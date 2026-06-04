@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Daily Diary — A Year of Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="logo">✦ My Diary</span>
+    </div>
+    <div class="topbar-right">
+      <!-- Search bar -->
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="Search entries…" autocomplete="off" />
+        <span class="search-icon">⌕</span>
+      </div>
+      <!-- Dark mode toggle -->
+      <button id="darkToggle" class="icon-btn" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <span id="darkIcon">☾</span>
+      </button>
+      <!-- Export / Import -->
+      <button id="exportBtn" class="icon-btn" title="Export data as JSON" aria-label="Export data">⤓</button>
+      <label class="icon-btn" title="Import JSON data" aria-label="Import data">
+        ⤒
+        <input type="file" id="importFile" accept=".json" style="display:none" />
+      </label>
+    </div>
+  </header>
+
+  <!-- ===== MOTIVATIONAL QUOTE ===== -->
+  <div class="quote-banner" id="quoteBanner">
+    <p class="quote-text" id="quoteText">Loading your daily inspiration…</p>
+  </div>
+
+  <!-- ===== MAIN LAYOUT ===== -->
+  <main class="app-layout">
+
+    <!-- LEFT PANEL: Year / Calendar Overview -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2 class="sidebar-title">2025 · Year View</h2>
+        <button class="today-btn" id="todayBtn">Jump to Today</button>
+      </div>
+
+      <!-- Month tabs for quick navigation -->
+      <div class="month-tabs" id="monthTabs"></div>
+
+      <!-- Day list for the selected month -->
+      <div class="day-list" id="dayList"></div>
+    </aside>
+
+    <!-- RIGHT PANEL: Daily Entry Editor -->
+    <section class="editor-panel" id="editorPanel">
+
+      <!-- Date heading -->
+      <div class="editor-header">
+        <div>
+          <p class="editor-day-label" id="editorDayLabel">Monday</p>
+          <h1 class="editor-date" id="editorDate">January 1, 2025</h1>
+        </div>
+        <div class="completion-badge" id="completionBadge">
+          <span id="completionText">0/0 tasks</span>
+        </div>
+      </div>
+
+      <!-- Progress bar for today's tasks -->
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar">
+          <div class="progress-fill" id="progressFill" style="width:0%"></div>
+        </div>
+        <span class="progress-label" id="progressLabel">0% complete</span>
+      </div>
+
+      <!-- ---- DIARY ENTRY ---- -->
+      <div class="card" id="diaryCard">
+        <div class="card-header">
+          <span class="card-icon">✎</span>
+          <h3 class="card-title">Diary Entry</h3>
+          <div class="mood-selector">
+            <span class="mood-label">Mood:</span>
+            <!-- Each mood button stores a value -->
+            <button class="mood-btn" data-mood="😊" title="Happy">😊</button>
+            <button class="mood-btn" data-mood="😐" title="Neutral">😐</button>
+            <button class="mood-btn" data-mood="😔" title="Sad">😔</button>
+            <button class="mood-btn" data-mood="😤" title="Frustrated">😤</button>
+            <button class="mood-btn" data-mood="🤩" title="Excited">🤩</button>
+            <button class="mood-btn" data-mood="😴" title="Tired">😴</button>
+          </div>
+        </div>
+        <textarea
+          id="diaryText"
+          class="big-textarea"
+          placeholder="Write your thoughts, reflections, goals, and gratitude here…
+What made today meaningful? What did you learn? What are you thankful for?"
+          rows="8"
+        ></textarea>
+        <p class="autosave-hint">✓ Auto-saved as you type</p>
+      </div>
+
+      <!-- ---- TO-DO LIST ---- -->
+      <div class="card" id="todoCard">
+        <div class="card-header">
+          <span class="card-icon">☑</span>
+          <h3 class="card-title">To-Do List</h3>
+        </div>
+
+        <!-- Add task input -->
+        <div class="add-task-row">
+          <input
+            type="text"
+            id="newTaskInput"
+            placeholder="Add a new task…"
+            maxlength="200"
+          />
+          <button id="addTaskBtn" class="add-btn">+ Add</button>
+        </div>
+
+        <!-- Tasks will be injected here by JS -->
+        <ul class="task-list" id="taskList">
+          <li class="empty-state" id="taskEmptyState">No tasks yet. Add one above!</li>
+        </ul>
+      </div>
+
+      <!-- ---- NOTES ---- -->
+      <div class="card" id="notesCard">
+        <div class="card-header">
+          <span class="card-icon">📝</span>
+          <h3 class="card-title">Notes</h3>
+          <!-- Category tag selector -->
+          <div class="tag-row">
+            <button class="tag-btn active-tag" data-tag="general">General</button>
+            <button class="tag-btn" data-tag="work">Work</button>
+            <button class="tag-btn" data-tag="health">Health</button>
+            <button class="tag-btn" data-tag="ideas">Ideas</button>
+            <button class="tag-btn" data-tag="study">Study</button>
+          </div>
+        </div>
+        <textarea
+          id="notesText"
+          class="big-textarea"
+          placeholder="Jot down anything: work notes, study reminders, ideas, health tips, or personal reflections…"
+          rows="5"
+        ></textarea>
+        <p class="autosave-hint">✓ Auto-saved as you type</p>
+      </div>
+
+      <!-- ---- STATS SUMMARY ---- -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <p class="stat-label">Today</p>
+          <p class="stat-number" id="statToday">0</p>
+          <p class="stat-sub">tasks done</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-label">This Week</p>
+          <p class="stat-number" id="statWeek">0</p>
+          <p class="stat-sub">tasks done</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-label">This Month</p>
+          <p class="stat-number" id="statMonth">0</p>
+          <p class="stat-sub">tasks done</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-label">This Year</p>
+          <p class="stat-number" id="statYear">0</p>
+          <p class="stat-sub">tasks done</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ===== SEARCH RESULTS OVERLAY ===== -->
+  <div class="search-overlay hidden" id="searchOverlay">
+    <div class="search-results-box">
+      <div class="search-results-header">
+        <h3>Search Results</h3>
+        <button id="closeSearch" class="icon-btn">✕</button>
+      </div>
+      <div id="searchResults" class="search-results-list">
+        <p class="empty-state">Type in the search bar to find entries…</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST NOTIFICATION ===== -->
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

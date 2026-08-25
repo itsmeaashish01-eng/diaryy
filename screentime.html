@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#c7784c" />
+  <title>Screen Time — Take Back Your Hours</title>
+  <link rel="icon" href="icons/icon-192.png" type="image/png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="screentime.css" />
+</head>
+<body class="st-body">
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="logo">✦ Screen Time</span>
+    </div>
+    <div class="topbar-right">
+      <a class="icon-btn" href="index.html" title="Back to diary" aria-label="Back to diary">✎</a>
+      <button id="darkToggle" class="icon-btn" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <span id="darkIcon">☾</span>
+      </button>
+      <button id="stExportBtn" class="icon-btn" title="Export screen time data" aria-label="Export data">⤓</button>
+      <label class="icon-btn" title="Import screen time data" aria-label="Import data">
+        ⤒
+        <input type="file" id="stImportFile" accept=".json" style="display:none" />
+      </label>
+      <button id="settingsBtn" class="icon-btn" title="Settings" aria-label="Settings">⚙</button>
+    </div>
+  </header>
+
+  <!-- ===== ACTIVE SESSION BANNER ===== -->
+  <div class="session-banner hidden" id="sessionBanner">
+    <div class="session-info">
+      <span class="session-emoji" id="sessionEmoji">📱</span>
+      <div>
+        <p class="session-name" id="sessionName">Instagram</p>
+        <p class="session-sub" id="sessionSub">counting since 14:02</p>
+      </div>
+    </div>
+    <div class="session-right">
+      <span class="session-clock" id="sessionClock">00:00</span>
+      <button class="stop-btn" id="sessionStopBtn">Stop</button>
+    </div>
+  </div>
+
+  <main class="st-layout">
+
+    <!-- ===== TODAY OVERVIEW ===== -->
+    <section class="card today-card">
+      <div class="card-header">
+        <span class="card-icon">⏳</span>
+        <h3 class="card-title">Today</h3>
+        <span class="today-date" id="todayDate"></span>
+      </div>
+
+      <div class="today-body">
+        <!-- Budget ring -->
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-track" cx="60" cy="60" r="52"></circle>
+            <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="ring-center">
+            <p class="ring-value" id="ringValue">0m</p>
+            <p class="ring-sub" id="ringSub">of 120m budget</p>
+          </div>
+        </div>
+
+        <!-- Headline numbers -->
+        <div class="today-stats">
+          <div class="stat-card">
+            <p class="stat-label">Remaining</p>
+            <p class="stat-number" id="statRemaining">120m</p>
+            <p class="stat-sub" id="statRemainingSub">today's budget</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Streak</p>
+            <p class="stat-number" id="statStreak">0</p>
+            <p class="stat-sub">days under budget</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">7-day avg</p>
+            <p class="stat-number" id="statAvg">0m</p>
+            <p class="stat-sub">per day</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Saved vs avg</p>
+            <p class="stat-number" id="statSaved">0m</p>
+            <p class="stat-sub">today so far</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="budget-msg" id="budgetMsg">Start a timer when you open a social app — stop it when you put the phone down.</p>
+    </section>
+
+    <!-- ===== APPS ===== -->
+    <section class="card">
+      <div class="card-header">
+        <span class="card-icon">📱</span>
+        <h3 class="card-title">Your apps</h3>
+        <button class="add-btn small-btn" id="addAppBtn">+ App</button>
+      </div>
+      <div class="app-grid" id="appGrid"></div>
+      <p class="empty-state hidden" id="appEmptyState">No apps tracked yet. Add one above.</p>
+    </section>
+
+    <!-- ===== FOCUS SESSION ===== -->
+    <section class="card">
+      <div class="card-header">
+        <span class="card-icon">🛡</span>
+        <h3 class="card-title">Focus session</h3>
+      </div>
+      <p class="hint-text">Commit to a stretch with no social apps. The screen stays up and counts down — quitting early takes a deliberate 3-second hold.</p>
+      <div class="focus-row">
+        <button class="chip-btn" data-focus="15">15m</button>
+        <button class="chip-btn" data-focus="25">25m</button>
+        <button class="chip-btn" data-focus="50">50m</button>
+        <button class="chip-btn" data-focus="90">90m</button>
+        <input type="number" id="focusCustom" min="1" max="480" placeholder="min" />
+        <button class="add-btn" id="focusStartBtn">Start focus</button>
+      </div>
+      <p class="focus-total" id="focusTotal"></p>
+    </section>
+
+    <!-- ===== LAST 7 DAYS ===== -->
+    <section class="card">
+      <div class="card-header">
+        <span class="card-icon">📊</span>
+        <h3 class="card-title">Last 7 days</h3>
+        <span class="today-date" id="weekTotal"></span>
+      </div>
+      <div class="week-chart" id="weekChart"></div>
+      <div class="breakdown" id="breakdown"></div>
+    </section>
+
+  </main>
+
+  <!-- ===== SETTINGS DRAWER ===== -->
+  <div class="drawer-backdrop hidden" id="settingsDrawer">
+    <div class="drawer">
+      <div class="drawer-header">
+        <h3>Settings</h3>
+        <button class="icon-btn" id="closeSettings" aria-label="Close settings">✕</button>
+      </div>
+
+      <label class="field">
+        <span class="field-label">Daily social budget (minutes)</span>
+        <input type="number" id="setBudget" min="0" max="1440" />
+      </label>
+
+      <label class="field">
+        <span class="field-label">Nag me every (minutes) during a session</span>
+        <input type="number" id="setNag" min="0" max="120" />
+        <span class="field-hint">0 turns reminders off.</span>
+      </label>
+
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">Downtime starts</span>
+          <input type="time" id="setBedStart" />
+        </label>
+        <label class="field">
+          <span class="field-label">Downtime ends</span>
+          <input type="time" id="setBedEnd" />
+        </label>
+      </div>
+
+      <label class="check-field">
+        <input type="checkbox" id="setNotify" />
+        <span>Send system notifications (needs permission)</span>
+      </label>
+
+      <label class="check-field">
+        <input type="checkbox" id="setBedBlock" />
+        <span>Show a downtime block screen during those hours</span>
+      </label>
+
+      <div class="drawer-actions">
+        <button class="add-btn" id="saveSettings">Save</button>
+        <button class="ghost-btn danger" id="resetTodayBtn">Reset today's logs</button>
+      </div>
+
+      <p class="disclaimer">
+        <strong>What this can and can't do:</strong> this is a web app, so it can track, budget,
+        warn and nag — it cannot force-close Instagram for you. For hard blocking, pair it with
+        Android <em>Digital Wellbeing → Focus mode / App timers</em> or iOS
+        <em>Settings → Screen Time → App Limits</em>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== APP EDITOR MODAL ===== -->
+  <div class="drawer-backdrop hidden" id="appModal">
+    <div class="modal">
+      <div class="drawer-header">
+        <h3 id="appModalTitle">Add app</h3>
+        <button class="icon-btn" id="closeAppModal" aria-label="Close">✕</button>
+      </div>
+      <label class="field">
+        <span class="field-label">Name</span>
+        <input type="text" id="appName" maxlength="30" placeholder="Instagram" />
+      </label>
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">Icon</span>
+          <input type="text" id="appEmoji" maxlength="4" placeholder="📷" />
+        </label>
+        <label class="field">
+          <span class="field-label">Daily limit (minutes)</span>
+          <input type="number" id="appLimit" min="0" max="1440" placeholder="30" />
+        </label>
+      </div>
+      <div class="drawer-actions">
+        <button class="add-btn" id="saveApp">Save</button>
+        <button class="ghost-btn danger hidden" id="deleteApp">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOCUS OVERLAY ===== -->
+  <div class="fullscreen-overlay hidden" id="focusOverlay">
+    <p class="overlay-kicker">Focus session</p>
+    <p class="overlay-clock" id="focusClock">25:00</p>
+    <p class="overlay-msg" id="focusMsg">Phone down. You said this hour matters.</p>
+    <button class="hold-btn" id="focusQuitBtn">Hold 3s to give up</button>
+  </div>
+
+  <!-- ===== DOWNTIME OVERLAY ===== -->
+  <div class="fullscreen-overlay hidden" id="bedOverlay">
+    <p class="overlay-kicker">Downtime</p>
+    <p class="overlay-clock">🌙</p>
+    <p class="overlay-msg" id="bedMsg">It's past your cut-off. Nothing on that feed is worth tomorrow's morning.</p>
+    <button class="hold-btn" id="bedDismissBtn">Hold 3s to open anyway</button>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="screentime.js"></script>
+</body>
+</html>

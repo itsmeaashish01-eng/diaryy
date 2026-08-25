@@ -704,3 +704,11 @@ function init() {
 
 // Run init when the page is ready
 document.addEventListener("DOMContentLoaded", init);
+
+/* ---- PWA: register the service worker so the diary installs to the
+   home screen and keeps working offline (see sw.js) ---- */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => { /* offline support is optional */ });
+  });
+}

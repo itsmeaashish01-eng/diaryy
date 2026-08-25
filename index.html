@@ -2,11 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#c7784c" />
   <title>My Daily Diary — A Year of Growth</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="icons/icon-192.png" type="image/png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -22,6 +28,8 @@
         <input type="text" id="searchInput" placeholder="Search entries…" autocomplete="off" />
         <span class="search-icon">⌕</span>
       </div>
+      <!-- Screen time app -->
+      <a class="icon-btn" href="screentime.html" title="Screen time" aria-label="Screen time">⏳</a>
       <!-- Dark mode toggle -->
       <button id="darkToggle" class="icon-btn" title="Toggle dark mode" aria-label="Toggle dark mode">
         <span id="darkIcon">☾</span>

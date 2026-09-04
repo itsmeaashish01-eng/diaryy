@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speak Again — Aphasia Speech Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="therapy.css" />
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="logo">🗣 Speak Again</span>
+    </div>
+    <div class="topbar-right">
+      <a href="index.html" class="icon-btn" title="Back to my diary" aria-label="Back to my diary">✎</a>
+      <button id="helperBtn" class="icon-btn" title="For helpers" aria-label="For helpers">🤝</button>
+      <button id="settingsBtn" class="icon-btn" title="Settings" aria-label="Settings">⚙</button>
+      <button id="darkToggle" class="icon-btn" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <span id="darkIcon">☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="app">
+
+    <!-- ================================================
+         SCREEN 1 — SETUP (first visit only)
+         ================================================ -->
+    <section class="screen" id="setupScreen">
+      <div class="setup-box">
+        <h1 class="big-title">Welcome</h1>
+        <p class="lead">This is a place to practise words and speaking, a little at a time.</p>
+
+        <div class="setup-step">
+          <h2 class="step-q">What shall we call you?</h2>
+          <input type="text" id="nameInput" class="big-input" placeholder="Your name" maxlength="30" />
+        </div>
+
+        <div class="setup-step">
+          <h2 class="step-q">Which is harder for you?</h2>
+          <p class="step-help">This only changes the mix of practice. You can change it any time.</p>
+          <div class="profile-grid">
+            <button class="profile-card" data-profile="broca">
+              <span class="profile-icon">🗣</span>
+              <span class="profile-name">Getting words out</span>
+              <span class="profile-desc">You know what you want to say, but the words will not come. More practice at saying words.</span>
+              <span class="profile-tag">Broca's / non-fluent</span>
+            </button>
+            <button class="profile-card" data-profile="wernicke">
+              <span class="profile-icon">👂</span>
+              <span class="profile-name">Understanding words</span>
+              <span class="profile-desc">Speech comes easily, but words get mixed up and others are hard to follow. More listening practice.</span>
+              <span class="profile-tag">Wernicke's / fluent</span>
+            </button>
+            <button class="profile-card" data-profile="mixed">
+              <span class="profile-icon">🔀</span>
+              <span class="profile-name">Both, or not sure</span>
+              <span class="profile-desc">An even mix of listening and speaking practice.</span>
+              <span class="profile-tag">Mixed</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          This is a practice tool for use at home. It does not diagnose anything and it does not
+          replace a speech and language therapist. If you can, ask your therapist which levels to work on.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================================================
+         SCREEN 2 — HOME
+         ================================================ -->
+    <section class="screen hidden" id="homeScreen">
+
+      <div class="home-header">
+        <div>
+          <p class="hello" id="helloText">Hello</p>
+          <h1 class="big-title" id="homeLevelTitle">Level 1 · Sounds &amp; Letters</h1>
+          <p class="lead" id="homeLevelBlurb"></p>
+        </div>
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="ring-label">
+            <span class="ring-pct" id="ringPct">0%</span>
+            <span class="ring-sub">of this level</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="start-btn" id="startSessionBtn">
+        <span class="start-icon">▶</span>
+        <span class="start-text">
+          <strong>Start today's practice</strong>
+          <em id="startSubText">10 turns · about 5 minutes</em>
+        </span>
+      </button>
+
+      <!-- Streak / totals -->
+      <div class="stats-row">
+        <div class="stat">
+          <p class="stat-num" id="statStreak">0</p>
+          <p class="stat-label">day streak</p>
+        </div>
+        <div class="stat">
+          <p class="stat-num" id="statSessions">0</p>
+          <p class="stat-label">sessions</p>
+        </div>
+        <div class="stat">
+          <p class="stat-num" id="statWords">0</p>
+          <p class="stat-label">words mastered</p>
+        </div>
+        <div class="stat">
+          <p class="stat-num" id="statAccuracy">—</p>
+          <p class="stat-label">recent accuracy</p>
+        </div>
+      </div>
+
+      <!-- The ladder of levels -->
+      <h2 class="section-title">The steps</h2>
+      <div class="level-ladder" id="levelLadder"></div>
+
+      <!-- Free practice -->
+      <h2 class="section-title">Practise one thing</h2>
+      <p class="section-help">Pick a single exercise and stay on it for as long as you like.</p>
+      <div class="practice-grid" id="practiceGrid"></div>
+
+    </section>
+
+    <!-- ================================================
+         SCREEN 3 — SESSION (the exercises)
+         ================================================ -->
+    <section class="screen hidden" id="sessionScreen">
+
+      <div class="session-bar">
+        <button class="quit-btn" id="quitBtn" aria-label="Stop practice">✕</button>
+        <div class="dots" id="sessionDots"></div>
+        <span class="session-count" id="sessionCount">1 / 10</span>
+      </div>
+
+      <!-- What to do, in as few words as possible -->
+      <p class="task-instruction" id="taskInstruction">Listen, then say it.</p>
+
+      <!-- Exercise body is drawn here by therapy.js -->
+      <div class="stage" id="stage"></div>
+
+      <!-- Feedback line -->
+      <p class="feedback" id="feedback"></p>
+
+      <!-- Always-available controls -->
+      <div class="controls" id="controls"></div>
+
+    </section>
+
+    <!-- ================================================
+         SCREEN 4 — SESSION SUMMARY
+         ================================================ -->
+    <section class="screen hidden" id="summaryScreen">
+      <div class="summary-box">
+        <p class="summary-emoji" id="summaryEmoji">🌟</p>
+        <h1 class="big-title" id="summaryTitle">Well done</h1>
+        <p class="lead" id="summaryLead"></p>
+
+        <div class="summary-bars">
+          <div class="sbar">
+            <span class="sbar-label">On your own</span>
+            <div class="sbar-track"><div class="sbar-fill good" id="barSolo"></div></div>
+            <span class="sbar-val" id="valSolo">0</span>
+          </div>
+          <div class="sbar">
+            <span class="sbar-label">With a hint</span>
+            <div class="sbar-track"><div class="sbar-fill mid" id="barCued"></div></div>
+            <span class="sbar-val" id="valCued">0</span>
+          </div>
+          <div class="sbar">
+            <span class="sbar-label">Together</span>
+            <div class="sbar-track"><div class="sbar-fill soft" id="barMissed"></div></div>
+            <span class="sbar-val" id="valMissed">0</span>
+          </div>
+        </div>
+
+        <div class="unlock-note hidden" id="unlockNote"></div>
+
+        <div class="summary-actions">
+          <button class="btn primary" id="againBtn">Practise again</button>
+          <button class="btn" id="homeBtn">Finish</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== SETTINGS PANEL ===== -->
+  <div class="overlay hidden" id="settingsOverlay">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Settings</h3>
+        <button class="icon-btn" id="closeSettings" aria-label="Close">✕</button>
+      </div>
+
+      <div class="setting">
+        <label for="rateRange">Speaking speed</label>
+        <p class="setting-help">Slower is easier to follow.</p>
+        <input type="range" id="rateRange" min="0.4" max="1.2" step="0.05" value="0.75" />
+        <span class="setting-val" id="rateVal">0.75×</span>
+      </div>
+
+      <div class="setting">
+        <label for="voiceSelect">Voice</label>
+        <select id="voiceSelect" class="big-select"></select>
+        <button class="btn small" id="testVoiceBtn">Test the voice</button>
+      </div>
+
+      <div class="setting">
+        <label for="sizeSelect">Text size</label>
+        <select id="sizeSelect" class="big-select">
+          <option value="normal">Normal</option>
+          <option value="large">Large</option>
+          <option value="huge">Very large</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <label for="choicesSelect">How many pictures to choose from</label>
+        <p class="setting-help">Fewer choices is easier.</p>
+        <select id="choicesSelect" class="big-select">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <label class="switch-row">
+          <input type="checkbox" id="errorlessToggle" />
+          <span>Show the answer before I try (errorless practice)</span>
+        </label>
+        <p class="setting-help">Helpful early on: hearing the right word first, every time, avoids practising mistakes.</p>
+      </div>
+
+      <div class="setting">
+        <label class="switch-row">
+          <input type="checkbox" id="asrToggle" />
+          <span>Let the computer listen to me</span>
+        </label>
+        <p class="setting-help" id="asrHelp">
+          The computer's listening is often wrong with aphasic speech, so it only ever offers a guess —
+          you or your helper always have the final say.
+        </p>
+      </div>
+
+      <div class="setting">
+        <label for="profileSelect">Practice mix</label>
+        <select id="profileSelect" class="big-select">
+          <option value="broca">Getting words out (Broca's)</option>
+          <option value="wernicke">Understanding words (Wernicke's)</option>
+          <option value="mixed">Both / not sure</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <label>Your progress</label>
+        <div class="btn-row">
+          <button class="btn small" id="exportBtn">Save a copy</button>
+          <label class="btn small file-btn">
+            Load a copy
+            <input type="file" id="importFile" accept=".json" hidden />
+          </label>
+          <button class="btn small danger" id="resetBtn">Start over</button>
+        </div>
+        <p class="setting-help">"Save a copy" makes a file you can send to your therapist.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HELPER PANEL ===== -->
+  <div class="overlay hidden" id="helperOverlay">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>For helpers &amp; therapists</h3>
+        <button class="icon-btn" id="closeHelper" aria-label="Close">✕</button>
+      </div>
+      <div id="helperBody" class="helper-body"></div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="therapy-content.js"></script>
+  <script src="therapy.js"></script>
+</body>
+</html>

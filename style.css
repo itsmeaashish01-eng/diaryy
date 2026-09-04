@@ -143,6 +143,7 @@ body {
   display: inline-flex;
   align-items: center;
   line-height: 1;
+  text-decoration: none;   /* the link to the speech app uses this too */
 }
 .icon-btn:hover { background: var(--bg2); color: var(--text); }
 

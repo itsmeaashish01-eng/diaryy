@@ -7,6 +7,11 @@ you already use, and a note you can copy straight into the chart.
 Open `index.html` from any static host (or straight off disk) — there is no build step,
 no dependencies, and no server.
 
+`node build-single.js` bundles the whole app into one file at
+`dist/strokerounds-standalone.html`, which runs from a phone's Files app, an email
+attachment, or a USB stick with nothing else beside it. `--artifact` emits the same
+bundle as a body fragment for hosts that supply their own `<head>`.
+
 ## What it does
 
 **Census** — one line per patient: room, name/initials, hospital day, territory, etiology,
@@ -48,8 +53,10 @@ Everything is stored in this browser's `localStorage` on this device. There is n
 account, no server, no analytics, and no network request of any kind after the page
 loads. Consequences worth knowing:
 
-- Clearing site data or deleting the app deletes the list. **Export a backup** (Settings →
-  Export JSON) at the end of a service block.
+- Clearing site data or deleting the app deletes the list. **Back up** (Settings → Save
+  backup file, or Copy as text) at the end of a service block. Each copy of the app —
+  the installed PWA, a hosted page, the standalone file — keeps its own separate
+  storage, so moving between them means exporting and importing.
 - The optional passcode is a screen lock for a shared workstation, not encryption.
   Anyone with device access and developer tools can read the stored file.
 - Follow your institution's policy on PHI on a personal device. Initials and a room
@@ -112,6 +119,7 @@ js/store.js              data model, localStorage, export/import, demo record
 js/scores.js             scales, dosing, reference tables
 js/note.js               note / sign-out / handoff text builders
 js/app.js                views, rendering, event handling
+build-single.js          bundles everything into one self-contained file
 manifest.webmanifest     PWA metadata
 sw.js                    offline cache of the app shell
 icons/                   generated app icons

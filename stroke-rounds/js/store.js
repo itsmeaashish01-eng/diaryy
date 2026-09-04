@@ -78,7 +78,7 @@ const Store = (() => {
   /* ---------- Defaults ---------- */
 
   const DEFAULT_SETTINGS = {
-    theme: "dark",
+    theme: "",          // "" = follow the device until the user picks one
     pin: "",            // stored as a hash, empty = no lock
     lockOnHide: true,
     autoPurgeDays: 0,   // 0 = never auto-purge signed-off patients

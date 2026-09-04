@@ -80,17 +80,29 @@
     if (Store.getSettings().pin) showLock();
     else unlock();
 
-    if ("serviceWorker" in navigator) {
+    // The single-file build has no sw.js beside it to register.
+    if ("serviceWorker" in navigator && !window.STROKEROUNDS_SINGLE_FILE) {
       window.addEventListener("load", () =>
         navigator.serviceWorker.register("sw.js").catch(() => {})
       );
     }
   }
 
-  function applyTheme(theme) {
-    document.documentElement.dataset.theme = theme === "light" ? "light" : "dark";
+  /** An explicit choice wins; otherwise follow whatever the device is set to. */
+  function resolveTheme(pref) {
+    if (pref === "light" || pref === "dark") return pref;
+    const stamped = document.documentElement.dataset.theme;
+    if (stamped === "light" || stamped === "dark") return stamped;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches
+      ? "light" : "dark";
+  }
+
+  function applyTheme(pref) {
+    const theme = resolveTheme(pref);
+    document.documentElement.dataset.theme = theme;
     const meta = $('meta[name="theme-color"]');
     if (meta) meta.content = theme === "light" ? "#f4f6fb" : "#0b1220";
+    return theme;
   }
 
   /* ---------------- Lock screen ---------------- */
@@ -128,7 +140,7 @@
     $("#lockNowBtn").addEventListener("click", showLock);
 
     $("#themeBtn").addEventListener("click", () => {
-      const next = Store.getSettings().theme === "light" ? "dark" : "light";
+      const next = resolveTheme(Store.getSettings().theme) === "light" ? "dark" : "light";
       Store.saveSettings({ theme: next });
       applyTheme(next);
     });
@@ -1053,13 +1065,16 @@
         <div class="card-head"><h3>Backup</h3>
           <span class="card-hint">${(bytes / 1024).toFixed(1)} KB stored</span></div>
         <div class="btn-row">
-          <button class="btn btn-primary" id="btn-export">Export JSON</button>
-          <label class="btn" for="importFile">Import JSON</label>
+          <button class="btn btn-primary" id="btn-export">Save backup file</button>
+          <label class="btn" for="importFile">Open backup file</label>
           <input type="file" id="importFile" accept=".json,application/json" hidden />
         </div>
-        <p class="tiny faint" style="margin-top:8px">
-          Import merges by patient id and keeps whichever copy was edited last.
-          ${s.lastBackup ? "Last export: " + esc(s.lastBackup) : "No export yet."}
+        <div class="btn-row" style="margin-top:8px">
+          <button class="btn btn-sm" id="btn-copybackup">Copy as text</button>
+          <button class="btn btn-sm" id="btn-pastebackup">Paste a backup</button>
+        </div>
+        <p class="tiny faint" id="backupHint" style="margin-top:8px">
+          ${s.lastBackup ? "Last backup: " + esc(s.lastBackup) : "No backup yet — importing merges by patient and keeps the newer copy."}
         </p>
       </div>
 
@@ -1120,6 +1135,8 @@
     };
 
     $("#btn-export").onclick = exportBackup;
+    $("#btn-copybackup").onclick = () => showBackupText();
+    $("#btn-pastebackup").onclick = pasteBackup;
     $("#importFile").onchange = importBackup;
 
     $("#btn-pin").onclick = setPin;
@@ -1141,19 +1158,82 @@
     $("#btn-demo").onclick = () => { Store.addDemo(); go("census"); toast("Demo patient added"); };
   }
 
-  function exportBackup() {
+  function markBackedUp() {
+    Store.saveSettings({ lastBackup: new Date().toLocaleString() });
+    const hint = $("#backupHint");
+    if (hint) hint.textContent = "Last backup: " + Store.getSettings().lastBackup;
+  }
+
+  /** Hosted viewers (claude.ai artifacts) sandbox downloads and ask the host
+      to save the file instead; a plain page saves it itself. */
+  async function hostDownloads() {
+    if (!window.claude || typeof window.claude.use !== "function") return null;
+    try { return await window.claude.use("downloads"); }
+    catch { return null; }
+  }
+
+  async function exportBackup() {
     const data = Store.exportJSON();
+    const filename = `strokerounds-${Store.todayISO()}.json`;
+
+    const downloads = await hostDownloads();
+    if (downloads) {
+      try {
+        await downloads.save({ filename, data });
+        markBackedUp();
+        toast("Backup saved");
+      } catch (err) {
+        if (err && err.code === "declined") return;   // the viewer said no
+        showBackupText(data);                          // last resort: copy it out
+      }
+      return;
+    }
+
     const blob = new Blob([data], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `strokerounds-${Store.todayISO()}.json`;
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
-    Store.saveSettings({ lastBackup: new Date().toLocaleString() });
+    markBackedUp();
     toast("Backup downloaded");
+  }
+
+  /** Backup as text — works in any browser, pastes into notes or email. */
+  function showBackupText(data = Store.exportJSON()) {
+    openModal("Backup as text", `
+      <p class="tiny faint">Copy this and keep it somewhere safe. Paste it back through
+      Import to restore the list on any device.</p>
+      <textarea id="backupText" readonly style="min-height:180px;font-family:var(--font-mono);font-size:11px">${esc(data)}</textarea>`,
+      `<button class="btn" id="bk-close">Close</button>
+       <button class="btn btn-primary" id="bk-copy">Copy</button>`);
+    $("#bk-close").onclick = closeModal;
+    $("#bk-copy").onclick = () => { copyText(data, "Backup copied"); markBackedUp(); };
+  }
+
+  /** Restore from pasted text, for viewers that cannot open a file picker. */
+  function pasteBackup() {
+    openModal("Paste a backup", `
+      <div class="field">
+        <label>Backup JSON</label>
+        <textarea id="pasteText" placeholder="Paste the exported text here" style="min-height:160px;font-family:var(--font-mono);font-size:11px"></textarea>
+      </div>`,
+      `<button class="btn" id="ps-cancel">Cancel</button>
+       <button class="btn btn-primary" id="ps-import">Import</button>`);
+    $("#ps-cancel").onclick = closeModal;
+    $("#ps-import").onclick = () => {
+      try {
+        const n = Store.importJSON($("#pasteText").value, true);
+        closeModal();
+        toast(`Imported ${n} patient${n === 1 ? "" : "s"}`);
+        go("census");
+      } catch (err) {
+        toast("That is not a StrokeRounds backup");
+      }
+    };
   }
 
   function importBackup(e) {

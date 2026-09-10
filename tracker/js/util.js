@@ -134,10 +134,29 @@ window.PT = window.PT || {};
     }
   }
 
-  function downloadJSON(filename, data) {
-    const blob = new Blob([JSON.stringify(data, null, 2)], {
-      type: "application/json",
-    });
+  /* Hand the viewer a file.
+
+     In an ordinary browser that's a blob link. Inside a hosted viewer,
+     links like that are inert — the platform mediates saves — so use that
+     route when it's there and report what actually happened rather than
+     claiming success. Returns "saved" | "declined" | "unavailable". */
+  async function downloadJSON(filename, data) {
+    const json = JSON.stringify(data, null, 2);
+    const hosted = Boolean(window.claude && typeof window.claude.use === "function");
+
+    if (hosted) {
+      let saver = null;
+      try { saver = await window.claude.use("downloads"); } catch (e) { saver = null; }
+      if (!saver || typeof saver.save !== "function") return "unavailable";
+      try {
+        await saver.save({ filename, data: json });
+        return "saved";
+      } catch (e) {
+        return e && e.code === "declined" ? "declined" : "unavailable";
+      }
+    }
+
+    const blob = new Blob([json], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -146,6 +165,7 @@ window.PT = window.PT || {};
     a.click();
     a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
+    return "saved";
   }
 
   /* Deterministic PRNG so the demo provider replays the same walk per watch */

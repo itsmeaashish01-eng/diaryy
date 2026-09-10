@@ -12,16 +12,38 @@
   /* ---------------------------------------------------------------
      Theme
      --------------------------------------------------------------- */
+  /* "auto" means whatever the surrounding page or the OS is set to; an
+     explicit choice by the user always wins over both. */
+  function resolveTheme(theme) {
+    if (theme === "dark" || theme === "light") return theme;
+    const stamped = document.documentElement.dataset.theme;
+    if (stamped === "dark" || stamped === "light") return stamped;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark" : "light";
+  }
+
   function applyTheme(theme) {
-    document.body.classList.toggle("dark", theme === "dark");
+    const resolved = resolveTheme(theme);
+    document.body.classList.toggle("dark", resolved === "dark");
     const icon = $("#darkIcon");
-    if (icon) icon.textContent = theme === "dark" ? "☀" : "☾";
+    if (icon) icon.textContent = resolved === "dark" ? "☀" : "☾";
   }
 
   function toggleTheme() {
-    const next = store.settings().theme === "dark" ? "light" : "dark";
+    const next = resolveTheme(store.settings().theme) === "dark" ? "light" : "dark";
     store.setSettings({ theme: next });
     applyTheme(next);
+  }
+
+  /* Follow the system while the user hasn't overridden it. */
+  function watchSystemTheme() {
+    if (!window.matchMedia) return;
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const onChange = () => {
+      if (store.settings().theme === "auto") applyTheme("auto");
+    };
+    if (mq.addEventListener) mq.addEventListener("change", onChange);
+    else if (mq.addListener) mq.addListener(onChange);
   }
 
   /* ---------------------------------------------------------------
@@ -332,13 +354,16 @@
 
         case "theme": toggleTheme(); break;
 
-        case "export":
-          U.downloadJSON(
+        case "export": {
+          const r = await U.downloadJSON(
             `price-watch-${new Date().toISOString().slice(0, 10)}.json`,
             store.exportAll()
           );
-          ui.flash("Exported.", "ok");
+          if (r === "saved") ui.flash("Exported.", "ok");
+          else if (r === "declined") ui.flash("Export cancelled.", "ok");
+          else ui.flash("This viewer can't save files. Open the app from the repository to export.", "warn");
           break;
+        }
 
         case "reset":
           if (confirm("Delete every watch, all price history and all alerts? This cannot be undone.")) {
@@ -451,6 +476,7 @@
     seed();
     backfillDemo();
     applyTheme(store.settings().theme);
+    watchSystemTheme();
     wire();
     ui.render();
 

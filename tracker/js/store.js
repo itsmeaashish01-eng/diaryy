@@ -33,7 +33,7 @@
     return {
       version: SCHEMA_VERSION,
       settings: {
-        theme: "light",
+        theme: "auto",   // "auto" follows the system until the user picks
         currency: "USD",
         defaultIntervalMin: 60,
         sound: true,

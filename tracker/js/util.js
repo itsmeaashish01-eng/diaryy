@@ -83,6 +83,11 @@ window.PT = window.PT || {};
     return `${s}${p.toFixed(Math.abs(p) < 10 ? 1 : 0)}%`;
   }
 
+  /* "1 day" / "2 days" — counted nouns read as broken English otherwise. */
+  function plural(n, one, many) {
+    return `${n} ${n === 1 ? one : many || one + "s"}`;
+  }
+
   function parseNum(v) {
     if (v == null) return null;
     const n = parseFloat(String(v).replace(/[^0-9.\-]/g, ""));
@@ -186,7 +191,7 @@ window.PT = window.PT || {};
 
   PT.util = {
     uid, MIN, HOUR, DAY, daysUntil, relTime, fmtDateTime, fmtDate, isoDay,
-    clamp, fmtMoney, fmtPct, parseNum, $, $$, esc, debounce, dig,
+    clamp, fmtMoney, fmtPct, parseNum, plural, $, $$, esc, debounce, dig,
     fetchWithTimeout, downloadJSON, seededRandom,
   };
 })(window.PT);

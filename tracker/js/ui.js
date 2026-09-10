@@ -25,9 +25,20 @@
     if (!v || !v.verdict) return "";
     const d = v.verdict;
     // Icon + word, never colour alone.
-    return `<span class="badge badge-${d.status}" title="Signal score ${v.score == null ? "n/a" : v.score + "/100"}">
+    // Before there's a verdict, show the progress toward one rather than a
+    // dead end — "why does it say this, and when will it stop" answered on
+    // the badge itself.
+    const tail = v.score != null
+      ? `<span class="badge-score">${v.score}</span>`
+      : v.needed
+        ? `<span class="badge-score">${v.n}/${v.needed}</span>`
+        : "";
+    const tip = v.score != null
+      ? `Signal score ${v.score} out of 100`
+      : `Needs ${v.needed} price readings before it can judge — ${v.n} so far`;
+    return `<span class="badge badge-${d.status}" title="${esc(tip)}">
       <span class="badge-icon" aria-hidden="true">${d.icon}</span>${esc(d.label)}
-      ${v.score != null ? `<span class="badge-score">${v.score}</span>` : ""}
+      ${tail}
     </span>`;
   }
 
@@ -544,7 +555,18 @@
       ${v.reasons && v.reasons.length
         ? `<div class="reasons">
              <p class="reasons-title">Why</p>
-             <ul>${v.reasons.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>
+             <ul>
+               ${v.reasons.map((r) => `<li>${esc(r)}</li>`).join("")}
+               ${v.score == null ? `<li>${esc(
+                 w.provider === "manual"
+                   ? "Press “Log price” each time you check, and the verdict appears on the third."
+                   : w.provider === "command"
+                     ? "The runner adds one each time it checks — start it with --loop and leave it going."
+                     : !w.active
+                       ? "This watch is paused, so no more readings are coming. Resume it."
+                       : `Next reading ${relTime(w.nextCheck) === "never" ? "is due now" : relTime(w.nextCheck)}, then every ${w.intervalMin} minutes.`
+               )}</li>` : ""}
+             </ul>
            </div>`
         : ""}
 
@@ -553,9 +575,10 @@
         ${stat("Highest seen", s.max == null ? "—" : esc(fmtMoney(s.max, w.currency)))}
         ${stat("30-day average", s.avg30 == null ? "—" : esc(fmtMoney(s.avg30, w.currency)))}
         ${stat("Vs that average", s.vsAvg30Pct == null ? "—" : esc(fmtPct(s.vsAvg30Pct, true)),
-              s.vsAvg30Pct == null ? "" : s.vsAvg30Pct < 0 ? "d-down" : "d-up")}
+              s.vsAvg30Pct == null || Math.abs(s.vsAvg30Pct) < 0.05 ? ""
+                : s.vsAvg30Pct < 0 ? "d-down" : "d-up")}
         ${stat("Readings", s.n)}
-        ${stat("Tracked for", s.trackedDays ? Math.max(1, Math.round(s.trackedDays)) + " days" : "—")}
+        ${stat("Tracked for", s.trackedDays ? esc(U.plural(Math.max(1, Math.round(s.trackedDays)), "day")) : "—")}
         ${s.position ? stat("Position value", esc(fmtMoney(s.position.value, w.currency))) : ""}
         ${s.position ? stat("Profit / loss",
             `${s.position.plAbs >= 0 ? "+" : ""}${esc(fmtMoney(s.position.plAbs, w.currency))}`,

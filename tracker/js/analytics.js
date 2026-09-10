@@ -39,12 +39,20 @@
     return ((below + equal / 2) / values.length) * 100;
   }
 
+  /* A daily rate extrapolated from a few minutes of readings is nonsense:
+     divide a price change by a near-zero time span and you get millions of
+     percent. Below this span there is no trend to report. */
+  const MIN_TREND_SPAN_DAYS = 0.25;   // six hours
+
   /* Least-squares slope in price-units per day, over the last `days`.
-     Positive = getting more expensive. */
+     Positive = getting more expensive. Null when there isn't enough
+     elapsed time to say. */
   function trendPerDay(history, days) {
     const cut = Date.now() - days * DAY;
     const pts = history.filter((p) => p.t >= cut);
     if (pts.length < 3) return null;
+    const spanDays = (pts[pts.length - 1].t - pts[0].t) / DAY;
+    if (spanDays < MIN_TREND_SPAN_DAYS) return null;
     const t0 = pts[0].t;
     const xs = pts.map((p) => (p.t - t0) / DAY);
     const ys = pts.map((p) => p.p);
@@ -151,16 +159,29 @@
     good:  { key: "good",  label: "Good price", short: "GOOD", icon: "◆", status: "good" },
     hold:  { key: "hold",  label: "Holding",   short: "HOLD",  icon: "■", status: "warning" },
     wait:  { key: "wait",  label: "Wait",      short: "WAIT",  icon: "▼", status: "serious" },
-    none:  { key: "none",  label: "Not enough data", short: "—", icon: "○", status: "neutral" },
+    none:  { key: "none",  label: "Gathering prices", short: "—", icon: "○", status: "neutral" },
   };
+
+  /* Below this, there is genuinely nothing to say. Most of the score is
+     "how does today compare with the past" — and with one reading, that
+     reading is both the highest and the lowest ever seen. */
+  const MIN_READINGS = 3;
 
   function verdict(watch, s) {
     const reasons = [];
-    if (s.n < 3 || s.latest == null) {
+    if (s.n < MIN_READINGS || s.latest == null) {
+      const short = MIN_READINGS - s.n;
       return {
         score: null,
+        n: s.n,
+        needed: MIN_READINGS,
         verdict: VERDICTS.none,
-        reasons: [`Only ${s.n} reading${s.n === 1 ? "" : "s"} so far — needs a few more to judge.`],
+        reasons: [
+          s.n === 0
+            ? "No prices recorded yet."
+            : `${s.n} price${s.n === 1 ? "" : "s"} recorded. A verdict needs ${MIN_READINGS}, so ${short} more to go.`,
+          "The signal is mostly about how today compares with the past, and there isn't a past yet.",
+        ],
       };
     }
 
@@ -173,7 +194,7 @@
     parts.push({ w: 0.40, v: cheapness });
     if (!up) {
       if (s.isAllTimeLow && s.n >= 5) {
-        reasons.push(`Lowest price since tracking began${s.trackedDays >= 1 ? ` (${Math.round(s.trackedDays)} days)` : ""}.`);
+        reasons.push(`Lowest price since tracking began${s.trackedDays >= 1 ? ` (${PT.util.plural(Math.round(s.trackedDays), "day")})` : ""}.`);
       } else if (rank <= 20) {
         reasons.push(`Cheaper than ${Math.round(100 - rank)}% of readings so far.`);
       } else if (rank >= 80) {
@@ -265,13 +286,14 @@
 
     // Confidence caveat — a strong verdict off five readings isn't strong.
     if (s.n < 8) {
-      reasons.push(`Based on only ${s.n} readings — the signal firms up with more history.`);
+      reasons.push(`Based on only ${PT.util.plural(s.n, "reading")} — the signal firms up with more history.`);
     }
 
     return { score, verdict: v, reasons };
   }
 
   PT.analytics = {
-    summarize, verdict, percentileRank, trendPerDay, mean, median, stdev, VERDICTS,
+    summarize, verdict, percentileRank, trendPerDay, mean, median, stdev,
+    VERDICTS, MIN_READINGS, MIN_TREND_SPAN_DAYS,
   };
 })(window.PT);

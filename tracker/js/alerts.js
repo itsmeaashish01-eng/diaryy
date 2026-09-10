@@ -72,7 +72,7 @@
       severity: "good",
       test: ({ s, price, w }) =>
         s.isAllTimeLow && s.n >= 5
-          ? `New low: ${fmtMoney(price, w.currency)} — cheapest in ${Math.max(1, Math.round(s.trackedDays))} days of tracking`
+          ? `New low: ${fmtMoney(price, w.currency)} — cheapest in ${PT.util.plural(Math.max(1, Math.round(s.trackedDays)), "day")} of tracking`
           : null,
     },
     allTimeHigh: {

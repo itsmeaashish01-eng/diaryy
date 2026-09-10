@@ -27,7 +27,9 @@
 
   function isDue(w, now) {
     if (!w.active) return false;
-    if (w.provider === "manual") return false;
+    // Neither can be checked from a page: manual is typed in by hand, and a
+    // browser can't start a local program. The unattended runner does both.
+    if (w.provider === "manual" || w.provider === "command") return false;
     if (running.has(w.id)) return false;
     if (!w.nextCheck) return true;
     return w.nextCheck <= now;
@@ -116,7 +118,8 @@
   /* "Check all now" — respects the concurrency cap but ignores schedules. */
   async function checkAll(onlyIds) {
     const list = store.all().filter(
-      (w) => w.active && w.provider !== "manual" && (!onlyIds || onlyIds.includes(w.id))
+      (w) => w.active && w.provider !== "manual" && w.provider !== "command"
+        && (!onlyIds || onlyIds.includes(w.id))
     );
     const queue = list.slice();
     const workers = new Array(Math.min(MAX_PARALLEL, queue.length))

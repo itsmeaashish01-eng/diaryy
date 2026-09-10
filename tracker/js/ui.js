@@ -126,13 +126,14 @@
         <span class="card-next">
           ${busy ? "checking…"
             : w.provider === "manual" ? "manual entries"
+            : w.provider === "command" ? "runs in the runner"
             : !w.active ? "paused"
             : !w.nextCheck ? "due now"
             : `next ${esc(relTime(w.nextCheck))}`}
         </span>
         <span class="card-actions">
-          ${w.provider === "manual"
-            ? `<button class="icon-btn" data-act="log" data-id="${esc(w.id)}" title="Log a price">＋</button>`
+          ${w.provider === "manual" || w.provider === "command"
+            ? `<button class="icon-btn" data-act="log" data-id="${esc(w.id)}" title="Log a price by hand">＋</button>`
             : `<button class="icon-btn" data-act="check" data-id="${esc(w.id)}" title="Check now" ${busy ? "disabled" : ""}>⟳</button>`}
           <button class="icon-btn" data-act="detail" data-id="${esc(w.id)}" title="Open details">⤢</button>
           <button class="icon-btn" data-act="toggle" data-id="${esc(w.id)}" title="${w.active ? "Pause" : "Resume"}">${w.active ? "⏸" : "▶"}</button>
@@ -560,7 +561,8 @@
             `${s.position.plAbs >= 0 ? "+" : ""}${esc(fmtMoney(s.position.plAbs, w.currency))}`,
             s.position.plAbs >= 0 ? "d-up" : "d-down") : ""}
         ${stat("Last checked", w.lastCheck ? esc(relTime(w.lastCheck)) : "never")}
-        ${stat("Next check", w.provider === "manual" ? "manual"
+        ${stat("Next check", w.provider === "command" ? "the runner"
+          : w.provider === "manual" ? "manual"
           : !w.active ? "paused"
           : !w.nextCheck ? "due now"
           : esc(relTime(w.nextCheck)))}

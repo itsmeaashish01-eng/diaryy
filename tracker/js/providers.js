@@ -289,6 +289,30 @@
 
     // ------------------------------------------------------------------
     {
+      id: "command",
+      label: "Local program (unattended runner only)",
+      kinds: ["flight", "train", "bus", "hotel", "ferry", "car", "stock", "crypto", "fx", "other"],
+      needsProxy: false,
+      note:
+        "Runs a program on your own machine that prints {\"price\": 87, " +
+        "\"currency\": \"USD\"}. This is how sites with no API get checked " +
+        "automatically — see tracker/server/fetchers/browser-price.mjs. A web " +
+        "page can't start programs, so this one is skipped here and only runs " +
+        "in the unattended runner.",
+      fields: [
+        { key: "command", label: "Command to run", placeholder: 'node tracker/server/fetchers/browser-price.mjs --url "…" --min 20 --max 600', required: true },
+        { key: "timeoutMs", label: "Give up after (ms)", type: "number", placeholder: "120000" },
+      ],
+      describe: () => "local program",
+      async fetch() {
+        throw new Error(
+          "Only the unattended runner can run local programs. This watch is checked there."
+        );
+      },
+    },
+
+    // ------------------------------------------------------------------
+    {
       id: "amadeus",
       label: "Amadeus flight offers (via proxy)",
       kinds: ["flight"],

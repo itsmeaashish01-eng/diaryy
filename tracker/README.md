@@ -92,14 +92,89 @@ Pick a long, unguessable ntfy topic — anyone who knows the name can read it.
 The **Suggest a topic** button generates one. Quiet hours (browser) record
 alerts without pinging you.
 
-### What the hourly job cannot check
+## Sites with no API — checking them anyway
 
-Anything on **Manual entry** — it skips those and says so in the log. That
-covers Amtrak, MTR, and most rail, coach and hotel operators, none of which
-publish a fare API a program can call. There is no way around that short of
-scraping their booking pages, which is fragile and usually against their terms.
-What the job does check happily: stocks, crypto, exchange rates, flights via
-Amadeus, and any JSON endpoint you point it at.
+Most rail, coach and hotel operators publish no fare API. Amtrak and MTR are
+both in that group. There is nothing for a program to call, so no scheduler can
+check them from a URL alone.
+
+What does work is driving a real browser at the real booking page and reading
+the fare off it. `tracker/server/fetchers/browser-price.mjs` does that, and the
+**Local program** source (`command`) lets a watch call it.
+
+```bash
+npm install playwright && npx playwright install chromium
+```
+
+### Setting one up
+
+**1 — Search on the site by hand** and copy the URL of the results page. Don't
+guess a deep-link format; use the URL the site actually gave you.
+
+**2 — Look at what the fetcher sees.** This is not optional. A page's cheapest
+number is very often *not* a fare:
+
+```bash
+node tracker/server/fetchers/browser-price.mjs   --url "<results page URL>" --discover --headed
+```
+
+It prints every money figure with the line it sits on, marks which ones it
+would count and why it rejected the rest, and saves a screenshot. Gift cards,
+baggage fees and "from $X" promos all look like money — that listing is how you
+catch them before they become a fake price alert.
+
+**3 — Narrow it** until only real fares are marked, using `--min`/`--max` for a
+sanity band and `--near` for words that only appear on fare rows:
+
+```bash
+node tracker/server/fetchers/browser-price.mjs   --url "<same URL>" --min 20 --max 600 --near "coach|business|saver"
+→ {"price":87,"currency":"USD"}
+```
+
+**4 — Put that command in a watch.** In the app, add a watch with source
+**Local program** and paste the whole command. Or write it straight into
+`tracker/data/watches.json`:
+
+```json
+{
+  "label": "Amtrak — Baltimore (BAL) → New York (NYP)",
+  "kind": "train", "provider": "command", "currency": "USD",
+  "config": {
+    "command": "node tracker/server/fetchers/browser-price.mjs --url \"…\" --min 20 --max 600 --near \"coach\"",
+    "timeoutMs": 90000
+  },
+  "trip": { "from": "BAL", "to": "NYP", "depart": "2026-09-11", "pax": 1 },
+  "intervalMin": 60,
+  "rules": [{ "id": "r1", "type": "below", "value": 100 }]
+}
+```
+
+### Run this one locally, not on GitHub
+
+Commercial booking sites use bot protection that blocks datacenter IP
+addresses. A browser-driven fetcher generally works from a home connection and
+generally **does not** from a CI runner. So keep browser watches on a machine of
+your own and use loop mode:
+
+```bash
+node tracker/server/watch-runner.mjs --file tracker/data/watches.json --loop
+```
+
+It checks each watch on its own interval and tells you when the next one is due,
+so you can see it's alive. To start it at login: a launchd plist on macOS, a
+systemd user service on Linux, or Task Scheduler on Windows. Any always-on box
+does — an old laptop, a Pi.
+
+There's no reason both can't run: API-backed watches on the hourly GitHub job,
+browser watches on your own machine, each with its own watchlist file.
+
+### Fair warning
+
+Reading a booking page this way is scraping. Check the site's terms before you
+point it anywhere. Poll hourly at most — you're asking a real server for a real
+page every time. And expect it to break eventually: when a site changes, the
+fetcher reports "no fare passed the filters" rather than inventing a number, but
+it's on you to re-tune it. A source with a real API never needs this.
 
 ## Price sources
 
@@ -116,6 +191,7 @@ rest need the proxy below.
 | Frankfurter | direct | ECB exchange rates, no key |
 | **Any JSON endpoint** | direct | **The important one** — any URL returning JSON, plus a path like `data.0.price.total` |
 | Any web page | needs proxy | Pull a price out of a page with a regular expression |
+| **Local program** | runner only | Runs a command that prints `{"price": …}` — how sites with no API get checked automatically |
 | Amadeus flight offers | needs proxy | Real flight fares from the free self-service tier |
 
 Adding a source is one object in `js/providers.js` — `fetch(watch, ctx)`

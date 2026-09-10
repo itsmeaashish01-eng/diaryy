@@ -10,6 +10,12 @@
 #   3. Put the watches you care about in tracker/data/watches.json —
 #      easiest via Export in the app, then commit the file.
 #
+# Not everything belongs here. Watches using the "Local program" source —
+# the browser-driven fetcher for sites with no API — should run on a machine
+# of your own instead: commercial booking sites block datacenter IPs, and
+# GitHub's runners are datacenter IPs. Keep those in a separate watchlist and
+# run `watch-runner.mjs --loop` at home. See tracker/README.md.
+#
 # Run it by hand any time from the Actions tab ("Run workflow").
 
 name: Price Watch

@@ -95,8 +95,13 @@
       "intervalMin": 60,
       "active": true,
       "createdAt": 1789008758389,
-      "history": [],
-      "lastCheck": null,
+      "history": [
+        {
+          "t": 1789011842393,
+          "p": 78322
+        }
+      ],
+      "lastCheck": 1789011842393,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
@@ -132,8 +137,16 @@
       "intervalMin": 60,
       "active": true,
       "createdAt": 1788144758389,
-      "history": [],
-      "lastCheck": null,
+      "history": [
+        {
+          "t": 1789011842409,
+          "p": 187.58,
+          "meta": {
+            "simulated": true
+          }
+        }
+      ],
+      "lastCheck": 1789011842409,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,

@@ -4,8 +4,10 @@ Keep an eye on something you're going to buy — a flight, a train seat, a bus
 ticket, a hotel room, a share, a coin — and get told when the price is worth
 acting on.
 
-It's a static page: open `tracker/index.html` and it runs. No build step, no
-account, no server unless you want one. Everything is stored in your browser.
+It's a static page: open `tracker/index.html` and it runs. No build step and no
+account. For hourly checks that reach your phone with nothing of yours open,
+there's a companion job that runs on GitHub Actions — see **Two ways to run it**
+below.
 
 ---
 
@@ -43,27 +45,61 @@ the card shows current value and profit or loss. Totals are grouped by currency
 
 ---
 
-## Getting notified
+## Two ways to run it
 
-Checks run **while the tab is open**. That's the honest limit of a page with no
-server behind it. So the useful channels are the ones that leave the browser:
+**In the browser.** Open the page and it polls while the tab is open. Good for
+watching something closely, useless when the tab is shut.
 
-| Channel | Reaches you with the tab closed? | Setup |
+**Unattended, every hour.** `tracker/server/watch-runner.mjs` does one pass —
+check what's due, record the prices, run the rules, push what fired — and exits.
+The bundled GitHub Actions workflow calls it hourly on GitHub's machines, so
+nothing of yours has to be running. It reuses the browser app's own provider,
+statistics and rule code, so the two halves can't drift apart on what they decide.
+
+```bash
+node tracker/server/watch-runner.mjs --file tracker/data/watches.json
+#   --dry-run   check and score, send nothing, save nothing
+#   --force     ignore each watch's interval
+```
+
+### Turning the hourly job on
+
+1. **Merge the workflow to your default branch.** GitHub only runs scheduled
+   workflows from the default branch — on a feature branch it will never fire.
+2. **Add a repository secret `NTFY_TOPIC`** under Settings → Secrets and
+   variables → Actions, then subscribe to that same topic in the ntfy app.
+   `WEBHOOK_URL` works instead of, or alongside, ntfy.
+3. **Put your watches in `tracker/data/watches.json`.** Export from the app and
+   commit the file; the job commits updated prices back each hour, so importing
+   that file into the app later brings the history with it.
+
+Run it on demand any time from the Actions tab.
+
+Worth knowing: GitHub's scheduler is best-effort and can be late by several
+minutes under load; scheduled workflows are switched off after long repository
+inactivity; and on a private repo an hourly job uses most of the free monthly
+Actions minutes (public repos are unlimited).
+
+### Which channel actually reaches you
+
+| Channel | Reaches you with nothing open? | Setup |
 |---|---|---|
-| **ntfy** | **Yes** | Install the ntfy app, subscribe to a topic, put the same topic in Settings. Free, no account. |
+| **ntfy** | **Yes** | Install the ntfy app, subscribe to a topic, use the same topic in Settings (browser) or as `NTFY_TOPIC` (hourly job). Free, no account. |
 | **Webhook** | **Yes** | Any Discord or Slack incoming webhook, or your own endpoint. |
-| Desktop notification | No | Just tick the box. Only fires while the tab lives. |
+| Desktop notification | No | Browser only, and only while the tab lives. |
 
 Pick a long, unguessable ntfy topic — anyone who knows the name can read it.
-The **Suggest a topic** button generates one.
+The **Suggest a topic** button generates one. Quiet hours (browser) record
+alerts without pinging you.
 
-Quiet hours record alerts without pinging you.
+### What the hourly job cannot check
 
-For genuinely unattended tracking, leave the tab open on a machine that stays
-awake (an old laptop, a Raspberry Pi, a pinned tab on your phone). Alerts still
-reach you through ntfy or the webhook.
-
----
+Anything on **Manual entry** — it skips those and says so in the log. That
+covers Amtrak, MTR, and most rail, coach and hotel operators, none of which
+publish a fare API a program can call. There is no way around that short of
+scraping their booking pages, which is fragile and usually against their terms.
+What the job does check happily: stocks, crypto, exchange rates, flights via
+Amadeus, and any JSON endpoint you point it at.
 
 ## Price sources
 

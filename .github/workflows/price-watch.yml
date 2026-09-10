@@ -1,0 +1,73 @@
+# Checks your watchlist every hour on GitHub's machines and pushes any
+# alerts to your phone. Nothing of yours needs to be running.
+#
+# Before this does anything useful:
+#   1. Merge this workflow to the default branch — GitHub only runs
+#      scheduled workflows from there, never from a feature branch.
+#   2. Add a repository secret NTFY_TOPIC (Settings → Secrets and
+#      variables → Actions), and subscribe to that same topic in the
+#      ntfy app on your phone.
+#   3. Put the watches you care about in tracker/data/watches.json —
+#      easiest via Export in the app, then commit the file.
+#
+# Run it by hand any time from the Actions tab ("Run workflow").
+
+name: Price Watch
+
+on:
+  schedule:
+    # Hourly at 17 past. GitHub's scheduler is busiest on the hour and
+    # delays runs under load, so an off-peak minute lands more reliably.
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Check every watch, ignoring its interval"
+        type: boolean
+        default: false
+
+# Never let a slow run overlap the next hour's.
+concurrency:
+  group: price-watch
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check prices and send alerts
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NTFY_SERVER: ${{ secrets.NTFY_SERVER }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          WEBHOOK_STYLE: ${{ secrets.WEBHOOK_STYLE }}
+          PROXY_BASE: ${{ secrets.PROXY_BASE }}
+        run: |
+          node tracker/server/watch-runner.mjs \
+            --file tracker/data/watches.json \
+            ${{ inputs.force && '--force' || '' }}
+
+      - name: Record the prices
+        run: |
+          if git diff --quiet -- tracker/data/watches.json; then
+            echo "No price changes to record."
+            exit 0
+          fi
+          git config user.name "price-watch"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tracker/data/watches.json
+          git commit -m "Record prices $(date -u '+%Y-%m-%d %H:%M UTC')"
+          # The branch may have moved on while this job ran.
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

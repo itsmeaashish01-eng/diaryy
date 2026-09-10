@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "settings": {
+    "theme": "auto",
+    "currency": "USD",
+    "defaultIntervalMin": 60,
+    "sound": true,
+    "proxyBase": "",
+    "notify": {
+      "browser": true,
+      "ntfy": {
+        "enabled": false,
+        "server": "https://ntfy.sh",
+        "topic": ""
+      },
+      "webhook": {
+        "enabled": false,
+        "url": "",
+        "style": "discord",
+        "noCors": false
+      }
+    },
+    "quietHours": {
+      "enabled": false,
+      "from": 23,
+      "to": 7
+    }
+  },
+  "seeded": true,
+  "alerts": [],
+  "watches": [
+    {
+      "id": "seed-amtrak",
+      "label": "Amtrak — Baltimore (BAL) → New York (NYP)",
+      "kind": "train",
+      "provider": "manual",
+      "config": {},
+      "trip": {
+        "from": "BAL",
+        "to": "NYP",
+        "depart": "2026-09-11",
+        "pax": 1
+      },
+      "position": null,
+      "currency": "USD",
+      "direction": "down",
+      "rules": [
+        {
+          "id": "seed-r1",
+          "type": "below",
+          "value": 100
+        },
+        {
+          "id": "seed-r2",
+          "type": "allTimeLow"
+        }
+      ],
+      "intervalMin": 60,
+      "active": true,
+      "createdAt": 1789008758389,
+      "history": [],
+      "lastCheck": null,
+      "nextCheck": null,
+      "errorCount": 0,
+      "lastError": null,
+      "lastAlertAt": {},
+      "cooldownMin": 180,
+      "notes": "Amtrak publishes no fare API, so the hourly runner skips this one. Log fares by hand in the app."
+    },
+    {
+      "id": "seed-btc",
+      "label": "Bitcoin",
+      "kind": "crypto",
+      "provider": "coingecko",
+      "config": {
+        "coinId": "bitcoin",
+        "vs": "usd"
+      },
+      "trip": {},
+      "position": null,
+      "currency": "USD",
+      "direction": "up",
+      "rules": [
+        {
+          "id": "seed-r3",
+          "type": "risePct",
+          "value": 5
+        },
+        {
+          "id": "seed-r4",
+          "type": "dropPct",
+          "value": 5
+        }
+      ],
+      "intervalMin": 60,
+      "active": true,
+      "createdAt": 1789008758389,
+      "history": [],
+      "lastCheck": null,
+      "nextCheck": null,
+      "errorCount": 0,
+      "lastError": null,
+      "lastAlertAt": {},
+      "cooldownMin": 360,
+      "notes": "Live source, no API key. Checked automatically every hour."
+    },
+    {
+      "id": "seed-demo",
+      "label": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "provider": "demo",
+      "config": {
+        "basePrice": 240,
+        "volatility": 0.07
+      },
+      "trip": {
+        "from": "BWI",
+        "to": "LGA",
+        "depart": "2026-10-20",
+        "pax": 1
+      },
+      "position": null,
+      "currency": "USD",
+      "direction": "down",
+      "rules": [
+        {
+          "id": "seed-r5",
+          "type": "dropPct",
+          "value": 6
+        }
+      ],
+      "intervalMin": 60,
+      "active": true,
+      "createdAt": 1788144758389,
+      "history": [],
+      "lastCheck": null,
+      "nextCheck": null,
+      "errorCount": 0,
+      "lastError": null,
+      "lastAlertAt": {},
+      "cooldownMin": 180,
+      "notes": "Simulated. Proves the hourly job runs end to end. Delete once your real watches are in."
+    }
+  ]
+}

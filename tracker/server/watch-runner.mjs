@@ -23,6 +23,8 @@
      --dry-run       check and score, but send nothing and save nothing
      --force         ignore each watch's interval and check everything
      --once <id>     check only this one watch, whatever its interval
+     --summary <p>   append a markdown report to this file (point it at
+                     $GITHUB_STEP_SUMMARY to see prices on the run page)
 
    Environment:
      NTFY_TOPIC      ntfy topic to push to
@@ -32,7 +34,7 @@
      PROXY_BASE      price-proxy address, for sources that need one
    ================================================ */
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, appendFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { exec } from "node:child_process";
 
@@ -61,6 +63,7 @@ const file = opt("--file", "");
 const dryRun = flag("--dry-run");
 const loop = flag("--loop");
 const onlyId = opt("--once", "");
+const summaryPath = opt("--summary", "");
 let force = flag("--force");
 
 if (!file) {
@@ -70,6 +73,14 @@ if (!file) {
 
 const stamp = () => new Date().toISOString().replace("T", " ").slice(0, 19);
 const log = (msg) => console.log(loop ? `[${stamp()}] ${msg}` : msg);
+
+/* Recording prices with nowhere to send an alert is a half-configured
+   setup that looks like a working one. Say so, every run. */
+const canNotify = Boolean(process.env.NTFY_TOPIC || process.env.WEBHOOK_URL);
+if (!canNotify && !dryRun) {
+  log("⚠ No alert channel configured — prices will be recorded, but nothing will reach you.");
+  log("  Set NTFY_TOPIC (or WEBHOOK_URL). On GitHub: Settings → Secrets and variables → Actions.");
+}
 
 // ---- the "command" source -------------------------------------------
 /* Runs a local program and reads {"price":…,"currency":"…"} off its
@@ -176,6 +187,7 @@ async function pass() {
   const now = Date.now();
   let checked = 0, skipped = 0, failed = 0, fired = 0;
   let soonest = null, soonestLabel = "";
+  const rows = [];
 
   for (const w of data.watches) {
     const label = w.label || w.id;
@@ -208,6 +220,7 @@ async function pass() {
       w.lastError = { message: String(e.message || e), t: Date.now() };
       w.lastCheck = Date.now();
       log(`✕ ${label} — ${e.message || e}`);
+      rows.push({ label, price: "—", verdict: "failed", note: String(e.message || e).slice(0, 90) });
       continue;
     }
 
@@ -222,7 +235,15 @@ async function pass() {
 
     const s = PT.analytics.summarize(w);
     const v = PT.analytics.verdict(w, s);
-    log(`✓ ${label} — ${PT.util.fmtMoney(result.price, w.currency)} · ${v.verdict.label}${v.score == null ? "" : ` ${v.score}/100`}`);
+    const money = PT.util.fmtMoney(result.price, w.currency);
+    log(`✓ ${label} — ${money} · ${v.verdict.label}${v.score == null ? "" : ` ${v.score}/100`}`);
+    rows.push({
+      label,
+      price: money,
+      verdict: `${v.verdict.label}${v.score == null ? ` ${v.n}/${v.needed}` : ` ${v.score}/100`}`,
+      note: `${w.history.length} reading${w.history.length === 1 ? "" : "s"}` +
+        (s.min != null ? ` · low ${PT.util.fmtMoney(s.min, w.currency)}` : ""),
+    });
 
     const alerts = PT.alerts.evaluate(w, result.price, s, v);
     if (!alerts.length) continue;
@@ -249,7 +270,40 @@ async function pass() {
   } else if (!loop) {
     log(`Nothing was due. skipped ${skipped}`);
   }
+  if (summaryPath) writeSummary(rows, { checked, skipped, failed, fired });
   return { checked, failed, fired, soonest, soonestLabel };
+}
+
+/* A run page that shows only log lines makes "is this thing working?"
+   a scrolling exercise. A table answers it at a glance. */
+function writeSummary(rows, totals) {
+  const lines = [
+    `## Price Watch — ${new Date().toUTCString()}`,
+    "",
+    `Checked **${totals.checked}**, skipped ${totals.skipped}, failed ${totals.failed}, alerts fired **${totals.fired}**.`,
+    "",
+  ];
+  if (!canNotify) {
+    lines.push(
+      "> [!WARNING]",
+      "> No alert channel is configured, so prices are being recorded but nothing will reach your phone.",
+      "> Add an `NTFY_TOPIC` secret under Settings → Secrets and variables → Actions.",
+      ""
+    );
+  }
+  if (rows.length) {
+    lines.push("| Watch | Price | Signal | |", "|---|---|---|---|");
+    for (const r of rows) {
+      lines.push(`| ${r.label} | ${r.price} | ${r.verdict} | ${r.note} |`);
+    }
+  } else {
+    lines.push("_Nothing was due this run._");
+  }
+  try {
+    appendFileSync(summaryPath, lines.join("\n") + "\n");
+  } catch (e) {
+    log(`could not write summary: ${e.message}`);
+  }
 }
 
 // ---- go --------------------------------------------------------------

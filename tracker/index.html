@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Price Watch — track fares &amp; prices</title>
+  <meta name="description" content="Track flight, train, bus and hotel fares — and the tickers you follow — and get pinged when the price is right." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="logo">◎ Price Watch</span>
+      <nav class="nav-tabs" aria-label="Main">
+        <button class="nav-tab is-on" data-view="watches">Watches</button>
+        <button class="nav-tab" data-view="alerts">
+          Alerts <span class="nav-badge" id="alertBadge" hidden>0</span>
+        </button>
+        <button class="nav-tab" data-view="settings">Settings</button>
+      </nav>
+    </div>
+
+    <div class="topbar-right">
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="Search watches…" autocomplete="off" aria-label="Search watches" />
+        <span class="search-icon" aria-hidden="true">⌕</span>
+      </div>
+      <button class="icon-btn" data-act="check-all" title="Check every watch now" aria-label="Check every watch now">⟳</button>
+      <button class="icon-btn" data-act="theme" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <span id="darkIcon">☾</span>
+      </button>
+      <a class="icon-btn" href="../index.html" title="Back to My Diary" aria-label="Back to My Diary">✦</a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="app-main" id="view"><!-- rendered by ui.js --></main>
+
+  <footer class="page-foot">
+    <p>
+      Everything is stored in this browser only. Checks run while this tab is open —
+      for alerts that reach you with it closed, set up ntfy or a webhook in Settings.
+    </p>
+  </footer>
+
+  <!-- ===== MODAL HOST & TOAST ===== -->
+  <div id="modalHost" hidden></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Load order matters: each file hangs itself off window.PT -->
+  <script src="js/util.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/providers.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/alerts.js"></script>
+  <script src="js/notify.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/scheduler.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

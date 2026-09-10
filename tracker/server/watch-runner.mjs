@@ -32,6 +32,9 @@
      WEBHOOK_URL     Discord / Slack / custom webhook
      WEBHOOK_STYLE   discord | slack | plain   (default discord)
      PROXY_BASE      price-proxy address, for sources that need one
+     ALLOW_COMMAND_WATCHES=1   permit "Local program" watches to run.
+                     Off by default: a watchlist is data, and data
+                     shouldn't be able to execute programs.
    ================================================ */
 
 import { readFileSync, writeFileSync, appendFileSync } from "node:fs";
@@ -89,9 +92,21 @@ if (!canNotify && !dryRun) {
 
    It executes whatever the watchlist says, so treat that file the way
    you'd treat a shell script: your own, not one you pasted in. */
+const COMMANDS_ALLOWED = process.env.ALLOW_COMMAND_WATCHES === "1";
+
 function runCommand(w) {
   const cmd = w.config && w.config.command;
   if (!cmd) return Promise.reject(new Error('This watch has no "command" set'));
+  /* A watchlist is data, and data should not be able to run programs
+     unless someone said so. These watches are meant for a machine of
+     your own, so the safe default is off — which also means a merged
+     edit to watches.json can't execute anything on a CI runner. */
+  if (!COMMANDS_ALLOWED) {
+    return Promise.reject(new Error(
+      "Local-program watches are off by default. Set ALLOW_COMMAND_WATCHES=1 to run them " +
+      "(intended for your own machine, not CI)."
+    ));
+  }
   const timeoutMs = Number(w.config.timeoutMs) || 120000;
 
   return new Promise((resolve, reject) => {

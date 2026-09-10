@@ -54,6 +54,7 @@ const ALLOW = new Set(
   )
 );
 const ALLOW_ANY = process.env.ALLOW_ANY_HOST === "1";
+const MAX_REDIRECTS = 5;
 
 /* ---- guards ------------------------------------------------------- */
 
@@ -83,7 +84,20 @@ async function assertSafeTarget(url) {
   if (url.protocol !== "http:" && url.protocol !== "https:") {
     throw new Error("Only http and https URLs are allowed");
   }
-  const host = url.hostname.toLowerCase();
+  // Node hands back IPv6 hosts still wrapped in brackets ("[::1]"), which
+  // net.isIP does not recognise. Unwrap before judging anything.
+  const host = url.hostname.toLowerCase().replace(/^\[|\]$/g, "");
+
+  /* Judge a bare IP address before anything else. It needs no lookup, and
+     it keeps the refusal message honest: "not on the allowlist, add it
+     with ALLOW_HOSTS=169.254.169.254" reads as though allowlisting were
+     the fix. It isn't — the address check below would still refuse it —
+     but no error should ever suggest opening a path to link-local or
+     loopback. */
+  if (net.isIP(host) && isPrivateAddress(host)) {
+    throw new Error(`"${host}" is a private or link-local address — refusing, and no setting permits it`);
+  }
+
   if (!ALLOW_ANY && !ALLOW.has(host)) {
     throw new Error(
       `Host "${host}" is not on the allowlist. Add it with ALLOW_HOSTS=${host}`
@@ -96,7 +110,7 @@ async function assertSafeTarget(url) {
     throw new Error(`Cannot resolve "${host}"`);
   }
   if (addrs.some((a) => isPrivateAddress(a.address))) {
-    throw new Error(`"${host}" resolves to a private address — refusing`);
+    throw new Error(`"${host}" resolves to a private address — refusing, and no setting permits it`);
   }
 }
 
@@ -134,21 +148,51 @@ async function handleFetch(req, res, url) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 20000);
   try {
-    const upstream = await fetch(parsed, {
-      headers: {
-        // Some sites serve nothing at all without a browser-ish UA.
-        "User-Agent": req.headers["user-agent"] || "PriceWatch/1.0",
-        Accept: req.headers["accept"] || "*/*",
-        "Accept-Language": "en",
-      },
-      redirect: "follow",
-      signal: ctrl.signal,
-    });
+    /* Follow redirects by hand, checking every hop.
+
+       Letting fetch follow them itself would undo the whole guard above:
+       the first URL passes, then the server answers 302 to
+       http://169.254.169.254/ or http://127.0.0.1:9000/ and the proxy
+       fetches it anyway. Only the first URL was ever validated. */
+    let current = parsed;
+    let upstream;
+    for (let hop = 0; ; hop++) {
+      if (hop > MAX_REDIRECTS) {
+        return sendJSON(res, 502, { error: `More than ${MAX_REDIRECTS} redirects` });
+      }
+      upstream = await fetch(current, {
+        headers: {
+          // Some sites serve nothing at all without a browser-ish UA.
+          "User-Agent": req.headers["user-agent"] || "PriceWatch/1.0",
+          Accept: req.headers["accept"] || "*/*",
+          "Accept-Language": "en",
+        },
+        redirect: "manual",
+        signal: ctrl.signal,
+      });
+
+      const location = upstream.headers.get("location");
+      if (!(upstream.status >= 300 && upstream.status < 400 && location)) break;
+
+      let next;
+      try { next = new URL(location, current); }
+      catch (e) { return sendJSON(res, 502, { error: "Upstream sent a redirect we can't parse" }); }
+
+      try {
+        await assertSafeTarget(next);
+      } catch (e) {
+        return sendJSON(res, 403, {
+          error: `Refused a redirect to ${next.origin}: ${e.message}`,
+        });
+      }
+      current = next;
+    }
+
     const body = Buffer.from(await upstream.arrayBuffer());
     cors(res);
     res.writeHead(upstream.status, {
       "Content-Type": upstream.headers.get("content-type") || "text/plain; charset=utf-8",
-      "X-Proxied-From": parsed.origin,
+      "X-Proxied-From": current.origin,
     });
     res.end(body);
   } catch (e) {

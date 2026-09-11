@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789156761636,
-      "lastOk": 1789156761636,
+      "lastRun": 1789166721601,
+      "lastOk": 1789166721601,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789156003000,
+          "level": "notable",
+          "title": "Txt: A fast, keyboard-driven terminal text editor for engineers",
+          "detail": "Article URL: https://txt.hellman.io/ Comments URL: https://news.ycombinator.com/item?id=49664322 Points: 15 # Comments: 11",
+          "url": "https://txt.hellman.io/"
+        },
+        {
+          "t": 1789150220000,
+          "level": "notable",
+          "title": "Litelm: LiteLLM Without the Bloat",
+          "detail": "Article URL: https://github.com/kennethwolters/litelm Comments URL: https://news.ycombinator.com/item?id=49662767 Points: 76 # Comments: 26",
+          "url": "https://github.com/kennethwolters/litelm"
+        },
+        {
+          "t": 1789123680000,
+          "level": "notable",
+          "title": "Claude is only available to people over 18 years",
+          "detail": "Article URL: https://support.claude.com/en/articles/15171100-age-assurance-on-claude Comments URL: https://news.ycombinator.com/item?id=49656225 Points: 531 # Comments: 571",
+          "url": "https://support.claude.com/en/articles/15171100-age-assurance-on-claude"
+        },
         {
           "t": 1789150220000,
           "level": "notable",
@@ -238,8 +259,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1789114622040,
-      "lastOk": 1789114622040,
+      "lastRun": 1789166721603,
+      "lastOk": 1789166721603,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 1 drifting",
@@ -248,9 +269,34 @@
         {
           "t": 1789114622040,
           "v": 17
+        },
+        {
+          "t": 1789166721603,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1789166721603,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 65 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1789166721603,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1789166721603,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 22 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1789114622040,
           "level": "notable",
@@ -279,8 +325,8 @@
       }
     },
     "reading": {
-      "lastRun": 1789114622041,
-      "lastOk": 1789114622041,
+      "lastRun": 1789166721604,
+      "lastOk": 1789166721604,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -289,9 +335,34 @@
         {
           "t": 1789114622041,
           "v": 3
+        },
+        {
+          "t": 1789166721604,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1789166721604,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1789166721604,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 41 days",
+          "url": ""
+        },
+        {
+          "t": 1789166721604,
+          "level": "notable",
+          "title": "Still unread after 133 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1789114622041,
           "level": "notable",
@@ -320,8 +391,8 @@
       }
     },
     "training": {
-      "lastRun": 1789114622043,
-      "lastOk": 1789114622043,
+      "lastRun": 1789166721605,
+      "lastOk": 1789166721605,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2/4 this week · 88 min · 6.4 km · last 4w: run 3, gym 2, swim 1",
@@ -329,6 +400,10 @@
       "metrics": [
         {
           "t": 1789114622043,
+          "v": 3
+        },
+        {
+          "t": 1789166721606,
           "v": 3
         }
       ],
@@ -339,11 +414,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789146533450,
-      "lastOk": 1789146533450,
+      "lastRun": 1789166722160,
+      "lastOk": 1789166722160,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,891 (+62.1%) · excludes S&P 500 ETF",
+      "lastLine": "$3,858 (+60.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -357,9 +432,27 @@
         {
           "t": 1789146533451,
           "v": 3890.85
+        },
+        {
+          "t": 1789166722160,
+          "v": 3858.3
         }
       ],
       "events": [
+        {
+          "t": 1789166722146,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789166722146,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789146533441,
           "level": "notable",
@@ -406,12 +499,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 77817
+          "BTC": 77166
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789166722160,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 11
+    },
     {
       "t": 1789156761643,
       "ran": 1,

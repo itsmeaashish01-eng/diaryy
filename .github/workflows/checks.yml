@@ -1,0 +1,52 @@
+# Runs on every push and pull request, so the agents' own tests actually
+# protect them. No dependencies and no network: the suite is deliberately
+# offline, which is why it can run here in a few seconds.
+
+name: Checks
+
+on:
+  push:
+    branches: ["**"]
+    # The two scheduled workflows commit a data file to this repo every
+    # hour. Those pushes change no code, so testing them is 48 runs a day
+    # proving the same thing. A commit that touches one of these *and*
+    # anything else still runs.
+    paths-ignore:
+      - "tracker/data/watches.json"
+      - "agents/data/state.json"
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Agent self-test
+        run: node agents/selftest.mjs
+
+      # A syntax error in a type would only show up at 37 past the hour,
+      # in a job nobody is watching. Cheaper to find it here.
+      - name: Everything parses
+        run: |
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js; do
+            node --check "$f"
+          done
+          for f in agents/data/*.json; do
+            node -e "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8'))" "$f"
+          done
+
+      # Every agent in agents.json should name a type that exists and be
+      # configured well enough to run. --dry-run sends nothing and writes
+      # nothing; this is only checking that the definitions hold together.
+      - name: Agent definitions are valid
+        run: node agents/runner.mjs --validate

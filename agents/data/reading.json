@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "guideline-update",
+      "title": "Current society guideline — read the update in full, not the summary",
+      "url": "",
+      "kind": "guideline",
+      "topic": "core",
+      "added": "2026-08-01",
+      "priority": 5,
+      "minutes": 60,
+      "started": null,
+      "finished": null
+    },
+    {
+      "id": "stats-refresher",
+      "title": "Survival analysis, properly this time",
+      "url": "",
+      "kind": "chapter",
+      "topic": "research methods",
+      "added": "2026-06-15",
+      "priority": 3,
+      "minutes": 45,
+      "started": "2026-07-02",
+      "finished": null
+    },
+    {
+      "id": "something-not-medicine",
+      "title": "A book that has nothing to do with work",
+      "url": "",
+      "kind": "book",
+      "topic": "not medicine",
+      "added": "2026-05-01",
+      "priority": 2,
+      "minutes": 400,
+      "started": null,
+      "finished": null
+    }
+  ]
+}

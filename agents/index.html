@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agents — what's been watching</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <a class="logo" href="../index.html" title="Back to the diary">✦ Agents</a>
+    </div>
+    <div class="topbar-right">
+      <a class="icon-btn" href="../tracker/index.html" title="Price Watch">◎</a>
+      <button id="darkToggle" class="icon-btn" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
+      <button id="reloadBtn" class="icon-btn" title="Reload from disk" aria-label="Reload">⟳</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <h1>What's been watching</h1>
+      <p id="lede" class="lede">Reading the last run…</p>
+    </section>
+
+    <!-- Shown only when the page can't read the JSON itself, which is
+         what happens when you open it straight off disk. -->
+    <section id="loadFallback" class="fallback" hidden>
+      <h2>Pick the two files</h2>
+      <p>
+        Opened from a <code>file://</code> path, a browser won't let this page read
+        its own data folder. Either serve the folder
+        (<code>python3 -m http.server</code>) or choose the files by hand:
+      </p>
+      <div class="filerow">
+        <label class="filebtn">agents.json <input type="file" id="agentsFile" accept=".json" /></label>
+        <label class="filebtn">state.json <input type="file" id="stateFile" accept=".json" /></label>
+      </div>
+      <p id="fallbackNote" class="muted"></p>
+    </section>
+
+    <section id="totals" class="totals" hidden></section>
+    <section id="cards" class="cards"></section>
+
+    <section id="empty" class="empty" hidden>
+      <p>No agents have run yet.</p>
+      <p class="muted">
+        Run <code>node agents/runner.mjs --force</code>, or let the hourly
+        workflow do it.
+      </p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

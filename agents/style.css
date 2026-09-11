@@ -1,0 +1,244 @@
+/* ================================================
+   AGENTS — style.css
+   Same palette as the diary and Price Watch, so moving between the
+   three doesn't feel like changing applications.
+   ================================================ */
+
+:root {
+  --bg:            #faf8f4;
+  --bg2:           #f2ede5;
+  --card:          #ffffff;
+  --card-border:   #e8e0d4;
+  --text:          #2c2318;
+  --text2:         #7a6a57;
+  --text3:         #b0a090;
+  --accent:        #c7784c;
+  --accent-soft:   #f6ece4;
+  --topbar-bg:     #ffffff;
+  --shadow:        0 2px 12px rgba(44,35,24,0.07);
+  --radius:        14px;
+  --radius-sm:     8px;
+  --font-display:  'Fraunces', Georgia, serif;
+  --font-body:     'DM Sans', system-ui, -apple-system, sans-serif;
+
+  --viz-series:    #2a78d6;
+  --viz-series-fill: rgba(42,120,214,0.12);
+
+  /* Status colour is never the only cue — every one is paired with an
+     icon and a word, so it still reads in monochrome or with a colour
+     vision difference. */
+  --st-good:       #0ca30c;
+  --st-good-ink:   #006300;
+  --st-good-bg:    rgba(12,163,12,0.12);
+  --st-warning-ink:#8a5a00;
+  --st-warning-bg: rgba(250,178,25,0.18);
+  --st-critical-ink:#a52020;
+  --st-critical-bg:rgba(208,59,59,0.12);
+}
+
+body.dark {
+  --bg:            #1a1612;
+  --bg2:           #221e18;
+  --card:          #2a2420;
+  --card-border:   #3d3630;
+  --text:          #f0e8dc;
+  --text2:         #9e8e7e;
+  --text3:         #6a5e52;
+  --accent:        #d98a60;
+  --accent-soft:   #33291f;
+  --topbar-bg:     #1a1612;
+  --shadow:        0 2px 16px rgba(0,0,0,0.35);
+
+  --viz-series:    #3987e5;
+  --viz-series-fill: rgba(57,135,229,0.16);
+
+  --st-good-ink:   #0ca30c;
+  --st-good-bg:    rgba(12,163,12,0.16);
+  --st-warning-ink:#fab219;
+  --st-warning-bg: rgba(250,178,25,0.14);
+  --st-critical-ink:#e66767;
+  --st-critical-bg:rgba(208,59,59,0.16);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- top bar ---- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--topbar-bg);
+  border-bottom: 1px solid var(--card-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+.topbar-right { display: flex; gap: 6px; align-items: center; }
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  color: var(--text2);
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.icon-btn:hover { background: var(--accent-soft); color: var(--accent); }
+.icon-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---- layout ---- */
+.wrap { max-width: 940px; margin: 0 auto; padding: 28px 20px 64px; }
+.intro h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 1.9rem;
+  margin: 0 0 4px;
+}
+.lede { color: var(--text2); margin: 0 0 24px; }
+.muted { color: var(--text3); font-size: 0.88rem; }
+
+/* ---- totals strip ---- */
+.totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.total {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  min-width: 96px;
+}
+.total b { display: block; font-size: 1.3rem; font-weight: 500; font-family: var(--font-display); }
+.total span { color: var(--text2); font-size: 0.8rem; }
+
+/* ---- cards ---- */
+.cards { display: grid; gap: 14px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 18px;
+}
+.card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.card h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin: 0;
+}
+.type {
+  font-size: 0.75rem;
+  color: var(--text2);
+  background: var(--bg2);
+  border-radius: 20px;
+  padding: 2px 9px;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+.when { color: var(--text3); font-size: 0.82rem; }
+.line { margin: 8px 0 0; color: var(--text); }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+.pill.ok       { background: var(--st-good-bg);     color: var(--st-good-ink); }
+.pill.notable  { background: var(--st-warning-bg);  color: var(--st-warning-ink); }
+.pill.urgent   { background: var(--st-critical-bg); color: var(--st-critical-ink); }
+.pill.failed   { background: var(--st-critical-bg); color: var(--st-critical-ink); }
+.pill.paused   { background: var(--bg2);            color: var(--text2); }
+.pill.waiting  { background: var(--bg2);            color: var(--text2); }
+
+/* ---- sparkline ---- */
+.spark { display: block; margin-top: 12px; width: 100%; height: 44px; }
+.spark-note { color: var(--text3); font-size: 0.78rem; margin-top: 2px; }
+
+/* ---- events ---- */
+.events { margin: 12px 0 0; padding: 0; list-style: none; }
+.events li {
+  border-top: 1px solid var(--card-border);
+  padding: 9px 0 0;
+  margin-top: 9px;
+}
+.events .etitle { font-weight: 400; }
+.events .edetail { color: var(--text2); font-size: 0.88rem; white-space: pre-wrap; }
+.events a { color: var(--accent); }
+.events time { color: var(--text3); font-size: 0.78rem; display: block; }
+
+details > summary {
+  cursor: pointer;
+  color: var(--text2);
+  font-size: 0.85rem;
+  margin-top: 10px;
+}
+
+/* ---- fallback / empty ---- */
+.fallback, .empty {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 22px;
+}
+.fallback h2 { font-family: var(--font-display); font-weight: 400; margin: 0 0 6px; font-size: 1.05rem; }
+.filerow { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0 6px; }
+.filebtn {
+  border: 1px solid var(--card-border);
+  background: var(--bg2);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.filebtn input { display: none; }
+code {
+  background: var(--bg2);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.88em;
+}
+
+@media (max-width: 560px) {
+  .wrap { padding: 20px 14px 48px; }
+  .intro h1 { font-size: 1.5rem; }
+}

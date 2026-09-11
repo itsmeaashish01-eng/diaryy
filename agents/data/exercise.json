@@ -1,0 +1,10 @@
+{
+  "sessions": [
+    { "date": "2026-09-09", "kind": "run", "minutes": 38, "distanceKm": 6.4, "rpe": 5 },
+    { "date": "2026-09-07", "kind": "gym", "minutes": 50, "rpe": 7, "note": "lower body" },
+    { "date": "2026-09-05", "kind": "run", "minutes": 45, "distanceKm": 8.0, "rpe": 6 },
+    { "date": "2026-09-02", "kind": "swim", "minutes": 30, "distanceKm": 1.2, "rpe": 5 },
+    { "date": "2026-08-31", "kind": "gym", "minutes": 55, "rpe": 7 },
+    { "date": "2026-08-28", "kind": "run", "minutes": 32, "distanceKm": 5.5, "rpe": 4 }
+  ]
+}

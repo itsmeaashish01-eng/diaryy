@@ -16,6 +16,13 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 import { parseFeed } from "./types/feed.mjs";
+import { parseHeader, reviewDue } from "./types/study.mjs";
+import { score } from "./types/reading.mjs";
+import goals from "./types/goals.mjs";
+import reading from "./types/reading.mjs";
+import exercise from "./types/exercise.mjs";
+import portfolio from "./types/portfolio.mjs";
+import { deadlineBucket, isoWeek, staleBucket, daysUntil } from "./core/local.mjs";
 import { toText, digest } from "./types/webpage.mjs";
 import diary from "./types/diary.mjs";
 import { decide } from "./core/brain.mjs";
@@ -39,7 +46,7 @@ function eq(actual, expected, what) {
 const ok = (cond, what) => { if (!cond) throw new Error(what || "expected true"); };
 
 const DAY = 86400000;
-const isoDay = (t) => new Date(t).toISOString().slice(0, 10);
+const isoDay = (t = Date.now()) => new Date(t).toISOString().slice(0, 10);
 
 /* ---- feed parsing ------------------------------------------------- */
 
@@ -250,6 +257,238 @@ await (async () => {
   });
   cleanup();
 })();
+
+/* ---- dates and buckets -------------------------------------------- */
+
+check("Deadlines are announced at thresholds, not continuously", () => {
+  eq(deadlineBucket(45), "90", "45 days out sits in the 90 bucket");
+  eq(deadlineBucket(20), "30");
+  eq(deadlineBucket(10), "14");
+  eq(deadlineBucket(5), "7");
+  eq(deadlineBucket(2), "3");
+  eq(deadlineBucket(0), "0", "due today");
+  eq(deadlineBucket(-3), "overdue");
+  eq(deadlineBucket(200), null, "too far out to mention");
+});
+
+check("A date is read as midday, so 'due today' isn't 'overdue'", () => {
+  eq(daysUntil(isoDay(Date.now())), 0, "today is zero days away");
+  eq(daysUntil(isoDay(Date.now() + 3 * DAY)), 3);
+});
+
+check("Staleness is reported in steps, not every run", () => {
+  eq(staleBucket(21, 7), 21);
+  eq(staleBucket(25, 7), 21, "still the same step");
+  eq(staleBucket(28, 7), 28, "next step");
+});
+
+check("ISO weeks roll over correctly", () => {
+  eq(isoWeek(Date.parse("2026-01-01T12:00:00Z")), "2026-W01");
+  eq(isoWeek(Date.parse("2027-01-04T12:00:00Z")), "2027-W01", "Monday starts the week");
+});
+
+/* ---- study: headers and the ladder -------------------------------- */
+
+check("Front matter is read, including lists and quotes", () => {
+  const { head, body } = parseHeader(
+    '---\ntitle: "DKA — management"\ntopic: endocrine\ntags: [algorithm, emergency]\nreviewed: 2026-08-14\n---\nFluids first.');
+  eq(head.title, "DKA — management", "quotes stripped");
+  eq(head.tags, ["algorithm", "emergency"], "list parsed");
+  eq(head.reviewed, "2026-08-14");
+  eq(body, "Fluids first.", "body separated from header");
+});
+
+check("A note with no front matter is still a note", () => {
+  const { head, body } = parseHeader("Just some text I typed between clinics.");
+  eq(head, {}, "no header");
+  eq(body, "Just some text I typed between clinics.", "body untouched");
+});
+
+check("A stray --- in the body doesn't become a header", () => {
+  const { head } = parseHeader("Some text\n---\nnot: a header\n---");
+  eq(head, {}, "front matter must start the file");
+});
+
+check("The review ladder advances as you work through a note", () => {
+  const ladder = [1, 7, 30, 90];
+  eq(reviewDue(2, ladder, 0), 1, "never reviewed: due after a day");
+  eq(reviewDue(2, ladder, 1), null, "one pass in: two days is too soon");
+  eq(reviewDue(9, ladder, 1), 7, "one pass in: due after a week");
+  eq(reviewDue(40, ladder, 2), 30, "two passes in: due after a month");
+  eq(reviewDue(500, ladder, 9), 90, "past the end of the ladder, it stays at the top rung");
+  eq(reviewDue(null, ladder, 0), null, "no date, nothing to judge");
+});
+
+/* ---- reading: the recommender ------------------------------------- */
+
+const item = (over = {}) => ({ id: "x", title: "t", added: isoDay(Date.now() - 30 * DAY), priority: 3, ...over });
+
+check("Something you started beats something you haven't", () => {
+  ok(score(item({ started: isoDay() }), 30) > score(item(), 30), "started wins");
+});
+
+check("Priority outranks patience", () => {
+  const urgent = item({ priority: 5, added: isoDay() });
+  const ancient = item({ priority: 2, added: isoDay(Date.now() - 400 * DAY) });
+  ok(score(urgent, 30) > score(ancient, 30), "nothing wins by age alone");
+});
+
+check("Something that fits the time you have beats something that doesn't", () => {
+  ok(score(item({ minutes: 20 }), 30) > score(item({ minutes: 300 }), 30), "fits wins");
+});
+
+/* ---- the file-backed agents --------------------------------------- */
+
+function tempJSON(obj) {
+  const dir = mkdtempSync(join(tmpdir(), "agents-"));
+  const p = join(dir, "data.json");
+  writeFileSync(p, JSON.stringify(obj));
+  return { p, cleanup: () => rmSync(dir, { recursive: true, force: true }) };
+}
+const runWith = (type, file, config = {}) =>
+  type.run({ id: "t", label: "T", config: { file, ...config } }, { state: blankAgentState(), log() {} });
+
+await (async () => {
+  const { p, cleanup } = tempJSON({
+    goals: [{
+      id: "g1", title: "A goal", active: true,
+      due: isoDay(Date.now() + 10 * DAY),
+      milestones: [
+        { text: "done one", done: "2026-01-01" },
+        { text: "open one", due: isoDay(Date.now() + 5 * DAY), done: null },
+      ],
+      progress: [{ on: isoDay(Date.now() - 40 * DAY), note: "ages ago" }],
+    }],
+  });
+  const run = await runWith(goals, p, { staleDays: 21 });
+  check("Goals: a near deadline and a stalled goal both surface", () => {
+    eq(run.metric, 50, "one of two milestones done");
+    ok(run.observations.some((o) => o.key.startsWith("due:g1:14")), "goal deadline bucketed at 14");
+    ok(run.observations.some((o) => o.key.startsWith("m-due:g1:1:7")), "milestone deadline bucketed at 7");
+    ok(run.observations.some((o) => o.key.startsWith("stale:g1")), "40 days of silence noticed");
+    ok(run.observations.some((o) => o.key === "done:g1:0:2026-01-01"), "completed milestone keyed by its date");
+  });
+  cleanup();
+})();
+
+await (async () => {
+  const { p, cleanup } = tempJSON({
+    goals: [{
+      id: "g2", title: "Missed it", active: true,
+      due: isoDay(Date.now() - 30 * DAY), milestones: [],
+      progress: [{ on: isoDay(), note: "still going" }],
+    }],
+  });
+  const run = await runWith(goals, p);
+  check("Goals: a passed deadline escalates on its own", () => {
+    eq(run.facts.overdue, 1);
+    eq(run.level, "notable", "the type escalates without needing a rule");
+    ok(run.observations.some((o) => o.key.startsWith("overdue:g2")), "and says so");
+  });
+  cleanup();
+})();
+
+await (async () => {
+  const { p, cleanup } = tempJSON({
+    goals: [{ id: "g3", title: "Paused", active: false, progress: [] }],
+  });
+  const run = await runWith(goals, p);
+  check("Goals: an inactive goal is left alone", () => {
+    eq(run.facts.goals, 0);
+    eq(run.observations.length, 0);
+  });
+  cleanup();
+})();
+
+await (async () => {
+  const { p, cleanup } = tempJSON({
+    items: [
+      { id: "a", title: "Unread", added: isoDay(Date.now() - 10 * DAY), priority: 4, minutes: 20 },
+      { id: "b", title: "Ancient", added: isoDay(Date.now() - 300 * DAY), priority: 1, minutes: 30 },
+      { id: "c", title: "Read", added: isoDay(Date.now() - 60 * DAY), finished: isoDay(Date.now() - 2 * DAY) },
+    ],
+  });
+  const run = await runWith(reading, p, { suggest: 1, minutesFree: 30, staleDays: 120 });
+  check("Reading: counts, a suggestion, a finish and a long-dead item", () => {
+    eq(run.metric, 2, "two unread");
+    eq(run.facts.finished, 1);
+    ok(run.observations.some((o) => o.key.startsWith("suggest:")), "suggests something");
+    ok(run.observations.some((o) => o.key.startsWith("finished:c")), "acknowledges the finish");
+    ok(run.observations.some((o) => o.key.startsWith("stale:b")), "flags the 300-day-old one");
+  });
+  cleanup();
+})();
+
+await (async () => {
+  const { p, cleanup } = tempJSON({ items: [] });
+  const run = await runWith(reading, p);
+  check("Reading: an empty list is quiet, not an error", () => {
+    eq(run.metric, 0);
+    eq(run.observations.length, 0);
+  });
+  cleanup();
+})();
+
+await (async () => {
+  const days = [0, 2, 4].map((n) => isoDay(Date.now() - n * DAY));
+  const { p, cleanup } = tempJSON({
+    sessions: days.map((d, i) => ({ date: d, kind: "run", minutes: 30 + i, distanceKm: 5 })),
+  });
+  const run = await runWith(exercise, p, { weeklyTarget: 2, restDayMax: 3 });
+  check("Exercise: the last seven days are the metric", () => {
+    eq(run.metric, 3, "three sessions in the week");
+    ok(run.facts.weekMinutes > 0, "minutes counted");
+    ok(!run.observations.some((o) => o.key.startsWith("rest:")), "trained today, so no rest nudge");
+  });
+  cleanup();
+})();
+
+await (async () => {
+  const { p, cleanup } = tempJSON({
+    sessions: [{ date: isoDay(Date.now() - 9 * DAY), kind: "run", minutes: 30 }],
+  });
+  const run = await runWith(exercise, p, { weeklyTarget: 4, restDayMax: 3 });
+  check("Exercise: a long gap is mentioned, once per day of it", () => {
+    eq(run.metric, 0, "nothing in the last week");
+    ok(run.observations.some((o) => o.key === "rest:9"), "nine days off, keyed by the count");
+  });
+  cleanup();
+})();
+
+await (async () => {
+  const { p, cleanup } = tempJSON({ sessions: [] });
+  const run = await runWith(exercise, p);
+  check("Exercise: an empty log explains itself", () => {
+    eq(run.metric, 0);
+    ok(run.observations.some((o) => o.key === "empty"), "says what to do");
+  });
+  cleanup();
+})();
+
+await (async () => {
+  const { p, cleanup } = tempJSON({
+    holdings: [{ symbol: "X", provider: "command", config: { command: "rm -rf /" }, quantity: 1 }],
+  });
+  check("Portfolio: a holding can't smuggle in the command source", () => {
+    const errs = portfolio.validate({ config: { file: p } });
+    ok(errs.some((e) => e.includes("command")), `expected a refusal, got ${JSON.stringify(errs)}`);
+  });
+  cleanup();
+})();
+
+await (async () => {
+  const { p, cleanup } = tempJSON({ holdings: [{ symbol: "X", provider: "invented", quantity: 1 }] });
+  check("Portfolio: an unknown source is named, not swallowed", () => {
+    const errs = portfolio.validate({ config: { file: p } });
+    ok(errs.some((e) => e.includes("invented")), `expected the source named, got ${JSON.stringify(errs)}`);
+  });
+  cleanup();
+})();
+
+check("A missing data file fails with something you can act on", () => {
+  const errs = reading.validate({ config: { file: "/nowhere/at/all.json" } });
+  ok(errs.length === 1 && errs[0].includes("no reading list at"), errs[0] || "expected one clear error");
+});
 
 /* ---- report ------------------------------------------------------- */
 

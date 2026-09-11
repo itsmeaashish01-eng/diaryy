@@ -1,0 +1,37 @@
+{
+  "reviewEveryDays": 90,
+  "lastReview": "2026-07-01",
+  "goals": [
+    {
+      "id": "fellowship",
+      "title": "Finish fellowship strong",
+      "area": "career",
+      "why": "The training only happens once.",
+      "due": "2027-06-30",
+      "active": true,
+      "milestones": [
+        { "text": "Log 50 supervised procedures", "due": "2026-12-31", "done": null },
+        { "text": "Present at the departmental meeting", "due": "2026-11-15", "done": null },
+        { "text": "Mid-year review with supervisor", "due": "2027-01-31", "done": null }
+      ],
+      "progress": [
+        { "on": "2026-09-01", "note": "31 procedures logged" }
+      ]
+    },
+    {
+      "id": "paper",
+      "title": "First-author paper submitted",
+      "area": "research",
+      "due": "2027-03-01",
+      "active": true,
+      "milestones": [
+        { "text": "Protocol approved", "due": "2026-10-01", "done": "2026-08-20" },
+        { "text": "Data collection complete", "due": "2026-12-15", "done": null },
+        { "text": "Draft to co-authors", "due": "2027-02-01", "done": null }
+      ],
+      "progress": [
+        { "on": "2026-08-20", "note": "Ethics approval through" }
+      ]
+    }
+  ]
+}

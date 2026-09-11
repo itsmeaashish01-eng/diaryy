@@ -11,8 +11,12 @@
 #      `node agents/runner.mjs --dry-run --force` locally first.
 #
 # Everything here runs on rules and costs nothing. ANTHROPIC_API_KEY is
-# optional and only does anything for agents that set "brain": "claude" —
-# see agents/README.md.
+# optional and only does anything for agents that set "brain": "claude",
+# or for the study agent's revision cards — see agents/README.md.
+#
+# Not everything belongs here. The `study` agent reads agents/private/,
+# which is gitignored and therefore empty on a runner. Keep that one
+# local: `node agents/runner.mjs --only fellowship --force`.
 #
 # Run it by hand any time from the Actions tab ("Run workflow").
 

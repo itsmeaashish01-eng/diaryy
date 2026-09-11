@@ -1,0 +1,25 @@
+{
+  "base": "USD",
+  "holdings": [
+    {
+      "symbol": "VOO",
+      "label": "S&P 500 ETF",
+      "provider": "stooq",
+      "config": { "symbol": "voo.us" },
+      "currency": "USD",
+      "quantity": 12,
+      "avgCost": 402.1,
+      "targetPercent": 70
+    },
+    {
+      "symbol": "BTC",
+      "label": "Bitcoin",
+      "provider": "coingecko",
+      "config": { "coinId": "bitcoin", "vs": "usd" },
+      "currency": "USD",
+      "quantity": 0.05,
+      "avgCost": 48000,
+      "targetPercent": 10
+    }
+  ]
+}

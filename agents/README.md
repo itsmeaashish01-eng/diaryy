@@ -21,19 +21,41 @@ Open `agents/index.html` to see what they've been doing.
 
 ## The types
 
+They fall into two families. Some watch the world and tell you when it
+moved; the rest watch *you*, and tell you when something you said
+mattered has stopped moving. The second family is the one that earns its
+keep — nothing else in your week is going to mention that a goal hasn't
+been touched since August.
+
+**Watching the world**
+
 | Type | Watches | Tells you when |
 |---|---|---|
 | `feed` | An RSS or Atom feed | New items appear, optionally only ones matching a pattern |
 | `webpage` | Any page | The text changes, or a number on it crosses a line |
 | `uptime` | An endpoint | It goes down, comes back, or gets slow |
 | `github-release` | A repository | A release or tag is published |
-| `price` | Anything Price Watch can price | A threshold, a fall, a new low |
-| `diary` | Your diary export | A streak, a silence, a milestone, a growing to-do backlog |
+| `price` | One price, from any Price Watch source | A threshold, a fall, a new low |
+| `portfolio` | A set of holdings | The total moves, or the allocation drifts from target |
 
-`price` doesn't reimplement anything — it borrows Price Watch's provider
-registry, so CoinGecko, Coinbase, Stooq, Frankfurter, a JSON path, a regex
-on a page and Amadeus fares are all available here too, and a fix in one
-place fixes both.
+**Watching you**
+
+| Type | Watches | Tells you when |
+|---|---|---|
+| `diary` | Your diary export | A streak, a silence, a milestone, a growing to-do backlog |
+| `goals` | Career goals and milestones | A deadline closes in, or a goal goes quiet |
+| `study` | A folder of notes | Something's new, due for review, unsourced, or built on an aged guideline |
+| `reading` | A reading list | What to read next, and when the list is out-growing you |
+| `exercise` | A training log | The week's volume, a streak, rest that's gone on a while |
+
+`price` and `portfolio` don't reimplement anything — they borrow Price
+Watch's provider registry, so CoinGecko, Coinbase, Stooq, Frankfurter, a
+JSON path, a regex on a page and Amadeus fares are all available here too,
+and a fix in one place fixes both.
+
+`portfolio` never adds currencies together. A dollar total and a rupee
+total are two totals, reported as two totals — a blended number would be
+worse than no number.
 
 ---
 
@@ -85,6 +107,130 @@ Each thing an agent finds carries a key — a feed item's guid, a page's
 fingerprint, `streak:30`. The runner remembers the keys it has shown you
 and filters them out next time. That's what makes an hourly schedule
 bearable: running more often costs you nothing extra in noise.
+
+---
+
+## The ones that watch you
+
+These read a file of yours. The files live in `agents/data/` (except the
+study library — see below), they're plain JSON, and each type's source file
+documents its own shape at the top.
+
+### `goals` — `agents/data/goals.json`
+
+Goals, milestones with dates, and a `progress` list you append a line to
+when something happens. It watches deadlines at thresholds — 90 days, 30,
+14, 7, 3, 1 — so each one is mentioned once rather than every hour.
+
+The part worth having is the other half: a goal with no progress note for
+`staleDays` gets flagged. Not as a scolding — as a question. Either it's
+still a goal and it needs an hour this week, or it isn't and it should come
+off the list. Both are fine answers; drifting without deciding isn't.
+
+### `reading` — `agents/data/reading.json`
+
+Once a week it tells you what to read next. The recommendation is
+arithmetic, not a model: priority, how long it has been waiting, whether it
+fits the sitting you said you get, and a nudge toward things you already
+started. All four terms are in `score()` in `types/reading.mjs` — if the
+order looks wrong, you can see which one did it and change the weight.
+
+It also tracks intake against completion, and says when the list is growing
+faster than you're reading it. And it will suggest dropping something that
+has sat unread for months, because a reading list that only grows stops
+being a list and becomes a reproach.
+
+### `exercise` — `agents/data/exercise.json`
+
+Sessions with a date, a kind, and minutes. It reports on the **week**, not
+the day, because a day means nothing and a week is the smallest unit where
+"am I actually doing this?" has an answer. Rest isn't failure, so a gap is
+only mentioned once it's longer than the `restDayMax` you set.
+
+### `portfolio` — `agents/data/portfolio.json`
+
+Holdings with a quantity, an average cost and an optional `targetPercent`.
+Each is priced through Price Watch's sources; you get the total, the profit
+or loss, any holding that moved more than `movePercent` since the last
+check, and any position that has drifted `driftPercent` from its target.
+
+One dead source doesn't cost you the valuation — it prices what it can and
+names what it couldn't.
+
+---
+
+## `study` — the fellowship library
+
+Point it at a folder of notes and it does four things a folder doesn't:
+
+| | |
+|---|---|
+| **Remembers what's new** | A note you added is acknowledged once, not every run |
+| **Schedules review** | Spaced repetition off each note's own `reviewed` date |
+| **Ages the sources** | A guideline has a shelf life; this says when yours is old enough to re-check |
+| **Insists on provenance** | A note with no source gets flagged, every run, until it has one |
+
+### The review ladder
+
+Spaced repetition needs to know how many passes you've made, and a note
+only carries one date. So the agent counts: every time the `reviewed` date
+changes from what it last saw, that note moves up a rung — 1 day, then 7,
+30, 90, 180. Read something today and it comes back tomorrow; read it again
+and it comes back next week. A note you know well stops asking for
+attention, which is the entire point.
+
+Ignore one and it asks again each time it passes another interval, rather
+than going quiet forever.
+
+### Why it nags about sources
+
+`source` and `sourceDate` in a note's header aren't bookkeeping. A note you
+can't trace back is a note you can't check, and the ones you'd actually act
+on — tagged `algorithm`, `protocol`, `dosing` — are exactly the ones where
+that matters. So the agent flags them, and it keeps flagging them.
+
+`sourceDate` drives the other half: when the guideline behind a note is
+older than `sourceMaxAgeDays`, you get told. Not that the note is wrong —
+that the thing it was built on has had time to move.
+
+### Revision cards
+
+With `ANTHROPIC_API_KEY` set and `"synthesize": true`, it writes a
+condensed revision card beside each new or changed note. Three things are
+wired into how that works, because a summariser loose in clinical material
+is only useful if it's bounded:
+
+- **It never touches your note.** Cards go to a separate `.card.md` file.
+  Delete every card and you've lost nothing.
+- **It's told to add nothing.** Numbers, doses and cut-offs are carried
+  across verbatim; anything ambiguous in the note goes under a **Gaps**
+  heading rather than being resolved. That flag is the most useful thing on
+  the card.
+- **Every card carries its provenance** — the source and date from your own
+  header, the note it came from, and a line saying it's derived. When a card
+  and a guideline disagree, it should be obvious which one wins.
+
+A card is a revision aid built from your note. It is not a source, and the
+agent says so on every one it writes.
+
+### Privacy
+
+The library defaults to `agents/private/`, which `.gitignore` excludes.
+That's deliberate: notes from a fellowship can contain things that have no
+business in a repository, least of all one whose CI job pushes commits back
+to itself.
+
+The consequence is that `study` can't run on GitHub's machines — there'd be
+nothing there to read. Run it locally:
+
+```bash
+node agents/runner.mjs --only fellowship --force
+```
+
+Making it run unattended means committing the folder somewhere, and that's
+a decision to make deliberately rather than by leaving a default alone. A
+private repository is not the same thing as a safe place for patient
+information.
 
 ---
 

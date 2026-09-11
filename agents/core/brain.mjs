@@ -133,55 +133,40 @@ export function llmEnabled(agent) {
 }
 
 /*
+   One place any agent can ask Claude something.
+
    Raw HTTP rather than @anthropic-ai/sdk on purpose: this repo has no
    package.json and the workflow runs bare `node`, so a dependency here
    would mean an install step in CI for a code path that is off by
    default. One POST is a fair trade for keeping that true.
 */
-export async function narrateWithClaude(agent, run, verdict, fresh) {
-  const model = process.env.AGENT_MODEL || "claude-opus-5";
-  const body = {
-    model,
-    max_tokens: 1024,
-    // Cheap end of the range: this is a two-sentence summarisation job.
-    output_config: { effort: "low" },
-    fallbacks: "default",
-    system:
-      "You write one-line alerts for a personal monitoring agent. " +
-      "You are given what the agent found and the reasons its rules fired. " +
-      "Reply with at most two sentences of plain text: what changed and why it matters. " +
-      "No preamble, no markdown, no bullet points, no restating the agent's name.",
-    messages: [
-      {
-        role: "user",
-        content: JSON.stringify({
-          agent: agent.label,
-          type: agent.type,
-          level: verdict.level,
-          summary: run.line,
-          reasons: verdict.reasons,
-          newItems: fresh.slice(0, 10).map((o) => ({ title: o.title, detail: o.detail })),
-          facts: run.facts || {},
-        }),
-      },
-    ],
-  };
+export async function askClaude({ system, user, maxTokens = 1024, effort = "low" }) {
+  const key = process.env.ANTHROPIC_API_KEY;
+  if (!key) throw new Error("no ANTHROPIC_API_KEY set");
 
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      "x-api-key": process.env.ANTHROPIC_API_KEY,
+      "x-api-key": key,
       "anthropic-version": "2023-06-01",
       "anthropic-beta": "server-side-fallback-2026-07-01",
     },
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(60000),
+    body: JSON.stringify({
+      model: process.env.AGENT_MODEL || "claude-opus-5",
+      max_tokens: maxTokens,
+      output_config: { effort },
+      // If a request is declined, fall back rather than losing the run.
+      fallbacks: "default",
+      system,
+      messages: [{ role: "user", content: user }],
+    }),
+    signal: AbortSignal.timeout(120000),
   });
 
   if (!res.ok) throw new Error(`Claude API responded ${res.status}: ${(await res.text()).slice(0, 200)}`);
   const json = await res.json();
-  if (json.stop_reason === "refusal") throw new Error("Claude declined to summarise this one");
+  if (json.stop_reason === "refusal") throw new Error("Claude declined this one");
 
   const text = (json.content || [])
     .filter((b) => b.type === "text")
@@ -190,6 +175,28 @@ export async function narrateWithClaude(agent, run, verdict, fresh) {
     .trim();
   if (!text) throw new Error("Claude returned no text");
   return text;
+}
+
+export async function narrateWithClaude(agent, run, verdict, fresh) {
+  return askClaude({
+    // Cheap end of the range: this is a two-sentence summarisation job.
+    maxTokens: 1024,
+    effort: "low",
+    system:
+      "You write one-line alerts for a personal monitoring agent. " +
+      "You are given what the agent found and the reasons its rules fired. " +
+      "Reply with at most two sentences of plain text: what changed and why it matters. " +
+      "No preamble, no markdown, no bullet points, no restating the agent's name.",
+    user: JSON.stringify({
+      agent: agent.label,
+      type: agent.type,
+      level: verdict.level,
+      summary: run.line,
+      reasons: verdict.reasons,
+      newItems: fresh.slice(0, 10).map((o) => ({ title: o.title, detail: o.detail })),
+      facts: run.facts || {},
+    }),
+  });
 }
 
 /* What the runner actually calls. Falls back to the rules if the model

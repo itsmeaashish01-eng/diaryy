@@ -16,8 +16,16 @@
         "match": "claude|anthropic|llm|agent",
         "max": 5
       },
-      "rules": [{ "when": "new", "level": "notable" }],
-      "notify": { "on": "notable", "cooldownMin": 180 }
+      "rules": [
+        {
+          "when": "new",
+          "level": "notable"
+        }
+      ],
+      "notify": {
+        "on": "notable",
+        "cooldownMin": 180
+      }
     },
     {
       "id": "claude-code-releases",
@@ -25,24 +33,19 @@
       "label": "Claude Code releases",
       "active": true,
       "intervalMin": 360,
-      "config": { "repo": "anthropics/claude-code" },
-      "rules": [{ "when": "new", "level": "notable" }],
-      "notify": { "on": "notable", "cooldownMin": 60 }
-    },
-    {
-      "id": "btc",
-      "type": "price",
-      "label": "Bitcoin",
-      "note": "A price agent says nothing until a threshold rule fires.",
-      "active": true,
-      "intervalMin": 60,
-      "config": { "provider": "coingecko", "coinId": "bitcoin", "currency": "USD" },
+      "config": {
+        "repo": "anthropics/claude-code"
+      },
       "rules": [
-        { "when": "changesBy", "percent": 5, "level": "notable" },
-        { "when": "below", "value": 30000, "level": "urgent" },
-        { "when": "newLow", "level": "notable" }
+        {
+          "when": "new",
+          "level": "notable"
+        }
       ],
-      "notify": { "on": "notable", "cooldownMin": 240 }
+      "notify": {
+        "on": "notable",
+        "cooldownMin": 60
+      }
     },
     {
       "id": "my-site",
@@ -51,9 +54,21 @@
       "note": "Point this at something of yours. Down is urgent; slow is notable.",
       "active": false,
       "intervalMin": 60,
-      "config": { "url": "https://example.com", "timeoutMs": 15000 },
-      "rules": [{ "when": "above", "value": 4000, "level": "notable" }],
-      "notify": { "on": "notable", "cooldownMin": 60 }
+      "config": {
+        "url": "https://example.com",
+        "timeoutMs": 15000
+      },
+      "rules": [
+        {
+          "when": "above",
+          "value": 4000,
+          "level": "notable"
+        }
+      ],
+      "notify": {
+        "on": "notable",
+        "cooldownMin": 60
+      }
     },
     {
       "id": "diary-nudge",
@@ -66,10 +81,23 @@
         "file": "agents/data/diary.json",
         "quietDays": 3,
         "backlog": 15,
-        "milestones": [7, 30, 100, 365]
+        "milestones": [
+          7,
+          30,
+          100,
+          365
+        ]
       },
-      "rules": [{ "when": "new", "level": "notable" }],
-      "notify": { "on": "notable", "cooldownMin": 720 }
+      "rules": [
+        {
+          "when": "new",
+          "level": "notable"
+        }
+      ],
+      "notify": {
+        "on": "notable",
+        "cooldownMin": 720
+      }
     },
     {
       "id": "page-watch",
@@ -83,8 +111,152 @@
         "region": "<main[^>]*>([\\s\\S]*?)</main>",
         "ignore": "\\b\\d{1,2}:\\d{2}\\b"
       },
-      "rules": [{ "when": "new", "level": "notable" }],
-      "notify": { "on": "notable", "cooldownMin": 120 }
+      "rules": [
+        {
+          "when": "new",
+          "level": "notable"
+        }
+      ],
+      "notify": {
+        "on": "notable",
+        "cooldownMin": 120
+      }
+    },
+    {
+      "id": "career",
+      "type": "goals",
+      "label": "Career goals",
+      "note": "Deadlines closing in, and goals that have stopped moving.",
+      "active": true,
+      "intervalMin": 720,
+      "config": {
+        "file": "agents/data/goals.json",
+        "staleDays": 21,
+        "horizonDays": 90
+      },
+      "rules": [
+        {
+          "when": "new",
+          "level": "notable"
+        }
+      ],
+      "notify": {
+        "on": "notable",
+        "cooldownMin": 720
+      }
+    },
+    {
+      "id": "fellowship",
+      "type": "study",
+      "label": "Fellowship library",
+      "note": "Reads agents/private/study, which is gitignored — run this one locally, not in CI. Set synthesize to true (and add ANTHROPIC_API_KEY) to also write revision cards.",
+      "active": false,
+      "intervalMin": 720,
+      "config": {
+        "library": "agents/private/study",
+        "reviewAfterDays": [
+          1,
+          7,
+          30,
+          90,
+          180
+        ],
+        "sourceMaxAgeDays": 730,
+        "requireSource": true,
+        "synthesize": false,
+        "maxSynthPerRun": 3
+      },
+      "rules": [
+        {
+          "when": "new",
+          "level": "notable"
+        },
+        {
+          "when": "above",
+          "value": 20,
+          "level": "notable"
+        }
+      ],
+      "notify": {
+        "on": "notable",
+        "cooldownMin": 720
+      }
+    },
+    {
+      "id": "reading",
+      "type": "reading",
+      "label": "Reading list",
+      "note": "Suggests what to read next once a week, and says when the list is growing faster than you're reading.",
+      "active": true,
+      "intervalMin": 720,
+      "config": {
+        "file": "agents/data/reading.json",
+        "suggest": 2,
+        "minutesFree": 30,
+        "staleDays": 120
+      },
+      "rules": [
+        {
+          "when": "new",
+          "level": "notable"
+        }
+      ],
+      "notify": {
+        "on": "notable",
+        "cooldownMin": 1440
+      }
+    },
+    {
+      "id": "training",
+      "type": "exercise",
+      "label": "Exercise",
+      "note": "Counts the week, not the day. Only mentions rest once it's longer than the rest you said you take.",
+      "active": true,
+      "intervalMin": 720,
+      "config": {
+        "file": "agents/data/exercise.json",
+        "weeklyTarget": 4,
+        "restDayMax": 3
+      },
+      "rules": [
+        {
+          "when": "new",
+          "level": "notable"
+        }
+      ],
+      "notify": {
+        "on": "notable",
+        "cooldownMin": 1440
+      }
+    },
+    {
+      "id": "portfolio",
+      "type": "portfolio",
+      "label": "Portfolio",
+      "note": "Prices every holding through Price Watch's sources. Currencies are totalled separately, never blended.",
+      "active": true,
+      "intervalMin": 240,
+      "config": {
+        "file": "agents/data/portfolio.json",
+        "base": "USD",
+        "movePercent": 5,
+        "driftPercent": 5
+      },
+      "rules": [
+        {
+          "when": "new",
+          "level": "notable"
+        },
+        {
+          "when": "changesBy",
+          "percent": 4,
+          "level": "notable"
+        }
+      ],
+      "notify": {
+        "on": "notable",
+        "cooldownMin": 360
+      }
     }
   ]
 }

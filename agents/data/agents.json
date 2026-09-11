@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "settings": {
+    "defaultIntervalMin": 60
+  },
+  "agents": [
+    {
+      "id": "hn-ai",
+      "type": "feed",
+      "label": "Hacker News — AI stories",
+      "note": "Anything on the front page mentioning Claude, Anthropic or LLMs.",
+      "active": true,
+      "intervalMin": 60,
+      "config": {
+        "url": "https://hnrss.org/frontpage",
+        "match": "claude|anthropic|llm|agent",
+        "max": 5
+      },
+      "rules": [{ "when": "new", "level": "notable" }],
+      "notify": { "on": "notable", "cooldownMin": 180 }
+    },
+    {
+      "id": "claude-code-releases",
+      "type": "github-release",
+      "label": "Claude Code releases",
+      "active": true,
+      "intervalMin": 360,
+      "config": { "repo": "anthropics/claude-code" },
+      "rules": [{ "when": "new", "level": "notable" }],
+      "notify": { "on": "notable", "cooldownMin": 60 }
+    },
+    {
+      "id": "btc",
+      "type": "price",
+      "label": "Bitcoin",
+      "note": "A price agent says nothing until a threshold rule fires.",
+      "active": true,
+      "intervalMin": 60,
+      "config": { "provider": "coingecko", "coinId": "bitcoin", "currency": "USD" },
+      "rules": [
+        { "when": "changesBy", "percent": 5, "level": "notable" },
+        { "when": "below", "value": 30000, "level": "urgent" },
+        { "when": "newLow", "level": "notable" }
+      ],
+      "notify": { "on": "notable", "cooldownMin": 240 }
+    },
+    {
+      "id": "my-site",
+      "type": "uptime",
+      "label": "My site",
+      "note": "Point this at something of yours. Down is urgent; slow is notable.",
+      "active": false,
+      "intervalMin": 60,
+      "config": { "url": "https://example.com", "timeoutMs": 15000 },
+      "rules": [{ "when": "above", "value": 4000, "level": "notable" }],
+      "notify": { "on": "notable", "cooldownMin": 60 }
+    },
+    {
+      "id": "diary-nudge",
+      "type": "diary",
+      "label": "Diary",
+      "note": "Export the diary with the ⤓ button, save it as agents/data/diary.json, then set active to true.",
+      "active": false,
+      "intervalMin": 720,
+      "config": {
+        "file": "agents/data/diary.json",
+        "quietDays": 3,
+        "backlog": 15,
+        "milestones": [7, 30, 100, 365]
+      },
+      "rules": [{ "when": "new", "level": "notable" }],
+      "notify": { "on": "notable", "cooldownMin": 720 }
+    },
+    {
+      "id": "page-watch",
+      "type": "webpage",
+      "label": "A page I care about",
+      "note": "region narrows what counts as a change; number pulls a metric out so threshold rules work.",
+      "active": false,
+      "intervalMin": 240,
+      "config": {
+        "url": "https://example.com",
+        "region": "<main[^>]*>([\\s\\S]*?)</main>",
+        "ignore": "\\b\\d{1,2}:\\d{2}\\b"
+      },
+      "rules": [{ "when": "new", "level": "notable" }],
+      "notify": { "on": "notable", "cooldownMin": 120 }
+    }
+  ]
+}

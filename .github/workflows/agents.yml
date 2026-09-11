@@ -1,0 +1,87 @@
+# Runs your agents every hour on GitHub's machines and pushes anything
+# worth knowing to your phone. Nothing of yours needs to be running.
+#
+# Before this does anything useful:
+#   1. Merge this workflow to the default branch — GitHub only runs
+#      scheduled workflows from there, never from a feature branch.
+#   2. Add a repository secret NTFY_TOPIC (Settings → Secrets and
+#      variables → Actions), and subscribe to that same topic in the
+#      ntfy app on your phone.
+#   3. Edit agents/data/agents.json so it watches things you care about.
+#      `node agents/runner.mjs --dry-run --force` locally first.
+#
+# Everything here runs on rules and costs nothing. ANTHROPIC_API_KEY is
+# optional and only does anything for agents that set "brain": "claude" —
+# see agents/README.md.
+#
+# Run it by hand any time from the Actions tab ("Run workflow").
+
+name: Agents
+
+on:
+  schedule:
+    # Hourly at 37 past. GitHub's scheduler is busiest on the hour and
+    # delays runs under load, so an off-peak minute lands more reliably —
+    # and this is deliberately away from Price Watch's :17.
+    - cron: "37 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run every agent, ignoring its interval"
+        type: boolean
+        default: false
+      only:
+        description: "Run just this one agent (its id)"
+        type: string
+        required: false
+
+# Never let a slow run overlap the next hour's.
+concurrency:
+  group: agents
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run the agents
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NTFY_SERVER: ${{ secrets.NTFY_SERVER }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          WEBHOOK_STYLE: ${{ secrets.WEBHOOK_STYLE }}
+          PROXY_BASE: ${{ secrets.PROXY_BASE }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          AGENT_MODEL: ${{ vars.AGENT_MODEL }}
+          # Raises the GitHub API rate limit for github-release agents.
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          node agents/runner.mjs \
+            --summary "$GITHUB_STEP_SUMMARY" \
+            ${{ inputs.force && '--force' || '' }} \
+            ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
+
+      - name: Remember what it saw
+        run: |
+          if git diff --quiet -- agents/data/state.json; then
+            echo "Nothing new to record."
+            exit 0
+          fi
+          git config user.name "agents"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add agents/data/state.json
+          git commit -m "Agents: record run $(date -u '+%Y-%m-%d %H:%M UTC')"
+          # The branch may have moved on while this job ran.
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

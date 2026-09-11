@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789114621590,
-      "lastOk": 1789114621590,
+      "lastRun": 1789131564069,
+      "lastOk": 1789131564069,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789126584000,
+          "level": "notable",
+          "title": "Moonshot serves Claude instead of Kimi and collects exchanges for model training",
+          "detail": "Article URL: https://twitter.com/DavidAgranovich/status/2098168522862215449 Comments URL: https://news.ycombinator.com/item?id=49656698 Points: 13 # Comments: 1",
+          "url": "https://twitter.com/DavidAgranovich/status/2098168522862215449"
+        },
+        {
+          "t": 1789123680000,
+          "level": "notable",
+          "title": "Claude is no longer available for minors",
+          "detail": "Article URL: https://support.claude.com/en/articles/15171100-age-assurance-on-claude Comments URL: https://news.ycombinator.com/item?id=49656225 Points: 151 # Comments: 201",
+          "url": "https://support.claude.com/en/articles/15171100-age-assurance-on-claude"
+        },
+        {
+          "t": 1789069402000,
+          "level": "notable",
+          "title": "OpenAI Agents API",
+          "detail": "Article URL: https://developers.openai.com/api/docs/guides/agents-api/overview Comments URL: https://news.ycombinator.com/item?id=49649213 Points: 282 # Comments: 159",
+          "url": "https://developers.openai.com/api/docs/guides/agents-api/overview"
+        },
         {
           "t": 1789069402000,
           "level": "notable",
@@ -213,19 +234,37 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789114622781,
-      "lastOk": 1789114622781,
+      "lastRun": 1789131564762,
+      "lastOk": 1789131564762,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,858 (+60.8%) · excludes S&P 500 ETF",
+      "lastLine": "$3,894 (+62.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
           "t": 1789114622781,
           "v": 3858.35
+        },
+        {
+          "t": 1789131564762,
+          "v": 3893.7
         }
       ],
       "events": [
+        {
+          "t": 1789131564751,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789131564751,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789114622767,
           "level": "notable",
@@ -244,12 +283,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 77167
+          "BTC": 77874
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789131564762,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 5
+    },
     {
       "t": 1789114622781,
       "ran": 6,

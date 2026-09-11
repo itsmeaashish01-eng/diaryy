@@ -110,8 +110,10 @@ export default {
         });
       } catch (e) {
         /* One dead source must not cost you the whole valuation — price
-           what you can and say plainly which ones you couldn't. */
-        failed.push(`${label}: ${e.message}`);
+           what you can and say plainly which ones you couldn't. A count
+           on its own ("1 unpriced") is the unhelpful version: it tells
+           you something is wrong and leaves you to guess where. */
+        failed.push({ symbol: h.symbol, label, why: String(e.message || e) });
         continue;
       }
 
@@ -137,7 +139,11 @@ export default {
     }
 
     if (!rows.length) {
-      throw new Error(failed.length ? `couldn't price anything — ${failed[0]}` : "no holdings priced");
+      throw new Error(
+        failed.length
+          ? `couldn't price anything — ${failed[0].label}: ${failed[0].why}`
+          : "no holdings priced"
+      );
     }
 
     // ---- totals, per currency, never blended ----
@@ -164,12 +170,23 @@ export default {
       }
     }
 
+    /* A holding that won't price is worth saying once a day, not every
+       four hours — a broken symbol stays broken, and the total is still
+       wrong every run until you fix it. */
+    const today = new Date().toISOString().slice(0, 10);
+    for (const f of failed) {
+      add(`unpriced:${f.symbol}:${today}`,
+        `Couldn't price ${f.label}`,
+        `${f.why}\nThe total below leaves it out, so it is lower than your real position.`);
+    }
+
     const parts = Object.entries(byCurrency).map(([cur, g]) => {
       const pl = g.cost ? ` (${signed(pct(g.value, g.cost))})` : "";
       return `${PT.util.fmtMoney(g.value, cur)}${pl}`;
     });
 
     const baseGroup = byCurrency[base];
+    const missing = failed.map((f) => f.label).join(", ");
 
     return {
       observations,
@@ -177,14 +194,16 @@ export default {
       memo: { prices },
       facts: {
         holdings: rows.length,
-        failed: failed.length,
+        unpriced: failed.map((f) => `${f.label}: ${f.why}`),
         byCurrency: Object.fromEntries(
           Object.entries(byCurrency).map(([k, v]) => [k, { value: Math.round(v.value * 100) / 100, holdings: v.n }])
         ),
       },
       level: failed.length ? "notable" : "quiet",
-      why: failed.length ? `couldn't price ${plural(failed.length, "holding")}` : "",
-      line: parts.join(" · ") + (failed.length ? ` · ${failed.length} unpriced` : ""),
+      why: failed.length ? `couldn't price ${missing}` : "",
+      /* Say what the total excludes, in the same breath as the total —
+         a number that silently omits a holding is worse than no number. */
+      line: parts.join(" · ") + (failed.length ? ` · excludes ${missing}` : ""),
     };
   },
 

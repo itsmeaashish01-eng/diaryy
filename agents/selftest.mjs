@@ -512,6 +512,31 @@ await (async () => {
   cleanup();
 })();
 
+await (async () => {
+  /* The real run surfaced this: the summary said "1 unpriced" and left you
+     to work out which holding and why. A source that can't be reached is
+     simulated here with a provider that always throws. */
+  const { p, cleanup } = tempJSON({
+    holdings: [
+      { symbol: "GOOD", label: "Priced fine", provider: "demo", currency: "USD",
+        config: { basePrice: 100, volatility: 0.01 }, quantity: 2, avgCost: 50 },
+      { symbol: "BAD", label: "Dead source", provider: "json", currency: "USD",
+        config: { url: "https://127.0.0.1/nope.json", path: "price" }, quantity: 1, avgCost: 10 },
+    ],
+  });
+  const run = await portfolio.run(
+    { id: "pf", label: "Portfolio", intervalMin: 60, config: { file: p, base: "USD" } },
+    { state: blankAgentState(), log() {} }
+  );
+  check("Portfolio: an unpriced holding is named, not just counted", () => {
+    ok(run.line.includes("Dead source"), `the line should name it, got: ${run.line}`);
+    ok(run.facts.unpriced.some((u) => u.startsWith("Dead source:")), "facts carry the reason");
+    ok(run.observations.some((o) => o.key.startsWith("unpriced:BAD:")), "and it raises an observation");
+    ok(run.metric > 0, "the holdings that did price still produce a total");
+  });
+  cleanup();
+})();
+
 check("A missing data file fails with something you can act on", () => {
   const errs = reading.validate({ config: { file: "/nowhere/at/all.json" } });
   ok(errs.length === 1 && errs[0].includes("no reading list at"), errs[0] || "expected one clear error");

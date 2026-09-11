@@ -15,8 +15,16 @@ import { dirname } from "node:path";
 const SCHEMA_VERSION = 1;
 
 /* Caps. An agent that runs hourly forever should not grow a state file
-   forever with it. */
-const MAX_SEEN = 400;
+   forever with it.
+
+   MAX_SEEN is the one to be careful with. It's the dedupe memory, so it
+   has to be bigger than the largest number of distinct things a single
+   run can turn up — otherwise a run overflows it, the earliest keys fall
+   off, and the next run "discovers" them again and alerts on them. A
+   library scan that finds a note and a review date for each of 300 notes
+   is 600 keys in one pass, so the default is set well clear of that, and
+   an agent that tracks more can raise it with "maxSeen". */
+const MAX_SEEN = 1000;
 const MAX_METRICS = 1500;
 const MAX_EVENTS = 60;
 const MAX_RUNS = 200;
@@ -65,13 +73,22 @@ export function agentState(state, id) {
   return s;
 }
 
-export function remember(s, { seen = [], metric = null, events = [] }) {
-  if (seen.length) s.seen = s.seen.concat(seen).slice(-MAX_SEEN);
+/* Returns how many keys had to be dropped to stay under the cap. Anything
+   above zero means this agent is forgetting faster than it's learning,
+   and the runner says so rather than letting it repeat itself quietly. */
+export function remember(s, { seen = [], metric = null, events = [] }, cap = MAX_SEEN) {
+  let dropped = 0;
+  if (seen.length) {
+    const merged = s.seen.concat(seen);
+    dropped = Math.max(0, Math.min(merged.length - cap, seen.length));
+    s.seen = merged.slice(-cap);
+  }
   if (metric && Number.isFinite(metric.v)) {
     s.metrics.push({ t: metric.t || Date.now(), v: metric.v });
     if (s.metrics.length > MAX_METRICS) s.metrics = s.metrics.slice(-MAX_METRICS);
   }
   if (events.length) s.events = events.concat(s.events).slice(0, MAX_EVENTS);
+  return { dropped };
 }
 
 export function saveState(path, state, run) {

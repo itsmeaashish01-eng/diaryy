@@ -10,10 +10,17 @@ source is how you get a different agent — the rest is shared.
 
 ```bash
 node agents/runner.mjs --list                # what types exist
+node agents/runner.mjs --validate            # are my definitions sound?
 node agents/runner.mjs --dry-run --force     # run everything, send nothing
 node agents/runner.mjs                       # a real pass
 node agents/selftest.mjs                     # check the reasoning
 ```
+
+`--validate` touches nothing — no fetching, no writing, no sending. It
+checks every active agent names a type that exists and is configured well
+enough to run, and exits non-zero if not. That's what CI runs on each
+push, so a typo fails on the pull request rather than at 37 past the hour
+in a job nobody is watching.
 
 Open `agents/index.html` to see what they've been doing.
 
@@ -107,6 +114,21 @@ Each thing an agent finds carries a key — a feed item's guid, a page's
 fingerprint, `streak:30`. The runner remembers the keys it has shown you
 and filters them out next time. That's what makes an hourly schedule
 bearable: running more often costs you nothing extra in noise.
+
+That memory has a size, and it matters. It has to be larger than the most
+distinct things a single run can turn up, or a run overflows it, the
+earliest keys fall off, and the next run rediscovers them and alerts on
+them — every run, forever. The default holds 1000 keys, which is far more
+than a feed or a price will ever need. An agent that tracks more raises it:
+
+```json
+{ "id": "fellowship", "type": "study", "maxSeen": 8000 }
+```
+
+A library scan turns up roughly three keys per note, so size it from the
+number of notes, not the number of alerts. If a run does overflow, the
+runner says so in the log and on the run page rather than letting the
+agent quietly start repeating itself.
 
 ---
 

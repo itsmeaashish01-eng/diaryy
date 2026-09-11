@@ -149,7 +149,7 @@
       "id": "fellowship",
       "type": "study",
       "label": "Fellowship library",
-      "note": "Reads agents/private/study, which is gitignored — run this one locally, not in CI. Set synthesize to true (and add ANTHROPIC_API_KEY) to also write revision cards.",
+      "note": "Reads agents/private/study, which is gitignored — run this one locally, not in CI. maxSeen is high because a library scan turns up several keys per note. Set synthesize to true (and add ANTHROPIC_API_KEY) to also write revision cards.",
       "active": false,
       "intervalMin": 720,
       "config": {
@@ -180,7 +180,8 @@
       "notify": {
         "on": "notable",
         "cooldownMin": 720
-      }
+      },
+      "maxSeen": 8000
     },
     {
       "id": "reading",

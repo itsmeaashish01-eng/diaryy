@@ -23,6 +23,8 @@
      --loop           keep running, waking every minute
      --summary <p>    append a markdown report ($GITHUB_STEP_SUMMARY)
      --list           print the agent types and exit
+     --validate       check every active agent's definition and exit
+                      non-zero if any is broken. Touches no network
 
    Environment:
      NTFY_TOPIC       ntfy topic to push to
@@ -65,6 +67,40 @@ let force = flag("--force");
 const LOOP_TICK_MS = 60000;
 const stamp = () => new Date().toISOString().replace("T", " ").slice(0, 19);
 const log = (m) => console.log(loop ? `[${stamp()}] ${m}` : m);
+
+/* A definitions check with no side effects at all: no fetching, no
+   writing, no sending. This is what CI runs, so a typo'd type or a
+   config key left half-renamed fails on the pull request rather than at
+   37 past the hour in a job nobody is watching.
+
+   Paused agents are skipped, the same as in a real pass — a local-only
+   agent whose folder doesn't exist on a runner isn't a broken one. */
+if (flag("--validate")) {
+  const defs = loadAgents(file);
+  const problems = [];
+  for (const agent of defs.agents) {
+    const label = agent.label || agent.id;
+    if (agent.active === false) {
+      console.log(`– ${label} — paused, not checked`);
+      continue;
+    }
+    const type = typeFor(agent);
+    if (!type) {
+      problems.push(`${label}: unknown type "${agent.type}". Known: ${Object.keys(TYPES).join(", ")}`);
+      continue;
+    }
+    const errs = type.validate(agent);
+    if (errs.length) problems.push(`${label}: ${errs.join("; ")}`);
+    else console.log(`✓ ${label} (${agent.type})`);
+  }
+  if (problems.length) {
+    console.error(`\n${problems.length} problem${problems.length === 1 ? "" : "s"}:`);
+    for (const p of problems) console.error(`  ✕ ${p}`);
+    process.exit(1);
+  }
+  console.log(`\nAll ${defs.agents.filter((a) => a.active !== false).length} active agents check out.`);
+  process.exit(0);
+}
 
 /* Running agents with nowhere to send their findings is a half-configured
    setup that looks like a working one. Say so, every run. */
@@ -175,11 +211,19 @@ async function pass() {
       url: o.url || "",
     }));
 
-    remember(s, {
+    const { dropped } = remember(s, {
       seen: fresh.map((o) => o.key),
       metric: run.metric == null ? null : { t: Date.now(), v: Number(run.metric) },
       events,
-    });
+    }, Number(agent.maxSeen) || undefined);
+
+    /* Overflowing the dedupe memory is the one failure that looks like
+       the agent working: it re-finds what it already told you and tells
+       you again, every run, forever. Never let that be silent. */
+    if (dropped) {
+      log(`  ⚠ ${label} tracks more than it can remember — ${dropped} key${dropped === 1 ? "" : "s"} dropped.`);
+      log(`     Raise "maxSeen" on this agent, or it will report those again next run.`);
+    }
 
     // ---- is it worth interrupting you for? ----
     const floor = (agent.notify && agent.notify.on) || "notable";

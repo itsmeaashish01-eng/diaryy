@@ -156,10 +156,37 @@ check("Repeated failures only alert once an error rule asks them to", () => {
 
 check("Seen keys and metrics are capped, newest kept", () => {
   const s = blankAgentState();
-  for (let i = 0; i < 500; i++) remember(s, { seen: [`k${i}`], metric: { t: i, v: i } });
-  ok(s.seen.length <= 400, `seen capped, got ${s.seen.length}`);
-  eq(s.seen[s.seen.length - 1], "k499", "newest key kept");
-  eq(s.metrics[s.metrics.length - 1].v, 499, "newest metric kept");
+  for (let i = 0; i < 1500; i++) remember(s, { seen: [`k${i}`], metric: { t: i, v: i } });
+  ok(s.seen.length <= 1000, `seen capped, got ${s.seen.length}`);
+  eq(s.seen[s.seen.length - 1], "k1499", "newest key kept");
+  eq(s.metrics[s.metrics.length - 1].v, 1499, "newest metric kept");
+});
+
+check("A single run bigger than the old cap is remembered whole", () => {
+  /* The failure this guards against: one scan turns up more keys than the
+     dedupe memory holds, the earliest fall off, and the next run re-finds
+     them and alerts again — every run, forever. */
+  const s = blankAgentState();
+  const oneRun = [];
+  for (let i = 0; i < 300; i++) oneRun.push(`note:n${i}`, `review:n${i}:1`);
+  const { dropped } = remember(s, { seen: oneRun });
+  eq(dropped, 0, "nothing dropped");
+  ok(oneRun.every((k) => s.seen.includes(k)), "every key from the run is remembered");
+});
+
+check("Overflowing the dedupe memory is reported, not swallowed", () => {
+  const s = blankAgentState();
+  const big = Array.from({ length: 1200 }, (_, i) => `k${i}`);
+  const { dropped } = remember(s, { seen: big });
+  eq(dropped, 200, "says how many it had to forget");
+});
+
+check("An agent that tracks a lot can raise its own cap", () => {
+  const s = blankAgentState();
+  const big = Array.from({ length: 1200 }, (_, i) => `k${i}`);
+  const { dropped } = remember(s, { seen: big }, 8000);
+  eq(dropped, 0, "nothing dropped at the raised cap");
+  eq(s.seen.length, 1200, "all of it kept");
 });
 
 check("A corrupt state file costs you memory, not the run", () => {

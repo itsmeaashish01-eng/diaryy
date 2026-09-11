@@ -289,6 +289,16 @@ With neither set the agents still run and record — and say loudly, every
 run, that nothing can reach you. A half-configured setup that looks like a
 working one is worse than one that's obviously off.
 
+**A finding nothing could deliver is held, not consumed.** Marking a key as
+seen is what retires it for good, so that only happens once a channel has
+actually taken it. Runs before you set up ntfy don't quietly eat your news:
+whatever they found waits, and arrives on the first run that can reach you.
+The run page says how many are waiting.
+
+Findings below your `notify.on` threshold, or inside a cooldown, are a
+different case — those are you saying "don't tell me about this", so they
+are recorded and won't come back.
+
 ---
 
 ## The Claude brain (optional, off by default)

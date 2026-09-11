@@ -19,6 +19,18 @@ export function writeSummary(path, rows, totals, warnings) {
     "",
   ];
 
+  /* Held findings are the ones nothing would carry. Saying so here is the
+     difference between "it's quiet" and "it's quiet because nothing can
+     reach you, and here is what is waiting". */
+  if (totals.held) {
+    lines.push(
+      `> [!NOTE]`,
+      `> **${totals.held} finding${totals.held === 1 ? "" : "s"} held, not discarded.** Nothing could deliver them, so they`,
+      `> stay unreported and will arrive on the first run with a working alert channel.`,
+      ""
+    );
+  }
+
   for (const w of warnings || []) {
     lines.push("> [!WARNING]", `> ${w}`, "");
   }

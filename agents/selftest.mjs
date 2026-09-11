@@ -27,6 +27,7 @@ import { toText, digest } from "./types/webpage.mjs";
 import diary from "./types/diary.mjs";
 import { decide } from "./core/brain.mjs";
 import { blankAgentState, remember, loadState, saveState, agentState } from "./core/state.mjs";
+import { anySent, describeDelivery } from "./core/notify.mjs";
 
 let passed = 0;
 const failures = [];
@@ -540,6 +541,33 @@ await (async () => {
 check("A missing data file fails with something you can act on", () => {
   const errs = reading.validate({ config: { file: "/nowhere/at/all.json" } });
   ok(errs.length === 1 && errs[0].includes("no reading list at"), errs[0] || "expected one clear error");
+});
+
+/* ---- delivery ------------------------------------------------------ */
+
+check("A finding only counts as reported if a channel actually took it", () => {
+  /* This is what stops a run with no alert channel quietly eating your
+     news: marking a key as seen is what retires it for good, so it must
+     wait on real delivery. */
+  ok(anySent([{ name: "ntfy", sent: true, detail: "sent" }]), "one channel took it");
+  ok(anySent([
+    { name: "ntfy", sent: false, detail: "no topic configured" },
+    { name: "webhook", sent: true, detail: "sent" },
+  ]), "one of two is enough");
+  ok(!anySent([
+    { name: "ntfy", sent: false, detail: "no topic configured" },
+    { name: "webhook", sent: false, detail: "no webhook configured" },
+  ]), "nothing configured means nothing was reported");
+  ok(!anySent([{ name: "ntfy", sent: false, detail: "FAILED — ntfy responded 503" }]),
+    "a channel that errored did not report it");
+  ok(!anySent([]), "no channels at all");
+});
+
+check("Delivery results read as a log line per channel", () => {
+  eq(describeDelivery([
+    { name: "ntfy", sent: true, detail: "sent" },
+    { name: "webhook", sent: false, detail: "FAILED — 503" },
+  ]), ["ntfy: sent", "webhook: FAILED — 503"]);
 });
 
 /* ---- report ------------------------------------------------------- */

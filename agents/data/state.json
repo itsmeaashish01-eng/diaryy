@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789146531620,
-      "lastOk": 1789146531620,
+      "lastRun": 1789156761636,
+      "lastOk": 1789156761636,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789150220000,
+          "level": "notable",
+          "title": "Litelm: LiteLLM Without the Bloat",
+          "detail": "Article URL: https://github.com/kennethwolters/litelm Comments URL: https://news.ycombinator.com/item?id=49662767 Points: 34 # Comments: 12",
+          "url": "https://github.com/kennethwolters/litelm"
+        },
+        {
+          "t": 1789123680000,
+          "level": "notable",
+          "title": "Claude is only available to people over 18 years",
+          "detail": "Article URL: https://support.claude.com/en/articles/15171100-age-assurance-on-claude Comments URL: https://news.ycombinator.com/item?id=49656225 Points: 445 # Comments: 502",
+          "url": "https://support.claude.com/en/articles/15171100-age-assurance-on-claude"
+        },
         {
           "t": 1789134857000,
           "level": "notable",
@@ -398,6 +412,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1789156761643,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 2
+    },
     {
       "t": 1789146533451,
       "ran": 3,

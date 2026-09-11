@@ -41,7 +41,7 @@
 import { typeFor, typeList, TYPES } from "./core/registry.mjs";
 import { loadAgents, loadState, agentState, remember, saveState } from "./core/state.mjs";
 import { decide, narrate, atLeast } from "./core/brain.mjs";
-import { deliver, canNotify } from "./core/notify.mjs";
+import { deliver, canNotify, anySent, describeDelivery } from "./core/notify.mjs";
 import { writeSummary } from "./core/report.mjs";
 
 const argv = process.argv.slice(2);
@@ -119,7 +119,7 @@ async function pass() {
   const now = Date.now();
   const defaultInterval = Number(defs.settings && defs.settings.defaultIntervalMin) || 60;
 
-  let ran = 0, skipped = 0, failed = 0, notified = 0;
+  let ran = 0, skipped = 0, failed = 0, notified = 0, held = 0;
   let soonest = null, soonestLabel = "";
   const rows = [];
 
@@ -177,11 +177,12 @@ async function pass() {
          agent with nothing to report. */
       const verdict = decide(agent, { fresh: [], metric: null }, s);
       if (atLeast(verdict.level, "urgent") && shouldSend(agent, s, verdict.level, now) && !dryRun) {
-        for (const line of await deliver(`${label} is failing`, s.lastError.message, "urgent")) {
-          log(`     ${line}`);
+        const results = await deliver(`${label} is failing`, s.lastError.message, "urgent");
+        for (const line of describeDelivery(results)) log(`     ${line}`);
+        if (anySent(results)) {
+          s.notifiedAt[verdict.level] = Date.now();
+          notified++;
         }
-        s.notifiedAt[verdict.level] = Date.now();
-        notified++;
       }
       continue;
     }
@@ -211,11 +212,17 @@ async function pass() {
       url: o.url || "",
     }));
 
+    /* Metrics and the event log are a record of what happened and go in
+       regardless. The `seen` keys are different: recording one is what
+       stops it being reported again, so it is only safe once the finding
+       has actually been dealt with. Held back until we know. */
+    const cap = Number(agent.maxSeen) || undefined;
     const { dropped } = remember(s, {
-      seen: fresh.map((o) => o.key),
+      seen: [],
       metric: run.metric == null ? null : { t: Date.now(), v: Number(run.metric) },
       events,
-    }, Number(agent.maxSeen) || undefined);
+    }, cap);
+    const keys = fresh.map((o) => o.key);
 
     /* Overflowing the dedupe memory is the one failure that looks like
        the agent working: it re-finds what it already told you and tells
@@ -227,11 +234,17 @@ async function pass() {
 
     // ---- is it worth interrupting you for? ----
     const floor = (agent.notify && agent.notify.on) || "notable";
+
+    /* Below the threshold you set, or inside a cooldown you set: both are
+       you saying "don't tell me about this". That counts as dealt with —
+       the finding is recorded and won't come back. */
     if (!atLeast(verdict.level, floor)) {
+      remember(s, { seen: keys }, cap);
       rows.push({ status: "quiet", label, type: agent.type, line: run.line || "no change" });
       continue;
     }
     if (!shouldSend(agent, s, verdict.level, now)) {
+      remember(s, { seen: keys }, cap);
       log(`  (${verdict.level}, but within its cooldown — not sending)`);
       rows.push({ status: "quiet", label, type: agent.type, line: `${run.line} (cooling down)` });
       continue;
@@ -245,20 +258,40 @@ async function pass() {
     log(`  ${verdict.level === "urgent" ? "🚨" : "🔔"} ${headline}`);
     if (dryRun) {
       log("     (dry run — not sent)");
-    } else {
-      for (const line of await deliver(`${label}`, body, verdict.level)) log(`     ${line}`);
-      s.notifiedAt[verdict.level] = Date.now();
+      notified++;
+      rows.push({ status: verdict.level, label, type: agent.type, line: headline });
+      continue;
     }
-    notified++;
-    rows.push({ status: verdict.level, label, type: agent.type, line: headline });
+
+    const results = await deliver(`${label}`, body, verdict.level);
+    for (const line of describeDelivery(results)) log(`     ${line}`);
+
+    if (anySent(results)) {
+      remember(s, { seen: keys }, cap);
+      s.notifiedAt[verdict.level] = Date.now();
+      notified++;
+      rows.push({ status: verdict.level, label, type: agent.type, line: headline });
+    } else {
+      /* Nothing took it, so you have not been told — and marking it seen
+         here is how a finding disappears for good. Leave the keys out and
+         it waits for a channel that works. This is the whole reason a run
+         with no alert channel doesn't quietly consume your news. */
+      held += keys.length;
+      log(`     (nothing took it — holding ${keys.length} finding${keys.length === 1 ? "" : "s"} for next time)`);
+      rows.push({ status: "failed", label, type: agent.type, line: `${headline} — undelivered` });
+    }
   }
 
-  const totals = { ran, skipped, failed, notified };
+  const totals = { ran, skipped, failed, notified, held };
   if (dryRun) {
     log(`Dry run — nothing written or sent. ran ${ran}, skipped ${skipped}, failed ${failed}, would notify ${notified}`);
   } else if (ran || failed) {
     saveState(statePath, state, { t: Date.now(), ...totals });
     log(`ran ${ran}, skipped ${skipped}, failed ${failed}, notified ${notified} — ${statePath} updated`);
+    if (held) {
+      log(`${held} finding${held === 1 ? " is" : "s are"} being held rather than discarded — nothing could deliver ${held === 1 ? "it" : "them"}.`);
+      log("They will be reported on the first run that has a working alert channel.");
+    }
   } else if (!loop) {
     log(`Nothing was due. skipped ${skipped}`);
   }

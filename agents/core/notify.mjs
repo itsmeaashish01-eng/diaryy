@@ -48,11 +48,22 @@ async function pushWebhook(title, message) {
   return "sent";
 }
 
+/* Returns one result per channel: { name, sent, detail }. `sent` is the
+   one that matters — the runner only marks a finding as reported once at
+   least one channel actually took it. A finding that went nowhere has not
+   been reported, whatever the log says. */
 export async function deliver(title, message, level) {
   const out = [];
   for (const [name, fn] of [["ntfy", pushNtfy], ["webhook", pushWebhook]]) {
-    try { out.push(`${name}: ${await fn(title, message, level)}`); }
-    catch (e) { out.push(`${name}: FAILED — ${e.message}`); }
+    try {
+      const detail = await fn(title, message, level);
+      out.push({ name, sent: detail === "sent", detail });
+    } catch (e) {
+      out.push({ name, sent: false, detail: `FAILED — ${e.message}` });
+    }
   }
   return out;
 }
+
+export const anySent = (results) => results.some((r) => r.sent);
+export const describeDelivery = (results) => results.map((r) => `${r.name}: ${r.detail}`);

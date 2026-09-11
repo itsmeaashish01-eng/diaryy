@@ -7,6 +7,13 @@ name: Checks
 on:
   push:
     branches: ["**"]
+    # The two scheduled workflows commit a data file to this repo every
+    # hour. Those pushes change no code, so testing them is 48 runs a day
+    # proving the same thing. A commit that touches one of these *and*
+    # anything else still runs.
+    paths-ignore:
+      - "tracker/data/watches.json"
+      - "agents/data/state.json"
   pull_request:
 
 permissions:

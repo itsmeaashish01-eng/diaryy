@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789241824570,
-      "lastOk": 1789241824570,
+      "lastRun": 1789249032448,
+      "lastOk": 1789249032448,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789243039000,
+          "level": "notable",
+          "title": "Benchmark: CadQuery vs. OpenSCAD for agentic CAD work",
+          "detail": "Article URL: https://modelrift.com/blog/cadquery-vs-openscad/ Comments URL: https://news.ycombinator.com/item?id=49676577 Points: 10 # Comments: 14",
+          "url": "https://modelrift.com/blog/cadquery-vs-openscad/"
+        },
+        {
+          "t": 1789211618000,
+          "level": "notable",
+          "title": "The worst spam emails: iLands AI agent hustle",
+          "detail": "Article URL: https://tedium.co/2026/09/11/ilands-agents-email-spam-kaixin-tang/ Comments URL: https://news.ycombinator.com/item?id=49671159 Points: 97 # Comments: 42",
+          "url": "https://tedium.co/2026/09/11/ilands-agents-email-spam-kaixin-tang/"
+        },
         {
           "t": 1789236427000,
           "level": "notable",
@@ -839,11 +853,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789233890453,
-      "lastOk": 1789233890453,
+      "lastRun": 1789249032939,
+      "lastOk": 1789249032939,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,864 (+61.0%) · excludes S&P 500 ETF",
+      "lastLine": "$3,861 (+60.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -873,9 +887,27 @@
         {
           "t": 1789233890453,
           "v": 3864.45
+        },
+        {
+          "t": 1789249032940,
+          "v": 3860.75
         }
       ],
       "events": [
+        {
+          "t": 1789249032924,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789249032924,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789233890441,
           "level": "notable",
@@ -978,12 +1010,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 77289
+          "BTC": 77215
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789249032940,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1789241824579,
       "ran": 1,

@@ -27,7 +27,23 @@
     }
   },
   "seeded": true,
-  "alerts": [],
+  "alerts": [
+    {
+      "id": "mtxw5pv6-g74gjl",
+      "watchId": "seed-demo",
+      "watchLabel": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 9.1% vs its recent average — now $217.74",
+      "price": 217.74,
+      "currency": "USD",
+      "t": 1789187696177,
+      "read": false,
+      "kindLabel": "Flight"
+    }
+  ],
   "watches": [
     {
       "id": "seed-amtrak",
@@ -147,9 +163,13 @@
         {
           "t": 1789172117628,
           "p": 77268
+        },
+        {
+          "t": 1789187696156,
+          "p": 77261
         }
       ],
-      "lastCheck": 1789172117628,
+      "lastCheck": 1789187696156,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
@@ -276,13 +296,22 @@
           "meta": {
             "simulated": true
           }
+        },
+        {
+          "t": 1789187696177,
+          "p": 217.74,
+          "meta": {
+            "simulated": true
+          }
         }
       ],
-      "lastCheck": 1789172117650,
+      "lastCheck": 1789187696177,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
-      "lastAlertAt": {},
+      "lastAlertAt": {
+        "dropPct": 1789187696177
+      },
       "cooldownMin": 180,
       "notes": "Simulated. Proves the hourly job runs end to end. Delete once your real watches are in."
     }

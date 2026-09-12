@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789211532691,
-      "lastOk": 1789211532691,
+      "lastRun": 1789222809315,
+      "lastOk": 1789222809315,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789211618000,
+          "level": "notable",
+          "title": "The Worst Spam Emails: Inside iLands' AI Agent Hustle",
+          "detail": "Article URL: https://tedium.co/2026/09/11/ilands-agents-email-spam-kaixin-tang/ Comments URL: https://news.ycombinator.com/item?id=49671159 Points: 48 # Comments: 26",
+          "url": "https://tedium.co/2026/09/11/ilands-agents-email-spam-kaixin-tang/"
+        },
+        {
+          "t": 1789168662000,
+          "level": "notable",
+          "title": "OpenAI agents carried out an undisclosed attack on RubyGems",
+          "detail": "https://simonwillison.net/2026/Sep/12/openai-agents-rubygems... Comments URL: https://news.ycombinator.com/item?id=49666735 Points: 815 # Comments: 473",
+          "url": "https://www.rubyhack.ai/"
+        },
+        {
+          "t": 1789150220000,
+          "level": "notable",
+          "title": "Litelm: LiteLLM Without the Bloat",
+          "detail": "Article URL: https://github.com/kennethwolters/litelm Comments URL: https://news.ycombinator.com/item?id=49662767 Points: 157 # Comments: 52",
+          "url": "https://github.com/kennethwolters/litelm"
+        },
         {
           "t": 1789210162000,
           "level": "notable",
@@ -819,6 +840,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1789222809323,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1789211536236,
       "ran": 6,

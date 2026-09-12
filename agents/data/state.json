@@ -2,14 +2,49 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789176533998,
-      "lastOk": 1789176533998,
+      "lastRun": 1789194315525,
+      "lastOk": 1789194315525,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789188403000,
+          "level": "notable",
+          "title": "OpenAI agents attacked RubyGems back in May",
+          "detail": "Article URL: https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/ Comments URL: https://news.ycombinator.com/item?id=49668914 Points: 19 # Comments: 1",
+          "url": "https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/"
+        },
+        {
+          "t": 1789172170000,
+          "level": "notable",
+          "title": "Show HN: Graphify C# – Compiler-accurate Find Usages for coding agents",
+          "detail": "Article URL: https://github.com/zachsaw/graphify-csharp Comments URL: https://news.ycombinator.com/item?id=49667188 Points: 29 # Comments: 13",
+          "url": "https://github.com/zachsaw/graphify-csharp"
+        },
+        {
+          "t": 1789168662000,
+          "level": "notable",
+          "title": "OpenAI agents carried out an undisclosed attack on RubyGems",
+          "detail": "Article URL: https://www.rubyhack.ai/ Comments URL: https://news.ycombinator.com/item?id=49666735 Points: 569 # Comments: 324",
+          "url": "https://www.rubyhack.ai/"
+        },
+        {
+          "t": 1789150220000,
+          "level": "notable",
+          "title": "Litelm: LiteLLM Without the Bloat",
+          "detail": "Article URL: https://github.com/kennethwolters/litelm Comments URL: https://news.ycombinator.com/item?id=49662767 Points: 120 # Comments: 39",
+          "url": "https://github.com/kennethwolters/litelm"
+        },
+        {
+          "t": 1789123680000,
+          "level": "notable",
+          "title": "Claude is only available to people over 18 years",
+          "detail": "Article URL: https://support.claude.com/en/articles/15171100-age-assurance-on-claude Comments URL: https://news.ycombinator.com/item?id=49656225 Points: 617 # Comments: 621",
+          "url": "https://support.claude.com/en/articles/15171100-age-assurance-on-claude"
+        },
         {
           "t": 1789172170000,
           "level": "notable",
@@ -512,11 +547,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789166722160,
-      "lastOk": 1789166722160,
+      "lastRun": 1789194316256,
+      "lastOk": 1789194316256,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,858 (+60.8%) · excludes S&P 500 ETF",
+      "lastLine": "$3,861 (+60.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -534,9 +569,27 @@
         {
           "t": 1789166722160,
           "v": 3858.3
+        },
+        {
+          "t": 1789194316256,
+          "v": 3861
         }
       ],
       "events": [
+        {
+          "t": 1789194316245,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789194316245,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789166722146,
           "level": "notable",
@@ -597,12 +650,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 77166
+          "BTC": 77220
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789194316257,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 7
+    },
     {
       "t": 1789176534311,
       "ran": 2,

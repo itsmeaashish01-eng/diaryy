@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789258384181,
-      "lastOk": 1789258384181,
+      "lastRun": 1789276711301,
+      "lastOk": 1789276711301,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789256758000,
+          "level": "notable",
+          "title": "AgentsDock: An IDE designed for agentic AI research",
+          "detail": "Article URL: https://agentsdock.net/ Comments URL: https://news.ycombinator.com/item?id=49678435 Points: 26 # Comments: 10",
+          "url": "https://agentsdock.net/"
+        },
         {
           "t": 1789211618000,
           "level": "notable",
@@ -992,8 +999,8 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789249032939,
-      "lastOk": 1789249032939,
+      "lastRun": 1789276711972,
+      "lastOk": 1789276711972,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "$3,861 (+60.9%) · excludes S&P 500 ETF",
@@ -1030,9 +1037,27 @@
         {
           "t": 1789249032940,
           "v": 3860.75
+        },
+        {
+          "t": 1789276711972,
+          "v": 3861.3
         }
       ],
       "events": [
+        {
+          "t": 1789276711958,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789276711958,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789249032924,
           "level": "notable",
@@ -1149,12 +1174,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 77215
+          "BTC": 77226
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789276711973,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1789258384586,
       "ran": 5,

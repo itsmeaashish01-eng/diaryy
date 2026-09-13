@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789310339662,
-      "lastOk": 1789310339662,
+      "lastRun": 1789323555373,
+      "lastOk": 1789323555373,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789318353000,
+          "level": "notable",
+          "title": "David Sacks: OpenAI and Anthropic Don't Need Regulations to Pace Frontier Models",
+          "detail": "Article URL: https://twitter.com/DavidSacks/status/2098973625252708460 Comments URL: https://news.ycombinator.com/item?id=49685991 Points: 75 # Comments: 35",
+          "url": "https://twitter.com/DavidSacks/status/2098973625252708460"
+        },
+        {
+          "t": 1789262551000,
+          "level": "notable",
+          "title": "Why are AI agents lying, cheating and coordinating?",
+          "detail": "Article URL: https://yoshuabengio.org/en/publication/why-are-ai-agents-lying-cheating-and-coordinating Comments URL: https://news.ycombinator.com/item?id=49678969 Points: 495 # Comments: 579",
+          "url": "https://yoshuabengio.org/en/publication/why-are-ai-agents-lying-cheating-and-coordinating"
+        },
         {
           "t": 1789262551000,
           "level": "notable",
@@ -316,8 +330,8 @@
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1789295660684,
-      "lastOk": 1789295660684,
+      "lastRun": 1789323555920,
+      "lastOk": 1789323555920,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.270",
@@ -465,6 +479,76 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.259"
         },
         {
+          "t": 1789242344000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.270",
+          "detail": "## What's changed\n\n- Fixed read-only git commands in Bash unexpectedly asking for permission after a session had been running for a while (regression in 2.1.269)\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
+        },
+        {
+          "t": 1789154275000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.269",
+          "detail": "## What's changed\n\n- Added `claude plugin eval`: run a plugin's eval suite against Claude Code and get scored, reproducible results (JSON + HTML report); see `claude plugin eval --help`\n- Added `/output-style [name]` to list and switch output styles, including over Remote Control and in cloud and other headless sessions\n- Added a diff of the files a Bash command changed to the Bash tool result whe",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
+        },
+        {
+          "t": 1789072254000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.268",
+          "detail": "## What's changed\n\n- Added to the Claude apps gateway: with `pricing:` set in `gateway.yaml`, signed-in Claude Code clients receive the same rates through managed settings, so `/cost` and telemetry match the spend meter\n- Added a startup warning for gateways when `access_control.allow_cidrs` is empty, and a one-time warning the first time a request arrives from a public address\n- Added the `gatewa",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.268"
+        },
+        {
+          "t": 1788983894000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.267",
+          "detail": "## What's changed\n\n- Added `maxEffortLevel` setting (top-level or per model under `modelSettings`): caps the effort level on every provider, including Bedrock, Vertex and Foundry; users can still pick a lower level\n- Added `--system-prompt-snapshot off` to render the system prompt fresh on every request instead of reusing the conversation's recorded prompt (for iterating on prompt text)\n- Fixed Co",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.267"
+        },
+        {
+          "t": 1788911714000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.266",
+          "detail": "## What's changed\n\n- Fixed a 2.1.265 regression affecting LLM-gateway and proxy setups: the undocumented `CLAUDE_CODE_USE_GATEWAY` environment variable, previously ignored unless `ANTHROPIC_BASE_URL` and `ANTHROPIC_AUTH_TOKEN` were both set, began forcing Cloud-gateway sign-in on its own in 2.1.265, so configurations that set it alongside an API key, `apiKeyHelper`, or custom auth headers failed e",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.266"
+        },
+        {
+          "t": 1788899851000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.265",
+          "detail": "## What's changed\n\n- Added `user.email` and `user.groups` to the telemetry Claude Desktop and Cowork send through a Claude apps gateway, matching terminal sessions\n- Added support for pointing `--plugin-dir` at a folder of plugins: each child folder with a manifest loads, and children added or removed while running are picked up\n- Added a 1 GB cap on tool results saved to disk; the in-conversation",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.265"
+        },
+        {
+          "t": 1788663260000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.263",
+          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.263"
+        },
+        {
+          "t": 1788551890000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.261",
+          "detail": "## What's changed\n\n- Added an \"Organization policy\" line to `/status` and `claude doctor` that says why your organization's policy could not be loaded, such as a proxy not passing the endpoint through\n- Added `bashOutputMaxChars` and `taskOutputMaxChars` settings to raise how much command and background-task output Claude receives inline before it is saved to a file, up to 128K characters\n- Added ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.261"
+        },
+        {
+          "t": 1788479292000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.260",
+          "detail": "## What's changed\n\n- Added a diff panel that opens beside the conversation in fullscreen mode and shows your uncommitted changes as Claude edits; toggle it with `/diff`\n- Added a likely cause for prompt-cache misses (e.g. tool definitions or system prompt changed, idle past the TTL) to `/cost` and the status line's `prompt_cache` field\n- Added `/reload-plugins` to headless sessions, so it appears ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.260"
+        },
+        {
+          "t": 1788388431000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.259",
+          "detail": "## What's changed\n\n- Added `managedMcpServers` managed setting: organizations can provide HTTP/SSE MCP servers to every user (same entry shape as `.mcp.json`); entries that name a command to run are skipped\n- Added `--permission-prompts none` for unattended headless hosts: anything that would prompt is denied automatically while the active permission mode (including auto mode) keeps deciding\n- Add",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.259"
+        },
+        {
           "t": 1789154275000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.269",
@@ -673,76 +757,6 @@
           "title": "anthropics/claude-code v2.1.258",
           "detail": "## What's changed\n\n- Fixed Claude Code failing to launch on macOS 12 (Monterey), a regression introduced in 2.1.255\n- Fixed remote and scheduled sessions failing with \"user messages must have non-empty content\" after a re-sent permission approval could not be applied\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.258"
-        },
-        {
-          "t": 1789072254000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.268",
-          "detail": "## What's changed\n\n- Added to the Claude apps gateway: with `pricing:` set in `gateway.yaml`, signed-in Claude Code clients receive the same rates through managed settings, so `/cost` and telemetry match the spend meter\n- Added a startup warning for gateways when `access_control.allow_cidrs` is empty, and a one-time warning the first time a request arrives from a public address\n- Added the `gatewa",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.268"
-        },
-        {
-          "t": 1788983894000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.267",
-          "detail": "## What's changed\n\n- Added `maxEffortLevel` setting (top-level or per model under `modelSettings`): caps the effort level on every provider, including Bedrock, Vertex and Foundry; users can still pick a lower level\n- Added `--system-prompt-snapshot off` to render the system prompt fresh on every request instead of reusing the conversation's recorded prompt (for iterating on prompt text)\n- Fixed Co",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.267"
-        },
-        {
-          "t": 1788911714000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.266",
-          "detail": "## What's changed\n\n- Fixed a 2.1.265 regression affecting LLM-gateway and proxy setups: the undocumented `CLAUDE_CODE_USE_GATEWAY` environment variable, previously ignored unless `ANTHROPIC_BASE_URL` and `ANTHROPIC_AUTH_TOKEN` were both set, began forcing Cloud-gateway sign-in on its own in 2.1.265, so configurations that set it alongside an API key, `apiKeyHelper`, or custom auth headers failed e",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.266"
-        },
-        {
-          "t": 1788899851000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.265",
-          "detail": "## What's changed\n\n- Added `user.email` and `user.groups` to the telemetry Claude Desktop and Cowork send through a Claude apps gateway, matching terminal sessions\n- Added support for pointing `--plugin-dir` at a folder of plugins: each child folder with a manifest loads, and children added or removed while running are picked up\n- Added a 1 GB cap on tool results saved to disk; the in-conversation",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.265"
-        },
-        {
-          "t": 1788663260000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.263",
-          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.263"
-        },
-        {
-          "t": 1788551890000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.261",
-          "detail": "## What's changed\n\n- Added an \"Organization policy\" line to `/status` and `claude doctor` that says why your organization's policy could not be loaded, such as a proxy not passing the endpoint through\n- Added `bashOutputMaxChars` and `taskOutputMaxChars` settings to raise how much command and background-task output Claude receives inline before it is saved to a file, up to 128K characters\n- Added ",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.261"
-        },
-        {
-          "t": 1788479292000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.260",
-          "detail": "## What's changed\n\n- Added a diff panel that opens beside the conversation in fullscreen mode and shows your uncommitted changes as Claude edits; toggle it with `/diff`\n- Added a likely cause for prompt-cache misses (e.g. tool definitions or system prompt changed, idle past the TTL) to `/cost` and the status line's `prompt_cache` field\n- Added `/reload-plugins` to headless sessions, so it appears ",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.260"
-        },
-        {
-          "t": 1788388431000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.259",
-          "detail": "## What's changed\n\n- Added `managedMcpServers` managed setting: organizations can provide HTTP/SSE MCP servers to every user (same entry shape as `.mcp.json`); entries that name a command to run are skipped\n- Added `--permission-prompts none` for unattended headless hosts: anything that would prompt is denied automatically while the active permission mode (including auto mode) keeps deciding\n- Add",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.259"
-        },
-        {
-          "t": 1788302000000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.258",
-          "detail": "## What's changed\n\n- Fixed Claude Code failing to launch on macOS 12 (Monterey), a regression introduced in 2.1.255\n- Fixed remote and scheduled sessions failing with \"user messages must have non-empty content\" after a re-sent permission approval could not be applied\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.258"
-        },
-        {
-          "t": 1788285232000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.257",
-          "detail": "## What's changed\n\n- Added Claude Fable 5.1 (`claude-fable-5-1`), now the default Fable model — 1M context, $10/$50 per Mtok with $0.25/Mtok cache reads\n- Added \"Time format\" (`timeFormat`) and `timeZone` settings: 12-hour, 24-hour, 24-hour UTC, or a strftime pattern for the turn-end clock and transcript-view timestamps\n- Added a Containment Escape rule to auto mode so cloud metadata-credential fe",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.257"
         }
       ],
       "notifiedAt": {},
@@ -1298,6 +1312,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1789323555925,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 12
+    },
     {
       "t": 1789310340398,
       "ran": 5,

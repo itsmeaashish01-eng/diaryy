@@ -2,14 +2,56 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789395766431,
-      "lastOk": 1789395766431,
+      "lastRun": 1789414427937,
+      "lastOk": 1789414427937,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "6 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789406166000,
+          "level": "notable",
+          "title": "Pion, an agent designed to run any company autonomously",
+          "detail": "Article URL: https://andonlabs.com/blog/why-we-built-pion Comments URL: https://news.ycombinator.com/item?id=49700477 Points: 131 # Comments: 124",
+          "url": "https://andonlabs.com/blog/why-we-built-pion"
+        },
+        {
+          "t": 1789403543000,
+          "level": "notable",
+          "title": "Why don't machine learning research agents overfit?",
+          "detail": "Article URL: https://www.amazon.science/blog/why-dont-machine-learning-research-agents-overfit Comments URL: https://news.ycombinator.com/item?id=49699648 Points: 62 # Comments: 31",
+          "url": "https://www.amazon.science/blog/why-dont-machine-learning-research-agents-overfit"
+        },
+        {
+          "t": 1789403370000,
+          "level": "notable",
+          "title": "When LLM judges agree, should we believe them?",
+          "detail": "Article URL: https://www.amazon.science/blog/when-llm-judges-agree-should-we-believe-them Comments URL: https://news.ycombinator.com/item?id=49699590 Points: 34 # Comments: 14",
+          "url": "https://www.amazon.science/blog/when-llm-judges-agree-should-we-believe-them"
+        },
+        {
+          "t": 1789402464000,
+          "level": "notable",
+          "title": "Claude is a Contrarian",
+          "detail": "Article URL: https://medium.com/@rdsubhas/claude-is-a-contrarian-dbce4de5cada Comments URL: https://news.ycombinator.com/item?id=49699373 Points: 85 # Comments: 113",
+          "url": "https://medium.com/@rdsubhas/claude-is-a-contrarian-dbce4de5cada"
+        },
+        {
+          "t": 1789394349000,
+          "level": "notable",
+          "title": "Notes on gotchas while migrating 35kb preprompts from Opus to self-hosted Ollama",
+          "detail": "Article URL: https://patrickmccanna.net/notes-on-migrating-large-prompts-away-from-anthropic-openai-to-self-hosted-llms/ Comments URL: https://news.ycombinator.com/item?id=49697014 Points: 89 # Comments: 40",
+          "url": "https://patrickmccanna.net/notes-on-migrating-large-prompts-away-from-anthropic-openai-to-self-hosted-llms/"
+        },
+        {
+          "t": 1789392022000,
+          "level": "notable",
+          "title": "Show HN: Pelican-bicycle alternatives",
+          "detail": "In November and December 2025, inspired by Simon Willison’s pelican-riding-a-bicycle benchmark, I had some then-current LLMs create SVGs from thirty similar prompts, such as “Generate an SVG of an octopus operating a pipe organ.” Simon mentioned that experiment on his blog [1].Nine months have passe",
+          "url": "https://gally.net/temp/20260914pelican-alternatives/index.html"
+        },
         {
           "t": 1789389657000,
           "level": "notable",
@@ -798,8 +840,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1789369064542,
-      "lastOk": 1789369064542,
+      "lastRun": 1789414427940,
+      "lastOk": 1789414427940,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 1 drifting",
@@ -828,9 +870,34 @@
         {
           "t": 1789369064542,
           "v": 17
+        },
+        {
+          "t": 1789414427940,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1789414427940,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 62 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1789414427940,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1789414427940,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 25 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1789369064542,
           "level": "notable",
@@ -964,8 +1031,8 @@
       }
     },
     "reading": {
-      "lastRun": 1789369064544,
-      "lastOk": 1789369064544,
+      "lastRun": 1789414427942,
+      "lastOk": 1789414427942,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -994,9 +1061,34 @@
         {
           "t": 1789369064544,
           "v": 3
+        },
+        {
+          "t": 1789414427942,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1789414427942,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1789414427942,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 44 days",
+          "url": ""
+        },
+        {
+          "t": 1789414427942,
+          "level": "notable",
+          "title": "Still unread after 136 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1789369064544,
           "level": "notable",
@@ -1130,8 +1222,8 @@
       }
     },
     "training": {
-      "lastRun": 1789369064546,
-      "lastOk": 1789369064546,
+      "lastRun": 1789414427944,
+      "lastOk": 1789414427944,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
@@ -1160,9 +1252,20 @@
         {
           "t": 1789369064546,
           "v": 2
+        },
+        {
+          "t": 1789414427944,
+          "v": 1
         }
       ],
       "events": [
+        {
+          "t": 1789414427943,
+          "level": "notable",
+          "title": "5 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1789369064545,
           "level": "notable",
@@ -1191,11 +1294,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789395767368,
-      "lastOk": 1789395767368,
+      "lastRun": 1789414428750,
+      "lastOk": 1789414428750,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,929 (+63.7%) · excludes S&P 500 ETF",
+      "lastLine": "$3,956 (+64.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1257,9 +1360,27 @@
         {
           "t": 1789395767368,
           "v": 3929.35
+        },
+        {
+          "t": 1789414428750,
+          "v": 3955.85
         }
       ],
       "events": [
+        {
+          "t": 1789414428737,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789414428737,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789395767356,
           "level": "notable",
@@ -1474,12 +1595,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 78587
+          "BTC": 79117
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789414428750,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 15
+    },
     {
       "t": 1789395767368,
       "ran": 3,

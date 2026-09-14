@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789369064540,
-      "lastOk": 1789369064540,
+      "lastRun": 1789395766431,
+      "lastOk": 1789395766431,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789389657000,
+          "level": "notable",
+          "title": "What a time to be alive – rouge AI agents attack RubyGems.org",
+          "detail": "Article URL: https://tenderlovemaking.com/2026/09/11/what-a-time-to-be-alive/ Comments URL: https://news.ycombinator.com/item?id=49695876 Points: 77 # Comments: 103",
+          "url": "https://tenderlovemaking.com/2026/09/11/what-a-time-to-be-alive/"
+        },
+        {
+          "t": 1789387292000,
+          "level": "notable",
+          "title": "Apple's Siri AI Can Be Swapped Out for Claude, ChatGPT, Code Shows",
+          "detail": "Article URL: https://www.macrumors.com/2026/09/14/siri-can-be-swapped-out-for-chatgpt-claude/ Comments URL: https://news.ycombinator.com/item?id=49695409 Points: 104 # Comments: 40",
+          "url": "https://www.macrumors.com/2026/09/14/siri-can-be-swapped-out-for-chatgpt-claude/"
+        },
+        {
+          "t": 1789372519000,
+          "level": "notable",
+          "title": "OpenArch – PyTorch implementations of modern LLM architectures",
+          "detail": "Article URL: https://github.com/anuj0456/OpenArch Comments URL: https://news.ycombinator.com/item?id=49693384 Points: 92 # Comments: 18",
+          "url": "https://github.com/anuj0456/OpenArch"
+        },
         {
           "t": 1789318353000,
           "level": "notable",
@@ -344,8 +365,8 @@
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1789349556182,
-      "lastOk": 1789349556182,
+      "lastRun": 1789395766794,
+      "lastOk": 1789395766794,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.270",
@@ -633,6 +654,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.259"
         },
         {
+          "t": 1789242344000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.270",
+          "detail": "## What's changed\n\n- Fixed read-only git commands in Bash unexpectedly asking for permission after a session had been running for a while (regression in 2.1.269)\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
+        },
+        {
           "t": 1789154275000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.269",
@@ -694,13 +722,6 @@
           "title": "anthropics/claude-code v2.1.259",
           "detail": "## What's changed\n\n- Added `managedMcpServers` managed setting: organizations can provide HTTP/SSE MCP servers to every user (same entry shape as `.mcp.json`); entries that name a command to run are skipped\n- Added `--permission-prompts none` for unattended headless hosts: anything that would prompt is denied automatically while the active permission mode (including auto mode) keeps deciding\n- Add",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.259"
-        },
-        {
-          "t": 1788302000000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.258",
-          "detail": "## What's changed\n\n- Fixed Claude Code failing to launch on macOS 12 (Monterey), a regression introduced in 2.1.255\n- Fixed remote and scheduled sessions failing with \"user messages must have non-empty content\" after a re-sent permission approval could not be applied\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.258"
         },
         {
           "t": 1789154275000,
@@ -1170,11 +1191,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789369065133,
-      "lastOk": 1789369065133,
+      "lastRun": 1789395767368,
+      "lastOk": 1789395767368,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,879 (+61.6%) · excludes S&P 500 ETF",
+      "lastLine": "$3,929 (+63.7%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1232,9 +1253,27 @@
         {
           "t": 1789369065133,
           "v": 3879.45
+        },
+        {
+          "t": 1789395767368,
+          "v": 3929.35
         }
       ],
       "events": [
+        {
+          "t": 1789395767356,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789395767357,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789369065119,
           "level": "notable",
@@ -1435,12 +1474,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 77589
+          "BTC": 78587
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789395767368,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 15
+    },
     {
       "t": 1789369065133,
       "ran": 5,

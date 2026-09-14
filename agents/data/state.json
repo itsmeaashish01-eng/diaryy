@@ -2,11 +2,11 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789349555643,
-      "lastOk": 1789349555643,
+      "lastRun": 1789369064540,
+      "lastOk": 1789369064540,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
@@ -777,8 +777,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1789310339665,
-      "lastOk": 1789310339665,
+      "lastRun": 1789369064542,
+      "lastOk": 1789369064542,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 1 drifting",
@@ -803,9 +803,34 @@
         {
           "t": 1789310339665,
           "v": 17
+        },
+        {
+          "t": 1789369064542,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1789369064542,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 62 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1789369064542,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1789369064542,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 25 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1789310339665,
           "level": "notable",
@@ -914,12 +939,12 @@
       ],
       "notifiedAt": {},
       "memo": {
-        "checkedOn": "2026-09-13"
+        "checkedOn": "2026-09-14"
       }
     },
     "reading": {
-      "lastRun": 1789310339667,
-      "lastOk": 1789310339667,
+      "lastRun": 1789369064544,
+      "lastOk": 1789369064544,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -944,9 +969,34 @@
         {
           "t": 1789310339667,
           "v": 3
+        },
+        {
+          "t": 1789369064544,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1789369064544,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1789369064544,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 44 days",
+          "url": ""
+        },
+        {
+          "t": 1789369064544,
+          "level": "notable",
+          "title": "Still unread after 136 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1789310339666,
           "level": "notable",
@@ -1055,15 +1105,15 @@
       ],
       "notifiedAt": {},
       "memo": {
-        "week": "2026-W37"
+        "week": "2026-W38"
       }
     },
     "training": {
-      "lastRun": 1789310339668,
-      "lastOk": 1789310339668,
+      "lastRun": 1789369064546,
+      "lastOk": 1789369064546,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2/4 this week · 88 min · 6.4 km · last 4w: run 3, gym 2, swim 1",
+      "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
       "seen": [],
       "metrics": [
         {
@@ -1085,9 +1135,20 @@
         {
           "t": 1789310339668,
           "v": 2
+        },
+        {
+          "t": 1789369064546,
+          "v": 2
         }
       ],
       "events": [
+        {
+          "t": 1789369064545,
+          "level": "notable",
+          "title": "5 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1789310339668,
           "level": "notable",
@@ -1109,11 +1170,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789349556996,
-      "lastOk": 1789349556996,
+      "lastRun": 1789369065133,
+      "lastOk": 1789369065133,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,841 (+60.0%) · excludes S&P 500 ETF",
+      "lastLine": "$3,879 (+61.6%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1167,9 +1228,27 @@
         {
           "t": 1789349556996,
           "v": 3840.55
+        },
+        {
+          "t": 1789369065133,
+          "v": 3879.45
         }
       ],
       "events": [
+        {
+          "t": 1789369065119,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789369065119,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789349556982,
           "level": "notable",
@@ -1356,12 +1435,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 76811
+          "BTC": 77589
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789369065133,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 9
+    },
     {
       "t": 1789349556997,
       "ran": 3,

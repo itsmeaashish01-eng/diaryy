@@ -2,11 +2,11 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789496784681,
-      "lastOk": 1789496784681,
+      "lastRun": 1789508541568,
+      "lastOk": 1789508541568,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1789459194125,
-      "lastOk": 1789459194125,
+      "lastRun": 1789508541570,
+      "lastOk": 1789508541570,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 1 drifting",
@@ -906,9 +906,34 @@
         {
           "t": 1789459194125,
           "v": 17
+        },
+        {
+          "t": 1789508541571,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1789508541570,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 61 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1789508541570,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1789508541570,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 26 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1789459194125,
           "level": "notable",
@@ -1084,8 +1109,8 @@
       }
     },
     "reading": {
-      "lastRun": 1789459194126,
-      "lastOk": 1789459194126,
+      "lastRun": 1789508541572,
+      "lastOk": 1789508541572,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1122,9 +1147,34 @@
         {
           "t": 1789459194126,
           "v": 3
+        },
+        {
+          "t": 1789508541573,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1789508541572,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1789508541572,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 45 days",
+          "url": ""
+        },
+        {
+          "t": 1789508541572,
+          "level": "notable",
+          "title": "Still unread after 137 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1789459194126,
           "level": "notable",
@@ -1300,8 +1350,8 @@
       }
     },
     "training": {
-      "lastRun": 1789459194127,
-      "lastOk": 1789459194127,
+      "lastRun": 1789508541574,
+      "lastOk": 1789508541574,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
@@ -1338,9 +1388,20 @@
         {
           "t": 1789459194127,
           "v": 1
+        },
+        {
+          "t": 1789508541574,
+          "v": 1
         }
       ],
       "events": [
+        {
+          "t": 1789508541574,
+          "level": "notable",
+          "title": "6 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1789459194127,
           "level": "notable",
@@ -1762,6 +1823,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1789508541579,
+      "ran": 4,
+      "skipped": 6,
+      "failed": 0,
+      "notified": 0,
+      "held": 7
+    },
     {
       "t": 1789496786198,
       "ran": 3,

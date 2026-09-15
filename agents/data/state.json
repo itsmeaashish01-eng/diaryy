@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789425807585,
-      "lastOk": 1789425807585,
+      "lastRun": 1789437065177,
+      "lastOk": 1789437065177,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789406166000,
+          "level": "notable",
+          "title": "Pion, an agent designed to run any company autonomously",
+          "detail": "Article URL: https://andonlabs.com/blog/why-we-built-pion Comments URL: https://news.ycombinator.com/item?id=49700477 Points: 283 # Comments: 308",
+          "url": "https://andonlabs.com/blog/why-we-built-pion"
+        },
+        {
+          "t": 1789403543000,
+          "level": "notable",
+          "title": "Why don't machine learning research agents overfit?",
+          "detail": "Article URL: https://www.amazon.science/blog/why-dont-machine-learning-research-agents-overfit Comments URL: https://news.ycombinator.com/item?id=49699648 Points: 105 # Comments: 58",
+          "url": "https://www.amazon.science/blog/why-dont-machine-learning-research-agents-overfit"
+        },
         {
           "t": 1789406166000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "OpenAI Agents API",
           "detail": "Article URL: https://developers.openai.com/api/docs/guides/agents-api/overview Comments URL: https://news.ycombinator.com/item?id=49649213 Points: 282 # Comments: 159",
           "url": "https://developers.openai.com/api/docs/guides/agents-api/overview"
-        },
-        {
-          "t": 1789069402000,
-          "level": "notable",
-          "title": "OpenAI Agents API",
-          "detail": "Article URL: https://developers.openai.com/api/docs/guides/agents-api/overview Comments URL: https://news.ycombinator.com/item?id=49649213 Points: 244 # Comments: 134",
-          "url": "https://developers.openai.com/api/docs/guides/agents-api/overview"
-        },
-        {
-          "t": 1789061022000,
-          "level": "notable",
-          "title": "Detecting and countering misuse of AI: September 2026",
-          "detail": "https://www-cdn.anthropic.com/e50be2e51e7695dc4b1366a37a245a... Comments URL: https://news.ycombinator.com/item?id=49647300 Points: 123 # Comments: 190",
-          "url": "https://www.anthropic.com/threat-intelligence-report-september-2026"
         }
       ],
       "notifiedAt": {},
@@ -1322,11 +1322,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789414428750,
-      "lastOk": 1789414428750,
+      "lastRun": 1789437066256,
+      "lastOk": 1789437066256,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,956 (+64.8%) · excludes S&P 500 ETF",
+      "lastLine": "$3,899 (+62.5%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1392,9 +1392,27 @@
         {
           "t": 1789414428750,
           "v": 3955.85
+        },
+        {
+          "t": 1789437066257,
+          "v": 3899.2
         }
       ],
       "events": [
+        {
+          "t": 1789437066243,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789437066243,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789414428737,
           "level": "notable",
@@ -1623,12 +1641,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 79117
+          "BTC": 77984
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789437066257,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1789425807922,
       "ran": 2,

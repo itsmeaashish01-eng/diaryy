@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789459193763,
-      "lastOk": 1789459193763,
+      "lastRun": 1789480192536,
+      "lastOk": 1789480192536,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789406166000,
+          "level": "notable",
+          "title": "Pion, an agent designed to run any company autonomously",
+          "detail": "Article URL: https://andonlabs.com/blog/why-we-built-pion Comments URL: https://news.ycombinator.com/item?id=49700477 Points: 442 # Comments: 542",
+          "url": "https://andonlabs.com/blog/why-we-built-pion"
+        },
         {
           "t": 1789406166000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "OpenAI Agents API",
           "detail": "Article URL: https://developers.openai.com/api/docs/guides/agents-api/overview Comments URL: https://news.ycombinator.com/item?id=49649213 Points: 325 # Comments: 168",
           "url": "https://developers.openai.com/api/docs/guides/agents-api/overview"
-        },
-        {
-          "t": 1789126584000,
-          "level": "notable",
-          "title": "Moonshot serves Claude instead of Kimi and collects exchanges for model training",
-          "detail": "Article URL: https://twitter.com/DavidAgranovich/status/2098168522862215449 Comments URL: https://news.ycombinator.com/item?id=49656698 Points: 13 # Comments: 1",
-          "url": "https://twitter.com/DavidAgranovich/status/2098168522862215449"
         }
       ],
       "notifiedAt": {},
@@ -1383,11 +1383,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789459194908,
-      "lastOk": 1789459194908,
+      "lastRun": 1789480193192,
+      "lastOk": 1789480193192,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,843 (+60.1%) · excludes S&P 500 ETF",
+      "lastLine": "$3,813 (+58.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1461,9 +1461,27 @@
         {
           "t": 1789459194908,
           "v": 3843.4
+        },
+        {
+          "t": 1789480193192,
+          "v": 3813.1
         }
       ],
       "events": [
+        {
+          "t": 1789480193178,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789480193178,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789459194894,
           "level": "notable",
@@ -1720,12 +1738,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 76868
+          "BTC": 76262
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789480193193,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1789459194909,
       "ran": 6,

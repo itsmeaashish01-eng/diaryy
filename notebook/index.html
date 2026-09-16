@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marginalia — a research notebook that runs on your laptop</title>
+  <!-- No webfonts, no CDN, no analytics: this page has to work on a
+       train with the wifi off, which is most of the point. -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark">✎</span>
+      <span class="name">Marginalia</span>
+      <span class="tag">local research notebook</span>
+    </div>
+
+    <div class="topbar-right">
+      <label class="picker" title="The model that writes. 12–14B at four bits is the sweet spot on 24 GB.">
+        <span>write with</span>
+        <select id="chatModel"></select>
+      </label>
+      <label class="picker" title="The model that turns passages into vectors. Search works without one, just less well.">
+        <span>search with</span>
+        <select id="embedModel"></select>
+      </label>
+      <span id="health" class="health" title="Ollama status">checking…</span>
+      <button id="darkToggle" class="icon-btn" title="Toggle dark mode">☾</button>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- ===== notebooks and sources ===== -->
+    <aside class="rail">
+      <section class="rail-block">
+        <div class="rail-head">
+          <h2>Notebooks</h2>
+          <button id="newNotebook" class="ghost" title="New notebook">+</button>
+        </div>
+        <ul id="notebookList" class="notebooks"></ul>
+      </section>
+
+      <section class="rail-block grow">
+        <div class="rail-head">
+          <h2>Sources</h2>
+          <span id="sourceCount" class="muted small"></span>
+        </div>
+
+        <div id="drop" class="drop">
+          <input type="file" id="fileInput" multiple accept=".pdf,.txt,.md,.html,.csv,.json" hidden />
+          <p><strong>Drop PDFs here</strong></p>
+          <p class="small muted">or <button id="browse" class="linklike">choose files</button> ·
+             <button id="addUrl" class="linklike">add a URL</button></p>
+        </div>
+
+        <ul id="sourceList" class="sources"></ul>
+
+        <div class="rail-actions">
+          <button id="indexBtn" class="primary wide" title="Chunk and embed every source so search finds them by meaning">
+            Build the index
+          </button>
+          <div id="indexProgress" class="progress hidden"><div class="bar"></div><span class="label"></span></div>
+        </div>
+      </section>
+    </aside>
+
+    <!-- ===== the work ===== -->
+    <section class="work">
+      <nav class="tabs" id="tabs">
+        <button class="tab active" data-tab="ask">Ask</button>
+        <button class="tab" data-tab="summary">Summarise</button>
+        <button class="tab" data-tab="diagram">Diagram</button>
+        <button class="tab" data-tab="deck">Slides</button>
+        <button class="tab" data-tab="plan">Study plan</button>
+        <button class="tab" data-tab="video">Video</button>
+        <button class="tab" data-tab="notes">Notes</button>
+      </nav>
+
+      <!-- Ask -->
+      <div class="panel active" data-panel="ask">
+        <div id="thread" class="thread">
+          <div class="empty">
+            <h3>Ask your library something.</h3>
+            <p>Answers come only from the sources on the left, and every sentence carries the page it came from.
+               Click a citation to read the passage it used.</p>
+          </div>
+        </div>
+        <form id="askForm" class="composer">
+          <textarea id="question" rows="2" placeholder="What does this say about…?  (Enter to send, Shift+Enter for a new line)"></textarea>
+          <button class="primary" type="submit">Ask</button>
+        </form>
+      </div>
+
+      <!-- Summarise -->
+      <div class="panel" data-panel="summary">
+        <div class="controls">
+          <select id="summaryKind">
+            <option value="brief">Brief — 200 words and the key points</option>
+            <option value="detailed">Detailed — claims, method, results, limits</option>
+            <option value="faq">Questions and answers</option>
+            <option value="timeline">Timeline of what happened</option>
+            <option value="critique">What is well supported, and what isn't</option>
+          </select>
+          <input id="summaryFocus" type="text" placeholder="Focus on… (optional)" />
+          <button id="summariseBtn" class="primary">Summarise</button>
+        </div>
+        <article id="summaryOut" class="prose"></article>
+      </div>
+
+      <!-- Diagram -->
+      <div class="panel" data-panel="diagram">
+        <div class="controls">
+          <select id="diagramKind">
+            <option value="flowchart">Flowchart — the process, in order</option>
+            <option value="concept">Concept map — how the ideas relate</option>
+            <option value="architecture">Architecture — parts and what flows between them</option>
+            <option value="timeline">Timeline</option>
+            <option value="argument">Argument — claims, evidence, objections</option>
+            <option value="compare">Comparison</option>
+          </select>
+          <input id="diagramTopic" type="text" placeholder="Of what? (optional — e.g. the training loop)" />
+          <button id="diagramBtn" class="primary">Draw it</button>
+          <button id="diagramSvg" class="ghost" disabled>Save SVG</button>
+          <button id="diagramMermaid" class="ghost" disabled>Copy Mermaid</button>
+        </div>
+        <div id="diagramOut" class="diagram-out"></div>
+      </div>
+
+      <!-- Slides -->
+      <div class="panel" data-panel="deck">
+        <div class="controls">
+          <input id="deckTopic" type="text" placeholder="What is the talk about? (optional)" />
+          <label class="check"><input type="checkbox" id="deckDiagram" checked /> include a diagram slide</label>
+          <button id="deckBtn" class="primary">Write the deck</button>
+          <button id="deckExport" class="ghost" disabled>Save .pptx</button>
+        </div>
+        <div id="deckOut" class="deck-out"></div>
+      </div>
+
+      <!-- Study plan -->
+      <div class="panel" data-panel="plan">
+        <div class="controls">
+          <input id="planGoal" type="text" placeholder="What are you preparing for?" />
+          <label class="num">days <input id="planDays" type="number" value="7" min="1" max="60" /></label>
+          <label class="num">min/day <input id="planMinutes" type="number" value="60" min="10" max="300" step="5" /></label>
+          <button id="planBtn" class="primary">Build a plan</button>
+        </div>
+        <div id="planOut" class="plan-out"></div>
+      </div>
+
+      <!-- Video -->
+      <div class="panel" data-panel="video">
+        <div class="controls">
+          <input id="videoTopic" type="text" placeholder="What should the explainer cover? (optional)" />
+          <label class="num">minutes <input id="videoMinutes" type="number" value="3" min="1" max="15" /></label>
+          <button id="storyboardBtn" class="primary">Write the storyboard</button>
+          <button id="renderBtn" class="ghost" disabled>Render a file</button>
+        </div>
+        <p id="videoCaps" class="muted small"></p>
+        <div id="videoOut" class="video-out"></div>
+      </div>
+
+      <!-- Notes -->
+      <div class="panel" data-panel="notes">
+        <div class="controls">
+          <input id="noteTitle" type="text" placeholder="Note title" />
+          <button id="noteAdd" class="primary">Keep a note</button>
+        </div>
+        <textarea id="noteBody" class="note-body" rows="4" placeholder="Anything you want to keep. Saved answers, summaries and plans land here too."></textarea>
+        <div id="noteList" class="notes-list"></div>
+      </div>
+    </section>
+
+    <!-- ===== the passage under discussion ===== -->
+    <aside class="evidence" id="evidence">
+      <div class="rail-head">
+        <h2>Evidence</h2>
+        <button id="closeEvidence" class="ghost" title="Close">×</button>
+      </div>
+      <div id="evidenceBody" class="evidence-body">
+        <p class="muted small">Click any citation — [S1:p4] — to see the exact passage the answer used, and the page it sits on.</p>
+      </div>
+    </aside>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

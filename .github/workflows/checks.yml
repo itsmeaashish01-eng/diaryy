@@ -34,11 +34,18 @@ jobs:
       - name: Agent self-test
         run: node agents/selftest.mjs
 
+      # The notebook's suite stubs the model, so it needs no Ollama and
+      # no network either — the PDF reader, the retrieval, the citation
+      # checking and the PowerPoint writer are all exercised for real.
+      - name: Notebook self-test
+        run: node notebook/server/selftest.mjs
+
       # A syntax error in a type would only show up at 37 past the hour,
       # in a job nobody is watching. Cheaper to find it here.
       - name: Everything parses
         run: |
-          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js; do
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js \
+                   notebook/server/*.mjs notebook/js/*.js; do
             node --check "$f"
           done
           for f in agents/data/*.json; do

@@ -794,6 +794,71 @@
   // ---------------------------------------------------------------
   // Settings
   // ---------------------------------------------------------------
+  /* How to get this onto a home screen, in the terms of whatever is
+     actually holding it. Nothing is shown once it's installed. */
+  function installPanel() {
+    // A copy of the app assembled without install.js still has a Settings tab.
+    if (!RG.install) return "";
+    const i = RG.install.state();
+    if (i.installed) {
+      return `<section class="panel">
+        <h2>Installed</h2>
+        <p class="muted">
+          Running from your home screen. It opens without a signal — the guidebook,
+          the planner and any map tiles you've already seen are on the device.
+        </p>
+      </section>`;
+    }
+
+    if (i.canPrompt) {
+      return `<section class="panel panel-nudge">
+        <h2>Install it</h2>
+        <p>Add RoamGuide to your home screen and it opens like any other app,
+          full screen and without a signal.</p>
+        <button class="btn btn-primary" data-act="install">Install</button>
+      </section>`;
+    }
+
+    if (i.platform === "ios-safari") {
+      return `<section class="panel panel-nudge">
+        <h2>Put it on your home screen</h2>
+        <p>iOS has no install button — it's a menu item, and it's been there for years:</p>
+        <ol class="install-steps">
+          <li>Tap <span class="install-key">Share</span> at the bottom of Safari
+            — the square with an arrow coming out of it.</li>
+          <li>Scroll down and tap <span class="install-key">Add to Home Screen</span>.</li>
+          <li>Tap <span class="install-key">Add</span>.</li>
+        </ol>
+        <p class="panel-note">
+          It then opens full screen with its own icon, and works with no signal.
+          Location and the map behave exactly as they do here.
+        </p>
+      </section>`;
+    }
+
+    if (i.platform === "ios-other") {
+      return `<section class="panel panel-warn">
+        <h2>Open this in Safari to install it</h2>
+        <p class="warn warn-warning"><span aria-hidden="true">▲</span>
+          On an iPhone, only Safari can add a site to the home screen — Chrome,
+          Firefox and Edge can't, however much they look the same.</p>
+        <p class="muted">
+          Copy this page's address, open Safari, paste it, then
+          <span class="install-key">Share</span> →
+          <span class="install-key">Add to Home Screen</span>.
+        </p>
+      </section>`;
+    }
+
+    return `<section class="panel">
+      <h2>Put it on your home screen</h2>
+      <p class="muted">
+        Most browsers offer this from their own menu — look for “Install”
+        or “Add to Home screen”. It then opens full screen and without a signal.
+      </p>
+    </section>`;
+  }
+
   function viewSettings() {
     const s = store.settings();
     const paceOpts = Object.keys(store.PACE).map((k) =>
@@ -841,6 +906,8 @@
           not the guidebook.
         </p>
       </section>
+
+      ${installPanel()}
 
       <section class="panel">
         <h2>Your data</h2>

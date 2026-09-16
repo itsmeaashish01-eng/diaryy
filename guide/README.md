@@ -72,6 +72,35 @@ Each day can also be copied as text, exported as `.geojson` for a real map app,
 or written straight into the diary next door — same browser, same date, appended
 to whatever's already in that entry.
 
+## Installing it on a phone
+
+RoamGuide is a progressive web app, so it goes on a home screen and opens like
+anything else on the phone — full screen, own icon, no address bar, and it starts
+with no signal.
+
+**On an iPhone it has to be Safari.** Add to Home Screen doesn't exist in Chrome,
+Firefox or Edge on iOS — they're all WebKit underneath, but only Safari has the
+menu item. Open the site in Safari, tap **Share**, scroll to **Add to Home
+Screen**, tap **Add**. The Settings tab says this in the app, and tells an iOS
+Chrome user to switch rather than sending them hunting for a button that isn't
+there.
+
+**Everywhere else** the browser offers it directly, and Settings shows a real
+Install button when it does.
+
+What works with the radio off, once installed: the whole app shell, the six-city
+guidebook, every place's history, the planner, your trips, and any map tiles you
+have already looked at. What doesn't, because it can't: the Wikipedia lookup,
+which is a question about right now, and tiles for streets you haven't seen yet.
+
+The service worker caches the shell on install and tiles as you walk, capped at
+400 so a long day can't fill the phone. Wikipedia is deliberately never cached —
+a stale answer from the last city would be worse than an honest failure.
+
+**This is not an App Store app.** There's no native build, no TestFlight, no
+review. That would need Xcode, a Mac and a paid Apple developer account, and it
+would buy nothing this doesn't already do.
+
 ## Where this has to run
 
 The Nearby tab has two requirements the rest of the app doesn't.
@@ -139,6 +168,9 @@ with a documented URL that opens the native app where it's installed.
 | `js/map.js` | SVG map, Google/Apple/OSM hand-off, GeoJSON export |
 | `js/live.js` | Geolocation, bearings, what's nearby, arrival, how much to trust the fix |
 | `js/livemap.js` | The real map: Leaflet, OSM tiles, pins, and the fallback when tiles fail |
+| `js/install.js` | Home-screen install: the prompt where there is one, the instructions where there isn't |
+| `sw.js` | Service worker — the offline shell, the tile cache, and what is deliberately not cached |
+| `manifest.webmanifest` | Name, icons, colours, and that it opens standalone |
 | `js/lookup.js` | The one networked part: Wikipedia, for buildings the guidebook doesn't cover |
 | `js/ui.js` | Rendering |
 | `js/app.js` | Bootstrap and every click |

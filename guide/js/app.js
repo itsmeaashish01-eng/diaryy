@@ -651,6 +651,15 @@
           break;
         case "lookup": await runLookup("manual"); break;
         case "map-recenter": RG.livemap.recenter(RG.live.state.fix); break;
+
+        case "install": {
+          const r = await RG.install.prompt();
+          if (r === "accepted") ui.flash("Installed — look for it on your home screen.", "ok");
+          else if (r === "dismissed") ui.flash("No problem — it's in Settings when you want it.", "ok");
+          else ui.flash("Your browser didn't offer an install this time.", "warn");
+          ui.render();
+          break;
+        }
         case "radius":
           ui.state.radius = Number(btn.dataset.r);
           await runLookup("manual");
@@ -946,6 +955,9 @@
     watchSystemTheme();
     wire();
     wireLive();
+    RG.install.listen();
+    // The offer can arrive after first paint; redraw Settings when it does.
+    RG.install.onChange(() => { if (ui.state.view === "settings") ui.render(); });
     ui.render();
 
     // Location is never switched on behind your back — the Nearby tab asks.

@@ -15,7 +15,7 @@
    render what the modules below decide.
    ================================================ */
 
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -55,7 +55,7 @@ function sandbox() {
     const src = readFileSync(join(HERE, "js", rel), "utf8");
     runInContext(src, ctx, { filename: `guide/js/${rel}` });
   };
-  ["util", "geo", "catalog", "store", "plan", "map", "live", "lookup"]
+  ["util", "geo", "catalog", "store", "plan", "map", "live", "lookup", "install"]
     .forEach((n) => load(`${n}.js`));
   // Every city registers itself, so the suite reads the directory rather
   // than a list that would quietly go stale as cities are added.
@@ -67,7 +67,7 @@ function sandbox() {
 }
 
 const RG = sandbox();
-const { util: U, geo, catalog, store, plan, map, live } = RG;
+const { util: U, geo, catalog, store, plan, map, live, install } = RG;
 
 /* ---- the harness -------------------------------------------------- */
 let passed = 0;
@@ -798,6 +798,90 @@ check("an encyclopedia opening is trimmed to something readable standing up", ()
   const short = "A small bridge over the canal.";
   eq(RG.lookup.trimExtract(short), short, "a short one is left alone");
   eq(RG.lookup.trimExtract(""), "", "and an empty one doesn't throw");
+});
+
+/* ---- installing it -------------------------------------------------------- */
+
+const UA = {
+  iphoneSafari: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1",
+  iphoneChrome: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/126.0 Mobile/15E148 Safari/604.1",
+  iphoneFirefox: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/127.0 Mobile/15E148 Safari/605.1.15",
+  android: "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36",
+  desktop: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+};
+
+check("an iPhone in Safari gets the Add to Home Screen instructions", () => {
+  const d = install.detect(UA.iphoneSafari, false);
+  eq(d.platform, "ios-safari", "Safari on iOS");
+  eq(d.iOS, true);
+  eq(d.installed, false);
+});
+
+check("an iPhone in Chrome is told to switch to Safari, not to tap Share", () => {
+  // Add to Home Screen simply isn't in these browsers; sending someone
+  // looking for it would waste their time.
+  eq(install.detect(UA.iphoneChrome, false).platform, "ios-other", "Chrome on iOS");
+  eq(install.detect(UA.iphoneFirefox, false).platform, "ios-other", "Firefox on iOS");
+});
+
+check("Android and desktop are told what their own browsers do", () => {
+  eq(install.detect(UA.android, false).platform, "android");
+  eq(install.detect(UA.desktop, false).platform, "desktop");
+  eq(install.detect(UA.desktop, false).iOS, false);
+});
+
+check("already installed is recognised, whatever the platform", () => {
+  Object.values(UA).forEach((ua) => {
+    eq(install.detect(ua, true).installed, true, "standalone wins");
+  });
+});
+
+check("nothing to prompt with means nothing is promised", async () => {
+  eq(await install.prompt(), "unavailable", "no deferred event, no install");
+});
+
+/* ---- the offline shell ---------------------------------------------------- */
+
+check("the service worker caches every script the page actually loads", () => {
+  const sw = readFileSync(join(HERE, "sw.js"), "utf8");
+  const html = readFileSync(join(HERE, "index.html"), "utf8");
+
+  const scripts = [...html.matchAll(/<script src="([^"]+)"/g)].map((m) => m[1])
+    .filter((src) => !/^https?:/.test(src));
+  ok(scripts.length > 10, `found ${scripts.length} local scripts`);
+  scripts.forEach((src) => {
+    ok(sw.includes(`"./${src}"`), `sw.js doesn't cache ${src} — it won't open offline`);
+  });
+
+  const styles = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map((m) => m[1])
+    .filter((h) => !/^https?:/.test(h));
+  styles.forEach((h) => ok(sw.includes(`"./${h}"`), `sw.js doesn't cache ${h}`));
+});
+
+check("the manifest points at icons that exist", () => {
+  const manifest = JSON.parse(readFileSync(join(HERE, "manifest.webmanifest"), "utf8"));
+  ok(manifest.name && manifest.start_url && manifest.scope, "the required fields");
+  eq(manifest.display, "standalone", "opens as an app, not a tab");
+  ok(manifest.icons.length >= 2, "more than one icon");
+  manifest.icons.forEach((i) => {
+    ok(existsSync(join(HERE, i.src)), `missing icon file: ${i.src}`);
+  });
+  ok(manifest.icons.some((i) => i.purpose === "maskable"), "one maskable, for Android's crop");
+
+  // iOS ignores the manifest for its home-screen icon.
+  const html = readFileSync(join(HERE, "index.html"), "utf8");
+  const apple = /<link rel="apple-touch-icon" href="([^"]+)"/.exec(html);
+  ok(apple, "an apple-touch-icon is declared");
+  ok(existsSync(join(HERE, apple[1])), `missing ${apple[1]}`);
+  ok(/apple-mobile-web-app-capable/.test(html), "iOS standalone flag");
+  ok(/viewport-fit=cover/.test(html), "runs under the notch, with CSS keeping clear of it");
+});
+
+check("Wikipedia is never served from cache", () => {
+  const sw = readFileSync(join(HERE, "sw.js"), "utf8");
+  // "What's around me" is a question about right now; a stale answer from
+  // the last city would be worse than an honest failure.
+  ok(/wikipedia\.org/.test(sw) && /return;/.test(sw), "wikipedia is passed straight through");
 });
 
 /* ---- report ------------------------------------------------------------ */

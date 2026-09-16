@@ -1,0 +1,51 @@
+{
+  "2026-08-18": {
+    "diary": "Long day on the ward.",
+    "mood": "😐",
+    "notes": "",
+    "notesTag": "general",
+    "tasks": [
+      { "id": "1755500000001", "text": "Chase the reference letter", "completed": false },
+      { "id": "1755500000002", "text": "Renew the parking permit", "completed": true }
+    ]
+  },
+  "2026-08-30": {
+    "diary": "Quiet weekend, finally.",
+    "mood": "🙂",
+    "notes": "Book the dentist at some point.",
+    "notesTag": "general",
+    "tasks": [
+      { "id": "1756500000001", "text": "Back up the laptop", "completed": false }
+    ]
+  },
+  "2026-09-10": {
+    "diary": "Good clinic. Two interesting cases.",
+    "mood": "😊",
+    "notes": "",
+    "notesTag": "work",
+    "tasks": [
+      { "id": "1757500000001", "text": "Write up the audit numbers", "completed": true },
+      { "id": "1757500000002", "text": "Email the supervisor about study leave", "completed": false }
+    ]
+  },
+  "2026-09-14": {
+    "diary": "Ran in the morning for once.",
+    "mood": "😊",
+    "notes": "",
+    "notesTag": "general",
+    "tasks": [
+      { "id": "1757900000001", "text": "Order the running shoes", "completed": true },
+      { "id": "1757900000002", "text": "Sort out the standing order", "completed": true }
+    ]
+  },
+  "2026-09-16": {
+    "diary": "",
+    "mood": "",
+    "notes": "",
+    "notesTag": "general",
+    "tasks": [
+      { "id": "1758000000001", "text": "Draft the case report intro", "completed": false },
+      { "id": "1758000000002", "text": "Pick up the prescription", "completed": false }
+    ]
+  }
+}

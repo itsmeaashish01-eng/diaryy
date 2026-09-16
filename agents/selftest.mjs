@@ -25,6 +25,7 @@ import portfolio from "./types/portfolio.mjs";
 import { deadlineBucket, isoWeek, staleBucket, daysUntil } from "./core/local.mjs";
 import { toText, digest } from "./types/webpage.mjs";
 import diary from "./types/diary.mjs";
+import organizer, { collect, ageBucket, ageRungs } from "./types/organizer.mjs";
 import { decide } from "./core/brain.mjs";
 import { blankAgentState, remember, loadState, saveState, agentState } from "./core/state.mjs";
 import { anySent, describeDelivery } from "./core/notify.mjs";
@@ -541,6 +542,160 @@ await (async () => {
 check("A missing data file fails with something you can act on", () => {
   const errs = reading.validate({ config: { file: "/nowhere/at/all.json" } });
   ok(errs.length === 1 && errs[0].includes("no reading list at"), errs[0] || "expected one clear error");
+});
+
+/* ---- the organizer: the to-do side of the same export -------------- */
+
+const task = (text, completed = false, id) => ({ id: id || text, text, completed });
+const orgRun = (entries, config = {}) => {
+  const { p, cleanup } = diaryFile(entries);
+  return organizer
+    .run({ id: "o", label: "Organizer", config: { file: p, ...config } }, { state: blankAgentState() })
+    .finally(cleanup);
+};
+const dayAgo = (n) => isoDay(Date.now() - n * DAY);
+
+check("collect: only dated entries with real task text count", () => {
+  const { tasks, days } = collect({
+    "not-a-date": { tasks: [task("ignored")] },
+    "2026-09-01": { tasks: [task("real"), task("   "), null] },
+    "2026-09-02": { tasks: "not an array" },
+    "2026-09-03": null,
+  });
+  eq(tasks.length, 1, "one usable task");
+  eq(tasks[0].text, "real", "the one with text");
+  eq(days, ["2026-09-01", "2026-09-02"], "dated entries, sorted");
+});
+
+check("collect: a task's key is scoped to its day", () => {
+  /* The app's ids are millisecond timestamps. The day is what actually
+     guarantees the key is unique, so two days can reuse an id safely. */
+  const { tasks } = collect({
+    "2026-09-01": { tasks: [task("a", false, "123")] },
+    "2026-09-02": { tasks: [task("b", false, "123")] },
+  });
+  eq(new Set(tasks.map((t) => t.key)).size, 2, "distinct keys");
+});
+
+check("The age rungs start where you said and climb from there", () => {
+  eq(ageRungs(7), [7, 14, 30, 60, 90, 180, 365], "default ladder");
+  eq(ageRungs(30), [30, 60, 90, 180, 365], "a later start drops the rungs below it");
+  eq(ageBucket(6, 7), null, "below the first rung, nothing is said");
+  eq(ageBucket(7, 7), 7, "the first rung, exactly");
+  eq(ageBucket(29, 7), 14, "highest rung reached, not the next one up");
+  eq(ageBucket(400, 7), 365, "the top rung holds");
+});
+
+await (async () => {
+  const run = await orgRun({
+    [dayAgo(20)]: entry({ tasks: [task("slipped")] }),
+    [dayAgo(0)]: entry({ tasks: [task("today's")] }),
+    [isoDay(Date.now() + 3 * DAY)]: entry({ tasks: [task("planned ahead")] }),
+  });
+  check("A task is slipped only once its own day has passed", () => {
+    eq(run.facts.slipped, 1, "the one behind us");
+    eq(run.facts.openToday, 1, "today's is not slipped");
+    eq(run.facts.plannedAhead, 1, "nor is one planned ahead");
+    eq(run.metric, 1, "the metric the threshold rules read is what slipped");
+  });
+})();
+
+await (async () => {
+  const run = await orgRun({ [dayAgo(20)]: entry({ tasks: [task("Call the agent")] }) });
+  const keys = run.observations.map((o) => o.key);
+  check("Each age rung announces a task once, and the key says which rung", () => {
+    ok(keys.includes(`aging:${dayAgo(20)}#Call the agent:14`), `expected the 14-day rung, got ${keys.join()}`);
+    /* Same task a fortnight later is a different key, so it comes back
+       once — and only once — at 30 days. */
+    eq(ageBucket(34, 7), 30, "and the next rung is a new key");
+  });
+})();
+
+await (async () => {
+  const days = {};
+  for (let i = 1; i <= 5; i++) days[dayAgo(20 + i)] = entry({ tasks: [task(`old ${i}`)] });
+  const run = await orgRun(days, { maxMention: 2 });
+  check("maxMention caps how much of the backlog one run reads out", () => {
+    const aging = run.observations.filter((o) => o.key.startsWith("aging:"));
+    eq(aging.length, 2, "two named");
+    ok(aging[0].title.includes(dayAgo(25)), "oldest first");
+  });
+})();
+
+await (async () => {
+  const run = await orgRun({ [dayAgo(20)]: entry({ tasks: [task("Private thing")] }) }, { includeText: false });
+  const body = organizer.describe({}, run.observations);
+  check("includeText: false keeps the task text out of the alert", () => {
+    ok(!body.includes("Private thing"), "the text stays in the file");
+    ok(body.includes(dayAgo(20)), "the date still identifies it");
+  });
+})();
+
+await (async () => {
+  const run = await orgRun({
+    [dayAgo(0)]: entry({ tasks: [] }),
+    [dayAgo(9)]: entry({ tasks: [task("still here")] }),
+  });
+  check("An empty day with a backlog behind it is the moment to pull one forward", () => {
+    const pull = run.observations.find((o) => o.key === `pull:${isoDay()}`);
+    ok(pull, "the nudge fired");
+    ok(pull.detail.includes("still here"), "and it names the oldest");
+  });
+})();
+
+await (async () => {
+  const run = await orgRun({ [dayAgo(0)]: entry({ tasks: [task("a", true), task("b", true)] }) });
+  const cleared = run.observations.find((o) => o.key === `clear:${isoDay()}`);
+  check("A cleared board is reported, because a tool that only nags gets ignored", () => {
+    ok(cleared, "it noticed");
+  });
+})();
+
+await (async () => {
+  const run = await orgRun({
+    [dayAgo(0)]: entry({ tasks: [task("a", true)] }),
+    [dayAgo(30)]: entry({ tasks: [task("b")] }),
+  });
+  check("Nothing is 'cleared' while something is still slipping", () => {
+    ok(!run.observations.some((o) => o.key.startsWith("clear:")), "the backlog counts");
+  });
+})();
+
+await (async () => {
+  const run = await orgRun({
+    [dayAgo(1)]: entry({ tasks: [task("a"), task("b"), task("c"), task("d"), task("e"), task("f"), task("g")] }),
+    [dayAgo(0)]: entry({ tasks: [task("1"), task("2"), task("3")] }),
+  }, { overload: 3, ageDays: 30 });
+  check("Too many on one day is said once, keyed to the day", () => {
+    eq(run.observations.filter((o) => o.key === `overload:${isoDay()}`).length, 1, "once");
+  });
+})();
+
+await (async () => {
+  const days = {};
+  for (let i = 0; i < 3; i++) days[dayAgo(i)] = entry({ tasks: [task(`x${i}`, true), task(`y${i}`, true)] });
+  const run = await orgRun(days);
+  const week = run.observations.find((o) => o.key.startsWith("week:"));
+  check("The weekly review says which way the list is moving", () => {
+    ok(week, "it fired");
+    eq(run.facts.closedThisWeek, 6, "six closed");
+    ok(week.detail.includes("broke even"), `expected break-even, got: ${week.detail}`);
+  });
+})();
+
+check("An export with no dated entries fails with something you can act on", () => {
+  const { p, cleanup } = diaryFile({ hello: "world" });
+  try {
+    const errs = organizer.validate({ config: { file: p } });
+    ok(errs.length === 1 && errs[0].includes("⤓ Export"), errs[0] || "expected one clear error");
+  } finally {
+    cleanup();
+  }
+});
+
+check("A missing export names the file rather than throwing", () => {
+  const errs = organizer.validate({ config: { file: "/nowhere/at/all.json" } });
+  ok(errs.length === 1 && errs[0].includes("no organizer export at"), errs[0] || "expected one clear error");
 });
 
 /* ---- delivery ------------------------------------------------------ */

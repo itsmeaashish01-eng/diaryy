@@ -50,6 +50,7 @@ been touched since August.
 | Type | Watches | Tells you when |
 |---|---|---|
 | `diary` | Your diary export | A streak, a silence, a milestone, a growing to-do backlog |
+| `organizer` | The task lists in that same export | Something slipped, today is overloaded, or the week's list grew |
 | `goals` | Career goals and milestones | A deadline closes in, or a goal goes quiet |
 | `study` | A folder of notes | Something's new, due for review, unsourced, or built on an aged guideline |
 | `reading` | A reading list | What to read next, and when the list is out-growing you |
@@ -137,6 +138,50 @@ agent quietly start repeating itself.
 These read a file of yours. The files live in `agents/data/` (except the
 study library — see below), they're plain JSON, and each type's source file
 documents its own shape at the top.
+
+### `organizer` — `agents/data/organizer.json`
+
+The same export the diary agent reads, with the prose ignored and only
+the task lists looked at. The two are worth having together because they
+answer different questions: `diary` asks whether you're writing,
+`organizer` asks whether any of it is getting done.
+
+A task in the organizer has no due date — it belongs to the day you wrote
+it on, and the day you planned something for is the best statement you
+made about when you meant to do it. So a task still open on a day that has
+gone by is a task that slipped, and how many of those there are, and how
+long they've sat, is the only honest measure of whether the list works.
+
+It reports a slipped task once per age rung — first at `ageDays`, then 14,
+30, 60, 90, 180, 365. A task you're ignoring on purpose goes quiet within a
+fortnight; one you've genuinely lost comes back at a month and again at a
+quarter. `maxMention` (3) caps how much of the backlog any single run reads
+out, oldest first, so a long list arrives as a nudge and not an inventory.
+
+Three other things it says, each at most once a day:
+
+- **A day with nothing on it while things are slipping.** That's the
+  easiest moment to pull one forward, so it names the oldest.
+- **A day carrying more than `overload` (6).** Some of that is really
+  tomorrow's.
+- **A cleared board.** Everything done and nothing open anywhere. A tool
+  that only ever reports failure is one you stop opening.
+
+And once a week, closed against added, with the only verdict that matters:
+whether the list shrank.
+
+The metric is the number of slipped tasks, so `above` puts a threshold on
+your backlog:
+
+```json
+{ "when": "above", "value": 10, "level": "urgent" }
+```
+
+**It says your task text out loud**, which the diary agent deliberately
+never does. "Something from three weeks ago is still open" isn't a
+reminder; "Call the letting agent" is. That text travels to whatever
+channel you configured, so `includeText: false` turns it off and leaves
+you the counts and the dates.
 
 ### `goals` — `agents/data/goals.json`
 
@@ -379,12 +424,56 @@ threshold says.
 ## Wiring in the diary
 
 The diary keeps its entries in your browser's localStorage, which nothing
-on a CI runner can read. Export it with the **⤓** button, save the file as
-`agents/data/diary.json`, commit it, and set the `diary-nudge` agent to
-`"active": true`.
+on a CI runner can read. Export it with the **⤓** button and save the file
+somewhere the runner can see it. Two agents read that one file:
 
-It reports counts and dates — streaks, silences, milestones, how many
-tasks are still open. It doesn't read your entries out loud and it doesn't
-send them anywhere. If you'd rather that file never left your machine, run
-the agent locally with `--only diary-nudge` and leave it paused in the
-committed config.
+| Agent | Reads | Default path |
+|---|---|---|
+| `diary-nudge` | The writing — streaks, silences, milestones | `agents/data/diary.json` |
+| `organizer` | The task lists — what slipped, what's piling up | `agents/data/organizer.json` |
+
+They're separate paths on purpose, so you can commit one and not the
+other. Point both at the same file if you'd rather keep one export:
+
+```json
+{ "id": "organizer", "config": { "file": "agents/data/diary.json" } }
+```
+
+`agents/data/organizer.json` ships with a few made-up days in it so the
+agent validates, runs and shows something on the dashboard before you've
+exported anything. Overwrite it with your own export — that's all the
+setup there is.
+
+### Where to keep the export
+
+**Committed, under `agents/data/`.** The hourly GitHub Actions run can see
+it, so the agents work with nothing of yours switched on. The cost is that
+your entries and task text are in the repository.
+
+**Local only, under `agents/private/`.** That folder is gitignored, same as
+the study library. Nothing of yours enters the repo, and the trade is that
+GitHub's runner has nothing to read — so run it yourself:
+
+```bash
+node agents/runner.mjs --only organizer --force
+```
+
+Either way it's one line of config:
+
+```json
+{ "id": "organizer", "config": { "file": "agents/private/organizer.json" } }
+```
+
+`diary-nudge` reports counts and dates only — it never reads your entries
+out loud. `organizer` does quote your task text, because a reminder that
+won't say what it's reminding you of isn't one; `"includeText": false`
+takes that back out if the alert is going somewhere you'd rather it
+didn't.
+
+### Keeping it current
+
+An export is a snapshot. The agents are only as current as the last one
+you saved, and a stale file makes for confident, wrong nudges — a task you
+finished last week still counted as slipped. Re-export when you've been
+using the diary properly for a few days, or when an alert tells you
+something you know isn't true any more.

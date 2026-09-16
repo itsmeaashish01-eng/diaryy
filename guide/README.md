@@ -95,7 +95,20 @@ on one machine.
 Everything else — the guidebook, the history, the planner, the drawn map, the
 distances and bearings — needs nothing at all and works on a plane.
 
-## The map
+## The maps, plural
+
+**On the road there's a real one.** Leaflet with OpenStreetMap tiles: pan, zoom,
+numbered pins matching the list beside them, your position with its accuracy
+circle, and a tap on any pin giving what it is and a walking route. It leads the
+Nearby view, because when you're standing on a corner the first question is
+which way to go.
+
+**Off the network there's a drawn one.** If Leaflet can't load, or the tiles stop
+arriving, the view switches back to the SVG map below and says why. A blank grey
+canvas with pins floating on it is worse than an honest sketch — it looks broken,
+and it has lost the scale bar and the compass.
+
+## The drawn map
 
 Drawn, not loaded. It's an inline SVG built from the coordinates the app already
 has: equirectangular, longitude squeezed by cos(latitude) so a city block stays
@@ -125,6 +138,7 @@ with a documented URL that opens the native app where it's installed.
 | `js/plan.js` | Opening hours, building a day, the warnings, suggesting a day |
 | `js/map.js` | SVG map, Google/Apple/OSM hand-off, GeoJSON export |
 | `js/live.js` | Geolocation, bearings, what's nearby, arrival, how much to trust the fix |
+| `js/livemap.js` | The real map: Leaflet, OSM tiles, pins, and the fallback when tiles fail |
 | `js/lookup.js` | The one networked part: Wikipedia, for buildings the guidebook doesn't cover |
 | `js/ui.js` | Rendering |
 | `js/app.js` | Bootstrap and every click |

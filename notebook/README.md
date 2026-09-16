@@ -200,6 +200,40 @@ changes; everything else is asked for again.
 
 ---
 
+## If it feels slow
+
+Three different things get called "slow", and they have different causes.
+
+**The page takes seconds to appear.** It shouldn't — the page, the
+stylesheet and the notebook list are a few milliseconds each. If it
+does, something is blocking the server: check the terminal it is running
+in. (An earlier version probed for ffmpeg, a browser and an OCR engine
+on every health check, synchronously, which stalled everything; that now
+happens once, in the background.)
+
+**The first answer takes forever, then later ones are quick.** That is
+Ollama loading the model: nine gigabytes off disk into memory. Marginalia
+now asks it to keep the model resident for thirty minutes
+(`OLLAMA_KEEP_ALIVE` changes it), so you pay that once rather than every
+time you pause to think. `ollama ps` shows what is currently loaded.
+
+**Every answer is slow.** That is the model itself, and it is a hardware
+question rather than a code one:
+
+- On a laptop with no usable GPU, a 14B model at four bits writes at
+  roughly 3–6 words a second, and has to read the passages before it
+  starts. `llama3.1:8b` or `qwen2.5:7b-instruct` are two to three times
+  faster and, for answering from passages that are already in front of
+  them, very nearly as good.
+- Apple silicon uses the GPU automatically. On Windows and Linux, check
+  that Ollama found your card: `ollama ps` names the processor it is
+  using, and a line saying 100% CPU on a machine with a GPU means the
+  driver or CUDA/ROCm runtime is missing.
+- Indexing is the embedding model, not the writer, and runs once per
+  source. A hundred-page paper is a minute or two.
+
+---
+
 ## Privacy
 
 `notebook/private/` is in `.gitignore`. Your PDFs, extracted text,

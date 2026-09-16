@@ -18,39 +18,42 @@
    being useful for everything else.
    ================================================ */
 
-import { spawn, spawnSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { mkdtempSync, rmSync, readdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 
 import { extractPdf } from "./pdf.mjs";
+import { once, exec, which } from "./tools.mjs";
 
-const which = (cmd) => {
-  if (!cmd) return null;
-  if (cmd.includes("/") || cmd.includes("\\")) return existsSync(cmd) ? cmd : null;
-  const probe = spawnSync(process.platform === "win32" ? "where" : "which", [cmd], { encoding: "utf8" });
-  const first = (probe.stdout || "").trim().split("\n")[0];
-  return probe.status === 0 && first ? first : null;
-};
-
-export function capabilities() {
-  const ocrmypdf = which(process.env.MARGINALIA_OCRMYPDF || "ocrmypdf");
-  const tesseract = which(process.env.MARGINALIA_TESSERACT || "tesseract");
-  const pdftoppm = which(process.env.MARGINALIA_PDFTOPPM || "pdftoppm");
+/*
+   Asked once, off the request path, and remembered. `tesseract
+   --list-langs` alone is a couple of hundred milliseconds on a machine
+   that has it, and this used to run on every health check — which is
+   every page load, and again every thirty seconds.
+*/
+export const capabilities = once(async () => {
+  const [ocrmypdf, tesseract, pdftoppm] = await Promise.all([
+    which(process.env.MARGINALIA_OCRMYPDF || "ocrmypdf"),
+    which(process.env.MARGINALIA_TESSERACT || "tesseract"),
+    which(process.env.MARGINALIA_PDFTOPPM || "pdftoppm"),
+  ]);
   const engine = ocrmypdf ? "ocrmypdf" : tesseract && pdftoppm ? "tesseract" : null;
   return {
     ocrmypdf, tesseract, pdftoppm, engine,
-    languages: tesseract ? languages(tesseract) : [],
+    languages: tesseract ? await languages(tesseract) : [],
     available: Boolean(engine),
     install: installHint(),
   };
-}
+});
 
-function languages(tesseract) {
-  const probe = spawnSync(tesseract, ["--list-langs"], { encoding: "utf8", timeout: 15000 });
-  return ((probe.stdout || "") + (probe.stderr || ""))
-    .split("\n").slice(1).map((s) => s.trim())
-    .filter((s) => /^[a-z_]{3,}$/i.test(s));
+export const known = () => capabilities.known();
+
+async function languages(tesseract) {
+  const { out, err } = await exec(tesseract, ["--list-langs"], { timeout: 10000 });
+  return (out + err)
+    .split("\n").slice(1).map((line) => line.trim())
+    .filter((line) => /^[a-z_]{3,}$/i.test(line));
 }
 
 const installHint = () =>
@@ -90,7 +93,7 @@ function run(cmd, args, { onLine, timeout = 1800000 } = {}) {
    that came in.
 */
 export async function ocr(pdfBuffer, { language = "eng", onProgress = () => {}, signal } = {}) {
-  const caps = capabilities();
+  const caps = await capabilities();
   if (!caps.available) {
     const e = new Error(
       `no OCR engine on this machine. Install one — ${caps.install} — and this button will work. ` +

@@ -17,6 +17,16 @@
 
 const HOST = (process.env.OLLAMA_HOST || "http://127.0.0.1:11434").replace(/\/+$/, "");
 
+/* How long Ollama should keep the weights in memory between requests.
+   Its own default is five minutes, which on a laptop means that asking
+   a question, reading the answer, thinking, and asking another one
+   costs a second load of nine gigabytes from disk — twenty or thirty
+   seconds of apparently nothing happening, blamed on the app. Half an
+   hour suits how people actually read. OLLAMA_KEEP_ALIVE overrides it;
+   "0" makes it unload immediately, which is what you want if something
+   else on the machine needs the memory. */
+const KEEP_ALIVE = process.env.OLLAMA_KEEP_ALIVE || "30m";
+
 export const RECOMMENDED = {
   chat: [
     { name: "qwen2.5:14b-instruct", ram: "~9 GB", note: "the all-rounder — best default at this size" },
@@ -82,8 +92,8 @@ async function call(path, { method = "GET", body, signal, timeout = 600000 } = {
 /* What is installed, split into the two roles. The split is by name,
    which is how Ollama itself presents them; a model that is really an
    embedder but named oddly can still be typed in by hand. */
-export async function models() {
-  const res = await call("/api/tags", { timeout: 15000 });
+export async function models({ timeout = 15000 } = {}) {
+  const res = await call("/api/tags", { timeout });
   const data = await res.json();
   const list = (data.models || []).map((m) => ({
     name: m.name,
@@ -129,6 +139,7 @@ export async function* stream(messages, { model, temperature = 0.2, context = 81
       messages,
       stream: true,
       format,
+      keep_alive: KEEP_ALIVE,
       options: { temperature, num_ctx: context, ...(stop ? { stop } : {}) },
     },
   });
@@ -222,7 +233,7 @@ export async function embed(texts, { model, signal } = {}) {
   const input = Array.isArray(texts) ? texts : [texts];
   if (!input.length) return [];
   try {
-    const res = await call("/api/embed", { method: "POST", signal, body: { model, input } });
+    const res = await call("/api/embed", { method: "POST", signal, body: { model, input, keep_alive: KEEP_ALIVE } });
     const data = await res.json();
     if (Array.isArray(data.embeddings) && data.embeddings.length) return data.embeddings.map(normalise);
   } catch (e) {
@@ -230,7 +241,7 @@ export async function embed(texts, { model, signal } = {}) {
   }
   const out = [];
   for (const one of input) {
-    const res = await call("/api/embeddings", { method: "POST", signal, body: { model, prompt: one } });
+    const res = await call("/api/embeddings", { method: "POST", signal, body: { model, prompt: one, keep_alive: KEEP_ALIVE } });
     const data = await res.json();
     out.push(normalise(data.embedding || []));
   }

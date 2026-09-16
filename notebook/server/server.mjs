@@ -169,20 +169,38 @@ const route = (method, pattern, handler) => {
 
 /* --- health and models --- */
 
+/*
+   Health has to be instant: the page asks for it before it draws
+   anything, and again every half minute. So it reports what is already
+   known about ffmpeg and OCR — null until the background probe
+   finishes — and never waits for either. /api/tools is where a caller
+   that genuinely wants the answer goes.
+*/
 route("GET", "/api/health", async (req, res) => {
+  video.capabilities.warm();
+  ocr.capabilities.warm();
   const out = {
-    ok: true, home: store.ROOT,
+    ok: true,
+    home: store.ROOT,
     ollama: { host: ollama.host, up: false },
-    video: video.capabilities(),
-    ocr: ocr.capabilities(),
+    video: video.known(),
+    ocr: ocr.known(),
+    probing: !video.known() || !ocr.known(),
   };
   try {
-    const m = await ollama.models();
+    /* A short leash. If Ollama is wedged rather than absent, the page
+       should still come up and say so. */
+    const m = await ollama.models({ timeout: 2500 });
     out.ollama = { host: m.host, up: true, chat: m.chat.length, embed: m.embed.length };
   } catch (e) {
     out.ollama.error = e.message;
   }
   send(res, 200, out);
+});
+
+route("GET", "/api/tools", async (req, res) => {
+  const [videoCaps, ocrCaps] = await Promise.all([video.capabilities(), ocr.capabilities()]);
+  send(res, 200, { video: videoCaps, ocr: ocrCaps });
 });
 
 route("GET", "/api/models", async (req, res) => {
@@ -498,7 +516,7 @@ route("POST", "/api/notebooks/:id/plan", async (req, res, { id }) => {
 
 /* --- video --- */
 
-route("GET", "/api/video/capabilities", (req, res) => send(res, 200, video.capabilities()));
+route("GET", "/api/video/capabilities", async (req, res) => send(res, 200, await video.capabilities()));
 
 route("POST", "/api/notebooks/:id/storyboard", async (req, res, { id }) => {
   const body = await readJSONBody(req);
@@ -518,7 +536,7 @@ route("POST", "/api/notebooks/:id/storyboard", async (req, res, { id }) => {
     ...board,
     player: `/api/notebooks/${id}/out/${encodeURIComponent(`${stem}-player.html`)}`,
     script: `/api/notebooks/${id}/out/${encodeURIComponent(`${stem}-script.md`)}`,
-    capabilities: video.capabilities(),
+    capabilities: await video.capabilities(),
   });
 });
 
@@ -527,7 +545,7 @@ route("POST", "/api/notebooks/:id/video", async (req, res, { id }) => {
   if (!board || !Array.isArray(board.scenes) || !board.scenes.length) return send(res, 400, { error: "no storyboard" });
   const stream = sse(res);
   try {
-    const caps = video.capabilities();
+    const caps = await video.capabilities();
     const name = `${slugName(board.title)}.${caps.h264 ? "mp4" : "webm"}`;
     const file = join(store.outputDir(id), name);
     stream.send("started", caps);
@@ -596,7 +614,7 @@ route("POST", "/api/notebooks/:id/sources/:sid/references", async (req, res, { i
 
 /* --- OCR, for the sources that are pictures of paper --- */
 
-route("GET", "/api/ocr/capabilities", (req, res) => send(res, 200, ocr.capabilities()));
+route("GET", "/api/ocr/capabilities", async (req, res) => send(res, 200, await ocr.capabilities()));
 
 route("POST", "/api/notebooks/:id/sources/:sid/ocr", async (req, res, { id, sid }) => {
   const body = await readJSONBody(req);
@@ -606,8 +624,9 @@ route("POST", "/api/notebooks/:id/sources/:sid/ocr", async (req, res, { id, sid 
     stream.send("failed", { error: "that source has no PDF to read — OCR only applies to scans" });
     return stream.end();
   }
+
   try {
-    stream.send("started", ocr.capabilities());
+    stream.send("started", await ocr.capabilities());
     const { pages, engine, pdf, warnings } = await ocr.ocr(readFileSync(file), {
       language: String(body.language || "eng").slice(0, 40),
       onProgress: (p) => stream.send("progress", p),
@@ -682,7 +701,6 @@ const server = http.createServer(async (req, res) => {
    Only running it directly starts the thing. */
 const runningDirectly = process.argv[1] && process.argv[1].endsWith("server.mjs");
 if (runningDirectly) server.listen(PORT, BIND, async () => {
-  const caps = video.capabilities();
   console.log(`\n  Marginalia — http://${BIND}:${PORT}`);
   console.log(`  library     ${store.ROOT}`);
   try {
@@ -693,8 +711,9 @@ if (runningDirectly) server.listen(PORT, BIND, async () => {
   } catch {
     console.log(`  ollama      not answering on ${ollama.host} — start it with "ollama serve"`);
   }
+  const caps = await video.capabilities();
   console.log(`  video       ${caps.canRender ? `can render (${caps.h264 ? "mp4" : "webm"}${caps.tts ? `, voice via ${caps.tts}` : ", silent"})` : "storyboard and player only (no ffmpeg or browser found)"}`);
-  const ocrCaps = ocr.capabilities();
+  const ocrCaps = await ocr.capabilities();
   console.log(`  ocr         ${ocrCaps.available ? `${ocrCaps.engine} — scans can be read` : `none installed (${ocrCaps.install})`}`);
   console.log("");
 });

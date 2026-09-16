@@ -23,7 +23,7 @@
    What is deliberately not here: any service, any upload, any key.
    ================================================ */
 
-import { spawn, spawnSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { writeFileSync, readFileSync, mkdtempSync, existsSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
@@ -31,6 +31,7 @@ import { tmpdir } from "node:os";
 import { json } from "./ollama.mjs";
 import { systemFor, verifyEvidence } from "./grounding.mjs";
 import { escapeXML as esc } from "./zip.mjs";
+import { once, exec, which, firstOf } from "./tools.mjs";
 
 export const SCHEMA = {
   type: "object",
@@ -281,60 +282,65 @@ function frameHTML(scene, board, index) {
 
 const CHROME_CANDIDATES = [
   process.env.MARGINALIA_CHROME,
-  "google-chrome", "chromium", "chromium-browser", "microsoft-edge", "brave-browser",
+  "chrome-headless-shell", "google-chrome", "chromium", "chromium-browser", "microsoft-edge", "brave-browser",
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
   "/Applications/Chromium.app/Contents/MacOS/Chromium",
   "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
 ].filter(Boolean);
 
-const which = (cmd) => {
-  if (cmd.includes("/") || cmd.includes("\\")) return existsSync(cmd) ? cmd : null;
-  const probe = spawnSync(process.platform === "win32" ? "where" : "which", [cmd], { encoding: "utf8" });
-  const out = (probe.stdout || "").trim().split("\n")[0];
-  return probe.status === 0 && out ? out : null;
-};
+const TTS_CANDIDATES = ["piper", "espeak-ng", "espeak", "say"];
 
-export function capabilities() {
-  const ffmpeg = which(process.env.MARGINALIA_FFMPEG || "ffmpeg");
+/*
+   Probing costs real time on a machine that has these tools: three
+   ffmpeg launches to ask what it was built with, plus a PATH lookup per
+   browser. So it happens once, off the request path, and the answer is
+   kept. `capabilities()` waits for it; `known()` returns whatever has
+   been found so far and never waits, which is what the health check
+   uses — a page load has no business being held up by a question about
+   video encoders.
+*/
+export const capabilities = once(async () => {
+  const [ffmpeg, chrome, ttsPath] = await Promise.all([
+    which(process.env.MARGINALIA_FFMPEG || "ffmpeg"),
+    firstOf(CHROME_CANDIDATES),
+    firstOf(TTS_CANDIDATES),
+  ]);
+
   let encoders = "";
   let demuxers = "";
   let decoders = "";
   if (ffmpeg) {
-    const probe = spawnSync(ffmpeg, ["-hide_banner", "-encoders"], { encoding: "utf8", timeout: 20000 });
-    encoders = (probe.stdout || "") + (probe.stderr || "");
-    const probeIn = spawnSync(ffmpeg, ["-hide_banner", "-demuxers"], { encoding: "utf8", timeout: 20000 });
-    demuxers = (probeIn.stdout || "") + (probeIn.stderr || "");
-    const probeDec = spawnSync(ffmpeg, ["-hide_banner", "-decoders"], { encoding: "utf8", timeout: 20000 });
-    decoders = (probeDec.stdout || "") + (probeDec.stderr || "");
+    const [e, m, d] = await Promise.all([
+      exec(ffmpeg, ["-hide_banner", "-encoders"], { timeout: 20000 }),
+      exec(ffmpeg, ["-hide_banner", "-demuxers"], { timeout: 20000 }),
+      exec(ffmpeg, ["-hide_banner", "-decoders"], { timeout: 20000 }),
+    ]);
+    encoders = e.out + e.err;
+    demuxers = m.out + m.err;
+    decoders = d.out + d.err;
   }
-  let chrome = null;
-  for (const c of CHROME_CANDIDATES) {
-    const found = which(c);
-    if (found) { chrome = found; break; }
-  }
-  const tts = ["piper", "espeak-ng", "espeak", "say"].map((t) => ({ name: t, path: which(t) })).find((t) => t.path) || null;
+
+  const tts = ttsPath ? TTS_CANDIDATES.find((name) => ttsPath.toLowerCase().includes(name)) || null : null;
+  const h264 = /\slibx264\b/.test(encoders);
+  const vp8 = /libvpx/.test(encoders);
+  const frameFormat = /\spng\b/.test(decoders) ? "png" : /\smjpeg\b/.test(decoders) ? "jpg" : null;
+
   return {
-    ffmpeg,
-    chrome,
-    tts: tts ? tts.name : null,
-    ttsPath: tts ? tts.path : null,
-    h264: /\slibx264\b/.test(encoders),
-    vp8: /libvpx/.test(encoders),
+    ffmpeg, chrome, tts, ttsPath, h264, vp8,
     /* Cut-down ffmpeg builds — the one Playwright ships, for instance —
        leave the concat demuxer out, and decode only one image format.
        Both are worked around rather than refused: frames go down a pipe
        instead of through a list, in whichever format this build can
        actually read. */
     concat: /(^|\s)concat(\s|$)/m.test(demuxers),
-    frameFormat: /\spng\b/.test(decoders) ? "png" : /\smjpeg\b/.test(decoders) ? "jpg" : null,
+    frameFormat,
     audioEncoder: /\saac\b/.test(encoders) ? "aac" : /libmp3lame/.test(encoders) ? "libmp3lame" : /libopus/.test(encoders) ? "libopus" : null,
-    canRender: Boolean(
-      ffmpeg && chrome &&
-      (/\slibx264\b/.test(encoders) || /libvpx/.test(encoders)) &&
-      (/\spng\b/.test(decoders) || /\smjpeg\b/.test(decoders))
-    ),
+    canRender: Boolean(ffmpeg && chrome && (h264 || vp8) && frameFormat),
   };
-}
+});
+
+/* What we know this instant, without asking anything. */
+export const known = () => capabilities.known();
 
 const run = (cmd, args, opts = {}) =>
   new Promise((resolve, reject) => {
@@ -348,7 +354,7 @@ const run = (cmd, args, opts = {}) =>
 /* ---- rendering -------------------------------------------------------- */
 
 export async function render(board, outFile, { onProgress = () => {} } = {}) {
-  const caps = capabilities();
+  const caps = await capabilities();
   if (!caps.canRender) {
     const missing = [
       !caps.chrome && "a Chrome or Chromium browser",

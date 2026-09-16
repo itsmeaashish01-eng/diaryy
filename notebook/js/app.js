@@ -87,14 +87,35 @@ async function health() {
       el.className = "health down";
       el.title = h.ollama.error || "";
     }
-    const caps = h.video;
-    $("#videoCaps").textContent = caps.canRender
-      ? `This machine can render a file: ${caps.h264 ? "MP4" : "WebM"}${caps.tts ? `, narrated by ${caps.tts}` : ", silent (the player speaks aloud instead)"}.`
-      : "No ffmpeg or browser found for rendering — you still get the storyboard, the script, and a player that reads itself aloud.";
+    if (h.video) showTools(h.video, h.ocr);
+    else if (h.probing) tools();                     // the answer is on its way
   } catch {
     el.textContent = "server unreachable";
     el.className = "health down";
   }
+}
+
+/* What ffmpeg, a browser and an OCR engine can do between them. Asked
+   once, separately from health, because finding out means launching
+   those programs and nobody should wait for that to read a PDF. */
+let toolsAsked = false;
+async function tools() {
+  if (toolsAsked) return;
+  toolsAsked = true;
+  try {
+    const t = await get("/api/tools");
+    showTools(t.video, t.ocr);
+  } catch { toolsAsked = false; }
+}
+
+function showTools(video, ocr) {
+  if (!video) return;
+  $("#videoCaps").textContent = video.canRender
+    ? `This machine can render a file: ${video.h264 ? "MP4" : "WebM"}${video.tts ? `, narrated by ${video.tts}` : ", silent (the player speaks aloud instead)"}.` +
+      (ocr && ocr.available ? ` Scans can be read with ${ocr.engine}.` : "")
+    : "No ffmpeg or browser found for rendering — you still get the storyboard, the script, and a player that reads itself aloud." +
+      (ocr && ocr.available ? ` Scans can be read with ${ocr.engine}.` : "");
+  if (state.board) $("#renderBtn").disabled = !video.canRender;
 }
 
 /* ---- notebooks ------------------------------------------------------ */
@@ -586,7 +607,7 @@ $("#storyboardBtn").addEventListener("click", async () => {
       diagramSVG: state.diagram ? state.diagram.svg : null,
     });
     state.board = board;
-    $("#renderBtn").disabled = !board.capabilities.canRender;
+    $("#renderBtn").disabled = !(board.capabilities && board.capabilities.canRender);
     out.innerHTML = `
       <p><strong>${escapeHTML(board.title)}</strong> · ${board.scenes.length} scenes · about ${Math.round(board.seconds)}s</p>
       <p class="small">
@@ -840,9 +861,18 @@ if (recall("dark") === "1" || (recall("dark") === null && matchMedia("(prefers-c
 /* ---- go ------------------------------------------------------------------ */
 
 (async function start() {
-  await health();
-  try { await loadModels(); } catch (e) { toast(`Could not list models: ${e.message}`, 8000); }
-  await loadProviders();
-  await loadNotebooks();
-  setInterval(health, 30000);
+  /* All four at once. They do not depend on each other, and serialising
+     them meant the notebook list waited for a question about ffmpeg. */
+  const [, models] = await Promise.allSettled([
+    health(),
+    loadModels(),
+    loadProviders(),
+    loadNotebooks(),
+  ]);
+  if (models.status === "rejected") toast(`Could not list models: ${models.reason.message}`, 8000);
+
+  /* Polling a background tab helps nobody, and on a laptop it is the
+     difference between the fans staying off and not. */
+  setInterval(() => { if (document.visibilityState === "visible") health(); }, 30000);
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") health(); });
 })();

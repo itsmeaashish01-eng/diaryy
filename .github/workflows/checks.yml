@@ -40,11 +40,17 @@ jobs:
       - name: Guide self-test
         run: node guide/selftest.mjs
 
+      # The atlas's 3D view reaches into the app bundle at four anchored
+      # points. If that file is ever replaced, the anchors should fail here
+      # rather than silently dropping the view.
+      - name: Atlas self-test
+        run: node atlas/selftest.mjs
+
       # A syntax error in a type would only show up at 37 past the hour,
       # in a job nobody is watching. Cheaper to find it here.
       - name: Everything parses
         run: |
-          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js; do
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js atlas/build.mjs atlas/selftest.mjs atlas/src/*.mjs atlas/src/*.js; do
             node --check "$f"
           done
           for f in agents/data/*.json; do

@@ -11,7 +11,7 @@
   const plan = RG.plan;
 
   const state = {
-    view: "explore",      // explore | trip | phrases | practical | settings
+    view: "explore",      // explore | nearby | trip | phrases | practical | settings
     city: null,           // null = every city
     category: "all",
     search: "",
@@ -19,6 +19,8 @@
     dayIndex: 0,
     detailId: null,
     editing: null,        // scratch object for whichever editor is open
+    lookup: null,         // { status, hits, error } — Wikipedia, in Nearby
+    lookupOpen: null,     // pageid of the article being read
   };
 
   // ---------------------------------------------------------------
@@ -62,6 +64,35 @@
   function tagList(tags) {
     return (tags || []).slice(0, 4)
       .map((t) => `<span class="tag">${esc(t)}</span>`).join("");
+  }
+
+  /* Hand off to whatever map app the device actually has. The drawn map
+     says which way and how far; turn-by-turn is not our job. */
+  function directionsRow(place, opts) {
+    if (!place || place.lat == null) return "";
+    const fix = RG.live.state.fix;
+    const from = fix ? { lat: fix.lat, lon: fix.lon } : (opts && opts.from) || null;
+    const links = RG.map.directionLinks(from, place, (opts && opts.mode) || "walk");
+    if (!links.length) return "";
+    return `<p class="dir-row">
+      <span class="dir-label">${from ? "Directions from where you are" : "Open in"}</span>
+      ${links.map((l) =>
+        `<a class="btn btn-small" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`
+      ).join("")}
+    </p>`;
+  }
+
+  /* What this place is, and how it got here. Older entries in the
+     guidebook predate the history field, so fall back rather than
+     showing a gap. */
+  function historyBlock(p) {
+    if (p.history) {
+      return `<div class="history">
+        <h3>The story of it</h3>
+        ${p.history.split("\n\n").map((para) => `<p>${esc(para)}</p>`).join("")}
+      </div>`;
+    }
+    return p.blurb ? `<div class="history"><p>${esc(p.blurb)}</p></div>` : "";
   }
 
   function flash(msg, kind) {
@@ -205,6 +236,209 @@
              <p>Nothing matches that.</p>
              <button class="btn btn-small" data-act="clear-filters">Clear the filters</button>
            </section>`}
+    `;
+  }
+
+  // ---------------------------------------------------------------
+  // Nearby — the guide that follows you around
+  // ---------------------------------------------------------------
+  function bearingChip(n) {
+    const dir = RG.live.compass(n.bearing);
+    return `<span class="bearing" title="${esc(Math.round(n.bearing))}° from north">
+      <span class="bearing-arrow" style="transform:rotate(${Math.round(n.bearing)}deg)" aria-hidden="true">↑</span>
+      ${esc(dir)}</span>`;
+  }
+
+  function nearbyRow(n) {
+    const p = n.place;
+    const dist = n.metres < 1000
+      ? `${Math.round(n.metres / 10) * 10} m`
+      : fmtDistance(n.km, store.settings().units);
+    return `<li class="near-row${n.arrived ? " is-here" : ""}">
+      <div class="near-dist">
+        <strong>${esc(dist)}</strong>
+        ${bearingChip(n)}
+      </div>
+      <div class="near-body">
+        <h4><button class="linkish" data-act="detail" data-id="${esc(p.id)}">${esc(p.name)}</button></h4>
+        <p class="near-meta">${catChip(p.cat)}
+          <span class="dot">·</span> ${esc(fmtDuration(p.min))}
+          ${priceText(p) ? `<span class="dot">·</span> ${esc(priceText(p))}` : ""}</p>
+        ${n.arrived
+          ? `<p><span class="badge badge-good"><span aria-hidden="true">◉</span> You're here</span></p>
+             ${historyBlock(p)}`
+          : `<p class="near-blurb">${esc(p.blurb || "")}</p>`}
+        ${directionsRow(p)}
+      </div>
+    </li>`;
+  }
+
+  function lookupPanel() {
+    const l = state.lookup;
+    if (!l) {
+      return `<section class="panel">
+        <h3>Standing in front of something else?</h3>
+        <p class="muted">
+          The guidebook covers ${esc(cat.cities.length)} cities. Anywhere else — or any
+          building on the street that isn't one of its entries — Wikipedia can say what
+          it is. This is the only thing in the app that needs a connection.
+        </p>
+        <button class="btn" data-act="lookup">What's around me?</button>
+      </section>`;
+    }
+    if (l.status === "loading") {
+      return `<section class="panel"><h3>Asking Wikipedia…</h3>
+        <p class="muted">Looking for anything with an article within 400 m.</p></section>`;
+    }
+    if (l.status === "error") {
+      return `<section class="panel panel-warn">
+        <h3>Couldn't ask</h3>
+        <p class="warn warn-warning"><span aria-hidden="true">▲</span> ${esc(l.error)}</p>
+        <button class="btn btn-small" data-act="lookup">Try again</button>
+      </section>`;
+    }
+    if (!l.hits.length) {
+      return `<section class="panel">
+        <h3>Nothing written up nearby</h3>
+        <p class="muted">Wikipedia has no article within 400 m of here.</p>
+        <button class="btn btn-small" data-act="lookup">Look again</button>
+      </section>`;
+    }
+    return `<section class="panel">
+      <h3>Wikipedia, within 400 m</h3>
+      <ul class="wiki-list">
+        ${l.hits.map((h) => `<li>
+          <button class="linkish wiki-title" data-act="wiki-read" data-page="${esc(h.pageid)}">${esc(h.title)}</button>
+          <span class="muted">${esc(h.metres)} m</span>
+          ${state.lookupOpen === h.pageid && h.summary
+            ? `<div class="wiki-extract">
+                 <p>${esc(h.summary.extract || "No opening paragraph.")}</p>
+                 <p><a href="${esc(h.summary.url)}" target="_blank" rel="noopener">Read the article ↗</a></p>
+               </div>`
+            : state.lookupOpen === h.pageid && h.error
+              ? `<p class="warn warn-warning"><span aria-hidden="true">▲</span> ${esc(h.error)}</p>`
+              : ""}
+        </li>`).join("")}
+      </ul>
+      <p class="panel-note">Text from Wikipedia, CC BY-SA. Only the coordinate is sent.</p>
+    </section>`;
+  }
+
+  function viewNearby() {
+    const L = RG.live;
+    const fix = L.state.fix;
+    const blocked = L.blockedReason();
+
+    if (blocked) {
+      return `<section class="panel empty">
+        <h2>Location isn't available here</h2>
+        <p>${esc(blocked)}</p>
+        <p class="muted">Everything else in the app works without it — this view is the
+          only part that needs to know where you are.</p>
+      </section>`;
+    }
+
+    if (!L.state.watching && !fix) {
+      return `<section class="panel">
+        <h2>Let the guide follow you</h2>
+        <p>
+          Switch on location and RoamGuide will keep a running list of what's around you,
+          which way it is and how far, and tell you the story of whatever you're standing
+          in front of.
+        </p>
+        <p class="muted">
+          Your position stays in this tab. It isn't sent anywhere, stored, or written into
+          your trips — the guidebook is already on the device, so working out what's nearby
+          is arithmetic rather than a lookup.
+        </p>
+        <button class="btn btn-primary" data-act="live-start">Switch on location</button>
+      </section>`;
+    }
+
+    if (L.state.error) {
+      return `<section class="panel panel-warn">
+        <h2>Can't place you</h2>
+        <p class="warn warn-serious"><span aria-hidden="true">✕</span> ${esc(L.state.error.message)}</p>
+        <button class="btn" data-act="live-start">Try again</button>
+      </section>`;
+    }
+
+    if (!fix) {
+      return `<section class="panel empty">
+        <h2>Locating…</h2>
+        <p class="muted">First fix can take a moment, and wants a bit of sky.</p>
+        <button class="btn btn-small btn-ghost" data-act="live-stop">Stop</button>
+      </section>`;
+    }
+
+    const q = L.quality(fix);
+    const where = L.cityAt(fix, cat.cities);
+    const near = L.nearby(store.allPlaces(), fix, 12);
+    const here = near.filter((n) => n.arrived);
+
+    const cityLine = where.city
+      ? `<span class="badge badge-good"><span aria-hidden="true">◈</span> In ${esc(where.city.name)}</span>`
+      : `<span class="badge badge-muted"><span aria-hidden="true">◌</span>
+           ${where.nearest
+             ? `${esc(fmtDistance(where.km, store.settings().units))} from ${esc(where.nearest.name)}, the closest city in the guidebook`
+             : "Nowhere in the guidebook"}</span>`;
+
+    return `
+      <section class="panel here-head">
+        <div>
+          <h2>Where you are</h2>
+          <p class="muted">
+            ${esc(fix.lat.toFixed(5))}, ${esc(fix.lon.toFixed(5))}
+            <span class="dot">·</span> updated ${esc(U.relTimeShort(fix.at))}
+          </p>
+          <div class="here-badges">
+            ${cityLine}
+            ${q ? `<span class="badge badge-${q.level === "good" ? "good" : q.level === "warning" ? "warning" : "critical"}">
+              <span aria-hidden="true">◎</span> ${esc(q.text)}</span>` : ""}
+          </div>
+        </div>
+        <div class="here-actions">
+          ${directionsRow({ name: "this spot", lat: fix.lat, lon: fix.lon })}
+          <button class="btn btn-small btn-ghost" data-act="live-stop">Switch off</button>
+        </div>
+      </section>
+
+      ${where.city ? "" : `<section class="panel panel-nudge">
+        <p><strong>You're outside the guidebook.</strong> It covers
+          ${esc(cat.cities.map((c) => c.name).join(", "))}. The distances below are real,
+          but everything in them is a long way off — Wikipedia is the better bet from here.</p>
+      </section>`}
+
+      ${here.length ? `<section class="panel panel-here">
+        <h2>You're standing at ${esc(here[0].place.name)}</h2>
+        ${historyBlock(here[0].place)}
+        ${here[0].place.tip ? `<p class="detail-tip"><strong>Worth knowing.</strong> ${esc(here[0].place.tip)}</p>` : ""}
+      </section>` : ""}
+
+      <div class="near-cols">
+        <section class="panel">
+          <h3>What's around you</h3>
+          ${near.length
+            ? `<ul class="near-list">${near.map(nearbyRow).join("")}</ul>`
+            : `<p class="muted">Nothing from the guidebook has coordinates near here.</p>`}
+        </section>
+
+        <aside class="near-side">
+          <section class="panel map-panel">
+            <h3>You and the nearest few</h3>
+            ${RG.map.svg(near.slice(0, 6).map((n, i) => ({
+              lat: n.place.lat, lon: n.place.lon, label: n.place.name, n: i + 1,
+              cat: n.place.cat,
+            })), {
+              width: 420, height: 320, route: false,
+              units: store.settings().units,
+              you: { lat: fix.lat, lon: fix.lon, accuracy: fix.accuracy },
+            })}
+            <p class="muted small">Your position, its margin of error, and the six nearest entries.</p>
+          </section>
+          ${lookupPanel()}
+        </aside>
+      </div>
     `;
   }
 
@@ -607,6 +841,20 @@
   // ---------------------------------------------------------------
   // Place detail
   // ---------------------------------------------------------------
+  /* Only shown once there's a fix — "2.3 km away, northeast" is the
+     first thing you want to know and nonsense if we're guessing. */
+  function distanceLine(p) {
+    const fix = RG.live.state.fix;
+    if (!fix || p.lat == null) return "";
+    const n = RG.live.nearby([p], fix, 1)[0];
+    if (!n) return "";
+    const dist = n.metres < 1000
+      ? `${Math.round(n.metres / 10) * 10} m`
+      : fmtDistance(n.km, store.settings().units);
+    return `<p class="muted">${esc(dist)} away, ${esc(RG.live.compass(n.bearing))} of you${
+      n.arrived ? " — you're there" : ""}.</p>`;
+  }
+
   function openDetail(id) {
     const p = store.place(id);
     if (!p) return;
@@ -614,7 +862,6 @@
     const city = cityOf(p);
     const visited = store.visitedAll()[id];
     const saved = store.isSaved(id);
-    const osm = RG.map.osmLink(p);
 
     const week = Array.isArray(p.hours) ? plan.WEEKDAYS.map((name, d) => {
       const h = plan.hoursFor(p, d);
@@ -629,12 +876,14 @@
         <span class="dot">·</span> ${esc(fmtDuration(p.min))} is about right
         ${priceText(p) ? `<span class="dot">·</span> ${esc(priceText(p))}` : ""}</p>
       ${p.blurb ? `<p class="detail-blurb">${esc(p.blurb)}</p>` : ""}
+      ${p.history ? historyBlock(p) : ""}
       ${p.best ? `<p><strong>Best time.</strong> ${esc(p.best)}</p>` : ""}
       ${p.tip ? `<p class="detail-tip"><strong>Worth knowing.</strong> ${esc(p.tip)}</p>` : ""}
       ${p.tags && p.tags.length ? `<p class="tag-row">${tagList(p.tags)}</p>` : ""}
       ${week ? `<h3>Opening hours</h3><dl class="week-hours">${week}</dl>` : ""}
       ${visited ? `<p class="panel-note">Visited ${esc(fmtDayLabel(visited.date))}${visited.note ? ` — ${esc(visited.note)}` : ""}</p>` : ""}
-      ${osm ? `<p><a href="${esc(osm)}" target="_blank" rel="noopener">Open on OpenStreetMap ↗</a></p>` : ""}
+      ${directionsRow(p)}
+      ${distanceLine(p)}
       ${p.custom ? `<p class="panel-note">One of your own pins.</p>` : ""}
     `, `
       <button class="btn btn-ghost" data-act="save" data-id="${esc(id)}">${saved ? "★ Saved" : "☆ Save"}</button>
@@ -664,6 +913,7 @@
     if (!host) return;
     let html = "";
     switch (state.view) {
+      case "nearby": html = viewNearby(); break;
       case "trip": html = viewTrip(); break;
       case "phrases": html = viewPhrases(); break;
       case "practical": html = viewPractical(); break;
@@ -676,6 +926,6 @@
 
   RG.ui = {
     state, render, flash, openModal, closeModal, openDetail,
-    dayContext, catChip, priceText, currentCity,
+    dayContext, catChip, priceText, currentCity, directionsRow, historyBlock,
   };
 })(window.RG);

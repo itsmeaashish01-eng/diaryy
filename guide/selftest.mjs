@@ -15,7 +15,7 @@
    render what the modules below decide.
    ================================================ */
 
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -30,27 +30,44 @@ function sandbox() {
     setItem: (k, v) => stored.set(k, String(v)),
     removeItem: (k) => stored.delete(k),
   };
-  const win = { localStorage };
+  const win = {
+    localStorage,
+    isSecureContext: true,
+    // A fake that hands back a fixed position, so "what's near me" is
+    // testable without a GPS or a browser prompt.
+    navigator: { geolocation: null, userAgent: "node", maxTouchPoints: 0 },
+  };
   const ctx = createContext({
     window: win,
     localStorage,
+    navigator: win.navigator,
     console,
     setTimeout,
     clearTimeout,
+    URLSearchParams,
+    AbortController,
     Intl,
     Date,
     Math,
     JSON,
   });
-  ["util", "geo", "catalog", "store", "plan", "map"].forEach((name) => {
-    const src = readFileSync(join(HERE, "js", `${name}.js`), "utf8");
-    runInContext(src, ctx, { filename: `guide/js/${name}.js` });
-  });
+  const load = (rel) => {
+    const src = readFileSync(join(HERE, "js", rel), "utf8");
+    runInContext(src, ctx, { filename: `guide/js/${rel}` });
+  };
+  ["util", "geo", "catalog", "store", "plan", "map", "live", "lookup"]
+    .forEach((n) => load(`${n}.js`));
+  // Every city registers itself, so the suite reads the directory rather
+  // than a list that would quietly go stale as cities are added.
+  readdirSync(join(HERE, "js", "cities"))
+    .filter((f) => f.endsWith(".js"))
+    .sort()
+    .forEach((f) => load(join("cities", f)));
   return win.RG;
 }
 
 const RG = sandbox();
-const { util: U, geo, catalog, store, plan, map } = RG;
+const { util: U, geo, catalog, store, plan, map, live } = RG;
 
 /* ---- the harness -------------------------------------------------- */
 let passed = 0;
@@ -620,6 +637,16 @@ check("every city can actually be planned — a full day exists in each", () => 
   });
 });
 
+check("every place carries its history, in paragraphs", () => {
+  catalog.allPlaces().forEach((p) => {
+    ok(p.history, `${p.id}: no history written`);
+    ok(p.history.length > 200, `${p.id}: history is a caption, not a history`);
+    ok(p.history.includes("\n\n"), `${p.id}: history should break into paragraphs`);
+    ok(!/\n\n\n/.test(p.history), `${p.id}: stray blank paragraph`);
+    ok(p.history.trim() === p.history, `${p.id}: history has loose whitespace`);
+  });
+});
+
 check("every city has the practical section filled in", () => {
   catalog.cities.forEach((c) => {
     ["transit", "money", "tipping", "water", "etiquette", "emergency", "power"].forEach((k) => {
@@ -649,6 +676,114 @@ check("currency formatting survives every code the guidebook uses", () => {
     ok(out && out !== "—", `${c.currency}: formats`);
     ok(/1/.test(out), `${c.currency}: has the number in it, got "${out}"`);
   });
+});
+
+/* ---- live location ------------------------------------------------------ */
+
+const FIX = (lat, lon, accuracy) => ({ lat, lon, accuracy: accuracy == null ? 10 : accuracy, at: Date.now() });
+
+check("bearings point the right way, and read as compass points", () => {
+  const here = { lat: 35.0, lon: 135.0 };
+  near(live.bearing(here, { lat: 36.0, lon: 135.0 }), 0, 1, "due north");
+  near(live.bearing(here, { lat: 35.0, lon: 136.0 }), 90, 1, "due east");
+  near(live.bearing(here, { lat: 34.0, lon: 135.0 }), 180, 1, "due south");
+  near(live.bearing(here, { lat: 35.0, lon: 134.0 }), 270, 1, "due west");
+  eq(live.compass(0), "N");
+  eq(live.compass(45), "NE");
+  eq(live.compass(200), "SSW");
+  eq(live.compass(359), "N", "wraps");
+});
+
+check("what's nearby comes back nearest first, with distance and direction", () => {
+  const fix = FIX(35.0116, 135.7681);      // central Kyoto
+  const list = live.nearby(catalog.allPlaces(), fix, 5);
+  eq(list.length, 5, "five back");
+  for (let i = 1; i < list.length; i++) {
+    ok(list[i].km >= list[i - 1].km, "sorted by distance");
+  }
+  ok(list[0].place.city === "kyoto", `nearest is in Kyoto, got ${list[0].place.cityName}`);
+  ok(list.every((n) => n.bearing >= 0 && n.bearing < 360), "every bearing is a compass angle");
+});
+
+check("standing at a place counts as arrival; across the street does not", () => {
+  const p = catalog.placeById("kyo-nishiki");
+  eq(live.nearby([p], FIX(p.lat, p.lon), 1)[0].arrived, true, "on top of it");
+  // ~700 m north
+  eq(live.nearby([p], FIX(p.lat + 0.0063, p.lon), 1)[0].arrived, false, "700 m away");
+});
+
+check("a vague fix widens what counts as arrival, rather than claiming precision", () => {
+  const p = catalog.placeById("kyo-nishiki");
+  const tight = live.nearby([p], FIX(p.lat + 0.0018, p.lon, 10), 1)[0];   // ~200 m
+  const loose = live.nearby([p], FIX(p.lat + 0.0018, p.lon, 500), 1)[0];
+  eq(tight.arrived, false, "200 m out on a good fix is not arrival");
+  eq(loose.arrived, true, "on a ±500 m fix it might well be, and says so");
+});
+
+check("the guidebook knows when it has nothing to say about where you are", () => {
+  const kyoto = live.cityAt(FIX(35.0116, 135.7681), catalog.cities);
+  eq(kyoto.city.id, "kyoto", "in Kyoto");
+
+  const atlantic = live.cityAt(FIX(0, -30), catalog.cities);
+  eq(atlantic.city, null, "mid-ocean is not in any city");
+  ok(atlantic.nearest, "but it still names the closest");
+  ok(atlantic.km > 1000, "and how far off it is");
+});
+
+check("accuracy is described honestly at every scale", () => {
+  eq(live.quality(FIX(0, 0, 8)).level, "good");
+  eq(live.quality(FIX(0, 0, 90)).level, "warning");
+  ok(/wifi/.test(live.quality(FIX(0, 0, 3000)).text), "a 3 km fix says where it came from");
+  eq(live.quality(null), null, "no fix, no claim");
+});
+
+check("with no geolocation at all, it says so rather than hanging", () => {
+  ok(live.blockedReason(), "there is a reason");
+  eq(live.start(), false, "and starting fails cleanly");
+  ok(live.state.error && live.state.error.code === "blocked", "recorded on the state");
+});
+
+/* ---- maps hand-off ------------------------------------------------------- */
+
+check("directions open the right place in Google and Apple Maps", () => {
+  const from = { lat: 35.0, lon: 135.0 };
+  const to = { lat: 35.01, lon: 135.01, name: "Somewhere" };
+
+  const g = map.googleDirections(from, to, "walk");
+  ok(g.includes("origin=35,135"), `origin, got ${g}`);
+  ok(g.includes("destination=35.01,135.01"), "destination");
+  ok(g.includes("travelmode=walking"), "on foot");
+  ok(map.googleDirections(from, to, "transit").includes("travelmode=transit"), "by transit");
+
+  const a = map.appleDirections(from, to, "walk");
+  ok(a.includes("saddr=35,135") && a.includes("daddr=35.01,135.01"), `apple route, got ${a}`);
+  ok(a.includes("dirflg=w"), "apple walking flag");
+  ok(map.appleDirections(from, to, "drive").includes("dirflg=d"), "apple driving flag");
+});
+
+check("with no fix, directions still open the destination", () => {
+  const to = { lat: 35.01, lon: 135.01, name: "Somewhere" };
+  const g = map.googleDirections(null, to, "walk");
+  ok(!g.includes("origin="), "no origin invented");
+  ok(g.includes("destination=35.01,135.01"), "still gets you there");
+  const links = map.directionLinks(null, to, "walk");
+  eq(links.length, 3, "Google, Apple and OpenStreetMap");
+  ok(links.every((l) => l.url && l.label), "each one usable");
+});
+
+check("a place with no coordinates offers no directions", () => {
+  eq(map.googleDirections(null, { name: "Nowhere" }, "walk"), null);
+  eq(map.directionLinks(null, { name: "Nowhere" }, "walk").length, 0);
+});
+
+/* ---- Wikipedia lookup ---------------------------------------------------- */
+
+check("a blocked request is explained, not repeated verbatim", () => {
+  const msg = RG.lookup.describeFailure(new TypeError("Failed to fetch"));
+  ok(/Couldn't reach Wikipedia/.test(msg), `plain English, got "${msg}"`);
+  ok(/offline/.test(msg), "and says the rest of the app is fine");
+  ok(/took too long/.test(RG.lookup.describeFailure(new Error("The operation was aborted"))),
+     "a timeout reads as a timeout");
 });
 
 /* ---- report ------------------------------------------------------------ */

@@ -518,6 +518,62 @@
   }
 
   /* ---------------------------------------------------------------
+     Live location
+     --------------------------------------------------------------- */
+  /* A fix arrives every few seconds while you walk. Re-rendering on each
+     one would fight anything you're in the middle of, so only redraw the
+     view that's actually showing your position, and never over a dialog. */
+  function wireLive() {
+    RG.live.onChange(U.debounce(() => {
+      if (ui.state.view !== "nearby") return;
+      if (document.body.classList.contains("modal-open")) return;
+      ui.render();
+    }, 700));
+  }
+
+  async function runLookup() {
+    const fix = RG.live.state.fix;
+    if (!fix) { ui.flash("Switch on location first.", "warn"); return; }
+
+    ui.state.lookup = { status: "loading", hits: [] };
+    ui.state.lookupOpen = null;
+    ui.render();
+
+    try {
+      const hits = await RG.lookup.around(fix.lat, fix.lon, 400);
+      ui.state.lookup = { status: "ok", hits };
+    } catch (e) {
+      ui.state.lookup = { status: "error", error: e.message, hits: [] };
+    }
+    ui.render();
+  }
+
+  async function readArticle(pageid) {
+    const l = ui.state.lookup;
+    if (!l || l.status !== "ok") return;
+    const hit = l.hits.find((h) => String(h.pageid) === String(pageid));
+    if (!hit) return;
+
+    // Second press on an open article closes it.
+    if (ui.state.lookupOpen === hit.pageid) {
+      ui.state.lookupOpen = null;
+      ui.render();
+      return;
+    }
+    ui.state.lookupOpen = hit.pageid;
+
+    if (!hit.summary && !hit.error) {
+      ui.render();
+      try {
+        hit.summary = await RG.lookup.summary(hit.pageid);
+      } catch (e) {
+        hit.error = e.message;
+      }
+    }
+    ui.render();
+  }
+
+  /* ---------------------------------------------------------------
      Events
      --------------------------------------------------------------- */
   function wire() {
@@ -545,6 +601,19 @@
       switch (act) {
         // ---- chrome ----
         case "view": ui.state.view = btn.dataset.view; ui.render(); break;
+
+        // ---- live location ----
+        case "live-start":
+          RG.live.start();
+          ui.render();
+          break;
+        case "live-stop":
+          RG.live.stop();
+          ui.flash("Location off.", "ok");
+          ui.render();
+          break;
+        case "lookup": await runLookup(); break;
+        case "wiki-read": await readArticle(btn.dataset.page); break;
         case "theme": toggleTheme(); break;
         case "close-modal": ui.closeModal(); break;
 
@@ -835,7 +904,10 @@
     applyTheme(store.settings().theme);
     watchSystemTheme();
     wire();
+    wireLive();
     ui.render();
+
+    // Location is never switched on behind your back — the Nearby tab asks.
   }
 
   if (document.readyState === "loading") {

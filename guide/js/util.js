@@ -89,6 +89,17 @@ window.RG = window.RG || {};
     return Math.round((t - today.getTime()) / DAY);
   }
 
+  /* "just now" / "40s ago" / "3m ago" — a live fix goes stale fast, and
+     a timestamp on its own doesn't say whether it still means anything. */
+  function relTimeShort(ts) {
+    if (!ts) return "never";
+    const secs = Math.max(0, Math.round((Date.now() - ts) / 1000));
+    if (secs < 5) return "just now";
+    if (secs < 60) return `${secs}s ago`;
+    if (secs < 3600) return `${Math.round(secs / 60)}m ago`;
+    return `${Math.round(secs / 3600)}h ago`;
+  }
+
   /* Add n days to a YYYY-MM-DD string and get one back. */
   function addDays(isoDate, n) {
     const t = Date.parse((isoDate || isoDay(0)) + "T12:00:00");
@@ -210,7 +221,7 @@ window.RG = window.RG || {};
   RG.util = {
     uid, MIN, HOUR, DAY,
     toMinutes, fromMinutes, fmtDuration, fmtDistance,
-    isoDay, weekdayOf, fmtDayLabel, daysUntil, addDays,
+    isoDay, weekdayOf, fmtDayLabel, daysUntil, addDays, relTimeShort,
     clamp, fmtMoney, plural, parseNum, fold,
     $, $$, esc, debounce, downloadFile, copyText,
   };

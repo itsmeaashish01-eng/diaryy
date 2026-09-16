@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoamGuide</title>
+  <meta name="description" content="A guidebook that works offline: what's worth seeing, when it's open, and a day planned around it — with the walking times worked out." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="logo">⛰ RoamGuide</span>
+      <nav class="nav-tabs" aria-label="Main">
+        <button class="nav-tab is-on" data-view="explore">Explore</button>
+        <button class="nav-tab" data-view="nearby">Nearby</button>
+        <button class="nav-tab" data-view="trip">Trip</button>
+        <button class="nav-tab" data-view="phrases">Phrasebook</button>
+        <button class="nav-tab" data-view="practical">Practical</button>
+        <button class="nav-tab" data-view="settings">Settings</button>
+      </nav>
+    </div>
+
+    <div class="topbar-right">
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="Search places…" autocomplete="off" aria-label="Search" />
+        <span class="search-icon" aria-hidden="true">⌕</span>
+      </div>
+      <button class="icon-btn" data-act="theme" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <span id="darkIcon">☾</span>
+      </button>
+      <a class="icon-btn" href="../index.html" title="Back to My Diary" aria-label="Back to My Diary">✦</a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="app-main" id="view"><!-- rendered by ui.js --></main>
+
+  <footer class="page-foot">
+    <p>
+      The guidebook travels with the app — no network, no accounts, nothing uploaded.
+      Opening hours and prices were right when they were written and drift with the seasons;
+      check anything you'd be sorry to get wrong.
+    </p>
+  </footer>
+
+  <!-- ===== MODAL HOST & TOAST ===== -->
+  <div id="modalHost" hidden></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Load order matters: each file hangs itself off window.RG -->
+  <script src="js/util.js"></script>
+  <script src="js/geo.js"></script>
+  <script src="js/catalog.js"></script>
+  <!-- One file per city; each registers itself with the catalogue. -->
+  <script src="js/cities/kyoto.js"></script>
+  <script src="js/cities/lisbon.js"></script>
+  <script src="js/cities/mexico-city.js"></script>
+  <script src="js/cities/istanbul.js"></script>
+  <script src="js/cities/rome.js"></script>
+  <script src="js/cities/marrakesh.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/plan.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/live.js"></script>
+  <script src="js/lookup.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

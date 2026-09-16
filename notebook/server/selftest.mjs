@@ -395,7 +395,20 @@ try {
     verified.data.grounding > 0.4 && verified.data.grounding < 1,
     `grounding ${verified.data.grounding}`);
 
-  const diagram = (await api("POST", `/api/notebooks/${nb.id}/diagram`, { model: "stub-writer:14b", kind: "flowchart" })).data;
+  /* Diagrams, decks and plans stream their progress now, so the test
+     takes the payload off the `done` event rather than out of a body. */
+  const doneOf = (events, what) => {
+    const finished = events.find((e) => e.event === "done");
+    if (!finished) throw new Error(`${what} never finished: ${JSON.stringify(events.slice(-2))}`);
+    return finished.data;
+  };
+  const diagramEvents = await stream(`/api/notebooks/${nb.id}/diagram`, { model: "stub-writer:14b", kind: "flowchart" });
+  check("a diagram reports what it is reading first",
+    diagramEvents[0] && diagramEvents[0].event === "reading", JSON.stringify(diagramEvents[0]));
+  check("and its progress while the model writes",
+    diagramEvents.some((e) => e.event === "progress" && e.data.chars > 0),
+    JSON.stringify(diagramEvents.map((e) => e.event)));
+  const diagram = doneOf(diagramEvents, "the diagram");
   check("builds a diagram", diagram.nodes && diagram.nodes.length === 3, JSON.stringify(diagram).slice(0, 200));
   check("lays out without overlapping", noOverlap(diagram.layout), "boxes overlap");
   check("edges point at real nodes", diagram.edges.every((e) => diagram.nodes.some((n) => n.id === e.from) && diagram.nodes.some((n) => n.id === e.to)));
@@ -403,7 +416,7 @@ try {
   check("renders SVG", /<svg/.test(diagram.svg) && /Split into chunks/.test(diagram.svg));
   check("renders Mermaid", /flowchart TD/.test(diagram.mermaid), diagram.mermaid);
 
-  const deck = (await api("POST", `/api/notebooks/${nb.id}/deck`, { model: "stub-writer:14b", diagram: false })).data;
+  const deck = doneOf(await stream(`/api/notebooks/${nb.id}/deck`, { model: "stub-writer:14b", diagram: false }), "the deck");
   check("writes slides", deck.slides.length >= 1, JSON.stringify(deck).slice(0, 200));
   check("bullets carry a verdict", deck.slides[0].bullets.every((b) => b.verdict), JSON.stringify(deck.slides[0].bullets));
 
@@ -415,7 +428,7 @@ try {
   check("it is a zip whose first entry is the content types", firstEntry(pptx) === "[Content_Types].xml", firstEntry(pptx));
   check("every entry's checksum is right", zipChecksumsValid(pptx));
 
-  const plan = (await api("POST", `/api/notebooks/${nb.id}/plan`, { model: "stub-writer:14b", days: 3 })).data;
+  const plan = doneOf(await stream(`/api/notebooks/${nb.id}/plan`, { model: "stub-writer:14b", days: 3 }), "the plan");
   check("builds a study plan", plan.sessions.length >= 1 && plan.sessions[0].read, JSON.stringify(plan).slice(0, 160));
 
   const board = (await api("POST", `/api/notebooks/${nb.id}/storyboard`, { model: "stub-writer:14b", minutes: 2 })).data;
@@ -424,6 +437,38 @@ try {
   const player = await fetch(base + board.player).then((r) => r.text());
   check("the player is self-contained", /speechSynthesis/.test(player) && !/<script src=/.test(player));
   check("the script is written out", /## 1\./.test(await fetch(base + board.script).then((r) => r.text())));
+
+  /* --- pace --- */
+  section("pace");
+  /* The two-page fixture has fewer chunks than even the fast setting
+     asks for, so the profiles would look identical. Give the notebook
+     something with enough in it to tell them apart. */
+  const filler = Array.from({ length: 30 }, (_, i) =>
+    `Section ${i + 1}. Retrieval quality decides the answer, and passage ${i + 1} exists to be retrieved. ` +
+    `It mentions memory, chunking, embeddings and the ${i + 1}th way of measuring them, at enough length to become its own chunk.`
+  ).join("\n\n");
+  await api("POST", `/api/notebooks/${nb.id}/sources`, Buffer.from(filler, "utf8"), "filler.txt");
+
+  const askAt = async (setting) => {
+    const events = await stream(`/api/notebooks/${nb.id}/ask`, {
+      question: "How much memory does the model need?", model: "stub-writer:14b", pace: setting,
+    });
+    return events.find((e) => e.event === "context").data;
+  };
+  const fast = await askAt("fast");
+  const thorough = await askAt("thorough");
+  check("the fast setting reads fewer passages", fast.passages.length < thorough.passages.length,
+    `${fast.passages.length} vs ${thorough.passages.length}`);
+  check("and sends less to the model", fast.chars < thorough.chars, `${fast.chars} vs ${thorough.chars}`);
+  check("the setting is reported back", fast.pace === "fast" && thorough.pace === "thorough");
+  const paceInfo = (await api("GET", "/api/pace")).data;
+  check("the profiles are listed", paceInfo.profiles.length === 3 && paceInfo.default === "balanced",
+    JSON.stringify(paceInfo.profiles.map((p) => p.id)));
+  const answered = await stream(`/api/notebooks/${nb.id}/ask`, { question: "How much memory?", model: "stub-writer:14b" });
+  const timing = answered.find((e) => e.event === "stats");
+  check("time to the first word is measured", answered.some((e) => e.event === "first"),
+    JSON.stringify(answered.map((e) => e.event)));
+  check("and the speed is reported", timing && typeof timing.data.rate === "number", JSON.stringify(timing && timing.data));
 
   const notebooks = (await api("GET", "/api/notebooks")).data.notebooks;
   check("the notebook is listed", notebooks.some((n) => n.id === nb.id));
@@ -496,7 +541,7 @@ try {
 
   /* --- OCR --- */
   section("ocr");
-  const ocrCaps = ocrMod.capabilities();
+  const ocrCaps = await ocrMod.capabilities();
   results.push(`  note  ${ocrCaps.available ? `${ocrCaps.engine} is installed` : `no OCR engine here (${ocrCaps.install})`}`);
   if (!ocrCaps.available) {
     let named = false;

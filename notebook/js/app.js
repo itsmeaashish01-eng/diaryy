@@ -210,7 +210,45 @@ const ask = () => ({
   model: $("#chatModel").value,
   embedModel: $("#embedModel").value || null,
   sourceIds: sourceIds(),
+  pace: $("#pace").value,
 });
+
+/* A clock, for the waits that cannot be streamed. Knowing a thing has
+   been going for eighteen seconds is the difference between waiting and
+   wondering whether it has died. */
+function waiting(el, what) {
+  const started = Date.now();
+  el.innerHTML = `<div class="waiting"><span>${escapeHTML(what)}<span class="dots"></span></span><span class="elapsed"></span></div>`;
+  const elapsed = el.querySelector(".elapsed");
+  const timer = setInterval(() => {
+    elapsed.textContent = `${Math.round((Date.now() - started) / 1000)}s`;
+  }, 500);
+  return {
+    say(text) { const line = el.querySelector(".waiting span"); if (line) line.firstChild.textContent = text; },
+    stop() { clearInterval(timer); },
+    seconds: () => (Date.now() - started) / 1000,
+  };
+}
+
+/* What the last answer cost, in the terms that matter on a laptop:
+   how long before it started (the model reading the passages) and how
+   fast it wrote. Shown because a person who can see the cost can make
+   a sensible decision about the pace control; a spinner teaches
+   nothing. */
+let slowWarned = false;
+function speedLine(stats, firstToken) {
+  if (!stats) return "";
+  const bits = [];
+  if (firstToken != null) bits.push(`${firstToken}s reading ${stats.promptTokens || "?"} tokens`);
+  if (stats.rate) bits.push(`${stats.rate} tokens/s writing`);
+  if (!bits.length) return "";
+  const slow = stats.slow;
+  if (slow && !slowWarned) {
+    slowWarned = true;
+    toast("That was slow. Try the pace control (top right) on Fast, or a smaller model — llama3.1:8b is two to three times quicker.", 14000);
+  }
+  return `<div class="speed${slow ? " slow" : ""}">${bits.join(" · ")}</div>`;
+}
 
 function requireNotebook() {
   if (!state.notebook) { toast("Make a notebook first."); return false; }
@@ -379,6 +417,9 @@ async function sendQuestion() {
   const chips = turn.querySelector(".passages");
   const prose = turn.querySelector(".prose");
   let answer = "";
+  let stats = null;
+  let firstToken = null;
+  const clock = waiting(prose, "reading the passages");
 
   try {
     await events(`/api/notebooks/${state.notebook.id}/ask`, { ...ask(), question, history: history.slice(-6) }, {
@@ -388,13 +429,16 @@ async function sendQuestion() {
           `<span class="chip" style="cursor:default" title="how the passages were found">${ctx.retrieval}</span>` +
           ctx.passages.map((p) => `<button class="chip cite" data-source="${p.label.match(/S(\d+)/)[1]}" data-page="${p.page}">${escapeHTML(p.label)}</button>`).join("");
       },
+      first: (f) => { firstToken = f.seconds; clock.stop(); },
+      stats: (s) => { stats = s; },
       token: (t) => {
         answer += t.delta;
         prose.innerHTML = markdown(answer);
         thread.scrollTop = thread.scrollHeight;
       },
       verified: (report) => {
-        prose.innerHTML = verifiedMarkdown(answer, report) + groundingBar(report);
+        clock.stop();
+        prose.innerHTML = verifiedMarkdown(answer, report) + groundingBar(report) + speedLine(stats, firstToken);
         turn.insertAdjacentHTML("beforeend",
           `<div class="grounding"><button class="ghost small keep">keep as a note</button></div>`);
         turn.querySelector(".keep").addEventListener("click", async () => {
@@ -406,11 +450,13 @@ async function sendQuestion() {
           toast("Kept in Notes.");
         });
       },
-      onError: (err) => { prose.innerHTML = `<p class="muted">${escapeHTML(err.message)}</p>`; },
+      onError: (err) => { clock.stop(); prose.innerHTML = `<p class="muted">${escapeHTML(err.message)}</p>`; },
     }).done;
     history.push({ role: "user", content: question }, { role: "assistant", content: answer });
   } catch (e) {
     prose.innerHTML = `<p class="muted">${escapeHTML(e.message)}</p>`;
+  } finally {
+    clock.stop();
   }
 }
 
@@ -419,16 +465,19 @@ async function sendQuestion() {
 $("#summariseBtn").addEventListener("click", async () => {
   if (!requireNotebook()) return;
   const out = $("#summaryOut");
-  out.innerHTML = "<p class='muted'>reading…</p>";
+  const clock = waiting(out, "reading the sources");
   busy($("#summariseBtn"), true);
   let text = "";
+  let stats = null;
   try {
     await events(`/api/notebooks/${state.notebook.id}/summarise`, {
       ...ask(), kind: $("#summaryKind").value, focus: $("#summaryFocus").value.trim() || null,
     }, {
-      token: (t) => { text += t.delta; out.innerHTML = markdown(text); },
+      stats: (s) => { stats = s; },
+      token: (t) => { clock.stop(); text += t.delta; out.innerHTML = markdown(text); },
       verified: (report) => {
-        out.innerHTML = verifiedMarkdown(text, report) + groundingBar(report) +
+        clock.stop();
+        out.innerHTML = verifiedMarkdown(text, report) + groundingBar(report) + speedLine(stats, null) +
           `<div class="grounding"><button class="ghost small" id="keepSummary">keep as a note</button></div>`;
         $("#keepSummary").addEventListener("click", async () => {
           await post(`/api/notebooks/${state.notebook.id}/notes`, {
@@ -444,22 +493,41 @@ $("#summariseBtn").addEventListener("click", async () => {
   } catch (e) {
     out.innerHTML = `<p class="muted">${escapeHTML(e.message)}</p>`;
   } finally {
+    clock.stop();
     busy($("#summariseBtn"), false);
   }
 });
+
+/* Diagrams, decks and plans come back as JSON — there is no half a
+   diagram to show — so what streams is progress rather than content:
+   what the model is reading, and how much it has written so far. */
+function streamed(path, body, clock, writingLabel) {
+  return new Promise((resolve, reject) => {
+    let result = null;
+    events(path, body, {
+      reading: (r) => clock.say(`reading ${r.passages} passages (${(r.chars / 1000).toFixed(1)}k characters)`),
+      progress: (p) => clock.say(p.chars ? `${writingLabel} — ${p.chars} characters` : writingLabel),
+      done: (d) => { result = d; },
+      onError: (e) => reject(e),
+    }).done.then(
+      () => (result ? resolve(result) : reject(new Error("the model stopped before it finished"))),
+      reject
+    );
+  });
+}
 
 /* ---- diagram ---------------------------------------------------------- */
 
 $("#diagramBtn").addEventListener("click", async () => {
   if (!requireNotebook()) return;
   const out = $("#diagramOut");
-  out.innerHTML = "<p class='muted'>reading the sources and working out the shape…</p>";
+  const clock = waiting(out, "reading the sources");
   busy($("#diagramBtn"), true, "drawing…");
   try {
-    const graph = await post(`/api/notebooks/${state.notebook.id}/diagram`, {
+    const graph = await streamed(`/api/notebooks/${state.notebook.id}/diagram`, {
       ...ask(), kind: $("#diagramKind").value, topic: $("#diagramTopic").value.trim() || null,
       theme: document.body.classList.contains("dark") ? "dark" : "light",
-    });
+    }, clock, "working out the shape");
     state.diagram = graph;
     $("#diagramSvg").disabled = false;
     $("#diagramMermaid").disabled = false;
@@ -484,6 +552,7 @@ $("#diagramBtn").addEventListener("click", async () => {
   } catch (e) {
     out.innerHTML = `<p class="muted">${escapeHTML(e.message)}</p>`;
   } finally {
+    clock.stop();
     busy($("#diagramBtn"), false);
   }
 });
@@ -510,12 +579,13 @@ $("#diagramMermaid").addEventListener("click", async () => {
 $("#deckBtn").addEventListener("click", async () => {
   if (!requireNotebook()) return;
   const out = $("#deckOut");
-  out.innerHTML = "<p class='muted'>writing slides…</p>";
+  const clock = waiting(out, "reading the sources");
   busy($("#deckBtn"), true, "writing…");
   try {
-    const deck = await post(`/api/notebooks/${state.notebook.id}/deck`, {
+    const deck = await streamed(`/api/notebooks/${state.notebook.id}/deck`, {
       ...ask(), topic: $("#deckTopic").value.trim() || null, diagram: $("#deckDiagram").checked,
-    });
+      theme: document.body.classList.contains("dark") ? "dark" : "light",
+    }, clock, "writing the slides");
     state.deck = deck;
     $("#deckExport").disabled = false;
     out.innerHTML = `
@@ -524,7 +594,7 @@ $("#deckBtn").addEventListener("click", async () => {
       ${deck.slides.map((s) => `
         <div class="slide">
           <h3>${escapeHTML(s.title)}</h3>
-          ${s.diagram ? s.diagram.svg || "" : ""}
+          ${s.diagram ? (s.diagram.svg || (deck.diagram && deck.diagram.svg) || "") : ""}
           <ul>${(s.bullets || []).map((b) => `
             <li>${escapeHTML(b.text)}
               ${b.cite ? `<button class="cite" data-source="${(b.cite.match(/S(\d+)/) || [])[1] || 1}" data-page="${b.page || ""}">${escapeHTML(b.cite)}</button>` : ""}
@@ -538,6 +608,7 @@ $("#deckBtn").addEventListener("click", async () => {
   } catch (e) {
     out.innerHTML = `<p class="muted">${escapeHTML(e.message)}</p>`;
   } finally {
+    clock.stop();
     busy($("#deckBtn"), false);
   }
 });
@@ -558,13 +629,13 @@ $("#deckExport").addEventListener("click", async () => {
 $("#planBtn").addEventListener("click", async () => {
   if (!requireNotebook()) return;
   const out = $("#planOut");
-  out.innerHTML = "<p class='muted'>working out an order…</p>";
+  const clock = waiting(out, "reading the sources");
   busy($("#planBtn"), true, "planning…");
   try {
-    const plan = await post(`/api/notebooks/${state.notebook.id}/plan`, {
+    const plan = await streamed(`/api/notebooks/${state.notebook.id}/plan`, {
       ...ask(), goal: $("#planGoal").value.trim() || null,
       days: Number($("#planDays").value) || 7, minutes: Number($("#planMinutes").value) || 60,
-    });
+    }, clock, "working out an order");
     out.innerHTML = `
       <p class="prose">${escapeHTML(plan.overview)}</p>
       <p class="small muted">${plan.sessions.length} sessions · about ${Math.round(plan.totalMinutes / 60)} hours in total</p>
@@ -590,6 +661,7 @@ $("#planBtn").addEventListener("click", async () => {
   } catch (e) {
     out.innerHTML = `<p class="muted">${escapeHTML(e.message)}</p>`;
   } finally {
+    clock.stop();
     busy($("#planBtn"), false);
   }
 });
@@ -845,6 +917,7 @@ $("#tabs").addEventListener("click", (e) => {
   $$(".panel").forEach((p) => p.classList.toggle("active", p.dataset.panel === tab.dataset.tab));
 });
 
+$("#pace").addEventListener("change", (e) => remember("pace", e.target.value));
 $("#chatModel").addEventListener("change", (e) => remember("chatModel", e.target.value));
 $("#embedModel").addEventListener("change", (e) => remember("embedModel", e.target.value));
 
@@ -861,6 +934,9 @@ if (recall("dark") === "1" || (recall("dark") === null && matchMedia("(prefers-c
 /* ---- go ------------------------------------------------------------------ */
 
 (async function start() {
+  const savedPace = recall("pace");
+  if (savedPace) $("#pace").value = savedPace;
+
   /* All four at once. They do not depend on each other, and serialising
      them meant the notebook list waited for a question about ffmpeg. */
   const [, models] = await Promise.allSettled([

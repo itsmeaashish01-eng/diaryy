@@ -120,8 +120,15 @@ If the passages only support four nodes, return four. A short honest diagram is 
   ];
 }
 
-export async function build({ topic, kind = "flowchart", context, model, signal }) {
-  const { value, raw } = await json(prompt({ topic, kind, context }), { model, schema: SCHEMA, signal, context: 8192 });
+export async function build({ topic, kind = "flowchart", context, model, signal, limits, onProgress }) {
+  const { value, raw } = await json(prompt({ topic, kind, context }), {
+    model,
+    schema: SCHEMA,
+    signal,
+    context: (limits && limits.context) || 4096,
+    predict: (limits && limits.predict) || 900,
+    onDelta: onProgress ? (_, chars) => onProgress(chars) : undefined,
+  });
   if (!value || !Array.isArray(value.nodes) || !value.nodes.length) {
     const e = new Error("the model did not return a diagram — try again, or pick a smaller topic");
     e.status = 502;

@@ -84,8 +84,14 @@ The first scene sets up the question. The last one says what is still unsettled 
   ];
 }
 
-export async function storyboard({ topic, context, model, minutes = 3, signal }) {
-  const { value, raw } = await json(prompt({ topic, context, minutes }), { model, schema: SCHEMA, signal, context: 8192 });
+export async function storyboard({ topic, context, model, minutes = 3, signal, limits }) {
+  const { value, raw } = await json(prompt({ topic, context, minutes }), {
+    model,
+    schema: SCHEMA,
+    signal,
+    context: (limits && limits.context) || 4096,
+    predict: (limits && limits.predict) || 1200,
+  });
   if (!value || !Array.isArray(value.scenes) || !value.scenes.length) {
     const e = new Error("the model did not return a storyboard");
     e.status = 502;

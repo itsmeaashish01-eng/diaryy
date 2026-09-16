@@ -217,14 +217,28 @@ now asks it to keep the model resident for thirty minutes
 (`OLLAMA_KEEP_ALIVE` changes it), so you pay that once rather than every
 time you pause to think. `ollama ps` shows what is currently loaded.
 
-**Every answer is slow.** That is the model itself, and it is a hardware
-question rather than a code one:
+**Every answer is slow.** Two things to try, in this order.
+
+*The pace control*, top right. Most of the wait before an answer appears
+is the model **reading** the passages, not writing the answer — at CPU
+speeds, three thousand tokens of context is most of a minute before the
+first word. Fast sends four passages instead of six, Thorough eight. For
+"what does this say about X?", where the answer is on one page anyway,
+Fast costs you nothing and starts two to three times sooner. Every
+answer now prints what it cost underneath — `4.2s reading 1180 tokens ·
+6.1 tokens/s writing` — so the trade is visible rather than guessed at.
+
+*Then the model*, because the rest is hardware:
 
 - On a laptop with no usable GPU, a 14B model at four bits writes at
   roughly 3–6 words a second, and has to read the passages before it
   starts. `llama3.1:8b` or `qwen2.5:7b-instruct` are two to three times
   faster and, for answering from passages that are already in front of
-  them, very nearly as good.
+  them, very nearly as good. This is the single biggest lever.
+- Diagrams, slides and study plans are the slowest things here: they are
+  structured output, so nothing can be shown until the model has
+  finished. They now report what they are reading and how much they have
+  written while you wait, rather than sitting on a spinner.
 - Apple silicon uses the GPU automatically. On Windows and Linux, check
   that Ollama found your card: `ollama ps` names the processor it is
   using, and a line saying 100% CPU on a machine with a GPU means the

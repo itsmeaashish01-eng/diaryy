@@ -130,7 +130,7 @@ export async function running() {
    and the deck writer want because they parse the result.
 */
 
-export async function* stream(messages, { model, temperature = 0.2, context = 8192, format, signal, stop } = {}) {
+export async function* stream(messages, { model, temperature = 0.2, context = 8192, predict, format, signal, stop } = {}) {
   const res = await call("/api/chat", {
     method: "POST",
     signal,
@@ -140,7 +140,15 @@ export async function* stream(messages, { model, temperature = 0.2, context = 81
       stream: true,
       format,
       keep_alive: KEEP_ALIVE,
-      options: { temperature, num_ctx: context, ...(stop ? { stop } : {}) },
+      options: {
+        temperature,
+        num_ctx: context,
+        /* A cap on the answer's length. Not censorship — a stop valve:
+           a small model asked for a summary will occasionally write
+           until the heat death of the laptop. */
+        ...(predict ? { num_predict: predict } : {}),
+        ...(stop ? { stop } : {}),
+      },
     },
   });
   let buf = "";
@@ -171,11 +179,15 @@ export async function* stream(messages, { model, temperature = 0.2, context = 81
   }
 }
 
-export async function chat(messages, opts = {}) {
+export async function chat(messages, { onDelta, ...opts } = {}) {
   let out = "";
   let stats = null;
   for await (const part of stream(messages, opts)) {
     out += part.delta;
+    /* Structured output is parsed rather than shown, but the caller
+       still wants to prove to a waiting person that something is
+       happening. */
+    if (part.delta && onDelta) onDelta(part.delta, out.length);
     if (part.done) stats = part.stats;
   }
   return { text: out, stats };

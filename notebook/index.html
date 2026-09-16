@@ -26,6 +26,14 @@
         <span>search with</span>
         <select id="embedModel"></select>
       </label>
+      <label class="picker" title="How much of the notebook to put in front of the model. Most of the wait before an answer is the model reading; fewer passages means it starts sooner.">
+        <span>pace</span>
+        <select id="pace">
+          <option value="fast">Fast · 4 passages</option>
+          <option value="balanced" selected>Balanced · 6</option>
+          <option value="thorough">Thorough · 8</option>
+        </select>
+      </label>
       <span id="health" class="health" title="Ollama status">checking…</span>
       <button id="darkToggle" class="icon-btn" title="Toggle dark mode">☾</button>
     </div>

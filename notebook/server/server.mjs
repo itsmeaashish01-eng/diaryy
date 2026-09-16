@@ -40,6 +40,7 @@ import { buildDeck } from "./pptx.mjs";
 import { toSVG, toMermaid } from "./diagram.mjs";
 import { SCHEMA as DECK_SCHEMA, prompt as deckPrompt, normalise as normaliseDeck } from "./deck.mjs";
 import { planPrompt, PLAN_SCHEMA, normalisePlan } from "./study.mjs";
+import { PROFILES, DEFAULT as DEFAULT_PACE, limits, pace } from "./pace.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const WEB = join(here, "..");
@@ -134,7 +135,7 @@ async function serveStatic(res, urlPath) {
    they all cite the same way and they all fail the same way.
 */
 
-async function gather(notebookId, { question, sourceIds, count = 8, embedModel, signal }) {
+async function gather(notebookId, { question, sourceIds, count = 6, budget = 6000, embedModel, signal }) {
   const nb = store.getNotebook(notebookId);
   const sources = sourceIds && sourceIds.length ? nb.sources.filter((s) => sourceIds.includes(s.id)) : nb.sources;
   if (!sources.length) {
@@ -152,7 +153,7 @@ async function gather(notebookId, { question, sourceIds, count = 8, embedModel, 
   }
 
   const hits = lib.search(question, { queryVector, count, sourceIds: sources.map((s) => s.id) });
-  const context = buildContext(hits, sources);
+  const context = buildContext(hits, sources, { budget });
   return { nb, sources, hits, context, retrieval: queryVector ? "hybrid" : "keyword" };
 }
 
@@ -176,6 +177,8 @@ const route = (method, pattern, handler) => {
    finishes — and never waits for either. /api/tools is where a caller
    that genuinely wants the answer goes.
 */
+route("GET", "/api/pace", (req, res) => send(res, 200, { profiles: Object.values(PROFILES), default: DEFAULT_PACE }));
+
 route("GET", "/api/health", async (req, res) => {
   video.capabilities.warm();
   ocr.capabilities.warm();
@@ -344,15 +347,19 @@ route("POST", "/api/notebooks/:id/ask", async (req, res, { id }) => {
   res.on("close", () => abort.abort());
 
   try {
+    const L = limits(body.pace, "ask");
     const { context, hits, sources, retrieval } = await gather(id, {
       question,
       sourceIds: body.sourceIds,
-      count: body.count || 8,
+      count: body.count || L.passages,
+      budget: L.budget,
       embedModel: body.embedModel,
       signal: abort.signal,
     });
     stream.send("context", {
       retrieval,
+      pace: L.id,
+      chars: context.text.length,
       passages: context.blocks.map((b) => ({ label: b.label, page: b.page, sourceId: b.sourceId, preview: b.text.slice(0, 240) })),
       searched: hits.length,
     });
@@ -368,14 +375,27 @@ route("POST", "/api/notebooks/:id/ask", async (req, res, { id }) => {
     ];
 
     let answer = "";
+    const startedAt = Date.now();
+    let firstToken = null;
     for await (const part of ollama.stream(messages, {
       model: body.model,
       temperature: body.temperature ?? 0.2,
-      context: body.contextWindow || 8192,
+      context: body.contextWindow || L.context,
+      predict: L.predict,
       signal: abort.signal,
     })) {
-      if (part.delta) { answer += part.delta; stream.send("token", { delta: part.delta }); }
-      if (part.done) stream.send("stats", part.stats);
+      if (part.delta) {
+        if (firstToken === null) {
+          /* The wait before the first word is the model reading the
+             passages, and it is the number worth reporting: it is the
+             one the passage count actually changes. */
+          firstToken = (Date.now() - startedAt) / 1000;
+          stream.send("first", { seconds: Number(firstToken.toFixed(1)) });
+        }
+        answer += part.delta;
+        stream.send("token", { delta: part.delta });
+      }
+      if (part.done) stream.send("stats", { ...part.stats, ...pace(part.stats), firstToken });
     }
 
     const report = verify(answer, { blocks: context.blocks, sources });
@@ -406,10 +426,12 @@ route("POST", "/api/notebooks/:id/summarise", async (req, res, { id }) => {
   res.on("close", () => abort.abort());
   try {
     const query = body.focus || "main claims, method, results, limitations, conclusions";
+    const L = limits(body.pace, "summary");
     const { context, sources } = await gather(id, {
       question: query,
       sourceIds: body.sourceIds,
-      count: body.count || 14,
+      count: body.count || L.passages,
+      budget: L.budget,
       embedModel: body.embedModel,
       signal: abort.signal,
     });
@@ -421,8 +443,11 @@ route("POST", "/api/notebooks/:id/summarise", async (req, res, { id }) => {
       },
     ];
     let text = "";
-    for await (const part of ollama.stream(messages, { model: body.model, temperature: 0.2, context: 8192, signal: abort.signal })) {
+    for await (const part of ollama.stream(messages, {
+      model: body.model, temperature: 0.2, context: L.context, predict: L.predict, signal: abort.signal,
+    })) {
       if (part.delta) { text += part.delta; stream.send("token", { delta: part.delta }); }
+      if (part.done) stream.send("stats", { ...part.stats, ...pace(part.stats) });
     }
     const report = verify(text, { blocks: context.blocks, sources });
     stream.send("verified", { ...report, note: groundingNote(report) });
@@ -435,16 +460,39 @@ route("POST", "/api/notebooks/:id/summarise", async (req, res, { id }) => {
 
 /* --- diagrams --- */
 
+/*
+   Structured output cannot be shown as it arrives — it is JSON, and
+   half a diagram is not a diagram. But a person watching a spinner for
+   ninety seconds deserves to know the difference between working and
+   wedged, so these stream their progress in characters and send the
+   finished object at the end.
+*/
 route("POST", "/api/notebooks/:id/diagram", async (req, res, { id }) => {
   const body = await readJSONBody(req);
-  const { context } = await gather(id, {
-    question: body.topic || "the process, the components and how they connect",
-    sourceIds: body.sourceIds,
-    count: body.count || 12,
-    embedModel: body.embedModel,
-  });
-  const graph = await diagram.build({ topic: body.topic, kind: body.kind, context, model: body.model });
-  send(res, 200, { ...graph, svg: toSVG(graph, { theme: body.theme }), mermaid: toMermaid(graph) });
+  const stream = sse(res);
+  const abort = new AbortController();
+  res.on("close", () => abort.abort());
+  try {
+    const L = limits(body.pace, "structure");
+    const { context } = await gather(id, {
+      question: body.topic || "the process, the components and how they connect",
+      sourceIds: body.sourceIds,
+      count: body.count || L.passages,
+      budget: L.budget,
+      embedModel: body.embedModel,
+      signal: abort.signal,
+    });
+    stream.send("reading", { passages: context.blocks.length, chars: context.text.length, pace: L.id });
+    const graph = await diagram.build({
+      topic: body.topic, kind: body.kind, context, model: body.model,
+      signal: abort.signal, limits: L,
+      onProgress: (chars) => stream.send("progress", { chars }),
+    });
+    stream.send("done", { ...graph, svg: toSVG(graph, { theme: body.theme }), mermaid: toMermaid(graph) });
+  } catch (e) {
+    stream.send("failed", { error: e.message });
+  }
+  stream.end();
 });
 
 route("POST", "/api/notebooks/:id/diagram/export", async (req, res, { id }) => {
@@ -462,29 +510,49 @@ route("POST", "/api/notebooks/:id/diagram/export", async (req, res, { id }) => {
 
 route("POST", "/api/notebooks/:id/deck", async (req, res, { id }) => {
   const body = await readJSONBody(req);
-  const { context, sources, nb } = await gather(id, {
-    question: body.topic || "the argument, the evidence and the conclusions",
-    sourceIds: body.sourceIds,
-    count: body.count || 16,
-    embedModel: body.embedModel,
-  });
-  const { value } = await ollama.json(
-    deckPrompt({ topic: body.topic, context, slides: body.slides || 8 }),
-    { model: body.model, schema: DECK_SCHEMA, context: 8192 }
-  );
-  const deck = normaliseDeck(value, { context, sources, notebook: nb });
-  if (body.diagram) {
-    try {
-      const graph = await diagram.build({ topic: body.topic, kind: body.diagramKind || "flowchart", context, model: body.model });
-      deck.slides.splice(Math.min(1, deck.slides.length), 0, {
-        title: graph.title,
-        diagram: graph,
-        notes: `${graph.summary}\n\nEvidence: ${graph.nodes.map((n) => `${n.label} ${n.cite}`).join("; ")}`,
-      });
-      deck.diagram = graph;
-    } catch { /* a deck without the diagram is still a deck */ }
+  const stream = sse(res);
+  const abort = new AbortController();
+  res.on("close", () => abort.abort());
+  try {
+    const L = limits(body.pace, "structure");
+    const { context, sources, nb } = await gather(id, {
+      question: body.topic || "the argument, the evidence and the conclusions",
+      sourceIds: body.sourceIds,
+      count: body.count || L.passages,
+      budget: L.budget,
+      embedModel: body.embedModel,
+      signal: abort.signal,
+    });
+    stream.send("reading", { passages: context.blocks.length, chars: context.text.length, pace: L.id });
+    const { value } = await ollama.json(
+      deckPrompt({ topic: body.topic, context, slides: body.slides || 8 }),
+      {
+        model: body.model, schema: DECK_SCHEMA, context: L.context, predict: L.predict * 2,
+        signal: abort.signal, onDelta: (_, chars) => stream.send("progress", { chars, step: "slides" }),
+      }
+    );
+    const deck = normaliseDeck(value, { context, sources, notebook: nb });
+    if (body.diagram) {
+      try {
+        stream.send("progress", { step: "diagram", chars: 0 });
+        const graph = await diagram.build({
+          topic: body.topic, kind: body.diagramKind || "flowchart", context, model: body.model,
+          signal: abort.signal, limits: L,
+          onProgress: (chars) => stream.send("progress", { chars, step: "diagram" }),
+        });
+        deck.slides.splice(Math.min(1, deck.slides.length), 0, {
+          title: graph.title,
+          diagram: graph,
+          notes: `${graph.summary}\n\nEvidence: ${graph.nodes.map((n) => `${n.label} ${n.cite}`).join("; ")}`,
+        });
+        deck.diagram = { ...graph, svg: toSVG(graph, { theme: body.theme }) };
+      } catch { /* a deck without the diagram is still a deck */ }
+    }
+    stream.send("done", deck);
+  } catch (e) {
+    stream.send("failed", { error: e.message });
   }
-  send(res, 200, deck);
+  stream.end();
 });
 
 route("POST", "/api/notebooks/:id/deck/export", async (req, res, { id }) => {
@@ -501,17 +569,32 @@ route("POST", "/api/notebooks/:id/deck/export", async (req, res, { id }) => {
 
 route("POST", "/api/notebooks/:id/plan", async (req, res, { id }) => {
   const body = await readJSONBody(req);
-  const { context, sources } = await gather(id, {
-    question: body.goal || "what this material covers and in what order it should be learned",
-    sourceIds: body.sourceIds,
-    count: body.count || 16,
-    embedModel: body.embedModel,
-  });
-  const { value } = await ollama.json(
-    planPrompt({ goal: body.goal, days: body.days || 7, minutes: body.minutes || 60, context }),
-    { model: body.model, schema: PLAN_SCHEMA, context: 8192 }
-  );
-  send(res, 200, normalisePlan(value, { context, sources }));
+  const stream = sse(res);
+  const abort = new AbortController();
+  res.on("close", () => abort.abort());
+  try {
+    const L = limits(body.pace, "structure");
+    const { context, sources } = await gather(id, {
+      question: body.goal || "what this material covers and in what order it should be learned",
+      sourceIds: body.sourceIds,
+      count: body.count || L.passages,
+      budget: L.budget,
+      embedModel: body.embedModel,
+      signal: abort.signal,
+    });
+    stream.send("reading", { passages: context.blocks.length, chars: context.text.length, pace: L.id });
+    const { value } = await ollama.json(
+      planPrompt({ goal: body.goal, days: body.days || 7, minutes: body.minutes || 60, context }),
+      {
+        model: body.model, schema: PLAN_SCHEMA, context: L.context, predict: L.predict * 2,
+        signal: abort.signal, onDelta: (_, chars) => stream.send("progress", { chars }),
+      }
+    );
+    stream.send("done", normalisePlan(value, { context, sources }));
+  } catch (e) {
+    stream.send("failed", { error: e.message });
+  }
+  stream.end();
 });
 
 /* --- video --- */
@@ -520,13 +603,17 @@ route("GET", "/api/video/capabilities", async (req, res) => send(res, 200, await
 
 route("POST", "/api/notebooks/:id/storyboard", async (req, res, { id }) => {
   const body = await readJSONBody(req);
+  const L = limits(body.pace, "structure");
   const { context } = await gather(id, {
     question: body.topic || "the story these sources tell",
     sourceIds: body.sourceIds,
-    count: body.count || 14,
+    count: body.count || L.passages,
+    budget: L.budget,
     embedModel: body.embedModel,
   });
-  const board = await video.storyboard({ topic: body.topic, context, model: body.model, minutes: body.minutes || 3 });
+  const board = await video.storyboard({
+    topic: body.topic, context, model: body.model, minutes: body.minutes || 3, limits: L,
+  });
   const dir = store.outputDir(id);
   const stem = slugName(board.title);
   writeFileSync(join(dir, `${stem}-script.md`), video.narrationScript(board));

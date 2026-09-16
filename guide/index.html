@@ -2,13 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- viewport-fit=cover lets the app run edge to edge on a notched
+       phone; the CSS then keeps content clear of the notch itself. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>RoamGuide</title>
   <meta name="description" content="A guidebook that works offline: what's worth seeing, when it's open, and a day planned around it — with the walking times worked out." />
   <meta name="color-scheme" content="light dark" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- ===== Installable app ===== -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#c7784c" />
+  <!-- iOS ignores the manifest for these, so they're spelled out -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="RoamGuide" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
   <link rel="stylesheet" href="style.css" />
@@ -72,8 +85,22 @@
   <script src="js/map.js"></script>
   <script src="js/live.js"></script>
   <script src="js/livemap.js"></script>
+  <script src="js/install.js"></script>
   <script src="js/lookup.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/app.js"></script>
+
+  <script>
+    /* Registering here rather than in app.js: if a script below it ever
+       throws, the app should still be installable and still open offline. */
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function (e) {
+          // Not fatal — the app works, it just won't open without a signal.
+          console.warn("RoamGuide: offline support unavailable.", e);
+        });
+      });
+    }
+  </script>
 </body>
 </html>

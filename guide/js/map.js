@@ -149,6 +149,15 @@
     return `https://maps.apple.com/?${saddr}daddr=${coord(to)}&dirflg=${flag}`;
   }
 
+  /* Open a spot in a map app — not a route to it. Used for "where am I",
+     where a route from you to you is nonsense. */
+  function placeLinks(place) {
+    const g = { label: "Google Maps", url: googlePlace(place) };
+    const a = { label: "Apple Maps", url: applePlace(place) };
+    const o = { label: "OpenStreetMap", url: osmLink(place) };
+    return (prefersApple() ? [a, g, o] : [g, a, o]).filter((x) => x.url);
+  }
+
   /* The pair of buttons, in the order that suits the device. */
   function directionLinks(from, to, mode) {
     const g = { label: "Google Maps", url: googleDirections(from, to, mode) };
@@ -198,6 +207,6 @@
   RG.map = {
     svg, osmLink, osmDirections, toGeoJSON, niceScale,
     googlePlace, applePlace, googleDirections, appleDirections,
-    directionLinks, prefersApple,
+    directionLinks, placeLinks, prefersApple,
   };
 })(window.RG);

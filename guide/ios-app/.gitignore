@@ -1,0 +1,12 @@
+# Installed, not committed
+node_modules/
+
+# Both are generated: `npm run build` rebuilds www/, and `npx cap add ios`
+# rebuilds ios/. Committing them would mean reviewing a few thousand files
+# nobody wrote.
+www/
+ios/
+
+# Xcode leftovers, if ios/ is ever un-ignored
+*.xcuserstate
+DerivedData/

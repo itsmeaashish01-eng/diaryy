@@ -771,9 +771,21 @@ check("with no fix, directions still open the destination", () => {
   ok(links.every((l) => l.url && l.label), "each one usable");
 });
 
+check("\"where am I\" opens the spot, it doesn't route you to yourself", () => {
+  const here = { name: "Where I am", lat: 51.5, lon: -0.12 };
+  const links = map.placeLinks(here);
+  eq(links.length, 3, "Google, Apple and OpenStreetMap");
+  links.forEach((l) => {
+    ok(!/dir\/|daddr=|saddr=|travelmode|dirflg/.test(l.url),
+       `${l.label} should point at the place, not a route: ${l.url}`);
+    ok(/51\.5/.test(l.url), `${l.label} carries the coordinate`);
+  });
+});
+
 check("a place with no coordinates offers no directions", () => {
   eq(map.googleDirections(null, { name: "Nowhere" }, "walk"), null);
   eq(map.directionLinks(null, { name: "Nowhere" }, "walk").length, 0);
+  eq(map.placeLinks({ name: "Nowhere" }).length, 0);
 });
 
 /* ---- Wikipedia lookup ---------------------------------------------------- */
@@ -882,6 +894,61 @@ check("Wikipedia is never served from cache", () => {
   // "What's around me" is a question about right now; a stale answer from
   // the last city would be worse than an honest failure.
   ok(/wikipedia\.org/.test(sw) && /return;/.test(sw), "wikipedia is passed straight through");
+});
+
+/* ---- the iOS build ------------------------------------------------------- */
+
+const IOS = join(HERE, "ios-app");
+
+check("the native build is bundled, not a web view pointed at a URL", () => {
+  // Guideline 4.2 rejects apps that are a website in a shell. A server.url
+  // in this config would make it exactly that.
+  const cfg = JSON.parse(readFileSync(join(IOS, "capacitor.config.json"), "utf8"));
+  ok(cfg.appId && cfg.appName, "an id and a name");
+  eq(cfg.webDir, "www", "serves the bundled files");
+  ok(!cfg.server || !cfg.server.url, "no server.url — everything ships in the binary");
+});
+
+check("the build strips what the App Store shouldn't see", () => {
+  const build = readFileSync(join(IOS, "scripts", "build.mjs"), "utf8");
+  // These are assertions inside the build itself; if the page changes shape
+  // the build must fail loudly rather than ship a half-rewritten index.
+  ok(build.includes("a CDN reference survived"), "it fails if a CDN reference survives");
+  ok(build.includes("service-worker block survived"), "it fails if the service worker survives");
+  ok(build.includes("Google Fonts reference survived"), "it fails if a webfont reference survives");
+});
+
+check("the location permission string says what it's for", () => {
+  const patch = readFileSync(join(IOS, "scripts", "patch-ios.mjs"), "utf8");
+  const m = /NSLocationWhenInUseUsageDescription:\s*\n?\s*"([\s\S]*?)",\n/.exec(patch);
+  ok(m, "the key is written");
+  const text = m[1].replace(/"\s*\+\s*\n\s*"/g, "");
+  ok(text.length > 40, "long enough to be an explanation");
+  // Guideline 5.1.1 rejects "This app needs location".
+  ok(/around you|nearby|landmark/i.test(text), `says what it does, got: ${text.slice(0, 60)}`);
+  ok(/ITSAppUsesNonExemptEncryption/.test(patch), "export compliance answered once, not per build");
+});
+
+check("the App Store text fits in Apple's boxes", () => {
+  const md = readFileSync(join(IOS, "store", "metadata.md"), "utf8");
+  const field = (heading) => {
+    const re = new RegExp("## " + heading + "[^\\n]*\\n+```\\n([\\s\\S]*?)\\n```");
+    const m = re.exec(md);
+    ok(m, `no ${heading} block in metadata.md`);
+    return m[1].trim();
+  };
+  ok(field("Name \\(30 max\\)").length <= 30, "name fits");
+  ok(field("Subtitle \\(30 max\\)").length <= 30, "subtitle fits");
+  ok(field("Promotional text \\(170 max[^)]*\\)").length <= 170, "promo text fits");
+  ok(field("Description \\(4000 max\\)").length <= 4000, "description fits");
+
+  const keywords = field("Keywords \\(100 max[^)]*\\)");
+  ok(keywords.length <= 100, `keywords fit, got ${keywords.length}`);
+  ok(!/,\s/.test(keywords), "no spaces after commas — they cost characters");
+
+  // A privacy policy URL is required for any app that uses location.
+  ok(/privacy\.html/.test(md), "a privacy policy URL is given");
+  ok(existsSync(join(HERE, "privacy.html")), "and the page it points at exists");
 });
 
 /* ---- report ------------------------------------------------------------ */

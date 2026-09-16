@@ -436,7 +436,13 @@
           </div>
         </div>
         <div class="here-actions">
-          ${directionsRow({ name: "this spot", lat: fix.lat, lon: fix.lon })}
+          <p class="dir-row">
+            <span class="dir-label">Open where I am in</span>
+            ${RG.map.placeLinks({ name: "Where I am", lat: fix.lat, lon: fix.lon })
+              .slice(0, 2)
+              .map((l) => `<a class="btn btn-small" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`)
+              .join("")}
+          </p>
           <button class="btn btn-small btn-ghost" data-act="live-stop">Switch off</button>
         </div>
       </section>

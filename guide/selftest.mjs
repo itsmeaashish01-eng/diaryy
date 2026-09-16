@@ -781,9 +781,23 @@ check("a place with no coordinates offers no directions", () => {
 check("a blocked request is explained, not repeated verbatim", () => {
   const msg = RG.lookup.describeFailure(new TypeError("Failed to fetch"));
   ok(/Couldn't reach Wikipedia/.test(msg), `plain English, got "${msg}"`);
-  ok(/offline/.test(msg), "and says the rest of the app is fine");
+  ok(/Host it yourself/.test(msg), "and names the way out, rather than just failing");
   ok(/took too long/.test(RG.lookup.describeFailure(new Error("The operation was aborted"))),
      "a timeout reads as a timeout");
+});
+
+check("an encyclopedia opening is trimmed to something readable standing up", () => {
+  const long = "Foo Cathedral (Italian: Cattedrale di Foo, pronounced [ˈfoː], " +
+    "also known locally as the Duomo di Foo or simply il Duomo) is a church. " +
+    "It was begun in 1296. " + "Filler sentence that goes on. ".repeat(40);
+  const out = RG.lookup.trimExtract(long);
+  ok(!out.includes("pronounced"), "the pronunciation parenthesis goes");
+  ok(out.length <= 470, `trimmed, got ${out.length} chars`);
+  ok(/[.…]$/.test(out), `ends at a stop, got "${out.slice(-40)}"`);
+
+  const short = "A small bridge over the canal.";
+  eq(RG.lookup.trimExtract(short), short, "a short one is left alone");
+  eq(RG.lookup.trimExtract(""), "", "and an empty one doesn't throw");
 });
 
 /* ---- report ------------------------------------------------------------ */

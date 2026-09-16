@@ -527,20 +527,38 @@
     RG.live.onChange(U.debounce(() => {
       if (ui.state.view !== "nearby") return;
       if (document.body.classList.contains("modal-open")) return;
+      maybeRefresh();
       ui.render();
     }, 700));
   }
 
-  async function runLookup() {
+  /* How far you have to walk before the answer to "what's around me"
+     could have changed. Re-asking every few metres would hammer the API
+     and reshuffle the list under your thumb while you're reading it. */
+  const REFRESH_M = 150;
+
+  async function runLookup(reason) {
     const fix = RG.live.state.fix;
-    if (!fix) { ui.flash("Switch on location first.", "warn"); return; }
+    if (!fix) return;
 
     ui.state.lookup = { status: "loading", hits: [] };
-    ui.state.lookupOpen = null;
+    ui.state.lookupAt = { lat: fix.lat, lon: fix.lon };
     ui.render();
 
     try {
-      const hits = await RG.lookup.around(fix.lat, fix.lon, 400);
+      const hits = await RG.lookup.around(fix.lat, fix.lon, ui.state.radius);
+
+      /* Where the curated guidebook has an entry for the same thing, it
+         wins: a paragraph written for a traveller beats an encyclopedia
+         opening, and it comes with the tip about the queue. Matched by
+         distance, because the names rarely agree exactly. */
+      const mine = store.allPlaces().filter((p) => p.lat != null);
+      hits.forEach((a) => {
+        a.guidebook = mine.find((p) =>
+          RG.geo.distanceKm({ lat: a.lat, lon: a.lon }, p) * 1000 < 90
+        ) || null;
+      });
+
       ui.state.lookup = { status: "ok", hits };
     } catch (e) {
       ui.state.lookup = { status: "error", error: e.message, hits: [] };
@@ -548,29 +566,15 @@
     ui.render();
   }
 
-  async function readArticle(pageid) {
-    const l = ui.state.lookup;
-    if (!l || l.status !== "ok") return;
-    const hit = l.hits.find((h) => String(h.pageid) === String(pageid));
-    if (!hit) return;
-
-    // Second press on an open article closes it.
-    if (ui.state.lookupOpen === hit.pageid) {
-      ui.state.lookupOpen = null;
-      ui.render();
-      return;
-    }
-    ui.state.lookupOpen = hit.pageid;
-
-    if (!hit.summary && !hit.error) {
-      ui.render();
-      try {
-        hit.summary = await RG.lookup.summary(hit.pageid);
-      } catch (e) {
-        hit.error = e.message;
-      }
-    }
-    ui.render();
+  /* Re-ask once you've actually moved, so the guide keeps up as you walk. */
+  function maybeRefresh() {
+    const fix = RG.live.state.fix;
+    if (!fix) return;
+    if (ui.state.lookup && ui.state.lookup.status === "loading") return;
+    const last = ui.state.lookupAt;
+    if (!last) { runLookup("auto"); return; }
+    const moved = RG.geo.distanceKm(last, { lat: fix.lat, lon: fix.lon }) * 1000;
+    if (moved >= REFRESH_M) runLookup("auto");
   }
 
   /* ---------------------------------------------------------------
@@ -612,8 +616,11 @@
           ui.flash("Location off.", "ok");
           ui.render();
           break;
-        case "lookup": await runLookup(); break;
-        case "wiki-read": await readArticle(btn.dataset.page); break;
+        case "lookup": await runLookup("manual"); break;
+        case "radius":
+          ui.state.radius = Number(btn.dataset.r);
+          await runLookup("manual");
+          break;
         case "theme": toggleTheme(); break;
         case "close-modal": ui.closeModal(); break;
 

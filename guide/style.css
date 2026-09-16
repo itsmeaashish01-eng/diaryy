@@ -814,13 +814,67 @@ a { color: var(--accent); }
 .map-you-ring { fill: var(--card); stroke: var(--map-you); stroke-width: 2.5; }
 .map-you-dot  { fill: var(--map-you); }
 
-.wiki-list { list-style: none; margin: 0 0 10px; padding: 0; }
-.wiki-list li { padding: 7px 0; border-bottom: 1px solid var(--card-border); }
-.wiki-list li:last-child { border-bottom: 0; }
-.wiki-title { font-family: var(--font-display); font-size: 0.98rem; }
-.wiki-title + .muted { font-size: 0.78rem; margin-left: 7px; }
-.wiki-extract { margin-top: 7px; font-size: 0.9rem; }
-.wiki-extract p { max-width: 62ch; }
+/* What's around you: one card per thing, read while walking, so the
+   distance and the direction come before the prose. */
+.art-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+.art-card {
+  display: flex;
+  gap: 14px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+}
+/* A curated entry beats an encyclopedia opening, and says so. */
+.art-card.is-curated { border-left: 3px solid var(--accent); }
+
+.art-thumb {
+  flex: 0 0 84px;
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: var(--bg2);
+}
+
+.art-body { flex: 1 1 auto; min-width: 0; }
+.art-title { font-size: 1.02rem; margin: 0 0 5px; }
+.art-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 7px;
+  font-size: 0.8rem;
+  color: var(--text2);
+}
+.art-meta strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.art-extract { font-size: 0.9rem; margin: 0; }
+.art-tip {
+  font-size: 0.87rem;
+  margin: 7px 0 0;
+  padding: 7px 10px;
+  background: var(--bg2);
+  border-radius: var(--radius-sm);
+}
+.art-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 9px 0 0;
+  font-size: 0.83rem;
+}
 
 @media (max-width: 900px) {
   .near-cols { grid-template-columns: minmax(0, 1fr); }
@@ -829,4 +883,6 @@ a { color: var(--accent); }
 @media (max-width: 640px) {
   .here-actions { align-items: flex-start; width: 100%; }
   .near-dist { flex-basis: 70px; }
+  .art-list { grid-template-columns: 1fr; }
+  .art-thumb { flex-basis: 64px; width: 64px; height: 64px; }
 }

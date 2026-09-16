@@ -20,7 +20,8 @@
     detailId: null,
     editing: null,        // scratch object for whichever editor is open
     lookup: null,         // { status, hits, error } — Wikipedia, in Nearby
-    lookupOpen: null,     // pageid of the article being read
+    radius: 500,          // metres to look within
+    lookupAt: null,       // the fix the current results were fetched for
   };
 
   // ---------------------------------------------------------------
@@ -273,55 +274,93 @@
     </li>`;
   }
 
-  function lookupPanel() {
-    const l = state.lookup;
-    if (!l) {
-      return `<section class="panel">
-        <h3>Standing in front of something else?</h3>
-        <p class="muted">
-          The guidebook covers ${esc(cat.cities.length)} cities. Anywhere else — or any
-          building on the street that isn't one of its entries — Wikipedia can say what
-          it is. This is the only thing in the app that needs a connection.
+  /* One thing Wikipedia knows about, as read while standing in front of
+     it: what it is, how far, which way, and a way to walk there. */
+  function articleCard(a, fix) {
+    const bearing = RG.live.bearing({ lat: fix.lat, lon: fix.lon }, a);
+    const dist = a.metres < 1000
+      ? `${Math.round(a.metres / 10) * 10} m`
+      : fmtDistance(a.metres / 1000, store.settings().units);
+    // A guidebook entry for the same thing is better than the article.
+    const mine = a.guidebook;
+
+    return `<article class="art-card${mine ? " is-curated" : ""}">
+      ${a.thumb ? `<img class="art-thumb" src="${esc(a.thumb)}" alt="" loading="lazy" />` : ""}
+      <div class="art-body">
+        <h3 class="art-title">${esc(a.title)}</h3>
+        <p class="art-meta">
+          <strong>${esc(dist)}</strong>
+          <span class="bearing"><span class="bearing-arrow" style="transform:rotate(${Math.round(bearing)}deg)" aria-hidden="true">↑</span>
+            ${esc(RG.live.compass(bearing))}</span>
+          ${mine ? `<span class="badge badge-good"><span aria-hidden="true">★</span> In the guidebook</span>` : ""}
         </p>
-        <button class="btn" data-act="lookup">What's around me?</button>
+        ${mine && mine.history
+          ? `<p class="art-extract">${esc(mine.history.split("\n\n")[0])}</p>
+             ${mine.tip ? `<p class="art-tip"><strong>Worth knowing.</strong> ${esc(mine.tip)}</p>` : ""}`
+          : `<p class="art-extract">${esc(a.extract || "No description written yet.")}</p>`}
+        <p class="art-links">
+          <a href="${esc(a.url)}" target="_blank" rel="noopener">Full article ↗</a>
+          ${RG.map.directionLinks({ lat: fix.lat, lon: fix.lon }, a, "walk")
+            .slice(0, 2)
+            .map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`)
+            .join("")}
+        </p>
+      </div>
+    </article>`;
+  }
+
+  /* The list that makes this a guide to anywhere rather than to six
+     cities. It loads itself as soon as there's a fix and reloads when
+     you've walked far enough for the answer to have changed. */
+  function aroundPanel(fix) {
+    const l = state.lookup;
+    const radius = state.radius || 500;
+
+    const radiusPicker = `<div class="filter-row filter-row-sub">
+      <span class="muted small">Look within</span>
+      ${[300, 500, 1000, 3000].map((r) =>
+        `<button class="chip-btn${radius === r ? " is-on" : ""}" data-act="radius" data-r="${r}">
+          ${r < 1000 ? `${r} m` : `${r / 1000} km`}</button>`).join("")}
+      <button class="btn btn-small btn-ghost" data-act="lookup">Refresh</button>
+    </div>`;
+
+    if (!l || l.status === "loading") {
+      return `<section class="panel">
+        <h2>What's around you</h2>
+        ${radiusPicker}
+        <p class="muted">${l ? "Asking Wikipedia…" : "Waiting for your position…"}</p>
       </section>`;
     }
-    if (l.status === "loading") {
-      return `<section class="panel"><h3>Asking Wikipedia…</h3>
-        <p class="muted">Looking for anything with an article within 400 m.</p></section>`;
-    }
+
     if (l.status === "error") {
       return `<section class="panel panel-warn">
-        <h3>Couldn't ask</h3>
-        <p class="warn warn-warning"><span aria-hidden="true">▲</span> ${esc(l.error)}</p>
-        <button class="btn btn-small" data-act="lookup">Try again</button>
+        <h2>Can't reach Wikipedia</h2>
+        <p class="warn warn-serious"><span aria-hidden="true">✕</span> ${esc(l.error)}</p>
+        <p class="muted">
+          The planner, the maps and the six-city guidebook all still work — this is
+          the one part that needs a connection.
+        </p>
+        <button class="btn" data-act="lookup">Try again</button>
       </section>`;
     }
+
     if (!l.hits.length) {
       return `<section class="panel">
-        <h3>Nothing written up nearby</h3>
-        <p class="muted">Wikipedia has no article within 400 m of here.</p>
-        <button class="btn btn-small" data-act="lookup">Look again</button>
+        <h2>Nothing written up within ${esc(radius < 1000 ? radius + " m" : radius / 1000 + " km")}</h2>
+        ${radiusPicker}
+        <p class="muted">
+          Wikipedia has no article with coordinates this close. Try a wider radius —
+          coverage is dense in city centres and thin in a residential street.
+        </p>
       </section>`;
     }
+
     return `<section class="panel">
-      <h3>Wikipedia, within 400 m</h3>
-      <ul class="wiki-list">
-        ${l.hits.map((h) => `<li>
-          <button class="linkish wiki-title" data-act="wiki-read" data-page="${esc(h.pageid)}">${esc(h.title)}</button>
-          <span class="muted">${esc(h.metres)} m</span>
-          ${state.lookupOpen === h.pageid && h.summary
-            ? `<div class="wiki-extract">
-                 <p>${esc(h.summary.extract || "No opening paragraph.")}</p>
-                 <p><a href="${esc(h.summary.url)}" target="_blank" rel="noopener">Read the article ↗</a></p>
-               </div>`
-            : state.lookupOpen === h.pageid && h.error
-              ? `<p class="warn warn-warning"><span aria-hidden="true">▲</span> ${esc(h.error)}</p>`
-              : ""}
-        </li>`).join("")}
-      </ul>
-      <p class="panel-note">Text from Wikipedia, CC BY-SA. Only the coordinate is sent.</p>
-    </section>`;
+      <h2>${U.plural(l.hits.length, "thing")} around you</h2>
+      <p class="muted">Nearest first. Text from Wikipedia, CC BY-SA — only your coordinate was sent.</p>
+      ${radiusPicker}
+    </section>
+    <div class="art-list">${l.hits.map((a) => articleCard(a, fix)).join("")}</div>`;
   }
 
   function viewNearby() {
@@ -340,16 +379,16 @@
 
     if (!L.state.watching && !fix) {
       return `<section class="panel">
-        <h2>Let the guide follow you</h2>
+        <h2>A guide to wherever you're standing</h2>
         <p>
-          Switch on location and RoamGuide will keep a running list of what's around you,
-          which way it is and how far, and tell you the story of whatever you're standing
-          in front of.
+          Switch on location and this becomes a walking guide to anywhere on earth:
+          what the buildings around you are, how far and which way each one is, and
+          the story of it — read off Wikipedia's two million or so places with
+          coordinates attached.
         </p>
         <p class="muted">
-          Your position stays in this tab. It isn't sent anywhere, stored, or written into
-          your trips — the guidebook is already on the device, so working out what's nearby
-          is arithmetic rather than a lookup.
+          Your position stays in this tab. Nothing is stored or sent anywhere except
+          the coordinate Wikipedia needs to answer "what is near here".
         </p>
         <button class="btn btn-primary" data-act="live-start">Switch on location</button>
       </section>`;
@@ -366,22 +405,19 @@
     if (!fix) {
       return `<section class="panel empty">
         <h2>Locating…</h2>
-        <p class="muted">First fix can take a moment, and wants a bit of sky.</p>
+        <p class="muted">The first fix can take a moment, and wants a bit of sky.</p>
         <button class="btn btn-small btn-ghost" data-act="live-stop">Stop</button>
       </section>`;
     }
 
     const q = L.quality(fix);
     const where = L.cityAt(fix, cat.cities);
-    const near = L.nearby(store.allPlaces(), fix, 12);
+    const near = L.nearby(store.allPlaces(), fix, 8);
     const here = near.filter((n) => n.arrived);
 
-    const cityLine = where.city
-      ? `<span class="badge badge-good"><span aria-hidden="true">◈</span> In ${esc(where.city.name)}</span>`
-      : `<span class="badge badge-muted"><span aria-hidden="true">◌</span>
-           ${where.nearest
-             ? `${esc(fmtDistance(where.km, store.settings().units))} from ${esc(where.nearest.name)}, the closest city in the guidebook`
-             : "Nowhere in the guidebook"}</span>`;
+    const mapPoints = (state.lookup && state.lookup.status === "ok" ? state.lookup.hits : [])
+      .slice(0, 8)
+      .map((a, i) => ({ lat: a.lat, lon: a.lon, label: a.title, n: i + 1 }));
 
     return `
       <section class="panel here-head">
@@ -392,7 +428,9 @@
             <span class="dot">·</span> updated ${esc(U.relTimeShort(fix.at))}
           </p>
           <div class="here-badges">
-            ${cityLine}
+            ${where.city
+              ? `<span class="badge badge-good"><span aria-hidden="true">◈</span> In ${esc(where.city.name)} — guidebook entries included below</span>`
+              : ""}
             ${q ? `<span class="badge badge-${q.level === "good" ? "good" : q.level === "warning" ? "warning" : "critical"}">
               <span aria-hidden="true">◎</span> ${esc(q.text)}</span>` : ""}
           </div>
@@ -403,42 +441,22 @@
         </div>
       </section>
 
-      ${where.city ? "" : `<section class="panel panel-nudge">
-        <p><strong>You're outside the guidebook.</strong> It covers
-          ${esc(cat.cities.map((c) => c.name).join(", "))}. The distances below are real,
-          but everything in them is a long way off — Wikipedia is the better bet from here.</p>
-      </section>`}
-
       ${here.length ? `<section class="panel panel-here">
         <h2>You're standing at ${esc(here[0].place.name)}</h2>
         ${historyBlock(here[0].place)}
         ${here[0].place.tip ? `<p class="detail-tip"><strong>Worth knowing.</strong> ${esc(here[0].place.tip)}</p>` : ""}
       </section>` : ""}
 
-      <div class="near-cols">
-        <section class="panel">
-          <h3>What's around you</h3>
-          ${near.length
-            ? `<ul class="near-list">${near.map(nearbyRow).join("")}</ul>`
-            : `<p class="muted">Nothing from the guidebook has coordinates near here.</p>`}
-        </section>
+      ${aroundPanel(fix)}
 
-        <aside class="near-side">
-          <section class="panel map-panel">
-            <h3>You and the nearest few</h3>
-            ${RG.map.svg(near.slice(0, 6).map((n, i) => ({
-              lat: n.place.lat, lon: n.place.lon, label: n.place.name, n: i + 1,
-              cat: n.place.cat,
-            })), {
-              width: 420, height: 320, route: false,
-              units: store.settings().units,
-              you: { lat: fix.lat, lon: fix.lon, accuracy: fix.accuracy },
-            })}
-            <p class="muted small">Your position, its margin of error, and the six nearest entries.</p>
-          </section>
-          ${lookupPanel()}
-        </aside>
-      </div>
+      ${mapPoints.length ? `<section class="panel map-panel">
+        <h3>You and the nearest eight</h3>
+        ${RG.map.svg(mapPoints, {
+          width: 680, height: 340, route: false,
+          units: store.settings().units,
+          you: { lat: fix.lat, lon: fix.lon, accuracy: fix.accuracy },
+        })}
+      </section>` : ""}
     `;
   }
 

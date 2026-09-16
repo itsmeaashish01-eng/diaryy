@@ -26,16 +26,24 @@ on how each place came to be there. Filter by city or by kind, search across all
 of them, save what appeals, and add your own places — a bakery, a friend's
 recommendation — which then behave exactly like the built-in ones.
 
-**Nearby** — switch on location and the guide follows you. It keeps a live list
-of what's around you with the distance and the compass direction to each,
-puts you on the map with your margin of error drawn to scale, and when you come
-within about 120 m of something in the guidebook it says so and tells you the
-story of it. Every entry hands off to Google Maps, Apple Maps or OpenStreetMap
-for turn-by-turn, in whichever order suits the device you're holding.
+**Nearby** — a walking guide to anywhere on earth. Switch on location and it
+asks Wikipedia what has an article within a few hundred metres of you, and lays
+the answers out nearest first: what each thing is, how far, which way, a picture
+where there is one, and a walking route in Google or Apple Maps. It re-asks once
+you've walked 150 m, so it keeps up.
 
-Your position stays in the tab. It isn't sent anywhere, stored, or written into
-your trips — the guidebook is already on the device, so working out what you're
-standing next to is arithmetic rather than a lookup.
+Wikipedia has roughly two million articles with coordinates on them, which is
+what makes this a guide to any street rather than to six cities. Coverage
+follows Wikipedia's own — dense in city centres, thin in a residential suburb.
+Empty means nobody wrote it up, and the app says so rather than implying there's
+nothing there.
+
+Where the curated guidebook has an entry for the same building it wins: a
+paragraph written for a traveller beats an encyclopedia opening, and it comes
+with the tip about the queue.
+
+Your position stays in the tab. Nothing is stored or sent anywhere except the
+coordinate Wikipedia needs to answer "what is near here".
 
 **Trip** — days you can drop places into. The app then does the part a list
 can't: it works out what time you'd actually arrive at each one, whether you'd
@@ -64,22 +72,28 @@ Each day can also be copied as text, exported as `.geojson` for a real map app,
 or written straight into the diary next door — same browser, same date, appended
 to whatever's already in that entry.
 
-## Location, and what it can and can't tell you
+## Where this has to run
 
-Geolocation needs a secure context — https, or `http://localhost`. Opened
-straight off a `file://` path, browsers refuse it, and the Nearby tab says so
-rather than spinning on "locating…" forever.
+The Nearby tab has two requirements the rest of the app doesn't.
 
-The guide can only narrate what's in its guidebook, which is six cities. Stand
-anywhere else and it says plainly how far you are from the nearest one it knows,
-rather than inventing something. For that case there's a Wikipedia lookup — what
-has an article within 400 m of your coordinate, and the opening paragraph of it.
+**A secure page.** Browsers refuse location to anything opened off a `file://`
+path — double-clicking `index.html` will never work, however many permissions
+you grant. It needs `https://` or `http://localhost`.
 
-That lookup is the only thing in RoamGuide that touches the network, and it
-doesn't work everywhere: a sandboxed viewer that blocks outbound requests will
-refuse it, and so will a dead signal. Both are reported as what they are. The
-rest of the app — the guidebook, the history, the planner, the map, the
-distances and bearings — needs nothing at all.
+**Outbound network.** Wikipedia is the only part of RoamGuide that touches the
+network, and a sandboxed viewer that blocks outbound requests — the claude.ai
+artifact preview, for one — can't reach it. The app reports that as what it is
+rather than showing an empty list and letting you assume the street is dull.
+
+So for the live guide, host it. GitHub Pages does this free from this very
+repository: **Settings → Pages → Source: Deploy from a branch → `main` → `/`
+(root)**. It lands at `https://<username>.github.io/<repo>/guide/`, which is
+https, can reach Wikipedia, and works on a phone. Locally,
+`python3 -m http.server 8000` and `http://localhost:8000/guide/` does the same
+on one machine.
+
+Everything else — the guidebook, the history, the planner, the drawn map, the
+distances and bearings — needs nothing at all and works on a plane.
 
 ## The map
 

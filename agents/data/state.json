@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789519475180,
-      "lastOk": 1789519475180,
+      "lastRun": 1789540738614,
+      "lastOk": 1789540738614,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789534716000,
+          "level": "notable",
+          "title": "Datamimic – don't let your coding agent invent its own test world",
+          "detail": "Article URL: https://github.com/rapiddweller/datamimic Comments URL: https://news.ycombinator.com/item?id=49722276 Points: 18 # Comments: 2",
+          "url": "https://github.com/rapiddweller/datamimic"
+        },
+        {
+          "t": 1789499258000,
+          "level": "notable",
+          "title": "Learning to solve hard problems in RL for LLMs by never giving up",
+          "detail": "https://arxiv.org/abs/2609.13443 Comments URL: https://news.ycombinator.com/item?id=49717280 Points: 79 # Comments: 0",
+          "url": "https://mnoukhov.github.io/posts/ngu/"
+        },
+        {
+          "t": 1789493832000,
+          "level": "notable",
+          "title": "Why I'm still bearish on LLMs after Navier-Stokes",
+          "detail": "Article URL: https://dank.systems/posts/2026-09-15-ai-bear.html Comments URL: https://news.ycombinator.com/item?id=49715927 Points: 166 # Comments: 175",
+          "url": "https://dank.systems/posts/2026-09-15-ai-bear.html"
+        },
+        {
+          "t": 1789485626000,
+          "level": "notable",
+          "title": "Show HN: Pizza Bot – An inbox for AI agents that work in the background",
+          "detail": "Hi HN - long-time lurker (since 2012!), first time poster.Pizza Bot is a self-hosted desktop app for Mac, Windows, and Linux that runs AI agents in the background and exposes them through an email-like UI. Finished work shows up in Unread, and anything waiting on your approval shows up in Action. It",
+          "url": "https://github.com/pizza-bot-app/pizza-bot"
+        },
         {
           "t": 1789499258000,
           "level": "notable",
@@ -401,34 +429,6 @@
           "title": "How to Build an AI Software Factory: Agents That Open, Review, and Merge PRs",
           "detail": "Article URL: https://www.firecrawl.dev/blog/ai-software-factory Comments URL: https://news.ycombinator.com/item?id=49666960 Points: 20 # Comments: 5",
           "url": "https://www.firecrawl.dev/blog/ai-software-factory"
-        },
-        {
-          "t": 1789168662000,
-          "level": "notable",
-          "title": "OpenAI agents carried out an undisclosed attack on RubyGems",
-          "detail": "Article URL: https://www.rubyhack.ai/ Comments URL: https://news.ycombinator.com/item?id=49666735 Points: 278 # Comments: 166",
-          "url": "https://www.rubyhack.ai/"
-        },
-        {
-          "t": 1789150220000,
-          "level": "notable",
-          "title": "Litelm: LiteLLM Without the Bloat",
-          "detail": "Article URL: https://github.com/kennethwolters/litelm Comments URL: https://news.ycombinator.com/item?id=49662767 Points: 95 # Comments: 36",
-          "url": "https://github.com/kennethwolters/litelm"
-        },
-        {
-          "t": 1789156003000,
-          "level": "notable",
-          "title": "Txt: A fast, keyboard-driven terminal text editor for engineers",
-          "detail": "Article URL: https://txt.hellman.io/ Comments URL: https://news.ycombinator.com/item?id=49664322 Points: 15 # Comments: 11",
-          "url": "https://txt.hellman.io/"
-        },
-        {
-          "t": 1789150220000,
-          "level": "notable",
-          "title": "Litelm: LiteLLM Without the Bloat",
-          "detail": "Article URL: https://github.com/kennethwolters/litelm Comments URL: https://news.ycombinator.com/item?id=49662767 Points: 76 # Comments: 26",
-          "url": "https://github.com/kennethwolters/litelm"
         }
       ],
       "notifiedAt": {},
@@ -1444,11 +1444,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789519476204,
-      "lastOk": 1789519476204,
+      "lastRun": 1789540739400,
+      "lastOk": 1789540739400,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,789 (+57.9%) · excludes S&P 500 ETF",
+      "lastLine": "$3,792 (+58.0%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1534,9 +1534,27 @@
         {
           "t": 1789519476204,
           "v": 3789.3
+        },
+        {
+          "t": 1789540739401,
+          "v": 3792.2
         }
       ],
       "events": [
+        {
+          "t": 1789540739387,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789540739387,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789519476190,
           "level": "notable",
@@ -1835,12 +1853,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 75786
+          "BTC": 75844
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789540739401,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 6
+    },
     {
       "t": 1789519476204,
       "ran": 3,

@@ -23,14 +23,33 @@
      honest to say. */
   const CITY_RANGE_KM = 40;
 
+  /* Inside the iOS shell, Capacitor's Geolocation plugin talks to
+     CoreLocation directly. The web API does work in a WKWebView, but
+     only with the Info.plist key set and the permission already granted
+     — the plugin handles asking, and reports refusal properly instead
+     of timing out. Same shape either way, so nothing below cares. */
+  function nativeGeo() {
+    const cap = typeof window !== "undefined" && window.Capacitor;
+    if (!cap || !cap.isNativePlatform || !cap.isNativePlatform()) return null;
+    const plugin = cap.Plugins && cap.Plugins.Geolocation;
+    return plugin && typeof plugin.watchPosition === "function" ? plugin : null;
+  }
+
+  const isNative = () => Boolean(nativeGeo());
+
   const state = {
-    supported: Boolean(typeof navigator !== "undefined" && navigator.geolocation),
+    supported: Boolean(
+      (typeof navigator !== "undefined" && navigator.geolocation) || isNative()
+    ),
+    // A native shell serves from its own scheme and is trusted; the
+    // secure-context rule is a browser one.
     secure: typeof window === "undefined" ? false
-      : (window.isSecureContext !== false),
+      : (isNative() || window.isSecureContext !== false),
     watching: false,
     fix: null,        // { lat, lon, accuracy, heading, at }
     error: null,      // { code, message }
     watchId: null,
+    native: false,
   };
 
   const listeners = [];
@@ -47,6 +66,50 @@
     return null;
   }
 
+  /* One shape of fix, whichever source produced it. */
+  function acceptPosition(pos) {
+    state.fix = {
+      lat: pos.coords.latitude,
+      lon: pos.coords.longitude,
+      accuracy: pos.coords.accuracy,
+      heading: Number.isFinite(pos.coords.heading) ? pos.coords.heading : null,
+      speed: Number.isFinite(pos.coords.speed) ? pos.coords.speed : null,
+      at: Date.now(),
+    };
+    state.error = null;
+    emit();
+  }
+
+  const OPTS = { enableHighAccuracy: true, maximumAge: 10000, timeout: 25000 };
+
+  async function startNative(plugin) {
+    try {
+      const perm = await plugin.requestPermissions();
+      const granted = perm && (perm.location === "granted" || perm.coarseLocation === "granted");
+      if (!granted) {
+        state.watching = false;
+        state.error = {
+          code: 1,
+          message: "Location permission was refused. Settings › RoamGuide › Location turns it back on.",
+        };
+        emit();
+        return;
+      }
+      state.watchId = await plugin.watchPosition(OPTS, (pos, err) => {
+        if (err) {
+          state.error = { code: 2, message: err.message || "Couldn't get a fix." };
+          emit();
+          return;
+        }
+        if (pos) acceptPosition(pos);
+      });
+    } catch (e) {
+      state.watching = false;
+      state.error = { code: 2, message: (e && e.message) || "Location is unavailable." };
+      emit();
+    }
+  }
+
   function start() {
     const blocked = blockedReason();
     if (blocked) {
@@ -60,19 +123,15 @@
     state.error = null;
     emit();
 
+    const plugin = nativeGeo();
+    if (plugin) {
+      state.native = true;
+      startNative(plugin);
+      return true;
+    }
+
     state.watchId = navigator.geolocation.watchPosition(
-      (pos) => {
-        state.fix = {
-          lat: pos.coords.latitude,
-          lon: pos.coords.longitude,
-          accuracy: pos.coords.accuracy,
-          heading: Number.isFinite(pos.coords.heading) ? pos.coords.heading : null,
-          speed: Number.isFinite(pos.coords.speed) ? pos.coords.speed : null,
-          at: Date.now(),
-        };
-        state.error = null;
-        emit();
-      },
+      acceptPosition,
       (err) => {
         const messages = {
           1: "Location permission was refused. Your browser's address bar has the switch to change that.",
@@ -91,11 +150,17 @@
   }
 
   function stop() {
-    if (state.watchId != null && state.supported) {
-      navigator.geolocation.clearWatch(state.watchId);
+    const plugin = nativeGeo();
+    if (state.watchId != null) {
+      if (plugin && state.native) {
+        Promise.resolve(plugin.clearWatch({ id: state.watchId })).catch(() => {});
+      } else if (navigator.geolocation) {
+        navigator.geolocation.clearWatch(state.watchId);
+      }
     }
     state.watchId = null;
     state.watching = false;
+    state.native = false;
     emit();
   }
 
@@ -169,7 +234,7 @@
   }
 
   RG.live = {
-    ARRIVAL_M, CITY_RANGE_KM, state, onChange,
+    ARRIVAL_M, CITY_RANGE_KM, state, onChange, isNative,
     start, stop, toggle, blockedReason,
     bearing, compass, nearby, cityAt, quality,
   };

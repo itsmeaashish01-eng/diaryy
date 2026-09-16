@@ -1,0 +1,17 @@
+{
+  "appId": "com.roamguide.app",
+  "appName": "RoamGuide",
+  "webDir": "www",
+  "ios": {
+    "contentInset": "always",
+    "limitsNavigationsToAppBoundDomains": false
+  },
+  "server": {
+    "iosScheme": "roamguide"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}

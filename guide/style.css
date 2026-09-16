@@ -716,9 +716,21 @@ a { color: var(--accent); }
 }
 
 @media (max-width: 640px) {
-  .topbar { padding: 10px 14px; }
+  .topbar { padding: 10px 14px; gap: 10px; }
   .topbar-left, .topbar-right { width: 100%; justify-content: space-between; }
-  .nav-tabs { order: 3; width: 100%; overflow-x: auto; }
+  /* One scrolling row, not a wrapped block three lines deep. */
+  .nav-tabs {
+    order: 3;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab { flex: 0 0 auto; }
+  .topbar-left { flex-wrap: wrap; }
+  .logo { flex: 0 0 auto; }
   .search-wrap input { width: 100%; max-width: none; }
   .search-wrap { flex: 1 1 auto; }
   .app-main { padding: 16px 14px 48px; }
@@ -882,6 +894,10 @@ a { color: var(--accent); }
 
 @media (max-width: 640px) {
   .here-actions { align-items: flex-start; width: 100%; }
+  /* Two map buttons on one line rather than three stacked. */
+  .here-head { gap: 10px; }
+  .dir-row { gap: 6px; }
+  .dir-label { flex: 0 0 100%; }
   .near-dist { flex-basis: 70px; }
   .art-list { grid-template-columns: 1fr; }
   .art-thumb { flex-basis: 64px; width: 64px; height: 64px; }

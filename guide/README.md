@@ -97,9 +97,14 @@ The service worker caches the shell on install and tiles as you walk, capped at
 400 so a long day can't fill the phone. Wikipedia is deliberately never cached —
 a stale answer from the last city would be worse than an honest failure.
 
-**This is not an App Store app.** There's no native build, no TestFlight, no
-review. That would need Xcode, a Mac and a paid Apple developer account, and it
-would buy nothing this doesn't already do.
+**For the App Store**, there's a Capacitor wrapper in
+[`ios-app/`](ios-app/README.md): it bundles the same app — Leaflet and the
+typefaces included — into a native shell with CoreLocation, and ships the
+metadata, screenshots and step-by-step submission guide with it. Building and
+submitting needs a Mac, Xcode and a paid Apple developer account; everything up
+to that point is done.
+
+Installing from Safari costs nothing and gets you the same app.
 
 ## Where this has to run
 

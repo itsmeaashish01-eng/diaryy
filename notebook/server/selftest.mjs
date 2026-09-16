@@ -195,6 +195,85 @@ function fakeVector(text) {
   return v.map((x) => x / norm);
 }
 
+/* ---- a stub for the catalogues ------------------------------------------ */
+/*
+   arXiv answers Atom, the rest answer JSON, and one of them is broken
+   on purpose: a search where a provider is down should come back with
+   the other providers' results and a note, not an error page.
+*/
+
+function startCatalogues() {
+  const server = http.createServer((req, res) => {
+    const url = new URL(req.url, "http://x");
+    const json = (v) => { res.writeHead(200, { "content-type": "application/json" }); res.end(JSON.stringify(v)); };
+
+    if (url.pathname === "/api/query") {
+      res.writeHead(200, { "content-type": "application/atom+xml" });
+      return res.end(`<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <entry>
+    <id>http://arxiv.org/abs/1706.03762v7</id>
+    <published>2017-06-12T00:00:00Z</published>
+    <title>Attention Is All You Need</title>
+    <summary>We propose a new simple network architecture, the Transformer.</summary>
+    <author><name>Ashish Vaswani</name></author>
+    <author><name>Noam Shazeer</name></author>
+  </entry>
+</feed>`);
+    }
+    if (url.pathname.startsWith("/pdf/")) {
+      res.writeHead(200, { "content-type": "application/pdf" });
+      return res.end(tinyPDF());
+    }
+    if (url.pathname === "/works" && url.searchParams.has("search")) {   // OpenAlex
+      return json({
+        results: [{
+          display_name: "Attention is all you need",
+          publication_year: 2017,
+          doi: "https://doi.org/10.5555/3295222.3295349",
+          cited_by_count: 140000,
+          authorships: [{ author: { display_name: "A. Vaswani" } }],
+          primary_location: { source: { display_name: "NeurIPS" } },
+          best_oa_location: { pdf_url: `${globalThis.__CATALOGUE__}/pdf/1706.03762` },
+          abstract_inverted_index: { The: [0], Transformer: [1], dispenses: [2], with: [3], recurrence: [4] },
+        }],
+      });
+    }
+    if (url.pathname === "/works") {                                     // Crossref search
+      return json({
+        message: {
+          items: [{
+            DOI: "10.5555/3295222.3295349",
+            title: ["Attention Is All You Need"],
+            author: [{ given: "Ashish", family: "Vaswani" }],
+            issued: { "date-parts": [[2017]] },
+            "container-title": ["NeurIPS"],
+            "is-referenced-by-count": 139000,
+            URL: "https://doi.org/10.5555/3295222.3295349",
+          }],
+        },
+      });
+    }
+    if (url.pathname.startsWith("/works/")) {                            // a single record by DOI
+      const doi = decodeURIComponent(url.pathname.replace("/works/", "")).replace(/^https:\/\/doi\.org\//, "");
+      return json({
+        display_name: "Deep Residual Learning for Image Recognition",
+        publication_year: 2016,
+        doi: `https://doi.org/${doi}`,
+        authorships: [{ author: { display_name: "Kaiming He" } }],
+        best_oa_location: { pdf_url: `${globalThis.__CATALOGUE__}/pdf/1512.03385` },
+      });
+    }
+    if (url.pathname.includes("esearch")) return json({ esearchresult: { idlist: [] } });
+    if (url.pathname === "/landing") {                                   // a "PDF" that is really a login page
+      res.writeHead(200, { "content-type": "text/html" });
+      return res.end("<html>Sign in to read this article</html>");
+    }
+    res.writeHead(500).end("catalogue is down");
+  });
+  return new Promise((resolve) => server.listen(0, "127.0.0.1", () => resolve(server)));
+}
+
 /* ---- the run ------------------------------------------------------------ */
 
 const home = mkdtempSync(join(tmpdir(), "marginalia-test-"));
@@ -203,8 +282,16 @@ process.env.MARGINALIA_HOME = home;
 const stub = await startStub();
 process.env.OLLAMA_HOST = `http://127.0.0.1:${stub.address().port}`;
 
+const catalogues = await startCatalogues();
+const CATALOGUE = `http://127.0.0.1:${catalogues.address().port}`;
+process.env.MARGINALIA_ARXIV = CATALOGUE;
+process.env.MARGINALIA_CROSSREF = CATALOGUE;
+process.env.MARGINALIA_OPENALEX = CATALOGUE;
+process.env.MARGINALIA_PUBMED = "http://127.0.0.1:9";   // nothing listens there, on purpose
+
 /* Imported after the environment is set, because both modules read it
    at load time. */
+globalThis.__CATALOGUE__ = CATALOGUE;
 const { extractPdf } = await import("./pdf.mjs");
 const rag = await import("./rag.mjs");
 const store = await import("./store.mjs");
@@ -214,6 +301,8 @@ const diagramMod = await import("./diagram.mjs");
 const deckMod = await import("./deck.mjs");
 const studyMod = await import("./study.mjs");
 const videoMod = await import("./video.mjs");
+const discover = await import("./discover.mjs");
+const ocrMod = await import("./ocr.mjs");
 const { buildDeck } = await import("./pptx.mjs");
 const { zip, crc32 } = await import("./zip.mjs");
 
@@ -343,6 +432,81 @@ try {
 
   server.close();
 
+  /* --- finding papers --- */
+  section("discover");
+  const found = await discover.search("attention transformer", { providers: ["arxiv", "openalex", "crossref", "pubmed"], limit: 5 });
+  check("searches several catalogues at once", found.results.length > 0, JSON.stringify(found).slice(0, 200));
+  check("merges the same work into one row", found.results.length === 1, JSON.stringify(found.results.map((r) => r.title)));
+  check("keeps the DOI from one and the PDF from another",
+    Boolean(found.results[0].doi && found.results[0].pdfUrl),
+    JSON.stringify(found.results[0]));
+  check("marks what can actually be read", found.results[0].openAccess === true);
+  /* Checked against OpenAlex alone: in the merged row the longer arXiv
+     summary wins, which is the behaviour we want and the wrong place to
+     test the un-inverting. */
+  const oaOnly = await discover.search("attention", { providers: ["openalex"], limit: 1 });
+  check("un-inverts an OpenAlex abstract",
+    /Transformer dispenses with recurrence/.test(oaOnly.results[0].abstract), oaOnly.results[0].abstract);
+  check("the merged row keeps the fuller abstract",
+    found.results[0].abstract.length >= oaOnly.results[0].abstract.length, found.results[0].abstract);
+  check("a catalogue that is down is reported, not fatal",
+    found.problems.some((p) => p.provider === "pubmed"), JSON.stringify(found.problems));
+
+  const fetched = await discover.fetchPaper(found.results[0]);
+  check("fetches the PDF itself", fetched.buffer.subarray(0, 5).toString() === "%PDF-", fetched.buffer.subarray(0, 8).toString());
+  let refusedLogin = false;
+  try { await discover.fetchPaper({ title: "x", pdfUrl: `${CATALOGUE}/landing` }); }
+  catch (e) { refusedLogin = /web page rather than a PDF/.test(e.message); }
+  check("refuses a login page pretending to be a PDF", refusedLogin);
+
+  const bibliography = [
+    "References",
+    "[1] Vaswani, A., Shazeer, N. Attention is all you need. In NeurIPS, 2017. arXiv:1706.03762",
+    "[2] He, K., Zhang, X. Deep residual learning for image recognition. CVPR, 2016. doi:10.1109/CVPR.2016.90",
+    "[3] Someone, A. A paper with no identifier at all. Journal of Things, 1998.",
+  ].join("\n");
+  const entries = discover.referenceEntries(bibliography);
+  check("reads a reference list", entries.length === 3, JSON.stringify(entries.map((e) => e.raw.slice(0, 30))));
+  check("finds an arXiv id", entries[0].arxivId === "1706.03762", JSON.stringify(entries[0]));
+  check("finds a DOI", entries[1].doi === "10.1109/cvpr.2016.90", JSON.stringify(entries[1]));
+  check("guesses a title when there is no identifier", /paper with no identifier/i.test(entries[2].title), entries[2].title);
+
+  const resolvedRefs = await discover.resolveReferences(entries, { limit: 3 });
+  check("looks references up", resolvedRefs.filter((r) => r.match).length >= 2, JSON.stringify(resolvedRefs.map((r) => Boolean(r.match))));
+  check("a looked-up reference is addable", resolvedRefs.some((r) => r.match && r.match.pdfUrl));
+
+  /* --- the same, through the API --- */
+  section("discover over http");
+  const server2 = (await import("./server.mjs")).default;
+  await new Promise((resolve) => server2.listen(0, "127.0.0.1", resolve));
+  const base2 = `http://127.0.0.1:${server2.address().port}`;
+  const post2 = async (path, body) => {
+    const res = await fetch(base2 + path, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+    return { status: res.status, data: await res.json() };
+  };
+  const nb2 = (await post2("/api/notebooks", { title: "From the catalogues" })).data;
+  const searched = await post2("/api/discover/search", { query: "attention", providers: ["arxiv", "openalex"] });
+  check("the search endpoint answers", searched.data.results.length === 1, JSON.stringify(searched.data).slice(0, 200));
+  const addedPaper = await post2(`/api/notebooks/${nb2.id}/discover/add`, searched.data.results[0]);
+  check("a found paper becomes a source",
+    addedPaper.data.source && addedPaper.data.source.pageCount === 2,
+    JSON.stringify(addedPaper.data).slice(0, 200));
+  check("the source keeps where it came from", /doi\.org|arxiv/i.test(addedPaper.data.source.url || ""), addedPaper.data.source.url);
+  server2.close();
+
+  /* --- OCR --- */
+  section("ocr");
+  const ocrCaps = ocrMod.capabilities();
+  results.push(`  note  ${ocrCaps.available ? `${ocrCaps.engine} is installed` : `no OCR engine here (${ocrCaps.install})`}`);
+  if (!ocrCaps.available) {
+    let named = false;
+    try { await ocrMod.ocr(tinyPDF()); }
+    catch (e) { named = /install/i.test(e.message) && Boolean(e.install); }
+    check("says how to install an engine rather than just failing", named);
+  }
+  check("thin OCR output is called thin", ocrMod.assess([{ number: 1, text: "a b" }]).ok === false);
+  check("good OCR output passes", ocrMod.assess([{ number: 1, text: "x".repeat(900) }]).ok === true);
+
   /* --- odds and ends --- */
   section("zip");
   const archive = zip([{ name: "a.txt", data: "hello" }, { name: "b/c.txt", data: Buffer.alloc(5000, 0x41) }]);
@@ -356,6 +520,7 @@ try {
   void grounding; void diagramMod; void deckMod; void studyMod;
 } finally {
   stub.close();
+  catalogues.close();
   rmSync(home, { recursive: true, force: true });
 }
 

@@ -293,6 +293,31 @@ export function library(notebookId) {
 
 export const forgetLibrary = (notebookId) => caches.delete(notebookId);
 
+/* Replace a source's text in place — what OCR produces, and what any
+   future re-extraction would. The index goes with it: chunks that
+   describe text which no longer exists are worse than no index, because
+   they would still be cited. */
+export function replaceSourceText(notebookId, sourceId, pages, { pdf = null, via = "ocr", warnings = [] } = {}) {
+  const nb = getNotebook(notebookId);
+  const source = nb.sources.find((s) => s.id === sourceId);
+  if (!source) { const e = new Error("no such source"); e.status = 404; throw e; }
+
+  const dir = ensure(join(nbDir(notebookId), "sources"));
+  const text = pages.map((p) => p.text).join("\n\f\n");
+  writeFileSync(join(dir, `${sourceId}.txt`), text);
+  if (pdf) writeFileSync(join(dir, `${sourceId}.pdf`), pdf);
+  rmSync(indexFile(notebookId, sourceId), { force: true });
+
+  source.pageCount = pages.length;
+  source.chars = text.length;
+  source.indexed = null;
+  source.warnings = warnings;
+  source.textFrom = via;
+  saveNotebook(nb);
+  forgetLibrary(notebookId);
+  return source;
+}
+
 /* ---- notes, chats and outputs --------------------------------------- */
 
 export function addNote(notebookId, note) {

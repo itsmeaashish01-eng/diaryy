@@ -26,6 +26,8 @@ const state = {
   diagram: null,
   deck: null,
   board: null,
+  found: [],                    // the last catalogue search
+  refs: [],                     // references resolved out of a source
 };
 
 const remember = (k, v) => { try { localStorage.setItem(`marginalia.${k}`, v); } catch { /* private mode */ } };
@@ -122,6 +124,7 @@ async function openNotebook(id) {
   $$("#notebookList li").forEach((li) => li.classList.toggle("active", li.dataset.id === id));
   drawSources();
   drawNotes();
+  drawRefSources();
   $("#thread").innerHTML = `<div class="empty"><h3>${escapeHTML(state.notebook.title)}</h3>
     <p>${state.notebook.sources.length
       ? "Ask anything about the sources on the left. Every sentence will carry the page it came from."
@@ -132,6 +135,7 @@ function drawSources() {
   const nb = state.notebook;
   const list = $("#sourceList");
   if (!nb) { list.innerHTML = ""; return; }
+  drawRefSources();
   $("#sourceCount").textContent = nb.sources.length
     ? `${nb.sources.length} · ${nb.sources.reduce((n, s) => n + (s.pageCount || 0), 0)} pages`
     : "";
@@ -149,8 +153,14 @@ function drawSources() {
         <button class="icon-btn drop-source" title="Remove from the notebook">×</button>
       </div>
       ${(s.warnings || []).map((w) => `<div class="warn">${escapeHTML(w)}</div>`).join("")}
+      ${looksScanned(s) ? `<button class="linklike ocr-source" data-ocr="${escapeHTML(s.id)}">read it with OCR</button>` : ""}
     </li>`).join("");
 }
+
+/* A PDF with almost no text on the page is a photograph of a page. The
+   button only appears where it would actually do something. */
+const looksScanned = (s) =>
+  s.kind === "pdf" && (s.chars < (s.pageCount || 1) * 200 || (s.warnings || []).some((w) => /scan|OCR|no text/i.test(w)));
 
 /* Ticking sources narrows every question, summary and diagram to them.
    Nothing ticked means the whole notebook, which is what people
@@ -159,6 +169,7 @@ $("#sourceList").addEventListener("click", async (e) => {
   const li = e.target.closest("li[data-id]");
   if (!li) return;
   const id = li.dataset.id;
+  if (e.target.closest("[data-ocr]")) return runOCR(id);
   if (e.target.closest(".drop-source")) {
     if (!confirm("Remove this source from the notebook? The file is deleted from the library.")) return;
     await del(`/api/notebooks/${state.notebook.id}/sources/${id}`);
@@ -655,6 +666,155 @@ $("#noteList").addEventListener("click", async (e) => {
   drawNotes();
 });
 
+/* ---- OCR --------------------------------------------------------------- */
+/*
+   Long-running and worth watching: a hundred-page scan is minutes, not
+   seconds. When it finishes the old index is gone — it described text
+   that no longer exists — so the person is told to rebuild it.
+*/
+
+async function runOCR(sourceId) {
+  const source = state.notebook.sources.find((s) => s.id === sourceId);
+  if (!source) return;
+  toast(`Reading ${source.title} with OCR — this takes a while…`, 600000);
+  try {
+    await events(`/api/notebooks/${state.notebook.id}/sources/${sourceId}/ocr`, { language: recall("ocrLanguage") || "eng" }, {
+      started: (caps) => toast(`OCR running (${caps.engine})…`, 600000),
+      progress: (p) => {
+        if (p.total) toast(`OCR: page ${p.done} of ${p.total}…`, 600000);
+        else if (p.step === "rendering") toast("OCR: rendering the pages…", 600000);
+      },
+      done: (r) => toast(`${r.note} Rebuild the index to search it.`, 12000),
+      onError: (e) => toast(e.message, 15000),
+    }).done;
+  } catch (e) {
+    toast(e.message, 15000);
+  }
+  state.notebook = await get(`/api/notebooks/${state.notebook.id}`);
+  drawSources();
+}
+
+/* ---- finding papers ----------------------------------------------------- */
+/*
+   The only outward-facing part of the application. Results are records
+   until somebody presses Add; that press is what fetches a file, and
+   only from a catalogue that says the file is open.
+*/
+
+const chosenProviders = () => $$("#providerPicks input:checked").map((i) => i.value);
+
+async function loadProviders() {
+  try {
+    const { providers } = await get("/api/discover/providers");
+    const saved = (recall("providers") || "arxiv,openalex,crossref").split(",");
+    $("#providerPicks").innerHTML = providers.map((p) => `
+      <label class="check" title="${escapeHTML(p.note)}">
+        <input type="checkbox" value="${escapeHTML(p.id)}" ${saved.includes(p.id) ? "checked" : ""} /> ${escapeHTML(p.label)}
+      </label>`).join("");
+    $("#providerPicks").addEventListener("change", () => remember("providers", chosenProviders().join(",")));
+  } catch { /* the tab still works; a failed search will say why */ }
+}
+
+$("#findBtn").addEventListener("click", async () => {
+  const query = $("#findQuery").value.trim();
+  if (!query) return toast("Search for what?");
+  const out = $("#findOut");
+  out.innerHTML = "<p class='muted'>asking the catalogues…</p>";
+  busy($("#findBtn"), true, "searching…");
+  try {
+    const found = await post("/api/discover/search", { query, providers: chosenProviders(), limit: 10 });
+    state.found = found.results;
+    out.innerHTML =
+      (found.problems.length
+        ? `<p class="muted small">${found.problems.map((p) => `${escapeHTML(p.provider)}: ${escapeHTML(p.error)}`).join(" · ")}</p>`
+        : "") +
+      (found.results.length
+        ? found.results.map((paper, i) => paperCard(paper, i, "found")).join("")
+        : "<p class='muted'>Nothing came back. Try fewer words, or tick another catalogue.</p>");
+  } catch (e) {
+    out.innerHTML = `<p class="muted">${escapeHTML(e.message)}</p>`;
+  } finally {
+    busy($("#findBtn"), false);
+  }
+});
+
+$("#findQuery").addEventListener("keydown", (e) => { if (e.key === "Enter") $("#findBtn").click(); });
+
+function paperCard(paper, index, prefix) {
+  return `
+    <div class="paper" data-list="${prefix}" data-index="${index}">
+      <h3>${escapeHTML(paper.title)}</h3>
+      <div class="who">${escapeHTML(paper.authors.slice(0, 5).join(", "))}${paper.authors.length > 5 ? " et al." : ""}
+        ${paper.year ? ` · ${paper.year}` : ""}${paper.venue ? ` · ${escapeHTML(paper.venue)}` : ""}</div>
+      ${paper.abstract ? `<div class="abstract">${escapeHTML(paper.abstract.slice(0, 340))}${paper.abstract.length > 340 ? "…" : ""}</div>` : ""}
+      <div class="row">
+        ${paper.openAccess
+          ? `<button class="primary add-paper">Add to notebook</button><span class="oa">open access</span>`
+          : `<span class="closed">no free copy found — record only</span>`}
+        ${paper.url ? `<a class="small" href="${escapeHTML(paper.url)}" target="_blank" rel="noreferrer">open the page</a>` : ""}
+        <span class="tagline">${escapeHTML(paper.from.join(" · "))}${paper.citedBy != null ? ` · cited ${paper.citedBy}` : ""}</span>
+      </div>
+    </div>`;
+}
+
+document.addEventListener("click", async (e) => {
+  const button = e.target.closest(".add-paper");
+  if (!button) return;
+  const card = button.closest(".paper");
+  const list = card.dataset.list === "refs" ? state.refs : state.found;
+  const paper = list[Number(card.dataset.index)];
+  if (!paper) return;
+  if (!state.notebook) await newNotebook("Reading list");
+  busy(button, true, "fetching…");
+  try {
+    const { source } = await post(`/api/notebooks/${state.notebook.id}/discover/add`, paper);
+    state.notebook = await get(`/api/notebooks/${state.notebook.id}`);
+    drawSources();
+    card.classList.add("added");
+    button.textContent = "added";
+    toast(`${source.title} — ${source.pageCount} pages. Rebuild the index to search it.`, 7000);
+  } catch (err) {
+    busy(button, false);
+    toast(err.message, 10000);
+  }
+});
+
+function drawRefSources() {
+  const select = $("#refSource");
+  if (!select) return;
+  const sources = (state.notebook && state.notebook.sources) || [];
+  select.innerHTML = sources.length
+    ? sources.map((s) => `<option value="${escapeHTML(s.id)}">${escapeHTML(s.title)}</option>`).join("")
+    : `<option value="">no sources yet</option>`;
+}
+
+$("#refBtn").addEventListener("click", async () => {
+  const sourceId = $("#refSource").value;
+  if (!sourceId) return toast("Add a paper first.");
+  const out = $("#refOut");
+  out.innerHTML = "<p class='muted'>reading the reference list…</p>";
+  busy($("#refBtn"), true, "looking up…");
+  state.refs = [];
+  let found = 0;
+  try {
+    await events(`/api/notebooks/${state.notebook.id}/sources/${sourceId}/references`, { limit: 25 }, {
+      entries: (e) => { found = e.found; out.innerHTML = `<p class="muted small">${e.found} reference(s) in the bibliography; looking up the first 25…</p>`; },
+      reference: (item) => {
+        if (!item.match) return;
+        state.refs.push(item.match);
+        out.insertAdjacentHTML("beforeend", paperCard(item.match, state.refs.length - 1, "refs"));
+      },
+      done: (d) => out.insertAdjacentHTML("afterbegin",
+        `<p class="muted small">${d.resolved} of ${d.total || found} references identified. The rest could not be matched to a catalogue record.</p>`),
+      onError: (e) => { out.innerHTML = `<p class="muted">${escapeHTML(e.message)}</p>`; },
+    }).done;
+  } catch (e) {
+    out.innerHTML = `<p class="muted">${escapeHTML(e.message)}</p>`;
+  } finally {
+    busy($("#refBtn"), false);
+  }
+});
+
 /* ---- chrome ---------------------------------------------------------------- */
 
 $("#tabs").addEventListener("click", (e) => {
@@ -682,6 +842,7 @@ if (recall("dark") === "1" || (recall("dark") === null && matchMedia("(prefers-c
 (async function start() {
   await health();
   try { await loadModels(); } catch (e) { toast(`Could not list models: ${e.message}`, 8000); }
+  await loadProviders();
   await loadNotebooks();
   setInterval(health, 30000);
 })();

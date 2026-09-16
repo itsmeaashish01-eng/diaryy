@@ -76,6 +76,7 @@
         <button class="tab" data-tab="deck">Slides</button>
         <button class="tab" data-tab="plan">Study plan</button>
         <button class="tab" data-tab="video">Video</button>
+        <button class="tab" data-tab="find">Find papers</button>
         <button class="tab" data-tab="notes">Notes</button>
       </nav>
 
@@ -161,6 +162,29 @@
         </div>
         <p id="videoCaps" class="muted small"></p>
         <div id="videoOut" class="video-out"></div>
+      </div>
+
+      <!-- Find papers -->
+      <div class="panel" data-panel="find">
+        <div class="controls">
+          <input id="findQuery" type="text" placeholder="Search the open catalogues — a title, an author, a question" />
+          <button id="findBtn" class="primary">Search</button>
+        </div>
+        <div class="controls" id="providerPicks"></div>
+        <p class="muted small">
+          This is the only part of Marginalia that leaves the machine, and only when you press something.
+          Nothing from your notebook is sent — just the words in the box.
+        </p>
+        <div id="findOut"></div>
+
+        <div class="section-rule"></div>
+
+        <div class="controls">
+          <select id="refSource"></select>
+          <button id="refBtn" class="ghost">Read its bibliography</button>
+        </div>
+        <p class="muted small">Pulls the reference list out of a paper you already have, looks each entry up, and offers the ones that can be fetched.</p>
+        <div id="refOut"></div>
       </div>
 
       <!-- Notes -->

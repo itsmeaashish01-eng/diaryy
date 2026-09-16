@@ -4,14 +4,18 @@ A research notebook that runs on your own laptop. You put PDFs in; it
 reads them, answers questions about them with the page numbers attached,
 draws the diagram, writes the deck, plans the reading, and scripts the
 video — using open-weight models through [Ollama](https://ollama.com),
-with no account, no key, no upload and no network.
+with no account, no key and nothing uploaded. It only touches the
+network when you ask it to go and fetch a paper, and then only to the
+open catalogues.
 
 It is the shape of NotebookLM, built on three rules that the hosted ones
 can't quite make:
 
-1. **Nothing leaves the machine.** The files stay in `notebook/private/`,
-   the model runs on your own silicon, and the server listens on
-   127.0.0.1 only.
+1. **Nothing leaves the machine.** The files stay in
+   `notebook/private/`, the model runs on your own silicon, and the
+   server listens on 127.0.0.1 only. The one outward-facing tab is
+   *Find papers*, which sends the words in its search box to arXiv and
+   friends — never anything from your notebook.
 2. **Every claim carries its page.** Answers, summaries, slides, plans,
    diagram boxes and narration all cite `[S1:p4]`, and clicking it shows
    the passage.
@@ -22,7 +26,7 @@ can't quite make:
 
 ```bash
 node notebook/server/server.mjs      # then open http://127.0.0.1:8099
-node notebook/server/selftest.mjs    # 48 checks, no model needed
+node notebook/server/selftest.mjs    # 69 checks, no model and no network needed
 ```
 
 Node 18 or newer. No dependencies, no build step, no `npm install`.
@@ -115,8 +119,32 @@ are on the machine. Narration is spoken by `piper`, `espeak-ng` or macOS
 `say` if one is installed — otherwise the file is silent and the captions
 carry the words.
 
+**Find papers** — the one part of Marginalia that leaves the machine,
+and only when you press something. It searches four open catalogues —
+arXiv, Crossref, OpenAlex and PubMed — merges what comes back into one
+row per paper (the arXiv preprint and the published record are the same
+work, so they are shown as one), and offers *Add* on the ones with a
+free copy. It will also read the bibliography out of a paper you already
+have, look each entry up by DOI, arXiv id or title, and offer those —
+which turns "this cites something interesting" into a source in two
+clicks. Nothing from your notebook is ever sent: only the words in the
+search box, or the reference line being looked up.
+
+Setting `MARGINALIA_CONTACT=you@example.com` puts a contact address in
+the user agent, which is what Crossref and OpenAlex ask for in exchange
+for their faster pool. It is optional and sent nowhere else.
+
 **Notes** — anything worth keeping. Answers, summaries and plans go here
 with one click, citations intact.
+
+**OCR** — a PDF whose pages are pictures shows a *read it with OCR*
+button. It drives `ocrmypdf` if you have it (best: it writes a new PDF
+with a text layer under the image) or `tesseract` with poppler's
+`pdftoppm`. Neither is bundled — an OCR engine is a hundred megabytes and
+most PDFs don't need one — so if neither is installed the app names the
+single command that would install it on your platform. Afterwards the
+old index is discarded, because chunks describing text that no longer
+exists would still be cited.
 
 ---
 
@@ -136,8 +164,10 @@ notebook/
     video.mjs       storyboard, player, ffmpeg rendering
     pptx.mjs        PowerPoint, written by hand
     zip.mjs         because a .pptx is a zip
+    discover.mjs    arXiv, Crossref, OpenAlex, PubMed; bibliography lookup
+    ocr.mjs         drives ocrmypdf or tesseract when a source is a scan
     ollama.mjs      the only file that talks to a model
-    selftest.mjs    48 checks against a stub model
+    selftest.mjs    69 checks against stub models and stub catalogues
   private/library/  your notebooks — not committed, see private/README.md
 ```
 
@@ -177,16 +207,20 @@ vectors, notes and exports live there and are never committed — which
 matters in this repository in particular, because two scheduled workflows
 push commits back to it every hour.
 
-The server binds to 127.0.0.1, refuses cross-origin requests, and makes
-exactly one outward call in its life: fetching a URL you explicitly typed
-into *add a URL*.
+The server binds to 127.0.0.1 and refuses cross-origin requests. It
+makes outward calls in exactly three places, each of them something you
+pressed: fetching a URL you typed into *add a URL*, searching the
+catalogues from *Find papers*, and downloading a paper you chose to add.
+Your sources, notes, questions and answers are never part of any of
+them.
 
 ---
 
 ## Known limits
 
-- **Scanned PDFs need OCR first.** There is no OCR in here; `ocrmypdf` is
-  one command and does it properly.
+- **Scanned PDFs need an OCR engine installed.** The button is there and
+  drives it; the engine itself is `apt install ocrmypdf` (or `brew`, or
+  `pip`) and is not bundled.
 - **Tables and equations come out as text.** Readable, usually not
   beautiful. Figures are not read at all — no vision model is involved.
 - **Three-column layouts and margin notes** can still interleave.
@@ -199,16 +233,21 @@ into *add a URL*.
 - **Video rendering needs ffmpeg and a Chromium.** Without them you still
   get the storyboard, the script and the player.
 
+- **A paywalled paper can only be shown as a record.** The catalogues say
+  whether a free copy exists; when none does, there is nothing to fetch,
+  and Marginalia will not pretend otherwise.
+- **Reference matching is best-effort.** A DOI or an arXiv id is exact; a
+  title is matched on word overlap, and an entry with neither and an
+  unusual title will simply not resolve.
+
 ## Next
 
 Worth building, roughly in order of how much they'd improve a day's work:
 
-- OCR for scanned PDFs, via whatever is installed (`ocrmypdf`, `tesseract`).
 - Reading figures with a local vision model (`qwen2.5-vl`, `llava`) so a
   diagram in a paper can become a diagram in a notebook.
-- A citation graph: pull the reference list out of a paper and offer to
-  fetch what it cites (arXiv, Crossref, OpenAlex, PubMed — all have open
-  APIs and none need a key).
+- Following the citation graph outward more than one hop, with a view of
+  what everything in the notebook cites in common.
 - Cross-notebook search, for when the answer is in something you read
   last year.
 - Anki export from the recall questions the study plan already writes.

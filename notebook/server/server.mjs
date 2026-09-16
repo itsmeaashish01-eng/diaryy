@@ -25,7 +25,7 @@
 
 import http from "node:http";
 import { readFile, stat } from "node:fs/promises";
-import { createReadStream, writeFileSync } from "node:fs";
+import { createReadStream, writeFileSync, readFileSync } from "node:fs";
 import { join, dirname, extname, normalize, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -33,6 +33,8 @@ import * as ollama from "./ollama.mjs";
 import * as store from "./store.mjs";
 import * as diagram from "./diagram.mjs";
 import * as video from "./video.mjs";
+import * as discover from "./discover.mjs";
+import * as ocr from "./ocr.mjs";
 import { buildContext, systemFor, verify, groundingNote } from "./grounding.mjs";
 import { buildDeck } from "./pptx.mjs";
 import { toSVG, toMermaid } from "./diagram.mjs";
@@ -168,7 +170,12 @@ const route = (method, pattern, handler) => {
 /* --- health and models --- */
 
 route("GET", "/api/health", async (req, res) => {
-  const out = { ok: true, home: store.ROOT, ollama: { host: ollama.host, up: false }, video: video.capabilities() };
+  const out = {
+    ok: true, home: store.ROOT,
+    ollama: { host: ollama.host, up: false },
+    video: video.capabilities(),
+    ocr: ocr.capabilities(),
+  };
   try {
     const m = await ollama.models();
     out.ollama = { host: m.host, up: true, chat: m.chat.length, embed: m.embed.length };
@@ -533,6 +540,91 @@ route("POST", "/api/notebooks/:id/video", async (req, res, { id }) => {
   stream.end();
 });
 
+/* --- finding papers that aren't here yet --- */
+/*
+   The one part of this application that talks to the internet, and it
+   only does so when somebody presses something. Searching returns
+   records; fetching a file is a second, separate click.
+*/
+
+route("GET", "/api/discover/providers", (req, res) =>
+  send(res, 200, { providers: discover.PROVIDERS, contact: Boolean(process.env.MARGINALIA_CONTACT) }));
+
+route("POST", "/api/discover/search", async (req, res) => {
+  const body = await readJSONBody(req);
+  const found = await discover.search(body.query, {
+    providers: Array.isArray(body.providers) && body.providers.length ? body.providers : undefined,
+    limit: Math.min(25, Math.max(1, Number(body.limit) || 8)),
+  });
+  send(res, 200, found);
+});
+
+route("POST", "/api/notebooks/:id/discover/add", async (req, res, { id }) => {
+  const result = await readJSONBody(req);
+  const { buffer, filename, url } = await discover.fetchPaper(result);
+  const { source } = store.addSource(id, {
+    filename,
+    buffer,
+    title: result.title || filename,
+    url: result.url || url,
+  });
+  store.forgetLibrary(id);
+  send(res, 200, { source });
+});
+
+/* The bibliography of something already in the notebook, looked up so
+   that "this cites something interesting" becomes a source. */
+route("POST", "/api/notebooks/:id/sources/:sid/references", async (req, res, { id, sid }) => {
+  const body = await readJSONBody(req);
+  const pages = store.sourcePages(id, sid);
+  if (!pages.length) return send(res, 404, { error: "no text for that source" });
+  const entries = discover.referenceEntries(pages.map((p) => p.text).join("\n"));
+  const stream = sse(res);
+  stream.send("entries", { found: entries.length });
+  try {
+    const resolved = await discover.resolveReferences(entries, { limit: Math.min(50, Number(body.limit) || 25) });
+    for (const item of resolved) {
+      if (!stream.open) return;
+      stream.send("reference", item);
+    }
+    stream.send("done", { resolved: resolved.filter((r) => r.match).length, total: entries.length });
+  } catch (e) {
+    stream.send("failed", { error: e.message });
+  }
+  stream.end();
+});
+
+/* --- OCR, for the sources that are pictures of paper --- */
+
+route("GET", "/api/ocr/capabilities", (req, res) => send(res, 200, ocr.capabilities()));
+
+route("POST", "/api/notebooks/:id/sources/:sid/ocr", async (req, res, { id, sid }) => {
+  const body = await readJSONBody(req);
+  const file = store.sourceFile(id, sid);
+  const stream = sse(res);
+  if (!file) {
+    stream.send("failed", { error: "that source has no PDF to read — OCR only applies to scans" });
+    return stream.end();
+  }
+  try {
+    stream.send("started", ocr.capabilities());
+    const { pages, engine, pdf, warnings } = await ocr.ocr(readFileSync(file), {
+      language: String(body.language || "eng").slice(0, 40),
+      onProgress: (p) => stream.send("progress", p),
+    });
+    const verdict = ocr.assess(pages);
+    const source = store.replaceSourceText(id, sid, pages, {
+      pdf,
+      via: engine,
+      warnings: [...(warnings || []), ...(verdict.ok ? [] : [verdict.note])],
+    });
+    stream.send("done", { source, engine, note: verdict.note, ok: verdict.ok });
+  } catch (e) {
+    stream.send("failed", { error: e.message });
+  }
+  stream.end();
+});
+
 /* --- notes and outputs --- */
 
 route("POST", "/api/notebooks/:id/notes", async (req, res, { id }) => send(res, 200, store.addNote(id, await readJSONBody(req))));
@@ -602,6 +694,8 @@ if (runningDirectly) server.listen(PORT, BIND, async () => {
     console.log(`  ollama      not answering on ${ollama.host} — start it with "ollama serve"`);
   }
   console.log(`  video       ${caps.canRender ? `can render (${caps.h264 ? "mp4" : "webm"}${caps.tts ? `, voice via ${caps.tts}` : ", silent"})` : "storyboard and player only (no ffmpeg or browser found)"}`);
+  const ocrCaps = ocr.capabilities();
+  console.log(`  ocr         ${ocrCaps.available ? `${ocrCaps.engine} — scans can be read` : `none installed (${ocrCaps.install})`}`);
   console.log("");
 });
 

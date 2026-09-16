@@ -886,3 +886,68 @@ a { color: var(--accent); }
   .art-list { grid-template-columns: 1fr; }
   .art-thumb { flex-basis: 64px; width: 64px; height: 64px; }
 }
+
+/* ================================================
+   THE LIVE MAP — Leaflet with OpenStreetMap tiles
+   ================================================ */
+
+.map-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.map-head h3 { margin-bottom: 0.4em; }
+
+.map-host { border-radius: var(--radius-sm); overflow: hidden; }
+
+/* Tall enough to show the next couple of streets, not so tall it pushes
+   the list of what's around you off the screen. */
+.live-map {
+  height: 380px;
+  width: 100%;
+  background: var(--map-bg);
+}
+@media (max-width: 640px) {
+  .live-map { height: 300px; }
+}
+
+/* Leaflet paints its own chrome white; in dark mode that's a torch in
+   the face at night, which is when you're most likely reading this. */
+body.dark .live-map .leaflet-control-zoom a,
+body.dark .live-map .leaflet-control-attribution {
+  background: var(--card);
+  color: var(--text2);
+}
+body.dark .live-map .leaflet-control-zoom a { border-color: var(--card-border); }
+body.dark .live-map .leaflet-control-attribution a { color: var(--accent); }
+/* Tiles are printed artwork — dim them rather than invert, which would
+   turn parkland purple and make the map harder to read, not easier. */
+body.dark .live-map .leaflet-tile-pane { filter: brightness(0.72) saturate(0.85); }
+
+/* Numbered pins, matching the numbering of the list beside them. */
+.lm-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--map-pin);
+  color: var(--map-ink);
+  border: 2px solid var(--card);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.live-map .lm-you { stroke: var(--card); fill: var(--map-you); }
+.live-map .lm-accuracy { fill: var(--map-you); }
+
+.lm-popup { font-family: var(--font-body); }
+.lm-popup strong { font-family: var(--font-display); font-weight: 500; font-size: 0.98rem; }
+.lm-popup-dist { display: block; font-size: 0.78rem; color: var(--text2); margin-top: 2px; }
+.lm-popup p { margin: 6px 0 0; font-size: 0.85rem; }
+.lm-popup-links { display: flex; gap: 12px; font-size: 0.83rem; }

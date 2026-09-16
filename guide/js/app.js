@@ -529,6 +529,7 @@
       if (document.body.classList.contains("modal-open")) return;
       maybeRefresh();
       ui.render();
+      syncMap();
     }, 700));
   }
 
@@ -564,6 +565,36 @@
       ui.state.lookup = { status: "error", error: e.message, hits: [] };
     }
     ui.render();
+    syncMap();
+  }
+
+  /* The live map is a long-lived object living inside a view that
+     re-renders on every fix, so it gets put back after each render and
+     told what to draw. Doing this from here rather than from ui.js keeps
+     rendering a pure string-building job. */
+  let tileTroubleWired = false;
+
+  function syncMap() {
+    if (ui.state.view !== "nearby") return;
+    if (!RG.livemap.available()) return;
+    const host = $("#mapHost");
+    if (!host) return;
+    const fix = RG.live.state.fix;
+    if (!fix) return;
+
+    if (!tileTroubleWired) {
+      tileTroubleWired = true;
+      // One re-render when the tiles give up, to swap in the drawn map.
+      RG.livemap.onTileTrouble(() => ui.render());
+    }
+
+    RG.livemap.mount(host);
+    const hits = (ui.state.lookup && ui.state.lookup.status === "ok") ? ui.state.lookup.hits : [];
+    RG.livemap.update(fix, hits.map((a) => ({
+      lat: a.lat, lon: a.lon, title: a.title, metres: a.metres,
+      extract: a.guidebook && a.guidebook.blurb ? a.guidebook.blurb : a.extract,
+      url: a.url,
+    })));
   }
 
   /* Re-ask once you've actually moved, so the guide keeps up as you walk. */
@@ -586,6 +617,7 @@
       if (navTab) {
         ui.state.view = navTab.dataset.view;
         ui.render();
+        syncMap();
         return;
       }
 
@@ -604,12 +636,13 @@
 
       switch (act) {
         // ---- chrome ----
-        case "view": ui.state.view = btn.dataset.view; ui.render(); break;
+        case "view": ui.state.view = btn.dataset.view; ui.render(); syncMap(); break;
 
         // ---- live location ----
         case "live-start":
           RG.live.start();
           ui.render();
+          syncMap();
           break;
         case "live-stop":
           RG.live.stop();
@@ -617,6 +650,7 @@
           ui.render();
           break;
         case "lookup": await runLookup("manual"); break;
+        case "map-recenter": RG.livemap.recenter(RG.live.state.fix); break;
         case "radius":
           ui.state.radius = Number(btn.dataset.r);
           await runLookup("manual");

@@ -447,16 +447,33 @@
         ${here[0].place.tip ? `<p class="detail-tip"><strong>Worth knowing.</strong> ${esc(here[0].place.tip)}</p>` : ""}
       </section>` : ""}
 
+      <section class="panel map-panel">
+        <div class="map-head">
+          <h3>The map</h3>
+          <div class="map-head-actions">
+            <button class="btn btn-small btn-ghost" data-act="map-recenter">Centre on me</button>
+          </div>
+        </div>
+        ${RG.livemap.available() && !RG.livemap.tilesBroken()
+          ? `<div class="map-host" id="mapHost"></div>
+             <p class="muted small">
+               Streets from OpenStreetMap. Tap a numbered pin for what it is and a walking route.
+             </p>`
+          : `${RG.map.svg(mapPoints, {
+                width: 680, height: 340, route: false,
+                units: store.settings().units,
+                you: { lat: fix.lat, lon: fix.lon, accuracy: fix.accuracy },
+              })}
+             <p class="muted small">
+               ${RG.livemap.tilesBroken()
+                 ? "The street tiles aren't loading — no connection, most likely. This is the drawn map instead:"
+                 : "No street map here. This is the drawn map:"}
+               direction and distance are right, the streets are simply not there.
+             </p>`}
+      </section>
+
       ${aroundPanel(fix)}
 
-      ${mapPoints.length ? `<section class="panel map-panel">
-        <h3>You and the nearest eight</h3>
-        ${RG.map.svg(mapPoints, {
-          width: 680, height: 340, route: false,
-          units: store.settings().units,
-          you: { lat: fix.lat, lon: fix.lon, accuracy: fix.accuracy },
-        })}
-      </section>` : ""}
     `;
   }
 

@@ -275,6 +275,9 @@
     </li>`;
   }
 
+  /* Set by a copy of the app published on its own, away from the diary it
+     normally sits beside. Everything else works standalone; writing into
+     diaryData does not, so that one control isn't drawn. */
   function dayPanel(trip) {
     const i = Math.min(state.dayIndex, Math.max(0, trip.days.length - 1));
     const day = trip.days[i];
@@ -338,7 +341,8 @@
             <button class="btn btn-small" data-act="view" data-view="explore">+ Add a place</button>
             ${day.stops.length ? `
               <button class="btn btn-small btn-ghost" data-act="day-copy">Copy as text</button>
-              <button class="btn btn-small btn-ghost" data-act="day-diary">Send to diary</button>
+              ${window.RG_HOSTED ? "" :
+                `<button class="btn btn-small btn-ghost" data-act="day-diary">Send to diary</button>`}
               <button class="btn btn-small btn-ghost" data-act="day-geojson">Export .geojson</button>` : ""}
           </div>
         </section>

@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789562863504,
-      "lastOk": 1789562863504,
+      "lastRun": 1789580595149,
+      "lastOk": 1789580595149,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789575985000,
+          "level": "notable",
+          "title": "Claude Cowork and chat are now one Claude",
+          "detail": "Article URL: https://claude.com/blog/cowork-is-now-claude Comments URL: https://news.ycombinator.com/item?id=49729412 Points: 54 # Comments: 70",
+          "url": "https://claude.com/blog/cowork-is-now-claude"
+        },
+        {
+          "t": 1789568908000,
+          "level": "notable",
+          "title": "Anatomy of a Texture",
+          "detail": "Article URL: https://agentlien.github.io/texture/ Comments URL: https://news.ycombinator.com/item?id=49727592 Points: 25 # Comments: 4",
+          "url": "https://agentlien.github.io/texture/"
+        },
         {
           "t": 1789549954000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "OpenAI agents carried out an undisclosed attack on RubyGems",
           "detail": "Article URL: https://www.rubyhack.ai/ Comments URL: https://news.ycombinator.com/item?id=49666735 Points: 569 # Comments: 324",
           "url": "https://www.rubyhack.ai/"
-        },
-        {
-          "t": 1789150220000,
-          "level": "notable",
-          "title": "Litelm: LiteLLM Without the Bloat",
-          "detail": "Article URL: https://github.com/kennethwolters/litelm Comments URL: https://news.ycombinator.com/item?id=49662767 Points: 120 # Comments: 39",
-          "url": "https://github.com/kennethwolters/litelm"
-        },
-        {
-          "t": 1789123680000,
-          "level": "notable",
-          "title": "Claude is only available to people over 18 years",
-          "detail": "Article URL: https://support.claude.com/en/articles/15171100-age-assurance-on-claude Comments URL: https://news.ycombinator.com/item?id=49656225 Points: 617 # Comments: 621",
-          "url": "https://support.claude.com/en/articles/15171100-age-assurance-on-claude"
         }
       ],
       "notifiedAt": {},
@@ -1512,11 +1512,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789562864916,
-      "lastOk": 1789562864916,
+      "lastRun": 1789580595973,
+      "lastOk": 1789580595973,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,795 (+58.1%) · excludes S&P 500 ETF",
+      "lastLine": "$3,773 (+57.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1610,9 +1610,27 @@
         {
           "t": 1789562864916,
           "v": 3795.1
+        },
+        {
+          "t": 1789580595973,
+          "v": 3772.95
         }
       ],
       "events": [
+        {
+          "t": 1789580595960,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789580595960,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789562864905,
           "level": "notable",
@@ -1939,12 +1957,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 75902
+          "BTC": 75459
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789580595974,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1789562864916,
       "ran": 6,

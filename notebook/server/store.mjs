@@ -358,6 +358,12 @@ export function recordChat(notebookId, turn) {
   saveNotebook(nb);
 }
 
+/* Where remembered answers live. Beside the notebook, inside private/,
+   so deleting the notebook takes them with it. */
+export function cacheDir(notebookId) {
+  return ensure(join(nbDir(notebookId), "cache"));
+}
+
 export function outputDir(notebookId) {
   return ensure(join(nbDir(notebookId), "out"));
 }

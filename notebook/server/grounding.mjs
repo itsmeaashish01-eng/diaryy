@@ -28,20 +28,35 @@ import { resolveCitations, quoteSupport } from "./rag.mjs";
    between the prompt and the verifier.
 */
 
-export function buildContext(hits, sources, { budget = 12000 } = {}) {
+export function buildContext(hits, sources, { budget = 6000 } = {}) {
   const indexOf = new Map(sources.map((s, i) => [s.id, i + 1]));
-  const blocks = [];
+  const chosen = [];
   let used = 0;
+
+  /* Which passages get in is decided by relevance — the retriever's
+     order, best first, until the budget runs out. */
   for (const hit of hits) {
     const n = indexOf.get(hit.sourceId);
     if (!n) continue;
     const label = `[S${n}:p${hit.page}]`;
     const head = hit.heading ? ` (${hit.heading})` : "";
     const block = `${label}${head}\n${hit.text.trim()}`;
-    if (used + block.length > budget && blocks.length) break;
+    if (used + block.length > budget && chosen.length) break;
     used += block.length;
-    blocks.push({ label, sourceIndex: n, sourceId: hit.sourceId, page: hit.page, text: hit.text.trim(), block });
+    chosen.push({ label, sourceIndex: n, sourceId: hit.sourceId, page: hit.page, ordinal: hit.ordinal ?? 0, text: hit.text.trim(), block });
   }
+
+  /* What order they are written in is a different question, and the
+     answer is document order: source one before source two, page four
+     before page nine. It reads better — an argument arrives in the
+     sequence its author wrote it — and it is stable, which matters for
+     speed. Two related questions retrieve overlapping passages; in
+     document order their prompts share a prefix, and a shared prefix is
+     one Ollama does not have to read again. */
+  const blocks = chosen.slice().sort((a, b) =>
+    a.sourceIndex - b.sourceIndex || a.page - b.page || a.ordinal - b.ordinal
+  );
+
   return {
     blocks,
     text: blocks.map((b) => b.block).join("\n\n---\n\n"),

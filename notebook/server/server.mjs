@@ -41,6 +41,7 @@ import { toSVG, toMermaid } from "./diagram.mjs";
 import { SCHEMA as DECK_SCHEMA, prompt as deckPrompt, normalise as normaliseDeck } from "./deck.mjs";
 import { planPrompt, PLAN_SCHEMA, normalisePlan } from "./study.mjs";
 import { PROFILES, DEFAULT as DEFAULT_PACE, limits, pace } from "./pace.mjs";
+import * as recall from "./recall.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const WEB = join(here, "..");
@@ -177,6 +178,31 @@ const route = (method, pattern, handler) => {
    finishes — and never waits for either. /api/tools is where a caller
    that genuinely wants the answer goes.
 */
+/*
+   Ask Ollama to load the model now rather than when the first question
+   arrives. The page calls this the moment someone clicks into the
+   question box; by the time they have typed it, the weights are in
+   memory. Fire-and-forget on purpose — nothing waits for it, and a
+   failure here costs nothing but the head start.
+*/
+route("POST", "/api/warm", async (req, res) => {
+  const { model } = await readJSONBody(req);
+  if (!model) return send(res, 400, { error: "which model?" });
+  ollama.warm(model).catch(() => {});
+  send(res, 200, { warming: model });
+});
+
+route("GET", "/api/running", async (req, res) => send(res, 200, { models: await ollama.running() }));
+
+/* How fast is this machine with this model? Real numbers, from Ollama's
+   own counters, so choosing between a 14B and an 8B is a measurement
+   rather than a guess. */
+route("POST", "/api/benchmark", async (req, res) => {
+  const { model } = await readJSONBody(req);
+  if (!model) return send(res, 400, { error: "which model?" });
+  send(res, 200, await ollama.benchmark(model));
+});
+
 route("GET", "/api/pace", (req, res) => send(res, 200, { profiles: Object.values(PROFILES), default: DEFAULT_PACE }));
 
 route("GET", "/api/health", async (req, res) => {
@@ -364,6 +390,21 @@ route("POST", "/api/notebooks/:id/ask", async (req, res, { id }) => {
       searched: hits.length,
     });
 
+    /* Asked this, of these passages, with this model, before? Then the
+       answer is already written, and re-deriving it would cost a minute
+       to produce the same words. */
+    const cacheDir = store.cacheDir(id);
+    const cacheKey = recall.key({ model: body.model, question, context: context.text });
+    const remembered = body.fresh ? null : recall.get(cacheDir, cacheKey);
+    if (remembered) {
+      stream.send("first", { seconds: 0, cached: true });
+      await recall.replay(remembered.answer, (piece) => stream.send("token", { delta: piece }));
+      stream.send("verified", { ...remembered.report, note: groundingNote(remembered.report) });
+      stream.send("stats", { cached: true, asked: remembered.used, rate: 0, promptTokens: 0 });
+      stream.send("done", { cached: true });
+      return stream.end();
+    }
+
     const history = (body.history || []).slice(-6).map((m) => ({ role: m.role, content: String(m.content).slice(0, 4000) }));
     const messages = [
       { role: "system", content: systemFor.ask },
@@ -400,6 +441,10 @@ route("POST", "/api/notebooks/:id/ask", async (req, res, { id }) => {
 
     const report = verify(answer, { blocks: context.blocks, sources });
     stream.send("verified", { ...report, note: groundingNote(report) });
+    /* Only worth remembering if there was no conversation behind it:
+       a follow-up that leans on what was said before is not the same
+       question when asked again cold. */
+    if (!history.length) recall.put(cacheDir, cacheKey, { question, answer, report, model: body.model });
     store.recordChat(id, { question, answer, model: body.model, grounding: report.grounding });
     stream.send("done", {});
   } catch (e) {
@@ -732,6 +777,11 @@ route("POST", "/api/notebooks/:id/sources/:sid/ocr", async (req, res, { id, sid 
 });
 
 /* --- notes and outputs --- */
+
+route("DELETE", "/api/notebooks/:id/remembered", (req, res, { id }) => {
+  recall.clear(store.cacheDir(id));
+  send(res, 200, { cleared: true });
+});
 
 route("POST", "/api/notebooks/:id/notes", async (req, res, { id }) => send(res, 200, store.addNote(id, await readJSONBody(req))));
 route("PATCH", "/api/notebooks/:id/notes/:nid", async (req, res, { id, nid }) => send(res, 200, store.updateNote(id, nid, await readJSONBody(req))));

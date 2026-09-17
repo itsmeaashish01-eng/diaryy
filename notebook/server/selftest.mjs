@@ -470,6 +470,52 @@ try {
     JSON.stringify(answered.map((e) => e.event)));
   check("and the speed is reported", timing && typeof timing.data.rate === "number", JSON.stringify(timing && timing.data));
 
+  /* --- remembering --- */
+  section("recall");
+  const askTwice = async (question, extra = {}) => {
+    const events = await stream(`/api/notebooks/${nb.id}/ask`, { question, model: "stub-writer:14b", ...extra });
+    return {
+      answer: events.filter((e) => e.event === "token").map((e) => e.data.delta).join(""),
+      stats: (events.find((e) => e.event === "stats") || {}).data || {},
+      first: (events.find((e) => e.event === "first") || {}).data || {},
+      verified: (events.find((e) => e.event === "verified") || {}).data || {},
+    };
+  };
+  const firstAsk = await askTwice("What decides the answer?");
+  const secondAsk = await askTwice("What decides the answer?");
+  check("the same question comes back from memory", secondAsk.stats.cached === true, JSON.stringify(secondAsk.stats));
+  check("word for word", secondAsk.answer === firstAsk.answer, `${secondAsk.answer.slice(0, 60)} vs ${firstAsk.answer.slice(0, 60)}`);
+  check("with its verification intact",
+    secondAsk.verified.grounding === firstAsk.verified.grounding && secondAsk.verified.unsupported.length === firstAsk.verified.unsupported.length,
+    JSON.stringify(secondAsk.verified.grounding));
+  const forced = await askTwice("What decides the answer?", { fresh: true });
+  check("and can be bypassed on demand", forced.stats.cached !== true, JSON.stringify(forced.stats));
+  const different = await askTwice("What decides the answer?", { pace: "thorough" });
+  check("a different pace is a different question", different.stats.cached !== true, JSON.stringify(different.stats));
+  await api("DELETE", `/api/notebooks/${nb.id}/remembered`);
+  const afterClear = await askTwice("What decides the answer?");
+  check("forgetting works", afterClear.stats.cached !== true, JSON.stringify(afterClear.stats));
+
+  /* --- warming and measuring --- */
+  section("speed");
+  const warmed = await api("POST", "/api/warm", { model: "stub-writer:14b" });
+  check("warming is fire-and-forget", warmed.status === 200 && warmed.data.warming === "stub-writer:14b", JSON.stringify(warmed.data));
+  const bench = (await api("POST", "/api/benchmark", { model: "stub-writer:14b" })).data;
+  check("the benchmark reports both halves",
+    typeof bench.reading === "number" && typeof bench.writing === "number" && bench.tokens > 0,
+    JSON.stringify(bench));
+  check("and how long the first word took", bench.firstToken >= 0, JSON.stringify(bench.firstToken));
+
+  /* --- passage order --- */
+  section("prompt reuse");
+  const ordered = (await askAt("thorough")).passages.map((p) => p.label);
+  const sorted = [...ordered].sort((a, b) => {
+    const [as, ap] = a.match(/\d+/g).map(Number);
+    const [bs, bp] = b.match(/\d+/g).map(Number);
+    return as - bs || ap - bp;
+  });
+  check("passages are sent in document order", JSON.stringify(ordered) === JSON.stringify(sorted), JSON.stringify(ordered));
+
   const notebooks = (await api("GET", "/api/notebooks")).data.notebooks;
   check("the notebook is listed", notebooks.some((n) => n.id === nb.id));
   await api("DELETE", `/api/notebooks/${nb.id}`);

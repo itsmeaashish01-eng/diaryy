@@ -233,6 +233,74 @@ export function parseLoose(text) {
   return null;
 }
 
+/* ---- getting the model into memory before it is wanted -------------- */
+/*
+   The first question of a session pays for nine gigabytes to be read
+   off disk, and from the outside that is indistinguishable from the
+   application being slow. It isn't — it is a load that was always going
+   to happen, at the worst possible moment. So it happens earlier: the
+   page asks for a warm-up when someone clicks into the question box,
+   which buys most of a minute's head start on a laptop.
+
+   One token, then stop. That is enough to make Ollama load the weights;
+   generating more would only make the warm-up itself slow.
+*/
+export async function warm(model, { signal } = {}) {
+  if (!model) return { warmed: false };
+  const started = Date.now();
+  await chat([{ role: "user", content: "ready?" }], { model, predict: 1, context: 512, temperature: 0, signal });
+  return { warmed: true, model, seconds: Number(((Date.now() - started) / 1000).toFixed(1)) };
+}
+
+/*
+   How fast is this machine, with this model? Two numbers, both from
+   Ollama's own counters rather than a stopwatch: how quickly it reads a
+   prompt, and how quickly it writes. Everything a person needs to
+   decide between a 14B and an 8B, and to know whether their GPU is
+   being used at all.
+*/
+export async function benchmark(model, { signal } = {}) {
+  const passage = (
+    "Dense retrieval maps passages into a shared vector space, so that queries and passages " +
+    "which mean the same thing land close together. Chunks of about nine hundred characters, " +
+    "with a little overlap, keep an argument intact while staying small enough to cite. "
+  ).repeat(4);
+
+  const messages = [
+    { role: "system", content: "You answer in two or three sentences." },
+    { role: "user", content: `${passage}\n\nIn your own words, what does this passage say about chunk size?` },
+  ];
+
+  const started = Date.now();
+  let firstToken = null;
+  let text = "";
+  let stats = null;
+  for await (const part of stream(messages, { model, predict: 60, context: 2048, temperature: 0.2, signal })) {
+    if (part.delta && firstToken === null) firstToken = (Date.now() - started) / 1000;
+    text += part.delta;
+    if (part.done) stats = part.stats;
+  }
+
+  const promptTokens = (stats && stats.promptTokens) || 0;
+  const tokens = (stats && stats.tokens) || 0;
+  const seconds = (stats && stats.seconds) || (Date.now() - started) / 1000;
+  const writing = seconds > 0 ? tokens / seconds : 0;
+  /* Time to the first token is the prompt being read, near enough, and
+     it is the half that the passage count changes. */
+  const reading = firstToken > 0 ? promptTokens / firstToken : 0;
+
+  return {
+    model,
+    promptTokens,
+    tokens,
+    firstToken: Number((firstToken || 0).toFixed(2)),
+    reading: Number(reading.toFixed(0)),
+    writing: Number(writing.toFixed(1)),
+    seconds: Number(seconds.toFixed(1)),
+    sample: text.slice(0, 160),
+  };
+}
+
 /* ---- embeddings ----------------------------------------------------- */
 /*
    /api/embed is the current endpoint and takes a batch; /api/embeddings

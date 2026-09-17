@@ -238,6 +238,10 @@ function waiting(el, what) {
 let slowWarned = false;
 function speedLine(stats, firstToken) {
   if (!stats) return "";
+  if (stats.cached) {
+    return `<div class="speed">from memory — you asked this before${stats.asked > 1 ? ` (${stats.asked} times)` : ""}. ` +
+      `<button class="linklike again">ask it again properly</button></div>`;
+  }
   const bits = [];
   if (firstToken != null) bits.push(`${firstToken}s reading ${stats.promptTokens || "?"} tokens`);
   if (stats.rate) bits.push(`${stats.rate} tokens/s writing`);
@@ -385,24 +389,75 @@ async function showEvidence(sourceIndex, page) {
 document.addEventListener("click", (e) => {
   const cite = e.target.closest(".cite");
   if (cite) showEvidence(Number(cite.dataset.source), cite.dataset.page);
+  const again = e.target.closest(".again");
+  if (again) {
+    const turn = again.closest(".turn");
+    const asked = turn && turn.previousElementSibling;
+    if (asked && asked.classList.contains("you")) sendQuestion(asked.textContent.trim(), { fresh: true });
+  }
 });
 $("#closeEvidence").addEventListener("click", () => $(".layout").classList.remove("showing-evidence"));
+
+/* ---- getting the model ready ------------------------------------------ */
+/*
+   Loading nine gigabytes takes as long as it takes, but it does not
+   have to happen while somebody waits for an answer. Clicking into the
+   question box, or opening a tab that will need the model, is enough
+   warning to start.
+*/
+const warmed = new Set();
+function warm() {
+  const model = $("#chatModel").value;
+  if (!model || warmed.has(model)) return;
+  warmed.add(model);
+  post("/api/warm", { model }).catch(() => warmed.delete(model));
+}
+
+$("#question").addEventListener("focus", warm, { once: false });
+$("#tabs").addEventListener("click", (e) => { if (e.target.closest(".tab")) warm(); });
+$("#chatModel").addEventListener("change", warm);
+
+/* ---- how fast is this machine? ---------------------------------------- */
+
+$("#measure").addEventListener("click", async () => {
+  const model = $("#chatModel").value;
+  if (!model) return toast("No model selected.");
+  busy($("#measure"), true, "measuring…");
+  try {
+    const b = await post("/api/benchmark", { model });
+    const verdict =
+      b.writing >= 20 ? "That is quick — a GPU is doing the work." :
+      b.writing >= 10 ? "Comfortable." :
+      b.writing >= 5 ? "Usable, but a smaller model would feel much better." :
+      "Slow. Try llama3.1:8b or qwen2.5:7b-instruct, and the Fast pace.";
+    toast(
+      `${model}: reads about ${b.reading} tokens/s, writes ${b.writing} tokens/s ` +
+      `(${b.firstToken}s to the first word). ${verdict}`,
+      16000
+    );
+  } catch (e) {
+    toast(e.message, 9000);
+  } finally {
+    busy($("#measure"), false);
+  }
+});
 
 /* ---- asking ---------------------------------------------------------- */
 
 $("#askForm").addEventListener("submit", (e) => { e.preventDefault(); sendQuestion(); });
+
 $("#question").addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendQuestion(); }
 });
 
 const history = [];
 
-async function sendQuestion() {
+async function sendQuestion(text, { fresh = false } = {}) {
   if (!requireNotebook()) return;
   const input = $("#question");
-  const question = input.value.trim();
+  const question = (text || input.value).trim();
   if (!question) return;
-  input.value = "";
+  if (!text) input.value = "";
 
   const thread = $("#thread");
   if (thread.querySelector(".empty")) thread.innerHTML = "";
@@ -422,14 +477,14 @@ async function sendQuestion() {
   const clock = waiting(prose, "reading the passages");
 
   try {
-    await events(`/api/notebooks/${state.notebook.id}/ask`, { ...ask(), question, history: history.slice(-6) }, {
+    await events(`/api/notebooks/${state.notebook.id}/ask`, { ...ask(), question, fresh, history: fresh ? [] : history.slice(-6) }, {
       context: (ctx) => {
         notePassages(ctx.passages);
         chips.innerHTML =
           `<span class="chip" style="cursor:default" title="how the passages were found">${ctx.retrieval}</span>` +
           ctx.passages.map((p) => `<button class="chip cite" data-source="${p.label.match(/S(\d+)/)[1]}" data-page="${p.page}">${escapeHTML(p.label)}</button>`).join("");
       },
-      first: (f) => { firstToken = f.seconds; clock.stop(); },
+      first: (f) => { firstToken = f.cached ? null : f.seconds; clock.stop(); },
       stats: (s) => { stats = s; },
       token: (t) => {
         answer += t.delta;

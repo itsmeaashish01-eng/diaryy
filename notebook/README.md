@@ -26,7 +26,7 @@ can't quite make:
 
 ```bash
 node notebook/server/server.mjs      # then open http://127.0.0.1:8099
-node notebook/server/selftest.mjs    # 69 checks, no model and no network needed
+node notebook/server/selftest.mjs    # 87 checks, no model and no network needed
 ```
 
 Node 18 or newer. No dependencies, no build step, no `npm install`.
@@ -166,8 +166,11 @@ notebook/
     zip.mjs         because a .pptx is a zip
     discover.mjs    arXiv, Crossref, OpenAlex, PubMed; bibliography lookup
     ocr.mjs         drives ocrmypdf or tesseract when a source is a scan
+    pace.mjs        how much to put in front of the model, and what it cost
+    recall.mjs      answers kept under model + passages + question
+    tools.mjs       async, cached probing for ffmpeg, a browser, an OCR engine
     ollama.mjs      the only file that talks to a model
-    selftest.mjs    69 checks against stub models and stub catalogues
+    selftest.mjs    87 checks against stub models and stub catalogues
   private/library/  your notebooks — not committed, see private/README.md
 ```
 
@@ -212,10 +215,22 @@ on every health check, synchronously, which stalled everything; that now
 happens once, in the background.)
 
 **The first answer takes forever, then later ones are quick.** That is
-Ollama loading the model: nine gigabytes off disk into memory. Marginalia
-now asks it to keep the model resident for thirty minutes
-(`OLLAMA_KEEP_ALIVE` changes it), so you pay that once rather than every
-time you pause to think. `ollama ps` shows what is currently loaded.
+Ollama loading the model: nine gigabytes off disk into memory.
+
+Two things now soften it. Clicking into the question box, or opening a
+tab that will need the model, quietly asks Ollama to load it — so the
+loading happens while you type rather than after you press Ask. And
+`keep_alive` is thirty minutes (`OLLAMA_KEEP_ALIVE` changes it), so
+pausing to read and think does not cost a second load. `ollama ps`
+shows what is currently resident.
+
+**The same question is instant the second time.** Answers are kept under
+a key made of the model, the passages and the question, so asking again
+— after lunch, or tomorrow — returns the identical answer with its
+citations and its verification, rather than spending another minute
+deriving the same words. Change any of the three and you get a fresh
+answer. A remembered answer says so, and offers to be asked again
+properly.
 
 **Every answer is slow.** Two things to try, in this order.
 
@@ -227,6 +242,13 @@ first word. Fast sends four passages instead of six, Thorough eight. For
 Fast costs you nothing and starts two to three times sooner. Every
 answer now prints what it cost underneath — `4.2s reading 1180 tokens ·
 6.1 tokens/s writing` — so the trade is visible rather than guessed at.
+
+*The measure button*, next to the pace control. It times this model on
+this machine — how fast it reads a prompt, how fast it writes — and says
+what the numbers mean. Above roughly 20 tokens a second something is
+using a GPU; below 5, a smaller model will feel like a different
+application. Guessing about this is miserable; measuring takes ten
+seconds.
 
 *Then the model*, because the rest is hardware:
 

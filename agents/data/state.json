@@ -2,14 +2,49 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789646533923,
-      "lastOk": 1789646533923,
+      "lastRun": 1789665238351,
+      "lastOk": 1789665238351,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789663697000,
+          "level": "notable",
+          "title": "Show HN: Aclif – Agent CLI framework: one grammar, canonical names across SaaS",
+          "detail": "Simple discovery of the provider's default schemas is possible without any credentials (since they are built into the binary). If you want it to fetch customizations of your specific instance, give it credentials to your org.The repo has more details. https://github.com/agent-cli-framework/aclif Com",
+          "url": "https://www.aclif.ai/"
+        },
+        {
+          "t": 1789662328000,
+          "level": "notable",
+          "title": "Show HN: Die With Me – Claude and Codex rate limits as AIM away messages",
+          "detail": "hey HN, i've been making this Mac app called Die With Me. it lets you see how much claude / codex usage your friends have left. it's kind of like AIM buddy list, but for your AI tokensand when your token allowance goes below 20%, a chatroom for everyone who is waiting for a resetI made this because ",
+          "url": "https://diewithme.co/join"
+        },
+        {
+          "t": 1789662135000,
+          "level": "notable",
+          "title": "Launch HN: Skillsync (YC W26) – AI chat sessions made portable across agents",
+          "detail": "Hey HN, we're Nars & Nishant, founders of Skillsync (https://skillsync.com)Skillsync lets you move your AI chats across every coding agent. Most of our work exists as conversations, which are currently scattered across our agents. Though stored locally, these conversations use different formats. Thi",
+          "url": "https://skillsync.com"
+        },
+        {
+          "t": 1789659617000,
+          "level": "notable",
+          "title": "LLM Classification Is Feature Engineering",
+          "detail": "Article URL: https://minimallysufficient.com/posts/llm-classification-is-feature-extraction/ Comments URL: https://news.ycombinator.com/item?id=49742437 Points: 35 # Comments: 9",
+          "url": "https://minimallysufficient.com/posts/llm-classification-is-feature-extraction/"
+        },
+        {
+          "t": 1789650104000,
+          "level": "notable",
+          "title": "Show HN: Share your AI Setup, Learn from others",
+          "detail": "I kept seeing engineers share what they were building with AI; however, I was always more curious about how they worked. Which agents did they use? What skills and tools had stuck or been thrown out the window? How did they manage longer-running tasks? So I built this with the hope we could have a d",
+          "url": "https://mysetup.ai/"
+        },
         {
           "t": 1789596613000,
           "level": "notable",
@@ -394,41 +429,6 @@
           "title": "Anthropic CEO Says It's Time to Slow AI Model Advances",
           "detail": "Article URL: https://www.bloomberg.com/news/articles/2026-09-12/anthropic-ceo-says-it-s-time-to-slow-pace-of-improving-ai-models Comments URL: https://news.ycombinator.com/item?id=49675247 Points: 35 # Comments: 34",
           "url": "https://www.bloomberg.com/news/articles/2026-09-12/anthropic-ceo-says-it-s-time-to-slow-pace-of-improving-ai-models"
-        },
-        {
-          "t": 1789223107000,
-          "level": "notable",
-          "title": "I refuse to let SPICE die",
-          "detail": "Article URL: https://github.com/nefarius/vd_agent/ Comments URL: https://news.ycombinator.com/item?id=49672641 Points: 59 # Comments: 50",
-          "url": "https://github.com/nefarius/vd_agent/"
-        },
-        {
-          "t": 1789211618000,
-          "level": "notable",
-          "title": "The worst spam emails: iLands AI agent hustle",
-          "detail": "Article URL: https://tedium.co/2026/09/11/ilands-agents-email-spam-kaixin-tang/ Comments URL: https://news.ycombinator.com/item?id=49671159 Points: 84 # Comments: 42",
-          "url": "https://tedium.co/2026/09/11/ilands-agents-email-spam-kaixin-tang/"
-        },
-        {
-          "t": 1789232212000,
-          "level": "notable",
-          "title": "Anthropic boss Dario Amodei calls for AI development to slow down",
-          "detail": "Article URL: https://www.bbc.com/news/articles/c14dpgm0rg4o Comments URL: https://news.ycombinator.com/item?id=49674395 Points: 12 # Comments: 6",
-          "url": "https://www.bbc.com/news/articles/c14dpgm0rg4o"
-        },
-        {
-          "t": 1789223107000,
-          "level": "notable",
-          "title": "I refuse to let SPICE die",
-          "detail": "Article URL: https://github.com/nefarius/vd_agent/ Comments URL: https://news.ycombinator.com/item?id=49672641 Points: 22 # Comments: 10",
-          "url": "https://github.com/nefarius/vd_agent/"
-        },
-        {
-          "t": 1789211618000,
-          "level": "notable",
-          "title": "The Worst Spam Emails: Inside iLands' AI Agent Hustle",
-          "detail": "Article URL: https://tedium.co/2026/09/11/ilands-agents-email-spam-kaixin-tang/ Comments URL: https://news.ycombinator.com/item?id=49671159 Points: 75 # Comments: 42",
-          "url": "https://tedium.co/2026/09/11/ilands-agents-email-spam-kaixin-tang/"
         }
       ],
       "notifiedAt": {},
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1789613314374,
-      "lastOk": 1789613314374,
+      "lastRun": 1789665238354,
+      "lastOk": 1789665238354,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 1 drifting",
@@ -922,9 +922,41 @@
         {
           "t": 1789613314374,
           "v": 17
+        },
+        {
+          "t": 1789665238354,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1789665238353,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 59 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1789665238353,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1789665238353,
+          "level": "notable",
+          "title": "Data collection complete — 89 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1789665238353,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 28 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1789613314374,
           "level": "notable",
@@ -1205,8 +1237,8 @@
       }
     },
     "reading": {
-      "lastRun": 1789613314375,
-      "lastOk": 1789613314375,
+      "lastRun": 1789665238355,
+      "lastOk": 1789665238355,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1259,9 +1291,34 @@
         {
           "t": 1789613314375,
           "v": 3
+        },
+        {
+          "t": 1789665238355,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1789665238355,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1789665238355,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 47 days",
+          "url": ""
+        },
+        {
+          "t": 1789665238355,
+          "level": "notable",
+          "title": "Still unread after 139 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1789613314375,
           "level": "notable",
@@ -1521,8 +1578,8 @@
       }
     },
     "training": {
-      "lastRun": 1789613314376,
-      "lastOk": 1789613314376,
+      "lastRun": 1789665238356,
+      "lastOk": 1789665238356,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
@@ -1575,9 +1632,20 @@
         {
           "t": 1789613314376,
           "v": 0
+        },
+        {
+          "t": 1789665238356,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1789665238356,
+          "level": "notable",
+          "title": "8 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1789613314376,
           "level": "notable",
@@ -1648,11 +1716,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789646534977,
-      "lastOk": 1789646534977,
+      "lastRun": 1789665239009,
+      "lastOk": 1789665239009,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,820 (+59.2%) · excludes S&P 500 ETF",
+      "lastLine": "$3,839 (+60.0%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1762,9 +1830,27 @@
         {
           "t": 1789646534977,
           "v": 3819.7
+        },
+        {
+          "t": 1789665239009,
+          "v": 3839
         }
       ],
       "events": [
+        {
+          "t": 1789665238998,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789665238998,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789646534963,
           "level": "notable",
@@ -2147,12 +2233,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 76394
+          "BTC": 76780
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789665239009,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 15
+    },
     {
       "t": 1789646534978,
       "ran": 3,

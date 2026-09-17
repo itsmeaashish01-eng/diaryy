@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789594745557,
-      "lastOk": 1789594745557,
+      "lastRun": 1789606274634,
+      "lastOk": 1789606274634,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789596613000,
+          "level": "notable",
+          "title": "HarnessTax: How Much Does the Harness Matter for Coding Agents?",
+          "detail": "Article URL: https://harnesstax.github.io/ Comments URL: https://news.ycombinator.com/item?id=49733726 Points: 12 # Comments: 2",
+          "url": "https://harnesstax.github.io/"
+        },
+        {
+          "t": 1789592364000,
+          "level": "notable",
+          "title": "Breaking the 1.58-bit Barrier for Ternary LLMs",
+          "detail": "Article URL: https://arxiv.org/abs/2609.16338 Comments URL: https://news.ycombinator.com/item?id=49732931 Points: 122 # Comments: 13",
+          "url": "https://arxiv.org/abs/2609.16338"
+        },
         {
           "t": 1789592364000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "OpenAI agents carried out an undisclosed attack on RubyGems",
           "detail": "https://simonwillison.net/2026/Sep/12/openai-agents-rubygems... Comments URL: https://news.ycombinator.com/item?id=49666735 Points: 732 # Comments: 408",
           "url": "https://www.rubyhack.ai/"
-        },
-        {
-          "t": 1789150220000,
-          "level": "notable",
-          "title": "Litelm: LiteLLM Without the Bloat",
-          "detail": "Article URL: https://github.com/kennethwolters/litelm Comments URL: https://news.ycombinator.com/item?id=49662767 Points: 149 # Comments: 49",
-          "url": "https://github.com/kennethwolters/litelm"
-        },
-        {
-          "t": 1789188403000,
-          "level": "notable",
-          "title": "OpenAI agents attacked RubyGems back in May",
-          "detail": "Article URL: https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/ Comments URL: https://news.ycombinator.com/item?id=49668914 Points: 19 # Comments: 1",
-          "url": "https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/"
         }
       ],
       "notifiedAt": {},
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1789562864138,
-      "lastOk": 1789562864138,
+      "lastRun": 1789606274637,
+      "lastOk": 1789606274637,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 1 drifting",
@@ -914,9 +914,41 @@
         {
           "t": 1789562864138,
           "v": 17
+        },
+        {
+          "t": 1789606274637,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1789606274637,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 59 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1789606274637,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1789606274637,
+          "level": "notable",
+          "title": "Data collection complete — 89 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1789606274637,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 28 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1789562864138,
           "level": "notable",
@@ -1137,12 +1169,12 @@
       ],
       "notifiedAt": {},
       "memo": {
-        "checkedOn": "2026-09-16"
+        "checkedOn": "2026-09-17"
       }
     },
     "reading": {
-      "lastRun": 1789562864139,
-      "lastOk": 1789562864139,
+      "lastRun": 1789606274639,
+      "lastOk": 1789606274639,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1187,9 +1219,34 @@
         {
           "t": 1789562864139,
           "v": 3
+        },
+        {
+          "t": 1789606274639,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1789606274639,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1789606274639,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 47 days",
+          "url": ""
+        },
+        {
+          "t": 1789606274639,
+          "level": "notable",
+          "title": "Still unread after 139 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1789562864139,
           "level": "notable",
@@ -1407,8 +1464,8 @@
       }
     },
     "training": {
-      "lastRun": 1789562864140,
-      "lastOk": 1789562864140,
+      "lastRun": 1789606274640,
+      "lastOk": 1789606274640,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
@@ -1453,9 +1510,20 @@
         {
           "t": 1789562864140,
           "v": 0
+        },
+        {
+          "t": 1789606274641,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1789606274640,
+          "level": "notable",
+          "title": "8 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1789562864140,
           "level": "notable",
@@ -1512,11 +1580,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789580595973,
-      "lastOk": 1789580595973,
+      "lastRun": 1789606275444,
+      "lastOk": 1789606275444,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,773 (+57.2%) · excludes S&P 500 ETF",
+      "lastLine": "$3,817 (+59.1%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1614,9 +1682,27 @@
         {
           "t": 1789580595973,
           "v": 3772.95
+        },
+        {
+          "t": 1789606275445,
+          "v": 3817.35
         }
       ],
       "events": [
+        {
+          "t": 1789606275427,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789606275427,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789580595960,
           "level": "notable",
@@ -1957,12 +2043,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 75459
+          "BTC": 76347
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789606275445,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 12
+    },
     {
       "t": 1789594746014,
       "ran": 2,

@@ -289,6 +289,29 @@ With neither set the agents still run and record — and say loudly, every
 run, that nothing can reach you. A half-configured setup that looks like a
 working one is worse than one that's obviously off.
 
+### Putting the topic in agents.json instead
+
+Setting a repository secret is a real obstacle if you don't live in
+GitHub's settings pages, and an alerting system nobody can finish
+configuring alerts nobody. So the topic can also live in the file:
+
+```json
+{ "settings": { "notify": { "ntfyTopic": "your-topic-string" } } }
+```
+
+**Only do this in a private repository.** An ntfy topic is a password —
+anyone holding the string can read every alert your agents send. In a
+public repo a committed topic is a password published to the internet.
+
+The runner doesn't take your word for it. When the topic comes from the
+file, it asks GitHub whether the repository is private, and uses it only
+if the answer is yes. A public repo, a missing token, an API that won't
+answer — all refuse, and say why. Off GitHub entirely it's your own
+machine and the topic stands.
+
+`NTFY_TOPIC` always wins where both exist, and a real secret is never
+subject to that check.
+
 **A finding nothing could deliver is held, not consumed.** Marking a key as
 seen is what retires it for good, so that only happens once a channel has
 actually taken it. Runs before you set up ntfy don't quietly eat your news:

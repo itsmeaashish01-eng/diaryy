@@ -10,10 +10,49 @@
 const PRIORITY = { quiet: 2, notable: 3, urgent: 5 };
 const TAGS = { quiet: ["information_source"], notable: ["bell"], urgent: ["rotating_light"] };
 
-export const canNotify = () => Boolean(process.env.NTFY_TOPIC || process.env.WEBHOOK_URL);
+/* Where the topic can come from, in order:
+
+     NTFY_TOPIC            an environment variable, which on GitHub means
+                           a repository secret
+     settings.notify       a value committed in agents.json
+
+   The second only exists because setting a repository secret is a real
+   obstacle for someone who doesn't live in GitHub's settings pages, and
+   an alerting system nobody can finish configuring alerts nobody.
+
+   It is safe ONLY in a private repository. An ntfy topic is a password:
+   anyone holding the string can read every alert. In a public repo a
+   committed topic is a password published to the internet, so the runner
+   checks and refuses rather than trusting you to remember. */
+let configured = { ntfyTopic: "" };
+
+export function configure(settings) {
+  configured = {
+    ntfyTopic: String((settings && settings.ntfyTopic) || "").trim(),
+  };
+}
+
+const topicFromEnv = () => String(process.env.NTFY_TOPIC || "").trim();
+
+/* Set by the runner once it knows whether a committed topic is usable. */
+let committedTopicAllowed = true;
+export function allowCommittedTopic(ok) { committedTopicAllowed = ok; }
+
+function ntfyTopic() {
+  const env = topicFromEnv();
+  if (env) return env;
+  if (configured.ntfyTopic && committedTopicAllowed) return configured.ntfyTopic;
+  return "";
+}
+
+export const canNotify = () => Boolean(ntfyTopic() || process.env.WEBHOOK_URL);
+
+/* True when a topic is only available because it was committed — the
+   runner uses this to decide whether the public-repo check matters. */
+export const usingCommittedTopic = () => Boolean(!topicFromEnv() && configured.ntfyTopic);
 
 async function pushNtfy(title, message, level) {
-  const topic = process.env.NTFY_TOPIC;
+  const topic = ntfyTopic();
   if (!topic) return "no topic configured";
   const server = (process.env.NTFY_SERVER || "https://ntfy.sh").replace(/\/+$/, "");
   const res = await fetch(server, {

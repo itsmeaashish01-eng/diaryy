@@ -27,7 +27,10 @@ import { toText, digest } from "./types/webpage.mjs";
 import diary from "./types/diary.mjs";
 import { decide } from "./core/brain.mjs";
 import { blankAgentState, remember, loadState, saveState, agentState } from "./core/state.mjs";
-import { anySent, describeDelivery } from "./core/notify.mjs";
+import {
+  anySent, describeDelivery, configure, allowCommittedTopic,
+  usingCommittedTopic, canNotify,
+} from "./core/notify.mjs";
 
 let passed = 0;
 const failures = [];
@@ -561,6 +564,42 @@ check("A finding only counts as reported if a channel actually took it", () => {
   ok(!anySent([{ name: "ntfy", sent: false, detail: "FAILED — ntfy responded 503" }]),
     "a channel that errored did not report it");
   ok(!anySent([]), "no channels at all");
+});
+
+check("A committed topic is used only when it has been allowed", () => {
+  /* An ntfy topic is a password. Committing one is a convenience in a
+     private repo and a published password in a public one, so the runner
+     decides and this flag is how it says so. */
+  delete process.env.NTFY_TOPIC;
+  configure({ ntfyTopic: "topic-from-the-config-file" });
+
+  allowCommittedTopic(true);
+  ok(canNotify(), "allowed: the committed topic counts as a channel");
+
+  allowCommittedTopic(false);
+  ok(!canNotify(), "refused: there is no channel, rather than a leaky one");
+
+  allowCommittedTopic(true);
+});
+
+check("An environment topic wins, and isn't subject to the committed check", () => {
+  configure({ ntfyTopic: "topic-from-the-config-file" });
+  process.env.NTFY_TOPIC = "topic-from-a-secret";
+
+  ok(!usingCommittedTopic(), "a secret is in play, so the committed one is moot");
+  allowCommittedTopic(false);
+  ok(canNotify(), "refusing the committed topic must not disable a real secret");
+
+  delete process.env.NTFY_TOPIC;
+  allowCommittedTopic(true);
+});
+
+check("With neither a secret nor a committed topic there is no channel", () => {
+  delete process.env.NTFY_TOPIC;
+  delete process.env.WEBHOOK_URL;
+  configure({});
+  ok(!usingCommittedTopic(), "nothing committed");
+  ok(!canNotify(), "and nothing to send with");
 });
 
 check("Delivery results read as a log line per channel", () => {

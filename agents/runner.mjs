@@ -41,7 +41,10 @@
 import { typeFor, typeList, TYPES } from "./core/registry.mjs";
 import { loadAgents, loadState, agentState, remember, saveState } from "./core/state.mjs";
 import { decide, narrate, atLeast } from "./core/brain.mjs";
-import { deliver, canNotify, anySent, describeDelivery } from "./core/notify.mjs";
+import {
+  deliver, canNotify, anySent, describeDelivery,
+  configure, allowCommittedTopic, usingCommittedTopic,
+} from "./core/notify.mjs";
 import { writeSummary } from "./core/report.mjs";
 
 const argv = process.argv.slice(2);
@@ -103,18 +106,77 @@ if (flag("--validate")) {
 }
 
 /* Running agents with nowhere to send their findings is a half-configured
-   setup that looks like a working one. Say so, every run. */
+   setup that looks like a working one. Say so, every run — but only once
+   the settings have been read, since the topic may be committed there. */
 const warnings = [];
-if (!canNotify() && !dryRun) {
-  const w =
-    "No alert channel is configured — agents will run and record, but nothing will reach you. " +
-    "Set NTFY_TOPIC (or WEBHOOK_URL). On GitHub: Settings → Secrets and variables → Actions.";
-  warnings.push(w);
-  log(`⚠ ${w}`);
+
+/* An ntfy topic is a password: anyone holding the string can read every
+   alert. Committing one is a reasonable convenience in a private
+   repository and a published password in a public one, so this checks
+   rather than trusting whoever set it to have remembered.
+
+   Off GitHub there is no repository to judge and it is the user's own
+   machine, so the committed topic stands. On GitHub, anything short of a
+   confirmed private repository refuses it: a missed alert is recoverable,
+   a leaked topic is not. */
+async function committedTopicIsSafe() {
+  const repo = process.env.GITHUB_REPOSITORY;
+  if (!repo) return { ok: true, why: "not running on GitHub" };
+
+  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  if (!token) {
+    return { ok: false, why: `cannot check whether ${repo} is public without a GITHUB_TOKEN` };
+  }
+  try {
+    const res = await fetch(`https://api.github.com/repos/${repo}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+      signal: AbortSignal.timeout(20000),
+    });
+    if (!res.ok) return { ok: false, why: `GitHub answered ${res.status} when asked if ${repo} is private` };
+    const json = await res.json();
+    return json.private
+      ? { ok: true, why: `${repo} is private` }
+      : { ok: false, why: `${repo} is PUBLIC — a committed topic there is a password anyone can read` };
+  } catch (e) {
+    return { ok: false, why: `could not check whether ${repo} is public (${e.message})` };
+  }
+}
+
+let settingsReady = false;
+async function applySettings(defs) {
+  if (settingsReady) return;
+  settingsReady = true;
+
+  configure((defs.settings && defs.settings.notify) || {});
+
+  if (usingCommittedTopic()) {
+    const verdict = await committedTopicIsSafe();
+    allowCommittedTopic(verdict.ok);
+    if (!verdict.ok) {
+      const w =
+        `The ntfy topic in agents.json is being ignored: ${verdict.why}. ` +
+        "Move it to an NTFY_TOPIC secret, or make the repository private.";
+      warnings.push(w);
+      log(`⚠ ${w}`);
+    }
+  }
+
+  if (!canNotify() && !dryRun) {
+    const w =
+      "No alert channel is configured — agents will run and record, but nothing will reach you. " +
+      "Set NTFY_TOPIC (or WEBHOOK_URL). On GitHub: Settings → Secrets and variables → Actions.";
+    warnings.push(w);
+    log(`⚠ ${w}`);
+  }
 }
 
 async function pass() {
   const defs = loadAgents(file);
+  await applySettings(defs);
   const state = loadState(statePath);
   const now = Date.now();
   const defaultInterval = Number(defs.settings && defs.settings.defaultIntervalMin) || 60;

@@ -29,6 +29,7 @@ import organizer, { collect, ageBucket, ageRungs } from "./types/organizer.mjs";
 import { decide } from "./core/brain.mjs";
 import { blankAgentState, remember, loadState, saveState, agentState } from "./core/state.mjs";
 import { anySent, describeDelivery } from "./core/notify.mjs";
+import { looksLikeExport, adoptTargets, byPath } from "./core/adopt.mjs";
 
 let passed = 0;
 const failures = [];
@@ -696,6 +697,78 @@ check("An export with no dated entries fails with something you can act on", () 
 check("A missing export names the file rather than throwing", () => {
   const errs = organizer.validate({ config: { file: "/nowhere/at/all.json" } });
   ok(errs.length === 1 && errs[0].includes("no organizer export at"), errs[0] || "expected one clear error");
+});
+
+/* ---- adopting an export ------------------------------------------- */
+
+check("An export is recognised by having dates in it, and counted", () => {
+  const got = looksLikeExport({
+    "2026-09-01": { diary: "wrote", tasks: [task("a"), task("b")] },
+    "2026-09-03": { diary: "   ", tasks: [task("c")] },
+  });
+  ok(got.ok, got.why);
+  eq(got.days, 2, "days");
+  eq(got.tasks, 3, "tasks");
+  eq(got.written, 1, "whitespace is not writing");
+  eq([got.first, got.last], ["2026-09-01", "2026-09-03"], "the range it covers");
+});
+
+check("The wrong file out of a downloads folder is refused, not adopted", () => {
+  /* This is the mistake worth catching: overwriting an agent's file with
+     something that isn't an export is silent until the agent reports
+     nonsense a day later. */
+  ok(!looksLikeExport({ hello: "world" }).ok, "no dated keys");
+  ok(!looksLikeExport([{ "2026-09-01": {} }]).ok, "an array is not an export");
+  ok(!looksLikeExport(null).ok, "null");
+  ok(!looksLikeExport("2026-09-01").ok, "a string");
+  ok(looksLikeExport({ hello: "world" }).why.includes("⤓"), "and it says where the file comes from");
+});
+
+check("A malformed entry doesn't stop the file being adoptable", () => {
+  const got = looksLikeExport({ "2026-09-01": null, "2026-09-02": { tasks: "nope" }, "2026-09-03": { diary: "x" } });
+  ok(got.ok, "still an export");
+  eq(got.tasks, 0, "nothing countable");
+  eq(got.written, 1, "the one real entry");
+});
+
+check("Which agents want the export is the types' business, not the runner's", () => {
+  const types = {
+    organizer: { id: "organizer", adopts: "diary export" },
+    diary: { id: "diary", adopts: "diary export" },
+    feed: { id: "feed" },
+  };
+  const defs = {
+    agents: [
+      { id: "organizer", type: "organizer", config: { file: "a.json" } },
+      { id: "diary-nudge", type: "diary", label: "Diary", active: false, config: { file: "b.json" } },
+      { id: "hn", type: "feed", config: { url: "https://example.com" } },
+      { id: "nofile", type: "organizer", config: {} },
+      { id: "unknown", type: "weather", config: { file: "c.json" } },
+    ],
+  };
+  const targets = adoptTargets(defs, types);
+  eq(targets.map((t) => t.id), ["organizer", "diary-nudge"], "only the types that asked");
+  eq(targets[1].paused, true, "a paused agent still gets its file — that's usually why you're adopting");
+  eq(targets[0].paused, false, "and an active one is not mislabelled");
+});
+
+check("Agents sharing one path are named together, because one copy happens", () => {
+  const targets = [
+    { id: "organizer", label: "Organizer", path: "same.json" },
+    { id: "diary-nudge", label: "Diary", path: "same.json" },
+    { id: "other", label: "Other", path: "else.json" },
+  ];
+  const groups = byPath(targets);
+  eq(groups.length, 2, "two files to write");
+  eq(groups[0].agents.map((a) => a.label), ["Organizer", "Diary"], "both named against the one path");
+});
+
+check("Every type that reads an export declares it, so --adopt finds it", () => {
+  /* The bargain in core/adopt.mjs: a new export-reading type is picked up
+     with no change on the runner's side. That only holds if the types
+     actually say so. */
+  eq(organizer.adopts, "diary export", "organizer");
+  eq(diary.adopts, "diary export", "diary");
 });
 
 /* ---- delivery ------------------------------------------------------ */

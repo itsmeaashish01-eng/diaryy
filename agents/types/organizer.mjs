@@ -113,6 +113,9 @@ export function collect(data) {
 export default {
   id: "organizer",
   label: "Organizer",
+  /* Names the file this type wants, which is what makes `--adopt` able
+     to find it without the runner knowing anything about diaries. */
+  adopts: "diary export",
   summary: "The to-do side of the diary: what slipped, what's piling up, what got done",
 
   validate(agent) {

@@ -11,6 +11,7 @@ source is how you get a different agent — the rest is shared.
 ```bash
 node agents/runner.mjs --list                # what types exist
 node agents/runner.mjs --validate            # are my definitions sound?
+node agents/runner.mjs --adopt <export>      # feed them the diary's ⤓ file
 node agents/runner.mjs --dry-run --force     # run everything, send nothing
 node agents/runner.mjs                       # a real pass
 node agents/selftest.mjs                     # check the reasoning
@@ -414,6 +415,10 @@ export default {
 };
 ```
 
+If your type reads a file the user exports from somewhere, name that file
+in an `adopts` field — `adopts: "diary export"` — and `--adopt` will start
+filling it in, with nothing added to the runner.
+
 `ctx.state` is what this agent remembered last time. Return `level` and
 `why` from `run` if the type knows something the rules cannot — `uptime`
 does this, because a site that just went down is urgent whatever a
@@ -424,8 +429,23 @@ threshold says.
 ## Wiring in the diary
 
 The diary keeps its entries in your browser's localStorage, which nothing
-on a CI runner can read. Export it with the **⤓** button and save the file
-somewhere the runner can see it. Two agents read that one file:
+on a CI runner can read. So: press **⤓**, then hand the file it gives you
+to the runner.
+
+```bash
+node agents/runner.mjs --adopt ~/Downloads/my-diary-2026-09-17.json
+```
+
+That copies it to wherever the agents that read an export are looking, and
+tells you what each one will now see and what it replaced. `--dry-run`
+alongside it shows you that without writing anything. It refuses a file
+that isn't a diary export rather than overwriting an agent's data with
+whatever else was in your downloads folder.
+
+Doing it by hand is a rename and a move, which is a chore, and a chore in
+front of an agent is why `diary-nudge` shipped paused and stayed paused.
+
+Two agents read that one file:
 
 | Agent | Reads | Default path |
 |---|---|---|
@@ -439,10 +459,11 @@ other. Point both at the same file if you'd rather keep one export:
 { "id": "organizer", "config": { "file": "agents/data/diary.json" } }
 ```
 
-`agents/data/organizer.json` ships with a few made-up days in it so the
-agent validates, runs and shows something on the dashboard before you've
-exported anything. Overwrite it with your own export — that's all the
-setup there is.
+`agents/data/organizer.json` ships as an empty placeholder, so the agent
+validates and runs before you've exported anything — it says "no tasks in
+the export yet" once and then waits. It deliberately doesn't ship with
+invented tasks in it: an agent whose first act is to nudge you about
+somebody's made-up errand is one you learn to ignore.
 
 ### Where to keep the export
 

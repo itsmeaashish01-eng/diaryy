@@ -58,18 +58,22 @@ const BUNDLE_EDITS = [
   },
 ];
 
-// The geometry module is shared with the self-test, so it is written as an ES
-// module and inlined here rather than duplicated.
-function inlineGeometry(source) {
-  const geometry = fs.readFileSync(path.join(here, 'src/geometry.mjs'), 'utf8')
-    .replace(/^export (const|function|let|var|class)/gm, '$1')
-    .split('\n')
-    .map((line) => (line ? '  ' + line : line))
-    .join('\n');
-  if (!source.includes('// @inject geometry')) {
-    throw new Error('neuraxis-3d.js no longer has the geometry injection point');
+// These modules are shared with the self-test, so they are written as ES
+// modules and inlined here rather than duplicated.
+const INLINE_MODULES = ['src/geometry.mjs', 'src/accents.mjs'];
+
+function inlineModules(source) {
+  const inlined = INLINE_MODULES.map((file) =>
+    fs.readFileSync(path.join(here, file), 'utf8')
+      .replace(/^export (const|function|let|var|class)/gm, '$1')
+      .split('\n')
+      .map((line) => (line ? '  ' + line : line))
+      .join('\n')
+  ).join('\n');
+  if (!source.includes('// @inject modules')) {
+    throw new Error('neuraxis-3d.js no longer has the module injection point');
   }
-  return source.replace('  // @inject geometry', geometry);
+  return source.replace('  // @inject modules', inlined);
 }
 
 export function build(inputHtml) {
@@ -95,7 +99,7 @@ export function build(inputHtml) {
   }
 
   const css = fs.readFileSync(path.join(here, 'src/neuraxis-3d.css'), 'utf8');
-  const js = inlineGeometry(fs.readFileSync(path.join(here, 'src/neuraxis-3d.js'), 'utf8'));
+  const js = inlineModules(fs.readFileSync(path.join(here, 'src/neuraxis-3d.js'), 'utf8'));
 
   if (js.includes('</script>') || css.includes('</style>')) {
     throw new Error('Injected source would close its own tag');

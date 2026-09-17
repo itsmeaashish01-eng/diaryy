@@ -15,7 +15,7 @@
 (function () {
   'use strict';
 
-  // @inject geometry
+  // @inject modules
 
   var HOST_ID = 'nvx3d-host';
   var atlas = null;
@@ -141,6 +141,23 @@
     });
     worldPolyCache[key] = polys;
     return polys;
+  }
+
+  // Plate landmarks, sampled the same way the outlines are.
+  var accentCache = {};
+
+  function plateAccents(levelId) {
+    if (accentCache[levelId]) return accentCache[levelId];
+    var built = accentsFor(levelId).map(function (accent) {
+      return {
+        spec: accent,
+        polys: splitSubpaths(accent.d)
+          .map(function (sub) { return samplePath(sub, 90); })
+          .filter(function (points) { return points.length > 1; }),
+      };
+    });
+    accentCache[levelId] = built;
+    return built;
   }
 
   // The point on a plate's rim where its label sits: lateral for a stacked
@@ -317,6 +334,46 @@
       return started;
     }
 
+    // The landmarks inside a plate, drawn on its top face. Their line widths
+    // are plate units, so they thin out with distance like everything else.
+    function drawAccents(item) {
+      var accents = plateAccents(item.level);
+      if (!accents.length) return;
+      var scale = placementFor(item.level).scale * item.centreScale;
+      accents.forEach(function (accent) {
+        var spec = accent.spec;
+        ctx.save();
+        ctx.globalAlpha *= spec.opacity === undefined ? 0.9 : spec.opacity;
+        accent.polys.forEach(function (points) {
+          var projected = points.map(function (p) {
+            return project(plateToWorld(item.level, p.x, p.y, item.side), cam, view);
+          });
+          var started = false;
+          ctx.beginPath();
+          projected.forEach(function (p) {
+            if (!p.visible) return;
+            if (!started) { ctx.moveTo(p.x, p.y); started = true; } else ctx.lineTo(p.x, p.y);
+          });
+          if (!started) return;
+          if (spec.fill) {
+            ctx.closePath();
+            ctx.fillStyle = spec.fill;
+            ctx.fill();
+          }
+          if (spec.stroke) {
+            if (spec.dash) ctx.setLineDash(spec.dash.map(function (n) { return n * scale; }));
+            ctx.strokeStyle = spec.stroke;
+            ctx.lineWidth = Math.max(0.5, spec.width * scale);
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+            ctx.setLineDash([]);
+          }
+        });
+        ctx.restore();
+      });
+    }
+
     function drawPlate(item) {
       var levelId = item.level;
       var alpha = plateAlpha(levelId);
@@ -358,6 +415,8 @@
         }
       }
 
+      drawAccents(item);
+
       // Midline, on the plates that have one.
       if (!isSurfaceLevel(levelId) && placementFor(levelId).kind === 'axial') {
         var front = project(plateToWorld(levelId, 300, 392), cam, view);
@@ -376,11 +435,18 @@
       ctx.restore();
     }
 
-    function drawPlateLabel(item) {
+    // Plates sit close together, so a label is dropped rather than printed on
+    // top of one already placed. The focused plate is placed first and so
+    // always keeps its label.
+    function drawPlateLabel(item, placed) {
       if (!state.labels) return;
       var level = levelById(item.level);
       var anchor = project(item.labelAt, cam, view);
       if (!anchor.visible) return;
+      for (var i = 0; i < placed.length; i++) {
+        if (Math.abs(placed[i].y - anchor.y) < 13 && Math.abs(placed[i].x - anchor.x) < 150) return;
+      }
+      placed.push({ x: anchor.x, y: anchor.y });
       ctx.save();
       ctx.globalAlpha = Math.max(0.35, plateAlpha(item.level)) * fog(item.depth);
       ctx.font = '700 11px Arial, Helvetica, sans-serif';
@@ -531,8 +597,10 @@
           items.push({
             type: 'plate',
             level: levelId,
+            side: side,
             polys: polys,
             depth: proj.depth,
+            centreScale: proj.scale,
             labelAt: labelAnchor(levelId, polys),
           });
         });
@@ -638,9 +706,12 @@
         else if (item.type === 'decussation') drawDecussation(item);
         else if (item.type === 'marker') drawMarker(item);
       });
-      items.forEach(function (item) {
-        if (item.type === 'plate') drawPlateLabel(item);
-      });
+      var plates = items.filter(function (item) { return item.type === 'plate'; });
+      var placedLabels = [];
+      plates
+        .slice()
+        .sort(function (a, b) { return (b.level === state.focus) - (a.level === state.focus); })
+        .forEach(function (item) { drawPlateLabel(item, placedLabels); });
       drawGizmo();
     }
 

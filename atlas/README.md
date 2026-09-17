@@ -29,6 +29,13 @@ the brainstem. Drag to rotate, wheel or pinch to zoom, shift-drag to pan, click
 a marker to inspect it. Arrow keys rotate the model when the canvas has focus,
 and every structure is reachable from the lists beside it without a pointer.
 
+Each plate keeps the landmarks its 2D map draws — the olive, the aqueduct, the
+basis pontis, the limbs of the capsule, the cerebellar folia — so a plate in
+the model and the same plate on the flat map read as one drawing. Two of them
+carry more than orientation: the medullary decussation arcs and the internal
+arcuate fibers sit directly under the dashed midline link that marks the
+crossing.
+
 The thing a flat plate cannot show is a **course**: a structure marked on
 several plates is drawn as a line through them, so the corticospinal tract can
 be followed from the posterior limb through the crus, the basis pontis and the
@@ -66,7 +73,7 @@ The build makes four small anchored edits to the app bundle — exporting its
 data, colours, text helpers and plate outlines on `window.__ATLAS__`, adding
 the nav entry, and rendering an empty host element for the new view — then
 appends `src/neuraxis-3d.css` and `src/neuraxis-3d.js` with `src/geometry.mjs`
-inlined. The anatomy is never copied: the 3D view reads the atlas's own data,
+and `src/accents.mjs` inlined. The anatomy is never copied: the 3D view reads the atlas's own data,
 so the two views cannot drift apart. Running the build on its own output is a
 no-op, so the shipped file can be rebuilt in place.
 

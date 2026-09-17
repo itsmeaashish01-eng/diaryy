@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as G from './src/geometry.mjs';
+import { PLATE_ACCENTS, accentsFor } from './src/accents.mjs';
 import { build } from './build.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -216,7 +217,7 @@ ok(!/<script[^>]+\ssrc=/.test(html), 'the file loads no external scripts');
 equal(build(html), html, 'rebuilding the shipped file changes nothing');
 
 const source = fs.readFileSync(path.join(here, 'src/neuraxis-3d.js'), 'utf8');
-ok(source.includes('// @inject geometry'), 'the geometry injection point is still there');
+ok(source.includes('// @inject modules'), 'the module injection point is still there');
 ok(!/\bexport\b/.test(build(html).split('<!-- nvx3d:begin -->')[1].split('</script>')[0]), 'the inlined geometry has no module syntax left');
 
 // --- report ----------------------------------------------------------------

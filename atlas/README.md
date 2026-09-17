@@ -73,9 +73,9 @@ The build makes four small anchored edits to the app bundle — exporting its
 data, colours, text helpers and plate outlines on `window.__ATLAS__`, adding
 the nav entry, and rendering an empty host element for the new view — then
 appends `src/neuraxis-3d.css` and `src/neuraxis-3d.js` with `src/geometry.mjs`
-and `src/accents.mjs` inlined. The anatomy is never copied: the 3D view reads the atlas's own data,
-so the two views cannot drift apart. Running the build on its own output is a
-no-op, so the shipped file can be rebuilt in place.
+and `src/accents.mjs` inlined. The anatomy is never copied: the 3D view reads
+the atlas's own data, so the two views cannot drift apart. Running the build on
+its own output is a no-op, so the shipped file can be rebuilt in place.
 
 There is no library behind the model. Canvas 2D, a hand-rolled camera and a
 painter's-algorithm sort keep the file dependency-free and offline, which the

@@ -141,6 +141,27 @@ if (outlineMatch) {
   }
 }
 
+// --- plate landmarks -------------------------------------------------------
+
+for (const [id, accents] of Object.entries(PLATE_ACCENTS)) {
+  ok(levelIds.includes(id), `landmarks for ${id} belong to a plate that exists`);
+  for (const accent of accents) {
+    ok(typeof accent.d === 'string' && accent.d.startsWith('M'), `a landmark on ${id} is a drawable path`);
+    ok(!!(accent.stroke || accent.fill), `a landmark on ${id} is either stroked or filled`);
+  }
+}
+equal(accentsFor('nonsense').length, 0, 'a plate without landmarks draws none');
+
+// The landmarks that carry the crossing story are paired across the midline,
+// and must be split before sampling or the two arcs join into one.
+for (const { region, level } of G.DECUSSATIONS) {
+  if (!accentsFor(level).length) continue;
+  const paired = accentsFor(level).some((accent) => G.splitSubpaths(accent.d).length > 1);
+  ok(paired, `the plate carrying the ${region} crossing draws it on both sides`);
+}
+ok(accentsFor('m3').length > 0, 'the olive is drawn on the plate named after it');
+ok(accentsFor('b1').some((a) => G.splitSubpaths(a.d).length === 2), 'the peduncle decussation is drawn as two arcs');
+
 // --- camera and projection -------------------------------------------------
 
 const cam = G.makeCamera({ yaw: 0, pitch: 0, distance: 1000, focal: 1000, target: { x: 0, y: 0, z: 0 } });

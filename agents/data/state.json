@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789677092868,
-      "lastOk": 1789677092868,
+      "lastRun": 1789686151021,
+      "lastOk": 1789686151021,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789681718000,
+          "level": "notable",
+          "title": "How to Write with an LLM",
+          "detail": "Article URL: https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/ Comments URL: https://news.ycombinator.com/item?id=49747070 Points: 12 # Comments: 2",
+          "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/"
+        },
+        {
+          "t": 1789664114000,
+          "level": "notable",
+          "title": "Infinite-Parameter LLMs: Generating and Adapting Weights from Live Data",
+          "detail": "Article URL: https://arxiv.org/abs/2609.18842 Comments URL: https://news.ycombinator.com/item?id=49743483 Points: 90 # Comments: 26",
+          "url": "https://arxiv.org/abs/2609.18842"
+        },
+        {
+          "t": 1789662135000,
+          "level": "notable",
+          "title": "Launch HN: Skillsync (YC W26) – AI chat sessions made portable across agents",
+          "detail": "Hey HN, we're Nars & Nishant, founders of Skillsync (https://skillsync.com)Skillsync lets you move your AI chats across every coding agent. Most of our work exists as conversations, which are currently scattered across our agents. Though stored locally, these conversations use different formats. Thi",
+          "url": "https://news.ycombinator.com/item?id=49743049"
+        },
+        {
+          "t": 1789650104000,
+          "level": "notable",
+          "title": "Show HN: Share your AI Setup, Learn from others",
+          "detail": "I kept seeing engineers share what they were building with AI; however, I was always more curious about how they worked. Which agents did they use? What skills and tools had stuck or been thrown out the window? How did they manage longer-running tasks? So I built this with the hope we could have a d",
+          "url": "https://mysetup.ai/"
+        },
         {
           "t": 1789664114000,
           "level": "notable",
@@ -401,34 +429,6 @@
           "title": "David Sacks: OpenAI and Anthropic Don't Need Regulations to Pace Frontier Models",
           "detail": "Article URL: https://twitter.com/DavidSacks/status/2098973625252708460 Comments URL: https://news.ycombinator.com/item?id=49685991 Points: 75 # Comments: 35",
           "url": "https://twitter.com/DavidSacks/status/2098973625252708460"
-        },
-        {
-          "t": 1789262551000,
-          "level": "notable",
-          "title": "Why are AI agents lying, cheating and coordinating?",
-          "detail": "Article URL: https://yoshuabengio.org/en/publication/why-are-ai-agents-lying-cheating-and-coordinating Comments URL: https://news.ycombinator.com/item?id=49678969 Points: 495 # Comments: 579",
-          "url": "https://yoshuabengio.org/en/publication/why-are-ai-agents-lying-cheating-and-coordinating"
-        },
-        {
-          "t": 1789262551000,
-          "level": "notable",
-          "title": "Why are AI agents lying, cheating and coordinating?",
-          "detail": "Article URL: https://yoshuabengio.org/en/publication/why-are-ai-agents-lying-cheating-and-coordinating Comments URL: https://news.ycombinator.com/item?id=49678969 Points: 394 # Comments: 471",
-          "url": "https://yoshuabengio.org/en/publication/why-are-ai-agents-lying-cheating-and-coordinating"
-        },
-        {
-          "t": 1789262551000,
-          "level": "notable",
-          "title": "Why are AI agents lying, cheating and coordinating?",
-          "detail": "Article URL: https://yoshuabengio.org/en/publication/why-are-ai-agents-lying-cheating-and-coordinating Comments URL: https://news.ycombinator.com/item?id=49678969 Points: 229 # Comments: 300",
-          "url": "https://yoshuabengio.org/en/publication/why-are-ai-agents-lying-cheating-and-coordinating"
-        },
-        {
-          "t": 1789256758000,
-          "level": "notable",
-          "title": "AgentsDock: An IDE designed for agentic AI research",
-          "detail": "Article URL: https://agentsdock.net/ Comments URL: https://news.ycombinator.com/item?id=49678435 Points: 60 # Comments: 29",
-          "url": "https://agentsdock.net/"
         }
       ],
       "notifiedAt": {},
@@ -1716,11 +1716,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789665239009,
-      "lastOk": 1789665239009,
+      "lastRun": 1789686151794,
+      "lastOk": 1789686151794,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,839 (+60.0%) · excludes S&P 500 ETF",
+      "lastLine": "$3,817 (+59.0%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1834,9 +1834,27 @@
         {
           "t": 1789665239009,
           "v": 3839
+        },
+        {
+          "t": 1789686151794,
+          "v": 3816.95
         }
       ],
       "events": [
+        {
+          "t": 1789686151782,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789686151783,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789665238998,
           "level": "notable",
@@ -2233,12 +2251,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 76780
+          "BTC": 76339
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789686151794,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 6
+    },
     {
       "t": 1789677093397,
       "ran": 2,

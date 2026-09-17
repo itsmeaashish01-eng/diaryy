@@ -350,6 +350,21 @@ mean an install step in CI for a path that is off unless you turn it on.
 
 ## Safety
 
+**A public repository publishes what the agents find.** Six of the types —
+`goals`, `reading`, `exercise`, `portfolio`, `diary`, `study` — read a file
+about you and write what they found into `state.json`, which the workflow
+commits on every run. In a public repo that is your goal deadlines, your
+reading list, your training gaps and your positions, published hourly and
+kept in the history afterwards.
+
+Nothing here stops you: it's your repository and your data. But the runner
+checks and says so on every run rather than letting it be something you
+find out later. Two ways out — make the repository private, or pause those
+agents and run them on your own machine with `--only`.
+
+The other five types watch the outside world and leak nothing.
+
+
 **Agents are data, and data doesn't get to run programs.** Price Watch's
 `command` source — which executes a local program — is deliberately
 unreachable from an agent definition.

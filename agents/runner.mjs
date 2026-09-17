@@ -45,6 +45,7 @@ import {
   deliver, canNotify, anySent, describeDelivery,
   configure, allowCommittedTopic, usingCommittedTopic,
 } from "./core/notify.mjs";
+import { repoVisibility, personalAgents } from "./core/repo.mjs";
 import { writeSummary } from "./core/report.mjs";
 
 const argv = process.argv.slice(2);
@@ -110,56 +111,47 @@ if (flag("--validate")) {
    the settings have been read, since the topic may be committed there. */
 const warnings = [];
 
-/* An ntfy topic is a password: anyone holding the string can read every
-   alert. Committing one is a reasonable convenience in a private
-   repository and a published password in a public one, so this checks
-   rather than trusting whoever set it to have remembered.
-
-   Off GitHub there is no repository to judge and it is the user's own
-   machine, so the committed topic stands. On GitHub, anything short of a
-   confirmed private repository refuses it: a missed alert is recoverable,
-   a leaked topic is not. */
-async function committedTopicIsSafe() {
-  const repo = process.env.GITHUB_REPOSITORY;
-  if (!repo) return { ok: true, why: "not running on GitHub" };
-
-  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
-  if (!token) {
-    return { ok: false, why: `cannot check whether ${repo} is public without a GITHUB_TOKEN` };
-  }
-  try {
-    const res = await fetch(`https://api.github.com/repos/${repo}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-      signal: AbortSignal.timeout(20000),
-    });
-    if (!res.ok) return { ok: false, why: `GitHub answered ${res.status} when asked if ${repo} is private` };
-    const json = await res.json();
-    return json.private
-      ? { ok: true, why: `${repo} is private` }
-      : { ok: false, why: `${repo} is PUBLIC — a committed topic there is a password anyone can read` };
-  } catch (e) {
-    return { ok: false, why: `could not check whether ${repo} is public (${e.message})` };
-  }
-}
-
 let settingsReady = false;
 async function applySettings(defs) {
   if (settingsReady) return;
   settingsReady = true;
 
   configure((defs.settings && defs.settings.notify) || {});
+  const vis = await repoVisibility();
 
+  /* A committed topic is a password. It is safe in a private repository
+     and published in a public one, so anything short of a confirmed
+     private repo refuses it: a missed alert is recoverable, a leaked
+     topic is not. */
   if (usingCommittedTopic()) {
-    const verdict = await committedTopicIsSafe();
-    allowCommittedTopic(verdict.ok);
-    if (!verdict.ok) {
+    const safe = !vis.onGitHub || (vis.known && !vis.isPublic);
+    allowCommittedTopic(safe);
+    if (!safe) {
       const w =
-        `The ntfy topic in agents.json is being ignored: ${verdict.why}. ` +
+        `The ntfy topic in agents.json is being ignored: ${vis.why}. ` +
         "Move it to an NTFY_TOPIC secret, or make the repository private.";
+      warnings.push(w);
+      log(`⚠ ${w}`);
+    }
+  }
+
+  /* The personal agents read a file about you and write what they found
+     back into the repository — which a workflow then commits, every hour,
+     for as long as this runs. In a public repo that is your goals, your
+     reading, your training and your positions, published on a schedule
+     and kept in the history afterwards.
+
+     Nothing here stops it: it is the user's repository and their data.
+     But it must never be the thing they find out afterwards. */
+  if (vis.onGitHub && vis.known && vis.isPublic) {
+    const personal = personalAgents(defs.agents);
+    if (personal.length) {
+      const names = personal.map((a) => a.label || a.id).join(", ");
+      const w =
+        `This repository is PUBLIC, and ${personal.length === 1 ? "this agent writes" : "these agents write"} ` +
+        `what ${personal.length === 1 ? "it finds" : "they find"} into state.json, which the workflow commits every run: ${names}. ` +
+        "Anyone can read it, and the history keeps it. Make the repository private, " +
+        "or pause these and run them on your own machine.";
       warnings.push(w);
       log(`⚠ ${w}`);
     }

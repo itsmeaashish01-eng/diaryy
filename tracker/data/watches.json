@@ -29,6 +29,21 @@
   "seeded": true,
   "alerts": [
     {
+      "id": "mu5rv93u-wtpi6n",
+      "watchId": "seed-demo",
+      "watchLabel": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 8.9% vs its recent average — now $217.27",
+      "price": 217.27,
+      "currency": "USD",
+      "t": 1789664218842,
+      "read": false,
+      "kindLabel": "Flight"
+    },
+    {
       "id": "mu5gfbs1-bt0qcm",
       "watchId": "seed-demo",
       "watchLabel": "Demo fare — checks with no network needed",
@@ -441,9 +456,13 @@
         {
           "t": 1789645000010,
           "p": 76245
+        },
+        {
+          "t": 1789664218827,
+          "p": 76624
         }
       ],
-      "lastCheck": 1789645000010,
+      "lastCheck": 1789664218827,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
@@ -794,14 +813,21 @@
           "meta": {
             "simulated": true
           }
+        },
+        {
+          "t": 1789664218841,
+          "p": 217.27,
+          "meta": {
+            "simulated": true
+          }
         }
       ],
-      "lastCheck": 1789645000032,
+      "lastCheck": 1789664218841,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
       "lastAlertAt": {
-        "dropPct": 1789645000033
+        "dropPct": 1789664218842
       },
       "cooldownMin": 180,
       "notes": "Simulated. Proves the hourly job runs end to end. Delete once your real watches are in."

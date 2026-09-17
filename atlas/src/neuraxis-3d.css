@@ -231,3 +231,20 @@
     padding: 20px 14px;
   }
 }
+
+/* Spoken, not seen: what the model is showing after a selection changes. */
+.nvx3d-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.nvx3d-open {
+  margin-top: 8px;
+}

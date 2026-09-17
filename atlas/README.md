@@ -50,10 +50,19 @@ all work as they do in the lesion explorer, and use the same text: a lesioned
 structure turns red on every plate it crosses, which is what makes a vascular
 pattern legible as a shape rather than a list.
 
+Each of the 26 cards in **Vascular territories** gets a *See it in 3D* button
+beside the one that loads it into the flat explorer, so a syndrome can be
+opened straight into the model with its structures already lesioned.
+
 The lesion explorer's map panel also gets a **2D / 3D** switch. In 3D it shows
 the plate being studied among its own neighbours, and it drives the explorer
 rather than duplicating it: clicking a marker there selects it in the app,
 exactly as clicking the flat map would.
+
+The model is not a silent picture: the canvas describes what it is showing,
+selections are announced, every structure is reachable from the lists beside
+it, and the spin control is not offered at all when the reader has asked for
+reduced motion.
 
 It is a schematic montage, and says so on screen. Relative plate sizes,
 spacing and marker positions are teaching approximations — not MRI

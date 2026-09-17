@@ -75,6 +75,10 @@
     return 0;
   }
 
+  function prefersReducedMotion() {
+    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
   function sidesFor(side) {
     return side === 'bilateral' ? ['left', 'right'] : [side];
   }
@@ -877,13 +881,29 @@
       window.addEventListener('resize', resize);
     }
 
+    // The description is rewritten only when it actually changes. The inline
+    // panel watches its own subtree for React re-renders, so an attribute set
+    // on every state change would wake that observer, which would sync state
+    // again, and the two would chase each other.
+    function describeScene() {
+      var level = levelById(state.focus);
+      var count = regionsAt(state.focus).length;
+      var label = 'Model of the atlas plates, viewed in three dimensions. Showing ' +
+        level.id.toUpperCase() + ' ' + levelShortName(level) + ', with ' + count +
+        ' numbered structures. Every structure is also listed beside the model. ' +
+        'Arrow keys rotate, plus and minus zoom, R resets the view.';
+      if (canvas.getAttribute('aria-label') !== label) canvas.setAttribute('aria-label', label);
+    }
+
     var api = {
       canvas: canvas,
       tip: tip,
       state: state,
+      describeScene: describeScene,
       camera: cam,
       setState: function (patch) {
         Object.keys(patch).forEach(function (key) { state[key] = patch[key]; });
+        describeScene();
         needsDraw = true;
       },
       // Moves in on the plate being studied, keeping its neighbours in frame.
@@ -972,6 +992,19 @@
       state.selected = bridged.selected || '';
       state.lesion = bridged.lesion || [];
     }
+    // Arriving from a vascular card: open on that pattern rather than on
+    // whatever the explorer was last showing.
+    if (pendingTerritory) {
+      var opening = atlas.data.territories.find(function (t) { return t.id === pendingTerritory; });
+      pendingTerritory = null;
+      if (opening) {
+        state.territory = opening.id;
+        state.focus = opening.level;
+        state.lesion = opening.regions.slice();
+        state.selected = opening.regions[0];
+        if (opening.bilateral) state.side = 'bilateral';
+      }
+    }
     if (!state.selected) state.selected = (regionsAt(state.focus)[0] || {}).id || '';
 
     var renderer = null;
@@ -983,6 +1016,17 @@
     // all survive a panel rebuild.
     var stageWrap = el('div', { class: 'nvx3d-canvas-wrap', style: 'height:min(64vh,620px)' });
     var spinButton = null;
+    var live = el('p', { class: 'nvx3d-live', 'aria-live': 'polite' });
+    host.appendChild(live);
+
+    function announce() {
+      var region = regionById(state.selected);
+      var level = levelById(state.focus);
+      if (!region) return;
+      live.textContent = region.name + ', ' + state.side + ', on plate ' +
+        level.id.toUpperCase() + ' ' + levelShortName(level) +
+        (state.lesion.indexOf(region.id) !== -1 ? '. In the lesion.' : '.');
+    }
 
     function territoryRegions() {
       var territory = atlas.data.territories.find(function (t) { return t.id === state.territory; });
@@ -1179,17 +1223,21 @@
           onclick: function () { renderer.setViewpoint(pair[0]); },
         }));
       });
-      spinButton = el('button', {
-        type: 'button',
-        text: 'Spin',
-        class: state.spin ? 'on' : '',
-        onclick: function () {
-          state.spin = !state.spin;
-          spinButton.className = state.spin ? 'on' : '';
-          pushToRenderer();
-        },
-      });
-      views.appendChild(spinButton);
+      // Nothing to offer if the reader has asked for less motion: the button
+      // would sit there pressed while the model stayed still.
+      if (!prefersReducedMotion()) {
+        spinButton = el('button', {
+          type: 'button',
+          text: 'Spin',
+          class: state.spin ? 'on' : '',
+          onclick: function () {
+            state.spin = !state.spin;
+            spinButton.className = state.spin ? 'on' : '';
+            pushToRenderer();
+          },
+        });
+        views.appendChild(spinButton);
+      }
       views.appendChild(el('button', {
         type: 'button',
         text: 'Reset',
@@ -1416,6 +1464,7 @@
         renderer.fitAll();
       }
       pushToRenderer();
+      announce();
     }
 
     render();
@@ -1571,15 +1620,48 @@
     if (inlineModeOn) setMode(true);
 
     // React re-renders the panel on every state change; re-read afterwards.
-    var observer = new MutationObserver(function () {
+    var observer = new MutationObserver(function (records) {
       if (!document.body.contains(wrap)) {
         observer.disconnect();
         if (renderer) renderer.destroy();
         return;
       }
-      if (on) sync();
+      // Only React's own changes to the panel are worth re-reading; the
+      // model's canvas lives inside the panel and changes constantly.
+      var fromApp = records.some(function (record) {
+        return !wrap.contains(record.target);
+      });
+      if (on && fromApp) sync();
     });
     observer.observe(panel, { childList: true, subtree: true, attributes: true });
+  }
+
+  // Each of the 26 vascular cards gets a way into the model, beside the
+  // existing button that loads it into the flat explorer.
+  var pendingTerritory = null;
+
+  function mountVascularLinks() {
+    var cards = document.querySelectorAll('.vascular-card');
+    if (!cards.length) return;
+    Array.prototype.forEach.call(cards, function (card) {
+      if (card.querySelector('.nvx3d-open')) return;
+      var heading = card.querySelector('h3');
+      var primary = card.querySelector('button.primary');
+      if (!heading || !primary) return;
+      var territory = atlas.data.territories.find(function (t) { return t.name === heading.textContent; });
+      if (!territory) return;
+      primary.parentNode.insertBefore(el('button', {
+        class: 'secondary nvx3d-open',
+        text: 'See it in 3D \u2192',
+        onclick: function () {
+          pendingTerritory = territory.id;
+          var nav = document.querySelectorAll('.main-nav button');
+          Array.prototype.forEach.call(nav, function (button) {
+            if (button.textContent.indexOf('3D neuraxis') !== -1) button.click();
+          });
+        },
+      }), primary.nextSibling);
+    });
   }
 
   // ------------------------------------------------------------------ boot
@@ -1605,6 +1687,7 @@
         mountExplorerSwitch();
         readExplorerState();
       }
+      mountVascularLinks();
     }
 
     var observer = new MutationObserver(tick);

@@ -143,6 +143,18 @@ async function applySettings(defs) {
 
      Nothing here stops it: it is the user's repository and their data.
      But it must never be the thing they find out afterwards. */
+  /* A check that couldn't be answered protects nothing, and said nothing
+     about it — which is how a guard quietly stops guarding. If the answer
+     is unavailable, say so and say why, because the alternative is a run
+     that looks identical to a safe one. */
+  if (vis.onGitHub && !vis.known) {
+    const w =
+      `Could not determine whether this repository is public: ${vis.why}. ` +
+      "The public-repository check is not protecting anything this run.";
+    warnings.push(w);
+    log(`⚠ ${w}`);
+  }
+
   if (vis.onGitHub && vis.known && vis.isPublic) {
     const personal = personalAgents(defs.agents);
     if (personal.length) {

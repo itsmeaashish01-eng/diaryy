@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789713221690,
-      "lastOk": 1789713221690,
+      "lastRun": 1789731870151,
+      "lastOk": 1789731870151,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789727728000,
+          "level": "notable",
+          "title": "ZCode, the GLM coding agent, silently uploads your Git history",
+          "detail": "Article URL: https://tokenstead.ai/guides/zcode-silent-git-history-upload Comments URL: https://news.ycombinator.com/item?id=49752422 Points: 31 # Comments: 2",
+          "url": "https://tokenstead.ai/guides/zcode-silent-git-history-upload"
+        },
+        {
+          "t": 1789681718000,
+          "level": "notable",
+          "title": "How to Write with an LLM",
+          "detail": "Article URL: https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/ Comments URL: https://news.ycombinator.com/item?id=49747070 Points: 190 # Comments: 120",
+          "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/"
+        },
         {
           "t": 1789681718000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Claude is a Contrarian",
           "detail": "Article URL: https://medium.com/@rdsubhas/claude-is-a-contrarian-dbce4de5cada Comments URL: https://news.ycombinator.com/item?id=49699373 Points: 85 # Comments: 113",
           "url": "https://medium.com/@rdsubhas/claude-is-a-contrarian-dbce4de5cada"
-        },
-        {
-          "t": 1789394349000,
-          "level": "notable",
-          "title": "Notes on gotchas while migrating 35kb preprompts from Opus to self-hosted Ollama",
-          "detail": "Article URL: https://patrickmccanna.net/notes-on-migrating-large-prompts-away-from-anthropic-openai-to-self-hosted-llms/ Comments URL: https://news.ycombinator.com/item?id=49697014 Points: 89 # Comments: 40",
-          "url": "https://patrickmccanna.net/notes-on-migrating-large-prompts-away-from-anthropic-openai-to-self-hosted-llms/"
-        },
-        {
-          "t": 1789392022000,
-          "level": "notable",
-          "title": "Show HN: Pelican-bicycle alternatives",
-          "detail": "In November and December 2025, inspired by Simon Willison’s pelican-riding-a-bicycle benchmark, I had some then-current LLMs create SVGs from thirty similar prompts, such as “Generate an SVG of an octopus operating a pipe organ.” Simon mentioned that experiment on his blog [1].Nine months have passe",
-          "url": "https://gally.net/temp/20260914pelican-alternatives/index.html"
         }
       ],
       "notifiedAt": {},
@@ -1784,11 +1784,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789713222572,
-      "lastOk": 1789713222572,
+      "lastRun": 1789731870689,
+      "lastOk": 1789731870689,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,874 (+61.4%) · excludes S&P 500 ETF",
+      "lastLine": "$3,901 (+62.5%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1910,9 +1910,27 @@
         {
           "t": 1789713222573,
           "v": 3874.1
+        },
+        {
+          "t": 1789731870690,
+          "v": 3900.6
         }
       ],
       "events": [
+        {
+          "t": 1789731870675,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789731870675,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789713222559,
           "level": "notable",
@@ -2318,31 +2336,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789114622767,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789114622767,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 77482
+          "BTC": 78012
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789731870690,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1789713222573,
       "ran": 6,

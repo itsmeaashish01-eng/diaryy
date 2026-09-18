@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789694737917,
-      "lastOk": 1789694737917,
+      "lastRun": 1789713221690,
+      "lastOk": 1789713221690,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789681718000,
+          "level": "notable",
+          "title": "How to Write with an LLM",
+          "detail": "Article URL: https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/ Comments URL: https://news.ycombinator.com/item?id=49747070 Points: 98 # Comments: 69",
+          "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/"
+        },
+        {
+          "t": 1789664114000,
+          "level": "notable",
+          "title": "Infinite-Parameter LLMs: Generating and Adapting Weights from Live Data",
+          "detail": "Article URL: https://arxiv.org/abs/2609.18842 Comments URL: https://news.ycombinator.com/item?id=49743483 Points: 133 # Comments: 38",
+          "url": "https://arxiv.org/abs/2609.18842"
+        },
         {
           "t": 1789675531000,
           "level": "notable",
@@ -415,35 +429,91 @@
           "title": "Show HN: Pelican-bicycle alternatives",
           "detail": "In November and December 2025, inspired by Simon Willison’s pelican-riding-a-bicycle benchmark, I had some then-current LLMs create SVGs from thirty similar prompts, such as “Generate an SVG of an octopus operating a pipe organ.” Simon mentioned that experiment on his blog [1].Nine months have passe",
           "url": "https://gally.net/temp/20260914pelican-alternatives/index.html"
-        },
-        {
-          "t": 1789389657000,
-          "level": "notable",
-          "title": "What a time to be alive – rouge AI agents attack RubyGems.org",
-          "detail": "Article URL: https://tenderlovemaking.com/2026/09/11/what-a-time-to-be-alive/ Comments URL: https://news.ycombinator.com/item?id=49695876 Points: 77 # Comments: 103",
-          "url": "https://tenderlovemaking.com/2026/09/11/what-a-time-to-be-alive/"
-        },
-        {
-          "t": 1789387292000,
-          "level": "notable",
-          "title": "Apple's Siri AI Can Be Swapped Out for Claude, ChatGPT, Code Shows",
-          "detail": "Article URL: https://www.macrumors.com/2026/09/14/siri-can-be-swapped-out-for-chatgpt-claude/ Comments URL: https://news.ycombinator.com/item?id=49695409 Points: 104 # Comments: 40",
-          "url": "https://www.macrumors.com/2026/09/14/siri-can-be-swapped-out-for-chatgpt-claude/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1789677093393,
-      "lastOk": 1789677093393,
+      "lastRun": 1789713222040,
+      "lastOk": 1789713222040,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.274",
+      "lastLine": "latest is anthropics/claude-code v2.1.276",
       "seen": [],
       "metrics": [],
       "events": [
         {
+          "t": 1789697546000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.276",
+          "detail": "## What's changed\n\n- Fixed every request failing with `400 … Input tag 'advisor_20260301'` when `ANTHROPIC_BASE_URL` points at a proxy or gateway (2.1.275 regression)\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.276"
+        },
+        {
+          "t": 1789684397000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.275",
+          "detail": "## What's changed\n\n- Added the signed-in account to Claude apps gateway sign-in: when the gateway names it, you confirm it before the credential is saved, and `/status` shows it\n- Added a send-now key (ctrl+enter, or ctrl+x ctrl+s) that interrupts the current turn and sends all queued messages at once; sent and queued messages show in gray until the model receives them\n- Added a startup warning wh",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.275"
+        },
+        {
+          "t": 1789603922000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.274",
+          "detail": "## What's changed\n\n- Added a visible warning when memory usage is critical, with steps to free memory or restart safely\n- Added `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` to bound how long the first non-interactive turn waits for connecting MCP servers (`0` = don't wait)\n- Added `effort` attribute to the `claude_code.llm_request` OpenTelemetry trace span, matching the `api_request` event\n- Added `claude_co",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.274"
+        },
+        {
+          "t": 1789503783000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.273",
+          "detail": "## What's changed\n\n- Added `x-claude-code-request-class`, `x-claude-code-agent-type`, `x-claude-code-prev-tool-durations`, `x-claude-code-compaction` and `x-claude-code-context-compacted` request headers for LLM gateways; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added a notification when an MCP server disconnects mid-session and automatic reconnection gives up, pointing at `/mcp`\n- Added",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
+        },
+        {
+          "t": 1789432945000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.272",
+          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.272"
+        },
+        {
+          "t": 1789423974000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.271",
+          "detail": "## What's changed\n\n- Added fast mode in Claude Code Remote sessions (cloud and self-hosted runners): the host's fast-mode setting or `/fast` typed in the session applies where your organization allows it\n- Added mouse support to the `/config` panel in fullscreen mode: the wheel scrolls the settings list, a click on a setting's value changes it, and the row under the pointer is highlighted\n- Added ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.271"
+        },
+        {
+          "t": 1789242344000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.270",
+          "detail": "## What's changed\n\n- Fixed read-only git commands in Bash unexpectedly asking for permission after a session had been running for a while (regression in 2.1.269)\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
+        },
+        {
+          "t": 1789154275000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.269",
+          "detail": "## What's changed\n\n- Added `claude plugin eval`: run a plugin's eval suite against Claude Code and get scored, reproducible results (JSON + HTML report); see `claude plugin eval --help`\n- Added `/output-style [name]` to list and switch output styles, including over Remote Control and in cloud and other headless sessions\n- Added a diff of the files a Bash command changed to the Bash tool result whe",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
+        },
+        {
+          "t": 1789072254000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.268",
+          "detail": "## What's changed\n\n- Added to the Claude apps gateway: with `pricing:` set in `gateway.yaml`, signed-in Claude Code clients receive the same rates through managed settings, so `/cost` and telemetry match the spend meter\n- Added a startup warning for gateways when `access_control.allow_cidrs` is empty, and a one-time warning the first time a request arrives from a public address\n- Added the `gatewa",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.268"
+        },
+        {
+          "t": 1788983894000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.267",
+          "detail": "## What's changed\n\n- Added `maxEffortLevel` setting (top-level or per model under `modelSettings`): caps the effort level on every provider, including Bedrock, Vertex and Foundry; users can still pick a lower level\n- Added `--system-prompt-snapshot off` to render the system prompt fresh on every request instead of reusing the conversation's recorded prompt (for iterating on prompt text)\n- Fixed Co",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.267"
+        },
+        {
           "t": 1789603922000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.274",
@@ -652,76 +722,6 @@
           "title": "anthropics/claude-code v2.1.265",
           "detail": "## What's changed\n\n- Added `user.email` and `user.groups` to the telemetry Claude Desktop and Cowork send through a Claude apps gateway, matching terminal sessions\n- Added support for pointing `--plugin-dir` at a folder of plugins: each child folder with a manifest loads, and children added or removed while running are picked up\n- Added a 1 GB cap on tool results saved to disk; the in-conversation",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.265"
-        },
-        {
-          "t": 1789503783000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.273",
-          "detail": "## What's changed\n\n- Added `x-claude-code-request-class`, `x-claude-code-agent-type`, `x-claude-code-prev-tool-durations`, `x-claude-code-compaction` and `x-claude-code-context-compacted` request headers for LLM gateways; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added a notification when an MCP server disconnects mid-session and automatic reconnection gives up, pointing at `/mcp`\n- Added",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
-        },
-        {
-          "t": 1789432945000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.272",
-          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.272"
-        },
-        {
-          "t": 1789423974000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.271",
-          "detail": "## What's changed\n\n- Added fast mode in Claude Code Remote sessions (cloud and self-hosted runners): the host's fast-mode setting or `/fast` typed in the session applies where your organization allows it\n- Added mouse support to the `/config` panel in fullscreen mode: the wheel scrolls the settings list, a click on a setting's value changes it, and the row under the pointer is highlighted\n- Added ",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.271"
-        },
-        {
-          "t": 1789242344000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.270",
-          "detail": "## What's changed\n\n- Fixed read-only git commands in Bash unexpectedly asking for permission after a session had been running for a while (regression in 2.1.269)\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
-        },
-        {
-          "t": 1789154275000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.269",
-          "detail": "## What's changed\n\n- Added `claude plugin eval`: run a plugin's eval suite against Claude Code and get scored, reproducible results (JSON + HTML report); see `claude plugin eval --help`\n- Added `/output-style [name]` to list and switch output styles, including over Remote Control and in cloud and other headless sessions\n- Added a diff of the files a Bash command changed to the Bash tool result whe",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
-        },
-        {
-          "t": 1789072254000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.268",
-          "detail": "## What's changed\n\n- Added to the Claude apps gateway: with `pricing:` set in `gateway.yaml`, signed-in Claude Code clients receive the same rates through managed settings, so `/cost` and telemetry match the spend meter\n- Added a startup warning for gateways when `access_control.allow_cidrs` is empty, and a one-time warning the first time a request arrives from a public address\n- Added the `gatewa",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.268"
-        },
-        {
-          "t": 1788983894000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.267",
-          "detail": "## What's changed\n\n- Added `maxEffortLevel` setting (top-level or per model under `modelSettings`): caps the effort level on every provider, including Bedrock, Vertex and Foundry; users can still pick a lower level\n- Added `--system-prompt-snapshot off` to render the system prompt fresh on every request instead of reusing the conversation's recorded prompt (for iterating on prompt text)\n- Fixed Co",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.267"
-        },
-        {
-          "t": 1788911714000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.266",
-          "detail": "## What's changed\n\n- Fixed a 2.1.265 regression affecting LLM-gateway and proxy setups: the undocumented `CLAUDE_CODE_USE_GATEWAY` environment variable, previously ignored unless `ANTHROPIC_BASE_URL` and `ANTHROPIC_AUTH_TOKEN` were both set, began forcing Cloud-gateway sign-in on its own in 2.1.265, so configurations that set it alongside an API key, `apiKeyHelper`, or custom auth headers failed e",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.266"
-        },
-        {
-          "t": 1788899851000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.265",
-          "detail": "## What's changed\n\n- Added `user.email` and `user.groups` to the telemetry Claude Desktop and Cowork send through a Claude apps gateway, matching terminal sessions\n- Added support for pointing `--plugin-dir` at a folder of plugins: each child folder with a manifest loads, and children added or removed while running are picked up\n- Added a 1 GB cap on tool results saved to disk; the in-conversation",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.265"
-        },
-        {
-          "t": 1788663260000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.263",
-          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.263"
         },
         {
           "t": 1789503783000,
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1789665238354,
-      "lastOk": 1789665238354,
+      "lastRun": 1789713222042,
+      "lastOk": 1789713222042,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 1 drifting",
@@ -926,9 +926,41 @@
         {
           "t": 1789665238354,
           "v": 17
+        },
+        {
+          "t": 1789713222042,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1789713222042,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 58 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1789713222042,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1789713222042,
+          "level": "notable",
+          "title": "Data collection complete — 88 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1789713222042,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 29 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1789665238353,
           "level": "notable",
@@ -1233,12 +1265,12 @@
       ],
       "notifiedAt": {},
       "memo": {
-        "checkedOn": "2026-09-17"
+        "checkedOn": "2026-09-18"
       }
     },
     "reading": {
-      "lastRun": 1789665238355,
-      "lastOk": 1789665238355,
+      "lastRun": 1789713222043,
+      "lastOk": 1789713222043,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1295,9 +1327,34 @@
         {
           "t": 1789665238355,
           "v": 3
+        },
+        {
+          "t": 1789713222044,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1789713222043,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1789713222043,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 48 days",
+          "url": ""
+        },
+        {
+          "t": 1789713222043,
+          "level": "notable",
+          "title": "Still unread after 140 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1789665238355,
           "level": "notable",
@@ -1578,8 +1635,8 @@
       }
     },
     "training": {
-      "lastRun": 1789665238356,
-      "lastOk": 1789665238356,
+      "lastRun": 1789713222045,
+      "lastOk": 1789713222045,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
@@ -1636,9 +1693,20 @@
         {
           "t": 1789665238356,
           "v": 0
+        },
+        {
+          "t": 1789713222045,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1789713222045,
+          "level": "notable",
+          "title": "9 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1789665238356,
           "level": "notable",
@@ -1716,11 +1784,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789686151794,
-      "lastOk": 1789686151794,
+      "lastRun": 1789713222572,
+      "lastOk": 1789713222572,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,817 (+59.0%) · excludes S&P 500 ETF",
+      "lastLine": "$3,874 (+61.4%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1838,9 +1906,27 @@
         {
           "t": 1789686151794,
           "v": 3816.95
+        },
+        {
+          "t": 1789713222573,
+          "v": 3874.1
         }
       ],
       "events": [
+        {
+          "t": 1789713222559,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789713222559,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789686151782,
           "level": "notable",
@@ -2251,12 +2337,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 76339
+          "BTC": 77482
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789713222573,
+      "ran": 6,
+      "skipped": 4,
+      "failed": 0,
+      "notified": 0,
+      "held": 22
+    },
     {
       "t": 1789694737921,
       "ran": 1,

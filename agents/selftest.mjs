@@ -29,7 +29,7 @@ import organizer, { collect, ageBucket, ageRungs } from "./types/organizer.mjs";
 import { decide } from "./core/brain.mjs";
 import { blankAgentState, remember, loadState, saveState, agentState } from "./core/state.mjs";
 import { anySent, describeDelivery } from "./core/notify.mjs";
-import { looksLikeExport, adoptTargets, byPath } from "./core/adopt.mjs";
+import { looksLikeExport, adoptTargets, byPath, adoptSources, newestOf } from "./core/adopt.mjs";
 
 let passed = 0;
 const failures = [];
@@ -769,6 +769,35 @@ check("Every type that reads an export declares it, so --adopt finds it", () => 
      actually say so. */
   eq(organizer.adopts, "diary export", "organizer");
   eq(diary.adopts, "diary export", "diary");
+});
+
+check("A glob arrives as several paths, and all of them are read", () => {
+  /* The shell expands `--adopt ~/Downloads/my-diary-*.json` before the
+     runner sees it. Reading one argument positionally drops the rest. */
+  eq(adoptSources(["--adopt", "a.json", "b.json", "c.json"]), ["a.json", "b.json", "c.json"], "all three");
+  eq(adoptSources(["--adopt", "a.json"]), ["a.json"], "the ordinary case");
+  eq(adoptSources(["--list"]), [], "not asked for");
+});
+
+check("Reading the sources stops at the next flag", () => {
+  /* `--adopt --dry-run` used to complain that it couldn't read a file
+     called --dry-run. */
+  eq(adoptSources(["--adopt", "--dry-run"]), [], "a flag is not a filename");
+  eq(adoptSources(["--adopt", "a.json", "--dry-run"]), ["a.json"], "flags after the file still parse");
+  eq(adoptSources(["--dry-run", "--adopt", "a.json", "b.json", "--force"]), ["a.json", "b.json"], "flags on both sides");
+});
+
+check("Several exports resolve to the most recent, not the first", () => {
+  /* Filenames carry their date, so they sort oldest-first — taking the
+     first would quietly adopt the stalest export you own. */
+  const files = [
+    { path: "my-diary-2026-08-01.json", mtime: 1000 },
+    { path: "my-diary-2026-09-18.json", mtime: 9000 },
+    { path: "my-diary-2026-09-02.json", mtime: 5000 },
+  ];
+  eq(newestOf(files).path, "my-diary-2026-09-18.json", "newest by mtime");
+  eq(newestOf([files[0]]).path, "my-diary-2026-08-01.json", "one file is its own newest");
+  eq(newestOf([{ path: "a", mtime: 5 }, { path: "b", mtime: 5 }]).path, "a", "a tie keeps the order it came in");
 });
 
 /* ---- delivery ------------------------------------------------------ */

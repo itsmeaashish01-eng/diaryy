@@ -331,6 +331,20 @@ is a glance rather than a scroll.
 | `WEBHOOK_URL` | Discord, Slack, or anything taking JSON |
 | `WEBHOOK_STYLE` | `discord` (default), `slack`, or `plain` |
 
+**On ntfy.sh, the topic name is the only secret there is.** There's no
+account and no password: anyone who knows or guesses the string can read
+what you publish to it. So don't name it `diary` or `aashish-tasks` —
+generate one:
+
+```bash
+openssl rand -hex 12
+```
+
+That matters most for `organizer`, which quotes your task text by design.
+If you'd rather not have that leave the machine at all, `includeText:
+false` sends the counts and the dates instead, or run a `NTFY_SERVER` of
+your own.
+
 With neither set the agents still run and record — and say loudly, every
 run, that nothing can reach you. A half-configured setup that looks like a
 working one is worse than one that's obviously off.
@@ -441,6 +455,18 @@ tells you what each one will now see and what it replaced. `--dry-run`
 alongside it shows you that without writing anything. It refuses a file
 that isn't a diary export rather than overwriting an agent's data with
 whatever else was in your downloads folder.
+
+A glob is fine, and usually what you want once you've exported a few
+times:
+
+```bash
+node agents/runner.mjs --adopt ~/Downloads/my-diary-*.json
+```
+
+The shell expands that before the runner sees it, so several paths arrive
+at once. It takes the most recent by modification time and prints the ones
+it passed over — never the first, which, since the filenames carry their
+dates, would be the oldest export you own.
 
 Doing it by hand is a rename and a move, which is a chore, and a chore in
 front of an agent is why `diary-nudge` shipped paused and stayed paused.

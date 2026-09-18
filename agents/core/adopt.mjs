@@ -75,3 +75,34 @@ export function byPath(targets) {
   }
   return [...seen.values()];
 }
+
+/* Everything after --adopt that isn't another flag.
+
+   Two ways this goes wrong with one argument read positionally. A glob —
+   `--adopt ~/Downloads/my-diary-*.json` — is expanded by the shell before
+   the runner sees it, so several paths arrive and all but the first are
+   silently dropped; and since they sort by name, and the name carries the
+   date, the one kept is the *oldest* export. That's the worst possible
+   choice made quietly. The other is `--adopt --dry-run`, which would take
+   the next flag as a filename and complain that it can't read it.
+
+   So read them all, and stop at the next flag. */
+export function adoptSources(argv) {
+  const at = argv.indexOf("--adopt");
+  if (at < 0) return [];
+  const out = [];
+  for (let i = at + 1; i < argv.length; i++) {
+    if (argv[i].startsWith("--")) break;
+    out.push(argv[i]);
+  }
+  return out;
+}
+
+/* Given several exports, the newest is what you meant — you pressed ⤓ and
+   then reached for the shell. Decided on modification time rather than on
+   the date in the filename, because a name is a claim and an mtime is
+   what actually happened. Ties go to the first, so the order the shell
+   gave them breaks it. */
+export function newestOf(files) {
+  return files.reduce((best, f) => (f.mtime > best.mtime ? f : best), files[0]) || null;
+}

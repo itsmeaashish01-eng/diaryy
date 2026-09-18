@@ -41,7 +41,7 @@
                       without it; see agents/README.md.
    ================================================ */
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, statSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
 import { typeFor, typeList, TYPES } from "./core/registry.mjs";
@@ -49,7 +49,7 @@ import { loadAgents, loadState, agentState, remember, saveState } from "./core/s
 import { decide, narrate, atLeast } from "./core/brain.mjs";
 import { deliver, canNotify, anySent, describeDelivery } from "./core/notify.mjs";
 import { writeSummary } from "./core/report.mjs";
-import { looksLikeExport, adoptTargets, byPath } from "./core/adopt.mjs";
+import { looksLikeExport, adoptTargets, byPath, adoptSources, newestOf } from "./core/adopt.mjs";
 import { plural } from "./core/local.mjs";
 
 const argv = process.argv.slice(2);
@@ -119,10 +119,31 @@ if (flag("--validate")) {
    paused and stayed paused. Reports what each agent will now see, and
    what it replaced — with --dry-run it only reports. */
 if (flag("--adopt")) {
-  const source = opt("--adopt", "");
-  if (!source) {
+  const given = adoptSources(argv);
+  if (!given.length) {
     console.error("--adopt needs a file: node agents/runner.mjs --adopt ~/Downloads/my-diary-2026-09-17.json");
     process.exit(1);
+  }
+
+  /* A glob arrives here as several paths. Take the newest and say which,
+     rather than the first — which, since the filenames carry their dates,
+     would be the oldest export you have. */
+  let source = given[0];
+  if (given.length > 1) {
+    const stamped = [];
+    for (const path of given) {
+      try {
+        stamped.push({ path, mtime: statSync(path).mtimeMs });
+      } catch {
+        console.error(`Can't read ${path}: no such file`);
+        process.exit(1);
+      }
+    }
+    source = newestOf(stamped).path;
+    console.log(
+      `${given.length} files matched — taking the most recent:\n  ${source}\n` +
+      stamped.filter((f) => f.path !== source).map((f) => `  (not ${f.path})`).join("\n") + "\n"
+    );
   }
 
   let raw;

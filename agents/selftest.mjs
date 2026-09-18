@@ -23,12 +23,16 @@ import reading from "./types/reading.mjs";
 import exercise from "./types/exercise.mjs";
 import portfolio from "./types/portfolio.mjs";
 import { deadlineBucket, isoWeek, staleBucket, daysUntil } from "./core/local.mjs";
+import { personalAgents, PERSONAL_TYPES, repoVisibility, __setVisibilityForTests } from "./core/repo.mjs";
 import { toText, digest } from "./types/webpage.mjs";
 import diary from "./types/diary.mjs";
 import organizer, { collect, ageBucket, ageRungs } from "./types/organizer.mjs";
 import { decide } from "./core/brain.mjs";
 import { blankAgentState, remember, loadState, saveState, agentState } from "./core/state.mjs";
-import { anySent, describeDelivery } from "./core/notify.mjs";
+import {
+  anySent, describeDelivery, configure, allowCommittedTopic,
+  usingCommittedTopic, canNotify,
+} from "./core/notify.mjs";
 import { looksLikeExport, adoptTargets, byPath, adoptSources, newestOf } from "./core/adopt.mjs";
 
 let passed = 0;
@@ -818,6 +822,80 @@ check("A finding only counts as reported if a channel actually took it", () => {
   ok(!anySent([{ name: "ntfy", sent: false, detail: "FAILED — ntfy responded 503" }]),
     "a channel that errored did not report it");
   ok(!anySent([]), "no channels at all");
+});
+
+check("Only the agents that write about you count as personal", () => {
+  /* The distinction that matters: these read a file about you and write
+     what they found back into the repo, which a workflow then commits.
+     The rest watch the outside world and leak nothing. */
+  const agents = [
+    { id: "a", type: "goals", active: true },
+    { id: "b", type: "portfolio", active: true },
+    { id: "c", type: "feed", active: true },          // watches the world
+    { id: "d", type: "uptime", active: true },        // watches the world
+    { id: "e", type: "diary", active: false },        // paused, publishes nothing
+  ];
+  eq(personalAgents(agents).map((a) => a.id), ["a", "b"]);
+});
+
+check("Every agent that reads a file about you is treated as personal", () => {
+  for (const t of ["goals", "reading", "exercise", "portfolio", "diary", "organizer", "study"]) {
+    ok(PERSONAL_TYPES.has(t), `${t} should be personal`);
+  }
+  /* organizer is the sharpest case: it reads the same export as diary and
+     quotes your task text verbatim, so leaving it out of this set would
+     under-report exactly the agent with most to lose. */
+  for (const t of ["feed", "webpage", "uptime", "github-release", "price"]) {
+    ok(!PERSONAL_TYPES.has(t), `${t} watches the world, not you`);
+  }
+});
+
+await (async () => {
+  /* "Couldn't tell" must never be read as "private" — every caller has to
+     treat an unanswered check as the unsafe case. */
+  __setVisibilityForTests({ onGitHub: true, known: false, isPublic: null, why: "no token" });
+  const v = await repoVisibility();
+  check("An unanswered visibility check is not a private repo", () => {
+    ok(!v.known, "the answer is unknown");
+    ok(v.isPublic !== false, "and must not read as private");
+  });
+  __setVisibilityForTests(null);
+})();
+
+check("A committed topic is used only when it has been allowed", () => {
+  /* An ntfy topic is a password. Committing one is a convenience in a
+     private repo and a published password in a public one, so the runner
+     decides and this flag is how it says so. */
+  delete process.env.NTFY_TOPIC;
+  configure({ ntfyTopic: "topic-from-the-config-file" });
+
+  allowCommittedTopic(true);
+  ok(canNotify(), "allowed: the committed topic counts as a channel");
+
+  allowCommittedTopic(false);
+  ok(!canNotify(), "refused: there is no channel, rather than a leaky one");
+
+  allowCommittedTopic(true);
+});
+
+check("An environment topic wins, and isn't subject to the committed check", () => {
+  configure({ ntfyTopic: "topic-from-the-config-file" });
+  process.env.NTFY_TOPIC = "topic-from-a-secret";
+
+  ok(!usingCommittedTopic(), "a secret is in play, so the committed one is moot");
+  allowCommittedTopic(false);
+  ok(canNotify(), "refusing the committed topic must not disable a real secret");
+
+  delete process.env.NTFY_TOPIC;
+  allowCommittedTopic(true);
+});
+
+check("With neither a secret nor a committed topic there is no channel", () => {
+  delete process.env.NTFY_TOPIC;
+  delete process.env.WEBHOOK_URL;
+  configure({});
+  ok(!usingCommittedTopic(), "nothing committed");
+  ok(!canNotify(), "and nothing to send with");
 });
 
 check("Delivery results read as a log line per channel", () => {

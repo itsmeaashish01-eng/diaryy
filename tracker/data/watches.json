@@ -29,6 +29,96 @@
   "seeded": true,
   "alerts": [
     {
+      "id": "mu6606v3-o9dy3z",
+      "watchId": "seed-demo",
+      "watchLabel": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 10.0% vs its recent average — now $212.97",
+      "price": 212.97,
+      "currency": "USD",
+      "t": 1789687963839,
+      "read": false,
+      "kindLabel": "Flight"
+    },
+    {
+      "id": "mu5z2wze-6uq8wz",
+      "watchId": "seed-demo",
+      "watchLabel": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 9.8% vs its recent average — now $214.68",
+      "price": 214.68,
+      "currency": "USD",
+      "t": 1789676333690,
+      "read": false,
+      "kindLabel": "Flight"
+    },
+    {
+      "id": "mu5rv93u-wtpi6n",
+      "watchId": "seed-demo",
+      "watchLabel": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 8.9% vs its recent average — now $217.27",
+      "price": 217.27,
+      "currency": "USD",
+      "t": 1789664218842,
+      "read": false,
+      "kindLabel": "Flight"
+    },
+    {
+      "id": "mu5gfbs1-bt0qcm",
+      "watchId": "seed-demo",
+      "watchLabel": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 12.6% vs its recent average — now $208.89",
+      "price": 208.89,
+      "currency": "USD",
+      "t": 1789645000033,
+      "read": false,
+      "kindLabel": "Flight"
+    },
+    {
+      "id": "mu54ntb3-hraea0",
+      "watchId": "seed-demo",
+      "watchLabel": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 6.7% vs its recent average — now $223.25",
+      "price": 223.25,
+      "currency": "USD",
+      "t": 1789625240607,
+      "read": false,
+      "kindLabel": "Flight"
+    },
+    {
+      "id": "mu4sjly5-scgi01",
+      "watchId": "seed-demo",
+      "watchLabel": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 14.6% vs its recent average — now $203.43",
+      "price": 203.43,
+      "currency": "USD",
+      "t": 1789604889053,
+      "read": false,
+      "kindLabel": "Flight"
+    },
+    {
       "id": "mtzwl3ml-tcr0i2",
       "watchId": "seed-demo",
       "watchLabel": "Demo fare — checks with no network needed",
@@ -380,9 +470,41 @@
         {
           "t": 1789584770780,
           "p": 75805
+        },
+        {
+          "t": 1789596506360,
+          "p": 75705
+        },
+        {
+          "t": 1789604889042,
+          "p": 76369
+        },
+        {
+          "t": 1789625240588,
+          "p": 76338
+        },
+        {
+          "t": 1789645000010,
+          "p": 76245
+        },
+        {
+          "t": 1789664218827,
+          "p": 76624
+        },
+        {
+          "t": 1789676333665,
+          "p": 76553
+        },
+        {
+          "t": 1789687963813,
+          "p": 76431
+        },
+        {
+          "t": 1789706327743,
+          "p": 77232
         }
       ],
-      "lastCheck": 1789584770780,
+      "lastCheck": 1789706327743,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
@@ -705,14 +827,70 @@
           "meta": {
             "simulated": true
           }
+        },
+        {
+          "t": 1789596506369,
+          "p": 229.18,
+          "meta": {
+            "simulated": true
+          }
+        },
+        {
+          "t": 1789604889052,
+          "p": 203.43,
+          "meta": {
+            "simulated": true
+          }
+        },
+        {
+          "t": 1789625240607,
+          "p": 223.25,
+          "meta": {
+            "simulated": true
+          }
+        },
+        {
+          "t": 1789645000032,
+          "p": 208.89,
+          "meta": {
+            "simulated": true
+          }
+        },
+        {
+          "t": 1789664218841,
+          "p": 217.27,
+          "meta": {
+            "simulated": true
+          }
+        },
+        {
+          "t": 1789676333689,
+          "p": 214.68,
+          "meta": {
+            "simulated": true
+          }
+        },
+        {
+          "t": 1789687963839,
+          "p": 212.97,
+          "meta": {
+            "simulated": true
+          }
+        },
+        {
+          "t": 1789706327771,
+          "p": 231,
+          "meta": {
+            "simulated": true
+          }
         }
       ],
-      "lastCheck": 1789584770796,
+      "lastCheck": 1789706327771,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
       "lastAlertAt": {
-        "dropPct": 1789309346205
+        "dropPct": 1789687963839
       },
       "cooldownMin": 180,
       "notes": "Simulated. Proves the hourly job runs end to end. Delete once your real watches are in."

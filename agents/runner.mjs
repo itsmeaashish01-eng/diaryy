@@ -47,7 +47,11 @@ import { dirname, resolve } from "node:path";
 import { typeFor, typeList, TYPES } from "./core/registry.mjs";
 import { loadAgents, loadState, agentState, remember, saveState } from "./core/state.mjs";
 import { decide, narrate, atLeast } from "./core/brain.mjs";
-import { deliver, canNotify, anySent, describeDelivery } from "./core/notify.mjs";
+import {
+  deliver, canNotify, anySent, describeDelivery,
+  configure, allowCommittedTopic, usingCommittedTopic,
+} from "./core/notify.mjs";
+import { repoVisibility, personalAgents } from "./core/repo.mjs";
 import { writeSummary } from "./core/report.mjs";
 import { looksLikeExport, adoptTargets, byPath, adoptSources, newestOf } from "./core/adopt.mjs";
 import { plural } from "./core/local.mjs";
@@ -229,18 +233,80 @@ if (flag("--adopt")) {
 }
 
 /* Running agents with nowhere to send their findings is a half-configured
-   setup that looks like a working one. Say so, every run. */
+   setup that looks like a working one. Say so, every run — but only once
+   the settings have been read, since the topic may be committed there. */
 const warnings = [];
-if (!canNotify() && !dryRun) {
-  const w =
-    "No alert channel is configured — agents will run and record, but nothing will reach you. " +
-    "Set NTFY_TOPIC (or WEBHOOK_URL). On GitHub: Settings → Secrets and variables → Actions.";
-  warnings.push(w);
-  log(`⚠ ${w}`);
+
+let settingsReady = false;
+async function applySettings(defs) {
+  if (settingsReady) return;
+  settingsReady = true;
+
+  configure((defs.settings && defs.settings.notify) || {});
+  const vis = await repoVisibility();
+
+  /* A committed topic is a password. It is safe in a private repository
+     and published in a public one, so anything short of a confirmed
+     private repo refuses it: a missed alert is recoverable, a leaked
+     topic is not. */
+  if (usingCommittedTopic()) {
+    const safe = !vis.onGitHub || (vis.known && !vis.isPublic);
+    allowCommittedTopic(safe);
+    if (!safe) {
+      const w =
+        `The ntfy topic in agents.json is being ignored: ${vis.why}. ` +
+        "Move it to an NTFY_TOPIC secret, or make the repository private.";
+      warnings.push(w);
+      log(`⚠ ${w}`);
+    }
+  }
+
+  /* The personal agents read a file about you and write what they found
+     back into the repository — which a workflow then commits, every hour,
+     for as long as this runs. In a public repo that is your goals, your
+     reading, your training and your positions, published on a schedule
+     and kept in the history afterwards.
+
+     Nothing here stops it: it is the user's repository and their data.
+     But it must never be the thing they find out afterwards. */
+  /* A check that couldn't be answered protects nothing, and said nothing
+     about it — which is how a guard quietly stops guarding. If the answer
+     is unavailable, say so and say why, because the alternative is a run
+     that looks identical to a safe one. */
+  if (vis.onGitHub && !vis.known) {
+    const w =
+      `Could not determine whether this repository is public: ${vis.why}. ` +
+      "The public-repository check is not protecting anything this run.";
+    warnings.push(w);
+    log(`⚠ ${w}`);
+  }
+
+  if (vis.onGitHub && vis.known && vis.isPublic) {
+    const personal = personalAgents(defs.agents);
+    if (personal.length) {
+      const names = personal.map((a) => a.label || a.id).join(", ");
+      const w =
+        `This repository is PUBLIC, and ${personal.length === 1 ? "this agent writes" : "these agents write"} ` +
+        `what ${personal.length === 1 ? "it finds" : "they find"} into state.json, which the workflow commits every run: ${names}. ` +
+        "Anyone can read it, and the history keeps it. Make the repository private, " +
+        "or pause these and run them on your own machine.";
+      warnings.push(w);
+      log(`⚠ ${w}`);
+    }
+  }
+
+  if (!canNotify() && !dryRun) {
+    const w =
+      "No alert channel is configured — agents will run and record, but nothing will reach you. " +
+      "Set NTFY_TOPIC (or WEBHOOK_URL). On GitHub: Settings → Secrets and variables → Actions.";
+    warnings.push(w);
+    log(`⚠ ${w}`);
+  }
 }
 
 async function pass() {
   const defs = loadAgents(file);
+  await applySettings(defs);
   const state = loadState(statePath);
   const now = Date.now();
   const defaultInterval = Number(defs.settings && defs.settings.defaultIntervalMin) || 60;

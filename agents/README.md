@@ -349,6 +349,29 @@ With neither set the agents still run and record — and say loudly, every
 run, that nothing can reach you. A half-configured setup that looks like a
 working one is worse than one that's obviously off.
 
+### Putting the topic in agents.json instead
+
+Setting a repository secret is a real obstacle if you don't live in
+GitHub's settings pages, and an alerting system nobody can finish
+configuring alerts nobody. So the topic can also live in the file:
+
+```json
+{ "settings": { "notify": { "ntfyTopic": "your-topic-string" } } }
+```
+
+**Only do this in a private repository.** An ntfy topic is a password —
+anyone holding the string can read every alert your agents send. In a
+public repo a committed topic is a password published to the internet.
+
+The runner doesn't take your word for it. When the topic comes from the
+file, it asks GitHub whether the repository is private, and uses it only
+if the answer is yes. A public repo, a missing token, an API that won't
+answer — all refuse, and say why. Off GitHub entirely it's your own
+machine and the topic stands.
+
+`NTFY_TOPIC` always wins where both exist, and a real secret is never
+subject to that check.
+
 **A finding nothing could deliver is held, not consumed.** Marking a key as
 seen is what retires it for good, so that only happens once a channel has
 actually taken it. Runs before you set up ntfy don't quietly eat your news:
@@ -386,6 +409,26 @@ mean an install step in CI for a path that is off unless you turn it on.
 ---
 
 ## Safety
+
+**A public repository publishes what the agents find.** Seven of the types —
+`goals`, `reading`, `exercise`, `portfolio`, `diary`, `organizer`, `study` —
+read a file about you and write what they found into `state.json`, which the
+workflow commits on every run. In a public repo that is your goal deadlines,
+your reading list, your training gaps and your positions, published hourly
+and kept in the history afterwards.
+
+`organizer` is the sharpest of them, because it quotes your task text
+rather than counting it: what lands in `state.json` is the errand itself,
+in your own words. `includeText: false` is the switch if you want the
+agent without that.
+
+Nothing here stops you: it's your repository and your data. But the runner
+checks and says so on every run rather than letting it be something you
+find out later. Two ways out — make the repository private, or pause those
+agents and run them on your own machine with `--only`.
+
+The other five types watch the outside world and leak nothing.
+
 
 **Agents are data, and data doesn't get to run programs.** Price Watch's
 `command` source — which executes a local program — is deliberately

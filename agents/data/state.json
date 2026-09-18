@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789686151021,
-      "lastOk": 1789686151021,
+      "lastRun": 1789694737917,
+      "lastOk": 1789694737917,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789675531000,
+          "level": "notable",
+          "title": "Plugin4Shell – Zero Click RCE Vulnerability found in top four coding agents",
+          "detail": "Article URL: https://www.air.security/blog-posts/plugin4shell Comments URL: https://news.ycombinator.com/item?id=49745809 Points: 7 # Comments: 2",
+          "url": "https://www.air.security/blog-posts/plugin4shell"
+        },
+        {
+          "t": 1789664114000,
+          "level": "notable",
+          "title": "Infinite-Parameter LLMs: Generating and Adapting Weights from Live Data",
+          "detail": "Article URL: https://arxiv.org/abs/2609.18842 Comments URL: https://news.ycombinator.com/item?id=49743483 Points: 107 # Comments: 30",
+          "url": "https://arxiv.org/abs/2609.18842"
+        },
+        {
+          "t": 1789662135000,
+          "level": "notable",
+          "title": "Launch HN: Skillsync (YC W26) – AI chat sessions made portable across agents",
+          "detail": "Hey HN, we're Nars & Nishant, founders of Skillsync (https://skillsync.com)Skillsync lets you move your AI chats across every coding agent. Most of our work exists as conversations, which are currently scattered across our agents. Though stored locally, these conversations use different formats. Thi",
+          "url": "https://news.ycombinator.com/item?id=49743049"
+        },
+        {
+          "t": 1789650104000,
+          "level": "notable",
+          "title": "Show HN: Share your AI Setup, Learn from others",
+          "detail": "I kept seeing engineers share what they were building with AI; however, I was always more curious about how they worked. Which agents did they use? What skills and tools had stuck or been thrown out the window? How did they manage longer-running tasks? So I built this with the hope we could have a d",
+          "url": "https://mysetup.ai/"
+        },
         {
           "t": 1789681718000,
           "level": "notable",
@@ -401,34 +429,6 @@
           "title": "Apple's Siri AI Can Be Swapped Out for Claude, ChatGPT, Code Shows",
           "detail": "Article URL: https://www.macrumors.com/2026/09/14/siri-can-be-swapped-out-for-chatgpt-claude/ Comments URL: https://news.ycombinator.com/item?id=49695409 Points: 104 # Comments: 40",
           "url": "https://www.macrumors.com/2026/09/14/siri-can-be-swapped-out-for-chatgpt-claude/"
-        },
-        {
-          "t": 1789372519000,
-          "level": "notable",
-          "title": "OpenArch – PyTorch implementations of modern LLM architectures",
-          "detail": "Article URL: https://github.com/anuj0456/OpenArch Comments URL: https://news.ycombinator.com/item?id=49693384 Points: 92 # Comments: 18",
-          "url": "https://github.com/anuj0456/OpenArch"
-        },
-        {
-          "t": 1789318353000,
-          "level": "notable",
-          "title": "David Sacks: OpenAI and Anthropic Don't Need Regulations to Pace Frontier Models",
-          "detail": "Article URL: https://twitter.com/DavidSacks/status/2098973625252708460 Comments URL: https://news.ycombinator.com/item?id=49685991 Points: 248 # Comments: 185",
-          "url": "https://twitter.com/DavidSacks/status/2098973625252708460"
-        },
-        {
-          "t": 1789318353000,
-          "level": "notable",
-          "title": "David Sacks: OpenAI and Anthropic Don't Need Regulations to Pace Frontier Models",
-          "detail": "Article URL: https://twitter.com/DavidSacks/status/2098973625252708460 Comments URL: https://news.ycombinator.com/item?id=49685991 Points: 175 # Comments: 138",
-          "url": "https://twitter.com/DavidSacks/status/2098973625252708460"
-        },
-        {
-          "t": 1789318353000,
-          "level": "notable",
-          "title": "David Sacks: OpenAI and Anthropic Don't Need Regulations to Pace Frontier Models",
-          "detail": "Article URL: https://twitter.com/DavidSacks/status/2098973625252708460 Comments URL: https://news.ycombinator.com/item?id=49685991 Points: 75 # Comments: 35",
-          "url": "https://twitter.com/DavidSacks/status/2098973625252708460"
         }
       ],
       "notifiedAt": {},
@@ -2257,6 +2257,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1789694737921,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1789686151794,
       "ran": 2,

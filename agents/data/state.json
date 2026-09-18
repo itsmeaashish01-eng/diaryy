@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789749663101,
-      "lastOk": 1789749663101,
+      "lastRun": 1789761329518,
+      "lastOk": 1789761329518,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789758006000,
+          "level": "notable",
+          "title": "The Implications of Linguistic Illegibility for LLM Security",
+          "detail": "Article URL: https://arxiv.org/abs/2609.02852 Comments URL: https://news.ycombinator.com/item?id=49758689 Points: 12 # Comments: 3",
+          "url": "https://arxiv.org/abs/2609.02852"
+        },
+        {
+          "t": 1789754912000,
+          "level": "notable",
+          "title": "Border agents can search cellphones without a warrant or reasonable suspicion",
+          "detail": "Article URL: https://lawandcrime.com/high-profile/the-government-was-entitled-trumps-border-agents-can-now-search-cellphones-without-a-warrant-probable-cause-or-reasonable-suspicion-2nd-circuit-rules/ Comments URL: https://news.ycombinator.com/item?id=49758028 Points: 56 # Comments: 29",
+          "url": "https://lawandcrime.com/high-profile/the-government-was-entitled-trumps-border-agents-can-now-search-cellphones-without-a-warrant-probable-cause-or-reasonable-suspicion-2nd-circuit-rules/"
+        },
         {
           "t": 1789743894000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Notes on gotchas while migrating 35kb preprompts from Opus to self-hosted Ollama",
           "detail": "Article URL: https://patrickmccanna.net/notes-on-migrating-large-prompts-away-from-anthropic-openai-to-self-hosted-llms/ Comments URL: https://news.ycombinator.com/item?id=49697014 Points: 105 # Comments: 56",
           "url": "https://patrickmccanna.net/notes-on-migrating-large-prompts-away-from-anthropic-openai-to-self-hosted-llms/"
-        },
-        {
-          "t": 1789392022000,
-          "level": "notable",
-          "title": "Show HN: Pelican-bicycle alternatives",
-          "detail": "In November and December 2025, inspired by Simon Willison’s pelican-riding-a-bicycle benchmark, I had some then-current LLMs create SVGs from thirty similar prompts, such as “Generate an SVG of an octopus operating a pipe organ.” Simon mentioned that experiment on his blog [1].Nine months have passe",
-          "url": "https://gally.net/temp/20260914pelican-alternatives/index.html"
-        },
-        {
-          "t": 1789406166000,
-          "level": "notable",
-          "title": "Pion, an agent designed to run any company autonomously",
-          "detail": "Article URL: https://andonlabs.com/blog/why-we-built-pion Comments URL: https://news.ycombinator.com/item?id=49700477 Points: 131 # Comments: 124",
-          "url": "https://andonlabs.com/blog/why-we-built-pion"
         }
       ],
       "notifiedAt": {},
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1789713222042,
-      "lastOk": 1789713222042,
+      "lastRun": 1789761329520,
+      "lastOk": 1789761329520,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 1 drifting",
@@ -930,9 +930,41 @@
         {
           "t": 1789713222042,
           "v": 17
+        },
+        {
+          "t": 1789761329520,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1789761329520,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 58 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1789761329520,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1789761329520,
+          "level": "notable",
+          "title": "Data collection complete — 88 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1789761329520,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 29 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1789713222042,
           "level": "notable",
@@ -1269,8 +1301,8 @@
       }
     },
     "reading": {
-      "lastRun": 1789713222043,
-      "lastOk": 1789713222043,
+      "lastRun": 1789761329521,
+      "lastOk": 1789761329521,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1331,9 +1363,34 @@
         {
           "t": 1789713222044,
           "v": 3
+        },
+        {
+          "t": 1789761329521,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1789761329521,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1789761329521,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 48 days",
+          "url": ""
+        },
+        {
+          "t": 1789761329521,
+          "level": "notable",
+          "title": "Still unread after 140 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1789713222043,
           "level": "notable",
@@ -1635,8 +1692,8 @@
       }
     },
     "training": {
-      "lastRun": 1789713222045,
-      "lastOk": 1789713222045,
+      "lastRun": 1789761329522,
+      "lastOk": 1789761329522,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
@@ -1697,9 +1754,20 @@
         {
           "t": 1789713222045,
           "v": 0
+        },
+        {
+          "t": 1789761329522,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1789761329522,
+          "level": "notable",
+          "title": "9 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1789713222045,
           "level": "notable",
@@ -2351,6 +2419,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1789761329525,
+      "ran": 4,
+      "skipped": 6,
+      "failed": 0,
+      "notified": 0,
+      "held": 10
+    },
     {
       "t": 1789749664309,
       "ran": 3,

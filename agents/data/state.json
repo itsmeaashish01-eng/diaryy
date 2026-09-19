@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789851407479,
-      "lastOk": 1789851407479,
+      "lastRun": 1789860448473,
+      "lastOk": 1789860448473,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789833171000,
+          "level": "notable",
+          "title": "Show HN: CUA-S1 – A System One Model for Computer Use",
+          "detail": "Hello HN! We're Dillon and Francesco from Cua.We were wondering how many computer use tasks actually need a full general purpose LLM (e.g. gpt-6-astra, claude-opus-5 etc.) to think through all their decisions and steps. Some tasks require thinking about a plan, exploring different paths, recovering ",
+          "url": "https://github.com/trycua/cua"
+        },
         {
           "t": 1789833171000,
           "level": "notable",
@@ -421,13 +428,6 @@
           "level": "notable",
           "title": "Datamimic – don't let your coding agent invent its own test world",
           "detail": "Article URL: https://github.com/rapiddweller/datamimic Comments URL: https://news.ycombinator.com/item?id=49722276 Points: 47 # Comments: 8",
-          "url": "https://github.com/rapiddweller/datamimic"
-        },
-        {
-          "t": 1789534716000,
-          "level": "notable",
-          "title": "Datamimic – don't let your coding agent invent its own test world",
-          "detail": "Article URL: https://github.com/rapiddweller/datamimic Comments URL: https://news.ycombinator.com/item?id=49722276 Points: 18 # Comments: 2",
           "url": "https://github.com/rapiddweller/datamimic"
         }
       ],
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1789817181071,
-      "lastOk": 1789817181071,
+      "lastRun": 1789860448476,
+      "lastOk": 1789860448476,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 1 drifting",
@@ -938,9 +938,41 @@
         {
           "t": 1789817181071,
           "v": 17
+        },
+        {
+          "t": 1789860448476,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1789860448475,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 57 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1789860448475,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1789860448475,
+          "level": "notable",
+          "title": "Data collection complete — 87 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1789860448476,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 30 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1789817181071,
           "level": "notable",
@@ -1333,8 +1365,8 @@
       }
     },
     "reading": {
-      "lastRun": 1789817181073,
-      "lastOk": 1789817181073,
+      "lastRun": 1789860448477,
+      "lastOk": 1789860448477,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1403,9 +1435,34 @@
         {
           "t": 1789817181073,
           "v": 3
+        },
+        {
+          "t": 1789860448477,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1789860448477,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1789860448477,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 49 days",
+          "url": ""
+        },
+        {
+          "t": 1789860448477,
+          "level": "notable",
+          "title": "Still unread after 141 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1789817181073,
           "level": "notable",
@@ -1749,8 +1806,8 @@
       }
     },
     "training": {
-      "lastRun": 1789817181074,
-      "lastOk": 1789817181074,
+      "lastRun": 1789860448478,
+      "lastOk": 1789860448478,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
@@ -1819,9 +1876,20 @@
         {
           "t": 1789817181074,
           "v": 0
+        },
+        {
+          "t": 1789860448478,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1789860448478,
+          "level": "notable",
+          "title": "10 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1789817181074,
           "level": "notable",
@@ -1920,11 +1988,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789841490352,
-      "lastOk": 1789841490352,
+      "lastRun": 1789860448964,
+      "lastOk": 1789860448964,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,071 (+69.6%) · excludes S&P 500 ETF",
+      "lastLine": "$4,061 (+69.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2070,9 +2138,27 @@
         {
           "t": 1789841490352,
           "v": 4071.35
+        },
+        {
+          "t": 1789860448964,
+          "v": 4060.75
         }
       ],
       "events": [
+        {
+          "t": 1789860448950,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789860448950,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789841490338,
           "level": "notable",
@@ -2478,31 +2564,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789233890441,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789233890441,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81427
+          "BTC": 81215
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789860448964,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 11
+    },
     {
       "t": 1789851407839,
       "ran": 2,

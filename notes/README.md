@@ -14,9 +14,20 @@ open notes/index.html          # or: npx serve notes
 node notes/selftest.mjs        # the offline test suite
 ```
 
-Works in any modern browser. Add it to the home screen on an iPhone or
-iPad and it runs full screen, offline, like an app. For the real App
-Store build, see [`ios-app/`](ios-app/).
+Works in any modern browser, and knows which one it is in.
+
+**On an iPhone or iPad** — Safari → Share → *Add to Home Screen*. It runs
+full screen and offline, with palm rejection and Apple Pencil pressure.
+
+**On a Mac** — Safari → *File → Add to Dock* (macOS 14 or later). Real
+window, real Dock icon, real offline storage, no Xcode and no $99. The
+app picks up the platform's conventions when it finds a trackpad:
+right-click menus, ⌘C/⌘X/⌘V including pasting a screenshot straight onto
+the page, ⌘D, ⌘+/−/0, space held down to pan, arrow keys to nudge, and a
+cursor that shows the size of the eraser.
+
+For App Store builds — iPhone, iPad, and Mac via *Designed for iPad* or
+Mac Catalyst — see [`ios-app/`](ios-app/).
 
 ---
 
@@ -132,6 +143,7 @@ js/
   tools.js          the pen tray, and what each tool remembers
   history.js        undo and redo, by snapshot
   ui.js             shelf, menus, sheets, toasts
+  desktop.js        cursors, clipboard and the right-click menu
   export.js         flattening a page; PNG, PDF and backup
   pdfout.js         a PDF writer, in about 150 lines, no dependency
   pdfin.js          PDF import (lazily loads pdf.js — the only dependency)
@@ -161,6 +173,27 @@ corrupting pages. A page is a plain object, cloning it takes a few
 hundred microseconds, and being certain that undo restores what was there
 is worth more than the memory. Thirty steps deep, dropped on page turn.
 
+### One app, two machines
+
+The same files run on a phone and on a Mac, and the differences are
+handled where they belong rather than by shipping two apps.
+
+The phone decides the layout: everything is a pointer event, every
+control clears 36px, and the pen tray scrolls sideways rather than
+wrapping. Below 480px the zoom buttons go — pinch does the same job with
+no chrome — and sheets come up from the bottom edge the way iOS does.
+
+The Mac gets what only a Mac can use, gated on
+`(hover: hover) and (pointer: fine)` so none of it is set up on a phone:
+cursors per tool, hover states, wider scrollbars, the clipboard, the
+right-click menu and the keyboard. `desktop.js` holds all of it, and
+takes no application state — which is why the cursor maths is in the
+test suite rather than only in a browser.
+
+`browsertest.mjs` runs the whole app twice, once at 1280×900 with a
+mouse and once at 393×852 with touch flags on, and fails if anything
+ends up off the side of the screen or smaller than a thumb.
+
 ### Palm rejection
 
 Once a pen has touched the screen, fingers stop drawing and start
@@ -177,7 +210,7 @@ resting a hand on the glass possible.
 node notes/selftest.mjs
 ```
 
-Forty-one checks, no browser, no network, no dependencies — it runs in CI
+Forty-seven checks, no browser, no network, no dependencies — it runs in CI
 in about a second, alongside the other apps in this repository. What it
 covers is the quiet stuff, the kind that is wrong without anyone
 noticing:
@@ -209,11 +242,31 @@ node notes/browsertest.mjs
 
 The unit suite cannot catch a panel that is invisible but still
 swallowing every tap, or ink that renders as two end caps with nothing
-between them. `browsertest.mjs` drives the real app in a real browser
-through twenty-one steps — draw, erase, lasso, type, turn a page, export
-a PDF, come back to the shelf, search — and fails on any console error
-along the way. Both of those bugs were found there rather than on a
-phone.
+between them. `browsertest.mjs` drives the real app in a real browser,
+twice: once at desk size with a mouse and a keyboard, once at the size
+of an iPhone. Draw, erase, lasso, type, turn a page, export a PDF, come
+back to the shelf, search — plus, on the desk pass, ⌘C/⌘V, arrow
+nudging, space-to-pan, the right-click menu and pasting an image; and,
+on the phone pass, a check that nothing has ended up off the side of the
+screen or too small to hit. Any console error fails the run.
+
+Five bugs have been found there rather than on a device, and the last
+two are the reason this file exists at all:
+
+- panels marked `hidden` that were still swallowing every tap, because
+  a `display` rule in the stylesheet beats the attribute;
+- a two-point stroke drawn as two end caps with nothing between them;
+- a clipboard handler that threw whenever nothing had focus;
+- a transparent full-page layer sitting over the photos and eating
+  every click meant for one, so **no photo or video could be selected
+  or moved at all**;
+- and a drag handler that rebuilt the selection frame on every pointer
+  move — destroying the element holding its own pointer capture, so
+  anything you dragged travelled about seven pixels and stopped.
+
+Not one of those is wrong in the model. The page state was correct
+throughout; what was broken was where the pixels and the pointer events
+ended up, which is exactly the part a unit test cannot see.
 
 It needs Playwright, which is why it is not in CI: the point of the
 other suite is that it needs nothing.

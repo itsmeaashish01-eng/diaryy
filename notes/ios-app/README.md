@@ -1,12 +1,16 @@
-# Inkwell for iOS
+# Inkwell for iPhone, iPad and Mac
 
-The App Store build. The app itself lives in `../` — this directory only
+The packaged builds. The app itself lives in `../` — this directory only
 packages it, so there is no second copy of anything to keep in step.
 
 **Everything here can be prepared on any machine. Everything from step 3
 on needs a Mac.** Building, signing and submitting an iOS app requires
 Xcode, and Xcode only runs on macOS. There is no way around that, and no
 amount of cleverness in this repository changes it.
+
+**If all you want is to use Inkwell on your own Mac, you do not need any
+of this.** Skip to [Running it on a Mac](#running-it-on-a-mac) at the
+bottom — it takes about ten seconds and costs nothing.
 
 ---
 
@@ -176,6 +180,84 @@ the last few milliseconds of pen latency, which PencilKit gets from being
 in the compositor. If that turns out to matter more than everything else
 after step 5, the ink layer is the only part that would need to change —
 which is roughly why it is a file of its own.
+
+## Running it on a Mac
+
+Three ways, in order of effort. The first needs nothing at all.
+
+### 1. Safari → Add to Dock (macOS 14 Sonoma or later)
+
+Open `notes/index.html` in Safari — from a local server, or from
+wherever you host the repository — then **File → Add to Dock**.
+
+You get a real app: its own icon, its own window with no address bar,
+its own place in the Dock and in ⌘-Tab, and its own storage that Safari
+will not clear out from under it. It works offline because the service
+worker has already cached the app.
+
+This is a genuine Mac app as far as the system is concerned, and it is
+the honest answer for one person wanting to use their own notebook on
+their own machine. No Xcode, no Apple Developer Program, no $99.
+
+The one thing it does not give you is a listing in the Mac App Store.
+
+### 2. "Designed for iPad" — Apple Silicon Macs, free, one checkbox
+
+When you submit the iOS build in step 6, App Store Connect offers
+**Pricing and Availability → Mac → "Make this app available on Mac"**.
+Tick it and the same binary runs on every Apple Silicon Mac, in a window,
+with the trackpad standing in for touch.
+
+Zero extra code, zero extra maintenance. The catch is that it does not
+run on Intel Macs, and the window is an iPad-shaped one — which for a
+notebook app is less of a compromise than it sounds.
+
+### 3. Mac Catalyst — a real Mac app, some assembly required
+
+Capacitor does not officially support Catalyst, and the usual reason is
+native plugins that have no Mac implementation. Inkwell has none: the
+dependencies are `@capacitor/core` and `@capacitor/ios`, and everything
+the app does natively it does through the web platform — `<input
+type="file">` for photos and video, IndexedDB for storage, a download
+for exports. All of that works under Catalyst.
+
+In Xcode, with the project from step 3 open:
+
+1. Select the **App** target → **General → Supported Destinations** →
+   **+** → **Mac (Mac Catalyst)**.
+2. **Signing & Capabilities** → add **App Sandbox** if it isn't there,
+   and tick **User Selected File → Read/Write** so the file pickers and
+   the export downloads work.
+3. Build for **My Mac (Mac Catalyst)** and run.
+
+Expect to spend an afternoon on signing and on the file pickers rather
+than on the app. It is worth it if you want a Mac App Store listing or
+Intel support; option 1 is worth it if you want to write notes today.
+
+**Not recommended: Electron.** `@capacitor-community/electron` would
+produce a `.app` for both architectures, but it means a second packaging
+pipeline, a second set of security decisions and a ~150 MB download, to
+arrive at a window showing the same HTML that Safari already shows for
+free.
+
+### What changes on a Mac
+
+The app already knows the difference, and `notes/js/desktop.js` is where
+it is handled:
+
+- **Cursors** say what the tool will do. The eraser's is a circle the
+  size of the eraser, which is the only honest way to show it.
+- **⌘C, ⌘X, ⌘V** on a selected photo, text box or loop of ink. ⌘V also
+  takes whatever is on the system clipboard — paste a screenshot
+  straight onto the page.
+- **Right-click** anywhere on the page.
+- **Space** held down pans, in whatever tool, as it does in every
+  drawing application on the platform.
+- **⌘D** duplicate, **⌘N** new page or notebook, **⌘+ / ⌘− / ⌘0** zoom,
+  **1–6** to pick a tool, **arrow keys** to nudge what is selected
+  (**⇧** for ten at a time).
+- **Two-finger trackpad** scroll and **pinch** zoom, and scrollbars wide
+  enough to grab.
 
 ## Layout
 

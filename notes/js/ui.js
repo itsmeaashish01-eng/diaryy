@@ -150,7 +150,7 @@ export function renderShelf(grid, notebooks, counts, { onOpen, onMenu }) {
     const n = counts.get(nb.id) ?? 0;
     return `
       <article class="book" data-id="${nb.id}">
-        <button class="book-cover" style="background:${cover.css}" aria-label="Open ${escapeHtml(nb.title)}">
+        <button class="book-cover" data-ink="${cover.ink || "light"}" style="background:${cover.css}" aria-label="Open ${escapeHtml(nb.title)}">
           <span class="book-spine" aria-hidden="true"></span>
           <span class="book-cover-title">${escapeHtml(nb.title)}</span>
         </button>

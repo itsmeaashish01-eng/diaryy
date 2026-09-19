@@ -32,13 +32,16 @@ export const PAPERS = {
   music:   { id: "music",   label: "Manuscript" },
 };
 
+/* `ink` is the colour the title has to be printed in to be readable on
+   that cover. White on the linen one is the sort of thing that looks
+   fine in a mockup and disappears on a phone in daylight. */
 export const COVERS = [
-  { id: "linen",   label: "Linen",   css: "linear-gradient(145deg,#e8ddcd,#cdbca4)" },
-  { id: "ink",     label: "Ink",     css: "linear-gradient(145deg,#2f3b47,#1b232c)" },
-  { id: "clay",    label: "Clay",    css: "linear-gradient(145deg,#d08a63,#a6552f)" },
-  { id: "moss",    label: "Moss",    css: "linear-gradient(145deg,#7f9274,#4e6047)" },
-  { id: "plum",    label: "Plum",    css: "linear-gradient(145deg,#8d6a8f,#5b3d60)" },
-  { id: "slate",   label: "Slate",   css: "linear-gradient(145deg,#9aa5ad,#5f6b74)" },
+  { id: "linen",   label: "Linen",   css: "linear-gradient(145deg,#e8ddcd,#cdbca4)", ink: "dark" },
+  { id: "ink",     label: "Ink",     css: "linear-gradient(145deg,#2f3b47,#1b232c)", ink: "light" },
+  { id: "clay",    label: "Clay",    css: "linear-gradient(145deg,#d08a63,#a6552f)", ink: "light" },
+  { id: "moss",    label: "Moss",    css: "linear-gradient(145deg,#7f9274,#4e6047)", ink: "light" },
+  { id: "plum",    label: "Plum",    css: "linear-gradient(145deg,#8d6a8f,#5b3d60)", ink: "light" },
+  { id: "slate",   label: "Slate",   css: "linear-gradient(145deg,#9aa5ad,#5f6b74)", ink: "light" },
 ];
 
 const LINE = 44;      // ruled line spacing, page units

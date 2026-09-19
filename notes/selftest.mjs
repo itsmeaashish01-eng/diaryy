@@ -32,6 +32,7 @@ import { buildPDF, pageToPoints } from "./js/pdfout.js";
 import { unzip, readDocx, readPptx, paragraphsFrom } from "./js/office.js";
 import { PAGE_SIZES, PAPERS, drawPaper, newPage } from "./js/paper.js";
 import { resizeObject, rotateObject, objectHit, fitOnPage, fileKind, MIN_SIZE } from "./js/objects.js";
+import { cursorFor } from "./js/desktop.js";
 
 let passed = 0;
 const failures = [];
@@ -544,6 +545,43 @@ check("file kinds are named from the extension when the mime is empty", () => {
   assert(fileKind("", "deck.pptx") === "Presentation");
   assert(fileKind("application/pdf", "x") === "PDF");
   assert(fileKind("", "archive.zip") === "ZIP");
+});
+
+/* ================================================
+   desktop
+   ================================================ */
+
+check("each tool gets its own cursor", () => {
+  assert(cursorFor("hand") === "grab", cursorFor("hand"));
+  assert(cursorFor("hand", { dragging: true }) === "grabbing");
+  assert(cursorFor("text") === "text");
+  assert(cursorFor("lasso") === "crosshair");
+});
+
+check("the eraser cursor is a circle the size of the eraser", () => {
+  const small = cursorFor("eraser", { size: 26, zoom: 1 });
+  const big = cursorFor("eraser", { size: 90, zoom: 1 });
+  assert(small.startsWith("url("), "not an image cursor");
+  assert(small !== big, "the cursor doesn't follow the eraser size");
+  // The hotspot is the two numbers after the URL, and it has to be the
+  // middle — a circle offset from the point it erases is worse than no
+  // circle at all.
+  const [, x, y] = /\)\s+(\d+)\s+(\d+),/.exec(small);
+  assert(x === y, `hotspot is not square: ${x},${y}`);
+  assert(Math.abs(Number(x) - 15) <= 1, `hotspot is at ${x}, expected the centre of a 26px circle`);
+});
+
+check("zoom scales the cursor with the ink", () => {
+  const at1 = cursorFor("eraser", { size: 26, zoom: 1 });
+  const at2 = cursorFor("eraser", { size: 26, zoom: 2 });
+  assert(at1 !== at2, "the cursor ignores zoom");
+});
+
+check("a cursor too big for a browser to accept falls back", () => {
+  // Browsers drop the whole declaration past 128px and show an arrow,
+  // which looks like a bug rather than a limit.
+  assert(cursorFor("eraser", { size: 90, zoom: 4 }) === "crosshair", "no fallback when oversized");
+  assert(cursorFor("pen", { size: 2, zoom: 1 }) === "crosshair", "a 2px nib should not draw a ring");
 });
 
 /* ================================================ */

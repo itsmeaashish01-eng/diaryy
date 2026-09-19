@@ -12,7 +12,7 @@
    the new worker installs, the old caches are deleted on activate.
    ================================================ */
 
-const VERSION = "inkwell-v1";
+const VERSION = "inkwell-v2";
 
 const SHELL = [
   "./",
@@ -28,6 +28,7 @@ const SHELL = [
   "./js/tools.js",
   "./js/history.js",
   "./js/ui.js",
+  "./js/desktop.js",
   "./js/util.js",
   "./js/export.js",
   "./js/pdfout.js",

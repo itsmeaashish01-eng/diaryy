@@ -158,8 +158,13 @@ body[data-view="editor"] .shelf { display: none; }
 .book-cover-title {
   color: #fff; font-size: .98rem; line-height: 1.25; text-align: left;
   text-shadow: 0 1px 3px rgba(0,0,0,.4);
+  font-weight: 500;
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
 }
+/* A pale cover needs dark type, and the shadow that made white legible
+   would only muddy it. */
+.book-cover[data-ink="dark"] .book-cover-title { color: #33302a; text-shadow: 0 1px 2px rgba(255,255,255,.45); }
+
 .book-foot { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; }
 .book-title { margin: 0; font-size: .9rem; }
 .book-sub { margin: 2px 0 0; font-size: .76rem; color: var(--text-2); }
@@ -208,22 +213,35 @@ body[data-view="editor"] .fab { display: none; }
 /* ---------- pen tray ---------- */
 
 .tray {
-  display: flex; align-items: center; gap: 10px; min-height: var(--tray);
+  /* A strip, and strips do not wrap. Without `nowrap` a long hint
+     reflows into a paragraph and the tray grows to ten lines tall,
+     which on a phone is half the screen. It scrolls sideways instead. */
+  display: flex; flex-wrap: nowrap; align-items: center; gap: 10px;
+  height: calc(var(--tray) + 8px); flex: 0 0 auto;
   padding: 6px calc(var(--safe-r) + 12px) 6px calc(var(--safe-l) + 12px);
   background: var(--bg-2); border-bottom: 1px solid var(--line);
-  overflow-x: auto; scrollbar-width: none;
+  overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
 }
 .tray::-webkit-scrollbar { display: none; }
-.tray-tools { display: flex; gap: 2px; flex: 0 0 auto; }
+.tray-tools { display: flex; flex-wrap: nowrap; gap: 2px; flex: 0 0 auto; }
 .tool {
   width: 42px; height: 40px; border: 0; border-radius: 9px;
   background: transparent; font-size: 1.05rem; color: var(--text-2);
 }
 .tool.is-on { background: var(--paper); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.14); }
-.tray-options { display: flex; align-items: center; gap: 7px; flex: 1 1 auto; min-width: 0; }
-.tray-right { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; }
+.tray-options { display: flex; flex-wrap: nowrap; align-items: center; gap: 7px; flex: 0 0 auto; }
+/* Sticky to the right edge of the scrolling strip, so the zoom reading
+   and the fit button stay reachable however many colour swatches have
+   pushed past the end. The background is what stops the swatches
+   sliding underneath it. */
+.tray-right {
+  display: flex; align-items: center; gap: 2px; flex: 0 0 auto;
+  position: sticky; right: 0; margin-left: auto;
+  padding-left: 8px; background: var(--bg-2);
+  box-shadow: -10px 0 10px -6px var(--bg-2);
+}
 .tray-sep { width: 1px; height: 24px; background: var(--line); flex: 0 0 auto; }
-.tray-hint { font-size: .82rem; color: var(--text-2); }
+.tray-hint { font-size: .82rem; color: var(--text-2); white-space: nowrap; }
 .zoom-label { font-size: .78rem; color: var(--text-2); min-width: 42px; text-align: right; }
 
 .nib {
@@ -281,7 +299,8 @@ body[data-view="editor"] .fab { display: none; }
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: auto;
 }
-.stage.is-dropping { outline: 3px dashed var(--accent); outline-offset: -12px; }
+.stage.is-dropping, .shelf.is-dropping { outline: 3px dashed var(--accent); outline-offset: -12px; }
+.shelf.is-dropping { position: relative; }
 
 .page {
   position: relative; display: inline-block; text-align: left;
@@ -298,12 +317,19 @@ body[data-view="editor"] .fab { display: none; }
 
 /* ---------- objects ---------- */
 
-.obj { position: absolute; }
+/* The layers are full-page boxes stacked over the sheet, and the object
+   layer sits above the media layer. Left hit-testable, it catches every
+   click meant for the photo underneath it — which is not a subtle bug:
+   no photo or video can be selected or moved at all, because the click
+   never reaches one. The layers are transparent to the pointer; the
+   objects in them are not. */
+.media-layer, .object-layer { pointer-events: none; }
+.obj { position: absolute; pointer-events: auto; }
 
 /* While a marking tool is in hand, photos, video and text boxes are not
-   hit-testable, so the pen draws over them instead of picking them up.
-   Pointer events on the layers themselves stay on: they bubble to the
-   stage, which is where drawing is handled. */
+   hit-testable either, so the pen draws over them instead of picking
+   them up. The click then falls through to the stage, which is where
+   drawing is handled. */
 .page[data-tool="pen"] .obj,
 .page[data-tool="highlighter"] .obj,
 .page[data-tool="eraser"] .obj,
@@ -341,6 +367,14 @@ body[data-view="editor"] .fab { display: none; }
 .sel-ne { left: 100%; top: 0; cursor: nesw-resize; }
 .sel-se { left: 100%; top: 100%; cursor: nwse-resize; }
 .sel-sw { left: 0; top: 100%; cursor: nesw-resize; }
+
+/* A small object: the handles step fully outside it, so the middle is
+   still there to be dragged. */
+.sel-tight .sel-handle { width: 20px; height: 20px; }
+.sel-tight .sel-nw { margin: -22px 0 0 -22px; }
+.sel-tight .sel-ne { margin: -22px 0 0 2px; }
+.sel-tight .sel-se { margin: 2px 0 0 2px; }
+.sel-tight .sel-sw { margin: 2px 0 0 -22px; }
 .sel-rotate {
   position: absolute; left: 50%; top: -34px; width: 22px; height: 22px; margin-left: -11px;
   border-radius: 50%; background: var(--accent); pointer-events: auto; cursor: grab; touch-action: none;
@@ -373,6 +407,24 @@ body[data-view="editor"] .fab { display: none; }
   background: var(--paper); border: 1px solid var(--line);
   border-radius: 999px; box-shadow: var(--shadow); font-size: .82rem; color: var(--text-2);
 }
+
+/* ---------- right-click menu ---------- */
+
+.ctx-menu {
+  position: fixed; z-index: 95; min-width: 216px; padding: 5px;
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 10px; box-shadow: var(--shadow);
+}
+.ctx-menu button {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  width: 100%; padding: 8px 10px; min-height: 34px;
+  border: 0; border-radius: 6px; background: transparent;
+  font-size: .87rem; text-align: left;
+}
+.ctx-menu button:hover:not(:disabled) { background: var(--bg-2); }
+.ctx-menu button:disabled { opacity: .38; cursor: default; }
+.ctx-menu button.danger { color: var(--danger); }
+.ctx-hint { color: var(--text-2); font-size: .78rem; font-variant-numeric: tabular-nums; }
 
 /* ---------- toast, scrim, progress ---------- */
 
@@ -418,6 +470,37 @@ body[data-view="editor"] .fab { display: none; }
 .progress-track { height: 5px; border-radius: 999px; background: var(--bg-2); overflow: hidden; }
 .progress-fill { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
 
+/* ---------- a mouse or a trackpad ---------- */
+
+/* Only where there is something to hover with. On a phone these are
+   dead weight at best: :hover sticks after a tap, and a cursor that
+   nothing can point with is pure overhead. */
+@media (hover: hover) and (pointer: fine) {
+  .book-cover:hover { transform: translateY(-4px); }
+  .rail-item:hover .rail-thumb { border-color: var(--text-2); }
+  .obj:hover { outline: 1px solid rgba(199,120,76,.35); outline-offset: 2px; }
+  .page[data-tool="pen"] .obj:hover,
+  .page[data-tool="highlighter"] .obj:hover,
+  .page[data-tool="eraser"] .obj:hover,
+  .page[data-tool="lasso"] .obj:hover { outline: none; }
+
+  /* Scrollbars that are visible enough to grab, which is how a long
+     notebook is actually navigated with a mouse. */
+  .stage::-webkit-scrollbar, .pages-rail::-webkit-scrollbar, .shelf-body::-webkit-scrollbar { width: 12px; height: 12px; }
+  .stage::-webkit-scrollbar-thumb, .pages-rail::-webkit-scrollbar-thumb, .shelf-body::-webkit-scrollbar-thumb {
+    background: rgba(120,115,105,.35); border-radius: 999px; border: 3px solid transparent; background-clip: content-box;
+  }
+  .stage::-webkit-scrollbar-thumb:hover { background: rgba(120,115,105,.6); background-clip: content-box; }
+}
+
+/* A desk-sized window: the shelf gets more columns rather than wider
+   books, and the page gets the room the toolbars were taking. */
+@media (min-width: 1200px) {
+  .shelf-grid { grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); max-width: 1400px; }
+  .stage { padding: 32px 32px calc(var(--safe-b) + 80px); }
+  .pages-rail { width: 152px; }
+}
+
 /* ---------- phones ---------- */
 
 @media (max-width: 720px) {
@@ -427,6 +510,30 @@ body[data-view="editor"] .fab { display: none; }
   .stage { padding: 12px 10px calc(var(--safe-b) + 66px); }
   .shelf-grid { grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 16px; }
   .edit-bar-mid { display: none; }    /* undo lives on the keyboard and the gesture */
+}
+
+/* ---------- a phone held in one hand ---------- */
+
+@media (max-width: 480px) {
+  /* The tray scrolls sideways, and on a narrow screen the zoom buttons
+     at the far end push the colours out of reach. Pinch does the same
+     job with no chrome at all, so only the reading stays. */
+  #zoomInBtn, #zoomOutBtn { display: none; }
+  .zoom-label { min-width: 38px; font-size: .72rem; }
+  /* The hints teach the tools to someone with a mouse and a wide
+     window. On a phone they are the width of the screen, and they push
+     the colours out of reach. */
+  .tray-hint { display: none; }
+  .tool { width: 38px; }
+  .edit-bar { gap: 2px; padding-left: calc(var(--safe-l) + 2px); padding-right: calc(var(--safe-r) + 4px); }
+  .icon-btn { min-width: 36px; padding: 0 5px; }
+  .title-field { font-size: .9rem; }
+  .sheet { padding: 20px 18px; border-radius: 16px 16px 0 0; }
+  .scrim { padding: 0; align-items: end; }       /* a sheet from the bottom, as iOS does */
+  .inspector { bottom: calc(var(--safe-b) + 68px); }
+  .book-cover { padding: 12px 10px 14px 18px; }
+  .search-wrap input { width: 136px; font-size: .88rem; padding-left: 30px; }
+  .search-icon { left: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

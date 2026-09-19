@@ -29,6 +29,7 @@ import * as objects from "./objects.js";
 import { makeStroke, strokeHit, strokeInLasso, translateStroke, snapToShape } from "./strokes.js";
 import { uid, clamp, debounce, escapeHtml, bboxOf, pointInPolygon } from "./util.js";
 import * as exporter from "./export.js";
+import { cursorFor, readClipboard, contextMenu, hasHover, modLabel } from "./desktop.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -42,6 +43,7 @@ const state = {
   urls: new Map(),          // blobId -> object URL, for the current page
   selection: null,          // { strokes:[ids], objects:[ids], bbox }
   activeObject: null,       // id of the object being edited/handled
+  clipboard: null,          // { objects, strokes, marker } — see copySelection
   dirty: false,
 };
 
@@ -67,10 +69,15 @@ async function boot() {
   }
   store.requestPersistence();
 
+  // "Search notes…" does not fit the box on a phone, and a clipped
+  // placeholder reads as a bug rather than as a label.
+  if (window.innerWidth < 480) $("shelfSearch").placeholder = "Search";
+
   wireShelf();
   wireEditor();
   wireTray();
   wireKeyboard();
+  wireDesktop();
   renderTray();
 
   await loadShelf();
@@ -120,6 +127,33 @@ function wireShelf() {
   });
 
   $("fileJson").addEventListener("change", onRestoreFile);
+
+  // Dropping a file on the window is how a Mac expects to open one.
+  // A PDF becomes a notebook, a backup restores; anything else needs a
+  // page to land on, so it says so rather than doing nothing.
+  const shelf = $("shelf");
+  shelf.addEventListener("dragover", (e) => { e.preventDefault(); shelf.classList.add("is-dropping"); });
+  shelf.addEventListener("dragleave", (e) => {
+    if (e.relatedTarget && shelf.contains(e.relatedTarget)) return;   // moving between children
+    shelf.classList.remove("is-dropping");
+  });
+  shelf.addEventListener("drop", async (e) => {
+    e.preventDefault();
+    shelf.classList.remove("is-dropping");
+    const file = e.dataTransfer?.files?.[0];
+    if (!file) return;
+
+    if (file.type === "application/pdf" || /\.pdf$/i.test(file.name)) {
+      state.pdfTarget = "new";
+      await insertPDF(file);
+      return;
+    }
+    if (file.type === "application/json" || /\.json$/i.test(file.name)) {
+      await onRestoreFile({ target: { files: [file], value: "" } });
+      return;
+    }
+    ui.toast("Open a notebook first — photos, video and documents go on a page.", { ms: 5000 });
+  });
 }
 
 async function loadShelf() {
@@ -365,6 +399,7 @@ function setZoom(z, anchor) {
   stage.scrollLeft = sx;
   stage.scrollTop = sy;
   $("zoomLabel").textContent = `${Math.round(state.zoom * 100)}%`;
+  applyCursor();
 }
 
 function fitZoom() {
@@ -486,9 +521,28 @@ function renderOverlay() {
 
 const HANDLES = ["nw", "ne", "se", "sw"];
 
+/* Move an existing frame rather than building a new one. This is not a
+   micro-optimisation: rebuilding the overlay mid-drag removes the very
+   element holding the pointer capture, so the drag dies after a few
+   pixels and the object stops following the hand. */
+function positionFrame(frame, box) {
+  if (!frame) return;
+  frame.style.left = `${box.x * state.zoom}px`;
+  frame.style.top = `${box.y * state.zoom}px`;
+  frame.style.width = `${box.w * state.zoom}px`;
+  frame.style.height = `${box.h * state.zoom}px`;
+  if ("rot" in box) frame.style.transform = box.rot ? `rotate(${box.rot}deg)` : "";
+}
+
+const TIGHT = 72;   // CSS px below which the handles won't fit inside
+
 function objectFrame(o) {
   const frame = document.createElement("div");
-  frame.className = "sel-frame";
+  // Handles sit centred on the corners, which for a small object means
+  // they cover the whole of it and there is nothing left in the middle
+  // to drag it by. Below this size they move fully outside instead.
+  const tight = o.w * state.zoom < TIGHT || o.h * state.zoom < TIGHT;
+  frame.className = tight ? "sel-frame sel-tight" : "sel-frame";
   Object.assign(frame.style, {
     left: `${o.x * state.zoom}px`, top: `${o.y * state.zoom}px`,
     width: `${o.w * state.zoom}px`, height: `${o.h * state.zoom}px`,
@@ -529,6 +583,7 @@ function startObjectDrag(e, id, mode) {
   const origin = toPage(e.clientX, e.clientY);
   const before = { ...start };
   const el = e.currentTarget;
+  const frame = el.closest(".sel-frame");
   el.setPointerCapture(e.pointerId);
 
   const onMove = (ev) => {
@@ -547,7 +602,7 @@ function startObjectDrag(e, id, mode) {
 
     replaceObject(id, next);
     renderObjects();
-    renderOverlay();
+    positionFrame(frame, next);
   };
 
   const onUp = () => {
@@ -555,6 +610,7 @@ function startObjectDrag(e, id, mode) {
     el.removeEventListener("pointermove", onMove);
     el.removeEventListener("pointerup", onUp);
     el.removeEventListener("pointercancel", onUp);
+    renderOverlay();       // safe now the drag is over: re-tightens the handles
     saveSoon();
   };
 
@@ -583,19 +639,23 @@ function startInkDrag(e) {
     state.page.strokes = before.map((s) => (ids.has(s.id) ? translateStroke(s, dx, dy) : s));
     state.selection.bbox = { ...startBox, x: startBox.x + dx, y: startBox.y + dy };
     view.drawInk();
-    renderOverlay();
+    // Move the frame, don't rebuild it — `el` is the frame, and
+    // replacing it mid-drag takes the pointer capture with it.
+    positionFrame(el, state.selection.bbox);
   };
 
   const onUp = () => {
     el.releasePointerCapture?.(e.pointerId);
     el.removeEventListener("pointermove", onMove);
     el.removeEventListener("pointerup", onUp);
+    el.removeEventListener("pointercancel", onUp);
     markDirty();
     saveSoon();
   };
 
   el.addEventListener("pointermove", onMove);
   el.addEventListener("pointerup", onUp);
+  el.addEventListener("pointercancel", onUp);
 }
 
 /* ================================================
@@ -1049,6 +1109,7 @@ function renderTray() {
   // while a marking tool is in hand, so the pen reaches the page
   // underneath them.
   $("page").dataset.tool = tools.active;
+  applyCursor();
 
   const box = $("trayOptions");
   const t = tools.active;
@@ -1093,7 +1154,7 @@ function renderTray() {
           <span class="nib-hollow" style="width:${Math.min(s / 2, 24)}px;height:${Math.min(s / 2, 24)}px"></span>
         </button>`).join("")}
       <span class="tray-sep"></span>
-      <button class="chip" data-act="clearink">Erase all ink on this page</button>`;
+      <button class="chip" data-act="clearink">Erase all ink</button>`;
     box.onclick = (e) => {
       const size = e.target.closest("[data-size]");
       if (size) tools.set("eraser", { size: Number(size.dataset.size) });
@@ -1104,18 +1165,18 @@ function renderTray() {
   }
 
   if (t === TOOL.TEXT) {
-    box.innerHTML = `<span class="tray-hint">Tap the page to put a text box there.</span>`;
+    box.innerHTML = `<span class="tray-hint">Tap the page to add a text box.</span>`;
     box.onclick = null; box.oninput = null;
     return;
   }
 
   if (t === TOOL.LASSO) {
-    box.innerHTML = `<span class="tray-hint">Draw a loop around what you want to move, copy or delete.</span>`;
+    box.innerHTML = `<span class="tray-hint">Loop around what you want to move or delete.</span>`;
     box.onclick = null; box.oninput = null;
     return;
   }
 
-  box.innerHTML = `<span class="tray-hint">Drag to move around the page. Two fingers work in any tool.</span>`;
+  box.innerHTML = `<span class="tray-hint">Drag to move around. Two fingers work in any tool.</span>`;
   box.onclick = null; box.oninput = null;
 }
 
@@ -1610,7 +1671,7 @@ async function doBackup() {
 
 async function onRestoreFile(e) {
   const file = e.target.files[0];
-  $("fileJson").value = "";
+  $("fileJson").value = "";      // or picking the same file twice does nothing
   if (!file) return;
 
   const how = await ui.sheet(`
@@ -1689,32 +1750,345 @@ async function savePageNow() {
   }
 }
 
+/* The target of a keyboard or clipboard event is whatever had focus, and that is
+   not always an element — with nothing focused it is the document,
+   which has no `matches`. Asking it anyway throws inside the listener
+   and the paste silently does nothing. */
+const isTypingTarget = (target) =>
+  target instanceof Element && target.matches("input, textarea, [contenteditable]");
+
 function wireKeyboard() {
   document.addEventListener("keydown", (e) => {
-    const typing = e.target.matches("input, textarea, [contenteditable='true'], [contenteditable='plaintext-only']");
+    const typing = isTypingTarget(e.target);
     const mod = e.metaKey || e.ctrlKey;
+    const editor = document.body.dataset.view === "editor";
 
+    // Undo and save work while typing too — ⌘Z in a text box is the
+    // browser's own undo, so that one is handed back.
     if (mod && e.key.toLowerCase() === "z") {
       if (typing) return;
       e.preventDefault();
-      e.shiftKey ? doRedo() : doUndo();
+      if (e.shiftKey) doRedo(); else doUndo();
       return;
     }
     if (mod && e.key.toLowerCase() === "s") { e.preventDefault(); savePageNow(); return; }
-    if (typing || document.body.dataset.view !== "editor") return;
+
+    if (mod && e.key.toLowerCase() === "n" && !typing) {
+      e.preventDefault();
+      if (editor) addPage(); else createNotebook();
+      return;
+    }
+
+    if (typing || !editor) return;
+
+    if (mod) {
+      switch (e.key) {
+        case "d": e.preventDefault(); duplicateSelection(); return;
+        case "c": copySelection(); return;                    // no preventDefault: the
+        case "x": cutSelection(); return;                     // copy event still fires
+        case "=": case "+": e.preventDefault(); setZoom(state.zoom * 1.25); return;
+        case "-": e.preventDefault(); setZoom(state.zoom / 1.25); return;
+        case "0": e.preventDefault(); fitZoom(); return;
+        default: break;
+      }
+    }
 
     const byNumber = { 1: TOOL.PEN, 2: TOOL.HIGHLIGHTER, 3: TOOL.ERASER, 4: TOOL.LASSO, 5: TOOL.TEXT, 6: TOOL.HAND };
-    if (byNumber[e.key]) { tools.active = byNumber[e.key]; return; }
+    if (byNumber[e.key] && !mod) { tools.active = byNumber[e.key]; return; }
+
+    // Space held down pans, in any tool. Every drawing application on
+    // this platform does it, and the hand tool is three clicks away
+    // without it.
+    if (e.code === "Space" && !e.repeat) {
+      e.preventDefault();
+      if (tools.active !== TOOL.HAND) {
+        spacePan.was = tools.active;
+        tools.active = TOOL.HAND;
+      }
+      return;
+    }
+
+    // Arrows nudge whatever is selected, and turn the page when nothing
+    // is. Shift makes the nudge ten times bigger, which is the
+    // convention everywhere else.
+    const nudge = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
+    if (nudge && (state.activeObject || state.selection)) {
+      e.preventDefault();
+      nudgeSelection(nudge[0] * (e.shiftKey ? 10 : 1), nudge[1] * (e.shiftKey ? 10 : 1));
+      return;
+    }
 
     if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); goToPage(state.index - 1); }
     if (e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); goToPage(state.index + 1); }
     if (e.key === "Escape") clearSelection();
-    if ((e.key === "Backspace" || e.key === "Delete")) {
+    if (e.key === "Backspace" || e.key === "Delete") {
       if (state.activeObject) { e.preventDefault(); deleteObject(state.activeObject); }
       else if (state.selection) { e.preventDefault(); deleteSelectedInk(); }
     }
-    if (e.key === "0" && mod) { e.preventDefault(); fitZoom(); }
   });
+
+  document.addEventListener("keyup", (e) => {
+    if (e.code !== "Space" || !spacePan.was) return;
+    tools.active = spacePan.was;
+    spacePan.was = null;
+  });
+
+  // Let go of the key while the window is in the background and the
+  // keyup never arrives, leaving the hand tool stuck.
+  window.addEventListener("blur", () => {
+    if (spacePan.was) { tools.active = spacePan.was; spacePan.was = null; }
+  });
+}
+
+const spacePan = { was: null };
+
+/* ================================================
+   DESKTOP: cursor, clipboard, right-click
+   ================================================ */
+
+function wireDesktop() {
+  document.addEventListener("paste", onPaste);
+  document.addEventListener("copy", onCopyEvent);
+  document.addEventListener("cut", onCopyEvent);
+  $("stage").addEventListener("contextmenu", onContextMenu);
+  applyCursor();
+}
+
+/* The cursor says what the tool will do before it does it, and for the
+   eraser it also says how big it is. Only on a device that hovers —
+   setting a cursor on a phone is at best wasted work. */
+function applyCursor() {
+  if (!hasHover()) return;
+  const t = tools.current;
+  $("stage").style.cursor = cursorFor(tools.active, {
+    size: t.size || 20,
+    zoom: state.zoom,
+  });
+}
+
+/* ---------- clipboard ---------- */
+
+/* Copying inside the app puts the real objects in `state.clipboard` and
+   a plain-text stand-in on the system clipboard. The stand-in is what
+   makes the two clipboards distinguishable on paste: if what the system
+   hands back is exactly what we put there, nothing else has been copied
+   since and the rich version is the one they meant. Copy something in
+   another app in between and the text won't match, so that wins. */
+async function copySelection({ cut = false } = {}) {
+  const picked = [];
+  const strokes = [];
+
+  if (state.activeObject) {
+    const o = objectById(state.activeObject);
+    if (o) picked.push(structuredClone(o));
+  } else if (state.selection) {
+    const ids = new Set(state.selection.strokes);
+    strokes.push(...state.page.strokes.filter((s) => ids.has(s.id)).map((s) => structuredClone(s)));
+  } else {
+    return false;
+  }
+
+  const marker = picked.length
+    ? (picked[0].type === "text" ? picked[0].text : `[Inkwell ${picked[0].type}]`)
+    : `[Inkwell ink: ${strokes.length} stroke${strokes.length === 1 ? "" : "s"}]`;
+
+  // The clipboard takes its own copy of any attached photo or video
+  // before anything else happens to the original. Cutting deletes the
+  // object's blob, and a clipboard holding the id of a blob that has
+  // just been deleted pastes an empty grey box.
+  for (const o of picked) {
+    if (!o.blobId) continue;
+    const blob = await store.getBlob(o.blobId);
+    o.blobId = blob ? await store.putBlob(blob, { name: o.name }) : null;
+  }
+
+  releaseClipboard();
+  state.clipboard = { objects: picked, strokes, marker };
+  navigator.clipboard?.writeText(marker).catch(() => { /* denied; the internal copy still works */ });
+
+  if (cut) {
+    if (picked.length) deleteObject(picked[0].id);
+    else deleteSelectedInk();
+  }
+  ui.toast(cut ? "Cut." : "Copied.", { ms: 1200 });
+  return true;
+}
+
+/* The clipboard's copies are real rows in the blob store. Replacing
+   what is on it has to take them with it, or every ⌘C on a photo leaves
+   a few megabytes behind that nothing will ever reference again. */
+function releaseClipboard() {
+  for (const o of state.clipboard?.objects || []) {
+    if (o.blobId) store.del("blobs", o.blobId);
+  }
+  state.clipboard = null;
+}
+
+const cutSelection = () => copySelection({ cut: true });
+
+function onCopyEvent(e) {
+  // Only take over when nothing is being typed and something on the
+  // page is selected — otherwise this is an ordinary text copy.
+  if (document.body.dataset.view !== "editor") return;
+  if (isTypingTarget(e.target)) return;
+  if (!state.activeObject && !state.selection) return;
+  e.preventDefault();
+  copySelection({ cut: e.type === "cut" });
+}
+
+async function onPaste(e) {
+  if (document.body.dataset.view !== "editor" || !state.page) return;
+  if (isTypingTarget(e.target)) return;      // let the browser paste into it
+
+  const clip = readClipboard(e);
+
+  if (clip.kind === "image" || clip.kind === "video" || clip.kind === "file") {
+    e.preventDefault();
+    await insertFile(clip.file);
+    return;
+  }
+
+  // Our own objects, if the system clipboard hasn't moved on since.
+  const mine = state.clipboard;
+  if (mine && (clip.kind === "none" || clip.text === mine.marker)) {
+    e.preventDefault();
+    pasteInternal(mine);
+    return;
+  }
+
+  if (clip.kind === "text") {
+    e.preventDefault();
+    history.record(state.page);
+    const t = tools.state.text;
+    const o = objects.makeText({
+      x: Math.round(state.page.w * 0.12),
+      y: Math.round(state.page.h * 0.18),
+      w: Math.round(state.page.w * 0.76),
+      h: Math.max(120, Math.ceil(clip.text.length / 52) * 44),
+      text: clip.text, color: t.color, size: t.size, font: t.font, align: t.align,
+    });
+    state.page.objects.push(o);
+    renderObjects();
+    selectObject(o.id);
+    finishEdit();
+  }
+}
+
+const PASTE_OFFSET = 28;
+
+function pasteInternal({ objects: objs, strokes }) {
+  history.record(state.page);
+
+  for (const src of objs) {
+    const copy = { ...structuredClone(src), id: uid("o"), x: src.x + PASTE_OFFSET, y: src.y + PASTE_OFFSET };
+    // Its own copy again, so that pasting twice gives two independent
+    // photos and the clipboard survives either of them being deleted.
+    if (src.blobId) {
+      store.getBlob(src.blobId).then(async (blob) => {
+        if (!blob) return;
+        copy.blobId = await store.putBlob(blob, { name: src.name });
+        await loadPageBlobs();
+        renderObjects();
+        saveSoon();
+      });
+    }
+    state.page.objects.push(copy);
+    selectObject(copy.id);
+  }
+
+  if (strokes.length) {
+    const copies = strokes.map((s) => ({ ...translateStroke(s, PASTE_OFFSET, PASTE_OFFSET), id: uid("s") }));
+    state.page.strokes.push(...copies);
+    const pts = copies.flatMap((s) => s.points);
+    state.selection = { strokes: copies.map((s) => s.id), bbox: bboxOf(pts, 12) };
+    state.activeObject = null;
+    view.drawInk();
+    renderOverlay();
+    renderInspector();
+  }
+
+  renderObjects();
+  finishEdit();
+}
+
+function duplicateSelection() {
+  if (state.activeObject) duplicateObject(state.activeObject);
+  else if (state.selection) duplicateSelectedInk();
+}
+
+function nudgeSelection(dx, dy) {
+  history.record(state.page);
+  if (state.activeObject) {
+    const o = objectById(state.activeObject);
+    replaceObject(o.id, { ...o, x: o.x + dx, y: o.y + dy });
+    renderObjects();
+  } else if (state.selection) {
+    const ids = new Set(state.selection.strokes);
+    state.page.strokes = state.page.strokes.map((s) => (ids.has(s.id) ? translateStroke(s, dx, dy) : s));
+    state.selection.bbox = { ...state.selection.bbox, x: state.selection.bbox.x + dx, y: state.selection.bbox.y + dy };
+    view.drawInk();
+  }
+  renderOverlay();
+  markDirty();
+  saveSoon();
+}
+
+/* ---------- right-click ---------- */
+
+async function onContextMenu(e) {
+  if (!state.page) return;
+  e.preventDefault();
+
+  const at = toPage(e.clientX, e.clientY);
+  const hit = (e.target instanceof Element ? e.target.closest(".obj") : null)?.dataset.id
+    || (state.page.objects || []).slice().reverse().find((o) => objects.objectHit(o, at.x, at.y))?.id;
+
+  if (hit && hit !== state.activeObject) selectObject(hit);
+
+  const m = modLabel();
+  const onSomething = !!(state.activeObject || state.selection);
+  const canPaste = !!state.clipboard;
+
+  const items = onSomething
+    ? [
+        { id: "cut", label: "Cut", hint: `${m}X` },
+        { id: "copy", label: "Copy", hint: `${m}C` },
+        { id: "duplicate", label: "Duplicate", hint: `${m}D` },
+        { sep: true },
+        ...(state.activeObject ? [
+          { id: "front", label: "Bring forward" },
+          { id: "back", label: "Send back" },
+          { sep: true },
+        ] : []),
+        { id: "delete", label: "Delete", danger: true, hint: "⌫" },
+      ]
+    : [
+        { id: "paste", label: "Paste", hint: `${m}V`, disabled: !canPaste },
+        { sep: true },
+        { id: "textbox", label: "Text box here" },
+        { id: "photo", label: "Insert a photo…" },
+        { sep: true },
+        { id: "addpage", label: "Add a page after this one", hint: `${m}N` },
+        { id: "fit", label: "Fit the page", hint: `${m}0` },
+      ];
+
+  switch (await contextMenu(e.clientX, e.clientY, items)) {
+    case "cut": cutSelection(); break;
+    case "copy": copySelection(); break;
+    case "duplicate": duplicateSelection(); break;
+    case "front": reorderObject(state.activeObject, +1); break;
+    case "back": reorderObject(state.activeObject, -1); break;
+    case "delete":
+      if (state.activeObject) deleteObject(state.activeObject);
+      else deleteSelectedInk();
+      break;
+    case "paste": if (state.clipboard) pasteInternal(state.clipboard); break;
+    case "textbox": placeTextBox(at); break;
+    case "photo": $("filePhoto").click(); break;
+    case "addpage": addPage(); break;
+    case "fit": fitZoom(); break;
+    default: break;
+  }
 }
 
 boot();

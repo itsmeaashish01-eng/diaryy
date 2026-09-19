@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789829058041,
-      "lastOk": 1789829058041,
+      "lastRun": 1789841489622,
+      "lastOk": 1789841489622,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789681718000,
+          "level": "notable",
+          "title": "How to Write with an LLM",
+          "detail": "Article URL: https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/ Comments URL: https://news.ycombinator.com/item?id=49747070 Points: 572 # Comments: 364",
+          "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/"
+        },
         {
           "t": 1789772657000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "Learning to solve hard problems in RL for LLMs by never giving up",
           "detail": "https://arxiv.org/abs/2609.13443 Comments URL: https://news.ycombinator.com/item?id=49717280 Points: 79 # Comments: 0",
           "url": "https://mnoukhov.github.io/posts/ngu/"
-        },
-        {
-          "t": 1789493832000,
-          "level": "notable",
-          "title": "Why I'm still bearish on LLMs after Navier-Stokes",
-          "detail": "Article URL: https://dank.systems/posts/2026-09-15-ai-bear.html Comments URL: https://news.ycombinator.com/item?id=49715927 Points: 166 # Comments: 175",
-          "url": "https://dank.systems/posts/2026-09-15-ai-bear.html"
         }
       ],
       "notifiedAt": {},
@@ -1920,11 +1920,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789817181760,
-      "lastOk": 1789817181760,
+      "lastRun": 1789841490352,
+      "lastOk": 1789841490352,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,066 (+69.4%) · excludes S&P 500 ETF",
+      "lastLine": "$4,071 (+69.6%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2066,9 +2066,27 @@
         {
           "t": 1789817181760,
           "v": 4066.15
+        },
+        {
+          "t": 1789841490352,
+          "v": 4071.35
         }
       ],
       "events": [
+        {
+          "t": 1789841490338,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789841490338,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789817181747,
           "level": "notable",
@@ -2474,31 +2492,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789211536225,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789211536225,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81323
+          "BTC": 81427
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789841490353,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1789829058383,
       "ran": 2,

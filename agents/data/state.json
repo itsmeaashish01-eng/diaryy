@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789799494940,
-      "lastOk": 1789799494940,
+      "lastRun": 1789817181068,
+      "lastOk": 1789817181068,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789772657000,
+          "level": "notable",
+          "title": "How OpenAI Used Its Own LLMs to Design Its Jalapeño Chip",
+          "detail": "Article URL: https://spectrum.ieee.org/llms-for-chip-design Comments URL: https://news.ycombinator.com/item?id=49761432 Points: 130 # Comments: 92",
+          "url": "https://spectrum.ieee.org/llms-for-chip-design"
+        },
+        {
+          "t": 1789757735000,
+          "level": "notable",
+          "title": "Cache-to-Cache: Direct Semantic Communication Between LLMs (2025)",
+          "detail": "Article URL: https://arxiv.org/abs/2510.03215 Comments URL: https://news.ycombinator.com/item?id=49758615 Points: 93 # Comments: 13",
+          "url": "https://arxiv.org/abs/2510.03215"
+        },
         {
           "t": 1789772657000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Learning to solve hard problems in RL for LLMs by never giving up",
           "detail": "https://arxiv.org/abs/2609.13443 Comments URL: https://news.ycombinator.com/item?id=49717280 Points: 27 # Comments: 0",
           "url": "https://mnoukhov.github.io/posts/ngu/"
-        },
-        {
-          "t": 1789493832000,
-          "level": "notable",
-          "title": "Why I'm still bearish on LLMs after Navier-Stokes",
-          "detail": "Article URL: https://dank.systems/posts/2026-09-15-ai-bear.html Comments URL: https://news.ycombinator.com/item?id=49715927 Points: 111 # Comments: 68",
-          "url": "https://dank.systems/posts/2026-09-15-ai-bear.html"
-        },
-        {
-          "t": 1789485626000,
-          "level": "notable",
-          "title": "Show HN: Pizza Bot – An inbox for AI agents that work in the background",
-          "detail": "Hi HN - long-time lurker (since 2012!), first time poster.Pizza Bot is a self-hosted desktop app for Mac, Windows, and Linux that runs AI agents in the background and exposes them through an email-like UI. Finished work shows up in Unread, and anything waiting on your approval shows up in Action. It",
-          "url": "https://github.com/pizza-bot-app/pizza-bot"
         }
       ],
       "notifiedAt": {},
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1789761329520,
-      "lastOk": 1789761329520,
+      "lastRun": 1789817181071,
+      "lastOk": 1789817181071,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 1 drifting",
@@ -934,9 +934,41 @@
         {
           "t": 1789761329520,
           "v": 17
+        },
+        {
+          "t": 1789817181071,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1789817181071,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 57 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1789817181071,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1789817181071,
+          "level": "notable",
+          "title": "Data collection complete — 87 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1789817181071,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 30 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1789761329520,
           "level": "notable",
@@ -1297,12 +1329,12 @@
       ],
       "notifiedAt": {},
       "memo": {
-        "checkedOn": "2026-09-18"
+        "checkedOn": "2026-09-19"
       }
     },
     "reading": {
-      "lastRun": 1789761329521,
-      "lastOk": 1789761329521,
+      "lastRun": 1789817181073,
+      "lastOk": 1789817181073,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1367,9 +1399,34 @@
         {
           "t": 1789761329521,
           "v": 3
+        },
+        {
+          "t": 1789817181073,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1789817181073,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1789817181073,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 49 days",
+          "url": ""
+        },
+        {
+          "t": 1789817181073,
+          "level": "notable",
+          "title": "Still unread after 141 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1789761329521,
           "level": "notable",
@@ -1692,8 +1749,8 @@
       }
     },
     "training": {
-      "lastRun": 1789761329522,
-      "lastOk": 1789761329522,
+      "lastRun": 1789817181074,
+      "lastOk": 1789817181074,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
@@ -1758,9 +1815,20 @@
         {
           "t": 1789761329522,
           "v": 0
+        },
+        {
+          "t": 1789817181074,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1789817181074,
+          "level": "notable",
+          "title": "10 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1789761329522,
           "level": "notable",
@@ -1852,11 +1920,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789799496044,
-      "lastOk": 1789799496044,
+      "lastRun": 1789817181760,
+      "lastOk": 1789817181760,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,047 (+68.6%) · excludes S&P 500 ETF",
+      "lastLine": "$4,066 (+69.4%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -1994,9 +2062,27 @@
         {
           "t": 1789799496044,
           "v": 4046.8
+        },
+        {
+          "t": 1789817181760,
+          "v": 4066.15
         }
       ],
       "events": [
+        {
+          "t": 1789817181747,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789817181747,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789799496030,
           "level": "notable",
@@ -2402,31 +2488,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789194316245,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789194316245,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 80936
+          "BTC": 81323
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789817181761,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 12
+    },
     {
       "t": 1789799496044,
       "ran": 3,

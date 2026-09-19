@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789771638957,
-      "lastOk": 1789771638957,
+      "lastRun": 1789781439944,
+      "lastOk": 1789781439944,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789772657000,
+          "level": "notable",
+          "title": "How OpenAI Used Its Own LLMs to Design Its Jalapeño Chip",
+          "detail": "Article URL: https://spectrum.ieee.org/llms-for-chip-design Comments URL: https://news.ycombinator.com/item?id=49761432 Points: 48 # Comments: 47",
+          "url": "https://spectrum.ieee.org/llms-for-chip-design"
+        },
+        {
+          "t": 1789765232000,
+          "level": "notable",
+          "title": "Claude Code now reads AGENTS.md if there is no Claude.md",
+          "detail": "Article URL: https://code.claude.com/docs/en/changelog Comments URL: https://news.ycombinator.com/item?id=49760187 Points: 502 # Comments: 181",
+          "url": "https://code.claude.com/docs/en/changelog"
+        },
+        {
+          "t": 1789758006000,
+          "level": "notable",
+          "title": "The Implications of Linguistic Illegibility for LLM Security",
+          "detail": "Article URL: https://arxiv.org/abs/2609.02852 Comments URL: https://news.ycombinator.com/item?id=49758689 Points: 51 # Comments: 19",
+          "url": "https://arxiv.org/abs/2609.02852"
+        },
+        {
+          "t": 1789757735000,
+          "level": "notable",
+          "title": "Cache-to-Cache: Direct Semantic Communication Between LLMs (2025)",
+          "detail": "Article URL: https://arxiv.org/abs/2510.03215 Comments URL: https://news.ycombinator.com/item?id=49758615 Points: 66 # Comments: 12",
+          "url": "https://arxiv.org/abs/2510.03215"
+        },
         {
           "t": 1789765232000,
           "level": "notable",
@@ -401,34 +429,6 @@
           "title": "How much of F-Droid is LLM generated?",
           "detail": "Article URL: https://tintotint.eu/whacky-corner/f-droid_slop/ Comments URL: https://news.ycombinator.com/item?id=49710015 Points: 99 # Comments: 129",
           "url": "https://tintotint.eu/whacky-corner/f-droid_slop/"
-        },
-        {
-          "t": 1789406166000,
-          "level": "notable",
-          "title": "Pion, an agent designed to run any company autonomously",
-          "detail": "Article URL: https://andonlabs.com/blog/why-we-built-pion Comments URL: https://news.ycombinator.com/item?id=49700477 Points: 442 # Comments: 542",
-          "url": "https://andonlabs.com/blog/why-we-built-pion"
-        },
-        {
-          "t": 1789406166000,
-          "level": "notable",
-          "title": "Pion, an agent designed to run any company autonomously",
-          "detail": "Article URL: https://andonlabs.com/blog/why-we-built-pion Comments URL: https://news.ycombinator.com/item?id=49700477 Points: 382 # Comments: 446",
-          "url": "https://andonlabs.com/blog/why-we-built-pion"
-        },
-        {
-          "t": 1789403543000,
-          "level": "notable",
-          "title": "Why don't machine learning research agents overfit?",
-          "detail": "Article URL: https://www.amazon.science/blog/why-dont-machine-learning-research-agents-overfit Comments URL: https://news.ycombinator.com/item?id=49699648 Points: 124 # Comments: 68",
-          "url": "https://www.amazon.science/blog/why-dont-machine-learning-research-agents-overfit"
-        },
-        {
-          "t": 1789406166000,
-          "level": "notable",
-          "title": "Pion, an agent designed to run any company autonomously",
-          "detail": "Article URL: https://andonlabs.com/blog/why-we-built-pion Comments URL: https://news.ycombinator.com/item?id=49700477 Points: 283 # Comments: 308",
-          "url": "https://andonlabs.com/blog/why-we-built-pion"
         }
       ],
       "notifiedAt": {},
@@ -2423,6 +2423,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1789781439952,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1789771639964,
       "ran": 3,

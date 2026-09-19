@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>The AI Employee</title>
+  <meta name="description" content="The admin around the work, done: the client file, the morning read, the QA pass, the revision log, updates, scheduling, invoicing, the team and the pipeline." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="icon-btn nav-toggle" data-act="nav" aria-label="Menu">☰</button>
+      <span class="logo">◒ The AI Employee</span>
+      <span class="biz-name" id="bizName"></span>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="Search clients, work, invoices…" autocomplete="off" aria-label="Search" />
+        <span class="search-icon" aria-hidden="true">⌕</span>
+      </div>
+      <button class="icon-btn" data-act="theme" title="Toggle dark mode" aria-label="Toggle dark mode"><span id="darkIcon">☾</span></button>
+      <button class="icon-btn" data-act="export" title="Export data as JSON" aria-label="Export data">⤓</button>
+      <label class="icon-btn" title="Import JSON data" aria-label="Import data">⤒
+        <input type="file" id="importFile" accept=".json" hidden />
+      </label>
+      <a class="icon-btn" href="../index.html" title="Back to My Diary" aria-label="Back to My Diary">✦</a>
+    </div>
+  </header>
+
+  <div class="app-shell">
+
+    <!-- ===== THE JOB DESCRIPTION ===== -->
+    <aside class="sidebar" id="sidebar">
+      <p class="side-label">The job description</p>
+      <nav class="side-nav" id="sideNav" aria-label="Sections">
+        <button class="side-item is-on" data-view="brief"><span class="num">2</span> Morning read <span class="side-count" id="countBrief"></span></button>
+        <button class="side-item" data-view="clients"><span class="num">1</span> Client file</button>
+        <button class="side-item" data-view="work"><span class="num">·</span> Work &amp; projects <span class="side-count" id="countWork"></span></button>
+        <button class="side-item" data-view="qa"><span class="num">3</span> QA pass</button>
+        <button class="side-item" data-view="revisions"><span class="num">4</span> Revision log <span class="side-count" id="countRev"></span></button>
+        <button class="side-item" data-view="updates"><span class="num">5</span> Client updates <span class="side-count" id="countUpd"></span></button>
+        <button class="side-item" data-view="schedule"><span class="num">6</span> Scheduling</button>
+        <button class="side-item" data-view="invoices"><span class="num">7</span> Invoicing <span class="side-count" id="countInv"></span></button>
+        <button class="side-item" data-view="team"><span class="num">8</span> Team</button>
+        <button class="side-item" data-view="growth"><span class="num">9</span> Growth <span class="side-count" id="countLead"></span></button>
+      </nav>
+
+      <p class="side-label">Same person. Bigger capacity.</p>
+      <nav class="side-nav" aria-label="About">
+        <button class="side-item" data-view="how"><span class="num">◒</span> How it works</button>
+        <button class="side-item" data-view="settings"><span class="num">⚙</span> Settings</button>
+      </nav>
+
+      <div class="side-foot">
+        <p id="sideFootNote">Everything stays in this browser.</p>
+      </div>
+    </aside>
+
+    <!-- ===== VIEW ===== -->
+    <main class="view" id="view" tabindex="-1"><!-- rendered by ui.js --></main>
+  </div>
+
+  <!-- ===== SLIDE-OVER SHEET (forms, drafts, detail) ===== -->
+  <div class="sheet-backdrop hidden" id="sheetBackdrop" data-act="closeSheet"></div>
+  <section class="sheet hidden" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <header class="sheet-head">
+      <h2 id="sheetTitle">—</h2>
+      <button class="icon-btn" data-act="closeSheet" aria-label="Close">✕</button>
+    </header>
+    <div class="sheet-body" id="sheetBody"></div>
+  </section>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="js/util.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/margin.js"></script>
+  <script src="js/qa.js"></script>
+  <script src="js/money.js"></script>
+  <script src="js/growth.js"></script>
+  <script src="js/brief.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

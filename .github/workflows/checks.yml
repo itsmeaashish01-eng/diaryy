@@ -40,11 +40,17 @@ jobs:
       - name: Guide self-test
         run: node guide/selftest.mjs
 
+      # The nine jobs: which revision round is billable, whether a QA pass
+      # still counts after the work changed, when an invoice becomes a
+      # chase. All arithmetic on dates and money, so it runs offline here.
+      - name: AI Employee self-test
+        run: node employee/selftest.mjs
+
       # A syntax error in a type would only show up at 37 past the hour,
       # in a job nobody is watching. Cheaper to find it here.
       - name: Everything parses
         run: |
-          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js; do
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js employee/selftest.mjs employee/js/*.js; do
             node --check "$f"
           done
           for f in agents/data/*.json; do

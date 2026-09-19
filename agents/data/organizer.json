@@ -1,0 +1,10 @@
+{
+  "_readme": "A placeholder, so the organizer agent validates and runs before you've exported anything. Replace it with your own diary export: click ⤓ in the diary, then run `node agents/runner.mjs --adopt ~/Downloads/my-diary-<date>.json`. Keys that aren't a YYYY-MM-DD date are ignored, which is why this line is harmless.",
+  "2026-09-17": {
+    "diary": "",
+    "mood": "",
+    "notes": "",
+    "notesTag": "general",
+    "tasks": []
+  }
+}

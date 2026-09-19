@@ -25,6 +25,9 @@
      --list           print the agent types and exit
      --validate       check every active agent's definition and exit
                       non-zero if any is broken. Touches no network
+     --adopt <file>   copy a diary export to wherever the agents that
+                      read one are looking, and exit. Add --dry-run to
+                      see what it would overwrite first
 
    Environment:
      NTFY_TOPIC       ntfy topic to push to
@@ -38,6 +41,9 @@
                       without it; see agents/README.md.
    ================================================ */
 
+import { readFileSync, writeFileSync, existsSync, mkdirSync, statSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+
 import { typeFor, typeList, TYPES } from "./core/registry.mjs";
 import { loadAgents, loadState, agentState, remember, saveState } from "./core/state.mjs";
 import { decide, narrate, atLeast } from "./core/brain.mjs";
@@ -47,6 +53,8 @@ import {
 } from "./core/notify.mjs";
 import { repoVisibility, personalAgents } from "./core/repo.mjs";
 import { writeSummary } from "./core/report.mjs";
+import { looksLikeExport, adoptTargets, byPath, adoptSources, newestOf } from "./core/adopt.mjs";
+import { plural } from "./core/local.mjs";
 
 const argv = process.argv.slice(2);
 const flag = (n) => argv.includes(n);
@@ -103,6 +111,124 @@ if (flag("--validate")) {
     process.exit(1);
   }
   console.log(`\nAll ${defs.agents.filter((a) => a.active !== false).length} active agents check out.`);
+  process.exit(0);
+}
+
+/* Put an export where the agents are already looking.
+
+     node agents/runner.mjs --adopt ~/Downloads/my-diary-2026-09-17.json
+
+   The alternative is renaming a file and remembering a path, which is a
+   chore, and a chore in front of an agent is why `diary-nudge` shipped
+   paused and stayed paused. Reports what each agent will now see, and
+   what it replaced — with --dry-run it only reports. */
+if (flag("--adopt")) {
+  const given = adoptSources(argv);
+  if (!given.length) {
+    console.error("--adopt needs a file: node agents/runner.mjs --adopt ~/Downloads/my-diary-2026-09-17.json");
+    process.exit(1);
+  }
+
+  /* A glob arrives here as several paths. Take the newest and say which,
+     rather than the first — which, since the filenames carry their dates,
+     would be the oldest export you have. */
+  let source = given[0];
+  if (given.length > 1) {
+    const stamped = [];
+    for (const path of given) {
+      try {
+        stamped.push({ path, mtime: statSync(path).mtimeMs });
+      } catch {
+        console.error(`Can't read ${path}: no such file`);
+        process.exit(1);
+      }
+    }
+    source = newestOf(stamped).path;
+    console.log(
+      `${given.length} files matched — taking the most recent:\n  ${source}\n` +
+      stamped.filter((f) => f.path !== source).map((f) => `  (not ${f.path})`).join("\n") + "\n"
+    );
+  }
+
+  let raw;
+  try {
+    raw = readFileSync(source, "utf8");
+  } catch (e) {
+    console.error(`Can't read ${source}: ${e.code === "ENOENT" ? "no such file" : e.message}`);
+    process.exit(1);
+  }
+
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch (e) {
+    console.error(`${source} isn't valid JSON: ${e.message}`);
+    process.exit(1);
+  }
+
+  const shape = looksLikeExport(parsed);
+  if (!shape.ok) {
+    console.error(`${source}: ${shape.why}`);
+    process.exit(1);
+  }
+
+  const targets = adoptTargets(loadAgents(file), TYPES);
+  if (!targets.length) {
+    console.error("No agent reads a diary export — nothing to adopt it into.");
+    process.exit(1);
+  }
+
+  console.log(
+    `${source}\n  ${plural(shape.days, "day")}, ${shape.first} to ${shape.last} · ` +
+    `${shape.written} with writing · ${plural(shape.tasks, "task")}\n`
+  );
+
+  for (const { path, agents } of byPath(targets)) {
+    const names = agents.map((a) => a.label).join(", ");
+    /* What's there now, said before it goes. Adopting is an overwrite,
+       and an overwrite you didn't see coming is the kind of thing you
+       only notice a week later. */
+    let had = "nothing there yet";
+    if (existsSync(path)) {
+      if (resolve(path) === resolve(source)) {
+        console.log(`– ${path} (${names}) — that's the file you gave me, left alone`);
+        continue;
+      }
+      try {
+        const before = looksLikeExport(JSON.parse(readFileSync(path, "utf8")));
+        had = before.ok
+          ? `replacing ${plural(before.days, "day")}, ${plural(before.tasks, "task")}`
+          : "replacing something that isn't an export";
+      } catch {
+        had = "replacing an unreadable file";
+      }
+    }
+
+    if (dryRun) {
+      console.log(`· ${path} (${names}) — would copy, ${had}`);
+      continue;
+    }
+
+    try {
+      mkdirSync(dirname(path), { recursive: true });
+      writeFileSync(path, raw);
+      console.log(`✓ ${path} (${names}) — ${had}`);
+    } catch (e) {
+      console.error(`✕ ${path} (${names}) — ${e.message}`);
+      process.exit(1);
+    }
+  }
+
+  const paused = targets.filter((t) => t.paused);
+  if (paused.length) {
+    console.log(
+      `\nStill paused: ${paused.map((p) => p.id).join(", ")}. ` +
+      (dryRun
+        ? `Adopting for real would give them their file; turning them on is \`"active": true\` in ${file}.`
+        : `They have their file now — set "active": true in ${file} to turn them on.`)
+    );
+  }
+  console.log(dryRun ? "\nDry run — nothing written." : "\nDone. `node agents/runner.mjs --dry-run --force` to see what they make of it.");
   process.exit(0);
 }
 

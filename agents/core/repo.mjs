@@ -67,7 +67,7 @@ export async function repoVisibility() {
 
 /* Only these read a file about you and write what they found back into
    the repository. The rest watch the outside world and leak nothing. */
-export const PERSONAL_TYPES = new Set(["goals", "reading", "exercise", "portfolio", "diary", "study"]);
+export const PERSONAL_TYPES = new Set(["goals", "reading", "exercise", "portfolio", "diary", "organizer", "study"]);
 
 export const personalAgents = (agents) =>
   agents.filter((a) => a && a.active !== false && PERSONAL_TYPES.has(a.type));

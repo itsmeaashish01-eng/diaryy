@@ -100,6 +100,37 @@
       }
     },
     {
+      "id": "organizer",
+      "type": "organizer",
+      "label": "Organizer",
+      "note": "Reads the diary's ⤓ export and watches the task lists: what slipped, what's piling up on today, and whether the week's list is shrinking. Point config.file at agents/private/organizer.json instead to keep it off GitHub — it runs locally either way.",
+      "active": true,
+      "intervalMin": 720,
+      "config": {
+        "file": "agents/data/organizer.json",
+        "ageDays": 7,
+        "overload": 6,
+        "maxMention": 3,
+        "includeText": true,
+        "weeklyReview": true
+      },
+      "rules": [
+        {
+          "when": "new",
+          "level": "notable"
+        },
+        {
+          "when": "above",
+          "value": 10,
+          "level": "urgent"
+        }
+      ],
+      "notify": {
+        "on": "notable",
+        "cooldownMin": 720
+      }
+    },
+    {
       "id": "page-watch",
       "type": "webpage",
       "label": "A page I care about",

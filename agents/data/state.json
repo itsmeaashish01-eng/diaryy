@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789841489622,
-      "lastOk": 1789841489622,
+      "lastRun": 1789851407479,
+      "lastOk": 1789851407479,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789833171000,
+          "level": "notable",
+          "title": "Show HN: CUA-S1 – A System One Model for Computer Use",
+          "detail": "Hello HN! We're Dillon and Francesco from Cua.We were wondering how many computer use tasks actually need a full general purpose LLM (e.g. gpt-6-astra, claude-opus-5 etc.) to think through all their decisions and steps. Some tasks require thinking about a plan, exploring different paths, recovering ",
+          "url": "https://github.com/trycua/cua"
+        },
         {
           "t": 1789681718000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "Datamimic – don't let your coding agent invent its own test world",
           "detail": "Article URL: https://github.com/rapiddweller/datamimic Comments URL: https://news.ycombinator.com/item?id=49722276 Points: 18 # Comments: 2",
           "url": "https://github.com/rapiddweller/datamimic"
-        },
-        {
-          "t": 1789499258000,
-          "level": "notable",
-          "title": "Learning to solve hard problems in RL for LLMs by never giving up",
-          "detail": "https://arxiv.org/abs/2609.13443 Comments URL: https://news.ycombinator.com/item?id=49717280 Points: 79 # Comments: 0",
-          "url": "https://mnoukhov.github.io/posts/ngu/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1789829058377,
-      "lastOk": 1789829058377,
+      "lastRun": 1789851407835,
+      "lastOk": 1789851407835,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.278",
@@ -584,6 +584,76 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
         },
         {
+          "t": 1789787440000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.278",
+          "detail": "## What's changed\n\n- Changed auto mode for Claude API and Enterprise users, and on Bedrock, Vertex, Foundry and gateways, to default to the server-side classifier, which does not charge for classifier overhead (`CLAUDE_CODE_AUTO_MODE_SERVER=0` opts out on Bedrock, Vertex, Foundry and gateways); warns on billed fallback. See https://code.claude.com/docs/en/auto-mode-classifier-billing\n- Added an `A",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.278"
+        },
+        {
+          "t": 1789754792000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.277",
+          "detail": "## What's changed\n\n- Added AGENTS.md support: in a project with no CLAUDE.md, Claude Code reads AGENTS.md instead; change it under \"Project instructions\" in `/config` (not yet on Bedrock, Vertex or Foundry)\n- Added `CLAUDE_GATEWAY_PROXY_IS_EGRESS_BOUNDARY=1` for Claude apps gateways whose only egress is a forward proxy: every outbound request hands the proxy the hostname instead of resolving it lo",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.277"
+        },
+        {
+          "t": 1789697546000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.276",
+          "detail": "## What's changed\n\n- Fixed every request failing with `400 … Input tag 'advisor_20260301'` when `ANTHROPIC_BASE_URL` points at a proxy or gateway (2.1.275 regression)\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.276"
+        },
+        {
+          "t": 1789684397000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.275",
+          "detail": "## What's changed\n\n- Added the signed-in account to Claude apps gateway sign-in: when the gateway names it, you confirm it before the credential is saved, and `/status` shows it\n- Added a send-now key (ctrl+enter, or ctrl+x ctrl+s) that interrupts the current turn and sends all queued messages at once; sent and queued messages show in gray until the model receives them\n- Added a startup warning wh",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.275"
+        },
+        {
+          "t": 1789603922000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.274",
+          "detail": "## What's changed\n\n- Added a visible warning when memory usage is critical, with steps to free memory or restart safely\n- Added `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` to bound how long the first non-interactive turn waits for connecting MCP servers (`0` = don't wait)\n- Added `effort` attribute to the `claude_code.llm_request` OpenTelemetry trace span, matching the `api_request` event\n- Added `claude_co",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.274"
+        },
+        {
+          "t": 1789503783000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.273",
+          "detail": "## What's changed\n\n- Added `x-claude-code-request-class`, `x-claude-code-agent-type`, `x-claude-code-prev-tool-durations`, `x-claude-code-compaction` and `x-claude-code-context-compacted` request headers for LLM gateways; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added a notification when an MCP server disconnects mid-session and automatic reconnection gives up, pointing at `/mcp`\n- Added",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
+        },
+        {
+          "t": 1789432945000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.272",
+          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.272"
+        },
+        {
+          "t": 1789423974000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.271",
+          "detail": "## What's changed\n\n- Added fast mode in Claude Code Remote sessions (cloud and self-hosted runners): the host's fast-mode setting or `/fast` typed in the session applies where your organization allows it\n- Added mouse support to the `/config` panel in fullscreen mode: the wheel scrolls the settings list, a click on a setting's value changes it, and the row under the pointer is highlighted\n- Added ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.271"
+        },
+        {
+          "t": 1789242344000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.270",
+          "detail": "## What's changed\n\n- Fixed read-only git commands in Bash unexpectedly asking for permission after a session had been running for a while (regression in 2.1.269)\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
+        },
+        {
+          "t": 1789154275000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.269",
+          "detail": "## What's changed\n\n- Added `claude plugin eval`: run a plugin's eval suite against Claude Code and get scored, reproducible results (JSON + HTML report); see `claude plugin eval --help`\n- Added `/output-style [name]` to list and switch output styles, including over Remote Control and in cloud and other headless sessions\n- Added a diff of the files a Bash command changed to the Bash tool result whe",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
+        },
+        {
           "t": 1789754792000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.277",
@@ -792,76 +862,6 @@
           "title": "anthropics/claude-code v2.1.267",
           "detail": "## What's changed\n\n- Added `maxEffortLevel` setting (top-level or per model under `modelSettings`): caps the effort level on every provider, including Bedrock, Vertex and Foundry; users can still pick a lower level\n- Added `--system-prompt-snapshot off` to render the system prompt fresh on every request instead of reusing the conversation's recorded prompt (for iterating on prompt text)\n- Fixed Co",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.267"
-        },
-        {
-          "t": 1789603922000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.274",
-          "detail": "## What's changed\n\n- Added a visible warning when memory usage is critical, with steps to free memory or restart safely\n- Added `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` to bound how long the first non-interactive turn waits for connecting MCP servers (`0` = don't wait)\n- Added `effort` attribute to the `claude_code.llm_request` OpenTelemetry trace span, matching the `api_request` event\n- Added `claude_co",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.274"
-        },
-        {
-          "t": 1789503783000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.273",
-          "detail": "## What's changed\n\n- Added `x-claude-code-request-class`, `x-claude-code-agent-type`, `x-claude-code-prev-tool-durations`, `x-claude-code-compaction` and `x-claude-code-context-compacted` request headers for LLM gateways; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added a notification when an MCP server disconnects mid-session and automatic reconnection gives up, pointing at `/mcp`\n- Added",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
-        },
-        {
-          "t": 1789432945000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.272",
-          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.272"
-        },
-        {
-          "t": 1789423974000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.271",
-          "detail": "## What's changed\n\n- Added fast mode in Claude Code Remote sessions (cloud and self-hosted runners): the host's fast-mode setting or `/fast` typed in the session applies where your organization allows it\n- Added mouse support to the `/config` panel in fullscreen mode: the wheel scrolls the settings list, a click on a setting's value changes it, and the row under the pointer is highlighted\n- Added ",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.271"
-        },
-        {
-          "t": 1789242344000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.270",
-          "detail": "## What's changed\n\n- Fixed read-only git commands in Bash unexpectedly asking for permission after a session had been running for a while (regression in 2.1.269)\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
-        },
-        {
-          "t": 1789154275000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.269",
-          "detail": "## What's changed\n\n- Added `claude plugin eval`: run a plugin's eval suite against Claude Code and get scored, reproducible results (JSON + HTML report); see `claude plugin eval --help`\n- Added `/output-style [name]` to list and switch output styles, including over Remote Control and in cloud and other headless sessions\n- Added a diff of the files a Bash command changed to the Bash tool result whe",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
-        },
-        {
-          "t": 1789072254000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.268",
-          "detail": "## What's changed\n\n- Added to the Claude apps gateway: with `pricing:` set in `gateway.yaml`, signed-in Claude Code clients receive the same rates through managed settings, so `/cost` and telemetry match the spend meter\n- Added a startup warning for gateways when `access_control.allow_cidrs` is empty, and a one-time warning the first time a request arrives from a public address\n- Added the `gatewa",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.268"
-        },
-        {
-          "t": 1788983894000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.267",
-          "detail": "## What's changed\n\n- Added `maxEffortLevel` setting (top-level or per model under `modelSettings`): caps the effort level on every provider, including Bedrock, Vertex and Foundry; users can still pick a lower level\n- Added `--system-prompt-snapshot off` to render the system prompt fresh on every request instead of reusing the conversation's recorded prompt (for iterating on prompt text)\n- Fixed Co",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.267"
-        },
-        {
-          "t": 1788911714000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.266",
-          "detail": "## What's changed\n\n- Fixed a 2.1.265 regression affecting LLM-gateway and proxy setups: the undocumented `CLAUDE_CODE_USE_GATEWAY` environment variable, previously ignored unless `ANTHROPIC_BASE_URL` and `ANTHROPIC_AUTH_TOKEN` were both set, began forcing Cloud-gateway sign-in on its own in 2.1.265, so configurations that set it alongside an API key, `apiKeyHelper`, or custom auth headers failed e",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.266"
-        },
-        {
-          "t": 1788899851000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.265",
-          "detail": "## What's changed\n\n- Added `user.email` and `user.groups` to the telemetry Claude Desktop and Cowork send through a Claude apps gateway, matching terminal sessions\n- Added support for pointing `--plugin-dir` at a folder of plugins: each child folder with a manifest loads, and children added or removed while running are picked up\n- Added a 1 GB cap on tool results saved to disk; the in-conversation",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.265"
         }
       ],
       "notifiedAt": {},
@@ -2503,6 +2503,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1789851407839,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 11
+    },
     {
       "t": 1789841490353,
       "ran": 2,

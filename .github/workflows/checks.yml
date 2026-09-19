@@ -40,14 +40,21 @@ jobs:
       - name: Guide self-test
         run: node guide/selftest.mjs
 
+      # Inkwell's ink geometry, PDF writer and ZIP reader. Also offline:
+      # a cross-reference offset that lands a byte early gives a PDF that
+      # opens in one reader and not another, which is a miserable thing
+      # to find out from a bug report.
+      - name: Inkwell self-test
+        run: node notes/selftest.mjs
+
       # A syntax error in a type would only show up at 37 past the hour,
       # in a job nobody is watching. Cheaper to find it here.
       - name: Everything parses
         run: |
-          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js; do
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js notes/selftest.mjs notes/js/*.js notes/sw.js notes/icons/make-icons.mjs notes/ios-app/scripts/*.mjs; do
             node --check "$f"
           done
-          for f in agents/data/*.json; do
+          for f in agents/data/*.json notes/manifest.webmanifest notes/ios-app/capacitor.config.json notes/ios-app/package.json; do
             node -e "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8'))" "$f"
           done
 

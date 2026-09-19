@@ -1,0 +1,442 @@
+/* ================================================
+   INKWELL — style.css
+   Paper, ink and the furniture around them.
+
+   Two rules run through all of it:
+     - the page is the only bright thing; everything else recedes;
+     - nothing that can be touched is smaller than 44px, because the
+       whole app is used with a hand resting on the glass.
+   ================================================ */
+
+:root {
+  --paper: #fffdf8;
+  --bg: #f3efe7;
+  --bg-2: #e9e3d8;
+  --line: #ded7c9;
+  --text: #2b3138;
+  --text-2: #6f6a60;
+  --accent: #c7784c;
+  --accent-ink: #fff;
+  --danger: #c0392b;
+  --shadow: 0 1px 2px rgba(40,35,25,.06), 0 8px 26px rgba(40,35,25,.09);
+  --radius: 12px;
+  --bar: 54px;
+  --tray: 52px;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+}
+
+:root[data-theme="dark"] {
+  --paper: #1d2126;
+  --bg: #14171b;
+  --bg-2: #1d2126;
+  --line: #2d333a;
+  --text: #e6e2da;
+  --text-2: #9a948a;
+  --accent: #d9905f;
+  --accent-ink: #1a1d21;
+  --danger: #e06c5d;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.45);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, .wordmark, .book-cover-title { font-family: 'Fraunces', Georgia, serif; font-weight: 500; }
+
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+
+/* The `hidden` attribute only sets `display: none` as a default, and any
+   display rule in a stylesheet beats it. Most of the panels here are
+   `display: flex` or `display: grid`, so without this the progress
+   overlay — position: fixed, inset: 0 — sits invisibly across the whole
+   app swallowing every tap, and the editor never leaves the screen. */
+[hidden] { display: none !important; }
+
+/* ---------- shared controls ---------- */
+
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 40px; height: 40px; padding: 0 8px;
+  border: 0; border-radius: 10px; background: transparent;
+  font-size: 1.1rem; line-height: 1; color: var(--text);
+  transition: background .15s;
+}
+.icon-btn:hover { background: var(--bg-2); }
+.icon-btn:disabled { opacity: .32; cursor: default; }
+.icon-btn:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.btn {
+  border: 1px solid var(--line); background: var(--bg-2); color: var(--text);
+  border-radius: 10px; padding: 10px 16px; min-height: 44px;
+}
+.btn:hover { border-color: var(--text-2); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn-danger { background: transparent; border-color: var(--danger); color: var(--danger); }
+.btn-wide { width: 100%; justify-content: flex-start; text-align: left; }
+
+.chip {
+  border: 1px solid var(--line); background: transparent; color: var(--text-2);
+  border-radius: 999px; padding: 7px 14px; font-size: .84rem; min-height: 36px;
+}
+.chip.is-on { background: var(--text); color: var(--paper); border-color: var(--text); }
+
+.search-wrap { position: relative; }
+.search-wrap input {
+  border: 1px solid var(--line); background: var(--bg-2); border-radius: 999px;
+  padding: 9px 14px 9px 34px; width: min(260px, 42vw); min-height: 40px;
+}
+.search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-2); }
+
+/* ---------- menus ---------- */
+
+.menu-wrap { position: relative; }
+.menu {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 60;
+  min-width: 250px; padding: 6px;
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.menu button {
+  display: block; width: 100%; text-align: left;
+  padding: 11px 12px; min-height: 44px;
+  border: 0; border-radius: 8px; background: transparent; font-size: .92rem;
+}
+.menu button:hover { background: var(--bg-2); }
+.menu button.danger { color: var(--danger); }
+.menu-sep { height: 1px; margin: 6px 4px; background: var(--line); }
+.menu-label { margin: 8px 12px 4px; font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--text-2); }
+.menu-note { margin: 8px 12px; font-size: .76rem; line-height: 1.45; color: var(--text-2); }
+.paper-picker { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 8px 8px; }
+
+/* ================================================
+   SHELF
+   ================================================ */
+
+.shelf { display: flex; flex-direction: column; height: 100%; }
+body[data-view="editor"] .shelf { display: none; }
+
+.shelf-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: calc(var(--safe-t) + 10px) calc(var(--safe-r) + 16px) 10px calc(var(--safe-l) + 12px);
+  border-bottom: 1px solid var(--line); background: var(--paper);
+}
+.shelf-bar-left, .shelf-bar-right { display: flex; align-items: center; gap: 6px; }
+.home-link { text-decoration: none; font-size: 1.5rem; line-height: 1; color: var(--text-2); padding: 0 6px; }
+.wordmark { margin: 0; font-size: 1.3rem; letter-spacing: -.01em; }
+
+.shelf-body { flex: 1; overflow-y: auto; padding: 22px calc(var(--safe-r) + 20px) 120px calc(var(--safe-l) + 20px); -webkit-overflow-scrolling: touch; }
+
+.shelf-grid {
+  display: grid; gap: 22px;
+  grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+  max-width: 1160px; margin: 0 auto;
+}
+.book { display: flex; flex-direction: column; gap: 9px; }
+.book-cover {
+  position: relative; aspect-ratio: 3 / 4; width: 100%;
+  border: 0; border-radius: 4px 10px 10px 4px; box-shadow: var(--shadow);
+  display: flex; align-items: flex-end; padding: 16px 14px 18px 24px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.book-cover:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(40,35,25,.12), 0 16px 40px rgba(40,35,25,.16); }
+.book-spine { position: absolute; inset: 0 auto 0 0; width: 10px; border-radius: 4px 0 0 4px; background: rgba(0,0,0,.16); }
+.book-cover-title {
+  color: #fff; font-size: .98rem; line-height: 1.25; text-align: left;
+  text-shadow: 0 1px 3px rgba(0,0,0,.4);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.book-foot { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; }
+.book-title { margin: 0; font-size: .9rem; }
+.book-sub { margin: 2px 0 0; font-size: .76rem; color: var(--text-2); }
+
+.shelf-empty { max-width: 460px; margin: 90px auto; text-align: center; color: var(--text-2); line-height: 1.6; }
+
+.search-results { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+.hit {
+  display: grid; grid-template-columns: 1fr auto; gap: 2px 12px;
+  text-align: left; padding: 14px; border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--paper);
+}
+.hit-book { font-weight: 500; }
+.hit-page { color: var(--text-2); font-size: .8rem; }
+.hit-text { grid-column: 1 / -1; color: var(--text-2); font-size: .86rem; line-height: 1.5; }
+
+.fab {
+  position: fixed; right: calc(var(--safe-r) + 22px); bottom: calc(var(--safe-b) + 22px);
+  width: 60px; height: 60px; border: 0; border-radius: 50%;
+  background: var(--accent); color: var(--accent-ink);
+  font-size: 1.7rem; line-height: 1; box-shadow: var(--shadow); z-index: 40;
+}
+body[data-view="editor"] .fab { display: none; }
+
+/* ================================================
+   EDITOR
+   ================================================ */
+
+.editor { display: flex; flex-direction: column; height: 100%; }
+
+.edit-bar {
+  display: flex; align-items: center; gap: 8px; height: calc(var(--bar) + var(--safe-t));
+  padding: var(--safe-t) calc(var(--safe-r) + 10px) 0 calc(var(--safe-l) + 6px);
+  background: var(--paper); border-bottom: 1px solid var(--line);
+}
+.edit-bar-left, .edit-bar-right { display: flex; align-items: center; gap: 4px; }
+.edit-bar-left { flex: 1; min-width: 0; }
+.edit-bar-mid { display: flex; gap: 2px; }
+.title-field {
+  flex: 1; min-width: 60px; border: 0; background: transparent;
+  font-family: 'Fraunces', Georgia, serif; font-size: 1.02rem; padding: 6px 8px;
+  border-radius: 8px; text-overflow: ellipsis;
+}
+.title-field:hover { background: var(--bg-2); }
+
+/* ---------- pen tray ---------- */
+
+.tray {
+  display: flex; align-items: center; gap: 10px; min-height: var(--tray);
+  padding: 6px calc(var(--safe-r) + 12px) 6px calc(var(--safe-l) + 12px);
+  background: var(--bg-2); border-bottom: 1px solid var(--line);
+  overflow-x: auto; scrollbar-width: none;
+}
+.tray::-webkit-scrollbar { display: none; }
+.tray-tools { display: flex; gap: 2px; flex: 0 0 auto; }
+.tool {
+  width: 42px; height: 40px; border: 0; border-radius: 9px;
+  background: transparent; font-size: 1.05rem; color: var(--text-2);
+}
+.tool.is-on { background: var(--paper); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.14); }
+.tray-options { display: flex; align-items: center; gap: 7px; flex: 1 1 auto; min-width: 0; }
+.tray-right { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; }
+.tray-sep { width: 1px; height: 24px; background: var(--line); flex: 0 0 auto; }
+.tray-hint { font-size: .82rem; color: var(--text-2); }
+.zoom-label { font-size: .78rem; color: var(--text-2); min-width: 42px; text-align: right; }
+
+.nib {
+  width: 36px; height: 36px; border: 0; border-radius: 9px; background: transparent;
+  display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
+}
+.nib.is-on { background: var(--paper); box-shadow: 0 1px 3px rgba(0,0,0,.14); }
+.nib span { display: block; border-radius: 50%; background: var(--text); }
+.nib .nib-hollow { background: transparent; border: 2px solid var(--text); }
+
+.swatch {
+  width: 28px; height: 28px; flex: 0 0 auto;
+  border: 2px solid transparent; border-radius: 50%; padding: 0;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.14);
+}
+.swatch.is-on { border-color: var(--text); transform: scale(1.12); }
+.swatch-custom { -webkit-appearance: none; appearance: none; background: none; cursor: pointer; }
+.swatch-custom::-webkit-color-swatch-wrapper { padding: 0; }
+.swatch-custom::-webkit-color-swatch { border: 0; border-radius: 50%; }
+
+/* ---------- body / stage ---------- */
+
+.edit-body { flex: 1; display: flex; min-height: 0; }
+
+.pages-rail {
+  width: 128px; flex: 0 0 auto; display: flex; flex-direction: column;
+  background: var(--bg-2); border-right: 1px solid var(--line); overflow-y: auto;
+  padding: 10px 8px calc(var(--safe-b) + 10px) calc(var(--safe-l) + 8px);
+}
+.rail-list { display: flex; flex-direction: column; gap: 9px; }
+.rail-item {
+  position: relative; border: 0; background: none; padding: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.rail-thumb {
+  width: 100%; aspect-ratio: 1240 / 1754; border-radius: 4px;
+  background: var(--paper) center / cover no-repeat;
+  border: 2px solid transparent; box-shadow: 0 1px 4px rgba(0,0,0,.14);
+}
+.rail-item.is-on .rail-thumb { border-color: var(--accent); }
+.rail-item.is-dragging { opacity: .4; }
+.rail-no { font-size: .72rem; color: var(--text-2); }
+.rail-add { margin-top: 12px; border: 1px dashed var(--line); background: none; border-radius: 9px; padding: 11px; font-size: .82rem; color: var(--text-2); }
+
+.stage {
+  flex: 1; min-width: 0; overflow: auto; position: relative;
+  background: var(--bg);
+  /* Centred with auto margins on the page rather than with flexbox:
+     `justify-content: center` clips the left-hand overflow once the
+     page is zoomed wider than the stage, and you cannot scroll back to
+     what it cut off. */
+  display: block; text-align: center;
+  padding: 22px 22px calc(var(--safe-b) + 70px);
+  touch-action: none;            /* the app handles pan and zoom itself */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: auto;
+}
+.stage.is-dropping { outline: 3px dashed var(--accent); outline-offset: -12px; }
+
+.page {
+  position: relative; display: inline-block; text-align: left;
+  vertical-align: top; margin: 0 auto;
+  background: var(--paper); border-radius: 3px; box-shadow: var(--shadow);
+}
+.layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+.layer-paper { z-index: 1; }
+.media-layer { position: absolute; inset: 0; z-index: 2; }
+.layer-ink { z-index: 3; pointer-events: none; }
+.layer-live { z-index: 4; pointer-events: none; }
+.object-layer { position: absolute; inset: 0; z-index: 5; }
+.overlay-layer { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+
+/* ---------- objects ---------- */
+
+.obj { position: absolute; }
+
+/* While a marking tool is in hand, photos, video and text boxes are not
+   hit-testable, so the pen draws over them instead of picking them up.
+   Pointer events on the layers themselves stay on: they bubble to the
+   stage, which is where drawing is handled. */
+.page[data-tool="pen"] .obj,
+.page[data-tool="highlighter"] .obj,
+.page[data-tool="eraser"] .obj,
+.page[data-tool="lasso"] .obj { pointer-events: none; }
+.obj img, .obj video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.obj.has-shadow img { box-shadow: 0 2px 6px rgba(0,0,0,.16), 0 10px 26px rgba(0,0,0,.14); }
+
+.obj-text-body {
+  width: 100%; height: 100%; padding: 8px; overflow: hidden;
+  outline: none; white-space: pre-wrap; word-break: break-word;
+}
+.obj-text-body:empty::before { content: attr(data-placeholder); color: var(--text-2); }
+
+.file-card {
+  display: flex; align-items: center; gap: 12px; height: 100%; padding: 12px 14px;
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px;
+}
+.file-icon { font-size: 1.7rem; color: var(--text-2); }
+.file-meta { flex: 1; min-width: 0; }
+.file-name { margin: 0; font-size: .92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-sub { margin: 2px 0 0; font-size: .76rem; color: var(--text-2); }
+.file-open { border: 1px solid var(--line); background: var(--paper); border-radius: 8px; padding: 7px 12px; font-size: .8rem; }
+
+/* ---------- selection ---------- */
+
+.sel-frame { position: absolute; border: 1.5px solid var(--accent); pointer-events: none; }
+.sel-frame.sel-ink { background: rgba(199,120,76,.07); pointer-events: auto; cursor: move; }
+.sel-move { position: absolute; inset: 0; pointer-events: auto; cursor: move; }
+.sel-handle {
+  position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px;
+  border-radius: 50%; background: var(--paper); border: 1.5px solid var(--accent);
+  pointer-events: auto; touch-action: none;
+}
+.sel-nw { left: 0; top: 0; cursor: nwse-resize; }
+.sel-ne { left: 100%; top: 0; cursor: nesw-resize; }
+.sel-se { left: 100%; top: 100%; cursor: nwse-resize; }
+.sel-sw { left: 0; top: 100%; cursor: nesw-resize; }
+.sel-rotate {
+  position: absolute; left: 50%; top: -34px; width: 22px; height: 22px; margin-left: -11px;
+  border-radius: 50%; background: var(--accent); pointer-events: auto; cursor: grab; touch-action: none;
+}
+.sel-rotate::after { content: "↻"; color: var(--accent-ink); font-size: .8rem; display: grid; place-items: center; height: 100%; }
+
+/* ---------- inspector & page nav ---------- */
+
+.inspector {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(var(--safe-b) + 74px); z-index: 45;
+  display: flex; align-items: center; gap: 5px; max-width: calc(100vw - 32px);
+  padding: 6px; overflow-x: auto; scrollbar-width: none;
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 999px; box-shadow: var(--shadow);
+}
+.inspector::-webkit-scrollbar { display: none; }
+.insp-btn { border: 0; background: transparent; border-radius: 999px; padding: 9px 13px; font-size: .84rem; min-height: 40px; white-space: nowrap; }
+.insp-btn:hover { background: var(--bg-2); }
+.insp-btn.is-on { background: var(--text); color: var(--paper); }
+.insp-btn.danger { color: var(--danger); }
+.insp-label { padding: 0 8px; font-size: .82rem; color: var(--text-2); white-space: nowrap; }
+.insp-sep { width: 1px; height: 22px; background: var(--line); flex: 0 0 auto; }
+.insp-color { width: 34px; height: 34px; border: 0; background: none; padding: 0; }
+
+.page-nav {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(var(--safe-b) + 14px); z-index: 40;
+  display: flex; align-items: center; gap: 4px; padding: 4px 8px;
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 999px; box-shadow: var(--shadow); font-size: .82rem; color: var(--text-2);
+}
+
+/* ---------- toast, scrim, progress ---------- */
+
+.toast {
+  position: fixed; left: 50%; transform: translate(-50%, 14px);
+  bottom: calc(var(--safe-b) + 86px); z-index: 90;
+  max-width: min(460px, calc(100vw - 32px));
+  padding: 12px 18px; border-radius: 12px;
+  background: var(--text); color: var(--paper);
+  font-size: .87rem; line-height: 1.45; text-align: center;
+  opacity: 0; transition: opacity .2s, transform .2s; box-shadow: var(--shadow);
+}
+.toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+.toast.is-error { background: var(--danger); color: #fff; }
+
+.scrim {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; place-items: center; padding: 20px;
+  background: rgba(20,18,14,.44); opacity: 0; transition: opacity .18s;
+  backdrop-filter: blur(2px);
+}
+.scrim.is-on { opacity: 1; }
+.sheet {
+  width: min(460px, 100%); max-height: 86vh; overflow-y: auto;
+  padding: 24px; border-radius: 18px;
+  background: var(--paper); box-shadow: var(--shadow);
+}
+.sheet-title { margin: 0 0 10px; font-size: 1.18rem; }
+.sheet-body { margin: 0 0 18px; color: var(--text-2); line-height: 1.6; font-size: .92rem; }
+.sheet-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.sheet-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+.field { display: block; margin-bottom: 16px; }
+.field span { display: block; margin-bottom: 6px; font-size: .8rem; color: var(--text-2); }
+.field input { width: 100%; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-2); min-height: 44px; }
+.field-label { margin: 0 0 8px; font-size: .8rem; color: var(--text-2); }
+.swatch-row, .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.cover-swatch { width: 44px; height: 44px; border-radius: 8px; border: 2px solid transparent; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
+.cover-swatch.is-on { border-color: var(--text); }
+
+.progress { position: fixed; inset: 0; z-index: 110; display: grid; place-items: center; background: rgba(20,18,14,.44); }
+.progress-card { width: min(320px, calc(100vw - 48px)); padding: 22px; border-radius: 16px; background: var(--paper); box-shadow: var(--shadow); text-align: center; }
+.progress-card p { margin: 0 0 14px; font-size: .9rem; }
+.progress-track { height: 5px; border-radius: 999px; background: var(--bg-2); overflow: hidden; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+
+/* ---------- phones ---------- */
+
+@media (max-width: 720px) {
+  .pages-rail { position: absolute; z-index: 30; height: 100%; box-shadow: var(--shadow); }
+  .search-wrap input { width: 150px; }
+  .title-field { font-size: .95rem; }
+  .stage { padding: 12px 10px calc(var(--safe-b) + 66px); }
+  .shelf-grid { grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 16px; }
+  .edit-bar-mid { display: none; }    /* undo lives on the keyboard and the gesture */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Printing a page of an app is rarely useful, but printing the page you
+   are looking at is — so everything but the sheet itself goes. */
+@media print {
+  .edit-bar, .tray, .pages-rail, .page-nav, .inspector, .fab, .shelf-bar { display: none !important; }
+  .stage { overflow: visible; padding: 0; }
+  .page { box-shadow: none; }
+}

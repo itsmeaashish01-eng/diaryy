@@ -1,0 +1,6 @@
+# Both are generated. `npm run build` makes www/ from ../, and
+# `npx cap add ios` makes the Xcode project from www/ — committing
+# either means two copies of the app to keep in step.
+www/
+ios/
+node_modules/

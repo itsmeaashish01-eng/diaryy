@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- viewport-fit=cover for edge-to-edge on a notched phone; user-scalable=no
+       because the page has its own pinch-to-zoom and the browser's would fight it. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no, maximum-scale=1" />
+  <title>Inkwell — handwritten notes</title>
+  <meta name="description" content="A notebook you write in by hand. Pen, highlighter, photos, video, PDFs and typed text on real paper — stored on your own device, with no account and no cloud." />
+  <meta name="color-scheme" content="light dark" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#2f3b47" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Inkwell" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-view="shelf">
+
+<!-- ============ SHELF ============ -->
+<section class="shelf" id="shelf">
+  <header class="shelf-bar">
+    <div class="shelf-bar-left">
+      <a class="home-link" href="../index.html" title="Back to the diary" aria-label="Back to the diary">‹</a>
+      <h1 class="wordmark">Inkwell</h1>
+    </div>
+    <div class="shelf-bar-right">
+      <div class="search-wrap">
+        <input type="search" id="shelfSearch" placeholder="Search notes…" autocomplete="off" aria-label="Search notes" />
+        <span class="search-icon" aria-hidden="true">⌕</span>
+      </div>
+      <button class="icon-btn" id="darkToggle" title="Light or dark" aria-label="Toggle dark mode">☾</button>
+      <div class="menu-wrap">
+        <button class="icon-btn" id="libraryMenuBtn" title="Library" aria-haspopup="true" aria-expanded="false" aria-label="Library menu">⋯</button>
+        <div class="menu" id="libraryMenu" role="menu" hidden>
+          <button role="menuitem" data-act="backup">Back up everything…</button>
+          <button role="menuitem" data-act="restore">Restore from backup…</button>
+          <div class="menu-sep"></div>
+          <button role="menuitem" data-act="importpdf">Import a PDF as a notebook…</button>
+          <div class="menu-sep"></div>
+          <p class="menu-note" id="storageNote">Checking storage…</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="shelf-body">
+    <div class="shelf-grid" id="shelfGrid"></div>
+    <p class="shelf-empty" id="shelfEmpty" hidden>
+      Nothing here yet. Start a notebook — it stays on this device.
+    </p>
+    <div id="searchResults" class="search-results" hidden></div>
+  </div>
+
+  <button class="fab" id="newNotebookBtn" title="New notebook">＋</button>
+</section>
+
+<!-- ============ EDITOR ============ -->
+<section class="editor" id="editor" hidden>
+
+  <header class="edit-bar">
+    <div class="edit-bar-left">
+      <button class="icon-btn" id="backBtn" title="Back to the shelf" aria-label="Back to the shelf">‹</button>
+      <button class="icon-btn" id="pagesBtn" title="Pages" aria-label="Show pages">▤</button>
+      <input class="title-field" id="titleField" aria-label="Notebook title" />
+    </div>
+
+    <div class="edit-bar-mid">
+      <button class="icon-btn" id="undoBtn" title="Undo" aria-label="Undo" disabled>↶</button>
+      <button class="icon-btn" id="redoBtn" title="Redo" aria-label="Redo" disabled>↷</button>
+    </div>
+
+    <div class="edit-bar-right">
+      <div class="menu-wrap">
+        <button class="icon-btn" id="insertBtn" title="Insert" aria-haspopup="true" aria-expanded="false" aria-label="Insert">＋</button>
+        <div class="menu" id="insertMenu" role="menu" hidden>
+          <button role="menuitem" data-act="photo">Photo from library…</button>
+          <button role="menuitem" data-act="camera">Take a photo…</button>
+          <button role="menuitem" data-act="video">Video…</button>
+          <div class="menu-sep"></div>
+          <button role="menuitem" data-act="textbox">Text box</button>
+          <button role="menuitem" data-act="office">Word or PowerPoint…</button>
+          <button role="menuitem" data-act="pdfpages">PDF, as pages…</button>
+          <button role="menuitem" data-act="attach">Attach any file…</button>
+        </div>
+      </div>
+
+      <div class="menu-wrap">
+        <button class="icon-btn" id="pageMenuBtn" title="Page" aria-haspopup="true" aria-expanded="false" aria-label="Page menu">▣</button>
+        <div class="menu" id="pageMenu" role="menu" hidden>
+          <p class="menu-label">Paper</p>
+          <div class="paper-picker" id="paperPicker"></div>
+          <div class="menu-sep"></div>
+          <button role="menuitem" data-act="addpage">Add a page after this one</button>
+          <button role="menuitem" data-act="duplicate">Duplicate this page</button>
+          <button role="menuitem" data-act="clearbg" id="clearBgItem">Remove the imported background</button>
+          <button role="menuitem" data-act="deletepage" class="danger">Delete this page</button>
+        </div>
+      </div>
+
+      <div class="menu-wrap">
+        <button class="icon-btn" id="shareBtn" title="Export" aria-haspopup="true" aria-expanded="false" aria-label="Export">⤓</button>
+        <div class="menu" id="shareMenu" role="menu" hidden>
+          <button role="menuitem" data-act="png">This page as PNG</button>
+          <button role="menuitem" data-act="pdfpage">This page as PDF</button>
+          <button role="menuitem" data-act="pdfall">Whole notebook as PDF</button>
+          <div class="menu-sep"></div>
+          <button role="menuitem" data-act="json">Back up this library (.json)</button>
+          <p class="menu-note">PDF and PNG are flattened pictures. The .json is the one that restores notes as notes.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ---- pen tray ---- -->
+  <div class="tray" id="tray">
+    <div class="tray-tools" role="toolbar" aria-label="Tools">
+      <button class="tool" data-tool="pen"         title="Pen (1)"         aria-label="Pen">✒</button>
+      <button class="tool" data-tool="highlighter" title="Highlighter (2)" aria-label="Highlighter">▬</button>
+      <button class="tool" data-tool="eraser"      title="Eraser (3)"      aria-label="Eraser">◻</button>
+      <button class="tool" data-tool="lasso"       title="Lasso (4)"       aria-label="Lasso">⌾</button>
+      <button class="tool" data-tool="text"        title="Text (5)"        aria-label="Text">T</button>
+      <button class="tool" data-tool="hand"        title="Pan (6)"         aria-label="Pan">✋</button>
+    </div>
+
+    <div class="tray-options" id="trayOptions"></div>
+
+    <div class="tray-right">
+      <span class="zoom-label" id="zoomLabel">100%</span>
+      <button class="icon-btn" id="zoomOutBtn" title="Zoom out" aria-label="Zoom out">−</button>
+      <button class="icon-btn" id="zoomFitBtn" title="Fit the page" aria-label="Fit the page">⊡</button>
+      <button class="icon-btn" id="zoomInBtn" title="Zoom in" aria-label="Zoom in">＋</button>
+    </div>
+  </div>
+
+  <div class="edit-body">
+    <!-- page thumbnails -->
+    <aside class="pages-rail" id="pagesRail" hidden>
+      <div class="rail-list" id="railList"></div>
+      <button class="rail-add" id="railAddBtn">＋ Add page</button>
+    </aside>
+
+    <!-- the page itself -->
+    <div class="stage" id="stage">
+      <div class="page" id="page">
+        <canvas class="layer layer-paper"></canvas>
+        <div class="media-layer" id="mediaLayer"></div>
+        <canvas class="layer layer-ink"></canvas>
+        <canvas class="layer layer-live"></canvas>
+        <div class="object-layer" id="objectLayer"></div>
+        <div class="overlay-layer" id="overlayLayer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- floating panel for whatever is selected -->
+  <div class="inspector" id="inspector" hidden></div>
+
+  <nav class="page-nav" id="pageNav">
+    <button class="icon-btn" id="prevPageBtn" aria-label="Previous page">‹</button>
+    <span id="pageCount">1 / 1</span>
+    <button class="icon-btn" id="nextPageBtn" aria-label="Next page">›</button>
+  </nav>
+</section>
+
+<!-- ============ shared chrome ============ -->
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<div class="scrim" id="scrim" hidden>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+</div>
+
+<div class="progress" id="progress" hidden>
+  <div class="progress-card">
+    <p id="progressLabel">Working…</p>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+</div>
+
+<!-- One input per kind so the system picker opens on the right thing.
+     `capture` on the camera one is what makes iOS open the camera
+     directly rather than the library. -->
+<input type="file" id="filePhoto"  accept="image/*" multiple hidden />
+<input type="file" id="fileCamera" accept="image/*" capture="environment" hidden />
+<input type="file" id="fileVideo"  accept="video/*" hidden />
+<input type="file" id="filePdf"    accept="application/pdf,.pdf" hidden />
+<input type="file" id="fileOffice" accept=".docx,.pptx" hidden />
+<input type="file" id="fileAny"    hidden />
+<input type="file" id="fileJson"   accept="application/json,.json" hidden />
+
+<script type="module" src="js/app.js"></script>
+<script>
+  /* Registering here rather than in a module so a browser without
+     service workers still runs the app. */
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "appId": "com.inkwell.notes",
+  "appName": "Inkwell",
+  "webDir": "www",
+  "ios": {
+    "contentInset": "always",
+    "limitsNavigationsToAppBoundDomains": false,
+    "scrollEnabled": false
+  },
+  "server": {
+    "iosScheme": "inkwell"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}

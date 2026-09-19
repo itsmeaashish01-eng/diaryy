@@ -1,0 +1,17 @@
+{
+  "name": "The AI Employee",
+  "short_name": "AI Employee",
+  "description": "The admin around the work, in nine jobs: the client file, the morning read, the QA pass, the revision log, updates, scheduling, invoicing, the team and the pipeline.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#faf8f4",
+  "theme_color": "#c7784c",
+  "categories": ["business", "productivity", "finance"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

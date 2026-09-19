@@ -9,6 +9,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- ===== Installable app ===== -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#c7784c" />
+  <!-- iOS ignores the manifest for these, so they're spelled out -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="AI Employee" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -86,7 +97,21 @@
   <script src="js/money.js"></script>
   <script src="js/growth.js"></script>
   <script src="js/brief.js"></script>
+  <script src="js/install.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/app.js"></script>
+
+  <script>
+    /* Registering here rather than in app.js: if a script above it ever
+       throws, the app should still be installable and still open offline. */
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function (err) {
+          // Not fatal — the app works, it just won't open without a signal.
+          console.warn("AI Employee: offline support unavailable.", err);
+        });
+      });
+    }
+  </script>
 </body>
 </html>

@@ -44,11 +44,26 @@ live in the modules, not the screens, and each is covered by the test suite:
 Settings change the numbers (the gap, the cadence, how many touches count);
 they don't change the rules.
 
+## Install it
+
+Settings offers it, worded for whichever browser you are in. There is a real
+install button where the browser provides one; on iOS there is no such event,
+so it says where Safari keeps Add to Home Screen — and if you are in Chrome or
+Firefox on iOS it says to open Safari, because that menu item does not exist in
+those browsers and sending you looking for it would waste your time.
+
+Installed or not, it opens offline. The service worker caches the app on first
+visit; there is nothing to keep fresh from a network, since the record lives on
+the device and never leaves it. Bump `VERSION` in `sw.js` to roll out a change.
+
 ## Data
 
 Everything is in this browser's `localStorage` under `aiEmployeeData`. Nothing
 is sent anywhere — there is no server and no account. Export and import JSON
 from the top bar, and load or erase the demo business from Settings.
+
+That also means it is per-device: the export file is the way to move a business
+to another machine.
 
 A first open seeds a small studio mid-week with the usual mess already in it,
 because nine empty screens explain nothing.
@@ -59,8 +74,11 @@ because nine empty screens explain nothing.
 node employee/selftest.mjs
 ```
 
-67 checks, no network, no browser: the date arithmetic, the money, and every
-rule above. They run in CI on each push alongside the other apps' suites.
+77 checks, no network, no browser: the date arithmetic, the money, every rule
+above, the install advice against real user-agent strings, and a check that
+every script the page loads is one the service worker caches — a file missing
+from that list is a blank screen on a train. They run in CI on each push
+alongside the other apps' suites.
 
 ## Files
 
@@ -75,8 +93,12 @@ employee/
   js/money.js       job 7: invoice state, totals, aging, drafts, chases
   js/growth.js      job 9: touches, stalled deals, weighted pipeline
   js/brief.js       job 2 and job 5: the morning read, the client update
+  js/install.js     where this browser keeps Add to Home Screen
   js/ui.js          every view, rendered from the store
   js/app.js         routing, actions, forms
+  sw.js             the offline shell
+  manifest.webmanifest
+  icons/icon.svg    the ◒ mark; the PNGs beside it are rendered from it
   selftest.mjs      the suite
 ```
 

@@ -16,7 +16,7 @@
    render what the modules below decide.
    ================================================ */
 
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -31,12 +31,12 @@ function sandbox() {
     setItem: (k, v) => stored.set(k, String(v)),
     removeItem: (k) => stored.delete(k),
   };
-  const win = { localStorage };
+  const win = { localStorage, navigator: { userAgent: "node", maxTouchPoints: 0 }, addEventListener() {} };
   const ctx = createContext({
-    window: win, localStorage, console, Date, Intl, JSON, Math,
+    window: win, localStorage, navigator: win.navigator, console, Date, Intl, JSON, Math,
     setTimeout, clearTimeout,
   });
-  for (const file of ["util.js", "store.js", "margin.js", "qa.js", "money.js", "growth.js", "brief.js"]) {
+  for (const file of ["util.js", "store.js", "margin.js", "qa.js", "money.js", "growth.js", "brief.js", "install.js"]) {
     runInContext(readFileSync(join(HERE, "js", file), "utf8"), ctx, { filename: file });
   }
   const AE = runInContext("window.AE", ctx);
@@ -70,7 +70,7 @@ function near(actual, expected, tol, note) {
 }
 
 const { AE, localStorage } = sandbox();
-const { util: U, store, margin, qa, money, growth, brief } = AE;
+const { util: U, store, margin, qa, money, growth, brief, install } = AE;
 
 /* A fixed "now" so nothing here depends on the day it runs. */
 const NOW = new Date(2026, 4, 20, 9, 0, 0); // Wed 20 May 2026, local
@@ -539,6 +539,92 @@ describe("brief — the client update", () => {
   it("has no empty headings and no triple blank lines", () => {
     ok(!/\n{3,}/.test(text), "collapsed blank lines");
     ok(!/In progress:\n\n/.test(text), "no heading without items");
+  });
+});
+
+/* ================================================================== */
+const UA = {
+  iphoneSafari: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1",
+  iphoneChrome: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/126.0 Mobile/15E148 Safari/604.1",
+  iphoneFirefox: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/127.0 Mobile/15E148 Safari/605.1.15",
+  ipadOS: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15",
+  android: "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36",
+  desktop: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+};
+
+describe("install — getting it onto a home screen", () => {
+  it("knows Safari on an iPhone can install", () => {
+    const d = install.detect(UA.iphoneSafari, false);
+    eq(d.platform, "ios-safari");
+    eq(d.iOS, true);
+    eq(d.installed, false);
+  });
+
+  it("does not send an iOS Chrome user hunting for a Share menu item", () => {
+    // Add to Home Screen simply isn't in these browsers.
+    eq(install.detect(UA.iphoneChrome, false).platform, "ios-other");
+    eq(install.detect(UA.iphoneFirefox, false).platform, "ios-other");
+    ok(/Safari/.test(install.advice({ platform: "ios-other" })), "tells them to open Safari");
+    ok(!/tap Share/.test(install.advice({ platform: "ios-other" })), "and not to tap Share");
+  });
+
+  it("spots an iPad pretending to be a Mac", () => {
+    eq(install.detect(UA.ipadOS, false, 5).platform, "ios-safari", "touch points give it away");
+    eq(install.detect(UA.ipadOS, false, 0).platform, "desktop", "a real Mac stays a desktop");
+  });
+
+  it("tells Android and desktop what their own browsers do", () => {
+    eq(install.detect(UA.android, false).platform, "android");
+    eq(install.detect(UA.desktop, false).platform, "desktop");
+    ok(/address bar/.test(install.advice({ platform: "desktop" })));
+  });
+
+  it("recognises being installed already, whatever the platform", () => {
+    for (const ua of Object.values(UA)) eq(install.detect(ua, true).installed, true);
+    ok(/Installed/.test(install.advice({ installed: true })));
+  });
+
+  it("offers the real button when the browser has one", () => {
+    ok(/Install it/.test(install.advice({ canPrompt: true, platform: "android" })),
+       "a live prompt beats the written instructions");
+  });
+});
+
+describe("the offline shell", () => {
+  const here = HERE;
+  const manifest = JSON.parse(readFileSync(join(here, "manifest.webmanifest"), "utf8"));
+  const sw = readFileSync(join(here, "sw.js"), "utf8");
+  const html = readFileSync(join(here, "index.html"), "utf8");
+
+  it("has a manifest that points at icons that exist", () => {
+    ok(manifest.start_url && manifest.scope, "start_url and scope set");
+    for (const icon of manifest.icons) {
+      ok(existsSync(join(here, icon.src)), `missing icon ${icon.src}`);
+    }
+    ok(manifest.icons.some((i) => i.purpose === "maskable"), "has a maskable icon");
+  });
+
+  it("caches every script the page loads", () => {
+    // A file in the page but not in the shell list is a blank screen on
+    // a train — the failure this check exists to prevent.
+    const inPage = [...html.matchAll(/<script src="([^"]+)"/g)].map((m) => m[1]);
+    ok(inPage.length >= 9, `found ${inPage.length} scripts`);
+    for (const src of inPage) {
+      ok(sw.includes(`"./${src}"`), `sw.js does not cache ${src}`);
+      ok(existsSync(join(here, src)), `${src} is missing from disk`);
+    }
+  });
+
+  it("caches the stylesheet and the page itself", () => {
+    for (const file of ["./index.html", "./style.css", "./manifest.webmanifest"]) {
+      ok(sw.includes(`"${file}"`), `sw.js does not cache ${file}`);
+    }
+  });
+
+  it("registers the worker and links the manifest", () => {
+    ok(/rel="manifest"/.test(html), "manifest linked");
+    ok(/apple-touch-icon/.test(html), "iOS icon linked");
+    ok(/serviceWorker/.test(html) && /register\("sw\.js"\)/.test(html), "worker registered");
   });
 });
 

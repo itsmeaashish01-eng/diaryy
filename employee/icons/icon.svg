@@ -1,0 +1,16 @@
+<!-- The AI Employee — icon source.
+     The mark is ◒: a circle half filled, the app's own logogram. The PNGs
+     beside this file are rendered from it; edit here, re-render those.
+     Palette is the poster's: lavender into terracotta. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8a7bc8" />
+      <stop offset="1" stop-color="#c7784c" />
+    </linearGradient>
+    <clipPath id="lower"><rect x="0" y="256" width="512" height="256" /></clipPath>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#g)" />
+  <circle cx="256" cy="256" r="132" fill="none" stroke="#fff" stroke-width="26" />
+  <circle cx="256" cy="256" r="132" fill="#fff" clip-path="url(#lower)" />
+</svg>

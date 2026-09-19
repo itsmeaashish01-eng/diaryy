@@ -574,6 +574,17 @@
   /* ================================================================
      SETTINGS
      ================================================================ */
+  /* The offer to install, worded for wherever the person actually is —
+     an iOS Chrome user hunting for a Share menu item that isn't there is
+     worse served than one told to open Safari. */
+  function installCard() {
+    const st = AE.install.state();
+    return card(cardHead("Install it") + `
+      <p class="card-note">${e(st.advice)}</p>
+      ${st.canPrompt ? `<div class="row-actions" style="margin-top:.7rem">${btn("Install", "install", "", "btn-sm btn-primary")}</div>` : ""}
+      ${st.installed ? "" : '<p class="field-hint" style="margin-top:.5rem">Once installed it opens offline — the record is on the device either way.</p>'}`);
+  }
+
   function viewSettings(db) {
     const s = db.settings;
     return head("Settings", "How the employee decides what to chase, and when.") + card(`
@@ -607,7 +618,7 @@
             </select></div>
         </div>
         <div class="form-actions">${btn("Save", "noop", "", "btn-primary")}</div>
-      </form>`) + card(cardHead("This data") + `
+      </form>`) + installCard() + card(cardHead("This data") + `
       <p class="card-note">Everything lives in this browser's local storage — nothing is sent anywhere. Export it if you want a copy.</p>
       <div class="row-actions" style="margin-top:.7rem">
         ${btn("Export JSON", "export", "", "btn-sm")}

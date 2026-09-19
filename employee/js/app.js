@@ -403,6 +403,12 @@
       el.select();
       navigator.clipboard ? navigator.clipboard.writeText(el.value).then(() => toast("Copied")) : toast("Select and copy");
     },
+    install: async () => {
+      const outcome = await AE.install.prompt();
+      toast(outcome === "accepted" ? "Installed" :
+            outcome === "unavailable" ? "Your browser installs this from its own menu" : "Maybe later");
+      render();
+    },
     export: () => {
       const blob = new Blob([S.exportJSON()], { type: "application/json" });
       const a = document.createElement("a");
@@ -625,6 +631,10 @@
 
   /* ---- boot --------------------------------------------------------------- */
   function boot() {
+    AE.install.listen();
+    /* Settings shows whether an install is on offer, so it has to
+       re-render when the browser decides to make one. */
+    AE.install.onChange(() => { if (state.view === "settings") render(); });
     S.load();
     const data = db();
     /* A first open lands in a working business rather than nine empty

@@ -16,44 +16,42 @@
    render what the modules below decide.
    ================================================ */
 
-import { readFileSync, existsSync } from "node:fs";
-import { createContext, runInContext } from "node:vm";
+import { readFileSync, existsSync, writeFileSync, readdirSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { createHmac } from "node:crypto";
+import { tmpdir } from "node:os";
+import { loadModules } from "./server/modules.mjs";
+import { BusinessStore } from "./server/store-file.mjs";
+import * as slack from "./server/slack.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
-/* ---- a browser, for a very small value of "browser" ---------------- */
-function sandbox() {
-  const stored = new Map();
-  const localStorage = {
-    getItem: (k) => (stored.has(k) ? stored.get(k) : null),
-    setItem: (k, v) => stored.set(k, String(v)),
-    removeItem: (k) => stored.delete(k),
-  };
-  const win = { localStorage, navigator: { userAgent: "node", maxTouchPoints: 0 }, addEventListener() {} };
-  const ctx = createContext({
-    window: win, localStorage, navigator: win.navigator, console, Date, Intl, JSON, Math,
-    setTimeout, clearTimeout,
-  });
-  for (const file of ["util.js", "store.js", "margin.js", "qa.js", "money.js", "growth.js", "brief.js", "install.js"]) {
-    runInContext(readFileSync(join(HERE, "js", file), "utf8"), ctx, { filename: file });
-  }
-  const AE = runInContext("window.AE", ctx);
-  /* The tests need the same storage the modules write to, to prove the
-     app copes with what it finds there. */
-  return { AE, localStorage };
-}
-
+/* The sandbox lives in server/modules.mjs now: the server runs these
+   same files, so there is one loader and no second copy to drift. */
 /* ---- a very small test runner -------------------------------------- */
 let passed = 0;
 const failures = [];
 let group = "";
 
 function describe(name, fn) { group = name; fn(); }
+
+/* An async test can't run inline: two of them in flight at once would
+   interleave on the same module state, which is how a suite starts
+   passing and failing by luck. They're queued and run in order, after
+   everything synchronous. */
+const queued = [];
 function it(name, fn) {
+  const where = group;
+  if (fn.constructor.name === "AsyncFunction") { queued.push([where, name, fn]); return; }
   try { fn(); passed += 1; }
-  catch (err) { failures.push(`${group} → ${name}\n    ${err.message}`); }
+  catch (err) { failures.push(`${where} → ${name}\n    ${err.message}`); }
+}
+async function runQueued() {
+  for (const [where, name, fn] of queued) {
+    try { await fn(); passed += 1; }
+    catch (err) { failures.push(`${where} → ${name}\n    ${err.message}`); }
+  }
 }
 function eq(actual, expected, note) {
   const a = JSON.stringify(actual);
@@ -69,8 +67,8 @@ function near(actual, expected, tol, note) {
   }
 }
 
-const { AE, localStorage } = sandbox();
-const { util: U, store, margin, qa, money, growth, brief, install } = AE;
+const { AE, localStorage } = loadModules();
+const { util: U, store, margin, qa, money, growth, brief, install, sync } = AE;
 
 /* A fixed "now" so nothing here depends on the day it runs. */
 const NOW = new Date(2026, 4, 20, 9, 0, 0); // Wed 20 May 2026, local
@@ -159,6 +157,38 @@ describe("store", () => {
     off();
     store.add("clients", { name: "Unwatched" });
     eq(calls, 1);
+  });
+
+  it("refuses anything that is not a business record", () => {
+    // hydrate() is forgiving, which on the way in means a string, a
+    // number or a stray array would quietly become an empty business
+    // and overwrite a real one. This is the check that stops that.
+    for (const junk of ["a string", 42, null, [1, 2, 3], true]) {
+      ok(store.validate(junk), `${JSON.stringify(junk)} should be refused`);
+    }
+    eq(store.validate(store.defaults()), null, "a real record passes");
+    eq(store.validate({ clients: [] }), null, "so does a partial one");
+    ok(store.validate({ clients: "nope" }), "a collection that is not a list");
+    ok(store.validate({ settings: [] }), "settings that are not an object");
+    ok(store.validate({ unrelated: true }), "an object with none of the fields");
+  });
+
+  it("will not let a bad import erase a real business", () => {
+    store.seed(NOW);
+    for (const junk of ['"a string"', "[1,2,3]", "42", "null", '{"unrelated":true}']) {
+      let threw = false;
+      try { store.importJSON(junk); } catch (err) { threw = true; }
+      ok(threw, `importing ${junk} should throw`);
+      eq(store.data().clients.length, 3, `and leave the business alone after ${junk}`);
+    }
+  });
+
+  it("imports the server's envelope as well as a plain export", () => {
+    store.seed(NOW);
+    const plain = store.exportJSON();
+    store.reset();
+    store.importJSON(JSON.stringify({ version: 4, updatedAt: "x", data: JSON.parse(plain) }));
+    eq(store.data().clients.length, 3, "unwrapped the envelope");
   });
 
   it("round-trips through export and import", () => {
@@ -629,6 +659,307 @@ describe("the offline shell", () => {
 });
 
 /* ================================================================== */
+describe("slack — is this really Slack?", () => {
+  const SECRET = "8f742231b10e8888abcd99yyyzzz85a5";
+  const body = "command=%2Femployee&text=money&user_name=dana";
+  const sign = (ts, raw, secret) =>
+    "v0=" + createHmac("sha256", secret || SECRET).update(`v0:${ts}:${raw}`).digest("hex");
+  const NOW_MS = 1_780_000_000_000;
+  const ts = String(Math.floor(NOW_MS / 1000));
+
+  it("accepts a request Slack actually signed", () => {
+    const r = slack.verify(SECRET, { timestamp: ts, body, signature: sign(ts, body) }, NOW_MS);
+    eq(r.ok, true);
+  });
+
+  it("refuses one signed with a different secret", () => {
+    const r = slack.verify(SECRET, { timestamp: ts, body, signature: sign(ts, body, "wrong-secret") }, NOW_MS);
+    eq(r.ok, false);
+    eq(r.reason, "signature mismatch");
+  });
+
+  it("refuses a body that changed after it was signed", () => {
+    const sig = sign(ts, body);
+    const tampered = body.replace("money", "chase");
+    eq(slack.verify(SECRET, { timestamp: ts, body: tampered, signature: sig }, NOW_MS).ok, false);
+  });
+
+  it("refuses a replay from an hour ago", () => {
+    const old = String(Math.floor(NOW_MS / 1000) - 3600);
+    const r = slack.verify(SECRET, { timestamp: old, body, signature: sign(old, body) }, NOW_MS);
+    eq(r.ok, false);
+    eq(r.reason, "timestamp too old");
+  });
+
+  it("accepts a little clock drift, in both directions", () => {
+    for (const skew of [-120, 120]) {
+      const t = String(Math.floor(NOW_MS / 1000) + skew);
+      eq(slack.verify(SECRET, { timestamp: t, body, signature: sign(t, body) }, NOW_MS).ok, true, `skew ${skew}`);
+    }
+  });
+
+  it("refuses an unsigned request, and one with no secret configured", () => {
+    eq(slack.verify(SECRET, { timestamp: ts, body }, NOW_MS).ok, false);
+    eq(slack.verify("", { timestamp: ts, body, signature: sign(ts, body) }, NOW_MS).ok, false);
+  });
+
+  it("does not throw on a signature of the wrong length", () => {
+    // timingSafeEqual throws on mismatched lengths; the check must not.
+    const r = slack.verify(SECRET, { timestamp: ts, body, signature: "v0=short" }, NOW_MS);
+    eq(r.ok, false);
+  });
+});
+
+describe("slack — what was asked", () => {
+  it("defaults to the morning read", () => {
+    eq(slack.parseCommand(""), "brief");
+    eq(slack.parseCommand("   "), "brief");
+    eq(slack.parseCommand(undefined), "brief");
+  });
+
+  it("understands the words people actually type", () => {
+    eq(slack.parseCommand("money"), "money");
+    eq(slack.parseCommand("Overdue"), "chase");
+    eq(slack.parseCommand("leads"), "pipeline");
+    eq(slack.parseCommand("updates"), "quiet");
+    eq(slack.parseCommand("today please"), "brief");
+  });
+
+  it("says so when it doesn't know", () => eq(slack.parseCommand("reconcile vat"), "unknown"));
+
+  it("escapes what Slack would otherwise read as markup", () => {
+    eq(slack.esc('Tom & Sons <tom@x.co>'), "Tom &amp; Sons &lt;tom@x.co&gt;");
+  });
+});
+
+describe("slack — the reply", () => {
+  const db = store.seed(NOW);
+
+  it("puts the headline in the morning read", () => {
+    const payload = slack.reply(AE, db, "brief", NOW);
+    const text = JSON.stringify(payload.blocks);
+    ok(text.includes("2 things need you today"), "headline is there");
+    ok(text.includes("Needs a decision from you"), "sections are there");
+    ok(text.includes(":red_circle:"), "severity survives into Slack");
+    eq(payload.response_type, "ephemeral", "a slash command answers only the person who asked");
+  });
+
+  it("caps a long section rather than posting a wall", () => {
+    const local = store.seed(NOW);
+    for (let i = 0; i < 9; i += 1) {
+      local.tasks.push({ id: "big" + i, title: "Decision " + i, status: "open",
+        needsDecision: true, due: day(0), clientId: "cl_north" });
+    }
+    const blocks = slack.briefBlocks(AE, local, NOW, { itemsPerSection: 4 });
+    const decisions = JSON.stringify(blocks).match(/Decision \d/g) || [];
+    ok(decisions.length <= 4, `showed ${decisions.length}`);
+    ok(JSON.stringify(blocks).includes("and 6 more"), "says how many it left out");
+  });
+
+  it("answers money with the numbers, not the whole brief", () => {
+    const text = JSON.stringify(slack.reply(AE, db, "money", NOW).blocks);
+    ok(text.includes("Outstanding"), "has the totals");
+    ok(text.includes("2026-041"), "names what to chase");
+    ok(!text.includes("Needs a decision"), "not the morning read");
+  });
+
+  it("answers chase with money, promises and quiet deals together", () => {
+    const text = JSON.stringify(slack.reply(AE, db, "chase", NOW).blocks);
+    ok(text.includes("2026-041"), "the invoice");
+    ok(text.includes("pricing table"), "the promise");
+    ok(text.includes("Greyline"), "the stalled lead");
+  });
+
+  it("carries a one-line fallback for the notification", () => {
+    eq(slack.reply(AE, db, "brief", NOW).text, brief.build(db, NOW).headline);
+    ok(/outstanding/.test(slack.fallbackText(AE, db, "money", NOW)));
+  });
+
+  it("points an unknown command at help", () => {
+    const text = JSON.stringify(slack.reply(AE, db, "unknown", NOW).blocks);
+    ok(/employee help/.test(text));
+  });
+
+  it("says nothing is wrong when nothing is", () => {
+    const quiet = store.defaults();
+    const text = JSON.stringify(slack.reply(AE, quiet, "brief", NOW).blocks);
+    ok(/on schedule/.test(text));
+  });
+
+  it("stays quiet on a day not worth waking a channel for", () => {
+    // A daily "nothing to report" trains everyone to ignore the channel.
+    eq(slack.worthPosting(AE, store.defaults(), NOW), false);
+    eq(slack.worthPosting(AE, db, NOW), true);
+    eq(slack.worthPosting(AE, db, NOW, { minSeverity: "red" }), true);
+  });
+
+  it("escapes a client name that would otherwise be markup", () => {
+    const local = store.defaults();
+    local.clients.push({ id: "c1", name: "Ben & <script>", status: "active", revisionsIncluded: 0 });
+    local.projects.push({ id: "p1", clientId: "c1", name: "Job", stage: "in_progress", dueDate: day(0) });
+    const text = JSON.stringify(slack.briefBlocks(AE, local, NOW));
+    ok(!text.includes("<script>"), "raw markup never reaches Slack");
+  });
+});
+
+describe("server — the business on disk", () => {
+  const file = join(tmpdir(), `ai-employee-test-${process.pid}.json`);
+  const disk = new BusinessStore(file, AE);
+
+  it("treats a missing file as a business nobody has saved yet", () => {
+    disk.clear();
+    const env = disk.read();
+    eq(env.version, 0);
+    eq(env.data.clients.length, 0);
+  });
+
+  it("round-trips and bumps the version", () => {
+    disk.clear();
+    const first = disk.write(store.seed(NOW), null, NOW);
+    eq(first.version, 1);
+    eq(disk.read().data.clients.length, 3);
+    const second = disk.write(disk.read().data, 1, NOW);
+    eq(second.version, 2);
+  });
+
+  it("refuses to write junk over a real business", () => {
+    disk.clear();
+    disk.write(store.seed(NOW), null, NOW);
+    for (const junk of ["a string", [1, 2, 3], 42]) {
+      let code = null;
+      try { disk.write(junk, null, NOW); } catch (err) { code = err.code; }
+      eq(code, "INVALID", `${JSON.stringify(junk)} should be refused`);
+    }
+    eq(disk.read().data.clients.length, 3, "the business survived");
+    eq(disk.read().version, 1, "and the version did not move");
+    disk.clear();
+  });
+
+  it("refuses a write based on a version that has moved", () => {
+    disk.clear();
+    disk.write(store.defaults(), null, NOW);      // version 1
+    disk.write(store.defaults(), 1, NOW);         // version 2
+    let code = null;
+    try { disk.write(store.defaults(), 1, NOW); } catch (err) { code = err.code; }
+    eq(code, "CONFLICT", "the stale write was refused");
+    eq(disk.read().version, 2, "and changed nothing");
+  });
+
+  it("keeps a copy of a file it cannot parse rather than clobbering it", () => {
+    disk.clear();
+    writeFileSync(file, "{ this is not json");
+    let code = null;
+    try { disk.read(); } catch (err) { code = err.code; }
+    eq(code, "CORRUPT");
+    ok(existsSync(file + ".corrupt"), "the wreckage was kept");
+    rmSync(file + ".corrupt", { force: true });
+  });
+
+  it("leaves no temp file behind", () => {
+    disk.clear();
+    disk.write(store.seed(NOW), null, NOW);
+    const strays = readdirSync(tmpdir()).filter((f) => f.startsWith(`ai-employee-test-${process.pid}.json.`));
+    eq(strays, [], "temp files cleaned up by the rename");
+    disk.clear();
+  });
+});
+
+describe("sync — the browser side", () => {
+  it("tidies up an address someone typed by hand", () => {
+    eq(sync.normaliseUrl("localhost:8788"), "http://localhost:8788");
+    eq(sync.normaliseUrl("http://box.local:8788/"), "http://box.local:8788");
+    eq(sync.normaliseUrl("https://box.local/health"), "https://box.local");
+    eq(sync.normaliseUrl("http://box.local/api/business"), "http://box.local");
+    eq(sync.normaliseUrl(""), "");
+  });
+
+  it("keeps the token out of the business record, and out of exports", () => {
+    store.seed(NOW);
+    sync.setConfig({ url: "http://localhost:8788", token: "super-secret-token" });
+    const exported = store.exportJSON();
+    ok(!exported.includes("super-secret-token"), "the token is not in the export");
+    ok(!exported.includes("aiEmployeeServer"), "nor is the server config");
+    ok(JSON.parse(localStorage.getItem(sync.KEY)).token, "it lives under its own key");
+  });
+
+  it("tells the server which version it is writing against", async () => {
+    const seen = [];
+    sync.setFetch(async (url, opts) => {
+      seen.push({ url, headers: opts.headers, method: opts.method });
+      return { ok: true, status: 200, text: async () => JSON.stringify({ version: 7 }) };
+    });
+    sync.setConfig({ url: "http://localhost:8788", token: "t", lastVersion: 6 });
+    await sync.push(false);
+    eq(seen[0].method, "PUT");
+    eq(seen[0].headers["If-Match"], "6");
+    eq(seen[0].headers.Authorization, "Bearer t");
+    eq(sync.config().lastVersion, 7, "and remembers where it got to");
+  });
+
+  it("drops the version check only when forced", async () => {
+    const seen = [];
+    sync.setFetch(async (url, opts) => {
+      seen.push(opts.headers);
+      return { ok: true, status: 200, text: async () => JSON.stringify({ version: 9 }) };
+    });
+    sync.setConfig({ url: "http://localhost:8788", lastVersion: 6 });
+    await sync.push(true);
+    eq(seen[0]["If-Match"], undefined, "a forced push says overwrite regardless");
+  });
+
+  it("reports a disagreement instead of picking a winner", async () => {
+    sync.setFetch(async () => ({
+      ok: false, status: 409,
+      text: async () => JSON.stringify({ error: "stale", current: { version: 12 } }),
+    }));
+    sync.setConfig({ url: "http://localhost:8788", lastVersion: 6 });
+    let caught = null;
+    try { await sync.push(false); } catch (err) { caught = err; }
+    ok(caught, "it threw");
+    eq(caught.code, "CONFLICT");
+    eq(caught.current.version, 12);
+    eq(sync.config().lastVersion, 6, "and did not move the local marker");
+  });
+
+  it("names the likely cause when the server can't be reached", async () => {
+    sync.setFetch(async () => { throw new TypeError("Failed to fetch"); });
+    sync.setConfig({ url: "http://localhost:8788" });
+    let msg = "";
+    try { await sync.health(); } catch (err) { msg = err.message; }
+    ok(/is it running/.test(msg), `said: ${msg}`);
+  });
+
+  it("tests the token, not just whether something answers", async () => {
+    // /health answers without a token; testing against it would call a
+    // wrong token healthy right up until the first real request.
+    const called = [];
+    sync.setFetch(async (url) => {
+      called.push(url);
+      return { ok: true, status: 200, text: async () => JSON.stringify({ ok: true, version: 3 }) };
+    });
+    sync.setConfig({ url: "http://localhost:8788", token: "t" });
+    await sync.health();
+    ok(/\/api\//.test(called[0]), `hit an authenticated endpoint, got ${called[0]}`);
+    ok(!/\/health$/.test(called[0]), "not the open one");
+  });
+
+  it("says plainly when the token is wrong", async () => {
+    sync.setFetch(async () => ({ ok: false, status: 401, text: async () => "" }));
+    let msg = "";
+    try { await sync.health(); } catch (err) { msg = err.message; }
+    ok(/rejected the token/.test(msg));
+  });
+
+  it("is off until an address is set", () => {
+    sync.forget();
+    eq(sync.configured(), false);
+    eq(sync.status().state, "off");
+  });
+});
+
+/* ================================================================== */
+await runQueued();
+
 const total = passed + failures.length;
 if (failures.length) {
   console.error(`\n✗ ${failures.length} of ${total} checks failed:\n`);

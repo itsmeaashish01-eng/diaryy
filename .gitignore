@@ -4,3 +4,7 @@
 # CI job pushes commits back. Only the explainer is tracked.
 agents/private/*
 !agents/private/README.md
+
+# The AI Employee's server keeps the business here; it is someone's own
+# data, not part of the app.
+employee/server/data/

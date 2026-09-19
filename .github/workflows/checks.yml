@@ -50,7 +50,7 @@ jobs:
       # in a job nobody is watching. Cheaper to find it here.
       - name: Everything parses
         run: |
-          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js employee/selftest.mjs employee/js/*.js; do
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js employee/selftest.mjs employee/js/*.js employee/server/*.mjs employee/sw.js; do
             node --check "$f"
           done
           for f in agents/data/*.json; do

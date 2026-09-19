@@ -585,6 +585,34 @@
       ${st.installed ? "" : '<p class="field-hint" style="margin-top:.5rem">Once installed it opens offline — the record is on the device either way.</p>'}`);
   }
 
+  /* Sync is off until someone types an address, and says plainly what
+     changes when they do. */
+  function syncCard() {
+    const cfg = AE.sync.config();
+    const st = AE.sync.status();
+    return card(cardHead("Sync &amp; Slack", `<span class="badge ${st.state === "on" ? "badge-green" : ""}">${st.state === "off" ? "off" : st.state === "on" ? "connected" : "set up"}</span>`) + `
+      <p class="card-note">${e(st.label)}</p>
+      <form data-form="sync" style="margin-top:.8rem">
+        <div class="field-row">
+          <div class="field"><label for="f_url">Server address</label>
+            <input id="f_url" name="url" value="${e(cfg.url)}" placeholder="http://localhost:8788" />
+            <p class="field-hint">Run <code>node employee/server/employee-server.mjs</code>.</p></div>
+          <div class="field"><label for="f_token">Token</label>
+            <input id="f_token" name="token" type="password" value="${e(cfg.token)}" placeholder="EMPLOYEE_TOKEN" />
+            <p class="field-hint">Kept out of exports — it never leaves this browser.</p></div>
+        </div>
+        <div class="form-actions" style="justify-content:flex-start">
+          <button type="submit" class="btn btn-sm">Save address</button>
+          ${cfg.url ? btn("Test", "syncTest", "", "btn-sm btn-quiet") : ""}
+          ${cfg.url ? btn("Push this browser up", "syncPush", "", "btn-sm btn-primary") : ""}
+          ${cfg.url ? btn("Pull the server down", "syncPull", "", "btn-sm") : ""}
+          ${cfg.url ? btn("Disconnect", "syncForget", "", "btn-sm btn-danger") : ""}
+        </div>
+      </form>
+      <p class="field-hint" style="margin-top:.6rem">The server is what Slack reads: <code>/employee</code> answers with the
+        morning read, and <code>--post</code> sends it to a channel on a schedule. It never changes the record — it only reports it.</p>`);
+  }
+
   function viewSettings(db) {
     const s = db.settings;
     return head("Settings", "How the employee decides what to chase, and when.") + card(`
@@ -618,7 +646,7 @@
             </select></div>
         </div>
         <div class="form-actions">${btn("Save", "noop", "", "btn-primary")}</div>
-      </form>`) + installCard() + card(cardHead("This data") + `
+      </form>`) + installCard() + syncCard() + card(cardHead("This data") + `
       <p class="card-note">Everything lives in this browser's local storage — nothing is sent anywhere. Export it if you want a copy.</p>
       <div class="row-actions" style="margin-top:.7rem">
         ${btn("Export JSON", "export", "", "btn-sm")}

@@ -33,6 +33,7 @@ const SHELL_FILES = [
   "./js/growth.js",
   "./js/brief.js",
   "./js/install.js",
+  "./js/sync.js",
   "./js/ui.js",
   "./js/app.js",
 ];

@@ -50,6 +50,33 @@
     };
   }
 
+  const COLLECTIONS = ["clients", "projects", "tasks", "revisions", "promises",
+                       "updates", "events", "invoices", "team", "leads", "qaRuns"];
+
+  /* Does this look like a business at all?
+
+     hydrate() is forgiving by design — it fills in whatever a stored file
+     predates. That forgiveness is dangerous on the way IN: hand it a
+     string, a number or a stray JSON array and it cheerfully returns an
+     empty business, which then overwrites a real one. So anything
+     arriving from outside (an import, a PUT from another device) is
+     checked here first. Returns null when it's fine, or why not. */
+  function validate(raw) {
+    if (raw === null || typeof raw !== "object" || Array.isArray(raw)) {
+      return "this is not a business record";
+    }
+    for (const key of COLLECTIONS) {
+      if (key in raw && !Array.isArray(raw[key])) return `"${key}" should be a list`;
+    }
+    if ("settings" in raw &&
+        (raw.settings === null || typeof raw.settings !== "object" || Array.isArray(raw.settings))) {
+      return '"settings" should be an object';
+    }
+    const looksRight = "version" in raw || "settings" in raw || COLLECTIONS.some((k) => k in raw);
+    if (!looksRight) return "this has none of a business's fields";
+    return null;
+  }
+
   /* Fill in anything a stored file predates, without touching what it
      already holds. Cheaper than a migration for an additive schema. */
   function hydrate(raw) {
@@ -57,8 +84,7 @@
     if (!raw || typeof raw !== "object") return base;
     const out = Object.assign(base, raw);
     out.settings = Object.assign(base.settings, raw.settings || {});
-    for (const key of ["clients", "projects", "tasks", "revisions", "promises",
-                       "updates", "events", "invoices", "team", "leads", "qaRuns"]) {
+    for (const key of COLLECTIONS) {
       out[key] = Array.isArray(raw[key]) ? raw[key] : [];
     }
     out.version = SCHEMA_VERSION;
@@ -201,8 +227,14 @@
 
   function importJSON(text) {
     const parsed = JSON.parse(text);
-    if (!parsed || typeof parsed !== "object") throw new Error("Not a data file");
-    set(parsed);
+    /* An export is either the record itself or the server's envelope
+       around it; anything else is refused rather than silently swapped
+       in for what's already here. */
+    const record = parsed && typeof parsed === "object" && !Array.isArray(parsed) &&
+                   parsed.data && typeof parsed.data === "object" ? parsed.data : parsed;
+    const problem = validate(record);
+    if (problem) throw new Error(problem);
+    set(record);
     return db;
   }
 
@@ -376,7 +408,7 @@
 
   AE.store = {
     KEY, SCHEMA_VERSION, PROJECT_STAGES,
-    defaults, hydrate, load, save, data, set, commit, subscribe,
+    COLLECTIONS, defaults, validate, hydrate, load, save, data, set, commit, subscribe,
     add, update, remove, find, setSetting,
     clientOf, projectsOf, revisionsOf, invoicesOf, openTasks, clientName, projectName,
     exportJSON, importJSON, reset, seed,

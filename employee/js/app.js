@@ -338,6 +338,23 @@
     },
   };
 
+  /* Two copies disagree. The app does not guess which is right — it
+     says so and offers the two honest answers, with an export in
+     between for anyone who wants both. */
+  function conflict() {
+    const cfg = AE.sync.config();
+    openSheet("Two copies disagree", `
+      <p class="card-note">This browser last saw version ${e(String(cfg.lastVersion))}, and the server has moved on
+        since — something else pushed to it, probably another device.</p>
+      <p class="card-note" style="margin-top:.6rem">Nothing has been overwritten. Pick which copy is the real one, or
+        export this browser's copy first and keep both.</p>
+      <div class="row-actions" style="margin-top:1rem;flex-wrap:wrap">
+        ${AE.ui.btn("Take the server's copy", "conflictTakeServer", "", "btn-sm btn-primary")}
+        ${AE.ui.btn("Keep mine, overwrite the server", "conflictKeepMine", "", "btn-sm btn-danger")}
+        ${AE.ui.btn("Export this browser's copy first", "export", "", "btn-sm btn-quiet")}
+      </div>`);
+  }
+
   function submitDeliver(id, forced) {
     S.update("projects", id, { stage: "delivered", deliveredAt: today() });
     closeSheet();
@@ -407,6 +424,55 @@
       const outcome = await AE.install.prompt();
       toast(outcome === "accepted" ? "Installed" :
             outcome === "unavailable" ? "Your browser installs this from its own menu" : "Maybe later");
+      render();
+    },
+    syncTest: async () => {
+      try {
+        const info = await AE.sync.health();
+        toast(`Server is up, holding version ${info.version}`);
+      } catch (err) { toast(err.message); }
+      render();
+    },
+    syncPush: async () => {
+      try {
+        const envelope = await AE.sync.push(false);
+        toast(`Pushed — the server is now on version ${envelope.version}`);
+      } catch (err) {
+        if (err.code === "CONFLICT") return conflict();
+        toast(err.message);
+      }
+      render();
+    },
+    syncPull: async () => {
+      try {
+        const envelope = await AE.sync.pull();
+        if (!confirm(`Replace what's in this browser with the server's version ${envelope.version}?`)) return;
+        AE.sync.applyPulled(envelope);
+        toast(`Pulled version ${envelope.version}`);
+        go("brief");
+      } catch (err) { toast(err.message); render(); }
+    },
+    syncForget: () => {
+      if (!confirm("Disconnect from the server? The business stays in this browser.")) return;
+      AE.sync.forget();
+      toast("Disconnected");
+      render();
+    },
+    conflictTakeServer: async () => {
+      try {
+        const envelope = await AE.sync.pull();
+        AE.sync.applyPulled(envelope);
+        closeSheet();
+        toast(`Took the server's version ${envelope.version}`);
+        go("brief");
+      } catch (err) { toast(err.message); }
+    },
+    conflictKeepMine: async () => {
+      try {
+        const envelope = await AE.sync.push(true);
+        closeSheet();
+        toast(`Overwrote the server — now on version ${envelope.version}`);
+      } catch (err) { toast(err.message); }
       render();
     },
     export: () => {
@@ -539,6 +605,15 @@
       const lead = S.find("leads", id);
       toast(`Touch ${lead.touches.length} logged`);
     },
+    sync(f) {
+      const url = AE.sync.normaliseUrl(f.url);
+      AE.sync.setConfig({ url, token: f.token.trim() });
+      toast(url ? "Server address saved" : "Address cleared");
+      /* The sync config lives under its own key, so saving it doesn't go
+         through the store and nothing would redraw on its own — and the
+         buttons that appear once an address exists would stay hidden. */
+      render();
+    },
     settings(f) {
       S.commit((d) => Object.assign(d.settings, {
         businessName: f.businessName.trim() || "My Studio",
@@ -588,7 +663,7 @@
       values[el.name] = el.type === "checkbox" ? el.checked : el.value;
     }
     fn(values, formEl.dataset.arg || "");
-    if (name !== "settings") closeSheet();
+    if (name !== "settings" && name !== "sync") closeSheet();
   });
 
   document.addEventListener("keydown", (ev) => {

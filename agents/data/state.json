@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789930856610,
-      "lastOk": 1789930856610,
+      "lastRun": 1789940791051,
+      "lastOk": 1789940791051,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789917367000,
+          "level": "notable",
+          "title": "Pirate Face Rescues LLM Models from Deletion",
+          "detail": "Article URL: https://pirateface.co/ Comments URL: https://news.ycombinator.com/item?id=49776699 Points: 356 # Comments: 116",
+          "url": "https://pirateface.co/"
+        },
         {
           "t": 1789917367000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "Breaking the 1.58-bit Barrier for Ternary LLMs",
           "detail": "Article URL: https://arxiv.org/abs/2609.16338 Comments URL: https://news.ycombinator.com/item?id=49732931 Points: 19 # Comments: 0",
           "url": "https://arxiv.org/abs/2609.16338"
-        },
-        {
-          "t": 1789575985000,
-          "level": "notable",
-          "title": "Claude Cowork and chat are now one Claude",
-          "detail": "Article URL: https://claude.com/blog/cowork-is-now-claude Comments URL: https://news.ycombinator.com/item?id=49729412 Points: 177 # Comments: 184",
-          "url": "https://claude.com/blog/cowork-is-now-claude"
         }
       ],
       "notifiedAt": {},
@@ -2634,6 +2634,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1789940791055,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 1
+    },
     {
       "t": 1789930857132,
       "ran": 2,

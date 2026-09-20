@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789921642010,
-      "lastOk": 1789921642010,
+      "lastRun": 1789930856610,
+      "lastOk": 1789930856610,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789917367000,
+          "level": "notable",
+          "title": "Pirate Face Rescues LLM Models from Deletion",
+          "detail": "Article URL: https://pirateface.co/ Comments URL: https://news.ycombinator.com/item?id=49776699 Points: 257 # Comments: 98",
+          "url": "https://pirateface.co/"
+        },
         {
           "t": 1789917367000,
           "level": "notable",
@@ -421,13 +428,6 @@
           "level": "notable",
           "title": "Claude Cowork and chat are now one Claude",
           "detail": "Article URL: https://claude.com/blog/cowork-is-now-claude Comments URL: https://news.ycombinator.com/item?id=49729412 Points: 177 # Comments: 184",
-          "url": "https://claude.com/blog/cowork-is-now-claude"
-        },
-        {
-          "t": 1789575985000,
-          "level": "notable",
-          "title": "Claude Cowork and chat are now one Claude",
-          "detail": "Article URL: https://claude.com/blog/cowork-is-now-claude Comments URL: https://news.ycombinator.com/item?id=49729412 Points: 54 # Comments: 70",
           "url": "https://claude.com/blog/cowork-is-now-claude"
         }
       ],
@@ -2035,11 +2035,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789907741817,
-      "lastOk": 1789907741817,
+      "lastRun": 1789930857131,
+      "lastOk": 1789930857131,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,016 (+67.3%) · excludes S&P 500 ETF",
+      "lastLine": "$4,053 (+68.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2197,9 +2197,27 @@
         {
           "t": 1789907741817,
           "v": 4016.3
+        },
+        {
+          "t": 1789930857131,
+          "v": 4052.95
         }
       ],
       "events": [
+        {
+          "t": 1789930857117,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789930857117,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789907741803,
           "level": "notable",
@@ -2605,31 +2623,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789295661446,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789295661446,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 80326
+          "BTC": 81059
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789930857132,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1789921642364,
       "ran": 2,

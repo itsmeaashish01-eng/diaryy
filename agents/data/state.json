@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789860448473,
-      "lastOk": 1789860448473,
+      "lastRun": 1789867966843,
+      "lastOk": 1789867966843,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789833171000,
+          "level": "notable",
+          "title": "Show HN: CUA-S1 – A System One Model for Computer Use",
+          "detail": "Hello HN! We're Dillon and Francesco from Cua.We were wondering how many computer use tasks actually need a full general purpose LLM (e.g. gpt-6-astra, claude-opus-5 etc.) to think through all their decisions and steps. Some tasks require thinking about a plan, exploring different paths, recovering ",
+          "url": "https://github.com/trycua/cua"
+        },
         {
           "t": 1789833171000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "Learning Programming in an Age of LLMs",
           "detail": "Article URL: https://blog.ploeh.dk/2026/09/16/on-learning-programming-in-an-age-of-llms/ Comments URL: https://news.ycombinator.com/item?id=49723873 Points: 97 # Comments: 62",
           "url": "https://blog.ploeh.dk/2026/09/16/on-learning-programming-in-an-age-of-llms/"
-        },
-        {
-          "t": 1789534716000,
-          "level": "notable",
-          "title": "Datamimic – don't let your coding agent invent its own test world",
-          "detail": "Article URL: https://github.com/rapiddweller/datamimic Comments URL: https://news.ycombinator.com/item?id=49722276 Points: 47 # Comments: 8",
-          "url": "https://github.com/rapiddweller/datamimic"
         }
       ],
       "notifiedAt": {},
@@ -2575,6 +2575,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1789867966849,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 1
+    },
     {
       "t": 1789860448964,
       "ran": 5,

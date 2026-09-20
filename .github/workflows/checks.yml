@@ -40,11 +40,19 @@ jobs:
       - name: Guide self-test
         run: node guide/selftest.mjs
 
+      # The market-making simulation. The statistical checks in here are
+      # the point: several plausible-looking bugs in a model like this
+      # make the bot look *better*, which is the direction nobody
+      # investigates. The null test — zero edge must earn zero — is what
+      # catches them.
+      - name: Quote Shell self-test
+        run: node maker/selftest.mjs
+
       # A syntax error in a type would only show up at 37 past the hour,
       # in a job nobody is watching. Cheaper to find it here.
       - name: Everything parses
         run: |
-          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js; do
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js maker/selftest.mjs maker/js/*.js; do
             node --check "$f"
           done
           for f in agents/data/*.json; do

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quote Shell — complete-set maker terminal</title>
+  <meta name="description" content="A simulated market-making terminal for five-minute binary up/down markets: quote both legs, pair them into complete sets under $1, carry the rest as a controlled residual." />
+  <meta name="color-scheme" content="dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2304060a'/%3E%3Ccircle cx='8' cy='8' r='5' fill='none' stroke='%23f7c948' stroke-width='1.4'/%3E%3Cpath d='M3.5 5.5 L12.5 10.5 M3.5 10.5 L12.5 5.5' stroke='%232fd47f' stroke-width='1'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== BOOT ===== -->
+<div class="boot" id="boot">
+  <div class="boot-inner">
+    <div class="boot-mark">▚ QUOTE SHELL</div>
+    <div class="boot-line" id="bootLine">replaying the last 24h of markets…</div>
+    <div class="boot-bar"><i id="bootBar"></i></div>
+    <div class="boot-note">simulated venue · seeded · nothing leaves this page</div>
+  </div>
+</div>
+
+<!-- ===== HUD ===== -->
+<header class="hud">
+  <div class="hud-row">
+    <div class="hud-id">
+      <span class="badge">QS</span>
+      <div class="hud-id-text">
+        <div class="hud-title">quoteshell <span class="dim">// complete-set maker</span></div>
+        <div class="hud-sub">BTC 5M UP·DOWN · BIDS ON BOTH LEGS · PAIRED UNDER $1 · SMALL RESIDUAL</div>
+      </div>
+      <span class="tag" id="tagMode">MKT MAKER</span>
+      <span class="tag tag-amber" id="tagPaired">PAIRED —</span>
+      <span class="tag tag-sim">SIMULATED</span>
+    </div>
+    <div class="hud-stats">
+      <div class="hs"><label>BTC <b class="pill" id="spotArrow">SPOT</b></label><span id="hsSpot">—</span></div>
+      <div class="hs"><label>UP BID</label><span id="hsUpBid" class="up">—</span></div>
+      <div class="hs"><label>DOWN BID</label><span id="hsDownBid" class="down">—</span></div>
+      <div class="hs"><label>SET COST</label><span id="hsSetCost" class="amber">—</span></div>
+      <div class="hs hs-clock"><label id="hsSpeedLabel">SIM CLOCK</label><span id="hsClock">--:--:--</span></div>
+      <div class="hud-ctl">
+        <button class="ctl" data-speed="1">1×</button>
+        <button class="ctl is-on" data-speed="4">4×</button>
+        <button class="ctl" data-speed="12">12×</button>
+        <button class="ctl" id="pauseBtn" title="Pause the clock">❚❚</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hud-feed">
+    <span class="feed-dot">● LIVE FEED</span>
+    <div class="feed-track" id="feedTrack"></div>
+    <span class="feed-state" id="feedState">QUOTING BOTH</span>
+  </div>
+</header>
+
+<!-- ===== GRID ===== -->
+<main class="grid">
+
+  <!-- WALLET -->
+  <section class="panel p-wallet">
+    <div class="panel-hd">
+      <h2>WALLET <span class="dim">· 0x8f33…68f7</span></h2>
+      <span class="hd-meta live">LIVE</span>
+    </div>
+    <div class="wallet-top">
+      <div>
+        <div class="k">SESSION P&amp;L <span class="dim" id="walletSpan">· 24H REPLAY + LIVE</span></div>
+        <div class="big" id="walletPnl">—</div>
+        <div class="k dim" id="walletSub">—</div>
+      </div>
+      <canvas id="cEquity" class="c-equity"></canvas>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><label>FILLS 24H</label><b id="stFills">—</b></div>
+      <div class="stat"><label>MARKETS UP</label><b id="stWin">—</b></div>
+      <div class="stat"><label>ROI</label><b id="stRoi">—</b></div>
+    </div>
+    <div class="risk">
+      <div class="risk-hd"><span>DRAWDOWN RISK</span><b id="riskVal">—</b></div>
+      <div class="risk-bar"><i id="riskFill"></i></div>
+      <div class="risk-note" id="riskNote">—</div>
+    </div>
+  </section>
+
+  <!-- COMPLETE-SET LEDGER -->
+  <section class="panel p-ledger">
+    <div class="panel-hd">
+      <h2>COMPLETE-SET LEDGER</h2>
+      <span class="hd-meta live">LIVE</span>
+    </div>
+    <div class="ledger">
+      <div class="led-main">
+        <div class="k">AVG SET COST</div>
+        <div class="mid amber" id="ledCost">—</div>
+        <div class="k dim" id="ledEdge">—</div>
+      </div>
+      <div class="led-split">
+        <div class="led-part"><label>PAIRED</label><b class="green" id="ledPaired">—</b><i class="bar"><u id="ledPairedBar"></u></i></div>
+        <div class="led-part"><label>RESIDUAL</label><b class="red" id="ledResid">—</b><i class="bar"><u id="ledResidBar" class="red-bar"></u></i></div>
+      </div>
+    </div>
+    <div class="ledger-foot" id="ledgerFoot">—</div>
+  </section>
+
+  <!-- BTC SPOT -->
+  <section class="panel p-spot">
+    <div class="panel-hd">
+      <h2>BTC SPOT <span class="dim">· 5M SWINGS</span></h2>
+      <span class="hd-meta" id="spotMeta">—</span>
+    </div>
+    <canvas id="cSpot" class="c-spot"></canvas>
+    <div class="ladder">
+      <div class="ladder-hd"><span>BOOK · THIS MARKET</span><span id="ladderSpread">—</span></div>
+      <div id="ladderRows"></div>
+    </div>
+  </section>
+
+  <!-- PAIR COST PLANE -->
+  <section class="panel p-plane">
+    <div class="panel-hd">
+      <h2>PAIR COST PLANE <span class="dim">· UP + DOWN BELOW $1 IS THE EDGE</span></h2>
+      <span class="hd-meta" id="planeMeta">—</span>
+    </div>
+    <div class="plane-wrap">
+      <canvas id="cPlane" class="c-plane"></canvas>
+      <canvas id="cPlaneHist" class="c-planehist"></canvas>
+      <div class="plane-stats">
+        <div><label>AVG SET</label><b class="amber" id="plCost">—</b></div>
+        <div><label>EDGE</label><b class="green" id="plEdge">—</b></div>
+        <div><label>UNDER $1</label><b id="plUnder">—</b></div>
+        <div><label>SETS</label><b id="plSets">—</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOLUTION GRID -->
+  <section class="panel p-grid">
+    <div class="panel-hd">
+      <h2>RESOLUTION GRID <span class="dim">· LAST BTC 5M EXPIRIES</span></h2>
+      <span class="hd-meta" id="gridMeta">—</span>
+    </div>
+    <div class="rgrid" id="rgrid"></div>
+    <div class="rgrid-key">
+      <span><i class="sw sw-green"></i> LEG THAT PAID $1</span>
+      <span><i class="sw sw-red"></i> LEG THAT EXPIRED AT ZERO</span>
+      <span class="dim">PRICE GOING IN · BOTTOM CELL CARRIES OUR P&amp;L FOR THAT MARKET</span>
+    </div>
+  </section>
+
+  <!-- QUOTE SHELL -->
+  <section class="panel p-shell">
+    <div class="panel-hd">
+      <h2>QUOTE SHELL <span class="dim">· EVERY CHORD IS ONE COMPLETE SET — AN UP FILL TIED TO THE DOWN FILL THAT PAIRED IT</span></h2>
+      <span class="hd-meta" id="shellMeta">—</span>
+    </div>
+    <div class="shell-body">
+
+      <div class="shell-inputs">
+        <div class="col-hd">QUOTE INPUTS</div>
+        <div class="meter" data-k="upbid"><label>UP BID</label><b id="mUpBid">—</b><i class="bar"><u id="bUpBid"></u></i></div>
+        <div class="meter" data-k="downbid"><label>DOWN BID</label><b id="mDownBid">—</b><i class="bar"><u id="bDownBid"></u></i></div>
+        <div class="meter" data-k="cost"><label>PAIR COST</label><b id="mCost">—</b><i class="bar"><u id="bCost"></u></i></div>
+        <div class="meter" data-k="swing"><label>BTC SWING</label><b id="mSwing">—</b><i class="bar bar-mid"><u id="bSwing"></u></i></div>
+        <div class="meter" data-k="skew"><label>INVENTORY SKEW</label><b id="mSkew">—</b><i class="bar bar-mid"><u id="bSkew"></u></i></div>
+        <div class="meter" data-k="time"><label>TIME LEFT</label><b id="mTime">—</b><i class="bar"><u id="bTime"></u></i></div>
+        <div class="meter" data-k="depth"><label>BOOK DEPTH</label><b id="mDepth">—</b><i class="bar"><u id="bDepth"></u></i></div>
+        <div class="shell-note" id="shellNote">—</div>
+      </div>
+
+      <div class="shell-canvas">
+        <canvas id="cShell"></canvas>
+        <div class="shell-legend">
+          <span><i class="dot d-up"></i> UP FILL</span>
+          <span><i class="dot d-down"></i> DOWN FILL</span>
+          <span class="dim">CHORD = SET COST:</span>
+          <span><i class="dot d-cheap2"></i> &lt;96¢</span>
+          <span><i class="dot d-cheap"></i> &lt;98½¢</span>
+          <span><i class="dot d-rich"></i> &lt;$1</span>
+          <span><i class="dot d-over"></i> OVER $1</span>
+        </div>
+      </div>
+
+      <div class="shell-fills">
+        <div class="col-hd">MAKER FILLS <span class="dim" id="fillsMeta"></span></div>
+        <div class="tape" id="tape"></div>
+        <canvas id="cFillHist" class="c-fillhist"></canvas>
+        <div class="tape-foot"><span>FILL SIZE DISTRIBUTION</span><span id="tapeFoot">—</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RUNNING VWAP -->
+  <section class="panel p-vwap">
+    <div class="panel-hd">
+      <h2>RUNNING VWAP <span class="dim">· WHAT THE PAIRS ACTUALLY COST IN THIS MARKET</span></h2>
+      <span class="hd-meta" id="vwapMeta">—</span>
+    </div>
+    <div class="vwap-body">
+      <canvas id="cVwap" class="c-vwap"></canvas>
+      <div class="vwap-side">
+        <div class="vs"><label>VWAP SET COST</label><b class="amber" id="vwCost">—</b></div>
+        <div class="vs"><label>LOCKED THIS MKT</label><b class="green" id="vwLocked">—</b></div>
+        <div class="vs"><label>SET SHARES OPEN</label><b id="vwSets">—</b></div>
+        <div class="vs"><label>RESIDUAL</label><b id="vwResid">—</b></div>
+        <canvas id="cVwapBars" class="c-vwapbars"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE CYCLE -->
+  <section class="panel p-cycle">
+    <div class="panel-hd">
+      <h2>QUOTE CYCLE <span class="dim">· FLAT → UP LEG → SET → DOWN LEG</span></h2>
+      <span class="hd-meta" id="cycleMeta">—</span>
+    </div>
+    <div class="cycle-body">
+      <canvas id="cCycle" class="c-cycle"></canvas>
+      <div class="cycle-side">
+        <div class="col-hd">STATE TIME</div>
+        <canvas id="cCycleBars" class="c-cyclebars"></canvas>
+        <div class="cycle-stats">
+          <div><label>STATE</label><b id="cyState">—</b></div>
+          <div><label>CYCLES</label><b id="cyCount">—</b></div>
+          <div><label>AVG HOLD</label><b id="cyHold">—</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== STATUS ===== -->
+<footer class="status" id="status">
+  <span id="stStrip">—</span>
+  <span class="status-right">
+    <a href="../index.html" title="Back to My Diary">✦ DIARY</a>
+    <a href="README.md">READ ME</a>
+  </span>
+</footer>
+
+<script src="js/util.js"></script>
+<script src="js/market.js"></script>
+<script src="js/maker.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

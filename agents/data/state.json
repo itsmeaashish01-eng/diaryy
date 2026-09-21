@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789968173693,
-      "lastOk": 1789968173693,
+      "lastRun": 1789988613404,
+      "lastOk": 1789988613404,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789943563000,
+          "level": "notable",
+          "title": "AX – Google’s Open Agentic Orchestrator",
+          "detail": "Article URL: https://agentexecutor.io Comments URL: https://news.ycombinator.com/item?id=49780797 Points: 521 # Comments: 226",
+          "url": "https://agentexecutor.io"
+        },
         {
           "t": 1789943563000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "HarnessTax: How Much Does the Harness Matter for Coding Agents?",
           "detail": "Article URL: https://harnesstax.github.io/ Comments URL: https://news.ycombinator.com/item?id=49733726 Points: 45 # Comments: 14",
           "url": "https://harnesstax.github.io/"
-        },
-        {
-          "t": 1789592364000,
-          "level": "notable",
-          "title": "Breaking the 1.58-bit Barrier for Ternary LLMs",
-          "detail": "Article URL: https://arxiv.org/abs/2609.16338 Comments URL: https://news.ycombinator.com/item?id=49732931 Points: 148 # Comments: 20",
-          "url": "https://arxiv.org/abs/2609.16338"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1789950433089,
-      "lastOk": 1789950433089,
+      "lastRun": 1789988613796,
+      "lastOk": 1789988613796,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.278",
@@ -2075,11 +2075,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789968174188,
-      "lastOk": 1789968174188,
+      "lastRun": 1789988614495,
+      "lastOk": 1789988614495,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,069 (+69.5%) · excludes S&P 500 ETF",
+      "lastLine": "$4,221 (+75.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2249,9 +2249,27 @@
         {
           "t": 1789968174188,
           "v": 4068.8
+        },
+        {
+          "t": 1789988614495,
+          "v": 4220.6
         }
       ],
       "events": [
+        {
+          "t": 1789988614481,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789988614482,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789968174174,
           "level": "notable",
@@ -2657,31 +2675,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789349556982,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789349556982,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81376
+          "BTC": 84412
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789988614495,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 13
+    },
     {
       "t": 1789968174188,
       "ran": 5,

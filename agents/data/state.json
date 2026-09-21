@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789988613404,
-      "lastOk": 1789988613404,
+      "lastRun": 1790010610966,
+      "lastOk": 1790010610966,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790007726000,
+          "level": "notable",
+          "title": "Show HN: Foremerge – Catch Intent Conflicts Between Parallel Coding Agents",
+          "detail": "At, GPTree, we run several coding agents across our team on one repo using parallel worktrees. Apart from wasted time reviewing and fixing conflicts at PR time, the failures that hurt the most are when multiple plans or tickets cause architecture changes that cannot both be true. Ex. one agent repla",
+          "url": "https://github.com/naw103/foremerge"
+        },
+        {
+          "t": 1789998807000,
+          "level": "notable",
+          "title": "M5 Ultra Mac Studio Review",
+          "detail": "Article URL: https://www.macstories.net/stories/m5-ultra-mac-studio-review-the-dream-mac-for-local-ai-agents/ Comments URL: https://news.ycombinator.com/item?id=49787313 Points: 124 # Comments: 94",
+          "url": "https://www.macstories.net/stories/m5-ultra-mac-studio-review-the-dream-mac-for-local-ai-agents/"
+        },
         {
           "t": 1789943563000,
           "level": "notable",
@@ -415,28 +429,14 @@
           "title": "HarnessTax: How Much Does the Harness Matter for Coding Agents?",
           "detail": "Article URL: https://harnesstax.github.io/ Comments URL: https://news.ycombinator.com/item?id=49733726 Points: 97 # Comments: 32",
           "url": "https://harnesstax.github.io/"
-        },
-        {
-          "t": 1789592364000,
-          "level": "notable",
-          "title": "Breaking the 1.58-bit Barrier for Ternary LLMs",
-          "detail": "Article URL: https://arxiv.org/abs/2609.16338 Comments URL: https://news.ycombinator.com/item?id=49732931 Points: 183 # Comments: 25",
-          "url": "https://arxiv.org/abs/2609.16338"
-        },
-        {
-          "t": 1789596613000,
-          "level": "notable",
-          "title": "HarnessTax: How Much Does the Harness Matter for Coding Agents?",
-          "detail": "Article URL: https://harnesstax.github.io/ Comments URL: https://news.ycombinator.com/item?id=49733726 Points: 45 # Comments: 14",
-          "url": "https://harnesstax.github.io/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1789988613796,
-      "lastOk": 1789988613796,
+      "lastRun": 1790010611369,
+      "lastOk": 1790010611369,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.278",
@@ -2075,11 +2075,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789988614495,
-      "lastOk": 1789988614495,
+      "lastRun": 1790010611923,
+      "lastOk": 1790010611923,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,221 (+75.9%) · excludes S&P 500 ETF",
+      "lastLine": "$4,303 (+79.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2253,9 +2253,27 @@
         {
           "t": 1789988614495,
           "v": 4220.6
+        },
+        {
+          "t": 1790010611923,
+          "v": 4302.5
         }
       ],
       "events": [
+        {
+          "t": 1790010611909,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790010611909,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789988614481,
           "level": "notable",
@@ -2661,31 +2679,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789369065119,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789369065119,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 84412
+          "BTC": 86050
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790010611923,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1789988614495,
       "ran": 3,

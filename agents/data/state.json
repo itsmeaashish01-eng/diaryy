@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1789940791051,
-      "lastOk": 1789940791051,
+      "lastRun": 1789950432800,
+      "lastOk": 1789950432800,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1789943563000,
+          "level": "notable",
+          "title": "Google's Open Agentic Orchestrator",
+          "detail": "Article URL: https://agentexecutor.io Comments URL: https://news.ycombinator.com/item?id=49780797 Points: 104 # Comments: 40",
+          "url": "https://agentexecutor.io"
+        },
         {
           "t": 1789917367000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "Breaking the 1.58-bit Barrier for Ternary LLMs",
           "detail": "Article URL: https://arxiv.org/abs/2609.16338 Comments URL: https://news.ycombinator.com/item?id=49732931 Points: 122 # Comments: 13",
           "url": "https://arxiv.org/abs/2609.16338"
-        },
-        {
-          "t": 1789592364000,
-          "level": "notable",
-          "title": "Breaking the 1.58-bit Barrier for Ternary LLMs",
-          "detail": "Article URL: https://arxiv.org/abs/2609.16338 Comments URL: https://news.ycombinator.com/item?id=49732931 Points: 19 # Comments: 0",
-          "url": "https://arxiv.org/abs/2609.16338"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1789921642359,
-      "lastOk": 1789921642359,
+      "lastRun": 1789950433089,
+      "lastOk": 1789950433089,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.278",
@@ -794,6 +794,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
         },
         {
+          "t": 1789787440000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.278",
+          "detail": "## What's changed\n\n- Changed auto mode for Claude API and Enterprise users, and on Bedrock, Vertex, Foundry and gateways, to default to the server-side classifier, which does not charge for classifier overhead (`CLAUDE_CODE_AUTO_MODE_SERVER=0` opts out on Bedrock, Vertex, Foundry and gateways); warns on billed fallback. See https://code.claude.com/docs/en/auto-mode-classifier-billing\n- Added an `A",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.278"
+        },
+        {
           "t": 1789754792000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.277",
@@ -855,13 +862,6 @@
           "title": "anthropics/claude-code v2.1.269",
           "detail": "## What's changed\n\n- Added `claude plugin eval`: run a plugin's eval suite against Claude Code and get scored, reproducible results (JSON + HTML report); see `claude plugin eval --help`\n- Added `/output-style [name]` to list and switch output styles, including over Remote Control and in cloud and other headless sessions\n- Added a diff of the files a Bash command changed to the Bash tool result whe",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
-        },
-        {
-          "t": 1789072254000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.268",
-          "detail": "## What's changed\n\n- Added to the Claude apps gateway: with `pricing:` set in `gateway.yaml`, signed-in Claude Code clients receive the same rates through managed settings, so `/cost` and telemetry match the spend meter\n- Added a startup warning for gateways when `access_control.allow_cidrs` is empty, and a one-time warning the first time a request arrives from a public address\n- Added the `gatewa",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.268"
         }
       ],
       "notifiedAt": {},
@@ -2035,11 +2035,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1789930857131,
-      "lastOk": 1789930857131,
+      "lastRun": 1789950433626,
+      "lastOk": 1789950433626,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,053 (+68.9%) · excludes S&P 500 ETF",
+      "lastLine": "$4,088 (+70.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2201,9 +2201,27 @@
         {
           "t": 1789930857131,
           "v": 4052.95
+        },
+        {
+          "t": 1789950433626,
+          "v": 4088.05
         }
       ],
       "events": [
+        {
+          "t": 1789950433612,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1789950433612,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1789930857117,
           "level": "notable",
@@ -2609,31 +2627,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789310340384,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789310340384,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81059
+          "BTC": 81761
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1789950433626,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 13
+    },
     {
       "t": 1789940791055,
       "ran": 1,

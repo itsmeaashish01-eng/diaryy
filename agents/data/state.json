@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790036113475,
-      "lastOk": 1790036113475,
+      "lastRun": 1790054340124,
+      "lastOk": 1790054340124,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790039119000,
+          "level": "notable",
+          "title": "Claude Status – Elevated errors for multiple models",
+          "detail": "Article URL: https://status.claude.com/incidents/7g1qpkyz5gxh Comments URL: https://news.ycombinator.com/item?id=49795579 Points: 85 # Comments: 64",
+          "url": "https://status.claude.com/incidents/7g1qpkyz5gxh"
+        },
         {
           "t": 1790007726000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "HarnessTax: How Much Does the Harness Matter for Coding Agents?",
           "detail": "Article URL: https://harnesstax.github.io/ Comments URL: https://news.ycombinator.com/item?id=49733726 Points: 144 # Comments: 55",
           "url": "https://harnesstax.github.io/"
-        },
-        {
-          "t": 1789592364000,
-          "level": "notable",
-          "title": "Breaking the 1.58-bit Barrier for Ternary LLMs",
-          "detail": "Article URL: https://arxiv.org/abs/2609.16338 Comments URL: https://news.ycombinator.com/item?id=49732931 Points: 213 # Comments: 34",
-          "url": "https://arxiv.org/abs/2609.16338"
         }
       ],
       "notifiedAt": {},
@@ -2115,11 +2115,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790025175048,
-      "lastOk": 1790025175048,
+      "lastRun": 1790054340879,
+      "lastOk": 1790054340879,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,331 (+80.5%) · excludes S&P 500 ETF",
+      "lastLine": "$4,266 (+77.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2301,9 +2301,27 @@
         {
           "t": 1790025175048,
           "v": 4331.15
+        },
+        {
+          "t": 1790054340879,
+          "v": 4266.3
         }
       ],
       "events": [
+        {
+          "t": 1790054340865,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790054340865,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790025175035,
           "level": "notable",
@@ -2709,31 +2727,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789414428737,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789414428737,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 86623
+          "BTC": 85326
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790054340880,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1790036114045,
       "ran": 2,

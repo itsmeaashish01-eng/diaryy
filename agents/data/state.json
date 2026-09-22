@@ -2,14 +2,56 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790103866684,
-      "lastOk": 1790103866684,
+      "lastRun": 1790115806955,
+      "lastOk": 1790115806955,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "6 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790109259000,
+          "level": "notable",
+          "title": "LLM Ass Bench",
+          "detail": "Article URL: https://www.assbench.com/ Comments URL: https://news.ycombinator.com/item?id=49807688 Points: 98 # Comments: 30",
+          "url": "https://www.assbench.com/"
+        },
+        {
+          "t": 1790100953000,
+          "level": "notable",
+          "title": "Unreal Agent",
+          "detail": "https://github.com/unreallabsai/unreal-agent Comments URL: https://news.ycombinator.com/item?id=49805748 Points: 82 # Comments: 53",
+          "url": "https://unreallabs.ai/blog/unreal-agent/"
+        },
+        {
+          "t": 1790097996000,
+          "level": "notable",
+          "title": "Launch HN: Coverage Cat (YC S22) – Umbrella insurance via your personal agent",
+          "detail": "Hey HN! We’re Max and Gabriel the co-founders of Coverage Cat. We’ve been friends for over a decade, met in college then hung out mostly on the internet. We love building products that help people optimize the crufty corners of their lives. Max is a former Google/Microsoft/Two Sigma PM and Gabriel h",
+          "url": "https://www.coveragecat.com/"
+        },
+        {
+          "t": 1790095891000,
+          "level": "notable",
+          "title": "Claude Opus 5.5 Intelligence, Performance and Price Analysis (Max)",
+          "detail": "Article URL: https://artificialanalysis.ai/models/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49804316 Points: 192 # Comments: 52",
+          "url": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        {
+          "t": 1790094545000,
+          "level": "notable",
+          "title": "Claude Opus 5.5",
+          "detail": "Article URL: https://www.anthropic.com/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49803892 Points: 982 # Comments: 713",
+          "url": "https://www.anthropic.com/claude-opus-5-5"
+        },
+        {
+          "t": 1790082063000,
+          "level": "notable",
+          "title": "Show HN: JevBench, a reproducible benchmark for typed decision models",
+          "detail": "Hi HN! I built JevBench because Jev kicks ass, and the world deserves to know how the serious open source and fake lookalike projects really perform in comparison.Jev-class models return bounded choices and probabilities instead of text, and are disruptively faster and cheaper than LLMs, while being",
+          "url": "https://benchmarkheaven.com/jev-models"
+        },
         {
           "t": 1790097996000,
           "level": "notable",
@@ -387,48 +429,6 @@
           "title": "Infinite-Parameter LLMs: Generating and Adapting Weights from Live Data",
           "detail": "Article URL: https://arxiv.org/abs/2609.18842 Comments URL: https://news.ycombinator.com/item?id=49743483 Points: 90 # Comments: 26",
           "url": "https://arxiv.org/abs/2609.18842"
-        },
-        {
-          "t": 1789662135000,
-          "level": "notable",
-          "title": "Launch HN: Skillsync (YC W26) – AI chat sessions made portable across agents",
-          "detail": "Hey HN, we're Nars & Nishant, founders of Skillsync (https://skillsync.com)Skillsync lets you move your AI chats across every coding agent. Most of our work exists as conversations, which are currently scattered across our agents. Though stored locally, these conversations use different formats. Thi",
-          "url": "https://news.ycombinator.com/item?id=49743049"
-        },
-        {
-          "t": 1789650104000,
-          "level": "notable",
-          "title": "Show HN: Share your AI Setup, Learn from others",
-          "detail": "I kept seeing engineers share what they were building with AI; however, I was always more curious about how they worked. Which agents did they use? What skills and tools had stuck or been thrown out the window? How did they manage longer-running tasks? So I built this with the hope we could have a d",
-          "url": "https://mysetup.ai/"
-        },
-        {
-          "t": 1789664114000,
-          "level": "notable",
-          "title": "Infinite-Parameter LLMs: Generating and Adapting Weights from Live Data",
-          "detail": "Article URL: https://arxiv.org/abs/2609.18842 Comments URL: https://news.ycombinator.com/item?id=49743483 Points: 55 # Comments: 13",
-          "url": "https://arxiv.org/abs/2609.18842"
-        },
-        {
-          "t": 1789664031000,
-          "level": "notable",
-          "title": "Show HN: Craigslist for agent skills, curated by a human",
-          "detail": "hey, i'm nick (@skeptrune on X). i have been using ai for a lot of things i'm not an expert in and thought it would be nice to try and buy paid skills for helping it accomplish those tasks more efficiently.for example, redlining contracts, creating ai generated videos, different website designs, and",
-          "url": "https://skillbay.sh/"
-        },
-        {
-          "t": 1789662135000,
-          "level": "notable",
-          "title": "Launch HN: Skillsync (YC W26) – AI chat sessions made portable across agents",
-          "detail": "Hey HN, we're Nars & Nishant, founders of Skillsync (https://skillsync.com)Skillsync lets you move your AI chats across every coding agent. Most of our work exists as conversations, which are currently scattered across our agents. Though stored locally, these conversations use different formats. Thi",
-          "url": "https://news.ycombinator.com/item?id=49743049"
-        },
-        {
-          "t": 1789659617000,
-          "level": "notable",
-          "title": "LLM Classification Is Feature Engineering",
-          "detail": "Article URL: https://minimallysufficient.com/posts/llm-classification-is-feature-extraction/ Comments URL: https://news.ycombinator.com/item?id=49742437 Points: 74 # Comments: 14",
-          "url": "https://minimallysufficient.com/posts/llm-classification-is-feature-extraction/"
         }
       ],
       "notifiedAt": {},
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1790072186994,
-      "lastOk": 1790072186994,
+      "lastRun": 1790115806958,
+      "lastOk": 1790115806958,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 2 drifting",
@@ -958,9 +958,48 @@
         {
           "t": 1790072186994,
           "v": 17
+        },
+        {
+          "t": 1790115806958,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1790115806958,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 54 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1790115806958,
+          "level": "notable",
+          "title": "Finish fellowship strong hasn't moved in 21 days",
+          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1790115806958,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1790115806958,
+          "level": "notable",
+          "title": "Data collection complete — 84 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1790115806958,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 33 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1790072186994,
           "level": "notable",
@@ -1345,41 +1384,6 @@
           "title": "First-author paper submitted hasn't moved in 26 days",
           "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
           "url": ""
-        },
-        {
-          "t": 1789414427940,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 62 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1789414427940,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
-        },
-        {
-          "t": 1789414427940,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 25 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1789369064542,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 62 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1789369064542,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -1388,8 +1392,8 @@
       }
     },
     "reading": {
-      "lastRun": 1790072186995,
-      "lastOk": 1790072186995,
+      "lastRun": 1790115806959,
+      "lastOk": 1790115806959,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1478,9 +1482,34 @@
         {
           "t": 1790072186995,
           "v": 3
+        },
+        {
+          "t": 1790115806959,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1790115806959,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1790115806959,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 52 days",
+          "url": ""
+        },
+        {
+          "t": 1790115806959,
+          "level": "notable",
+          "title": "Still unread after 144 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1790072186995,
           "level": "notable",
@@ -1879,27 +1908,6 @@
           "title": "Still unread after 134 days — A book that has nothing to do with work",
           "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
           "url": ""
-        },
-        {
-          "t": 1789166721604,
-          "level": "notable",
-          "title": "Read next — Survival analysis, properly this time",
-          "detail": "about 45 min · research methods · already started",
-          "url": ""
-        },
-        {
-          "t": 1789166721604,
-          "level": "notable",
-          "title": "Read next — Current society guideline — read the update in full, not the summary",
-          "detail": "about 60 min · core · on the list 41 days",
-          "url": ""
-        },
-        {
-          "t": 1789166721604,
-          "level": "notable",
-          "title": "Still unread after 133 days — A book that has nothing to do with work",
-          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -1908,8 +1916,8 @@
       }
     },
     "training": {
-      "lastRun": 1790072186996,
-      "lastOk": 1790072186996,
+      "lastRun": 1790115806960,
+      "lastOk": 1790115806960,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
@@ -1998,9 +2006,20 @@
         {
           "t": 1790072186996,
           "v": 0
+        },
+        {
+          "t": 1790115806960,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1790115806960,
+          "level": "notable",
+          "title": "13 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1790072186996,
           "level": "notable",
@@ -2134,11 +2153,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790089712084,
-      "lastOk": 1790089712084,
+      "lastRun": 1790115807656,
+      "lastOk": 1790115807656,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,313 (+79.7%) · excludes S&P 500 ETF",
+      "lastLine": "$4,309 (+79.5%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2332,9 +2351,27 @@
         {
           "t": 1790089712085,
           "v": 4312.75
+        },
+        {
+          "t": 1790115807656,
+          "v": 4309
         }
       ],
       "events": [
+        {
+          "t": 1790115807645,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790115807645,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790089712073,
           "level": "notable",
@@ -2740,31 +2777,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789480193178,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789480193178,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 86255
+          "BTC": 86180
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790115807656,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 17
+    },
     {
       "t": 1790103867102,
       "ran": 2,

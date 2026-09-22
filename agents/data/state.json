@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790025174326,
-      "lastOk": 1790025174326,
+      "lastRun": 1790036113475,
+      "lastOk": 1790036113475,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790007726000,
+          "level": "notable",
+          "title": "Show HN: Foremerge – Catch intent conflicts between parallel coding agents",
+          "detail": "At, GPTree, we run several coding agents across our team on one repo using parallel worktrees. Apart from wasted time reviewing and fixing conflicts at PR time, the failures that hurt the most are when multiple plans or tickets cause architecture changes that cannot both be true. Ex. one agent repla",
+          "url": "https://github.com/naw103/foremerge"
+        },
         {
           "t": 1790007726000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "Breaking the 1.58-bit Barrier for Ternary LLMs",
           "detail": "Article URL: https://arxiv.org/abs/2609.16338 Comments URL: https://news.ycombinator.com/item?id=49732931 Points: 213 # Comments: 34",
           "url": "https://arxiv.org/abs/2609.16338"
-        },
-        {
-          "t": 1789614725000,
-          "level": "notable",
-          "title": "Jev Ultrafast: A browser agent with a dynamic, indexed action space",
-          "detail": "Article URL: https://github.com/browser-use/jev-ultrafast Comments URL: https://news.ycombinator.com/item?id=49735979 Points: 19 # Comments: 1",
-          "url": "https://github.com/browser-use/jev-ultrafast"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1790010611369,
-      "lastOk": 1790010611369,
+      "lastRun": 1790036114038,
+      "lastOk": 1790036114038,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.278",
@@ -2734,6 +2734,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1790036114045,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 11
+    },
     {
       "t": 1790025175048,
       "ran": 5,

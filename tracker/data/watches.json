@@ -29,6 +29,36 @@
   "seeded": true,
   "alerts": [
     {
+      "id": "muchzbyy-9s6a08",
+      "watchId": "seed-demo",
+      "watchLabel": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 15.5% vs its recent average — now $204.66",
+      "price": 204.66,
+      "currency": "USD",
+      "t": 1790070876250,
+      "read": false,
+      "kindLabel": "Flight"
+    },
+    {
+      "id": "muchzbyv-qonwg9",
+      "watchId": "seed-btc",
+      "watchLabel": "Bitcoin",
+      "kind": "crypto",
+      "ruleType": "risePct",
+      "ruleLabel": "Rises % above its recent average",
+      "severity": "warning",
+      "message": "Up 7.8% vs its recent average — now $86,068",
+      "price": 86068,
+      "currency": "USD",
+      "t": 1790070876247,
+      "read": false,
+      "kindLabel": "Crypto"
+    },
+    {
       "id": "muc73h8y-w4ikm5",
       "watchId": "seed-demo",
       "watchLabel": "Demo fare — checks with no network needed",
@@ -703,14 +733,18 @@
         {
           "t": 1790052593921,
           "p": 85466
+        },
+        {
+          "t": 1790070876231,
+          "p": 86068
         }
       ],
-      "lastCheck": 1790052593921,
+      "lastCheck": 1790070876231,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
       "lastAlertAt": {
-        "risePct": 1790035447176
+        "risePct": 1790070876247
       },
       "cooldownMin": 360,
       "notes": "Live source, no API key. Checked automatically every hour."
@@ -1254,14 +1288,21 @@
           "meta": {
             "simulated": true
           }
+        },
+        {
+          "t": 1790070876249,
+          "p": 204.66,
+          "meta": {
+            "simulated": true
+          }
         }
       ],
-      "lastCheck": 1790052593937,
+      "lastCheck": 1790070876249,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
       "lastAlertAt": {
-        "dropPct": 1790052593938
+        "dropPct": 1790070876250
       },
       "cooldownMin": 180,
       "notes": "Simulated. Proves the hourly job runs end to end. Delete once your real watches are in."

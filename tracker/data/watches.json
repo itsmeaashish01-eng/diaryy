@@ -29,6 +29,21 @@
   "seeded": true,
   "alerts": [
     {
+      "id": "mud15y97-8x94vb",
+      "watchId": "seed-btc",
+      "watchLabel": "Bitcoin",
+      "kind": "crypto",
+      "ruleType": "risePct",
+      "ruleLabel": "Rises % above its recent average",
+      "severity": "warning",
+      "message": "Up 7.8% vs its recent average — now $86,508",
+      "price": 86508,
+      "currency": "USD",
+      "t": 1790103097771,
+      "read": false,
+      "kindLabel": "Crypto"
+    },
+    {
       "id": "mucsj80z-0a6ehh",
       "watchId": "seed-demo",
       "watchLabel": "Demo fare — checks with no network needed",
@@ -756,14 +771,18 @@
         {
           "t": 1790088600408,
           "p": 85927
+        },
+        {
+          "t": 1790103097762,
+          "p": 86508
         }
       ],
-      "lastCheck": 1790088600408,
+      "lastCheck": 1790103097762,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
       "lastAlertAt": {
-        "risePct": 1790070876247
+        "risePct": 1790103097771
       },
       "cooldownMin": 360,
       "notes": "Live source, no API key. Checked automatically every hour."
@@ -1321,9 +1340,16 @@
           "meta": {
             "simulated": true
           }
+        },
+        {
+          "t": 1790103097772,
+          "p": 235.44,
+          "meta": {
+            "simulated": true
+          }
         }
       ],
-      "lastCheck": 1790088600418,
+      "lastCheck": 1790103097772,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,

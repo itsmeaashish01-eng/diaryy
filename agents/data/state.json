@@ -2,14 +2,56 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790089711159,
-      "lastOk": 1790089711159,
+      "lastRun": 1790103866684,
+      "lastOk": 1790103866684,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "6 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790097996000,
+          "level": "notable",
+          "title": "Launch HN: Coverage Cat (YC S22) – Umbrella insurance via your personal agent",
+          "detail": "Hey HN! We’re Max and Gabriel the co-founders of Coverage Cat. We’ve been friends for over a decade, met in college then hung out mostly on the internet. We love building products that help people optimize the crufty corners of their lives. Max is a former Google/Microsoft/Two Sigma PM and Gabriel h",
+          "url": "https://www.coveragecat.com/"
+        },
+        {
+          "t": 1790095891000,
+          "level": "notable",
+          "title": "Claude Opus 5.5 Intelligence, Performance and Price Analysis (Max)",
+          "detail": "Article URL: https://artificialanalysis.ai/models/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49804316 Points: 87 # Comments: 33",
+          "url": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        {
+          "t": 1790094545000,
+          "level": "notable",
+          "title": "Claude Opus 5.5",
+          "detail": "Article URL: https://www.anthropic.com/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49803892 Points: 583 # Comments: 531",
+          "url": "https://www.anthropic.com/claude-opus-5-5"
+        },
+        {
+          "t": 1790093706000,
+          "level": "notable",
+          "title": "Show HN: AI·rete·RAG – a Rete rule engine decides, RAG explains why",
+          "detail": "Hi HN, I built ai·rete·rag because I kept seeing teams put an LLM in charge of decisions that need to be auditable (lending, fraud, clinical triage), then bolt on \"guardrails\" after the fact.It runs the two in series instead:1. A pure-Python Rete engine evaluates YAML rules against your facts. The v",
+          "url": "https://ai-rete-rag.com/"
+        },
+        {
+          "t": 1790091504000,
+          "level": "notable",
+          "title": "Writing Rust code that's fast by asking agents to make the code faster",
+          "detail": "Article URL: https://minimaxir.com/2026/09/agentic-iteration/ Comments URL: https://news.ycombinator.com/item?id=49803085 Points: 64 # Comments: 28",
+          "url": "https://minimaxir.com/2026/09/agentic-iteration/"
+        },
+        {
+          "t": 1790089623000,
+          "level": "notable",
+          "title": "Vacate a drone restriction that criminalized recording immigration agents",
+          "detail": "Article URL: https://www.eff.org/deeplinks/2026/09/dc-circuit-must-vacate-drone-flight-restriction-criminalized-recording-immigration Comments URL: https://news.ycombinator.com/item?id=49802581 Points: 74 # Comments: 15",
+          "url": "https://www.eff.org/deeplinks/2026/09/dc-circuit-must-vacate-drone-flight-restriction-criminalized-recording-immigration"
+        },
         {
           "t": 1790039119000,
           "level": "notable",
@@ -387,62 +429,27 @@
           "title": "LLM Classification Is Feature Engineering",
           "detail": "Article URL: https://minimallysufficient.com/posts/llm-classification-is-feature-extraction/ Comments URL: https://news.ycombinator.com/item?id=49742437 Points: 74 # Comments: 14",
           "url": "https://minimallysufficient.com/posts/llm-classification-is-feature-extraction/"
-        },
-        {
-          "t": 1789650104000,
-          "level": "notable",
-          "title": "Show HN: Share your AI Setup, Learn from others",
-          "detail": "I kept seeing engineers share what they were building with AI; however, I was always more curious about how they worked. Which agents did they use? What skills and tools had stuck or been thrown out the window? How did they manage longer-running tasks? So I built this with the hope we could have a d",
-          "url": "https://mysetup.ai/"
-        },
-        {
-          "t": 1789663697000,
-          "level": "notable",
-          "title": "Show HN: Aclif – Agent CLI framework: one grammar, canonical names across SaaS",
-          "detail": "Simple discovery of the provider's default schemas is possible without any credentials (since they are built into the binary). If you want it to fetch customizations of your specific instance, give it credentials to your org.The repo has more details. https://github.com/agent-cli-framework/aclif Com",
-          "url": "https://www.aclif.ai/"
-        },
-        {
-          "t": 1789662328000,
-          "level": "notable",
-          "title": "Show HN: Die With Me – Claude and Codex rate limits as AIM away messages",
-          "detail": "hey HN, i've been making this Mac app called Die With Me. it lets you see how much claude / codex usage your friends have left. it's kind of like AIM buddy list, but for your AI tokensand when your token allowance goes below 20%, a chatroom for everyone who is waiting for a resetI made this because ",
-          "url": "https://diewithme.co/join"
-        },
-        {
-          "t": 1789662135000,
-          "level": "notable",
-          "title": "Launch HN: Skillsync (YC W26) – AI chat sessions made portable across agents",
-          "detail": "Hey HN, we're Nars & Nishant, founders of Skillsync (https://skillsync.com)Skillsync lets you move your AI chats across every coding agent. Most of our work exists as conversations, which are currently scattered across our agents. Though stored locally, these conversations use different formats. Thi",
-          "url": "https://skillsync.com"
-        },
-        {
-          "t": 1789659617000,
-          "level": "notable",
-          "title": "LLM Classification Is Feature Engineering",
-          "detail": "Article URL: https://minimallysufficient.com/posts/llm-classification-is-feature-extraction/ Comments URL: https://news.ycombinator.com/item?id=49742437 Points: 35 # Comments: 9",
-          "url": "https://minimallysufficient.com/posts/llm-classification-is-feature-extraction/"
-        },
-        {
-          "t": 1789650104000,
-          "level": "notable",
-          "title": "Show HN: Share your AI Setup, Learn from others",
-          "detail": "I kept seeing engineers share what they were building with AI; however, I was always more curious about how they worked. Which agents did they use? What skills and tools had stuck or been thrown out the window? How did they manage longer-running tasks? So I built this with the hope we could have a d",
-          "url": "https://mysetup.ai/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1790072186993,
-      "lastOk": 1790072186993,
+      "lastRun": 1790103867099,
+      "lastOk": 1790103867099,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.278",
+      "lastLine": "latest is anthropics/claude-code v2.1.280",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790095094000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.280",
+          "detail": "## What's changed\n\n- Added Claude Opus 5.5 (`claude-opus-5-5`), now the default Opus model — 1M context, $4/$20 per Mtok with $0.20/Mtok cache reads\n- Added mouse support to more lists in fullscreen mode: the wheel scrolls the `/skills` list, and a skill's state options in `/plugin` can be clicked\n- Added `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` to change the 2,048-character cap on MCP tool descri",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.280"
+        },
         {
           "t": 1789787440000,
           "level": "notable",
@@ -505,13 +512,6 @@
           "title": "anthropics/claude-code v2.1.270",
           "detail": "## What's changed\n\n- Fixed read-only git commands in Bash unexpectedly asking for permission after a session had been running for a while (regression in 2.1.269)\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
-        },
-        {
-          "t": 1789154275000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.269",
-          "detail": "## What's changed\n\n- Added `claude plugin eval`: run a plugin's eval suite against Claude Code and get scored, reproducible results (JSON + HTML report); see `claude plugin eval --help`\n- Added `/output-style [name]` to list and switch output styles, including over Remote Control and in cloud and other headless sessions\n- Added a diff of the files a Bash command changed to the Bash tool result whe",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
         },
         {
           "t": 1789787440000,
@@ -2765,6 +2765,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1790103867102,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 16
+    },
     {
       "t": 1790089712085,
       "ran": 2,

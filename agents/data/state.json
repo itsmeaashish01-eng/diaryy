@@ -2,14 +2,49 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790115806955,
-      "lastOk": 1790115806955,
+      "lastRun": 1790124796405,
+      "lastOk": 1790124796405,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "6 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790120767000,
+          "level": "notable",
+          "title": "The new CC, an AI agent built for families",
+          "detail": "Article URL: https://blog.google/innovation-and-ai/models-and-research/google-labs/cc-expanding-to-groups/ Comments URL: https://news.ycombinator.com/item?id=49809806 Points: 6 # Comments: 0",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/google-labs/cc-expanding-to-groups/"
+        },
+        {
+          "t": 1790100953000,
+          "level": "notable",
+          "title": "Unreal Agent",
+          "detail": "https://github.com/unreallabsai/unreal-agent Comments URL: https://news.ycombinator.com/item?id=49805748 Points: 119 # Comments: 72",
+          "url": "https://unreallabs.ai/blog/unreal-agent/"
+        },
+        {
+          "t": 1790097996000,
+          "level": "notable",
+          "title": "Launch HN: Coverage Cat (YC S22) – Umbrella insurance via your personal agent",
+          "detail": "Hey HN! We’re Max and Gabriel the co-founders of Coverage Cat. We’ve been friends for over a decade, met in college then hung out mostly on the internet. We love building products that help people optimize the crufty corners of their lives. Max is a former Google/Microsoft/Two Sigma PM and Gabriel h",
+          "url": "https://www.coveragecat.com/"
+        },
+        {
+          "t": 1790095891000,
+          "level": "notable",
+          "title": "Claude Opus 5.5 Intelligence, Performance and Price Analysis (Max)",
+          "detail": "Article URL: https://artificialanalysis.ai/models/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49804316 Points: 227 # Comments: 63",
+          "url": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        {
+          "t": 1790094545000,
+          "level": "notable",
+          "title": "Claude Opus 5.5",
+          "detail": "Article URL: https://www.anthropic.com/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49803892 Points: 1158 # Comments: 790",
+          "url": "https://www.anthropic.com/claude-opus-5-5"
+        },
         {
           "t": 1790109259000,
           "level": "notable",
@@ -394,41 +429,6 @@
           "title": "Plugin4Shell – Zero Click RCE Vulnerability found in top four coding agents",
           "detail": "Article URL: https://www.air.security/blog-posts/plugin4shell Comments URL: https://news.ycombinator.com/item?id=49745809 Points: 7 # Comments: 2",
           "url": "https://www.air.security/blog-posts/plugin4shell"
-        },
-        {
-          "t": 1789664114000,
-          "level": "notable",
-          "title": "Infinite-Parameter LLMs: Generating and Adapting Weights from Live Data",
-          "detail": "Article URL: https://arxiv.org/abs/2609.18842 Comments URL: https://news.ycombinator.com/item?id=49743483 Points: 107 # Comments: 30",
-          "url": "https://arxiv.org/abs/2609.18842"
-        },
-        {
-          "t": 1789662135000,
-          "level": "notable",
-          "title": "Launch HN: Skillsync (YC W26) – AI chat sessions made portable across agents",
-          "detail": "Hey HN, we're Nars & Nishant, founders of Skillsync (https://skillsync.com)Skillsync lets you move your AI chats across every coding agent. Most of our work exists as conversations, which are currently scattered across our agents. Though stored locally, these conversations use different formats. Thi",
-          "url": "https://news.ycombinator.com/item?id=49743049"
-        },
-        {
-          "t": 1789650104000,
-          "level": "notable",
-          "title": "Show HN: Share your AI Setup, Learn from others",
-          "detail": "I kept seeing engineers share what they were building with AI; however, I was always more curious about how they worked. Which agents did they use? What skills and tools had stuck or been thrown out the window? How did they manage longer-running tasks? So I built this with the hope we could have a d",
-          "url": "https://mysetup.ai/"
-        },
-        {
-          "t": 1789681718000,
-          "level": "notable",
-          "title": "How to Write with an LLM",
-          "detail": "Article URL: https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/ Comments URL: https://news.ycombinator.com/item?id=49747070 Points: 12 # Comments: 2",
-          "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/"
-        },
-        {
-          "t": 1789664114000,
-          "level": "notable",
-          "title": "Infinite-Parameter LLMs: Generating and Adapting Weights from Live Data",
-          "detail": "Article URL: https://arxiv.org/abs/2609.18842 Comments URL: https://news.ycombinator.com/item?id=49743483 Points: 90 # Comments: 26",
-          "url": "https://arxiv.org/abs/2609.18842"
         }
       ],
       "notifiedAt": {},
@@ -2788,6 +2788,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1790124796408,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 5
+    },
     {
       "t": 1790115807656,
       "ran": 5,

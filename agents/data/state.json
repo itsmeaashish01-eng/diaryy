@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790165080515,
-      "lastOk": 1790165080515,
+      "lastRun": 1790184316883,
+      "lastOk": 1790184316884,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790175946000,
+          "level": "notable",
+          "title": "Strands Harness",
+          "detail": "Article URL: https://strandsagents.com/blog/introducing-strands-harness/ Comments URL: https://news.ycombinator.com/item?id=49817289 Points: 82 # Comments: 55",
+          "url": "https://strandsagents.com/blog/introducing-strands-harness/"
+        },
+        {
+          "t": 1790165733000,
+          "level": "notable",
+          "title": "Claude Code reads AGENTS.md only when telemetry is on [fixed]",
+          "detail": "Article URL: https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/ Comments URL: https://news.ycombinator.com/item?id=49814947 Points: 365 # Comments: 201",
+          "url": "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/"
+        },
         {
           "t": 1790150354000,
           "level": "notable",
@@ -415,28 +429,14 @@
           "title": "The Implications of Linguistic Illegibility for LLM Security",
           "detail": "Article URL: https://arxiv.org/abs/2609.02852 Comments URL: https://news.ycombinator.com/item?id=49758689 Points: 12 # Comments: 3",
           "url": "https://arxiv.org/abs/2609.02852"
-        },
-        {
-          "t": 1789754912000,
-          "level": "notable",
-          "title": "Border agents can search cellphones without a warrant or reasonable suspicion",
-          "detail": "Article URL: https://lawandcrime.com/high-profile/the-government-was-entitled-trumps-border-agents-can-now-search-cellphones-without-a-warrant-probable-cause-or-reasonable-suspicion-2nd-circuit-rules/ Comments URL: https://news.ycombinator.com/item?id=49758028 Points: 56 # Comments: 29",
-          "url": "https://lawandcrime.com/high-profile/the-government-was-entitled-trumps-border-agents-can-now-search-cellphones-without-a-warrant-probable-cause-or-reasonable-suspicion-2nd-circuit-rules/"
-        },
-        {
-          "t": 1789743894000,
-          "level": "notable",
-          "title": "GrassLobster: AI Agentic Generation of Parametric Geometry Workflows",
-          "detail": "Article URL: https://www.miro.vision/index.php/2026/09/17/grasslobbster/ Comments URL: https://news.ycombinator.com/item?id=49755431 Points: 12 # Comments: 0",
-          "url": "https://www.miro.vision/index.php/2026/09/17/grasslobbster/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1790145342503,
-      "lastOk": 1790145342503,
+      "lastRun": 1790184317242,
+      "lastOk": 1790184317242,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.280",
@@ -584,6 +584,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
         },
         {
+          "t": 1790095094000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.280",
+          "detail": "## What's changed\n\n- Added Claude Opus 5.5 (`claude-opus-5-5`), now the default Opus model — 1M context, $4/$20 per Mtok with $0.20/Mtok cache reads\n- Added mouse support to more lists in fullscreen mode: the wheel scrolls the `/skills` list, and a skill's state options in `/plugin` can be clicked\n- Added `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` to change the 2,048-character cap on MCP tool descri",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.280"
+        },
+        {
           "t": 1789787440000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.278",
@@ -645,13 +652,6 @@
           "title": "anthropics/claude-code v2.1.270",
           "detail": "## What's changed\n\n- Fixed read-only git commands in Bash unexpectedly asking for permission after a session had been running for a while (regression in 2.1.269)\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
-        },
-        {
-          "t": 1789154275000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.269",
-          "detail": "## What's changed\n\n- Added `claude plugin eval`: run a plugin's eval suite against Claude Code and get scored, reproducible results (JSON + HTML report); see `claude plugin eval --help`\n- Added `/output-style [name]` to list and switch output styles, including over Remote Control and in cloud and other headless sessions\n- Added a diff of the files a Bash command changed to the Bash tool result whe",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
         },
         {
           "t": 1789787440000,
@@ -2172,11 +2172,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790165081263,
-      "lastOk": 1790165081263,
+      "lastRun": 1790184317976,
+      "lastOk": 1790184317976,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,280 (+78.3%) · excludes S&P 500 ETF",
+      "lastLine": "$4,204 (+75.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2382,9 +2382,27 @@
         {
           "t": 1790165081263,
           "v": 4279.5
+        },
+        {
+          "t": 1790184317976,
+          "v": 4204
         }
       ],
       "events": [
+        {
+          "t": 1790184317960,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790184317960,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790165081252,
           "level": "notable",
@@ -2790,31 +2808,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789540739387,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789540739387,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 85590
+          "BTC": 84080
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790184317976,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1790165081264,
       "ran": 5,

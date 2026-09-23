@@ -29,6 +29,21 @@
   "seeded": true,
   "alerts": [
     {
+      "id": "mudowody-chrunv",
+      "watchId": "seed-btc",
+      "watchLabel": "Bitcoin",
+      "kind": "crypto",
+      "ruleType": "risePct",
+      "ruleLabel": "Rises % above its recent average",
+      "severity": "warning",
+      "message": "Up 6.8% vs its recent average — now $86,523",
+      "price": 86523,
+      "currency": "USD",
+      "t": 1790142975862,
+      "read": false,
+      "kindLabel": "Crypto"
+    },
+    {
       "id": "mudd7opu-bfwumv",
       "watchId": "seed-demo",
       "watchLabel": "Demo fare — checks with no network needed",
@@ -798,14 +813,18 @@
         {
           "t": 1790123334104,
           "p": 86483
+        },
+        {
+          "t": 1790142975837,
+          "p": 86523
         }
       ],
-      "lastCheck": 1790123334104,
+      "lastCheck": 1790142975837,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
       "lastAlertAt": {
-        "risePct": 1790103097771
+        "risePct": 1790142975862
       },
       "cooldownMin": 360,
       "notes": "Live source, no API key. Checked automatically every hour."
@@ -1384,9 +1403,16 @@
           "meta": {
             "simulated": true
           }
+        },
+        {
+          "t": 1790142975864,
+          "p": 225.22,
+          "meta": {
+            "simulated": true
+          }
         }
       ],
-      "lastCheck": 1790123334114,
+      "lastCheck": 1790142975864,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,

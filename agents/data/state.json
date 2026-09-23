@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790124796405,
-      "lastOk": 1790124796405,
+      "lastRun": 1790145342149,
+      "lastOk": 1790145342149,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790100953000,
+          "level": "notable",
+          "title": "Unreal Agent",
+          "detail": "https://github.com/unreallabsai/unreal-agent Comments URL: https://news.ycombinator.com/item?id=49805748 Points: 161 # Comments: 94",
+          "url": "https://unreallabs.ai/blog/unreal-agent/"
+        },
+        {
+          "t": 1790095891000,
+          "level": "notable",
+          "title": "Claude Opus 5.5 Intelligence, Performance and Price Analysis (Max)",
+          "detail": "Article URL: https://artificialanalysis.ai/models/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49804316 Points: 269 # Comments: 80",
+          "url": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        {
+          "t": 1790094545000,
+          "level": "notable",
+          "title": "Claude Opus 5.5",
+          "detail": "Article URL: https://www.anthropic.com/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49803892 Points: 1414 # Comments: 895",
+          "url": "https://www.anthropic.com/claude-opus-5-5"
+        },
+        {
+          "t": 1790082063000,
+          "level": "notable",
+          "title": "Show HN: JevBench, a reproducible benchmark for typed decision models",
+          "detail": "Hi HN! I built JevBench because Jev kicks ass, and the world deserves to know how the serious open source and fake lookalike projects really perform in comparison.Jev-class models return bounded choices and probabilities instead of text, and are disruptively faster and cheaper than LLMs, while being",
+          "url": "https://benchmarkheaven.com/jev-models"
+        },
         {
           "t": 1790120767000,
           "level": "notable",
@@ -401,42 +429,14 @@
           "title": "ZCode, the GLM coding agent, silently uploads your Git history",
           "detail": "Article URL: https://tokenstead.ai/guides/zcode-silent-git-history-upload Comments URL: https://news.ycombinator.com/item?id=49752422 Points: 31 # Comments: 2",
           "url": "https://tokenstead.ai/guides/zcode-silent-git-history-upload"
-        },
-        {
-          "t": 1789681718000,
-          "level": "notable",
-          "title": "How to Write with an LLM",
-          "detail": "Article URL: https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/ Comments URL: https://news.ycombinator.com/item?id=49747070 Points: 190 # Comments: 120",
-          "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/"
-        },
-        {
-          "t": 1789681718000,
-          "level": "notable",
-          "title": "How to Write with an LLM",
-          "detail": "Article URL: https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/ Comments URL: https://news.ycombinator.com/item?id=49747070 Points: 98 # Comments: 69",
-          "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/"
-        },
-        {
-          "t": 1789664114000,
-          "level": "notable",
-          "title": "Infinite-Parameter LLMs: Generating and Adapting Weights from Live Data",
-          "detail": "Article URL: https://arxiv.org/abs/2609.18842 Comments URL: https://news.ycombinator.com/item?id=49743483 Points: 133 # Comments: 38",
-          "url": "https://arxiv.org/abs/2609.18842"
-        },
-        {
-          "t": 1789675531000,
-          "level": "notable",
-          "title": "Plugin4Shell – Zero Click RCE Vulnerability found in top four coding agents",
-          "detail": "Article URL: https://www.air.security/blog-posts/plugin4shell Comments URL: https://news.ycombinator.com/item?id=49745809 Points: 7 # Comments: 2",
-          "url": "https://www.air.security/blog-posts/plugin4shell"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1790103867099,
-      "lastOk": 1790103867099,
+      "lastRun": 1790145342503,
+      "lastOk": 1790145342503,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.280",
@@ -514,6 +514,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
         },
         {
+          "t": 1790095094000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.280",
+          "detail": "## What's changed\n\n- Added Claude Opus 5.5 (`claude-opus-5-5`), now the default Opus model — 1M context, $4/$20 per Mtok with $0.20/Mtok cache reads\n- Added mouse support to more lists in fullscreen mode: the wheel scrolls the `/skills` list, and a skill's state options in `/plugin` can be clicked\n- Added `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` to change the 2,048-character cap on MCP tool descri",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.280"
+        },
+        {
           "t": 1789787440000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.278",
@@ -575,13 +582,6 @@
           "title": "anthropics/claude-code v2.1.270",
           "detail": "## What's changed\n\n- Fixed read-only git commands in Bash unexpectedly asking for permission after a session had been running for a while (regression in 2.1.269)\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
-        },
-        {
-          "t": 1789154275000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.269",
-          "detail": "## What's changed\n\n- Added `claude plugin eval`: run a plugin's eval suite against Claude Code and get scored, reproducible results (JSON + HTML report); see `claude plugin eval --help`\n- Added `/output-style [name]` to list and switch output styles, including over Remote Control and in cloud and other headless sessions\n- Added a diff of the files a Bash command changed to the Bash tool result whe",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
         },
         {
           "t": 1789787440000,
@@ -2153,11 +2153,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790115807656,
-      "lastOk": 1790115807656,
+      "lastRun": 1790145343055,
+      "lastOk": 1790145343055,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,309 (+79.5%) · excludes S&P 500 ETF",
+      "lastLine": "$4,321 (+80.1%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2355,9 +2355,27 @@
         {
           "t": 1790115807656,
           "v": 4309
+        },
+        {
+          "t": 1790145343055,
+          "v": 4321.45
         }
       ],
       "events": [
+        {
+          "t": 1790145343041,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790145343041,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790115807645,
           "level": "notable",
@@ -2763,31 +2781,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789496786183,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789496786183,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 86180
+          "BTC": 86429
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790145343056,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 16
+    },
     {
       "t": 1790124796408,
       "ran": 1,

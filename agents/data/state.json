@@ -2,14 +2,49 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790184316883,
-      "lastOk": 1790184316884,
+      "lastRun": 1790195963801,
+      "lastOk": 1790195963801,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790191420000,
+          "level": "notable",
+          "title": "How we made claude.ai 3x faster in two weeks",
+          "detail": "Article URL: https://claude.dev/blog/how-we-made-claude-ai-faster/ Comments URL: https://news.ycombinator.com/item?id=49821196 Points: 69 # Comments: 35",
+          "url": "https://claude.dev/blog/how-we-made-claude-ai-faster/"
+        },
+        {
+          "t": 1790187401000,
+          "level": "notable",
+          "title": "Cloud Agents Are Inevitable AI Prisons",
+          "detail": "Article URL: https://normanponte.io/19df691f Comments URL: https://news.ycombinator.com/item?id=49820267 Points: 40 # Comments: 34",
+          "url": "https://normanponte.io/19df691f"
+        },
+        {
+          "t": 1790186807000,
+          "level": "notable",
+          "title": "Claude discovers a novel enzyme system with CRISPR-like repeats",
+          "detail": "Article URL: https://www.anthropic.com/news/claude-discovers-novel-enzyme-system Comments URL: https://news.ycombinator.com/item?id=49820134 Points: 225 # Comments: 222",
+          "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
+        },
+        {
+          "t": 1790175946000,
+          "level": "notable",
+          "title": "Strands Harness",
+          "detail": "Article URL: https://strandsagents.com/blog/introducing-strands-harness/ Comments URL: https://news.ycombinator.com/item?id=49817289 Points: 115 # Comments: 84",
+          "url": "https://strandsagents.com/blog/introducing-strands-harness/"
+        },
+        {
+          "t": 1790165733000,
+          "level": "notable",
+          "title": "Claude Code reads AGENTS.md only when telemetry is on [fixed]",
+          "detail": "Article URL: https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/ Comments URL: https://news.ycombinator.com/item?id=49814947 Points: 416 # Comments: 235",
+          "url": "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/"
+        },
         {
           "t": 1790175946000,
           "level": "notable",
@@ -394,41 +429,6 @@
           "title": "Cache-to-Cache: Direct Semantic Communication Between LLMs (2025)",
           "detail": "Article URL: https://arxiv.org/abs/2510.03215 Comments URL: https://news.ycombinator.com/item?id=49758615 Points: 66 # Comments: 12",
           "url": "https://arxiv.org/abs/2510.03215"
-        },
-        {
-          "t": 1789765232000,
-          "level": "notable",
-          "title": "Claude Code now reads AGENTS.md if there is no Claude.md",
-          "detail": "Article URL: https://code.claude.com/docs/en/changelog Comments URL: https://news.ycombinator.com/item?id=49760187 Points: 239 # Comments: 94",
-          "url": "https://code.claude.com/docs/en/changelog"
-        },
-        {
-          "t": 1789758006000,
-          "level": "notable",
-          "title": "The Implications of Linguistic Illegibility for LLM Security",
-          "detail": "Article URL: https://arxiv.org/abs/2609.02852 Comments URL: https://news.ycombinator.com/item?id=49758689 Points: 38 # Comments: 14",
-          "url": "https://arxiv.org/abs/2609.02852"
-        },
-        {
-          "t": 1789757735000,
-          "level": "notable",
-          "title": "Cache-to-Cache: Direct Semantic Communication Between LLMs (2025)",
-          "detail": "Article URL: https://arxiv.org/abs/2510.03215 Comments URL: https://news.ycombinator.com/item?id=49758615 Points: 52 # Comments: 10",
-          "url": "https://arxiv.org/abs/2510.03215"
-        },
-        {
-          "t": 1789754912000,
-          "level": "notable",
-          "title": "Border agents can search cellphones without a warrant or reasonable suspicion",
-          "detail": "Article URL: https://lawandcrime.com/high-profile/the-government-was-entitled-trumps-border-agents-can-now-search-cellphones-without-a-warrant-probable-cause-or-reasonable-suspicion-2nd-circuit-rules/ Comments URL: https://news.ycombinator.com/item?id=49758028 Points: 164 # Comments: 124",
-          "url": "https://lawandcrime.com/high-profile/the-government-was-entitled-trumps-border-agents-can-now-search-cellphones-without-a-warrant-probable-cause-or-reasonable-suspicion-2nd-circuit-rules/"
-        },
-        {
-          "t": 1789758006000,
-          "level": "notable",
-          "title": "The Implications of Linguistic Illegibility for LLM Security",
-          "detail": "Article URL: https://arxiv.org/abs/2609.02852 Comments URL: https://news.ycombinator.com/item?id=49758689 Points: 12 # Comments: 3",
-          "url": "https://arxiv.org/abs/2609.02852"
         }
       ],
       "notifiedAt": {},
@@ -2819,6 +2819,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1790195963807,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 5
+    },
     {
       "t": 1790184317976,
       "ran": 3,

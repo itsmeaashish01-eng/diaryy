@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790245691213,
-      "lastOk": 1790245691213,
+      "lastRun": 1790263703198,
+      "lastOk": 1790263703198,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "6 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790258997000,
+          "level": "notable",
+          "title": "Best LLM for every budget, updated daily",
+          "detail": "Article URL: https://bestmodelforyourbudget.terrydjony.com/ Comments URL: https://news.ycombinator.com/item?id=49830866 Points: 72 # Comments: 39",
+          "url": "https://bestmodelforyourbudget.terrydjony.com/"
+        },
+        {
+          "t": 1790227270000,
+          "level": "notable",
+          "title": "Early rogue AI agent activity and attempts to hack found on urlquery.net",
+          "detail": "Article URL: https://transluce.org/agent-activity Comments URL: https://news.ycombinator.com/item?id=49826565 Points: 196 # Comments: 178",
+          "url": "https://transluce.org/agent-activity"
+        },
+        {
+          "t": 1790217888000,
+          "level": "notable",
+          "title": "OpenAI agent hacked Australian government website, PM says",
+          "detail": "Article URL: https://www.bbc.com/news/live/cvgl73pxgndwt Comments URL: https://news.ycombinator.com/item?id=49825580 Points: 218 # Comments: 139",
+          "url": "https://www.bbc.com/news/live/cvgl73pxgndwt"
+        },
+        {
+          "t": 1790203096000,
+          "level": "notable",
+          "title": "Linux support is coming to Snapdragon X2 Series",
+          "detail": "Article URL: https://www.qualcomm.com/news/onq/2026/09/snapdragon-summit-agentic-ai-pcs-linux Comments URL: https://news.ycombinator.com/item?id=49823582 Points: 544 # Comments: 224",
+          "url": "https://www.qualcomm.com/news/onq/2026/09/snapdragon-summit-agentic-ai-pcs-linux"
+        },
         {
           "t": 1790227270000,
           "level": "notable",
@@ -401,34 +429,6 @@
           "title": "AX – Google’s Open Agentic Orchestrator",
           "detail": "Article URL: https://agentexecutor.io Comments URL: https://news.ycombinator.com/item?id=49780797 Points: 341 # Comments: 132",
           "url": "https://agentexecutor.io"
-        },
-        {
-          "t": 1789917367000,
-          "level": "notable",
-          "title": "Pirate Face Rescues LLM Models from Deletion",
-          "detail": "Article URL: https://pirateface.co/ Comments URL: https://news.ycombinator.com/item?id=49776699 Points: 494 # Comments: 143",
-          "url": "https://pirateface.co/"
-        },
-        {
-          "t": 1789943563000,
-          "level": "notable",
-          "title": "Google's Open Agentic Orchestrator",
-          "detail": "Article URL: https://agentexecutor.io Comments URL: https://news.ycombinator.com/item?id=49780797 Points: 104 # Comments: 40",
-          "url": "https://agentexecutor.io"
-        },
-        {
-          "t": 1789917367000,
-          "level": "notable",
-          "title": "Pirate Face Rescues LLM Models from Deletion",
-          "detail": "Article URL: https://pirateface.co/ Comments URL: https://news.ycombinator.com/item?id=49776699 Points: 356 # Comments: 116",
-          "url": "https://pirateface.co/"
-        },
-        {
-          "t": 1789917367000,
-          "level": "notable",
-          "title": "Pirate Face Rescues LLM Models from Deletion",
-          "detail": "Article URL: https://pirateface.co/ Comments URL: https://news.ycombinator.com/item?id=49776699 Points: 257 # Comments: 98",
-          "url": "https://pirateface.co/"
         }
       ],
       "notifiedAt": {},
@@ -2191,11 +2191,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790245692400,
-      "lastOk": 1790245692400,
+      "lastRun": 1790263704026,
+      "lastOk": 1790263704026,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,162 (+73.4%) · excludes S&P 500 ETF",
+      "lastLine": "$4,207 (+75.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2417,9 +2417,27 @@
         {
           "t": 1790245692400,
           "v": 4161.8
+        },
+        {
+          "t": 1790263704026,
+          "v": 4206.55
         }
       ],
       "events": [
+        {
+          "t": 1790263704012,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790263704012,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790245692386,
           "level": "notable",
@@ -2825,31 +2843,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789613315053,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789613315053,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 83236
+          "BTC": 84131
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790263704027,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 6
+    },
     {
       "t": 1790245692401,
       "ran": 3,

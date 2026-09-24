@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790278098336,
-      "lastOk": 1790278098336,
+      "lastRun": 1790289738924,
+      "lastOk": 1790289738924,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790277267000,
+          "level": "notable",
+          "title": "Using LLMs to trace alchemical knowledge and decode 17th century letters",
+          "detail": "Article URL: https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical Comments URL: https://news.ycombinator.com/item?id=49835531 Points: 44 # Comments: 8",
+          "url": "https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical"
+        },
+        {
+          "t": 1790271328000,
+          "level": "notable",
+          "title": "Show HN: Critic – Review code with the agent that wrote it",
+          "detail": "Hey HN, I'm Shreyash from Feyn. We help companies build custom models from their data. Today we're releasing Critic, a change review platform that lets you engage directly with the AI that wrote the code.Agents write most of our code. While that has made us more productive, understanding a change an",
+          "url": "https://www.critic.run/"
+        },
+        {
+          "t": 1790270496000,
+          "level": "notable",
+          "title": "Show HN: Whiteboard (YC W26) – An open-source IDE for thoughtful software design",
+          "detail": "Hello! We’re Sid, Alex, Ketan, and Milan. We’re building Whiteboard (https://whiteboard.dev.fast/), an open-source desktop app where humans and agents can architect software together in a common workspace. Here’s our repo: https://github.com/devdotfast/whiteboard.We were missing the feeling of a “wh",
+          "url": "https://github.com/devdotfast/whiteboard"
+        },
+        {
+          "t": 1790227270000,
+          "level": "notable",
+          "title": "Early rogue AI agent activity and attempts to hack found on urlquery.net",
+          "detail": "Article URL: https://transluce.org/agent-activity Comments URL: https://news.ycombinator.com/item?id=49826565 Points: 228 # Comments: 209",
+          "url": "https://transluce.org/agent-activity"
+        },
         {
           "t": 1790270496000,
           "level": "notable",
@@ -401,34 +429,6 @@
           "title": "Claude Status – Elevated errors for multiple models",
           "detail": "Article URL: https://status.claude.com/incidents/7g1qpkyz5gxh Comments URL: https://news.ycombinator.com/item?id=49795579 Points: 85 # Comments: 64",
           "url": "https://status.claude.com/incidents/7g1qpkyz5gxh"
-        },
-        {
-          "t": 1790007726000,
-          "level": "notable",
-          "title": "Show HN: Foremerge – Catch intent conflicts between parallel coding agents",
-          "detail": "At, GPTree, we run several coding agents across our team on one repo using parallel worktrees. Apart from wasted time reviewing and fixing conflicts at PR time, the failures that hurt the most are when multiple plans or tickets cause architecture changes that cannot both be true. Ex. one agent repla",
-          "url": "https://github.com/naw103/foremerge"
-        },
-        {
-          "t": 1790007726000,
-          "level": "notable",
-          "title": "Show HN: Foremerge – Catch intent conflicts between parallel coding agents",
-          "detail": "At, GPTree, we run several coding agents across our team on one repo using parallel worktrees. Apart from wasted time reviewing and fixing conflicts at PR time, the failures that hurt the most are when multiple plans or tickets cause architecture changes that cannot both be true. Ex. one agent repla",
-          "url": "https://github.com/naw103/foremerge"
-        },
-        {
-          "t": 1790007726000,
-          "level": "notable",
-          "title": "Show HN: Foremerge – Catch Intent Conflicts Between Parallel Coding Agents",
-          "detail": "At, GPTree, we run several coding agents across our team on one repo using parallel worktrees. Apart from wasted time reviewing and fixing conflicts at PR time, the failures that hurt the most are when multiple plans or tickets cause architecture changes that cannot both be true. Ex. one agent repla",
-          "url": "https://github.com/naw103/foremerge"
-        },
-        {
-          "t": 1789998807000,
-          "level": "notable",
-          "title": "M5 Ultra Mac Studio Review",
-          "detail": "Article URL: https://www.macstories.net/stories/m5-ultra-mac-studio-review-the-dream-mac-for-local-ai-agents/ Comments URL: https://news.ycombinator.com/item?id=49787313 Points: 124 # Comments: 94",
-          "url": "https://www.macstories.net/stories/m5-ultra-mac-studio-review-the-dream-mac-for-local-ai-agents/"
         }
       ],
       "notifiedAt": {},
@@ -2210,11 +2210,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790263704026,
-      "lastOk": 1790263704026,
+      "lastRun": 1790289739813,
+      "lastOk": 1790289739813,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,207 (+75.3%) · excludes S&P 500 ETF",
+      "lastLine": "$4,203 (+75.1%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2440,9 +2440,27 @@
         {
           "t": 1790263704026,
           "v": 4206.55
+        },
+        {
+          "t": 1790289739814,
+          "v": 4202.85
         }
       ],
       "events": [
+        {
+          "t": 1790289739805,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790289739805,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790263704012,
           "level": "notable",
@@ -2848,31 +2866,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789646534963,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789646534963,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 84131
+          "BTC": 84057
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790289739814,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 6
+    },
     {
       "t": 1790278098739,
       "ran": 5,

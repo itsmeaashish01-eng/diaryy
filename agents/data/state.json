@@ -2,14 +2,56 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790207697558,
-      "lastOk": 1790207697558,
+      "lastRun": 1790227018309,
+      "lastOk": 1790227018309,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "6 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790213040000,
+          "level": "notable",
+          "title": "Australia says OpenAI agent hacked into government website",
+          "detail": "Article URL: https://www.channelnewsasia.com/world/australia-openai-agent-breach-government-portal-6406411 Comments URL: https://news.ycombinator.com/item?id=49825024 Points: 73 # Comments: 54",
+          "url": "https://www.channelnewsasia.com/world/australia-openai-agent-breach-government-portal-6406411"
+        },
+        {
+          "t": 1790210491000,
+          "level": "notable",
+          "title": "Feds Target AI Critics as \"Foreign Agents\"",
+          "detail": "Article URL: https://www.kenklippenstein.com/p/feds-think-ai-critics-are-foreign Comments URL: https://news.ycombinator.com/item?id=49824686 Points: 165 # Comments: 150",
+          "url": "https://www.kenklippenstein.com/p/feds-think-ai-critics-are-foreign"
+        },
+        {
+          "t": 1790203096000,
+          "level": "notable",
+          "title": "Linux support is coming to Snapdragon X2 Series",
+          "detail": "Article URL: https://www.qualcomm.com/news/onq/2026/09/snapdragon-summit-agentic-ai-pcs-linux Comments URL: https://news.ycombinator.com/item?id=49823582 Points: 261 # Comments: 124",
+          "url": "https://www.qualcomm.com/news/onq/2026/09/snapdragon-summit-agentic-ai-pcs-linux"
+        },
+        {
+          "t": 1790201779000,
+          "level": "notable",
+          "title": "Mercury 2.5 LLM hits 770 tokens per second",
+          "detail": "Article URL: https://artificialanalysis.ai/models/mercury-2-5 Comments URL: https://news.ycombinator.com/item?id=49823348 Points: 79 # Comments: 49",
+          "url": "https://artificialanalysis.ai/models/mercury-2-5"
+        },
+        {
+          "t": 1790197308000,
+          "level": "notable",
+          "title": "VSCode's SSH Agent Is Bananas (2025)",
+          "detail": "Article URL: https://fly.io/blog/vscode-ssh-wtf/ Comments URL: https://news.ycombinator.com/item?id=49822555 Points: 168 # Comments: 110",
+          "url": "https://fly.io/blog/vscode-ssh-wtf/"
+        },
+        {
+          "t": 1790186807000,
+          "level": "notable",
+          "title": "Claude discovers a novel enzyme system with CRISPR-like repeats",
+          "detail": "Article URL: https://www.anthropic.com/news/claude-discovers-novel-enzyme-system Comments URL: https://news.ycombinator.com/item?id=49820134 Points: 572 # Comments: 588",
+          "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
+        },
         {
           "t": 1790203096000,
           "level": "notable",
@@ -387,48 +429,6 @@
           "title": "How to Write with an LLM",
           "detail": "Article URL: https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/ Comments URL: https://news.ycombinator.com/item?id=49747070 Points: 572 # Comments: 364",
           "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/"
-        },
-        {
-          "t": 1789772657000,
-          "level": "notable",
-          "title": "How OpenAI Used Its Own LLMs to Design Its Jalapeño Chip",
-          "detail": "Article URL: https://spectrum.ieee.org/llms-for-chip-design Comments URL: https://news.ycombinator.com/item?id=49761432 Points: 161 # Comments: 110",
-          "url": "https://spectrum.ieee.org/llms-for-chip-design"
-        },
-        {
-          "t": 1789681718000,
-          "level": "notable",
-          "title": "How to Write with an LLM",
-          "detail": "Article URL: https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/ Comments URL: https://news.ycombinator.com/item?id=49747070 Points: 536 # Comments: 355",
-          "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/"
-        },
-        {
-          "t": 1789772657000,
-          "level": "notable",
-          "title": "How OpenAI Used Its Own LLMs to Design Its Jalapeño Chip",
-          "detail": "Article URL: https://spectrum.ieee.org/llms-for-chip-design Comments URL: https://news.ycombinator.com/item?id=49761432 Points: 130 # Comments: 92",
-          "url": "https://spectrum.ieee.org/llms-for-chip-design"
-        },
-        {
-          "t": 1789757735000,
-          "level": "notable",
-          "title": "Cache-to-Cache: Direct Semantic Communication Between LLMs (2025)",
-          "detail": "Article URL: https://arxiv.org/abs/2510.03215 Comments URL: https://news.ycombinator.com/item?id=49758615 Points: 93 # Comments: 13",
-          "url": "https://arxiv.org/abs/2510.03215"
-        },
-        {
-          "t": 1789772657000,
-          "level": "notable",
-          "title": "How OpenAI Used Its Own LLMs to Design Its Jalapeño Chip",
-          "detail": "Article URL: https://spectrum.ieee.org/llms-for-chip-design Comments URL: https://news.ycombinator.com/item?id=49761432 Points: 102 # Comments: 75",
-          "url": "https://spectrum.ieee.org/llms-for-chip-design"
-        },
-        {
-          "t": 1789765232000,
-          "level": "notable",
-          "title": "Claude Code now reads AGENTS.md if there is no Claude.md",
-          "detail": "Article URL: https://code.claude.com/docs/en/changelog Comments URL: https://news.ycombinator.com/item?id=49760187 Points: 611 # Comments: 218",
-          "url": "https://code.claude.com/docs/en/changelog"
         }
       ],
       "notifiedAt": {},
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1790165080518,
-      "lastOk": 1790165080518,
+      "lastRun": 1790227018313,
+      "lastOk": 1790227018313,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 2 drifting",
@@ -966,9 +966,48 @@
         {
           "t": 1790165080518,
           "v": 17
+        },
+        {
+          "t": 1790227018313,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1790227018312,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 52 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1790227018313,
+          "level": "notable",
+          "title": "Finish fellowship strong hasn't moved in 23 days",
+          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1790227018313,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1790227018313,
+          "level": "notable",
+          "title": "Data collection complete — 82 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1790227018313,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 35 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1790165080517,
           "level": "notable",
@@ -1353,51 +1392,16 @@
           "title": "First-author paper submitted hasn't moved in 28 days",
           "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
           "url": ""
-        },
-        {
-          "t": 1789562864138,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 60 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1789562864138,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
-        },
-        {
-          "t": 1789562864138,
-          "level": "notable",
-          "title": "Data collection complete — 90 days left",
-          "detail": "First-author paper submitted, due 2026-12-15.",
-          "url": ""
-        },
-        {
-          "t": 1789562864138,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 27 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1789508541570,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 61 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
-        "checkedOn": "2026-09-23"
+        "checkedOn": "2026-09-24"
       }
     },
     "reading": {
-      "lastRun": 1790165080519,
-      "lastOk": 1790165080519,
+      "lastRun": 1790227018315,
+      "lastOk": 1790227018315,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1494,9 +1498,34 @@
         {
           "t": 1790165080519,
           "v": 3
+        },
+        {
+          "t": 1790227018315,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1790227018315,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1790227018315,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 54 days",
+          "url": ""
+        },
+        {
+          "t": 1790227018315,
+          "level": "notable",
+          "title": "Still unread after 146 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1790165080519,
           "level": "notable",
@@ -1895,27 +1924,6 @@
           "title": "Still unread after 135 days — A book that has nothing to do with work",
           "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
           "url": ""
-        },
-        {
-          "t": 1789258384581,
-          "level": "notable",
-          "title": "Read next — Survival analysis, properly this time",
-          "detail": "about 45 min · research methods · already started",
-          "url": ""
-        },
-        {
-          "t": 1789258384581,
-          "level": "notable",
-          "title": "Read next — Current society guideline — read the update in full, not the summary",
-          "detail": "about 60 min · core · on the list 43 days",
-          "url": ""
-        },
-        {
-          "t": 1789258384581,
-          "level": "notable",
-          "title": "Still unread after 135 days — A book that has nothing to do with work",
-          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -1924,8 +1932,8 @@
       }
     },
     "training": {
-      "lastRun": 1790165080520,
-      "lastOk": 1790165080520,
+      "lastRun": 1790227018316,
+      "lastOk": 1790227018316,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
@@ -2022,9 +2030,20 @@
         {
           "t": 1790165080520,
           "v": 0
+        },
+        {
+          "t": 1790227018316,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1790227018316,
+          "level": "notable",
+          "title": "15 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1790165080520,
           "level": "notable",
@@ -2172,11 +2191,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790207698385,
-      "lastOk": 1790207698385,
+      "lastRun": 1790227018975,
+      "lastOk": 1790227018975,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,218 (+75.8%) · excludes S&P 500 ETF",
+      "lastLine": "$4,210 (+75.4%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2390,9 +2409,27 @@
         {
           "t": 1790207698385,
           "v": 4218.3
+        },
+        {
+          "t": 1790227018975,
+          "v": 4210.35
         }
       ],
       "events": [
+        {
+          "t": 1790227018961,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790227018961,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790207698371,
           "level": "notable",
@@ -2798,31 +2835,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789580595960,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789580595960,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 84366
+          "BTC": 84207
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790227018975,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 17
+    },
     {
       "t": 1790207698385,
       "ran": 3,

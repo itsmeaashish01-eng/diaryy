@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790362231327,
-      "lastOk": 1790362231327,
+      "lastRun": 1790376263643,
+      "lastOk": 1790376263643,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790370567000,
+          "level": "notable",
+          "title": "Revealing the details of how OpenAI agents hacked Hugging Face",
+          "detail": "Article URL: https://swarmtraces.org/ Comments URL: https://news.ycombinator.com/item?id=49849985 Points: 54 # Comments: 23",
+          "url": "https://swarmtraces.org/"
+        },
+        {
+          "t": 1790361425000,
+          "level": "notable",
+          "title": "Alan Kay: Shannon gave us a way of dealing with noisy channels [video]",
+          "detail": "The following explanation is taken from https://news.ycombinator.com/item?id=49622607:Alan Kay performs an improvisational avant garde layered audio feedback loop about Claude Shannon, live online during Kristen Nygaard's 100-year birthday celebration.Alan was scheduled to talk about how encounterin",
+          "url": "https://www.youtube.com/watch?v=Cjntrqhn8pk"
+        },
+        {
+          "t": 1790350165000,
+          "level": "notable",
+          "title": "U.S. appeals court upholds designation of Anthropic as supply chain risk",
+          "detail": "Article URL: https://www.cnbc.com/2026/09/25/pentagon-anthropic-ai-risk-appeals-court.html Comments URL: https://news.ycombinator.com/item?id=49845977 Points: 337 # Comments: 604",
+          "url": "https://www.cnbc.com/2026/09/25/pentagon-anthropic-ai-risk-appeals-court.html"
+        },
         {
           "t": 1790359908000,
           "level": "notable",
@@ -408,27 +429,6 @@
           "title": "LLM Ass Bench",
           "detail": "Article URL: https://www.assbench.com/ Comments URL: https://news.ycombinator.com/item?id=49807688 Points: 98 # Comments: 30",
           "url": "https://www.assbench.com/"
-        },
-        {
-          "t": 1790100953000,
-          "level": "notable",
-          "title": "Unreal Agent",
-          "detail": "https://github.com/unreallabsai/unreal-agent Comments URL: https://news.ycombinator.com/item?id=49805748 Points: 82 # Comments: 53",
-          "url": "https://unreallabs.ai/blog/unreal-agent/"
-        },
-        {
-          "t": 1790097996000,
-          "level": "notable",
-          "title": "Launch HN: Coverage Cat (YC S22) – Umbrella insurance via your personal agent",
-          "detail": "Hey HN! We’re Max and Gabriel the co-founders of Coverage Cat. We’ve been friends for over a decade, met in college then hung out mostly on the internet. We love building products that help people optimize the crufty corners of their lives. Max is a former Google/Microsoft/Two Sigma PM and Gabriel h",
-          "url": "https://www.coveragecat.com/"
-        },
-        {
-          "t": 1790095891000,
-          "level": "notable",
-          "title": "Claude Opus 5.5 Intelligence, Performance and Price Analysis (Max)",
-          "detail": "Article URL: https://artificialanalysis.ai/models/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49804316 Points: 192 # Comments: 52",
-          "url": "https://artificialanalysis.ai/models/claude-opus-5-5"
         }
       ],
       "notifiedAt": {},
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1790323697912,
-      "lastOk": 1790323697912,
+      "lastRun": 1790376263645,
+      "lastOk": 1790376263645,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 2 drifting",
@@ -978,9 +978,48 @@
         {
           "t": 1790323697913,
           "v": 17
+        },
+        {
+          "t": 1790376263645,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1790376263645,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 51 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1790376263645,
+          "level": "notable",
+          "title": "Finish fellowship strong hasn't moved in 24 days",
+          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1790376263645,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1790376263645,
+          "level": "notable",
+          "title": "Data collection complete — 81 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1790376263645,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 36 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1790323697912,
           "level": "notable",
@@ -1365,41 +1404,6 @@
           "title": "Present at the departmental meeting — 58 days left",
           "detail": "Finish fellowship strong, due 2026-11-15.",
           "url": ""
-        },
-        {
-          "t": 1789713222042,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
-        },
-        {
-          "t": 1789713222042,
-          "level": "notable",
-          "title": "Data collection complete — 88 days left",
-          "detail": "First-author paper submitted, due 2026-12-15.",
-          "url": ""
-        },
-        {
-          "t": 1789713222042,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 29 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1789665238353,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 59 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1789665238353,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -1408,8 +1412,8 @@
       }
     },
     "reading": {
-      "lastRun": 1790323697914,
-      "lastOk": 1790323697914,
+      "lastRun": 1790376263646,
+      "lastOk": 1790376263646,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1518,9 +1522,34 @@
         {
           "t": 1790323697914,
           "v": 3
+        },
+        {
+          "t": 1790376263646,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1790376263646,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1790376263646,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 55 days",
+          "url": ""
+        },
+        {
+          "t": 1790376263646,
+          "level": "notable",
+          "title": "Still unread after 147 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1790323697914,
           "level": "notable",
@@ -1919,27 +1948,6 @@
           "title": "Still unread after 137 days — A book that has nothing to do with work",
           "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
           "url": ""
-        },
-        {
-          "t": 1789414427942,
-          "level": "notable",
-          "title": "Read next — Survival analysis, properly this time",
-          "detail": "about 45 min · research methods · already started",
-          "url": ""
-        },
-        {
-          "t": 1789414427942,
-          "level": "notable",
-          "title": "Read next — Current society guideline — read the update in full, not the summary",
-          "detail": "about 60 min · core · on the list 44 days",
-          "url": ""
-        },
-        {
-          "t": 1789414427942,
-          "level": "notable",
-          "title": "Still unread after 136 days — A book that has nothing to do with work",
-          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -1948,11 +1956,11 @@
       }
     },
     "training": {
-      "lastRun": 1790323697915,
-      "lastOk": 1790323697915,
+      "lastRun": 1790376263647,
+      "lastOk": 1790376263647,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0/4 this week · 0 min · last 4w: run 3, gym 2, swim 1",
+      "lastLine": "0/4 this week · 0 min · last 4w: gym 2, run 2, swim 1",
       "seen": [],
       "metrics": [
         {
@@ -2058,9 +2066,20 @@
         {
           "t": 1790323697915,
           "v": 0
+        },
+        {
+          "t": 1790376263647,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1790376263647,
+          "level": "notable",
+          "title": "16 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1790323697915,
           "level": "notable",
@@ -2908,6 +2927,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1790376263650,
+      "ran": 4,
+      "skipped": 6,
+      "failed": 0,
+      "notified": 0,
+      "held": 12
+    },
     {
       "t": 1790362232699,
       "ran": 3,

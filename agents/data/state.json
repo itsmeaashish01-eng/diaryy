@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790323697495,
-      "lastOk": 1790323697495,
+      "lastRun": 1790345254181,
+      "lastOk": 1790345254181,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790332378000,
+          "level": "notable",
+          "title": "Show HN: Agentic CUDA Kernel Optimizer",
+          "detail": "Hello; I was working on optimizing some CUDA kernels and I thought may be it is a good oppurtunity learn langgraph as well. I created a simple C++ CUDA Test Harness and handed that to AI agents. They can run kernels, get benchmarks, and even can profile via nsight Comments URL: https://news.ycombina",
+          "url": "https://github.com/bertaye/agentic-cuda-optimizer"
+        },
+        {
+          "t": 1790277267000,
+          "level": "notable",
+          "title": "Using LLMs to trace alchemical knowledge and decode 17th century letters",
+          "detail": "Article URL: https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical Comments URL: https://news.ycombinator.com/item?id=49835531 Points: 146 # Comments: 31",
+          "url": "https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical"
+        },
         {
           "t": 1790277267000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Launch HN: Coverage Cat (YC S22) – Umbrella insurance via your personal agent",
           "detail": "Hey HN! We’re Max and Gabriel the co-founders of Coverage Cat. We’ve been friends for over a decade, met in college then hung out mostly on the internet. We love building products that help people optimize the crufty corners of their lives. Max is a former Google/Microsoft/Two Sigma PM and Gabriel h",
           "url": "https://www.coveragecat.com/"
-        },
-        {
-          "t": 1790095891000,
-          "level": "notable",
-          "title": "Claude Opus 5.5 Intelligence, Performance and Price Analysis (Max)",
-          "detail": "Article URL: https://artificialanalysis.ai/models/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49804316 Points: 87 # Comments: 33",
-          "url": "https://artificialanalysis.ai/models/claude-opus-5-5"
-        },
-        {
-          "t": 1790094545000,
-          "level": "notable",
-          "title": "Claude Opus 5.5",
-          "detail": "Article URL: https://www.anthropic.com/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49803892 Points: 583 # Comments: 531",
-          "url": "https://www.anthropic.com/claude-opus-5-5"
         }
       ],
       "notifiedAt": {},
@@ -2229,11 +2229,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790323698708,
-      "lastOk": 1790323698708,
+      "lastRun": 1790345254957,
+      "lastOk": 1790345254957,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,205 (+75.2%) · excludes S&P 500 ETF",
+      "lastLine": "$4,162 (+73.4%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2467,9 +2467,27 @@
         {
           "t": 1790323698708,
           "v": 4205.4
+        },
+        {
+          "t": 1790345254957,
+          "v": 4161.5
         }
       ],
       "events": [
+        {
+          "t": 1790345254947,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790345254948,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790323698693,
           "level": "notable",
@@ -2875,31 +2893,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789686151782,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789686151783,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 84108
+          "BTC": 83230
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790345254957,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1790323698708,
       "ran": 6,

@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790453181747,
-      "lastOk": 1790453181747,
+      "lastRun": 1790464047125,
+      "lastOk": 1790464047125,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "6 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790442640000,
+          "level": "notable",
+          "title": "Show HN: Reladraw – A diagram language where you decide where to place things",
+          "detail": "I love making diagrams to help understand, plan, etc. However, the options are (A) auto-placement languages like Mermaid or Graphviz (which don't let me decide how the diagram looks), or (B) software like Draw.io which are powerful but are very time consuming (and inefficient for agents to manipulat",
+          "url": "https://github.com/reladraw/reladraw"
+        },
+        {
+          "t": 1790438194000,
+          "level": "notable",
+          "title": "Drawgent: Coding agent on a live Excalidraw canvas",
+          "detail": "Article URL: https://tangled.org/yanndegat.tngl.sh/drawgent Comments URL: https://news.ycombinator.com/item?id=49857729 Points: 90 # Comments: 31",
+          "url": "https://tangled.org/yanndegat.tngl.sh/drawgent"
+        },
+        {
+          "t": 1790415718000,
+          "level": "notable",
+          "title": "How to keep enjoying programming in a world of LLMs",
+          "detail": "Article URL: https://discourse.haskell.org/t/how-to-keep-enjoying-programming-in-a-world-of-llms/14705 Comments URL: https://news.ycombinator.com/item?id=49854875 Points: 132 # Comments: 190",
+          "url": "https://discourse.haskell.org/t/how-to-keep-enjoying-programming-in-a-world-of-llms/14705"
+        },
         {
           "t": 1790442640000,
           "level": "notable",
@@ -408,27 +429,6 @@
           "title": "Once Claude can measure something, it can make it faster",
           "detail": "Article URL: https://claude.dev/blog/how-we-made-claude-ai-faster/ Comments URL: https://news.ycombinator.com/item?id=49821196 Points: 140 # Comments: 90",
           "url": "https://claude.dev/blog/how-we-made-claude-ai-faster/"
-        },
-        {
-          "t": 1790186807000,
-          "level": "notable",
-          "title": "Claude discovers a novel enzyme system with CRISPR-like repeats",
-          "detail": "Article URL: https://www.anthropic.com/news/claude-discovers-novel-enzyme-system Comments URL: https://news.ycombinator.com/item?id=49820134 Points: 437 # Comments: 478",
-          "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
-        },
-        {
-          "t": 1790191420000,
-          "level": "notable",
-          "title": "How we made claude.ai 3x faster in two weeks",
-          "detail": "Article URL: https://claude.dev/blog/how-we-made-claude-ai-faster/ Comments URL: https://news.ycombinator.com/item?id=49821196 Points: 69 # Comments: 35",
-          "url": "https://claude.dev/blog/how-we-made-claude-ai-faster/"
-        },
-        {
-          "t": 1790187401000,
-          "level": "notable",
-          "title": "Cloud Agents Are Inevitable AI Prisons",
-          "detail": "Article URL: https://normanponte.io/19df691f Comments URL: https://news.ycombinator.com/item?id=49820267 Points: 40 # Comments: 34",
-          "url": "https://normanponte.io/19df691f"
         }
       ],
       "notifiedAt": {},
@@ -2267,11 +2267,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790443343784,
-      "lastOk": 1790443343784,
+      "lastRun": 1790464047575,
+      "lastOk": 1790464047575,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,202 (+75.1%) · excludes S&P 500 ETF",
+      "lastLine": "$4,215 (+75.6%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2529,9 +2529,27 @@
         {
           "t": 1790443343784,
           "v": 4202.3
+        },
+        {
+          "t": 1790464047576,
+          "v": 4215.45
         }
       ],
       "events": [
+        {
+          "t": 1790464047562,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790464047562,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790443343770,
           "level": "notable",
@@ -2937,31 +2955,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789817181747,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789817181747,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 84046
+          "BTC": 84309
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790464047576,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 5
+    },
     {
       "t": 1790453181754,
       "ran": 1,

@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790428865993,
-      "lastOk": 1790428865993,
+      "lastRun": 1790443342789,
+      "lastOk": 1790443342789,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790438194000,
+          "level": "notable",
+          "title": "Make Claude your assistant in excalidraw",
+          "detail": "Article URL: https://tangled.org/yanndegat.tngl.sh/drawgent Comments URL: https://news.ycombinator.com/item?id=49857729 Points: 5 # Comments: 1",
+          "url": "https://tangled.org/yanndegat.tngl.sh/drawgent"
+        },
+        {
+          "t": 1790436893000,
+          "level": "notable",
+          "title": "Show HN: A Claude Code skill to analyze your chess games",
+          "detail": "Hello HN,It started as an experiment: can Claude play chess properly if it uses vision instead of PGN notation? Somehow it can.The next experiment was to see whether Claude + Stockfish could explain a game. Somehow it can too.A few sessions later, I had a system that takes my live audio notes (or te",
+          "url": "https://github.com/brumar/chess-postmortem-skills"
+        },
+        {
+          "t": 1790396458000,
+          "level": "notable",
+          "title": "A single function Jev-like wrapper for LLMs, including vision models",
+          "detail": "Article URL: http://allanrbo.blogspot.com/2026/09/a-jev-like-wrapper-for-llms-including.html Comments URL: https://news.ycombinator.com/item?id=49853175 Points: 116 # Comments: 36",
+          "url": "http://allanrbo.blogspot.com/2026/09/a-jev-like-wrapper-for-llms-including.html"
+        },
+        {
+          "t": 1790370567000,
+          "level": "notable",
+          "title": "Revealing the details of how OpenAI agents hacked Hugging Face",
+          "detail": "Article URL: https://swarmtraces.org/ Comments URL: https://news.ycombinator.com/item?id=49849985 Points: 618 # Comments: 398",
+          "url": "https://swarmtraces.org/"
+        },
         {
           "t": 1790396458000,
           "level": "notable",
@@ -401,42 +429,14 @@
           "title": "I am done with this shit",
           "detail": "Article URL: https://www.reddit.com/r/ClaudeAI/comments/1wm5c21/i_am_done_with_this_shit/ Comments URL: https://news.ycombinator.com/item?id=49812975 Points: 125 # Comments: 71",
           "url": "https://www.reddit.com/r/ClaudeAI/comments/1wm5c21/i_am_done_with_this_shit/"
-        },
-        {
-          "t": 1790100953000,
-          "level": "notable",
-          "title": "Unreal Agent",
-          "detail": "https://github.com/unreallabsai/unreal-agent Comments URL: https://news.ycombinator.com/item?id=49805748 Points: 203 # Comments: 110",
-          "url": "https://unreallabs.ai/blog/unreal-agent/"
-        },
-        {
-          "t": 1790095891000,
-          "level": "notable",
-          "title": "Claude Opus 5.5 Intelligence, Performance and Price Analysis (Max)",
-          "detail": "Article URL: https://artificialanalysis.ai/models/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49804316 Points: 305 # Comments: 95",
-          "url": "https://artificialanalysis.ai/models/claude-opus-5-5"
-        },
-        {
-          "t": 1790100953000,
-          "level": "notable",
-          "title": "Unreal Agent",
-          "detail": "https://github.com/unreallabsai/unreal-agent Comments URL: https://news.ycombinator.com/item?id=49805748 Points: 161 # Comments: 94",
-          "url": "https://unreallabs.ai/blog/unreal-agent/"
-        },
-        {
-          "t": 1790095891000,
-          "level": "notable",
-          "title": "Claude Opus 5.5 Intelligence, Performance and Price Analysis (Max)",
-          "detail": "Article URL: https://artificialanalysis.ai/models/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49804316 Points: 269 # Comments: 80",
-          "url": "https://artificialanalysis.ai/models/claude-opus-5-5"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1790409504630,
-      "lastOk": 1790409504630,
+      "lastRun": 1790443343132,
+      "lastOk": 1790443343132,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.283",
@@ -584,6 +584,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
         },
         {
+          "t": 1790373012000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.283",
+          "detail": "## What's changed\n\n- Added `x-claude-code-prompt-id` to the gateway hint headers so LLM gateways can group the requests that serve one user prompt; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added `availableModelsMatch` managed setting: with `\"exact\"`, an `availableModels` entry allows only the model version it names, so new releases stay blocked until listed\n- Added `deniedModels` managed",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.283"
+        },
+        {
           "t": 1790275085000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.282",
@@ -645,13 +652,6 @@
           "title": "anthropics/claude-code v2.1.273",
           "detail": "## What's changed\n\n- Added `x-claude-code-request-class`, `x-claude-code-agent-type`, `x-claude-code-prev-tool-durations`, `x-claude-code-compaction` and `x-claude-code-context-compacted` request headers for LLM gateways; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added a notification when an MCP server disconnects mid-session and automatic reconnection gives up, pointing at `/mcp`\n- Added",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
-        },
-        {
-          "t": 1789432945000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.272",
-          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.272"
         },
         {
           "t": 1790275085000,
@@ -2267,11 +2267,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790428866563,
-      "lastOk": 1790428866563,
+      "lastRun": 1790443343784,
+      "lastOk": 1790443343784,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,199 (+75.0%) · excludes S&P 500 ETF",
+      "lastLine": "$4,202 (+75.1%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2525,9 +2525,27 @@
         {
           "t": 1790428866563,
           "v": 4199
+        },
+        {
+          "t": 1790443343784,
+          "v": 4202.3
         }
       ],
       "events": [
+        {
+          "t": 1790443343770,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790443343770,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790428866549,
           "level": "notable",
@@ -2933,31 +2951,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789799496030,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789799496031,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 83980
+          "BTC": 84046
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790443343784,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 16
+    },
     {
       "t": 1790428866564,
       "ran": 5,

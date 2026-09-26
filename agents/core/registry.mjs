@@ -25,6 +25,7 @@ import uptime from "../types/uptime.mjs";
 import githubRelease from "../types/github-release.mjs";
 import price from "../types/price.mjs";
 import diary from "../types/diary.mjs";
+import organizer from "../types/organizer.mjs";
 import goals from "../types/goals.mjs";
 import study from "../types/study.mjs";
 import reading from "../types/reading.mjs";
@@ -36,7 +37,7 @@ export const TYPES = Object.fromEntries(
     // Watching the world
     feed, webpage, uptime, githubRelease, price, portfolio,
     // Watching you
-    diary, goals, study, reading, exercise,
+    diary, organizer, goals, study, reading, exercise,
   ].map((t) => [t.id, t])
 );
 

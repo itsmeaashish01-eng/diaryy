@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790376263643,
-      "lastOk": 1790376263643,
+      "lastRun": 1790387648379,
+      "lastOk": 1790387648379,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790370567000,
+          "level": "notable",
+          "title": "Revealing the details of how OpenAI agents hacked Hugging Face",
+          "detail": "Article URL: https://swarmtraces.org/ Comments URL: https://news.ycombinator.com/item?id=49849985 Points: 213 # Comments: 131",
+          "url": "https://swarmtraces.org/"
+        },
+        {
+          "t": 1790361425000,
+          "level": "notable",
+          "title": "Alan Kay: Shannon gave us a way of dealing with noisy channels [video]",
+          "detail": "The following explanation is taken from https://news.ycombinator.com/item?id=49622607:Alan Kay performs an improvisational avant garde layered audio feedback loop about Claude Shannon, live online during Kristen Nygaard's 100-year birthday celebration.Alan was scheduled to talk about how encounterin",
+          "url": "https://www.youtube.com/watch?v=Cjntrqhn8pk"
+        },
+        {
+          "t": 1790350165000,
+          "level": "notable",
+          "title": "U.S. appeals court upholds designation of Anthropic as supply chain risk",
+          "detail": "Article URL: https://www.cnbc.com/2026/09/25/pentagon-anthropic-ai-risk-appeals-court.html Comments URL: https://news.ycombinator.com/item?id=49845977 Points: 386 # Comments: 698",
+          "url": "https://www.cnbc.com/2026/09/25/pentagon-anthropic-ai-risk-appeals-court.html"
+        },
         {
           "t": 1790370567000,
           "level": "notable",
@@ -408,42 +429,91 @@
           "title": "Launch HN: Coverage Cat (YC S22) – Umbrella insurance via your personal agent",
           "detail": "Hey HN! We’re Max and Gabriel the co-founders of Coverage Cat. We’ve been friends for over a decade, met in college then hung out mostly on the internet. We love building products that help people optimize the crufty corners of their lives. Max is a former Google/Microsoft/Two Sigma PM and Gabriel h",
           "url": "https://www.coveragecat.com/"
-        },
-        {
-          "t": 1790095891000,
-          "level": "notable",
-          "title": "Claude Opus 5.5 Intelligence, Performance and Price Analysis (Max)",
-          "detail": "Article URL: https://artificialanalysis.ai/models/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49804316 Points: 227 # Comments: 63",
-          "url": "https://artificialanalysis.ai/models/claude-opus-5-5"
-        },
-        {
-          "t": 1790094545000,
-          "level": "notable",
-          "title": "Claude Opus 5.5",
-          "detail": "Article URL: https://www.anthropic.com/claude-opus-5-5 Comments URL: https://news.ycombinator.com/item?id=49803892 Points: 1158 # Comments: 790",
-          "url": "https://www.anthropic.com/claude-opus-5-5"
-        },
-        {
-          "t": 1790109259000,
-          "level": "notable",
-          "title": "LLM Ass Bench",
-          "detail": "Article URL: https://www.assbench.com/ Comments URL: https://news.ycombinator.com/item?id=49807688 Points: 98 # Comments: 30",
-          "url": "https://www.assbench.com/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1790362231799,
-      "lastOk": 1790362231799,
+      "lastRun": 1790387648688,
+      "lastOk": 1790387648688,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.282",
+      "lastLine": "latest is anthropics/claude-code v2.1.283",
       "seen": [],
       "metrics": [],
       "events": [
         {
+          "t": 1790373012000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.283",
+          "detail": "## What's changed\n\n- Added `x-claude-code-prompt-id` to the gateway hint headers so LLM gateways can group the requests that serve one user prompt; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added `availableModelsMatch` managed setting: with `\"exact\"`, an `availableModels` entry allows only the model version it names, so new releases stay blocked until listed\n- Added `deniedModels` managed",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.283"
+        },
+        {
+          "t": 1790275085000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.282",
+          "detail": "## What's changed\n\n- Added a `maxProseWidth` setting that caps the width of Claude's prose in wide terminals while tables and code blocks keep the full width\n- Added a startup notice, and `/status` and `claude doctor` entries, listing telemetry variables in a project's settings files that were ignored or that turned telemetry off\n- Added the `allowClaudeInChromeWithManagedMcp` managed setting to l",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.282"
+        },
+        {
+          "t": 1790191155000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.281",
+          "detail": "## What's changed\n\n- Added Claude apps gateway support for newer Claude Desktop keys in `desktop` policy blocks, including `blockReadsOutsideWorkingDirectories` and `disableBypassPermissionsMode`\n- Added `assume_role` on Claude apps gateway Bedrock upstreams: the gateway calls Bedrock as an IAM role it assumes through STS, in another AWS account if needed, optionally one session per developer\n- Ad",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.281"
+        },
+        {
+          "t": 1790095094000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.280",
+          "detail": "## What's changed\n\n- Added Claude Opus 5.5 (`claude-opus-5-5`), now the default Opus model — 1M context, $4/$20 per Mtok with $0.20/Mtok cache reads\n- Added mouse support to more lists in fullscreen mode: the wheel scrolls the `/skills` list, and a skill's state options in `/plugin` can be clicked\n- Added `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` to change the 2,048-character cap on MCP tool descri",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.280"
+        },
+        {
+          "t": 1789787440000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.278",
+          "detail": "## What's changed\n\n- Changed auto mode for Claude API and Enterprise users, and on Bedrock, Vertex, Foundry and gateways, to default to the server-side classifier, which does not charge for classifier overhead (`CLAUDE_CODE_AUTO_MODE_SERVER=0` opts out on Bedrock, Vertex, Foundry and gateways); warns on billed fallback. See https://code.claude.com/docs/en/auto-mode-classifier-billing\n- Added an `A",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.278"
+        },
+        {
+          "t": 1789754792000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.277",
+          "detail": "## What's changed\n\n- Added AGENTS.md support: in a project with no CLAUDE.md, Claude Code reads AGENTS.md instead; change it under \"Project instructions\" in `/config` (not yet on Bedrock, Vertex or Foundry)\n- Added `CLAUDE_GATEWAY_PROXY_IS_EGRESS_BOUNDARY=1` for Claude apps gateways whose only egress is a forward proxy: every outbound request hands the proxy the hostname instead of resolving it lo",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.277"
+        },
+        {
+          "t": 1789697546000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.276",
+          "detail": "## What's changed\n\n- Fixed every request failing with `400 … Input tag 'advisor_20260301'` when `ANTHROPIC_BASE_URL` points at a proxy or gateway (2.1.275 regression)\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.276"
+        },
+        {
+          "t": 1789684397000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.275",
+          "detail": "## What's changed\n\n- Added the signed-in account to Claude apps gateway sign-in: when the gateway names it, you confirm it before the credential is saved, and `/status` shows it\n- Added a send-now key (ctrl+enter, or ctrl+x ctrl+s) that interrupts the current turn and sends all queued messages at once; sent and queued messages show in gray until the model receives them\n- Added a startup warning wh",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.275"
+        },
+        {
+          "t": 1789603922000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.274",
+          "detail": "## What's changed\n\n- Added a visible warning when memory usage is critical, with steps to free memory or restart safely\n- Added `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` to bound how long the first non-interactive turn waits for connecting MCP servers (`0` = don't wait)\n- Added `effort` attribute to the `claude_code.llm_request` OpenTelemetry trace span, matching the `api_request` event\n- Added `claude_co",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.274"
+        },
+        {
+          "t": 1789503783000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.273",
+          "detail": "## What's changed\n\n- Added `x-claude-code-request-class`, `x-claude-code-agent-type`, `x-claude-code-prev-tool-durations`, `x-claude-code-compaction` and `x-claude-code-context-compacted` request headers for LLM gateways; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added a notification when an MCP server disconnects mid-session and automatic reconnection gives up, pointing at `/mcp`\n- Added",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
+        },
+        {
           "t": 1790275085000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.282",
@@ -722,76 +792,6 @@
           "title": "anthropics/claude-code v2.1.272",
           "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.272"
-        },
-        {
-          "t": 1790191155000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.281",
-          "detail": "## What's changed\n\n- Added Claude apps gateway support for newer Claude Desktop keys in `desktop` policy blocks, including `blockReadsOutsideWorkingDirectories` and `disableBypassPermissionsMode`\n- Added `assume_role` on Claude apps gateway Bedrock upstreams: the gateway calls Bedrock as an IAM role it assumes through STS, in another AWS account if needed, optionally one session per developer\n- Ad",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.281"
-        },
-        {
-          "t": 1790095094000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.280",
-          "detail": "## What's changed\n\n- Added Claude Opus 5.5 (`claude-opus-5-5`), now the default Opus model — 1M context, $4/$20 per Mtok with $0.20/Mtok cache reads\n- Added mouse support to more lists in fullscreen mode: the wheel scrolls the `/skills` list, and a skill's state options in `/plugin` can be clicked\n- Added `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` to change the 2,048-character cap on MCP tool descri",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.280"
-        },
-        {
-          "t": 1789787440000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.278",
-          "detail": "## What's changed\n\n- Changed auto mode for Claude API and Enterprise users, and on Bedrock, Vertex, Foundry and gateways, to default to the server-side classifier, which does not charge for classifier overhead (`CLAUDE_CODE_AUTO_MODE_SERVER=0` opts out on Bedrock, Vertex, Foundry and gateways); warns on billed fallback. See https://code.claude.com/docs/en/auto-mode-classifier-billing\n- Added an `A",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.278"
-        },
-        {
-          "t": 1789754792000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.277",
-          "detail": "## What's changed\n\n- Added AGENTS.md support: in a project with no CLAUDE.md, Claude Code reads AGENTS.md instead; change it under \"Project instructions\" in `/config` (not yet on Bedrock, Vertex or Foundry)\n- Added `CLAUDE_GATEWAY_PROXY_IS_EGRESS_BOUNDARY=1` for Claude apps gateways whose only egress is a forward proxy: every outbound request hands the proxy the hostname instead of resolving it lo",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.277"
-        },
-        {
-          "t": 1789697546000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.276",
-          "detail": "## What's changed\n\n- Fixed every request failing with `400 … Input tag 'advisor_20260301'` when `ANTHROPIC_BASE_URL` points at a proxy or gateway (2.1.275 regression)\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.276"
-        },
-        {
-          "t": 1789684397000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.275",
-          "detail": "## What's changed\n\n- Added the signed-in account to Claude apps gateway sign-in: when the gateway names it, you confirm it before the credential is saved, and `/status` shows it\n- Added a send-now key (ctrl+enter, or ctrl+x ctrl+s) that interrupts the current turn and sends all queued messages at once; sent and queued messages show in gray until the model receives them\n- Added a startup warning wh",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.275"
-        },
-        {
-          "t": 1789603922000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.274",
-          "detail": "## What's changed\n\n- Added a visible warning when memory usage is critical, with steps to free memory or restart safely\n- Added `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` to bound how long the first non-interactive turn waits for connecting MCP servers (`0` = don't wait)\n- Added `effort` attribute to the `claude_code.llm_request` OpenTelemetry trace span, matching the `api_request` event\n- Added `claude_co",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.274"
-        },
-        {
-          "t": 1789503783000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.273",
-          "detail": "## What's changed\n\n- Added `x-claude-code-request-class`, `x-claude-code-agent-type`, `x-claude-code-prev-tool-durations`, `x-claude-code-compaction` and `x-claude-code-context-compacted` request headers for LLM gateways; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added a notification when an MCP server disconnects mid-session and automatic reconnection gives up, pointing at `/mcp`\n- Added",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
-        },
-        {
-          "t": 1789432945000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.272",
-          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.272"
-        },
-        {
-          "t": 1789423974000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.271",
-          "detail": "## What's changed\n\n- Added fast mode in Claude Code Remote sessions (cloud and self-hosted runners): the host's fast-mode setting or `/fast` typed in the session applies where your organization allows it\n- Added mouse support to the `/config` panel in fullscreen mode: the wheel scrolls the settings list, a click on a setting's value changes it, and the row under the pointer is highlighted\n- Added ",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.271"
         },
         {
           "t": 1790191155000,
@@ -2248,11 +2248,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790362232699,
-      "lastOk": 1790362232699,
+      "lastRun": 1790387649352,
+      "lastOk": 1790387649352,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,197 (+74.9%) · excludes S&P 500 ETF",
+      "lastLine": "$4,202 (+75.1%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2494,9 +2494,27 @@
         {
           "t": 1790362232699,
           "v": 4196.7
+        },
+        {
+          "t": 1790387649352,
+          "v": 4201.5
         }
       ],
       "events": [
+        {
+          "t": 1790387649338,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790387649338,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790362232691,
           "level": "notable",
@@ -2902,31 +2920,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789731870675,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789731870675,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 83934
+          "BTC": 84030
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790387649352,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 15
+    },
     {
       "t": 1790376263650,
       "ran": 4,

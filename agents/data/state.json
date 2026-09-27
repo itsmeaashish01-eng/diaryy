@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790534262215,
-      "lastOk": 1790534262215,
+      "lastRun": 1790548305800,
+      "lastOk": 1790548305800,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790524288000,
+          "level": "notable",
+          "title": "Show HN: TinyAIArena watch AI agents battle it out",
+          "detail": "Did you ever click on an “AI Arena” expecting glorious battle and instead get a boring benchmark? If so, this project is for you: proper life-or-death fights between four models on a picturesque 8×8 grid. May the most intelligent one win!Click on any of the matches to spectate them.Code: https://git",
+          "url": "https://tinyaiarena.com/"
+        },
         {
           "t": 1790530322000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "Linux support is coming to Snapdragon X2 Series",
           "detail": "Article URL: https://www.qualcomm.com/news/onq/2026/09/snapdragon-summit-agentic-ai-pcs-linux Comments URL: https://news.ycombinator.com/item?id=49823582 Points: 544 # Comments: 224",
           "url": "https://www.qualcomm.com/news/onq/2026/09/snapdragon-summit-agentic-ai-pcs-linux"
-        },
-        {
-          "t": 1790227270000,
-          "level": "notable",
-          "title": "Early rogue AI agent activity and attempts to hack found on urlquery.net",
-          "detail": "Article URL: https://transluce.org/agent-activity Comments URL: https://news.ycombinator.com/item?id=49826565 Points: 134 # Comments: 97",
-          "url": "https://transluce.org/agent-activity"
         }
       ],
       "notifiedAt": {},
@@ -3016,6 +3016,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1790548305807,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 1
+    },
     {
       "t": 1790534263398,
       "ran": 3,

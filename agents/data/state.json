@@ -2,14 +2,49 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790464047125,
-      "lastOk": 1790464047125,
+      "lastRun": 1790473399844,
+      "lastOk": 1790473399844,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790442640000,
+          "level": "notable",
+          "title": "Show HN: Reladraw – A diagram language where you decide where to place things",
+          "detail": "I love making diagrams to help understand, plan, etc. However, the options are (A) auto-placement languages like Mermaid or Graphviz (which don't let me decide how the diagram looks), or (B) software like Draw.io which are powerful but are very time consuming (and inefficient for agents to manipulat",
+          "url": "https://github.com/reladraw/reladraw"
+        },
+        {
+          "t": 1790438194000,
+          "level": "notable",
+          "title": "Drawgent: Coding agent on a live Excalidraw canvas",
+          "detail": "Article URL: https://tangled.org/yanndegat.tngl.sh/drawgent Comments URL: https://news.ycombinator.com/item?id=49857729 Points: 108 # Comments: 32",
+          "url": "https://tangled.org/yanndegat.tngl.sh/drawgent"
+        },
+        {
+          "t": 1790437744000,
+          "level": "notable",
+          "title": "Turning GLM-5.3-Flash into a Jev-like decision model",
+          "detail": "We found an approach to get Jev-like properties from standard LLMs like GLM-5.3-Flash.The core idea is to craft the input prompt so that the first output token answers the question. This makes it possible to get a decision with a single forward pass.In the blog post, we describe the approach in deta",
+          "url": "https://www.privatemode.ai/blog/system-one-from-glm-flash"
+        },
+        {
+          "t": 1790415718000,
+          "level": "notable",
+          "title": "How to keep enjoying programming in a world of LLMs",
+          "detail": "Article URL: https://discourse.haskell.org/t/how-to-keep-enjoying-programming-in-a-world-of-llms/14705 Comments URL: https://news.ycombinator.com/item?id=49854875 Points: 156 # Comments: 211",
+          "url": "https://discourse.haskell.org/t/how-to-keep-enjoying-programming-in-a-world-of-llms/14705"
+        },
+        {
+          "t": 1790382603000,
+          "level": "notable",
+          "title": "Generate fonts where every LLM token is the same width",
+          "detail": "Article URL: https://ampdot.mesh.host/token-space-fonts.html Comments URL: https://news.ycombinator.com/item?id=49851883 Points: 25 # Comments: 6",
+          "url": "https://ampdot.mesh.host/token-space-fonts.html"
+        },
         {
           "t": 1790442640000,
           "level": "notable",
@@ -394,49 +429,14 @@
           "title": "VSCode's SSH Agent Is Bananas (2025)",
           "detail": "Article URL: https://fly.io/blog/vscode-ssh-wtf/ Comments URL: https://news.ycombinator.com/item?id=49822555 Points: 168 # Comments: 110",
           "url": "https://fly.io/blog/vscode-ssh-wtf/"
-        },
-        {
-          "t": 1790186807000,
-          "level": "notable",
-          "title": "Claude discovers a novel enzyme system with CRISPR-like repeats",
-          "detail": "Article URL: https://www.anthropic.com/news/claude-discovers-novel-enzyme-system Comments URL: https://news.ycombinator.com/item?id=49820134 Points: 572 # Comments: 588",
-          "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
-        },
-        {
-          "t": 1790203096000,
-          "level": "notable",
-          "title": "Linux support is coming to Snapdragon X2 Series",
-          "detail": "Article URL: https://www.qualcomm.com/news/onq/2026/09/snapdragon-summit-agentic-ai-pcs-linux Comments URL: https://news.ycombinator.com/item?id=49823582 Points: 55 # Comments: 23",
-          "url": "https://www.qualcomm.com/news/onq/2026/09/snapdragon-summit-agentic-ai-pcs-linux"
-        },
-        {
-          "t": 1790201779000,
-          "level": "notable",
-          "title": "Mercury 2.5 LLM hits 770 tokens per second",
-          "detail": "Article URL: https://artificialanalysis.ai/models/mercury-2-5 Comments URL: https://news.ycombinator.com/item?id=49823348 Points: 18 # Comments: 8",
-          "url": "https://artificialanalysis.ai/models/mercury-2-5"
-        },
-        {
-          "t": 1790197308000,
-          "level": "notable",
-          "title": "VSCode's SSH Agent Is Bananas (2025)",
-          "detail": "Article URL: https://fly.io/blog/vscode-ssh-wtf/ Comments URL: https://news.ycombinator.com/item?id=49822555 Points: 92 # Comments: 66",
-          "url": "https://fly.io/blog/vscode-ssh-wtf/"
-        },
-        {
-          "t": 1790191420000,
-          "level": "notable",
-          "title": "Once Claude can measure something, it can make it faster",
-          "detail": "Article URL: https://claude.dev/blog/how-we-made-claude-ai-faster/ Comments URL: https://news.ycombinator.com/item?id=49821196 Points: 140 # Comments: 90",
-          "url": "https://claude.dev/blog/how-we-made-claude-ai-faster/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1790443343132,
-      "lastOk": 1790443343132,
+      "lastRun": 1790473400317,
+      "lastOk": 1790473400317,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.283",
@@ -654,6 +654,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
         },
         {
+          "t": 1790373012000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.283",
+          "detail": "## What's changed\n\n- Added `x-claude-code-prompt-id` to the gateway hint headers so LLM gateways can group the requests that serve one user prompt; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added `availableModelsMatch` managed setting: with `\"exact\"`, an `availableModels` entry allows only the model version it names, so new releases stay blocked until listed\n- Added `deniedModels` managed",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.283"
+        },
+        {
           "t": 1790275085000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.282",
@@ -715,13 +722,6 @@
           "title": "anthropics/claude-code v2.1.273",
           "detail": "## What's changed\n\n- Added `x-claude-code-request-class`, `x-claude-code-agent-type`, `x-claude-code-prev-tool-durations`, `x-claude-code-compaction` and `x-claude-code-context-compacted` request headers for LLM gateways; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added a notification when an MCP server disconnects mid-session and automatic reconnection gives up, pointing at `/mcp`\n- Added",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
-        },
-        {
-          "t": 1789432945000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.272",
-          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.272"
         },
         {
           "t": 1790275085000,
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1790428865996,
-      "lastOk": 1790428865996,
+      "lastRun": 1790473400318,
+      "lastOk": 1790473400318,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 2 drifting",
@@ -986,9 +986,48 @@
         {
           "t": 1790428865997,
           "v": 17
+        },
+        {
+          "t": 1790473400318,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1790473400318,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 49 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1790473400318,
+          "level": "notable",
+          "title": "Finish fellowship strong hasn't moved in 26 days",
+          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1790473400318,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1790473400318,
+          "level": "notable",
+          "title": "Data collection complete — 79 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1790473400318,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 38 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1790428865996,
           "level": "notable",
@@ -1373,51 +1412,16 @@
           "title": "Data collection complete — 87 days left",
           "detail": "First-author paper submitted, due 2026-12-15.",
           "url": ""
-        },
-        {
-          "t": 1789860448476,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 30 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1789817181071,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 57 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1789817181071,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
-        },
-        {
-          "t": 1789817181071,
-          "level": "notable",
-          "title": "Data collection complete — 87 days left",
-          "detail": "First-author paper submitted, due 2026-12-15.",
-          "url": ""
-        },
-        {
-          "t": 1789817181071,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 30 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
-        "checkedOn": "2026-09-26"
+        "checkedOn": "2026-09-27"
       }
     },
     "reading": {
-      "lastRun": 1790428865998,
-      "lastOk": 1790428865998,
+      "lastRun": 1790473400319,
+      "lastOk": 1790473400319,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1534,9 +1538,34 @@
         {
           "t": 1790428865998,
           "v": 3
+        },
+        {
+          "t": 1790473400319,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1790473400319,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1790473400319,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 57 days",
+          "url": ""
+        },
+        {
+          "t": 1790473400319,
+          "level": "notable",
+          "title": "Still unread after 149 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1790428865998,
           "level": "notable",
@@ -1935,27 +1964,6 @@
           "title": "Still unread after 138 days — A book that has nothing to do with work",
           "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
           "url": ""
-        },
-        {
-          "t": 1789508541572,
-          "level": "notable",
-          "title": "Read next — Survival analysis, properly this time",
-          "detail": "about 45 min · research methods · already started",
-          "url": ""
-        },
-        {
-          "t": 1789508541572,
-          "level": "notable",
-          "title": "Read next — Current society guideline — read the update in full, not the summary",
-          "detail": "about 60 min · core · on the list 45 days",
-          "url": ""
-        },
-        {
-          "t": 1789508541572,
-          "level": "notable",
-          "title": "Still unread after 137 days — A book that has nothing to do with work",
-          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -1964,8 +1972,8 @@
       }
     },
     "training": {
-      "lastRun": 1790428865999,
-      "lastOk": 1790428865999,
+      "lastRun": 1790473400320,
+      "lastOk": 1790473400320,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min · last 4w: gym 2, run 2, swim 1",
@@ -2082,9 +2090,20 @@
         {
           "t": 1790428865999,
           "v": 0
+        },
+        {
+          "t": 1790473400320,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1790473400320,
+          "level": "notable",
+          "title": "18 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1790428865999,
           "level": "notable",
@@ -2966,6 +2985,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1790473400322,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 24
+    },
     {
       "t": 1790464047576,
       "ran": 2,

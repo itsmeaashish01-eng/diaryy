@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790610679342,
-      "lastOk": 1790610679342,
+      "lastRun": 1790633704040,
+      "lastOk": 1790633704040,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790621933000,
+          "level": "notable",
+          "title": "MicroLLM Lab – Try 7 tiny LLM's in the browser",
+          "detail": "Article URL: https://stateofutopia.com/experiments/microllmlab/ Comments URL: https://news.ycombinator.com/item?id=49882781 Points: 90 # Comments: 36",
+          "url": "https://stateofutopia.com/experiments/microllmlab/"
+        },
+        {
+          "t": 1790618291000,
+          "level": "notable",
+          "title": "Sonnet 5.5",
+          "detail": "Article URL: https://www.anthropic.com/claude-sonnet-5-5 Comments URL: https://news.ycombinator.com/item?id=49881850 Points: 468 # Comments: 316",
+          "url": "https://www.anthropic.com/claude-sonnet-5-5"
+        },
+        {
+          "t": 1790616876000,
+          "level": "notable",
+          "title": "Launch HN: Vespper (YC F24) – SOTA Docx MCP",
+          "detail": "Hey HN! We're Dudu and Topaz from Vespper (https://vespper.com). Vespper is an MCP that lets AI agents efficiently edit Word documents, powered by our fine-tuned model. It's currently 3× faster, 2× cheaper and more accurate than the closest alternative. Check out an overview of how the product works",
+          "url": "https://www.vespper.com/blog/launching-vespper-docx-mcp"
+        },
         {
           "t": 1790524288000,
           "level": "notable",
@@ -408,41 +429,27 @@
           "title": "Show HN: AgentRun: DSL to turn agents into workflows",
           "detail": "Hi HN,I just open sourced the DSL that our harness in grep.ai uses to turn repeatable parts of agent work into workflows. You can combine tool calls, code, Jev-powered system one decisions for things like routing and screening evidence, and agents when a step needs more investigation.Our harness use",
           "url": "https://github.com/Parcha-ai/agentrun"
-        },
-        {
-          "t": 1790258997000,
-          "level": "notable",
-          "title": "Best LLM for every budget, updated daily",
-          "detail": "Article URL: https://bestmodelforyourbudget.terrydjony.com/ Comments URL: https://news.ycombinator.com/item?id=49830866 Points: 72 # Comments: 39",
-          "url": "https://bestmodelforyourbudget.terrydjony.com/"
-        },
-        {
-          "t": 1790227270000,
-          "level": "notable",
-          "title": "Early rogue AI agent activity and attempts to hack found on urlquery.net",
-          "detail": "Article URL: https://transluce.org/agent-activity Comments URL: https://news.ycombinator.com/item?id=49826565 Points: 196 # Comments: 178",
-          "url": "https://transluce.org/agent-activity"
-        },
-        {
-          "t": 1790217888000,
-          "level": "notable",
-          "title": "OpenAI agent hacked Australian government website, PM says",
-          "detail": "Article URL: https://www.bbc.com/news/live/cvgl73pxgndwt Comments URL: https://news.ycombinator.com/item?id=49825580 Points: 218 # Comments: 139",
-          "url": "https://www.bbc.com/news/live/cvgl73pxgndwt"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1790610679887,
-      "lastOk": 1790610679887,
+      "lastRun": 1790633704373,
+      "lastOk": 1790633704373,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.283",
+      "lastLine": "latest is anthropics/claude-code v2.1.284",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790618523000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.284",
+          "detail": "## What's changed\n\n- Added Claude Sonnet 5.5 (`claude-sonnet-5-5`), now the default Sonnet model on the Anthropic API — 1M context, $2/$10 per Mtok with $0.20/Mtok cache reads\n- Added a \"Yes, but ask again next time\" answer to auto mode's prompt before a read outside the working directories, so you can allow that one read and still be asked about later ones\n- Added dollar amounts to the Claude app",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.284"
+        },
         {
           "t": 1790373012000,
           "level": "notable",
@@ -505,13 +512,6 @@
           "title": "anthropics/claude-code v2.1.274",
           "detail": "## What's changed\n\n- Added a visible warning when memory usage is critical, with steps to free memory or restart safely\n- Added `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` to bound how long the first non-interactive turn waits for connecting MCP servers (`0` = don't wait)\n- Added `effort` attribute to the `claude_code.llm_request` OpenTelemetry trace span, matching the `api_request` event\n- Added `claude_co",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.274"
-        },
-        {
-          "t": 1789503783000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.273",
-          "detail": "## What's changed\n\n- Added `x-claude-code-request-class`, `x-claude-code-agent-type`, `x-claude-code-prev-tool-durations`, `x-claude-code-compaction` and `x-claude-code-context-compacted` request headers for LLM gateways; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added a notification when an MCP server disconnects mid-session and automatic reconnection gives up, pointing at `/mcp`\n- Added",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
         },
         {
           "t": 1790373012000,
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1790580700542,
-      "lastOk": 1790580700542,
+      "lastRun": 1790633704376,
+      "lastOk": 1790633704376,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 2 drifting",
@@ -998,9 +998,48 @@
         {
           "t": 1790580700542,
           "v": 17
+        },
+        {
+          "t": 1790633704376,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1790633704375,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 48 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1790633704375,
+          "level": "notable",
+          "title": "Finish fellowship strong hasn't moved in 27 days",
+          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1790633704375,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1790633704375,
+          "level": "notable",
+          "title": "Data collection complete — 78 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1790633704375,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 39 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
         {
           "t": 1790580700542,
           "level": "notable",
@@ -1385,41 +1424,6 @@
           "title": "First-author paper submitted hasn't moved in 33 days",
           "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
           "url": ""
-        },
-        {
-          "t": 1790025174328,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 55 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1790025174328,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
-        },
-        {
-          "t": 1790025174328,
-          "level": "notable",
-          "title": "Data collection complete — 85 days left",
-          "detail": "First-author paper submitted, due 2026-12-15.",
-          "url": ""
-        },
-        {
-          "t": 1790025174328,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 32 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1789968173697,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 55 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -1428,8 +1432,8 @@
       }
     },
     "reading": {
-      "lastRun": 1790580700543,
-      "lastOk": 1790580700543,
+      "lastRun": 1790633704377,
+      "lastOk": 1790633704377,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1558,9 +1562,34 @@
         {
           "t": 1790580700543,
           "v": 3
+        },
+        {
+          "t": 1790633704377,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1790633704377,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1790633704377,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 58 days",
+          "url": ""
+        },
+        {
+          "t": 1790633704377,
+          "level": "notable",
+          "title": "Still unread after 150 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1790580700543,
           "level": "notable",
@@ -1959,27 +1988,6 @@
           "title": "Still unread after 139 days — A book that has nothing to do with work",
           "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
           "url": ""
-        },
-        {
-          "t": 1789613314375,
-          "level": "notable",
-          "title": "Read next — Survival analysis, properly this time",
-          "detail": "about 45 min · research methods · already started",
-          "url": ""
-        },
-        {
-          "t": 1789613314375,
-          "level": "notable",
-          "title": "Read next — Current society guideline — read the update in full, not the summary",
-          "detail": "about 60 min · core · on the list 47 days",
-          "url": ""
-        },
-        {
-          "t": 1789613314375,
-          "level": "notable",
-          "title": "Still unread after 139 days — A book that has nothing to do with work",
-          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -1988,11 +1996,11 @@
       }
     },
     "training": {
-      "lastRun": 1790580700544,
-      "lastOk": 1790580700544,
+      "lastRun": 1790633704379,
+      "lastOk": 1790633704379,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0/4 this week · 0 min · last 4w: gym 2, run 2, swim 1",
+      "lastLine": "0/4 this week · 0 min · last 4w: run 2, swim 1, gym 1",
       "seen": [],
       "metrics": [
         {
@@ -2118,9 +2126,20 @@
         {
           "t": 1790580700545,
           "v": 0
+        },
+        {
+          "t": 1790633704379,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1790633704379,
+          "level": "notable",
+          "title": "19 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1790580700544,
           "level": "notable",
@@ -2324,11 +2343,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790610680581,
-      "lastOk": 1790610680581,
+      "lastRun": 1790633704854,
+      "lastOk": 1790633704854,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,161 (+73.4%) · excludes S&P 500 ETF",
+      "lastLine": "$4,159 (+73.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2614,9 +2633,27 @@
         {
           "t": 1790610680581,
           "v": 4161.3
+        },
+        {
+          "t": 1790633704854,
+          "v": 4158.7
         }
       ],
       "events": [
+        {
+          "t": 1790633704841,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790633704841,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790610680568,
           "level": "notable",
@@ -3022,31 +3059,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789968174174,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789968174174,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 83226
+          "BTC": 83174
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790633704854,
+      "ran": 6,
+      "skipped": 4,
+      "failed": 0,
+      "notified": 0,
+      "held": 24
+    },
     {
       "t": 1790610680582,
       "ran": 3,

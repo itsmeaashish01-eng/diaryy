@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790548305800,
-      "lastOk": 1790548305800,
+      "lastRun": 1790557605918,
+      "lastOk": 1790557605918,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790524288000,
+          "level": "notable",
+          "title": "Show HN: TinyAIArena watch AI agents battle it out",
+          "detail": "Did you ever click on an “AI Arena” expecting glorious battle and instead get a boring benchmark? If so, this project is for you: proper life-or-death fights between four models on a picturesque 8×8 grid. May the most intelligent one win!Click on any of the matches to spectate them.Code: https://git",
+          "url": "https://tinyaiarena.com/"
+        },
         {
           "t": 1790524288000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "OpenAI agent hacked Australian government website, PM says",
           "detail": "Article URL: https://www.bbc.com/news/live/cvgl73pxgndwt Comments URL: https://news.ycombinator.com/item?id=49825580 Points: 218 # Comments: 139",
           "url": "https://www.bbc.com/news/live/cvgl73pxgndwt"
-        },
-        {
-          "t": 1790203096000,
-          "level": "notable",
-          "title": "Linux support is coming to Snapdragon X2 Series",
-          "detail": "Article URL: https://www.qualcomm.com/news/onq/2026/09/snapdragon-summit-agentic-ai-pcs-linux Comments URL: https://news.ycombinator.com/item?id=49823582 Points: 544 # Comments: 224",
-          "url": "https://www.qualcomm.com/news/onq/2026/09/snapdragon-summit-agentic-ai-pcs-linux"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1790534262627,
-      "lastOk": 1790534262627,
+      "lastRun": 1790557606258,
+      "lastOk": 1790557606258,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.283",
@@ -2305,11 +2305,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790534263397,
-      "lastOk": 1790534263397,
+      "lastRun": 1790557606869,
+      "lastOk": 1790557606869,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,235 (+76.5%) · excludes S&P 500 ETF",
+      "lastLine": "$4,205 (+75.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2583,9 +2583,27 @@
         {
           "t": 1790534263397,
           "v": 4235.1
+        },
+        {
+          "t": 1790557606869,
+          "v": 4204.7
         }
       ],
       "events": [
+        {
+          "t": 1790557606855,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790557606856,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790534263388,
           "level": "notable",
@@ -2991,31 +3009,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789907741803,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789907741803,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 84702
+          "BTC": 84094
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790557606869,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 13
+    },
     {
       "t": 1790548305807,
       "ran": 1,

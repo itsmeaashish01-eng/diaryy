@@ -29,6 +29,21 @@
   "seeded": true,
   "alerts": [
     {
+      "id": "mumevmae-t985t4",
+      "watchId": "seed-demo",
+      "watchLabel": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 17.1% vs its recent average — now $204.01",
+      "price": 204.01,
+      "currency": "USD",
+      "t": 1790670325910,
+      "read": false,
+      "kindLabel": "Flight"
+    },
+    {
       "id": "mum0wol6-1eotpb",
       "watchId": "seed-demo",
       "watchLabel": "Demo fare — checks with no network needed",
@@ -969,10 +984,13 @@
           "p": 82907
         }
       ],
-      "lastCheck": 1790646860896,
+      "lastCheck": 1790670325898,
       "nextCheck": null,
-      "errorCount": 0,
-      "lastError": null,
+      "errorCount": 1,
+      "lastError": {
+        "message": "HTTP 403 Forbidden",
+        "t": 1790670325898
+      },
       "lastAlertAt": {
         "risePct": 1790142975862
       },
@@ -1770,14 +1788,21 @@
           "meta": {
             "simulated": true
           }
+        },
+        {
+          "t": 1790670325899,
+          "p": 204.01,
+          "meta": {
+            "simulated": true
+          }
         }
       ],
-      "lastCheck": 1790646860921,
+      "lastCheck": 1790670325899,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
       "lastAlertAt": {
-        "dropPct": 1790646860922
+        "dropPct": 1790670325910
       },
       "cooldownMin": 180,
       "notes": "Simulated. Proves the hourly job runs end to end. Delete once your real watches are in."

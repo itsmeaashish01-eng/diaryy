@@ -40,11 +40,16 @@ jobs:
       - name: Guide self-test
         run: node guide/selftest.mjs
 
+      # Quantum Ladder's numerics against textbook answers, and the course
+      # against itself: every exercise's answer must pass its own checker.
+      - name: Quantum self-test
+        run: node quantum/selftest.mjs
+
       # A syntax error in a type would only show up at 37 past the hour,
       # in a job nobody is watching. Cheaper to find it here.
       - name: Everything parses
         run: |
-          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js; do
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js quantum/selftest.mjs quantum/js/*.js; do
             node --check "$f"
           done
           for f in agents/data/*.json; do

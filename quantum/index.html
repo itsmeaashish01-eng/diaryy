@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Quantum Ladder</title>
+  <meta name="description" content="Learn quantum mechanics from first principles to quantum field theory, with live simulations and worked exercises." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    // MathJax renders the TeX in lessons as SVG (no font files to fetch).
+    // If it fails to load, the TeX stays readable as source.
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]],
+        macros: {
+          ket: ["\\left|#1\\right\\rangle", 1],
+          bra: ["\\left\\langle#1\\right|", 1],
+          braket: ["\\left\\langle#1\\middle|#2\\right\\rangle", 2],
+        },
+      },
+      svg: { fontCache: "global" },
+      options: { enableMenu: false },
+      startup: {
+        typeset: false,
+        ready() {
+          MathJax.startup.defaultReady();
+          MathJax.startup.promise.then(() => window.QApp && window.QApp.typesetAll());
+        },
+      },
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Quantum Ladder, course map">
+      <span class="brand-mark" aria-hidden="true">|n⟩</span>
+      <span class="brand-name">Quantum Ladder</span>
+    </a>
+    <nav class="topnav" aria-label="Sections">
+      <a href="#home" data-tab="home">Course</a>
+      <a href="#lab" data-tab="lab">Lab</a>
+      <a href="#gym" data-tab="gym">Math Gym</a>
+      <a class="back-diary" href="../index.html" title="Back to My Diary">Diary</a>
+    </nav>
+  </header>
+
+  <div class="shell">
+    <details class="outline-wrap" id="outline-wrap" open>
+      <summary>Course outline</summary>
+      <nav id="outline" class="outline" aria-label="Lessons"></nav>
+    </details>
+    <main id="main" class="main" tabindex="-1"></main>
+  </div>
+
+  <footer class="foot">
+    Units in simulations: ħ = m = 1 unless stated. Progress is kept in this browser only.
+  </footer>
+
+  <script src="js/physics.js"></script>
+  <script src="js/exercises.js"></script>
+  <script src="js/curriculum.js"></script>
+  <script src="js/sims.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

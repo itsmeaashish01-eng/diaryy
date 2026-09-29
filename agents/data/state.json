@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790648111057,
-      "lastOk": 1790648111057,
+      "lastRun": 1790672316697,
+      "lastOk": 1790672316697,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "7 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790630801000,
+          "level": "notable",
+          "title": "ESP32S3 cluster running 1.58-bit (BitNet) Language model",
+          "detail": "Article URL: https://github.com/Low-Zi-Hong/ESP32s3-LLM-Cluster Comments URL: https://news.ycombinator.com/item?id=49884625 Points: 95 # Comments: 18",
+          "url": "https://github.com/Low-Zi-Hong/ESP32s3-LLM-Cluster"
+        },
+        {
+          "t": 1790621933000,
+          "level": "notable",
+          "title": "MicroLLM Lab – Try 7 tiny LLM's in the browser",
+          "detail": "Article URL: https://stateofutopia.com/experiments/microllmlab/ Comments URL: https://news.ycombinator.com/item?id=49882781 Points: 233 # Comments: 82",
+          "url": "https://stateofutopia.com/experiments/microllmlab/"
+        },
+        {
+          "t": 1790618291000,
+          "level": "notable",
+          "title": "Sonnet 5.5",
+          "detail": "Article URL: https://www.anthropic.com/claude-sonnet-5-5 Comments URL: https://news.ycombinator.com/item?id=49881850 Points: 772 # Comments: 517",
+          "url": "https://www.anthropic.com/claude-sonnet-5-5"
+        },
+        {
+          "t": 1790610396000,
+          "level": "notable",
+          "title": "Nvidia wants to put a watchdog chip next to every AI agent",
+          "detail": "Article URL: https://www.cnbc.com/2026/09/28/nvidia-releases.html Comments URL: https://news.ycombinator.com/item?id=49879883 Points: 166 # Comments: 208",
+          "url": "https://www.cnbc.com/2026/09/28/nvidia-releases.html"
+        },
         {
           "t": 1790643347000,
           "level": "notable",
@@ -401,42 +429,14 @@
           "title": "Using LLMs to trace alchemical knowledge and decode 17th century letters",
           "detail": "Article URL: https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical Comments URL: https://news.ycombinator.com/item?id=49835531 Points: 146 # Comments: 31",
           "url": "https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical"
-        },
-        {
-          "t": 1790277267000,
-          "level": "notable",
-          "title": "Using LLMs to trace alchemical knowledge and decode 17th century letters",
-          "detail": "Article URL: https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical Comments URL: https://news.ycombinator.com/item?id=49835531 Points: 124 # Comments: 24",
-          "url": "https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical"
-        },
-        {
-          "t": 1790270496000,
-          "level": "notable",
-          "title": "Show HN: Whiteboard (YC W26) – An open-source IDE for thoughtful software design",
-          "detail": "Hello! We’re Sid, Alex, Ketan, and Milan. We’re building Whiteboard (https://whiteboard.dev.fast/), an open-source desktop app where humans and agents can architect software together in a common workspace. Here’s our repo: https://github.com/devdotfast/whiteboard.We were missing the feeling of a “wh",
-          "url": "https://github.com/devdotfast/whiteboard"
-        },
-        {
-          "t": 1790277267000,
-          "level": "notable",
-          "title": "Using LLMs to trace alchemical knowledge and decode 17th century letters",
-          "detail": "Article URL: https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical Comments URL: https://news.ycombinator.com/item?id=49835531 Points: 67 # Comments: 9",
-          "url": "https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical"
-        },
-        {
-          "t": 1790270496000,
-          "level": "notable",
-          "title": "Show HN: Whiteboard (YC W26) – An open-source IDE for thoughtful software design",
-          "detail": "Hello! We’re Sid, Alex, Ketan, and Milan. We’re building Whiteboard (https://whiteboard.dev.fast/), an open-source desktop app where humans and agents can architect software together in a common workspace. Here’s our repo: https://github.com/devdotfast/whiteboard.We were missing the feeling of a “wh",
-          "url": "https://github.com/devdotfast/whiteboard"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1790633704373,
-      "lastOk": 1790633704373,
+      "lastRun": 1790672317231,
+      "lastOk": 1790672317231,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.284",
@@ -514,6 +514,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.274"
         },
         {
+          "t": 1790618523000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.284",
+          "detail": "## What's changed\n\n- Added Claude Sonnet 5.5 (`claude-sonnet-5-5`), now the default Sonnet model on the Anthropic API — 1M context, $2/$10 per Mtok with $0.20/Mtok cache reads\n- Added a \"Yes, but ask again next time\" answer to auto mode's prompt before a read outside the working directories, so you can allow that one read and still be asked about later ones\n- Added dollar amounts to the Claude app",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.284"
+        },
+        {
           "t": 1790373012000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.283",
@@ -575,13 +582,6 @@
           "title": "anthropics/claude-code v2.1.274",
           "detail": "## What's changed\n\n- Added a visible warning when memory usage is critical, with steps to free memory or restart safely\n- Added `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` to bound how long the first non-interactive turn waits for connecting MCP servers (`0` = don't wait)\n- Added `effort` attribute to the `claude_code.llm_request` OpenTelemetry trace span, matching the `api_request` event\n- Added `claude_co",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.274"
-        },
-        {
-          "t": 1789503783000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.273",
-          "detail": "## What's changed\n\n- Added `x-claude-code-request-class`, `x-claude-code-agent-type`, `x-claude-code-prev-tool-durations`, `x-claude-code-compaction` and `x-claude-code-context-compacted` request headers for LLM gateways; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added a notification when an MCP server disconnects mid-session and automatic reconnection gives up, pointing at `/mcp`\n- Added",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
         },
         {
           "t": 1790373012000,
@@ -2343,10 +2343,13 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790648111706,
+      "lastRun": 1790672317985,
       "lastOk": 1790648111706,
-      "errorCount": 0,
-      "lastError": null,
+      "errorCount": 1,
+      "lastError": {
+        "message": "couldn't price anything — S&P 500 ETF: HTTP 404 Not Found",
+        "t": 1790672317985
+      },
       "lastLine": "$4,149 (+72.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
@@ -3074,6 +3077,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1790672317985,
+      "ran": 2,
+      "skipped": 7,
+      "failed": 1,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1790648111706,
       "ran": 2,

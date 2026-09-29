@@ -29,6 +29,21 @@
   "seeded": true,
   "alerts": [
     {
+      "id": "mun59ujr-5tdja5",
+      "watchId": "seed-demo",
+      "watchLabel": "Demo fare — checks with no network needed",
+      "kind": "flight",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 23.0% vs its recent average — now $188.72",
+      "price": 188.72,
+      "currency": "USD",
+      "t": 1790714659815,
+      "read": false,
+      "kindLabel": "Flight"
+    },
+    {
       "id": "mumunatk-z01j9g",
       "watchId": "seed-demo",
       "watchLabel": "Demo fare — checks with no network needed",
@@ -999,12 +1014,12 @@
           "p": 82907
         }
       ],
-      "lastCheck": 1790696811627,
+      "lastCheck": 1790714659802,
       "nextCheck": null,
-      "errorCount": 2,
+      "errorCount": 3,
       "lastError": {
         "message": "HTTP 403 Forbidden",
-        "t": 1790696811627
+        "t": 1790714659802
       },
       "lastAlertAt": {
         "risePct": 1790142975862
@@ -1817,14 +1832,21 @@
           "meta": {
             "simulated": true
           }
+        },
+        {
+          "t": 1790714659803,
+          "p": 188.72,
+          "meta": {
+            "simulated": true
+          }
         }
       ],
-      "lastCheck": 1790696811628,
+      "lastCheck": 1790714659803,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
       "lastAlertAt": {
-        "dropPct": 1790696811655
+        "dropPct": 1790714659815
       },
       "cooldownMin": 180,
       "notes": "Simulated. Proves the hourly job runs end to end. Delete once your real watches are in."

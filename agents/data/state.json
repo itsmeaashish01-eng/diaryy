@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790697939687,
-      "lastOk": 1790697939687,
+      "lastRun": 1790715579369,
+      "lastOk": 1790715579369,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790703086000,
+          "level": "notable",
+          "title": "GLM-5.3 and the spread of advanced cyber capabilities",
+          "detail": "Article URL: https://www.anthropic.com/research/glm-5-3-and-the-spread-of-advanced-cyber-capabilities Comments URL: https://news.ycombinator.com/item?id=49897075 Points: 76 # Comments: 65",
+          "url": "https://www.anthropic.com/research/glm-5-3-and-the-spread-of-advanced-cyber-capabilities"
+        },
+        {
+          "t": 1790701677000,
+          "level": "notable",
+          "title": "Dots: Always-on agents",
+          "detail": "Article URL: https://openai.com/index/introducing-dots/ Comments URL: https://news.ycombinator.com/item?id=49896604 Points: 372 # Comments: 280",
+          "url": "https://openai.com/index/introducing-dots/"
+        },
         {
           "t": 1790691941000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Yes, Claude can do Nine Loops",
           "detail": "Article URL: https://www.anthropic.com/research/yes-claude-can-do-nine-loops Comments URL: https://news.ycombinator.com/item?id=49848033 Points: 9 # Comments: 0",
           "url": "https://www.anthropic.com/research/yes-claude-can-do-nine-loops"
-        },
-        {
-          "t": 1790352244000,
-          "level": "notable",
-          "title": "Jevmem – automatic project memory for Claude Code, built on Jev",
-          "detail": "Article URL: https://github.com/Avinash-jetwani/jevmem Comments URL: https://news.ycombinator.com/item?id=49846391 Points: 52 # Comments: 36",
-          "url": "https://github.com/Avinash-jetwani/jevmem"
-        },
-        {
-          "t": 1790350165000,
-          "level": "notable",
-          "title": "U.S. appeals court upholds designation of Anthropic as supply chain risk",
-          "detail": "Article URL: https://www.cnbc.com/2026/09/25/pentagon-anthropic-ai-risk-appeals-court.html Comments URL: https://news.ycombinator.com/item?id=49845977 Points: 229 # Comments: 323",
-          "url": "https://www.cnbc.com/2026/09/25/pentagon-anthropic-ai-risk-appeals-court.html"
         }
       ],
       "notifiedAt": {},
@@ -2362,12 +2362,12 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790697940571,
+      "lastRun": 1790715589703,
       "lastOk": 1790648111706,
-      "errorCount": 2,
+      "errorCount": 3,
       "lastError": {
-        "message": "couldn't price anything — S&P 500 ETF: HTTP 404 Not Found",
-        "t": 1790697940571
+        "message": "couldn't price anything — S&P 500 ETF: fetch failed",
+        "t": 1790715589703
       },
       "lastLine": "$4,149 (+72.9%) · excludes S&P 500 ETF",
       "seen": [],
@@ -3096,6 +3096,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1790715589704,
+      "ran": 1,
+      "skipped": 8,
+      "failed": 1,
+      "notified": 0,
+      "held": 2
+    },
     {
       "t": 1790697940571,
       "ran": 5,

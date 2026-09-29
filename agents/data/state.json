@@ -2,14 +2,63 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790633704040,
-      "lastOk": 1790633704040,
+      "lastRun": 1790648111057,
+      "lastOk": 1790648111057,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "7 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790643347000,
+          "level": "notable",
+          "title": "We found 24 Android vulnerabilities using our open source AI security agent",
+          "detail": "Article URL: https://github.blog/security/how-we-found-24-android-vulnerabilities-using-our-open-source-ai-security-agent/ Comments URL: https://news.ycombinator.com/item?id=49886609 Points: 6 # Comments: 1",
+          "url": "https://github.blog/security/how-we-found-24-android-vulnerabilities-using-our-open-source-ai-security-agent/"
+        },
+        {
+          "t": 1790630801000,
+          "level": "notable",
+          "title": "ESP32S3 cluster running 1.58-bit (BitNet) Language model",
+          "detail": "Article URL: https://github.com/Low-Zi-Hong/ESP32s3-LLM-Cluster Comments URL: https://news.ycombinator.com/item?id=49884625 Points: 30 # Comments: 2",
+          "url": "https://github.com/Low-Zi-Hong/ESP32s3-LLM-Cluster"
+        },
+        {
+          "t": 1790621933000,
+          "level": "notable",
+          "title": "MicroLLM Lab – Try 7 tiny LLM's in the browser",
+          "detail": "Article URL: https://stateofutopia.com/experiments/microllmlab/ Comments URL: https://news.ycombinator.com/item?id=49882781 Points: 134 # Comments: 65",
+          "url": "https://stateofutopia.com/experiments/microllmlab/"
+        },
+        {
+          "t": 1790618291000,
+          "level": "notable",
+          "title": "Sonnet 5.5",
+          "detail": "Article URL: https://www.anthropic.com/claude-sonnet-5-5 Comments URL: https://news.ycombinator.com/item?id=49881850 Points: 591 # Comments: 412",
+          "url": "https://www.anthropic.com/claude-sonnet-5-5"
+        },
+        {
+          "t": 1790610396000,
+          "level": "notable",
+          "title": "Nvidia wants to put a watchdog chip next to every AI agent",
+          "detail": "Article URL: https://www.cnbc.com/2026/09/28/nvidia-releases.html Comments URL: https://news.ycombinator.com/item?id=49879883 Points: 106 # Comments: 148",
+          "url": "https://www.cnbc.com/2026/09/28/nvidia-releases.html"
+        },
+        {
+          "t": 1790609293000,
+          "level": "notable",
+          "title": "Cf: The Agentic CLI for the Cloudflare API",
+          "detail": "Article URL: https://blog.cloudflare.com/cloudflare-cf-cli-launch/ Comments URL: https://news.ycombinator.com/item?id=49879577 Points: 121 # Comments: 48",
+          "url": "https://blog.cloudflare.com/cloudflare-cf-cli-launch/"
+        },
+        {
+          "t": 1790608573000,
+          "level": "notable",
+          "title": "Show HN: HN.watch – Videos of all Hacker News posts",
+          "detail": "Hi HN, I’m Per, founder of Scrimba (YC S20). We’ve spent the last decade teaching people how to code with an HTML-based video format. We’ve now plugged an LLM into it, so that people can create explainer videos about anything. It’s called “Scrimba Explain”.To demo this technology for Hacker News, we",
+          "url": "https://hn.watch/"
+        },
         {
           "t": 1790621933000,
           "level": "notable",
@@ -380,55 +429,6 @@
           "title": "Show HN: Whiteboard (YC W26) – An open-source IDE for thoughtful software design",
           "detail": "Hello! We’re Sid, Alex, Ketan, and Milan. We’re building Whiteboard (https://whiteboard.dev.fast/), an open-source desktop app where humans and agents can architect software together in a common workspace. Here’s our repo: https://github.com/devdotfast/whiteboard.We were missing the feeling of a “wh",
           "url": "https://github.com/devdotfast/whiteboard"
-        },
-        {
-          "t": 1790227270000,
-          "level": "notable",
-          "title": "Early rogue AI agent activity and attempts to hack found on urlquery.net",
-          "detail": "Article URL: https://transluce.org/agent-activity Comments URL: https://news.ycombinator.com/item?id=49826565 Points: 244 # Comments: 239",
-          "url": "https://transluce.org/agent-activity"
-        },
-        {
-          "t": 1790277267000,
-          "level": "notable",
-          "title": "Using LLMs to trace alchemical knowledge and decode 17th century letters",
-          "detail": "Article URL: https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical Comments URL: https://news.ycombinator.com/item?id=49835531 Points: 44 # Comments: 8",
-          "url": "https://resobscura.substack.com/p/ai-labs-need-to-start-funding-historical"
-        },
-        {
-          "t": 1790271328000,
-          "level": "notable",
-          "title": "Show HN: Critic – Review code with the agent that wrote it",
-          "detail": "Hey HN, I'm Shreyash from Feyn. We help companies build custom models from their data. Today we're releasing Critic, a change review platform that lets you engage directly with the AI that wrote the code.Agents write most of our code. While that has made us more productive, understanding a change an",
-          "url": "https://www.critic.run/"
-        },
-        {
-          "t": 1790270496000,
-          "level": "notable",
-          "title": "Show HN: Whiteboard (YC W26) – An open-source IDE for thoughtful software design",
-          "detail": "Hello! We’re Sid, Alex, Ketan, and Milan. We’re building Whiteboard (https://whiteboard.dev.fast/), an open-source desktop app where humans and agents can architect software together in a common workspace. Here’s our repo: https://github.com/devdotfast/whiteboard.We were missing the feeling of a “wh",
-          "url": "https://github.com/devdotfast/whiteboard"
-        },
-        {
-          "t": 1790227270000,
-          "level": "notable",
-          "title": "Early rogue AI agent activity and attempts to hack found on urlquery.net",
-          "detail": "Article URL: https://transluce.org/agent-activity Comments URL: https://news.ycombinator.com/item?id=49826565 Points: 228 # Comments: 209",
-          "url": "https://transluce.org/agent-activity"
-        },
-        {
-          "t": 1790270496000,
-          "level": "notable",
-          "title": "Show HN: Whiteboard (YC W26) – An open-source IDE for thoughtful software design",
-          "detail": "Hello! We’re Sid, Alex, Ketan, and Milan. We’re building Whiteboard, an open-source desktop app where humans and agents can architect software together in a common workspace. Here’s our repo: https://github.com/devdotfast/whiteboard and our homepage: https://whiteboard.dev.fast/We were missing the f",
-          "url": "https://github.com/devdotfast/whiteboard"
-        },
-        {
-          "t": 1790192578000,
-          "level": "notable",
-          "title": "Show HN: AgentRun: DSL to turn agents into workflows",
-          "detail": "Hi HN,I just open sourced the DSL that our harness in grep.ai uses to turn repeatable parts of agent work into workflows. You can combine tool calls, code, Jev-powered system one decisions for things like routing and screening evidence, and agents when a step needs more investigation.Our harness use",
-          "url": "https://github.com/Parcha-ai/agentrun"
         }
       ],
       "notifiedAt": {},
@@ -2343,11 +2343,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790633704854,
-      "lastOk": 1790633704854,
+      "lastRun": 1790648111706,
+      "lastOk": 1790648111706,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,159 (+73.3%) · excludes S&P 500 ETF",
+      "lastLine": "$4,149 (+72.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2637,9 +2637,27 @@
         {
           "t": 1790633704854,
           "v": 4158.7
+        },
+        {
+          "t": 1790648111706,
+          "v": 4149.25
         }
       ],
       "events": [
+        {
+          "t": 1790648111692,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790648111692,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790633704841,
           "level": "notable",
@@ -3045,31 +3063,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1789988614481,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1789988614482,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 83174
+          "BTC": 82985
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790648111706,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 9
+    },
     {
       "t": 1790633704854,
       "ran": 6,

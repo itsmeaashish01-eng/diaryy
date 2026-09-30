@@ -1027,15 +1027,16 @@
         {
           "t": 1790646860896,
           "p": 82907
+        },
+        {
+          "t": 1790750405624,
+          "p": 83070
         }
       ],
-      "lastCheck": 1790727866844,
+      "lastCheck": 1790750405624,
       "nextCheck": null,
-      "errorCount": 4,
-      "lastError": {
-        "message": "HTTP 403 Forbidden",
-        "t": 1790727866844
-      },
+      "errorCount": 0,
+      "lastError": null,
       "lastAlertAt": {
         "risePct": 1790142975862
       },
@@ -1861,9 +1862,16 @@
           "meta": {
             "simulated": true
           }
+        },
+        {
+          "t": 1790750405643,
+          "p": 253.36,
+          "meta": {
+            "simulated": true
+          }
         }
       ],
-      "lastCheck": 1790727866845,
+      "lastCheck": 1790750405643,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,

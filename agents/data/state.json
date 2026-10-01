@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790809882437,
-      "lastOk": 1790809882437,
+      "lastRun": 1790821252774,
+      "lastOk": 1790821252774,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790789860000,
+          "level": "notable",
+          "title": "Launch HN: Magnitude (YC S25) – Self-optimizing inference engine for agents",
+          "detail": "Hey HN, Anders and Tom here. We're building Magnitude, an inference engine for agents that optimizes itself to run as fast as possible on your hardware. It works on Mac, Linux, and Windows on any hardware and is up to 2x faster than llama.cpp.We're both software engineers and previously built an ope",
+          "url": "https://github.com/magnitudedev/magnitude"
+        },
         {
           "t": 1790789860000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "A single function Jev-like wrapper for LLMs, including vision models",
           "detail": "Article URL: http://allanrbo.blogspot.com/2026/09/a-jev-like-wrapper-for-llms-including.html Comments URL: https://news.ycombinator.com/item?id=49853175 Points: 52 # Comments: 6",
           "url": "http://allanrbo.blogspot.com/2026/09/a-jev-like-wrapper-for-llms-including.html"
-        },
-        {
-          "t": 1790370567000,
-          "level": "notable",
-          "title": "Revealing the details of how OpenAI agents hacked Hugging Face",
-          "detail": "Article URL: https://swarmtraces.org/ Comments URL: https://news.ycombinator.com/item?id=49849985 Points: 439 # Comments: 271",
-          "url": "https://swarmtraces.org/"
         }
       ],
       "notifiedAt": {},
@@ -2400,11 +2400,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790796952441,
-      "lastOk": 1790796952441,
+      "lastRun": 1790821253451,
+      "lastOk": 1790821253451,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,190 (+74.6%) · excludes S&P 500 ETF",
+      "lastLine": "$4,175 (+74.0%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2710,9 +2710,27 @@
         {
           "t": 1790796952441,
           "v": 4190.2
+        },
+        {
+          "t": 1790821253451,
+          "v": 4175.35
         }
       ],
       "events": [
+        {
+          "t": 1790821253437,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790821253437,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790796952427,
           "level": "notable",
@@ -3118,31 +3136,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790072187699,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790072187699,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 83804
+          "BTC": 83507
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790821253452,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1790809882828,
       "ran": 2,

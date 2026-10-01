@@ -1,0 +1,2710 @@
+<title>StrokeRounds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ==========================================================
+   StrokeRounds — style.css
+   Mobile-first, dark by default (rounds happen at 6am and 2am),
+   with a light theme for bright wards.
+   ========================================================== */
+
+:root {
+  --bg:            #0b1220;
+  --bg-elev:       #121c2e;
+  --bg-elev-2:     #182541;
+  --line:          #24324d;
+  --line-soft:     #1b2740;
+  --text:          #e8eefc;
+  --text-dim:      #9fb0cd;
+  --text-faint:    #6c7f9e;
+  --accent:        #4f8cff;
+  --accent-soft:   rgba(79,140,255,.16);
+  --good:          #2fbf71;
+  --good-soft:     rgba(47,191,113,.16);
+  --warn:          #f0a92b;
+  --warn-soft:     rgba(240,169,43,.16);
+  --bad:           #ff5f6d;
+  --bad-soft:      rgba(255,95,109,.16);
+  --violet:        #a77dff;
+  --violet-soft:   rgba(167,125,255,.16);
+  --radius:        14px;
+  --radius-sm:     10px;
+  --shadow:        0 10px 30px rgba(0,0,0,.35);
+  --font-ui:       "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:     "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --tap:           44px;
+  --safe-b:        env(safe-area-inset-bottom, 0px);
+  --safe-t:        env(safe-area-inset-top, 0px);
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --bg:            #f4f6fb;
+  --bg-elev:       #ffffff;
+  --bg-elev-2:     #eef2f9;
+  --line:          #d8e0ee;
+  --line-soft:     #e6ebf4;
+  --text:          #131c2c;
+  --text-dim:      #536176;
+  --text-faint:    #7c8aa1;
+  --accent:        #2563eb;
+  --accent-soft:   rgba(37,99,235,.10);
+  --good:          #12855a;
+  --good-soft:     rgba(18,133,90,.12);
+  --warn:          #a86a00;
+  --warn-soft:     rgba(168,106,0,.12);
+  --bad:           #c62839;
+  --bad-soft:      rgba(198,40,57,.10);
+  --violet:        #6d3fd1;
+  --violet-soft:   rgba(109,63,209,.12);
+  --shadow:        0 8px 24px rgba(20,32,58,.10);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+/* `hidden` must win over the layout displays set below. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+h1, h2, h3, h4 { margin: 0; font-weight: 650; letter-spacing: -.01em; }
+p { margin: 0 0 .6em; }
+.muted { color: var(--text-dim); }
+.faint { color: var(--text-faint); }
+.tiny  { font-size: 12px; }
+.mono  { font-family: var(--font-mono); }
+.right { text-align: right; }
+.nowrap{ white-space: nowrap; }
+.hidden{ display: none !important; }
+
+/* ---------- Lock screen ---------- */
+.lock-screen {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; place-items: center;
+  background: radial-gradient(120% 80% at 50% 0%, #16213c 0%, var(--bg) 60%);
+  padding: 24px;
+}
+.lock-card { width: min(360px, 100%); text-align: center; }
+.lock-logo { font-size: 44px; color: var(--accent); line-height: 1; }
+.lock-card h1 { font-size: 26px; margin: 8px 0 4px; }
+.lock-input {
+  width: 100%; margin: 18px 0 6px; padding: 14px;
+  font-size: 22px; text-align: center; letter-spacing: .4em;
+  background: var(--bg-elev); border: 1px solid var(--line);
+  color: var(--text); border-radius: var(--radius);
+}
+.lock-error { color: var(--bad); font-size: 13px; margin: 6px 0; }
+
+/* ---------- App shell ---------- */
+.app { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+
+.appbar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 8px;
+  padding: calc(10px + var(--safe-t)) 12px 10px;
+  background: color-mix(in srgb, var(--bg) 97%, transparent);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.appbar-title { flex: 1; min-width: 0; }
+.appbar-title h1 { font-size: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.appbar-sub { display: block; font-size: 12px; color: var(--text-dim); }
+.appbar-actions { display: flex; gap: 4px; }
+
+.main { flex: 1; padding: 12px 12px calc(96px + var(--safe-b)); max-width: 860px; width: 100%; margin: 0 auto; }
+@media (min-width: 900px) { .main { padding-bottom: 40px; } }
+
+/* ---------- Buttons ---------- */
+.btn {
+  appearance: none; border: 1px solid var(--line);
+  background: var(--bg-elev); color: var(--text);
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 550; cursor: pointer; white-space: nowrap;
+  min-height: var(--tap); display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+}
+.btn:active { transform: scale(.985); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-danger  { background: var(--bad-soft); border-color: transparent; color: var(--bad); }
+.btn-ghost   { background: transparent; border-color: transparent; color: var(--text-dim); }
+.btn-block   { width: 100%; }
+.btn-sm      { min-height: 34px; padding: 6px 10px; font-size: 13px; }
+.btn-row     { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn-col     { display: flex; flex-direction: column; gap: 8px; }
+.tile {
+  width: 100%; text-align: left; white-space: normal;
+  flex-direction: column; align-items: flex-start; gap: 2px;
+  padding: 12px 14px;
+}
+.tile span { font-weight: 400; }
+
+.icon-btn {
+  appearance: none; background: transparent; border: 0; color: var(--text-dim);
+  width: var(--tap); height: var(--tap); border-radius: 12px;
+  font-size: 20px; line-height: 1; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.icon-btn:active { background: var(--bg-elev-2); }
+
+.fab {
+  position: fixed; right: 16px; bottom: calc(74px + var(--safe-b));
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--accent); color: #fff; border: 0;
+  font-size: 28px; line-height: 1; box-shadow: var(--shadow);
+  z-index: 30; cursor: pointer;
+}
+.fab:active { transform: scale(.94); }
+
+/* ---------- Bottom nav ---------- */
+.bottom-nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 25;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  padding-bottom: var(--safe-b);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line-soft);
+}
+.nav-btn {
+  appearance: none; background: none; border: 0; cursor: pointer;
+  color: var(--text-faint); font-size: 11px; font-weight: 550;
+  padding: 8px 0 10px; display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.nav-btn.is-active { color: var(--accent); }
+.nav-ico { font-size: 18px; line-height: 1; }
+
+/* ---------- Toolbar / search ---------- */
+.toolbar { display: flex; gap: 8px; margin-bottom: 10px; }
+.search-wrap { position: relative; flex: 1 1 auto; min-width: 0; }
+.search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-faint); font-size: 17px; pointer-events: none; }
+.search-wrap input {
+  width: 100%; padding: 11px 12px 11px 36px;
+  background: var(--bg-elev); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); color: var(--text); font-size: 15px;
+}
+.select {
+  background: var(--bg-elev); border: 1px solid var(--line); color: var(--text);
+  border-radius: var(--radius-sm); padding: 0 8px; font-size: 13px; min-height: var(--tap);
+}
+.toolbar .select { flex: 0 0 auto; max-width: 42%; }
+
+/* ---------- Chips ---------- */
+.chip-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+.chip-row::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto; padding: 7px 12px; border-radius: 999px; cursor: pointer;
+  background: var(--bg-elev); border: 1px solid var(--line);
+  color: var(--text-dim); font-size: 13px; font-weight: 550; white-space: nowrap;
+}
+.chip.is-on { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 50%, transparent); color: var(--accent); }
+.chip-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ---------- Stats ---------- */
+.stat-row { display: flex; gap: 8px; margin: 2px 0 12px; }
+.stat {
+  flex: 1; background: var(--bg-elev); border: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm); padding: 8px 10px;
+}
+.stat b { display: block; font-size: 19px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.stat span {
+  display: block; font-size: 10px; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: .03em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ---------- Patient cards ---------- */
+.list { display: flex; flex-direction: column; gap: 8px; }
+.pcard {
+  display: flex; gap: 10px; align-items: stretch;
+  background: var(--bg-elev); border: 1px solid var(--line-soft);
+  border-radius: var(--radius); padding: 11px 12px; cursor: pointer;
+  border-left: 3px solid var(--line);
+}
+.pcard:active { background: var(--bg-elev-2); }
+.pcard.is-rounded { border-left-color: var(--good); }
+.pcard.is-flagged { border-left-color: var(--bad); }
+.pcard.is-off { opacity: .55; }
+.pcard-main { flex: 1; min-width: 0; }
+.pcard-top { display: flex; align-items: baseline; gap: 8px; }
+.pcard-room {
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: -.02em; color: var(--accent); background: var(--accent-soft);
+  padding: 2px 6px; border-radius: 6px; flex: 0 0 auto;
+}
+.pcard-name { font-weight: 650; font-size: 16px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcard-meta { font-size: 12.5px; color: var(--text-dim); margin-top: 2px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcard-tags { display: flex; gap: 5px; margin-top: 7px; flex-wrap: wrap; }
+.pcard-side { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 6px; }
+
+.tag {
+  font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 6px;
+  background: var(--bg-elev-2); color: var(--text-dim); white-space: nowrap;
+}
+.tag-accent { background: var(--accent-soft); color: var(--accent); }
+.tag-good   { background: var(--good-soft);   color: var(--good); }
+.tag-warn   { background: var(--warn-soft);   color: var(--warn); }
+.tag-bad    { background: var(--bad-soft);    color: var(--bad); }
+.tag-violet { background: var(--violet-soft); color: var(--violet); }
+
+.day-pill {
+  font-size: 11px; font-weight: 700; color: var(--text-dim);
+  background: var(--bg-elev-2); border-radius: 999px; padding: 3px 8px;
+}
+
+/* ---------- Patient detail ---------- */
+.patient-header {
+  background: var(--bg-elev); border: 1px solid var(--line-soft);
+  border-radius: var(--radius); padding: 12px 14px; margin-bottom: 10px;
+}
+.ph-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.ph-name { font-size: 20px; font-weight: 700; }
+.ph-sub { font-size: 12.5px; line-height: 1.35; color: var(--text-dim); max-width: 34ch; }
+.ph-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 9px; }
+.ph-actions { display: flex; gap: 6px; }
+
+.tabs {
+  display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
+  border-bottom: 1px solid var(--line-soft); margin-bottom: 12px;
+  position: sticky; top: calc(56px + var(--safe-t)); z-index: 15;
+  background: var(--bg);
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  appearance: none; background: none; border: 0; cursor: pointer;
+  color: var(--text-dim); font-size: 14px; font-weight: 600;
+  padding: 10px 12px; border-bottom: 2px solid transparent; white-space: nowrap;
+}
+.tab.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ---------- Section cards / fields ---------- */
+.card {
+  background: var(--bg-elev); border: 1px solid var(--line-soft);
+  border-radius: var(--radius); padding: 12px 14px; margin-bottom: 10px;
+}
+.card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.card-head h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--text-faint); }
+.card-hint { font-size: 12px; color: var(--text-faint); }
+
+.field { margin-bottom: 12px; }
+.field:last-child { margin-bottom: 0; }
+.field > label, .flabel {
+  display: block; font-size: 12px; font-weight: 600; letter-spacing: .03em;
+  text-transform: uppercase; color: var(--text-faint); margin-bottom: 5px;
+}
+input[type="text"], input[type="number"], input[type="date"], input[type="time"],
+input[type="search"], input[type="password"], textarea, select {
+  font-family: inherit; font-size: 15px; color: var(--text);
+  background: var(--bg-elev-2); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 10px 11px; width: 100%;
+}
+textarea { resize: vertical; min-height: 68px; line-height: 1.5; }
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+@media (max-width: 420px) { .grid3 { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- Work-up rows ---------- */
+.wu-row {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 10px 0; border-bottom: 1px solid var(--line-soft);
+}
+.wu-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.wu-top { display: flex; align-items: center; gap: 8px; }
+.wu-label { flex: 1; font-size: 14px; font-weight: 600; }
+.wu-sub { font-size: 11.5px; color: var(--text-faint); font-weight: 400; display: block; }
+.seg { display: flex; background: var(--bg-elev-2); border-radius: 8px; padding: 2px; gap: 2px; }
+.seg button {
+  appearance: none; border: 0; background: transparent; cursor: pointer;
+  color: var(--text-faint); font-size: 11px; font-weight: 700;
+  padding: 5px 8px; border-radius: 6px; min-width: 30px;
+}
+.seg button.is-on { background: var(--accent); color: #fff; }
+.seg button.is-on[data-status="done"]    { background: var(--good); }
+.seg button.is-on[data-status="pending"] { background: var(--warn); color: #1a1200; }
+.seg button.is-on[data-status="na"]      { background: var(--line); color: var(--text-dim); }
+
+/* ---------- Tasks ---------- */
+.task {
+  display: flex; align-items: flex-start; gap: 10px; padding: 9px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.task:last-child { border-bottom: 0; }
+.task input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); flex: 0 0 auto; }
+.task-text { flex: 1; font-size: 14.5px; }
+.task.is-done .task-text { text-decoration: line-through; color: var(--text-faint); }
+.task-add { display: flex; gap: 8px; margin-top: 10px; }
+
+/* ---------- History ---------- */
+.hist { border-left: 2px solid var(--line); padding-left: 12px; margin-left: 4px; }
+.hist-item { position: relative; padding-bottom: 14px; }
+.hist-item::before {
+  content: ""; position: absolute; left: -19px; top: 6px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 3px var(--bg);
+}
+.hist-date { font-size: 12px; font-weight: 700; color: var(--accent); }
+.hist-body { font-size: 13.5px; color: var(--text-dim); white-space: pre-wrap; margin-top: 3px; }
+
+/* ---------- Note output ---------- */
+.note-out {
+  font-family: var(--font-mono);
+  font-size: 12.5px; line-height: 1.55; white-space: pre-wrap; word-break: break-word;
+  background: var(--bg-elev-2); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 12px; max-height: 60vh; overflow: auto;
+}
+
+/* ---------- Modal ---------- */
+.modal { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-end; justify-content: center; }
+@media (min-width: 700px) { .modal { align-items: center; } }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(2,7,18,.62); backdrop-filter: blur(2px); }
+.modal-card {
+  position: relative; width: min(640px, 100%); max-height: 92dvh;
+  background: var(--bg-elev); border: 1px solid var(--line);
+  border-radius: 18px 18px 0 0; display: flex; flex-direction: column; box-shadow: var(--shadow);
+}
+@media (min-width: 700px) { .modal-card { border-radius: 18px; } }
+.modal-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 14px 8px; }
+.modal-head h2 { font-size: 17px; }
+.modal-body { padding: 4px 14px 14px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.modal-foot { display: flex; gap: 8px; padding: 10px 14px calc(14px + var(--safe-b)); border-top: 1px solid var(--line-soft); }
+.modal-foot .btn { flex: 1; }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(88px + var(--safe-b)); z-index: 90;
+  background: var(--text); color: var(--bg);
+  padding: 10px 16px; border-radius: 999px; font-size: 13.5px; font-weight: 600;
+  box-shadow: var(--shadow); max-width: 90vw; text-align: center;
+}
+
+/* ---------- Empty state ---------- */
+.empty { text-align: center; padding: 48px 20px; }
+.empty-glyph { font-size: 40px; color: var(--accent); }
+.empty h2 { font-size: 18px; margin: 10px 0 4px; }
+.empty .btn { margin: 6px 4px 0; }
+
+/* ---------- Score tool ---------- */
+.score-item { padding: 11px 0; border-bottom: 1px solid var(--line-soft); }
+.score-item:last-of-type { border-bottom: 0; }
+.score-q { font-size: 14px; font-weight: 600; margin-bottom: 7px; }
+.score-total {
+  position: sticky; bottom: 0; background: var(--bg-elev);
+  border-top: 1px solid var(--line); padding: 10px 0; margin-top: 6px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.score-total b { font-size: 26px; font-variant-numeric: tabular-nums; }
+.opt-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.opt {
+  padding: 7px 10px; border-radius: 8px; cursor: pointer; font-size: 13px;
+  background: var(--bg-elev-2); border: 1px solid var(--line); color: var(--text-dim);
+}
+.opt.is-on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+
+.kv { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line-soft); font-size: 14px; }
+.kv:last-child { border-bottom: 0; }
+.kv span { color: var(--text-dim); }
+.kv b { font-weight: 650; font-variant-numeric: tabular-nums; }
+
+.banner {
+  background: var(--warn-soft); border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+  color: var(--text); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13px; margin-bottom: 10px;
+}
+.banner b { color: var(--warn); }
+
+</style>
+
+<!-- ============ LOCK SCREEN ============ -->
+<div id="lockScreen" class="lock-screen" hidden>
+  <div class="lock-card">
+    <div class="lock-logo">◈</div>
+    <h1>StrokeRounds</h1>
+    <p class="muted">Enter passcode to unlock this device's list.</p>
+    <input id="lockInput" class="lock-input" type="password" inputmode="numeric" autocomplete="off" placeholder="••••" />
+    <p id="lockError" class="lock-error" hidden>Incorrect passcode</p>
+    <button id="lockBtn" class="btn btn-primary btn-block">Unlock</button>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" class="app" hidden>
+
+  <!-- Header -->
+  <header class="appbar">
+    <button id="backBtn" class="icon-btn" title="Back" aria-label="Back" hidden>‹</button>
+    <div class="appbar-title">
+      <h1 id="appTitle">Census</h1>
+      <span id="appSub" class="appbar-sub"></span>
+    </div>
+    <div class="appbar-actions">
+      <button id="themeBtn" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">◐</button>
+      <button id="lockNowBtn" class="icon-btn" title="Lock app" aria-label="Lock app" hidden>🔒</button>
+    </div>
+  </header>
+
+  <main id="main" class="main">
+
+    <!-- ============ CENSUS VIEW ============ -->
+    <section id="view-census" class="view">
+      <div class="toolbar">
+        <div class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input id="searchInput" type="search" placeholder="Search name, room, MRN, dx…" autocomplete="off" />
+        </div>
+        <select id="sortSelect" class="select" aria-label="Sort list">
+          <option value="room">Sort: Room</option>
+          <option value="name">Sort: Name</option>
+          <option value="day">Sort: Hospital day</option>
+          <option value="nihss">Sort: NIHSS</option>
+          <option value="updated">Sort: Recently updated</option>
+        </select>
+      </div>
+
+      <div class="chip-row" id="filterChips">
+        <button class="chip chip-toggle is-on" data-filter="active">Active</button>
+        <button class="chip chip-toggle" data-filter="discharged">Signed off</button>
+        <button class="chip chip-toggle" data-filter="notrounded">Not rounded today</button>
+        <button class="chip chip-toggle" data-filter="flag">Flagged</button>
+        <button class="chip chip-toggle" data-filter="tasks">Open tasks</button>
+      </div>
+
+      <div id="censusStats" class="stat-row"></div>
+      <div id="censusList" class="list"></div>
+      <div id="censusEmpty" class="empty" hidden>
+        <div class="empty-glyph">◈</div>
+        <h2>No patients yet</h2>
+        <p class="muted">Add your first patient to start the list. Everything stays on this device.</p>
+        <button class="btn btn-primary" data-action="new-patient">Add patient</button>
+        <button class="btn btn-ghost" data-action="load-demo">Load a demo patient</button>
+      </div>
+    </section>
+
+    <!-- ============ PATIENT VIEW ============ -->
+    <section id="view-patient" class="view" hidden>
+      <div id="patientHeader" class="patient-header"></div>
+      <nav class="tabs" id="patientTabs">
+        <button class="tab is-active" data-tab="round">Round</button>
+        <button class="tab" data-tab="workup">Work-up</button>
+        <button class="tab" data-tab="profile">Profile</button>
+        <button class="tab" data-tab="history">History</button>
+        <button class="tab" data-tab="note">Note</button>
+      </nav>
+      <div id="patientBody" class="patient-body"></div>
+    </section>
+
+    <!-- ============ TOOLS VIEW ============ -->
+    <section id="view-tools" class="view" hidden>
+      <div id="toolsBody"></div>
+    </section>
+
+    <!-- ============ SETTINGS VIEW ============ -->
+    <section id="view-settings" class="view" hidden>
+      <div id="settingsBody"></div>
+    </section>
+
+  </main>
+
+  <!-- Floating add button -->
+  <button id="fab" class="fab" title="Add patient" aria-label="Add patient">＋</button>
+
+  <!-- Bottom navigation -->
+  <nav class="bottom-nav" id="bottomNav">
+    <button class="nav-btn is-active" data-view="census"><span class="nav-ico">☰</span><span>Census</span></button>
+    <button class="nav-btn" data-view="tools"><span class="nav-ico">∑</span><span>Tools</span></button>
+    <button class="nav-btn" data-view="settings"><span class="nav-ico">⚙</span><span>Settings</span></button>
+  </nav>
+</div>
+
+<!-- ============ MODAL ============ -->
+<div id="modal" class="modal" hidden>
+  <div class="modal-backdrop" data-close="1"></div>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <header class="modal-head">
+      <h2 id="modalTitle">Title</h2>
+      <button class="icon-btn" id="modalClose" aria-label="Close">✕</button>
+    </header>
+    <div id="modalBody" class="modal-body"></div>
+    <footer id="modalFoot" class="modal-foot"></footer>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<script>window.STROKEROUNDS_SINGLE_FILE = true;</script>
+<script>
+/* ---- js/store.js ---- */
+/* ==========================================================
+   StrokeRounds — store.js
+   Local-only data layer. Nothing leaves the device: every
+   patient, round and task lives in localStorage under
+   "strokeRounds.v1". Export/import is a plain JSON file the
+   user controls.
+   ========================================================== */
+
+const Store = (() => {
+  const KEY      = "strokeRounds.v1";
+  const SETTINGS = "strokeRounds.settings.v1";
+  const SCHEMA   = 1;
+
+  /* ---------- Reference data (the fields from the paper list) ---------- */
+
+  const STROKE_TYPES = [
+    "Ischemic stroke", "TIA", "ICH", "SAH", "CVST",
+    "Stroke mimic", "Carotid/vert dissection", "Other",
+  ];
+
+  const VASC_TERRITORIES = [
+    "MCA", "MCA superior div", "MCA inferior div", "ACA", "PCA",
+    "Vertebrobasilar", "PICA", "AICA", "SCA", "Lenticulostriate",
+    "Watershed", "Multi-territory",
+  ];
+
+  const LOCATIONS = [
+    "L frontal", "R frontal", "L parietal", "R parietal",
+    "L temporal", "R temporal", "L occipital", "R occipital",
+    "L insula", "R insula", "L basal ganglia", "R basal ganglia",
+    "L thalamus", "R thalamus", "L corona radiata", "R corona radiata",
+    "Pons", "Midbrain", "Medulla", "L cerebellum", "R cerebellum",
+  ];
+
+  const RISK_FACTORS = [
+    "HTN", "DM2", "HLD", "AFib", "CAD", "CHF", "Prior stroke/TIA",
+    "Smoking", "OSA", "CKD", "Obesity", "PFO", "Carotid stenosis",
+    "Malignancy", "OCP/HRT", "Substance use", "Family hx",
+  ];
+
+  const ETIOLOGIES = [
+    "Large artery atherosclerosis", "Cardioembolic", "Small vessel",
+    "Other determined", "Cryptogenic / ESUS", "Incomplete work-up",
+    "Dissection", "Hypoperfusion / watershed", "Vasculitis / RCVS",
+  ];
+
+  /* Work-up items — mirrors the "Work up" block of the rounding sheet */
+  const WORKUP_ITEMS = [
+    { key: "cth",       label: "CT head",             sub: "baseline / interval bleed check" },
+    { key: "cta",       label: "CTA head & neck",     sub: "LVO, stenosis, dissection" },
+    { key: "ctp",       label: "CT perfusion",        sub: "core / penumbra mismatch" },
+    { key: "mri",       label: "MRI brain",           sub: "DWI · ADC · SWAN · FLAIR ± contrast" },
+    { key: "priorScan", label: "Prior scans reviewed", sub: "outside imaging / comparison" },
+    { key: "tte",       label: "TTE",                 sub: "EF, wall motion, thrombus" },
+    { key: "bubble",    label: "Bubble study",        sub: "R→L shunt / PFO" },
+    { key: "tee",       label: "TEE",                 sub: "if source still unclear" },
+    { key: "ltcm",      label: "Long-term cardiac monitor", sub: "≥14–30 day for occult AF" },
+    { key: "ldl",       label: "LDL",                 sub: "goal < 70 mg/dL" },
+    { key: "a1c",       label: "HbA1c",               sub: "goal < 7%" },
+    { key: "hypercoag", label: "Hypercoagulable panel", sub: "APLA, factors — timing matters" },
+    { key: "dsa",       label: "DSA",                 sub: "catheter angiography" },
+    { key: "eeg",       label: "EEG",                 sub: "if seizure suspected" },
+  ];
+
+  const WORKUP_STATUS = ["", "ordered", "pending", "done", "na"];
+
+  /* Associated-condition block */
+  const ASSOC_FIELDS = [
+    { key: "cns",          label: "CNS / prior stroke" },
+    { key: "card",         label: "Cardiac (stent, CAD, valve)" },
+    { key: "endo",         label: "Endocrine" },
+    { key: "hemeOnc",      label: "Heme / Onc" },
+    { key: "electroRenal", label: "Electrolytes / renal" },
+    { key: "infection",    label: "Infection" },
+    { key: "other",        label: "Other significant disorder" },
+  ];
+
+  /* ---------- Defaults ---------- */
+
+  const DEFAULT_SETTINGS = {
+    theme: "",          // "" = follow the device until the user picks one
+    pin: "",            // stored as a hash, empty = no lock
+    lockOnHide: true,
+    autoPurgeDays: 0,   // 0 = never auto-purge signed-off patients
+    listName: "Stroke service",
+    lastBackup: "",
+  };
+
+  let db = { schema: SCHEMA, patients: [], updatedAt: "" };
+  let settings = { ...DEFAULT_SETTINGS };
+
+  /* ---------- Utilities ---------- */
+
+  const uid = () =>
+    Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+
+  const todayISO = (d = new Date()) => {
+    const t = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+    return t.toISOString().slice(0, 10);
+  };
+
+  const nowISO = () => new Date().toISOString();
+
+  /** Days since admission, 1-indexed the way rounds are counted. */
+  function hospitalDay(patient) {
+    if (!patient.admitDate) return null;
+    const a = new Date(patient.admitDate + "T00:00:00");
+    const t = new Date(todayISO() + "T00:00:00");
+    const diff = Math.round((t - a) / 86400000);
+    return diff >= 0 ? diff + 1 : null;
+  }
+
+  /* Tiny non-cryptographic hash. This is a screen-lock convenience for a
+     shared workstation, not encryption — the README says so plainly. */
+  function hash(str) {
+    let h = 5381;
+    for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0;
+    return "h" + (h >>> 0).toString(36);
+  }
+
+  /* ---------- Blank records ---------- */
+
+  function blankWorkup() {
+    const wu = {};
+    WORKUP_ITEMS.forEach((i) => (wu[i.key] = { status: "", result: "" }));
+    return wu;
+  }
+
+  function blankAssoc() {
+    const a = {};
+    ASSOC_FIELDS.forEach((f) => (a[f.key] = ""));
+    return a;
+  }
+
+  function blankPatient() {
+    return {
+      id: uid(),
+      name: "",
+      mrn: "",
+      room: "",
+      age: "",
+      sex: "",
+      admitDate: todayISO(),
+      lkw: "",
+      type: "Ischemic stroke",
+      location: "",
+      vascularity: "",
+      hx: "",
+      trauma: "",
+      nihssAdmit: "",
+      nihssCurrent: "",
+      mrsPre: "",
+      tpa: "",          // e.g. "TNK 0.25 mg/kg @ 03:12"
+      evt: "",          // e.g. "EVT TICI 2b @ 04:40"
+      riskFactors: [],
+      etiology: "",
+      etiologyNote: "",
+      prevention: "",
+      dvt: "",
+      pt: "", ot: "", slp: "",
+      workup: blankWorkup(),
+      assoc: blankAssoc(),
+      meds: "",
+      notes: "",
+      dispo: "",
+      flag: false,
+      status: "active",
+      dischargeDate: "",
+      tasks: [],
+      rounds: [],
+      createdAt: nowISO(),
+      updatedAt: nowISO(),
+    };
+  }
+
+  function blankRound(date = todayISO()) {
+    return {
+      id: uid(),
+      date,
+      vitals: "",
+      labs: "",
+      newInvestigation: "",
+      exam: "",
+      nihss: "",
+      assessment: "",
+      plan: "",
+      createdAt: nowISO(),
+      updatedAt: nowISO(),
+    };
+  }
+
+  /* ---------- Persistence ---------- */
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        db = migrate(parsed);
+      }
+    } catch (e) {
+      console.warn("StrokeRounds: could not read saved data", e);
+    }
+    try {
+      const raw = localStorage.getItem(SETTINGS);
+      if (raw) settings = { ...DEFAULT_SETTINGS, ...JSON.parse(raw) };
+    } catch (e) {
+      console.warn("StrokeRounds: could not read settings", e);
+    }
+    autoPurge();
+    return db;
+  }
+
+  /** Fill in fields added after a record was first written. */
+  function migrate(parsed) {
+    const out = { schema: SCHEMA, patients: [], updatedAt: parsed.updatedAt || "" };
+    out.patients = (parsed.patients || []).map((p) => {
+      const base = blankPatient();
+      const merged = { ...base, ...p };
+      merged.workup = { ...base.workup, ...(p.workup || {}) };
+      WORKUP_ITEMS.forEach((i) => {
+        if (typeof merged.workup[i.key] === "string") {
+          merged.workup[i.key] = { status: "done", result: merged.workup[i.key] };
+        }
+        if (!merged.workup[i.key]) merged.workup[i.key] = { status: "", result: "" };
+      });
+      merged.assoc = { ...base.assoc, ...(p.assoc || {}) };
+      merged.riskFactors = Array.isArray(p.riskFactors) ? p.riskFactors : [];
+      merged.tasks = Array.isArray(p.tasks) ? p.tasks : [];
+      merged.rounds = Array.isArray(p.rounds) ? p.rounds : [];
+      merged.id = p.id || uid();
+      return merged;
+    });
+    return out;
+  }
+
+  function save() {
+    db.updatedAt = nowISO();
+    try {
+      localStorage.setItem(KEY, JSON.stringify(db));
+    } catch (e) {
+      alert("Could not save — this device's storage is full or blocked.\n" + e.message);
+    }
+  }
+
+  function saveSettings(patch) {
+    settings = { ...settings, ...patch };
+    localStorage.setItem(SETTINGS, JSON.stringify(settings));
+    return settings;
+  }
+
+  function getSettings() { return settings; }
+
+  /** Drop signed-off patients older than the retention window (opt-in). */
+  function autoPurge() {
+    const days = Number(settings.autoPurgeDays) || 0;
+    if (!days) return;
+    const cutoff = Date.now() - days * 86400000;
+    const before = db.patients.length;
+    db.patients = db.patients.filter((p) => {
+      if (p.status !== "discharged") return true;
+      const t = new Date(p.dischargeDate || p.updatedAt || 0).getTime();
+      return t > cutoff;
+    });
+    if (db.patients.length !== before) save();
+  }
+
+  /* ---------- Patient CRUD ---------- */
+
+  const all = () => db.patients;
+  const get = (id) => db.patients.find((p) => p.id === id) || null;
+
+  function add(patch = {}) {
+    const p = { ...blankPatient(), ...patch };
+    db.patients.push(p);
+    save();
+    return p;
+  }
+
+  function update(id, patch) {
+    const p = get(id);
+    if (!p) return null;
+    Object.assign(p, patch, { updatedAt: nowISO() });
+    save();
+    return p;
+  }
+
+  function remove(id) {
+    db.patients = db.patients.filter((p) => p.id !== id);
+    save();
+  }
+
+  /* ---------- Rounds ---------- */
+
+  /** Today's round note, created on first touch so the tab is never empty. */
+  function todayRound(patient, create = true) {
+    const d = todayISO();
+    let r = patient.rounds.find((x) => x.date === d);
+    if (!r && create) {
+      r = blankRound(d);
+      patient.rounds.push(r);
+      save();
+    }
+    return r;
+  }
+
+  function updateRound(patient, roundId, patch) {
+    const r = patient.rounds.find((x) => x.id === roundId);
+    if (!r) return null;
+    Object.assign(r, patch, { updatedAt: nowISO() });
+    patient.updatedAt = nowISO();
+    save();
+    return r;
+  }
+
+  function deleteRound(patient, roundId) {
+    patient.rounds = patient.rounds.filter((r) => r.id !== roundId);
+    save();
+  }
+
+  /** Was this patient rounded on today? (any content in today's note) */
+  function roundedToday(patient) {
+    const r = patient.rounds.find((x) => x.date === todayISO());
+    if (!r) return false;
+    return Boolean(
+      (r.vitals || r.labs || r.newInvestigation || r.exam || r.assessment || r.plan || "").trim()
+    );
+  }
+
+  /* ---------- Tasks ---------- */
+
+  function addTask(patient, text) {
+    if (!text.trim()) return;
+    patient.tasks.push({ id: uid(), text: text.trim(), done: false, createdAt: nowISO() });
+    patient.updatedAt = nowISO();
+    save();
+  }
+
+  function toggleTask(patient, taskId) {
+    const t = patient.tasks.find((x) => x.id === taskId);
+    if (t) { t.done = !t.done; patient.updatedAt = nowISO(); save(); }
+  }
+
+  function removeTask(patient, taskId) {
+    patient.tasks = patient.tasks.filter((t) => t.id !== taskId);
+    save();
+  }
+
+  const openTasks = (p) => p.tasks.filter((t) => !t.done).length;
+
+  /* ---------- Export / import ---------- */
+
+  function exportJSON() {
+    return JSON.stringify({ ...db, exportedAt: nowISO(), app: "StrokeRounds" }, null, 2);
+  }
+
+  /** merge = keep existing patients and append; otherwise replace outright. */
+  function importJSON(text, merge = true) {
+    const parsed = JSON.parse(text);
+    if (!parsed || !Array.isArray(parsed.patients)) throw new Error("Not a StrokeRounds backup file.");
+    const incoming = migrate(parsed).patients;
+    if (!merge) {
+      db.patients = incoming;
+    } else {
+      const byId = new Map(db.patients.map((p) => [p.id, p]));
+      incoming.forEach((p) => {
+        const existing = byId.get(p.id);
+        if (!existing) db.patients.push(p);
+        else if (new Date(p.updatedAt) > new Date(existing.updatedAt)) Object.assign(existing, p);
+      });
+    }
+    save();
+    return incoming.length;
+  }
+
+  function wipe() {
+    db = { schema: SCHEMA, patients: [], updatedAt: nowISO() };
+    save();
+  }
+
+  /* ---------- Demo record (teaching / trying the app out) ---------- */
+
+  function addDemo() {
+    const p = add({
+      name: "DEMO — J.R.",
+      mrn: "000-DEMO",
+      room: "7West-12",
+      age: "68",
+      sex: "F",
+      admitDate: todayISO(new Date(Date.now() - 2 * 86400000)),
+      lkw: "2026-09-02 21:40",
+      type: "Ischemic stroke",
+      location: "L basal ganglia",
+      vascularity: "MCA superior div",
+      hx: "Sudden R hemiparesis and aphasia at home, found by family.",
+      trauma: "No head trauma; no fall witnessed.",
+      nihssAdmit: "14",
+      nihssCurrent: "6",
+      mrsPre: "0",
+      tpa: "TNK 0.25 mg/kg 23:05 (door-to-needle 38 min)",
+      evt: "EVT L M1, TICI 2b at 00:22",
+      riskFactors: ["HTN", "DM2", "HLD", "AFib"],
+      etiology: "Cardioembolic",
+      etiologyNote: "New AF on telemetry, CHA2DS2-VASc 6.",
+      prevention: "ASA 81 bridge → apixaban 5 mg BID on day 5 (size-based delay). Atorvastatin 80.",
+      dvt: "SCDs; heparin held 24h post-lytic, started this AM.",
+      pt: "PT: ambulating with min assist",
+      ot: "OT: ADL retraining",
+      slp: "SLP: dysphagia 3 diet, thin liquids",
+      meds: "Atorvastatin 80, metoprolol 25 BID, metformin held, apixaban to start d5.",
+      notes: "Family meeting scheduled; discussing rehab placement.",
+    });
+    p.workup.cth  = { status: "done",    result: "ASPECTS 8, no HT on 24h scan" };
+    p.workup.cta  = { status: "done",    result: "L M1 occlusion, recanalized post-EVT" };
+    p.workup.ctp  = { status: "done",    result: "Core 12 mL / penumbra 78 mL" };
+    p.workup.mri  = { status: "done",    result: "L lentiform + insular DWI, no SWAN blooming" };
+    p.workup.tte  = { status: "done",    result: "EF 55%, no thrombus" };
+    p.workup.ldl  = { status: "done",    result: "112 → statin escalated" };
+    p.workup.a1c  = { status: "done",    result: "7.8%" };
+    p.workup.ltcm = { status: "ordered", result: "AF captured — monitor not needed" };
+    p.workup.tee  = { status: "na",      result: "source found" };
+    p.assoc.card  = "New-onset AF, rate controlled";
+    p.assoc.endo  = "DM2 uncontrolled, A1c 7.8";
+    p.assoc.electroRenal = "Cr 1.1, K 3.4 repleted";
+    const r = todayRound(p);
+    Object.assign(r, {
+      vitals: "BP 138/76, HR 74, T 36.8, SpO2 97% RA",
+      labs: "Acceptable — Na 138, K 3.4→repleted, Cr 1.1, Plt 210",
+      newInvestigation: "24h CT head: no hemorrhagic transformation",
+      exam: "Alert, mild expressive aphasia, R arm 4/5, R leg 4+/5, R facial droop",
+      nihss: "6",
+      assessment: "Day 3 L MCA cardioembolic stroke s/p TNK + EVT, improving.",
+      plan: "Start apixaban day 5. Continue statin. PT/OT/SLP. Rehab eval.",
+    });
+    addTask(p, "Confirm apixaban start date with pharmacy");
+    addTask(p, "Rehab placement — call case management");
+    addTask(p, "Repeat lipid panel in 6 weeks (discharge instruction)");
+    save();
+    return p;
+  }
+
+  return {
+    // reference data
+    STROKE_TYPES, VASC_TERRITORIES, LOCATIONS, RISK_FACTORS, ETIOLOGIES,
+    WORKUP_ITEMS, WORKUP_STATUS, ASSOC_FIELDS,
+    // lifecycle
+    load, save, getSettings, saveSettings, hash,
+    // patients
+    all, get, add, update, remove, blankPatient,
+    // rounds
+    todayRound, updateRound, deleteRound, roundedToday, blankRound,
+    // tasks
+    addTask, toggleTask, removeTask, openTasks,
+    // data
+    exportJSON, importJSON, wipe, addDemo,
+    // helpers
+    uid, todayISO, nowISO, hospitalDay,
+  };
+})();
+
+
+/* ---- js/scores.js ---- */
+/* ==========================================================
+   StrokeRounds — scores.js
+   Bedside scales and calculators, defined as data so the UI can
+   render any of them from one generic renderer.
+
+   These are aids for a clinician who already knows the scales.
+   They do not replace institutional protocol or the package insert.
+   ========================================================== */
+
+const Scores = (() => {
+
+  /* ---------- Scales scored by summing item selections ---------- */
+
+  const SCALES = {
+
+    nihss: {
+      id: "nihss",
+      name: "NIH Stroke Scale",
+      sub: "15 items · 0–42 · score what you see, not what you think",
+      items: [
+        { label: "1a. Level of consciousness", opts: [
+          ["Alert", 0], ["Not alert, rousable", 1], ["Not alert, repeated stim", 2], ["Unresponsive / reflex only", 3]] },
+        { label: "1b. LOC questions (month, age)", opts: [
+          ["Both correct", 0], ["One correct", 1], ["Neither correct", 2]] },
+        { label: "1c. LOC commands (open eyes, grip)", opts: [
+          ["Both correct", 0], ["One correct", 1], ["Neither correct", 2]] },
+        { label: "2. Best gaze", opts: [
+          ["Normal", 0], ["Partial gaze palsy", 1], ["Forced deviation", 2]] },
+        { label: "3. Visual fields", opts: [
+          ["No loss", 0], ["Partial hemianopia", 1], ["Complete hemianopia", 2], ["Bilateral hemianopia", 3]] },
+        { label: "4. Facial palsy", opts: [
+          ["Normal", 0], ["Minor", 1], ["Partial", 2], ["Complete", 3]] },
+        { label: "5a. Left arm motor", opts: [
+          ["No drift", 0], ["Drift", 1], ["Some effort vs gravity", 2], ["No effort vs gravity", 3], ["No movement", 4], ["Amputation / fused (UN)", 0]] },
+        { label: "5b. Right arm motor", opts: [
+          ["No drift", 0], ["Drift", 1], ["Some effort vs gravity", 2], ["No effort vs gravity", 3], ["No movement", 4], ["Amputation / fused (UN)", 0]] },
+        { label: "6a. Left leg motor", opts: [
+          ["No drift", 0], ["Drift", 1], ["Some effort vs gravity", 2], ["No effort vs gravity", 3], ["No movement", 4], ["Amputation / fused (UN)", 0]] },
+        { label: "6b. Right leg motor", opts: [
+          ["No drift", 0], ["Drift", 1], ["Some effort vs gravity", 2], ["No effort vs gravity", 3], ["No movement", 4], ["Amputation / fused (UN)", 0]] },
+        { label: "7. Limb ataxia", opts: [
+          ["Absent", 0], ["One limb", 1], ["Two limbs", 2]] },
+        { label: "8. Sensory", opts: [
+          ["Normal", 0], ["Mild–moderate loss", 1], ["Severe / total loss", 2]] },
+        { label: "9. Best language", opts: [
+          ["No aphasia", 0], ["Mild–moderate", 1], ["Severe", 2], ["Mute / global", 3]] },
+        { label: "10. Dysarthria", opts: [
+          ["Normal", 0], ["Mild–moderate", 1], ["Severe / anarthric", 2], ["Intubated (UN)", 0]] },
+        { label: "11. Extinction / inattention", opts: [
+          ["No abnormality", 0], ["One modality", 1], ["Profound / >1 modality", 2]] },
+      ],
+      interpret(t) {
+        if (t === 0) return "No stroke symptoms";
+        if (t <= 4)  return "Minor stroke";
+        if (t <= 15) return "Moderate stroke";
+        if (t <= 20) return "Moderate–severe stroke";
+        return "Severe stroke";
+      },
+    },
+
+    chadsvasc: {
+      id: "chadsvasc",
+      name: "CHA₂DS₂-VASc",
+      sub: "Annual stroke risk in non-valvular atrial fibrillation",
+      items: [
+        { label: "Congestive heart failure / LV dysfunction", opts: [["No", 0], ["Yes", 1]] },
+        { label: "Hypertension",                              opts: [["No", 0], ["Yes", 1]] },
+        { label: "Age",                                       opts: [["< 65", 0], ["65–74", 1], ["≥ 75", 2]] },
+        { label: "Diabetes mellitus",                         opts: [["No", 0], ["Yes", 1]] },
+        { label: "Prior stroke / TIA / thromboembolism",       opts: [["No", 0], ["Yes", 2]] },
+        { label: "Vascular disease (MI, PAD, aortic plaque)",  opts: [["No", 0], ["Yes", 1]] },
+        { label: "Sex category",                              opts: [["Male", 0], ["Female", 1]] },
+      ],
+      interpret(t) {
+        const risk = { 0: "0.2%", 1: "0.6%", 2: "2.2%", 3: "3.2%", 4: "4.8%",
+                       5: "7.2%", 6: "9.7%", 7: "11.2%", 8: "10.8%", 9: "12.2%" };
+        return `≈ ${risk[Math.min(t, 9)]} / year ischemic stroke risk untreated`;
+      },
+    },
+
+    hasbled: {
+      id: "hasbled",
+      name: "HAS-BLED",
+      sub: "Major bleeding risk on anticoagulation — a prompt to fix modifiable risks, not to withhold",
+      items: [
+        { label: "Hypertension (uncontrolled, SBP > 160)", opts: [["No", 0], ["Yes", 1]] },
+        { label: "Abnormal renal function",                opts: [["No", 0], ["Yes", 1]] },
+        { label: "Abnormal liver function",                opts: [["No", 0], ["Yes", 1]] },
+        { label: "Prior stroke",                           opts: [["No", 0], ["Yes", 1]] },
+        { label: "Bleeding history or predisposition",     opts: [["No", 0], ["Yes", 1]] },
+        { label: "Labile INR (on warfarin)",               opts: [["No", 0], ["Yes", 1]] },
+        { label: "Elderly (> 65)",                         opts: [["No", 0], ["Yes", 1]] },
+        { label: "Drugs (antiplatelet / NSAID)",           opts: [["No", 0], ["Yes", 1]] },
+        { label: "Alcohol ≥ 8 drinks/week",                opts: [["No", 0], ["Yes", 1]] },
+      ],
+      interpret(t) {
+        if (t <= 2) return "Low–moderate bleeding risk";
+        return "High bleeding risk (≥ 3) — address modifiable factors, review more often";
+      },
+    },
+
+    ich: {
+      id: "ich",
+      name: "ICH Score",
+      sub: "30-day mortality after spontaneous intracerebral hemorrhage",
+      items: [
+        { label: "GCS",                          opts: [["13–15", 0], ["5–12", 1], ["3–4", 2]] },
+        { label: "ICH volume",                   opts: [["< 30 mL", 0], ["≥ 30 mL", 1]] },
+        { label: "Intraventricular hemorrhage",  opts: [["No", 0], ["Yes", 1]] },
+        { label: "Infratentorial origin",        opts: [["No", 0], ["Yes", 1]] },
+        { label: "Age",                          opts: [["< 80", 0], ["≥ 80", 1]] },
+      ],
+      interpret(t) {
+        const m = { 0: "0%", 1: "13%", 2: "26%", 3: "72%", 4: "97%", 5: "100%", 6: "100%" };
+        return `≈ ${m[t]} 30-day mortality in the original cohort`;
+      },
+    },
+
+    abcd2: {
+      id: "abcd2",
+      name: "ABCD²",
+      sub: "Early stroke risk after TIA",
+      items: [
+        { label: "Age ≥ 60",              opts: [["No", 0], ["Yes", 1]] },
+        { label: "BP ≥ 140/90 at present", opts: [["No", 0], ["Yes", 1]] },
+        { label: "Clinical features",     opts: [["Other", 0], ["Speech impairment, no weakness", 1], ["Unilateral weakness", 2]] },
+        { label: "Duration",              opts: [["< 10 min", 0], ["10–59 min", 1], ["≥ 60 min", 2]] },
+        { label: "Diabetes",              opts: [["No", 0], ["Yes", 1]] },
+      ],
+      interpret(t) {
+        if (t <= 3) return "Low (≈1% 2-day stroke risk)";
+        if (t <= 5) return "Moderate (≈4% 2-day stroke risk)";
+        return "High (≈8% 2-day stroke risk)";
+      },
+    },
+
+    mrs: {
+      id: "mrs",
+      name: "Modified Rankin Scale",
+      sub: "Pick one level — pre-morbid on admission, functional at discharge",
+      single: true,
+      items: [
+        { label: "Level", opts: [
+          ["0 · No symptoms", 0],
+          ["1 · No significant disability", 1],
+          ["2 · Slight disability", 2],
+          ["3 · Moderate — walks unaided", 3],
+          ["4 · Moderately severe — cannot walk unassisted", 4],
+          ["5 · Severe — bedridden, constant care", 5],
+          ["6 · Dead", 6]] },
+      ],
+      interpret(t) {
+        return t <= 2 ? "Functionally independent (mRS 0–2)" : "Dependent (mRS 3–5)";
+      },
+    },
+  };
+
+  /* ---------- Thrombolytic dosing ---------- */
+
+  function alteplase(weightKg) {
+    const w = Math.max(0, Number(weightKg) || 0);
+    const total = Math.min(0.9 * w, 90);
+    const bolus = total * 0.1;
+    return {
+      total:   round1(total),
+      bolus:   round1(bolus),
+      infusion: round1(total - bolus),
+      capped:  0.9 * w > 90,
+      note: "0.9 mg/kg (max 90 mg): 10% as bolus over 1 min, remainder over 60 min.",
+    };
+  }
+
+  function tenecteplase(weightKg, dosePerKg = 0.25) {
+    const w = Math.max(0, Number(weightKg) || 0);
+    const cap = dosePerKg === 0.25 ? 25 : 50;
+    const total = Math.min(dosePerKg * w, cap);
+    return {
+      total: round1(total),
+      capped: dosePerKg * w > cap,
+      note: `${dosePerKg} mg/kg (max ${cap} mg) as a single IV bolus over ~5 seconds.`,
+    };
+  }
+
+  /** ABC/2 estimate of hematoma volume, in mL. */
+  function ichVolume(a, b, slices, sliceThicknessCm = 0.5) {
+    const A = Number(a) || 0, B = Number(b) || 0;
+    const C = (Number(slices) || 0) * (Number(sliceThicknessCm) || 0);
+    return round1((A * B * C) / 2);
+  }
+
+  const round1 = (n) => Math.round(n * 10) / 10;
+
+  /* ---------- Reference cards ---------- */
+
+  const REFERENCE = [
+    {
+      title: "Blood pressure targets",
+      rows: [
+        ["Pre-thrombolytic", "< 185/110 before the bolus"],
+        ["First 24 h post-lytic", "< 180/105"],
+        ["Post-EVT, recanalized", "Often < 160 or < 140 systolic — per protocol"],
+        ["AIS, no reperfusion therapy", "Permissive to 220/120 unless another indication"],
+        ["ICH, SBP 150–220", "Lower to ~140 (avoid dips below 130)"],
+      ],
+    },
+    {
+      title: "Antithrombotic timing",
+      rows: [
+        ["After IV thrombolysis", "No antiplatelet/anticoag for 24 h; repeat imaging first"],
+        ["Minor stroke / high-risk TIA", "DAPT 21–90 days, then single agent"],
+        ["AF, small infarct", "Anticoagulate early — day 3–5 typical"],
+        ["AF, large infarct", "Delay ~day 7–14; re-image before starting"],
+        ["Symptomatic ICAD", "DAPT 90 days + aggressive risk factor control"],
+      ],
+    },
+    {
+      title: "Secondary prevention targets",
+      rows: [
+        ["LDL", "< 70 mg/dL (high-intensity statin ± ezetimibe/PCSK9)"],
+        ["HbA1c", "< 7% for most"],
+        ["BP long term", "< 130/80 once stable"],
+        ["Carotid stenosis", "Symptomatic 70–99% → revascularize, usually within 2 weeks"],
+        ["Lifestyle", "Smoking cessation, OSA screening, 150 min/wk activity"],
+      ],
+    },
+  ];
+
+  return { SCALES, alteplase, tenecteplase, ichVolume, REFERENCE };
+})();
+
+
+/* ---- js/note.js ---- */
+/* ==========================================================
+   StrokeRounds — note.js
+   Turns a patient record into text you can paste into the chart.
+
+   buildNote()   — the full STROKE ROUND sheet, in the same order
+                   as the paper template it replaces
+   buildBrief()  — a one-screen sign-out blurb
+   buildList()   — the whole census as a printable handoff
+   ========================================================== */
+
+const NoteBuilder = (() => {
+
+  const STATUS_TEXT = {
+    "":        "—",
+    ordered:   "ordered",
+    pending:   "pending",
+    done:      "done",
+    na:        "n/a",
+  };
+
+  const dash = (v) => (v && String(v).trim() ? String(v).trim() : "—");
+
+  /** "Label: value" only when there is a value, so the note stays readable. */
+  function line(label, value, opts = {}) {
+    const v = value == null ? "" : String(value).trim();
+    if (!v && !opts.always) return null;
+    return `${label}: ${v || "—"}`;
+  }
+
+  function header(p) {
+    const day = Store.hospitalDay(p);
+    const bits = [
+      p.name || "Unnamed patient",
+      p.age ? `${p.age}${p.sex ? p.sex[0].toUpperCase() : ""}` : p.sex,
+      p.room ? `Room ${p.room}` : "",
+      p.mrn ? `MRN ${p.mrn}` : "",
+    ].filter(Boolean);
+    const l2 = [
+      day ? `Hospital day ${day}` : "",
+      p.admitDate ? `Admitted ${p.admitDate}` : "",
+      p.lkw ? `LKW ${p.lkw}` : "",
+    ].filter(Boolean);
+    return [bits.join(" · "), l2.join(" · ")].filter(Boolean);
+  }
+
+  function workupBlock(p) {
+    const out = [];
+    Store.WORKUP_ITEMS.forEach((item) => {
+      const w = p.workup[item.key] || { status: "", result: "" };
+      if (!w.status && !w.result) return;
+      const result = (w.result || "").trim();
+      // A result typed without a status is still a result — don't print "— —".
+      const value = w.status
+        ? STATUS_TEXT[w.status] + (result ? ` — ${result}` : "")
+        : result;
+      out.push(`  ${item.label}: ${value}`);
+    });
+    return out;
+  }
+
+  function assocBlock(p) {
+    const out = [];
+    Store.ASSOC_FIELDS.forEach((f) => {
+      const v = (p.assoc[f.key] || "").trim();
+      if (v) out.push(`  ${f.label}: ${v}`);
+    });
+    return out;
+  }
+
+  /**
+   * Full round note.
+   * @param {object} p patient
+   * @param {object} r the round entry to render (defaults to today's)
+   * @param {object} opts {includeEmpty:boolean} — keep blank prompts as "—"
+   *        so the note can be printed and filled in by hand at the bedside.
+   */
+  function buildNote(p, r, opts = {}) {
+    const keepEmpty = !!opts.includeEmpty;
+    const L = [];
+    const push = (v) => { if (v !== null && v !== undefined) L.push(v); };
+    const section = (title) => { push(""); push(title); };
+    const kv = (label, value) => push(line(label, value, { always: keepEmpty }));
+
+    push("STROKE ROUND");
+    push(r && r.date ? r.date : Store.todayISO());
+    header(p).forEach(push);
+    push("");
+
+    kv("Vitals", r && r.vitals);
+    kv("Labs", r && r.labs);
+    kv("Any new investigation", r && r.newInvestigation);
+
+    push("");
+    kv("Hx / Trauma", [p.hx, p.trauma].filter(Boolean).join(" | "));
+    kv("Location", p.location);
+    kv("Vascularity", p.vascularity);
+    kv("Risk factors", (p.riskFactors || []).join(", "));
+    kv("Etiology", [p.etiology, p.etiologyNote].filter(Boolean).join(" — "));
+    kv("Stroke prevention", p.prevention);
+    kv("DVT", p.dvt);
+    kv("PT / OT / SLP", [p.pt, p.ot, p.slp].filter(Boolean).join(" | "));
+
+    const acute = [p.tpa, p.evt].filter(Boolean).join(" | ");
+    if (acute) kv("Acute treatment", acute);
+
+    const nihss = (r && r.nihss) || p.nihssCurrent;
+    if (p.nihssAdmit || nihss || p.mrsPre) {
+      kv("NIHSS", [
+        p.nihssAdmit ? `admit ${p.nihssAdmit}` : "",
+        nihss ? `today ${nihss}` : "",
+        p.mrsPre ? `pre-morbid mRS ${p.mrsPre}` : "",
+      ].filter(Boolean).join(" · "));
+    }
+
+    const wu = workupBlock(p);
+    if (wu.length || keepEmpty) {
+      section("Work up:");
+      if (wu.length) wu.forEach(push);
+      else Store.WORKUP_ITEMS.forEach((i) => push(`  ${i.label}: —`));
+    }
+
+    const assoc = assocBlock(p);
+    if (assoc.length || keepEmpty) {
+      section("Associated condition:");
+      if (assoc.length) assoc.forEach(push);
+      else Store.ASSOC_FIELDS.forEach((f) => push(`  ${f.label}: —`));
+    }
+
+    push("");
+    kv("Exam", r && r.exam);
+    kv("Assessment", r && r.assessment);
+    kv("Plan", r && r.plan);
+    kv("Meds", p.meds);
+    kv("Notes", p.notes);
+
+    const open = (p.tasks || []).filter((t) => !t.done);
+    if (open.length) {
+      section("Open items:");
+      open.forEach((t) => push(`  [ ] ${t.text}`));
+    }
+
+    if (p.dispo) { push(""); push(line("Dispo", p.dispo)); }
+
+    // Collapse runs of blank lines that appear when sections are empty.
+    return L.join("\n").replace(/\n{3,}/g, "\n\n").trim() + "\n";
+  }
+
+  /** Short sign-out line: who they are, what happened, what is pending. */
+  function buildBrief(p) {
+    const day = Store.hospitalDay(p);
+    const r = (p.rounds || []).find((x) => x.date === Store.todayISO());
+    const pending = Store.WORKUP_ITEMS
+      .filter((i) => ["ordered", "pending"].includes((p.workup[i.key] || {}).status))
+      .map((i) => i.label);
+    const open = (p.tasks || []).filter((t) => !t.done).map((t) => t.text);
+
+    const L = [];
+    L.push(`${p.room ? p.room + " · " : ""}${p.name || "Unnamed"}${p.age ? ", " + p.age : ""}${p.sex ? p.sex[0].toUpperCase() : ""}${day ? " · HD " + day : ""}`);
+    L.push(`${p.type}${p.location ? " — " + p.location : ""}${p.vascularity ? " (" + p.vascularity + ")" : ""}`);
+    if (p.etiology) L.push(`Etiology: ${p.etiology}`);
+    if (p.tpa || p.evt) L.push(`Acute: ${[p.tpa, p.evt].filter(Boolean).join(" | ")}`);
+    if (p.nihssAdmit || p.nihssCurrent) L.push(`NIHSS ${dash(p.nihssAdmit)} → ${dash(p.nihssCurrent)}`);
+    if (p.prevention) L.push(`Prevention: ${p.prevention}`);
+    if (r && r.plan) L.push(`Plan: ${r.plan}`);
+    if (pending.length) L.push(`Pending: ${pending.join(", ")}`);
+    if (open.length) L.push(`To do: ${open.join("; ")}`);
+    if (p.dispo) L.push(`Dispo: ${p.dispo}`);
+    return L.join("\n") + "\n";
+  }
+
+  /** Whole active list, for a printed handoff or a paste into a group chat. */
+  function buildList(patients, title = "Stroke service") {
+    const L = [`${title.toUpperCase()} — ${Store.todayISO()}`, `${patients.length} patient(s)`, ""];
+    patients.forEach((p, i) => {
+      L.push(`${i + 1}. ${buildBrief(p).trim().split("\n").join("\n   ")}`);
+      L.push("");
+    });
+    return L.join("\n");
+  }
+
+  return { buildNote, buildBrief, buildList, STATUS_TEXT };
+})();
+
+
+/* ---- js/app.js ---- */
+/* ==========================================================
+   StrokeRounds — app.js
+   UI: census, patient detail, tools, settings.
+   Everything renders from Store; every edit writes straight back.
+   ========================================================== */
+
+(() => {
+  "use strict";
+
+  /* ---------------- DOM helpers ---------------- */
+
+  const $  = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  const esc = (s) =>
+    String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+
+  let toastTimer = null;
+  function toast(msg) {
+    const t = $("#toast");
+    t.textContent = msg;
+    t.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => (t.hidden = true), 2200);
+  }
+
+  async function copyText(text, label = "Copied") {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast(label);
+    } catch {
+      // Clipboard API is blocked on insecure origins and in some webviews.
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); toast(label); }
+      catch { toast("Select and copy manually"); }
+      ta.remove();
+    }
+  }
+
+  function printText(text, title) {
+    const w = window.open("", "_blank");
+    if (!w) { toast("Allow pop-ups to print"); return; }
+    w.document.write(
+      `<!doctype html><title>${esc(title)}</title>` +
+      `<style>body{font:12px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;padding:24px;max-width:800px}</style>` +
+      esc(text)
+    );
+    w.document.close();
+    w.focus();
+    w.print();
+  }
+
+  /* ---------------- App state ---------------- */
+
+  const state = {
+    view: "census",
+    patientId: null,
+    tab: "round",
+    search: "",
+    sort: "room",
+    filters: new Set(["active"]),
+    noteBlanks: false,
+    scale: null,       // active calculator state
+  };
+
+  /* ---------------- Boot ---------------- */
+
+  function init() {
+    Store.load();
+    applyTheme(Store.getSettings().theme);
+    wireChrome();
+
+    if (Store.getSettings().pin) showLock();
+    else unlock();
+
+    // The single-file build has no sw.js beside it to register.
+    if ("serviceWorker" in navigator && !window.STROKEROUNDS_SINGLE_FILE) {
+      window.addEventListener("load", () =>
+        navigator.serviceWorker.register("sw.js").catch(() => {})
+      );
+    }
+  }
+
+  /** An explicit choice wins; otherwise follow whatever the device is set to. */
+  function resolveTheme(pref) {
+    if (pref === "light" || pref === "dark") return pref;
+    const stamped = document.documentElement.dataset.theme;
+    if (stamped === "light" || stamped === "dark") return stamped;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches
+      ? "light" : "dark";
+  }
+
+  function applyTheme(pref) {
+    const theme = resolveTheme(pref);
+    document.documentElement.dataset.theme = theme;
+    const meta = $('meta[name="theme-color"]');
+    if (meta) meta.content = theme === "light" ? "#f4f6fb" : "#0b1220";
+    return theme;
+  }
+
+  /* ---------------- Lock screen ---------------- */
+
+  function showLock() {
+    $("#lockScreen").hidden = false;
+    $("#app").hidden = true;
+    setTimeout(() => $("#lockInput").focus(), 120);
+  }
+
+  function unlock() {
+    $("#lockScreen").hidden = true;
+    $("#app").hidden = false;
+    $("#lockNowBtn").hidden = !Store.getSettings().pin;
+    render();
+  }
+
+  function tryUnlock() {
+    const val = $("#lockInput").value;
+    if (Store.hash(val) === Store.getSettings().pin) {
+      $("#lockInput").value = "";
+      $("#lockError").hidden = true;
+      unlock();
+    } else {
+      $("#lockError").hidden = false;
+      $("#lockInput").value = "";
+    }
+  }
+
+  /* ---------------- Chrome (header, nav, modal) ---------------- */
+
+  function wireChrome() {
+    $("#lockBtn").addEventListener("click", tryUnlock);
+    $("#lockInput").addEventListener("keydown", (e) => { if (e.key === "Enter") tryUnlock(); });
+    $("#lockNowBtn").addEventListener("click", showLock);
+
+    $("#themeBtn").addEventListener("click", () => {
+      const next = resolveTheme(Store.getSettings().theme) === "light" ? "dark" : "light";
+      Store.saveSettings({ theme: next });
+      applyTheme(next);
+    });
+
+    $("#backBtn").addEventListener("click", () => go("census"));
+
+    $("#bottomNav").addEventListener("click", (e) => {
+      const btn = e.target.closest(".nav-btn");
+      if (btn) go(btn.dataset.view);
+    });
+
+    $("#fab").addEventListener("click", () => openPatientForm(null));
+
+    $("#searchInput").addEventListener("input", (e) => {
+      state.search = e.target.value.toLowerCase();
+      renderCensus();
+    });
+    $("#sortSelect").addEventListener("change", (e) => {
+      state.sort = e.target.value;
+      renderCensus();
+    });
+    $("#filterChips").addEventListener("click", (e) => {
+      const chip = e.target.closest(".chip");
+      if (!chip) return;
+      const f = chip.dataset.filter;
+      if (state.filters.has(f)) state.filters.delete(f);
+      else {
+        // Active and signed-off are mutually exclusive views of the list.
+        if (f === "active") state.filters.delete("discharged");
+        if (f === "discharged") state.filters.delete("active");
+        state.filters.add(f);
+      }
+      $$("#filterChips .chip").forEach((c) =>
+        c.classList.toggle("is-on", state.filters.has(c.dataset.filter))
+      );
+      renderCensus();
+    });
+
+    $("#censusEmpty").addEventListener("click", (e) => {
+      const act = e.target.closest("[data-action]");
+      if (!act) return;
+      if (act.dataset.action === "new-patient") openPatientForm(null);
+      if (act.dataset.action === "load-demo") { Store.addDemo(); render(); toast("Demo patient added"); }
+    });
+
+    $("#patientTabs").addEventListener("click", (e) => {
+      const tab = e.target.closest(".tab");
+      if (!tab) return;
+      state.tab = tab.dataset.tab;
+      $$("#patientTabs .tab").forEach((t) => t.classList.toggle("is-active", t === tab));
+      renderPatientBody();
+    });
+
+    bindPatientBody();
+
+    $("#modalClose").addEventListener("click", closeModal);
+    $("#modal .modal-backdrop").addEventListener("click", closeModal);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !$("#modal").hidden) closeModal();
+    });
+
+    // Lock again when the app goes to the background on a shared device.
+    document.addEventListener("visibilitychange", () => {
+      const s = Store.getSettings();
+      if (document.hidden && s.pin && s.lockOnHide) showLock();
+    });
+  }
+
+  function go(view, patientId = null) {
+    state.view = view;
+    if (patientId) state.patientId = patientId;
+    render();
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------------- Modal ---------------- */
+
+  function openModal(title, bodyHTML, footHTML = "") {
+    $("#modalTitle").textContent = title;
+    $("#modalBody").innerHTML = bodyHTML;
+    $("#modalFoot").innerHTML = footHTML;
+    $("#modal").hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    $("#modal").hidden = true;
+    $("#modalBody").innerHTML = "";
+    $("#modalFoot").innerHTML = "";
+    document.body.style.overflow = "";
+    state.scale = null;
+  }
+
+  function confirmAction(message, onYes, yesLabel = "Delete") {
+    openModal("Are you sure?", `<p>${esc(message)}</p>`,
+      `<button class="btn" id="cnlBtn">Cancel</button>
+       <button class="btn btn-danger" id="yesBtn">${esc(yesLabel)}</button>`);
+    $("#cnlBtn").onclick = closeModal;
+    $("#yesBtn").onclick = () => { closeModal(); onYes(); };
+  }
+
+  /* ---------------- Router / render ---------------- */
+
+  function render() {
+    ["census", "patient", "tools", "settings"].forEach((v) => {
+      $(`#view-${v}`).hidden = v !== state.view;
+    });
+    $("#backBtn").hidden = state.view !== "patient";
+    $("#fab").hidden = state.view !== "census";
+    $$("#bottomNav .nav-btn").forEach((b) =>
+      b.classList.toggle("is-active", b.dataset.view === state.view)
+    );
+
+    if (state.view === "census")   renderCensus();
+    if (state.view === "patient")  renderPatient();
+    if (state.view === "tools")    renderTools();
+    if (state.view === "settings") renderSettings();
+  }
+
+  /* ---------------- Census ---------------- */
+
+  function visiblePatients() {
+    const f = state.filters;
+    let list = Store.all().slice();
+
+    if (f.has("discharged")) list = list.filter((p) => p.status === "discharged");
+    else if (f.has("active")) list = list.filter((p) => p.status === "active");
+
+    if (f.has("notrounded")) list = list.filter((p) => !Store.roundedToday(p));
+    if (f.has("flag"))       list = list.filter((p) => p.flag);
+    if (f.has("tasks"))      list = list.filter((p) => Store.openTasks(p) > 0);
+
+    if (state.search) {
+      const q = state.search;
+      list = list.filter((p) =>
+        [p.name, p.room, p.mrn, p.type, p.location, p.vascularity, p.etiology, p.notes]
+          .join(" ").toLowerCase().includes(q)
+      );
+    }
+
+    const num = (v) => (v === "" || v == null ? -1 : Number(v));
+    const sorters = {
+      room:    (a, b) => String(a.room).localeCompare(String(b.room), undefined, { numeric: true }),
+      name:    (a, b) => String(a.name).localeCompare(String(b.name)),
+      day:     (a, b) => (Store.hospitalDay(b) || 0) - (Store.hospitalDay(a) || 0),
+      nihss:   (a, b) => num(b.nihssCurrent) - num(a.nihssCurrent),
+      updated: (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
+    };
+    return list.sort(sorters[state.sort] || sorters.room);
+  }
+
+  function renderCensus() {
+    const s = Store.getSettings();
+    $("#appTitle").textContent = s.listName || "Census";
+    const active = Store.all().filter((p) => p.status === "active");
+    $("#appSub").textContent =
+      `${active.length} active · ${active.filter(Store.roundedToday).length} rounded today`;
+
+    const list = visiblePatients();
+    const wrap = $("#censusList");
+    const empty = $("#censusEmpty");
+
+    // Stats strip
+    const openTasks = active.reduce((n, p) => n + Store.openTasks(p), 0);
+    const pendingWU = active.reduce((n, p) =>
+      n + Store.WORKUP_ITEMS.filter((i) => ["ordered", "pending"].includes((p.workup[i.key] || {}).status)).length, 0);
+    $("#censusStats").innerHTML = Store.all().length ? `
+      <div class="stat"><b>${active.length}</b><span>On service</span></div>
+      <div class="stat"><b>${active.length - active.filter(Store.roundedToday).length}</b><span>To round</span></div>
+      <div class="stat"><b>${openTasks}</b><span>Open tasks</span></div>
+      <div class="stat"><b>${pendingWU}</b><span>Pending w/u</span></div>` : "";
+
+    if (!Store.all().length) {
+      wrap.innerHTML = "";
+      empty.hidden = false;
+      return;
+    }
+    empty.hidden = true;
+
+    if (!list.length) {
+      wrap.innerHTML = `<div class="empty"><p class="muted">No patients match this filter.</p></div>`;
+      return;
+    }
+
+    wrap.innerHTML = list.map(patientCard).join("");
+    wrap.onclick = (e) => {
+      const card = e.target.closest(".pcard");
+      if (!card) return;
+      if (e.target.closest("[data-flag]")) {
+        const p = Store.get(card.dataset.id);
+        Store.update(p.id, { flag: !p.flag });
+        renderCensus();
+        return;
+      }
+      state.tab = "round";
+      go("patient", card.dataset.id);
+    };
+  }
+
+  function patientCard(p) {
+    const day = Store.hospitalDay(p);
+    const rounded = Store.roundedToday(p);
+    const tasks = Store.openTasks(p);
+    const pending = Store.WORKUP_ITEMS
+      .filter((i) => ["ordered", "pending"].includes((p.workup[i.key] || {}).status)).length;
+
+    const tags = [];
+    if (p.type)         tags.push(`<span class="tag tag-accent">${esc(p.type)}</span>`);
+    if (p.vascularity)  tags.push(`<span class="tag">${esc(p.vascularity)}</span>`);
+    if (p.etiology)     tags.push(`<span class="tag tag-violet">${esc(p.etiology)}</span>`);
+    if (p.nihssCurrent !== "") tags.push(`<span class="tag tag-warn">NIHSS ${esc(p.nihssCurrent)}</span>`);
+    if (tasks)          tags.push(`<span class="tag tag-bad">${tasks} task${tasks > 1 ? "s" : ""}</span>`);
+    if (pending)        tags.push(`<span class="tag tag-warn">${pending} pending</span>`);
+    if (rounded)        tags.push(`<span class="tag tag-good">Rounded</span>`);
+
+    const meta = [
+      p.age ? `${esc(p.age)}${p.sex ? esc(p.sex[0].toUpperCase()) : ""}` : esc(p.sex),
+      esc(p.location),
+      p.mrn ? `MRN ${esc(p.mrn)}` : "",
+    ].filter(Boolean).join(" · ");
+
+    return `
+      <article class="pcard ${rounded ? "is-rounded" : ""} ${p.flag ? "is-flagged" : ""} ${p.status === "discharged" ? "is-off" : ""}" data-id="${p.id}">
+        <div class="pcard-main">
+          <div class="pcard-top">
+            ${p.room ? `<span class="pcard-room">${esc(p.room)}</span>` : ""}
+            <span class="pcard-name">${esc(p.name || "Unnamed")}</span>
+          </div>
+          ${meta ? `<div class="pcard-meta">${meta}</div>` : ""}
+          <div class="pcard-tags">${tags.join("")}</div>
+        </div>
+        <div class="pcard-side">
+          <button class="icon-btn" data-flag="1" title="Flag patient">${p.flag ? "🚩" : "⚐"}</button>
+          ${day ? `<span class="day-pill">HD ${day}</span>` : ""}
+        </div>
+      </article>`;
+  }
+
+  /* ---------------- Patient detail ---------------- */
+
+  function currentPatient() { return Store.get(state.patientId); }
+
+  function renderPatient() {
+    const p = currentPatient();
+    if (!p) { go("census"); return; }
+
+    $("#appTitle").textContent = p.name || "Patient";
+    const day = Store.hospitalDay(p);
+    $("#appSub").textContent = [
+      p.room ? `Room ${p.room}` : "",
+      day ? `HD ${day}` : "",
+      p.type,
+    ].filter(Boolean).join(" · ");
+
+    $("#patientHeader").innerHTML = `
+      <div class="ph-top">
+        <div>
+          <div class="ph-name">${esc(p.name || "Unnamed")}</div>
+          <div class="ph-sub">${[
+            p.age ? esc(p.age) + (p.sex ? esc(p.sex[0].toUpperCase()) : "") : esc(p.sex),
+            p.mrn ? "MRN " + esc(p.mrn) : "",
+            p.admitDate ? "Adm " + esc(p.admitDate) : "",
+            p.lkw ? "LKW " + esc(p.lkw) : "",
+          ].filter(Boolean).join(" · ")}</div>
+        </div>
+        <div class="ph-actions">
+          <button class="icon-btn" data-p="flag" title="Flag">${p.flag ? "🚩" : "⚐"}</button>
+          <button class="icon-btn" data-p="edit" title="Edit details">✎</button>
+          <button class="icon-btn" data-p="more" title="More">⋯</button>
+        </div>
+      </div>
+      <div class="ph-tags">
+        ${p.type ? `<span class="tag tag-accent">${esc(p.type)}</span>` : ""}
+        ${p.location ? `<span class="tag">${esc(p.location)}</span>` : ""}
+        ${p.vascularity ? `<span class="tag">${esc(p.vascularity)}</span>` : ""}
+        ${p.etiology ? `<span class="tag tag-violet">${esc(p.etiology)}</span>` : ""}
+        ${p.nihssAdmit !== "" || p.nihssCurrent !== "" ? `<span class="tag tag-warn">NIHSS ${esc(p.nihssAdmit || "–")} → ${esc(p.nihssCurrent || "–")}</span>` : ""}
+        ${p.status === "discharged" ? `<span class="tag tag-good">Signed off</span>` : ""}
+      </div>`;
+
+    $("#patientHeader").onclick = (e) => {
+      const b = e.target.closest("[data-p]");
+      if (!b) return;
+      if (b.dataset.p === "flag") { Store.update(p.id, { flag: !p.flag }); renderPatient(); }
+      if (b.dataset.p === "edit") openPatientForm(p);
+      if (b.dataset.p === "more") openPatientMenu(p);
+    };
+
+    $$("#patientTabs .tab").forEach((t) => t.classList.toggle("is-active", t.dataset.tab === state.tab));
+    renderPatientBody();
+  }
+
+  function openPatientMenu(p) {
+    openModal("Patient actions", `
+      <div class="btn-col">
+        <button class="btn btn-block" data-m="brief">Copy sign-out blurb</button>
+        <button class="btn btn-block" data-m="note">Copy full round note</button>
+        <button class="btn btn-block" data-m="print">Print round note</button>
+        <button class="btn btn-block" data-m="status">${p.status === "active" ? "Sign off / discharge" : "Return to active list"}</button>
+        <button class="btn btn-block btn-danger" data-m="delete">Delete patient</button>
+      </div>`);
+    $("#modalBody").onclick = (e) => {
+      const b = e.target.closest("[data-m]");
+      if (!b) return;
+      const r = Store.todayRound(p, false);
+      if (b.dataset.m === "brief") { copyText(NoteBuilder.buildBrief(p), "Sign-out copied"); closeModal(); }
+      if (b.dataset.m === "note")  { copyText(NoteBuilder.buildNote(p, r), "Note copied"); closeModal(); }
+      if (b.dataset.m === "print") { printText(NoteBuilder.buildNote(p, r), p.name || "Round note"); closeModal(); }
+      if (b.dataset.m === "status") {
+        const active = p.status === "active";
+        Store.update(p.id, {
+          status: active ? "discharged" : "active",
+          dischargeDate: active ? Store.todayISO() : "",
+        });
+        closeModal();
+        toast(active ? "Signed off" : "Back on the list");
+        renderPatient();
+      }
+      if (b.dataset.m === "delete") {
+        closeModal();
+        confirmAction(`Delete ${p.name || "this patient"} and all their rounds? This cannot be undone.`, () => {
+          Store.remove(p.id);
+          go("census");
+          toast("Patient deleted");
+        });
+      }
+    };
+  }
+
+  function renderPatientBody() {
+    const p = currentPatient();
+    if (!p) return;
+    const body = $("#patientBody");
+    const views = { round: roundTab, workup: workupTab, profile: profileTab, history: historyTab, note: noteTab };
+    body.innerHTML = (views[state.tab] || roundTab)(p);
+  }
+
+  /* ----- Round tab ----- */
+
+  function roundTab(p) {
+    const r = Store.todayRound(p);
+    const ta = (field, label, ph = "") => `
+      <div class="field">
+        <label>${label}</label>
+        <textarea data-round="${field}" placeholder="${esc(ph)}">${esc(r[field] || "")}</textarea>
+      </div>`;
+
+    const tasks = p.tasks.map((t) => `
+      <div class="task ${t.done ? "is-done" : ""}">
+        <input type="checkbox" data-task="${t.id}" ${t.done ? "checked" : ""} />
+        <div class="task-text">${esc(t.text)}</div>
+        <button class="icon-btn" data-taskdel="${t.id}" title="Remove">✕</button>
+      </div>`).join("");
+
+    return `
+      <div class="card">
+        <div class="card-head">
+          <h3>Today · ${r.date}</h3>
+          <button class="btn btn-sm" data-act="carry">Carry forward</button>
+        </div>
+        ${ta("vitals", "Vitals", "BP, HR, T, SpO2")}
+        ${ta("labs", "Labs", "Acceptable / notable values")}
+        ${ta("newInvestigation", "Any new investigation", "Results back since yesterday")}
+        <div class="field">
+          <label>NIHSS today</label>
+          <div style="display:flex;gap:8px">
+            <input type="number" min="0" max="42" data-round="nihss" value="${esc(r.nihss || "")}" placeholder="0–42" />
+            <button class="btn btn-sm" data-act="nihss">Score it</button>
+          </div>
+        </div>
+        ${ta("exam", "Exam", "Focal findings, interval change")}
+        ${ta("assessment", "Assessment", "Day N, diagnosis, trajectory")}
+        ${ta("plan", "Plan", "Today's actions")}
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Tasks</h3>
+          <span class="card-hint">${Store.openTasks(p)} open</span></div>
+        ${tasks || `<p class="muted tiny">Nothing outstanding.</p>`}
+        <div class="task-add">
+          <input type="text" id="taskInput" placeholder="Add a to-do…" />
+          <button class="btn btn-primary btn-sm" data-act="addtask">Add</button>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn" data-act="copy-note">Copy note</button>
+        <button class="btn" data-act="copy-brief">Copy sign-out</button>
+      </div>`;
+  }
+
+  /* ----- Work-up tab ----- */
+
+  function workupTab(p) {
+    const rows = Store.WORKUP_ITEMS.map((item) => {
+      const w = p.workup[item.key] || { status: "", result: "" };
+      const seg = ["ordered", "pending", "done", "na"].map((s) => `
+        <button data-status="${s}" data-wu="${item.key}" class="${w.status === s ? "is-on" : ""}">
+          ${s === "na" ? "N/A" : s === "ordered" ? "Ord" : s === "pending" ? "Pend" : "Done"}
+        </button>`).join("");
+      return `
+        <div class="wu-row">
+          <div class="wu-top">
+            <div class="wu-label">${esc(item.label)}<span class="wu-sub">${esc(item.sub)}</span></div>
+            <div class="seg">${seg}</div>
+          </div>
+          ${w.status || w.result
+            ? `<input type="text" data-wuresult="${item.key}" value="${esc(w.result)}" placeholder="Result / comment" />`
+            : ""}
+        </div>`;
+    }).join("");
+
+    const assoc = Store.ASSOC_FIELDS.map((f) => `
+      <div class="field">
+        <label>${esc(f.label)}</label>
+        <input type="text" data-assoc="${f.key}" value="${esc(p.assoc[f.key] || "")}" placeholder="—" />
+      </div>`).join("");
+
+    return `
+      <div class="card">
+        <div class="card-head"><h3>Work up</h3>
+          <span class="card-hint">Tap a status, then add the result</span></div>
+        ${rows}
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Associated conditions</h3></div>
+        ${assoc}
+      </div>`;
+  }
+
+  /* ----- Profile tab ----- */
+
+  function profileTab(p) {
+    const chipSet = (values, selected, attr) => `
+      <div class="chip-wrap">
+        ${values.map((v) => `
+          <button class="chip ${selected.includes(v) ? "is-on" : ""}" data-${attr}="${esc(v)}">${esc(v)}</button>`).join("")}
+      </div>`;
+
+    const field = (key, label, ph = "", type = "text") => `
+      <div class="field">
+        <label>${label}</label>
+        <input type="${type}" data-field="${key}" value="${esc(p[key] || "")}" placeholder="${esc(ph)}" />
+      </div>`;
+
+    const area = (key, label, ph = "") => `
+      <div class="field">
+        <label>${label}</label>
+        <textarea data-field="${key}" placeholder="${esc(ph)}">${esc(p[key] || "")}</textarea>
+      </div>`;
+
+    return `
+      <div class="card">
+        <div class="card-head"><h3>Presentation</h3></div>
+        ${area("hx", "History", "How it started, who found them, course")}
+        ${area("trauma", "Trauma", "Head trauma, falls, mechanism")}
+        <div class="grid3">
+          ${field("nihssAdmit", "NIHSS admit", "", "number")}
+          ${field("nihssCurrent", "NIHSS now", "", "number")}
+          ${field("mrsPre", "Pre mRS", "", "number")}
+        </div>
+        ${field("tpa", "Thrombolytic", "agent, dose, time")}
+        ${field("evt", "Thrombectomy", "vessel, TICI, time")}
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Location</h3></div>
+        ${field("location", "Location", "e.g. L basal ganglia")}
+        ${chipSet(Store.LOCATIONS, [p.location], "loc")}
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Vascularity</h3></div>
+        ${field("vascularity", "Territory", "e.g. MCA superior division")}
+        ${chipSet(Store.VASC_TERRITORIES, [p.vascularity], "vasc")}
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Risk factors</h3></div>
+        ${chipSet(Store.RISK_FACTORS, p.riskFactors, "rf")}
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Etiology</h3></div>
+        ${chipSet(Store.ETIOLOGIES, [p.etiology], "etio")}
+        ${area("etiologyNote", "Supporting detail", "What points to this mechanism")}
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Prevention & prophylaxis</h3></div>
+        ${area("prevention", "Stroke prevention", "Antithrombotic, statin, BP, glycemic plan")}
+        ${field("dvt", "DVT prophylaxis", "SCDs, LMWH, timing")}
+        <div class="grid3">
+          ${field("pt", "PT")}
+          ${field("ot", "OT")}
+          ${field("slp", "SLP")}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Meds & notes</h3></div>
+        ${area("meds", "Meds", "Active medications and changes")}
+        ${area("notes", "Notes", "Anything that does not fit elsewhere")}
+        ${field("dispo", "Dispo", "Home / rehab / SNF, barriers")}
+      </div>`;
+  }
+
+  /* ----- History tab ----- */
+
+  function historyTab(p) {
+    const rounds = p.rounds.slice().sort((a, b) => b.date.localeCompare(a.date));
+    if (!rounds.length) return `<div class="card"><p class="muted">No rounds recorded yet.</p></div>`;
+    return `
+      <div class="card">
+        <div class="card-head"><h3>Round history</h3>
+          <span class="card-hint">${rounds.length} entr${rounds.length === 1 ? "y" : "ies"}</span></div>
+        <div class="hist">
+          ${rounds.map((r) => {
+            const summary = [
+              r.vitals && `Vitals: ${r.vitals}`,
+              r.labs && `Labs: ${r.labs}`,
+              r.newInvestigation && `New: ${r.newInvestigation}`,
+              r.nihss && `NIHSS ${r.nihss}`,
+              r.exam && `Exam: ${r.exam}`,
+              r.assessment && `A: ${r.assessment}`,
+              r.plan && `P: ${r.plan}`,
+            ].filter(Boolean).join("\n");
+            return `
+              <div class="hist-item">
+                <div class="hist-date">${esc(r.date)}${r.date === Store.todayISO() ? " · today" : ""}</div>
+                <div class="hist-body">${esc(summary || "No content")}</div>
+                <div class="btn-row" style="margin-top:6px">
+                  <button class="btn btn-sm" data-roundcopy="${r.id}">Copy</button>
+                  <button class="btn btn-sm btn-ghost" data-rounddel="${r.id}">Delete</button>
+                </div>
+              </div>`;
+          }).join("")}
+        </div>
+      </div>`;
+  }
+
+  /* ----- Note tab ----- */
+
+  function noteTab(p) {
+    const r = Store.todayRound(p);
+    const note = NoteBuilder.buildNote(p, r, { includeEmpty: state.noteBlanks });
+    return `
+      <div class="card">
+        <div class="card-head"><h3>Round note</h3>
+          <button class="btn btn-sm" data-act="blanks">${state.noteBlanks ? "Hide blanks" : "Show blanks"}</button></div>
+        <div class="note-out" id="noteOut">${esc(note)}</div>
+        <div class="btn-row" style="margin-top:10px">
+          <button class="btn btn-primary" data-act="copy-note">Copy</button>
+          <button class="btn" data-act="print-note">Print</button>
+          <button class="btn" data-act="copy-brief">Sign-out</button>
+        </div>
+      </div>
+      <p class="tiny faint">Paste into the chart and edit there — this app is a scratchpad, not the medical record.</p>`;
+  }
+
+  /* ----- Patient body event wiring -----
+     Attached once at start-up. Re-rendering the body replaces its innerHTML,
+     so binding per render would stack duplicate handlers and make every
+     toggle fire twice. */
+
+  const saveTimers = {};
+  function debouncedSave(key, fn) {
+    clearTimeout(saveTimers[key]);
+    saveTimers[key] = setTimeout(fn, 250);
+  }
+
+  function bindPatientBody() {
+    const body = $("#patientBody");
+
+    body.addEventListener("input", (e) => {
+      const p = currentPatient();
+      if (!p) return;
+      const t = e.target;
+      const d = t.dataset;
+
+      if (d.round) {
+        const r = Store.todayRound(p);
+        debouncedSave("round:" + d.round, () => Store.updateRound(p, r.id, { [d.round]: t.value }));
+      } else if (d.field) {
+        debouncedSave("field:" + d.field, () => Store.update(p.id, { [d.field]: t.value }));
+      } else if (d.wuresult) {
+        debouncedSave("wu:" + d.wuresult, () => {
+          p.workup[d.wuresult].result = t.value;
+          Store.update(p.id, {});
+        });
+      } else if (d.assoc) {
+        debouncedSave("assoc:" + d.assoc, () => {
+          p.assoc[d.assoc] = t.value;
+          Store.update(p.id, {});
+        });
+      }
+    });
+
+    body.addEventListener("change", (e) => {
+      const p = currentPatient();
+      if (!p || !e.target.dataset.task) return;
+      Store.toggleTask(p, e.target.dataset.task);
+      renderPatientBody();
+    });
+
+    body.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" || e.target.id !== "taskInput") return;
+      const p = currentPatient();
+      if (!p) return;
+      Store.addTask(p, e.target.value);
+      renderPatientBody();
+    });
+
+    body.addEventListener("click", (e) => {
+      const p = currentPatient();
+      if (!p) return;
+      const el = e.target.closest("[data-wu],[data-loc],[data-vasc],[data-rf],[data-etio],[data-act],[data-taskdel],[data-roundcopy],[data-rounddel]");
+      if (!el) return;
+      const d = el.dataset;
+
+      if (d.wu) {                                   // work-up status segment
+        const cur = p.workup[d.wu].status;
+        p.workup[d.wu].status = cur === d.status ? "" : d.status;
+        Store.update(p.id, {});
+        renderPatientBody();
+        return;
+      }
+      if (d.loc)  { Store.update(p.id, { location: p.location === d.loc ? "" : d.loc }); renderPatient(); return; }
+      if (d.vasc) { Store.update(p.id, { vascularity: p.vascularity === d.vasc ? "" : d.vasc }); renderPatient(); return; }
+      if (d.etio) { Store.update(p.id, { etiology: p.etiology === d.etio ? "" : d.etio }); renderPatient(); return; }
+      if (d.rf) {
+        const set = new Set(p.riskFactors);
+        set.has(d.rf) ? set.delete(d.rf) : set.add(d.rf);
+        Store.update(p.id, { riskFactors: [...set] });
+        renderPatientBody();
+        return;
+      }
+      if (d.taskdel)   { Store.removeTask(p, d.taskdel); renderPatientBody(); return; }
+      if (d.roundcopy) {
+        const r = p.rounds.find((x) => x.id === d.roundcopy);
+        copyText(NoteBuilder.buildNote(p, r), "Note copied");
+        return;
+      }
+      if (d.rounddel) {
+        confirmAction("Delete this round entry?", () => {
+          Store.deleteRound(p, d.rounddel);
+          renderPatientBody();
+        });
+        return;
+      }
+
+      switch (d.act) {
+        case "addtask": {
+          const input = $("#taskInput", body);
+          Store.addTask(p, input.value);
+          renderPatientBody();
+          break;
+        }
+        case "carry":     carryForward(p); break;
+        case "nihss":     openScale("nihss", (total) => {
+                            const r = Store.todayRound(p);
+                            Store.updateRound(p, r.id, { nihss: String(total) });
+                            Store.update(p.id, { nihssCurrent: String(total) });
+                            renderPatient();
+                            toast("NIHSS " + total + " saved");
+                          }); break;
+        case "copy-note": copyText(NoteBuilder.buildNote(p, Store.todayRound(p)), "Note copied"); break;
+        case "copy-brief":copyText(NoteBuilder.buildBrief(p), "Sign-out copied"); break;
+        case "print-note":printText(NoteBuilder.buildNote(p, Store.todayRound(p)), p.name || "Round note"); break;
+        case "blanks":    state.noteBlanks = !state.noteBlanks; renderPatientBody(); break;
+      }
+    });
+  }
+
+  /** Pull yesterday's (or the most recent) round into today's blank fields. */
+  function carryForward(p) {
+    const today = Store.todayISO();
+    const prev = p.rounds
+      .filter((r) => r.date < today)
+      .sort((a, b) => b.date.localeCompare(a.date))[0];
+    if (!prev) { toast("No earlier round to carry"); return; }
+    const r = Store.todayRound(p);
+    const patch = {};
+    ["exam", "assessment", "plan", "nihss"].forEach((f) => {
+      if (!r[f] && prev[f]) patch[f] = prev[f];
+    });
+    if (!Object.keys(patch).length) { toast("Nothing empty to fill"); return; }
+    Store.updateRound(p, r.id, patch);
+    renderPatientBody();
+    toast(`Carried forward from ${prev.date}`);
+  }
+
+  /* ---------------- Patient form (new / edit) ---------------- */
+
+  function openPatientForm(p) {
+    const isNew = !p;
+    const d = p || Store.blankPatient();
+    openModal(isNew ? "New patient" : "Edit details", `
+      <div class="field">
+        <label>Name or initials</label>
+        <input type="text" id="f-name" value="${esc(d.name)}" placeholder="J.R. or Room 12" autofocus />
+      </div>
+      <div class="grid2">
+        <div class="field"><label>Room / bed</label><input type="text" id="f-room" value="${esc(d.room)}" /></div>
+        <div class="field"><label>MRN</label><input type="text" id="f-mrn" value="${esc(d.mrn)}" /></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>Age</label><input type="number" id="f-age" value="${esc(d.age)}" /></div>
+        <div class="field"><label>Sex</label>
+          <select id="f-sex">
+            ${["", "F", "M", "Other"].map((s) => `<option ${d.sex === s ? "selected" : ""}>${s}</option>`).join("")}
+          </select>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>Admit date</label><input type="date" id="f-admit" value="${esc(d.admitDate)}" /></div>
+        <div class="field"><label>Last known well</label><input type="text" id="f-lkw" value="${esc(d.lkw)}" placeholder="date / time" /></div>
+      </div>
+      <div class="field">
+        <label>Diagnosis</label>
+        <select id="f-type">
+          ${Store.STROKE_TYPES.map((t) => `<option ${d.type === t ? "selected" : ""}>${esc(t)}</option>`).join("")}
+        </select>
+      </div>
+      <p class="tiny faint">Tip: initials and a room number are usually enough. Less identifying data on a phone is safer.</p>`,
+      `<button class="btn" id="pf-cancel">Cancel</button>
+       <button class="btn btn-primary" id="pf-save">${isNew ? "Add to list" : "Save"}</button>`);
+
+    $("#pf-cancel").onclick = closeModal;
+    $("#pf-save").onclick = () => {
+      const patch = {
+        name: $("#f-name").value.trim(),
+        room: $("#f-room").value.trim(),
+        mrn: $("#f-mrn").value.trim(),
+        age: $("#f-age").value.trim(),
+        sex: $("#f-sex").value,
+        admitDate: $("#f-admit").value,
+        lkw: $("#f-lkw").value.trim(),
+        type: $("#f-type").value,
+      };
+      if (!patch.name && !patch.room) { toast("Give a name or a room"); return; }
+      if (isNew) {
+        const created = Store.add(patch);
+        closeModal();
+        state.tab = "round";
+        go("patient", created.id);
+      } else {
+        Store.update(p.id, patch);
+        closeModal();
+        renderPatient();
+      }
+    };
+  }
+
+  /* ---------------- Tools ---------------- */
+
+  function renderTools() {
+    $("#appTitle").textContent = "Tools";
+    $("#appSub").textContent = "Scales, dosing, reference";
+
+    const scaleBtns = Object.values(Scores.SCALES).map((s) => `
+      <button class="btn tile" data-scale="${s.id}">
+        <b>${esc(s.name)}</b><span class="tiny faint">${esc(s.sub)}</span>
+      </button>`).join("");
+
+    const refCards = Scores.REFERENCE.map((c) => `
+      <div class="card">
+        <div class="card-head"><h3>${esc(c.title)}</h3></div>
+        ${c.rows.map(([k, v]) => `<div class="kv"><span>${esc(k)}</span><b class="right">${esc(v)}</b></div>`).join("")}
+      </div>`).join("");
+
+    $("#toolsBody").innerHTML = `
+      <div class="card">
+        <div class="card-head"><h3>Scales</h3></div>
+        <div class="btn-col">${scaleBtns}</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Thrombolytic dosing</h3></div>
+        <div class="field">
+          <label>Weight (kg)</label>
+          <input type="number" id="lyticWeight" placeholder="e.g. 78" inputmode="decimal" />
+        </div>
+        <div id="lyticOut" class="muted tiny">Enter a weight to see alteplase and tenecteplase doses.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>ICH volume (ABC/2)</h3></div>
+        <div class="grid3">
+          <div class="field"><label>A (cm)</label><input type="number" id="ichA" inputmode="decimal" /></div>
+          <div class="field"><label>B (cm)</label><input type="number" id="ichB" inputmode="decimal" /></div>
+          <div class="field"><label>Slices</label><input type="number" id="ichC" inputmode="numeric" /></div>
+        </div>
+        <div class="field">
+          <label>Slice thickness (cm)</label>
+          <input type="number" id="ichT" value="0.5" inputmode="decimal" />
+        </div>
+        <div id="ichOut" class="muted tiny">Largest axial diameter × perpendicular × number of slices with hemorrhage.</div>
+      </div>
+
+      ${refCards}
+      <p class="tiny faint">Reference values are the common defaults. Your institution's protocol wins.</p>`;
+
+    $("#toolsBody").onclick = (e) => {
+      const b = e.target.closest("[data-scale]");
+      if (b) openScale(b.dataset.scale);
+    };
+
+    const lw = $("#lyticWeight");
+    lw.addEventListener("input", () => {
+      const w = Number(lw.value);
+      if (!w) { $("#lyticOut").innerHTML = "Enter a weight to see alteplase and tenecteplase doses."; return; }
+      const a = Scores.alteplase(w);
+      const t = Scores.tenecteplase(w, 0.25);
+      const t5 = Scores.tenecteplase(w, 0.4);
+      $("#lyticOut").innerHTML = `
+        <div class="kv"><span>Alteplase total</span><b>${a.total} mg${a.capped ? " (capped)" : ""}</b></div>
+        <div class="kv"><span>— bolus (10%, 1 min)</span><b>${a.bolus} mg</b></div>
+        <div class="kv"><span>— infusion (60 min)</span><b>${a.infusion} mg</b></div>
+        <div class="kv"><span>Tenecteplase 0.25 mg/kg</span><b>${t.total} mg${t.capped ? " (capped)" : ""}</b></div>
+        <div class="kv"><span>Tenecteplase 0.4 mg/kg</span><b>${t5.total} mg${t5.capped ? " (capped)" : ""}</b></div>
+        <p class="tiny faint" style="margin-top:8px">${esc(a.note)} ${esc(t.note)} Confirm against your protocol and the package insert.</p>`;
+    });
+
+    const recalcICH = () => {
+      const v = Scores.ichVolume($("#ichA").value, $("#ichB").value, $("#ichC").value, $("#ichT").value);
+      $("#ichOut").innerHTML = v
+        ? `<div class="kv"><span>Estimated volume</span><b>${v} mL</b></div>
+           <p class="tiny faint">≥ 30 mL scores a point on the ICH score.</p>`
+        : "Largest axial diameter × perpendicular × number of slices with hemorrhage.";
+    };
+    ["ichA", "ichB", "ichC", "ichT"].forEach((id) => $("#" + id).addEventListener("input", recalcICH));
+  }
+
+  /** Generic scale renderer — works for any entry in Scores.SCALES. */
+  function openScale(id, onSave) {
+    const scale = Scores.SCALES[id];
+    if (!scale) return;
+    state.scale = { id, values: scale.items.map(() => null) };
+
+    const body = scale.items.map((item, i) => `
+      <div class="score-item">
+        <div class="score-q">${esc(item.label)}</div>
+        <div class="opt-row">
+          ${item.opts.map(([t, v], j) =>
+            `<button class="opt" data-i="${i}" data-j="${j}" data-v="${v}">${esc(t)}</button>`).join("")}
+        </div>
+      </div>`).join("");
+
+    openModal(scale.name, `
+      <p class="tiny faint">${esc(scale.sub)}</p>
+      ${body}
+      <div class="score-total">
+        <span class="muted tiny" id="scoreNote">Select every item</span>
+        <b id="scoreTotal">0</b>
+      </div>`,
+      `<button class="btn" id="sc-close">Close</button>
+       ${onSave ? `<button class="btn btn-primary" id="sc-save">Save to patient</button>` : ""}`);
+
+    const totalEl = $("#scoreTotal");
+    const noteEl = $("#scoreNote");
+
+    const recompute = () => {
+      const vals = state.scale.values;
+      const answered = vals.filter((v) => v !== null).length;
+      const total = vals.reduce((n, v) => n + (v || 0), 0);
+      totalEl.textContent = total;
+      noteEl.textContent = answered < scale.items.length
+        ? `${answered}/${scale.items.length} items — ${scale.interpret(total)}`
+        : scale.interpret(total);
+      return total;
+    };
+
+    $("#modalBody").addEventListener("click", (e) => {
+      const b = e.target.closest(".opt");
+      if (!b) return;
+      const i = Number(b.dataset.i);
+      state.scale.values[i] = Number(b.dataset.v);
+      $$(`.opt[data-i="${i}"]`, $("#modalBody")).forEach((o) => o.classList.remove("is-on"));
+      b.classList.add("is-on");
+      recompute();
+    });
+
+    $("#sc-close").onclick = closeModal;
+    if (onSave) $("#sc-save").onclick = () => { const t = recompute(); closeModal(); onSave(t); };
+    recompute();
+  }
+
+  /* ---------------- Settings ---------------- */
+
+  function renderSettings() {
+    const s = Store.getSettings();
+    $("#appTitle").textContent = "Settings";
+    $("#appSub").textContent = "Data lives on this device only";
+
+    const bytes = (() => {
+      try { return new Blob([localStorage.getItem("strokeRounds.v1") || ""]).size; }
+      catch { return 0; }
+    })();
+
+    $("#settingsBody").innerHTML = `
+      <div class="banner">
+        <b>Local only.</b> Nothing is uploaded — no account, no server, no analytics.
+        That also means an uninstall or a cleared browser wipes the list, so export a
+        backup at the end of a service block. Follow your institution's policy before
+        entering identifiable information.
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>List</h3></div>
+        <div class="field">
+          <label>List name</label>
+          <input type="text" id="set-listname" value="${esc(s.listName)}" placeholder="Stroke service" />
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="btn-copylist">Copy whole list</button>
+          <button class="btn" id="btn-printlist">Print handoff</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Backup</h3>
+          <span class="card-hint">${(bytes / 1024).toFixed(1)} KB stored</span></div>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="btn-export">Save backup file</button>
+          <label class="btn" for="importFile">Open backup file</label>
+          <input type="file" id="importFile" accept=".json,application/json" hidden />
+        </div>
+        <div class="btn-row" style="margin-top:8px">
+          <button class="btn btn-sm" id="btn-copybackup">Copy as text</button>
+          <button class="btn btn-sm" id="btn-pastebackup">Paste a backup</button>
+        </div>
+        <p class="tiny faint" id="backupHint" style="margin-top:8px">
+          ${s.lastBackup ? "Last backup: " + esc(s.lastBackup) : "No backup yet — importing merges by patient and keeps the newer copy."}
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Passcode</h3></div>
+        <p class="tiny faint">A screen lock for a shared workstation. It is not encryption — anyone with device access and a debugger can read the stored file.</p>
+        <div class="btn-row">
+          <button class="btn" id="btn-pin">${s.pin ? "Change passcode" : "Set passcode"}</button>
+          ${s.pin ? `<button class="btn btn-ghost" id="btn-pin-off">Remove</button>` : ""}
+        </div>
+        ${s.pin ? `
+        <div class="field" style="margin-top:10px">
+          <label style="text-transform:none">
+            <input type="checkbox" id="set-lockhide" ${s.lockOnHide ? "checked" : ""} style="width:auto;margin-right:8px" />
+            Lock when the app goes to the background
+          </label>
+        </div>` : ""}
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Retention</h3></div>
+        <div class="field">
+          <label>Auto-delete signed-off patients after</label>
+          <select id="set-purge">
+            ${[[0, "Never"], [1, "1 day"], [3, "3 days"], [7, "7 days"], [30, "30 days"]]
+              .map(([v, t]) => `<option value="${v}" ${Number(s.autoPurgeDays) === v ? "selected" : ""}>${t}</option>`).join("")}
+          </select>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-danger" id="btn-wipe">Delete everything</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>About</h3></div>
+        <p class="tiny muted">StrokeRounds is an offline rounding list and structured note builder
+        for a stroke attending. Add it to your home screen and it runs like a native app, with or
+        without signal. It is a scratchpad — the chart is still the medical record, and the
+        scales and dosing here assist a clinician who already knows them.</p>
+        <button class="btn btn-sm" id="btn-demo">Add demo patient</button>
+      </div>`;
+
+    $("#set-listname").addEventListener("input", (e) => Store.saveSettings({ listName: e.target.value }));
+    $("#set-purge").addEventListener("change", (e) => {
+      Store.saveSettings({ autoPurgeDays: Number(e.target.value) });
+      toast("Retention updated");
+    });
+    const lockHide = $("#set-lockhide");
+    if (lockHide) lockHide.addEventListener("change", (e) => Store.saveSettings({ lockOnHide: e.target.checked }));
+
+    $("#btn-copylist").onclick = () => {
+      const active = Store.all().filter((p) => p.status === "active");
+      copyText(NoteBuilder.buildList(active, Store.getSettings().listName), "List copied");
+    };
+    $("#btn-printlist").onclick = () => {
+      const active = Store.all().filter((p) => p.status === "active");
+      printText(NoteBuilder.buildList(active, Store.getSettings().listName), "Handoff");
+    };
+
+    $("#btn-export").onclick = exportBackup;
+    $("#btn-copybackup").onclick = () => showBackupText();
+    $("#btn-pastebackup").onclick = pasteBackup;
+    $("#importFile").onchange = importBackup;
+
+    $("#btn-pin").onclick = setPin;
+    const pinOff = $("#btn-pin-off");
+    if (pinOff) pinOff.onclick = () => {
+      Store.saveSettings({ pin: "" });
+      $("#lockNowBtn").hidden = true;
+      renderSettings();
+      toast("Passcode removed");
+    };
+
+    $("#btn-wipe").onclick = () =>
+      confirmAction("Delete every patient, round and task on this device?", () => {
+        Store.wipe();
+        go("census");
+        toast("All data deleted");
+      }, "Delete everything");
+
+    $("#btn-demo").onclick = () => { Store.addDemo(); go("census"); toast("Demo patient added"); };
+  }
+
+  function markBackedUp() {
+    Store.saveSettings({ lastBackup: new Date().toLocaleString() });
+    const hint = $("#backupHint");
+    if (hint) hint.textContent = "Last backup: " + Store.getSettings().lastBackup;
+  }
+
+  /** Hosted viewers (claude.ai artifacts) sandbox downloads and ask the host
+      to save the file instead; a plain page saves it itself. */
+  async function hostDownloads() {
+    if (!window.claude || typeof window.claude.use !== "function") return null;
+    try { return await window.claude.use("downloads"); }
+    catch { return null; }
+  }
+
+  async function exportBackup() {
+    const data = Store.exportJSON();
+    const filename = `strokerounds-${Store.todayISO()}.json`;
+
+    const downloads = await hostDownloads();
+    if (downloads) {
+      try {
+        await downloads.save({ filename, data });
+        markBackedUp();
+        toast("Backup saved");
+      } catch (err) {
+        if (err && err.code === "declined") return;   // the viewer said no
+        showBackupText(data);                          // last resort: copy it out
+      }
+      return;
+    }
+
+    const blob = new Blob([data], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    markBackedUp();
+    toast("Backup downloaded");
+  }
+
+  /** Backup as text — works in any browser, pastes into notes or email. */
+  function showBackupText(data = Store.exportJSON()) {
+    openModal("Backup as text", `
+      <p class="tiny faint">Copy this and keep it somewhere safe. Paste it back through
+      Import to restore the list on any device.</p>
+      <textarea id="backupText" readonly style="min-height:180px;font-family:var(--font-mono);font-size:11px">${esc(data)}</textarea>`,
+      `<button class="btn" id="bk-close">Close</button>
+       <button class="btn btn-primary" id="bk-copy">Copy</button>`);
+    $("#bk-close").onclick = closeModal;
+    $("#bk-copy").onclick = () => { copyText(data, "Backup copied"); markBackedUp(); };
+  }
+
+  /** Restore from pasted text, for viewers that cannot open a file picker. */
+  function pasteBackup() {
+    openModal("Paste a backup", `
+      <div class="field">
+        <label>Backup JSON</label>
+        <textarea id="pasteText" placeholder="Paste the exported text here" style="min-height:160px;font-family:var(--font-mono);font-size:11px"></textarea>
+      </div>`,
+      `<button class="btn" id="ps-cancel">Cancel</button>
+       <button class="btn btn-primary" id="ps-import">Import</button>`);
+    $("#ps-cancel").onclick = closeModal;
+    $("#ps-import").onclick = () => {
+      try {
+        const n = Store.importJSON($("#pasteText").value, true);
+        closeModal();
+        toast(`Imported ${n} patient${n === 1 ? "" : "s"}`);
+        go("census");
+      } catch (err) {
+        toast("That is not a StrokeRounds backup");
+      }
+    };
+  }
+
+  function importBackup(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const n = Store.importJSON(String(reader.result), true);
+        toast(`Imported ${n} patient${n === 1 ? "" : "s"}`);
+        go("census");
+      } catch (err) {
+        alert("Could not import this file.\n" + err.message);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  }
+
+  function setPin() {
+    openModal("Set passcode", `
+      <div class="field">
+        <label>New passcode</label>
+        <input type="password" id="pin1" inputmode="numeric" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label>Confirm</label>
+        <input type="password" id="pin2" inputmode="numeric" autocomplete="off" />
+      </div>
+      <p class="tiny faint">There is no recovery. Forgetting it means exporting is impossible without clearing the app's data.</p>`,
+      `<button class="btn" id="pin-cancel">Cancel</button>
+       <button class="btn btn-primary" id="pin-save">Save</button>`);
+    $("#pin-cancel").onclick = closeModal;
+    $("#pin-save").onclick = () => {
+      const a = $("#pin1").value, b = $("#pin2").value;
+      if (!a) { toast("Enter a passcode"); return; }
+      if (a !== b) { toast("Passcodes do not match"); return; }
+      Store.saveSettings({ pin: Store.hash(a) });
+      $("#lockNowBtn").hidden = false;
+      closeModal();
+      renderSettings();
+      toast("Passcode set");
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+})();
+
+</script>

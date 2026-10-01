@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Neuro Multiverse</title>
+  <meta name="description" content="Neurology education for students: new evidence, what's cool in neurology, and Quantum Stroke — neuroanatomy, trials and the code-stroke workflow." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="brand" href="#top" aria-label="Neuro Multiverse home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="5" fill="currentColor"/><path d="M16 11V2M16 21v9M11 16H2M21 16h9M12.5 12.5 6 6M19.5 19.5 26 26M19.5 12.5 26 6M12.5 19.5 6 26" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      <span>Neuro<b>Multiverse</b></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <nav class="nav-links" id="navLinks" aria-label="Sections">
+      <a href="#learn">Learn</a>
+      <a href="#cool">What's cool</a>
+      <a href="#quantum-stroke" class="nav-qs">Quantum Stroke</a>
+      <a href="#tools">Atlas &amp; App</a>
+      <a href="#plans">Plans</a>
+      <a href="#instagram">Instagram</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme">◐</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <canvas id="neuralCanvas" aria-hidden="true"></canvas>
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Neurology education · new evidence · stroke</p>
+      <h1>Every lesion<br />has an <em>address.</em></h1>
+      <p class="lede">Neuro Multiverse teaches neurology the way it's practised: localise first, then read the evidence. Built for students who want to know why neurologists love this field.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#learn">Start learning</a>
+        <a class="btn btn-ghost" href="#quantum-stroke">Enter Quantum Stroke</a>
+      </div>
+      <dl class="hero-facts">
+        <div><dt>Free tracks</dt><dd>6</dd></div>
+        <div><dt>Trial briefs</dt><dd>8</dd></div>
+        <div><dt>Vascular territories</dt><dd>7</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== TIME IS BRAIN STRIP ===== -->
+  <section class="brain-clock" aria-labelledby="clockTitle">
+    <div class="wrap clock-row">
+      <p id="clockTitle" class="clock-label">Time is brain. Since you opened this page, an untreated large-vessel stroke would have cost</p>
+      <p class="clock-num"><span id="neuronCount">0</span> <small>neurons</small></p>
+      <p class="clock-src">1.9 million neurons per minute · Saver, <i>Stroke</i> 2006</p>
+    </div>
+  </section>
+
+  <!-- ===== LEARN ===== -->
+  <section class="section" id="learn">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">Learn</p>
+        <h2>Neurology for students, minus the fear</h2>
+        <p class="sec-sub">Each track opens with one bedside question. Answer it and the anatomy, the exam and the differential follow.</p>
+      </header>
+      <div class="tracks">
+        <article class="track">
+          <span class="level">MBBS</span>
+          <h3>Localisation</h3>
+          <p class="q">Upper or lower motor neuron? Then: brain, cord, root, plexus, nerve, junction or muscle?</p>
+          <p class="meta">Neuroanatomy · exam</p>
+        </article>
+        <article class="track">
+          <span class="level">MBBS</span>
+          <h3>The neuro exam</h3>
+          <p class="q">What does a pronator drift tell you that a power grade of 4/5 can't?</p>
+          <p class="meta">Clinical skills · video</p>
+        </article>
+        <article class="track">
+          <span class="level">MBBS</span>
+          <h3>Headache</h3>
+          <p class="q">Which red flags turn a "migraine" into a scan today: SNOOP4 in practice.</p>
+          <p class="meta">Emergency · primary care</p>
+        </article>
+        <article class="track">
+          <span class="level">Residency</span>
+          <h3>Epilepsy</h3>
+          <p class="q">Focal or generalised onset? Why the first 30 seconds of the history decide the drug.</p>
+          <p class="meta">EEG · pharmacology</p>
+        </article>
+        <article class="track">
+          <span class="level">Residency</span>
+          <h3>Movement disorders</h3>
+          <p class="q">Rest or action tremor? Reading the basal ganglia from across the room.</p>
+          <p class="meta">Phenomenology · video</p>
+        </article>
+        <article class="track">
+          <span class="level">Residency</span>
+          <h3>Neuromuscular</h3>
+          <p class="q">Fatigable ptosis, absent reflexes, or a sensory level: which one is the emergency?</p>
+          <p class="meta">EMG/NCS · ICU</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHAT'S COOL ===== -->
+  <section class="section section-alt" id="cool">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">What's cool in neurology</p>
+        <h2>The field is moving fast. Here's the proof.</h2>
+        <p class="sec-sub">Short reads on the discoveries that changed what neurologists can do, with the paper so you can check it yourself.</p>
+      </header>
+      <div class="cool-grid">
+        <article class="cool cool-lead">
+          <p class="cool-tag">Brain–computer interfaces</p>
+          <h3>Implanted electrodes now decode attempted speech</h3>
+          <p>In 2023, two teams decoded speech from people with ALS and brainstem stroke at roughly 60–78 words per minute, using cortical arrays and machine learning. Speech that was lost can be partly restored.</p>
+          <p class="cite">Willett et al.; Metzger et al., <i>Nature</i> 2023</p>
+        </article>
+        <article class="cool">
+          <p class="cool-tag">Sleep</p>
+          <h3>The brain rinses itself while you sleep</h3>
+          <p>Interstitial space widens during sleep and CSF flow clears metabolites such as amyloid-β faster: the glymphatic system.</p>
+          <p class="cite">Xie et al., <i>Science</i> 2013</p>
+        </article>
+        <article class="cool">
+          <p class="cool-tag">Dementia</p>
+          <h3>A blood test for Alzheimer pathology</h3>
+          <p>Plasma p-tau217 tracks amyloid and tau pathology closely enough to change how patients reach diagnosis.</p>
+          <p class="cite">Palmqvist et al., <i>JAMA</i> 2024</p>
+        </article>
+        <article class="cool">
+          <p class="cool-tag">Genetics</p>
+          <h3>Spinal muscular atrophy, rewritten</h3>
+          <p>Antisense oligonucleotides and gene replacement turned a fatal infant disease into one where many children sit and walk.</p>
+          <p class="cite">Finkel et al.; Mendell et al., <i>NEJM</i> 2017</p>
+        </article>
+        <article class="cool">
+          <p class="cool-tag">Movement</p>
+          <h3>Tremor treated without an incision</h3>
+          <p>MR-guided focused ultrasound lesions the VIM thalamus through an intact skull for essential tremor.</p>
+          <p class="cite">Elias et al., <i>NEJM</i> 2016</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUANTUM STROKE ===== -->
+  <section class="qs" id="quantum-stroke">
+    <div class="wrap">
+      <header class="qs-head">
+        <p class="eyebrow eyebrow-qs">Quantum Stroke</p>
+        <h2>Stroke, from the artery to the outcome</h2>
+        <p class="sec-sub">Neuroanatomy you can localise with, the trials that moved practice, and the code-stroke workflow minute by minute.</p>
+        <nav class="qs-tabs" role="tablist" aria-label="Quantum Stroke sections">
+          <button role="tab" id="tab-anatomy" aria-controls="panel-anatomy" aria-selected="true">Neuroanatomy</button>
+          <button role="tab" id="tab-evidence" aria-controls="panel-evidence" aria-selected="false">New evidence</button>
+          <button role="tab" id="tab-workflow" aria-controls="panel-workflow" aria-selected="false">Workflow</button>
+        </nav>
+      </header>
+
+      <!-- Neuroanatomy -->
+      <div class="qs-panel" role="tabpanel" id="panel-anatomy" aria-labelledby="tab-anatomy">
+        <div class="territory">
+          <div class="territory-list" id="territoryList" role="listbox" aria-label="Vascular territory"></div>
+          <article class="territory-card" id="territoryCard" aria-live="polite"></article>
+        </div>
+      </div>
+
+      <!-- Evidence -->
+      <div class="qs-panel" role="tabpanel" id="panel-evidence" aria-labelledby="tab-evidence" hidden>
+        <div class="trials" id="trialList"></div>
+        <p class="note">Summaries are for learning. Read the full paper and your local protocol before applying any result.</p>
+      </div>
+
+      <!-- Workflow -->
+      <div class="qs-panel" role="tabpanel" id="panel-workflow" aria-labelledby="tab-workflow" hidden>
+        <div class="workflow">
+          <ol class="timeline">
+            <li><span class="t">0 min</span><div><h4>Door</h4><p>Stroke alert on arrival. Glucose at the bedside, last known well documented.</p></div></li>
+            <li><span class="t">≤10 min</span><div><h4>Doctor at bedside</h4><p>ABCs, NIHSS, weight, anticoagulant history.</p></div></li>
+            <li><span class="t">≤15 min</span><div><h4>Stroke team</h4><p>Neurology on scene, family located for history.</p></div></li>
+            <li><span class="t">≤25 min</span><div><h4>CT started</h4><p>Non-contrast CT plus CT angiography from arch to vertex.</p></div></li>
+            <li><span class="t">≤45 min</span><div><h4>Imaging read</h4><p>Bleed excluded, ASPECTS scored, large-vessel occlusion called.</p></div></li>
+            <li><span class="t">≤60 min</span><div><h4>Needle</h4><p>Thrombolysis if eligible. Many centres aim for 45.</p></div></li>
+            <li><span class="t">≤90 min</span><div><h4>Groin puncture</h4><p>Thrombectomy for LVO, without waiting to see a lytic response.</p></div></li>
+          </ol>
+
+          <div class="window" aria-labelledby="windowTitle">
+            <h3 id="windowTitle">Window check</h3>
+            <p class="window-sub">Drag to the time since last known well and see which treatments the major trials studied.</p>
+            <label for="lkwRange" class="lkw-label">Last known well: <output id="lkwOut">2 h 00 min</output> ago</label>
+            <input type="range" id="lkwRange" min="0" max="1800" step="15" value="120" />
+            <div class="scale" aria-hidden="true"><span>0 h</span><span>4.5 h</span><span>24 h</span><span>30 h</span></div>
+            <ul class="window-list" id="windowList"></ul>
+            <p class="note">A teaching tool, not a decision aid. Eligibility depends on imaging, contraindications and local protocol.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOOLS: ATLAS + APP ===== -->
+  <section class="section" id="tools">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">Atlas &amp; App</p>
+        <h2>Tools from the bedside</h2>
+        <p class="sec-sub">A preview of the Neurology Atlas and the Stroke App. Sample pages are free; the full versions come with Pro.</p>
+      </header>
+
+      <div class="tool">
+        <div class="tool-copy">
+          <p class="cool-tag">Neurology Atlas</p>
+          <h3>Plates that teach you to localise</h3>
+          <p>Cross-sections, tracts and syndromes drawn for revision, with the clinical sign beside the structure that causes it.</p>
+          <ul class="ticks">
+            <li>Brainstem levels with cranial nerve nuclei</li>
+            <li>Vascular territories and classic syndromes</li>
+            <li>Tracts, plexuses and dermatomes</li>
+          </ul>
+          <a class="btn btn-primary" href="#plans">Unlock the full atlas</a>
+        </div>
+        <div class="plates">
+          <figure class="plate plate-free">
+            <figcaption><span class="badge">Free plate</span> The brainstem rule of 4</figcaption>
+            <div class="plate-body">
+              <div class="rule-col">
+                <h4>Medial: 4 Ms</h4>
+                <ul>
+                  <li><b>M</b>otor pathway → contralateral weakness</li>
+                  <li><b>M</b>edial lemniscus → contralateral vibration/proprioception</li>
+                  <li><b>M</b>LF → internuclear ophthalmoplegia</li>
+                  <li><b>M</b>otor nuclei: III, IV, VI, XII</li>
+                </ul>
+              </div>
+              <div class="rule-col">
+                <h4>Lateral: 4 Ss</h4>
+                <ul>
+                  <li><b>S</b>pinocerebellar → ipsilateral ataxia</li>
+                  <li><b>S</b>pinothalamic → contralateral pain/temperature</li>
+                  <li><b>S</b>ensory nucleus of V → ipsilateral facial sensory loss</li>
+                  <li><b>S</b>ympathetic → ipsilateral Horner</li>
+                </ul>
+              </div>
+            </div>
+            <p class="plate-foot">Nuclei that divide 12 equally (3, 4, 6, 12) are medial. Gates, <i>Practical Neurology</i> 2005</p>
+          </figure>
+          <figure class="plate plate-locked" aria-label="Locked plate preview">
+            <figcaption><span class="badge badge-pro">Pro</span> Brachial plexus, fully labelled</figcaption>
+            <div class="lock-veil">Included with Pro</div>
+          </figure>
+        </div>
+      </div>
+
+      <div class="tool tool-app">
+        <div class="phone" aria-hidden="true">
+          <div class="phone-screen">
+            <p class="ph-title">Stroke App</p>
+            <div class="ph-card"><span>NIHSS</span><b>14</b></div>
+            <div class="ph-card"><span>LKW</span><b>2 h 10 m</b></div>
+            <div class="ph-card ph-go"><span>Lytic checklist</span><b>11 / 11</b></div>
+            <div class="ph-card"><span>Door to needle</span><b>38 min</b></div>
+            <p class="ph-bar">Code stroke · running</p>
+          </div>
+        </div>
+        <div class="tool-copy">
+          <p class="cool-tag">Stroke App</p>
+          <h3>The code stroke in your pocket</h3>
+          <p>NIHSS scoring with prompts, a thrombolysis checklist, door-to-needle timers and dose calculators. Try the free Window check in Quantum Stroke above.</p>
+          <ul class="ticks">
+            <li>Guided NIHSS with item-by-item tips</li>
+            <li>Alteplase and tenecteplase dose by weight</li>
+            <li>Team timers that match the workflow</li>
+          </ul>
+          <a class="btn btn-primary" href="#waitlist">Join the early-access list</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PLANS ===== -->
+  <section class="section section-alt" id="plans">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">Plans</p>
+        <h2>Free to learn. Pro to go deeper.</h2>
+      </header>
+      <div class="plans">
+        <article class="plan">
+          <h3>Student</h3>
+          <p class="price"><b>Free</b></p>
+          <ul class="ticks">
+            <li>All Learn tracks</li>
+            <li>What's cool articles</li>
+            <li>Quantum Stroke evidence and workflow</li>
+            <li>Sample atlas plates</li>
+          </ul>
+          <a class="btn btn-ghost" href="#waitlist">Sign up free</a>
+        </article>
+        <article class="plan plan-pro">
+          <p class="plan-flag">Most popular</p>
+          <h3>Pro</h3>
+          <p class="price"><b>$6</b> / month</p>
+          <ul class="ticks">
+            <li>Full Neurology Atlas</li>
+            <li>Stroke App with all calculators</li>
+            <li>Case-based quizzes and exam packs</li>
+            <li>Monthly evidence round-up</li>
+          </ul>
+          <a class="btn btn-primary" href="#waitlist">Go Pro</a>
+        </article>
+        <article class="plan">
+          <h3>Institution</h3>
+          <p class="price"><b>Custom</b></p>
+          <ul class="ticks">
+            <li>Pro for a whole department</li>
+            <li>Stroke-team workflow training</li>
+            <li>Teaching sessions for residents</li>
+          </ul>
+          <a class="btn btn-ghost" href="#waitlist">Talk to us</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INSTAGRAM ===== -->
+  <section class="section" id="instagram">
+    <div class="wrap">
+      <header class="sec-head sec-head-row">
+        <div>
+          <p class="eyebrow">On Instagram</p>
+          <h2>Neuro Multiverse, one post at a time</h2>
+          <p class="sec-sub">Bite-size neurology education and what's cool in neurology, every week.</p>
+        </div>
+        <a class="btn btn-primary" id="igFollow" href="https://www.instagram.com/" target="_blank" rel="noopener">Follow on Instagram</a>
+      </header>
+      <div class="ig-grid">
+        <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener"><span class="ig-k">Sign</span><b>Babinski</b><span>Why an upgoing toe means an upper motor neuron lesion</span></a>
+        <a class="ig ig-red" href="https://www.instagram.com/" target="_blank" rel="noopener"><span class="ig-k">Quantum Stroke</span><b>Wallenberg</b><span>Lateral medulla in one diagram</span></a>
+        <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener"><span class="ig-k">What's cool</span><b>BCI speech</b><span>Decoding words from cortex</span></a>
+        <a class="ig ig-ink" href="https://www.instagram.com/" target="_blank" rel="noopener"><span class="ig-k">Exam pearl</span><b>INO</b><span>Which eye fails to adduct, and why</span></a>
+        <a class="ig ig-red" href="https://www.instagram.com/" target="_blank" rel="noopener"><span class="ig-k">Evidence</span><b>Large core</b><span>SELECT2 and ANGEL-ASPECT explained</span></a>
+        <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener"><span class="ig-k">Anatomy</span><b>Circle of Willis</b><span>Draw it in 60 seconds</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WAITLIST ===== -->
+  <section class="waitlist" id="waitlist">
+    <div class="wrap waitlist-row">
+      <div>
+        <h2>Get the monthly evidence round-up</h2>
+        <p>New trials, one cool thing in neurology, and early access to the Atlas and Stroke App.</p>
+      </div>
+      <form id="waitForm" class="wait-form" novalidate>
+        <label for="waitEmail" class="sr">Email address</label>
+        <input id="waitEmail" type="email" placeholder="you@medschool.edu" autocomplete="email" required />
+        <label for="waitRole" class="sr">I am a</label>
+        <select id="waitRole">
+          <option>Medical student</option>
+          <option>Resident</option>
+          <option>Neurologist</option>
+          <option>Nurse / allied health</option>
+          <option>Other</option>
+        </select>
+        <button class="btn btn-primary" type="submit">Join</button>
+        <p class="form-msg" id="waitMsg" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-row">
+    <p class="brand brand-foot">Neuro<b>Multiverse</b></p>
+    <p class="disclaimer">For education only. Nothing here is medical advice or a substitute for clinical judgement and local protocols.</p>
+    <p class="copy">© <span id="year">2026</span> Neuro Multiverse</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

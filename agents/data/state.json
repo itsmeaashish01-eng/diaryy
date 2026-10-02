@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1790956624878,
-      "lastOk": 1790956624878,
+      "lastRun": 1790974551685,
+      "lastOk": 1790974551685,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790973545000,
+          "level": "notable",
+          "title": "Three AI agents, two countries, and one uneven world wide web",
+          "detail": "Article URL: https://royapakzad.substack.com/p/multilingual-ai-agents Comments URL: https://news.ycombinator.com/item?id=49938326 Points: 6 # Comments: 0",
+          "url": "https://royapakzad.substack.com/p/multilingual-ai-agents"
+        },
+        {
+          "t": 1790971215000,
+          "level": "notable",
+          "title": "Show HN: Made an open-source Lego AI generator",
+          "detail": "Hi there :-) New on HN, first time posting.Past year, around December, I started experimenting with making ChatGPT and Claude generate source code in LDraw language.This LDraw is literally an \"assembly\" language, a low-level programming language that describes how to assemble LEGO pieces together in",
+          "url": "https://github.com/anteloc/ldraw-nova"
+        },
+        {
+          "t": 1790964076000,
+          "level": "notable",
+          "title": "From the creator of Redis; run LLM locally with ds4",
+          "detail": "Article URL: https://dwarfstar.sh/ Comments URL: https://news.ycombinator.com/item?id=49936575 Points: 53 # Comments: 5",
+          "url": "https://dwarfstar.sh/"
+        },
         {
           "t": 1790892151000,
           "level": "notable",
@@ -408,27 +429,6 @@
           "title": "How to keep enjoying programming in a world of LLMs",
           "detail": "Article URL: https://discourse.haskell.org/t/how-to-keep-enjoying-programming-in-a-world-of-llms/14705 Comments URL: https://news.ycombinator.com/item?id=49854875 Points: 89 # Comments: 147",
           "url": "https://discourse.haskell.org/t/how-to-keep-enjoying-programming-in-a-world-of-llms/14705"
-        },
-        {
-          "t": 1790396458000,
-          "level": "notable",
-          "title": "A single function Jev-like wrapper for LLMs, including vision models",
-          "detail": "Article URL: http://allanrbo.blogspot.com/2026/09/a-jev-like-wrapper-for-llms-including.html Comments URL: https://news.ycombinator.com/item?id=49853175 Points: 125 # Comments: 40",
-          "url": "http://allanrbo.blogspot.com/2026/09/a-jev-like-wrapper-for-llms-including.html"
-        },
-        {
-          "t": 1790370567000,
-          "level": "notable",
-          "title": "Revealing the details of how OpenAI agents hacked Hugging Face",
-          "detail": "Article URL: https://swarmtraces.org/ Comments URL: https://news.ycombinator.com/item?id=49849985 Points: 658 # Comments: 417",
-          "url": "https://swarmtraces.org/"
-        },
-        {
-          "t": 1790438194000,
-          "level": "notable",
-          "title": "Make Claude your assistant in excalidraw",
-          "detail": "Article URL: https://tangled.org/yanndegat.tngl.sh/drawgent Comments URL: https://news.ycombinator.com/item?id=49857729 Points: 5 # Comments: 1",
-          "url": "https://tangled.org/yanndegat.tngl.sh/drawgent"
         }
       ],
       "notifiedAt": {},
@@ -2457,11 +2457,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1790956626001,
-      "lastOk": 1790956626001,
+      "lastRun": 1790974562178,
+      "lastOk": 1790974562178,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,260 (+77.5%) · excludes S&P 500 ETF",
+      "lastLine": "$4,221 (+75.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2791,9 +2791,27 @@
         {
           "t": 1790956626001,
           "v": 4259.55
+        },
+        {
+          "t": 1790974562179,
+          "v": 4221.4
         }
       ],
       "events": [
+        {
+          "t": 1790974562169,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1790974562169,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1790956625988,
           "level": "notable",
@@ -3199,31 +3217,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790207698371,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790207698372,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 85191
+          "BTC": 84428
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1790974562179,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 5
+    },
     {
       "t": 1790956626002,
       "ran": 6,

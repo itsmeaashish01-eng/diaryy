@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791048831960,
-      "lastOk": 1791048831960,
+      "lastRun": 1791058181214,
+      "lastOk": 1791058181214,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1790968238000,
+          "level": "notable",
+          "title": "Show HN: Pi pod – Run your pi coding agent in sandboxes on your own server",
+          "detail": "pi pod runs sessions of the pi coding agent in isolated sandboxes (\"pods\") on a server you run, in composable environments.----Since moving my company towards AI-native work, I have been really frustrated by the state of \"agentic engineering\" environments. Products by the labs (claude code, codex) l",
+          "url": "https://pipod.dev/"
+        },
+        {
+          "t": 1790964076000,
+          "level": "notable",
+          "title": "From the creator of Redis; run LLM locally with ds4",
+          "detail": "Article URL: https://dwarfstar.sh/ Comments URL: https://news.ycombinator.com/item?id=49936575 Points: 331 # Comments: 95",
+          "url": "https://dwarfstar.sh/"
+        },
         {
           "t": 1791024231000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Show HN: Reladraw – A diagram language where you decide where to place things",
           "detail": "I love making diagrams to help understand, plan, etc. However, the options are (A) auto-placement languages like Mermaid or Graphviz (which don't let me decide how the diagram looks), or (B) software like Draw.io which are powerful but are very time consuming (and inefficient for agents to manipulat",
           "url": "https://github.com/reladraw/reladraw"
-        },
-        {
-          "t": 1790438194000,
-          "level": "notable",
-          "title": "Drawgent: Coding agent on a live Excalidraw canvas",
-          "detail": "Article URL: https://tangled.org/yanndegat.tngl.sh/drawgent Comments URL: https://news.ycombinator.com/item?id=49857729 Points: 108 # Comments: 32",
-          "url": "https://tangled.org/yanndegat.tngl.sh/drawgent"
-        },
-        {
-          "t": 1790437744000,
-          "level": "notable",
-          "title": "Turning GLM-5.3-Flash into a Jev-like decision model",
-          "detail": "We found an approach to get Jev-like properties from standard LLMs like GLM-5.3-Flash.The core idea is to craft the input prompt so that the first output token answers the question. This makes it possible to get a decision with a single forward pass.In the blog post, we describe the approach in deta",
-          "url": "https://www.privatemode.ai/blog/system-one-from-glm-flash"
         }
       ],
       "notifiedAt": {},
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1791010959740,
-      "lastOk": 1791010959740,
+      "lastRun": 1791058181217,
+      "lastOk": 1791058181217,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 2 drifting",
@@ -1030,9 +1030,62 @@
         {
           "t": 1791010959740,
           "v": 17
+        },
+        {
+          "t": 1791058181217,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1791058181217,
+          "level": "notable",
+          "title": "Log 50 supervised procedures — 89 days left",
+          "detail": "Finish fellowship strong, due 2026-12-31.",
+          "url": ""
+        },
+        {
+          "t": 1791058181217,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 43 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1791058181217,
+          "level": "notable",
+          "title": "Finish fellowship strong hasn't moved in 32 days",
+          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1791058181217,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1791058181217,
+          "level": "notable",
+          "title": "Data collection complete — 73 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1791058181217,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 44 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1791058181217,
+          "level": "notable",
+          "title": "Time for a goals review",
+          "detail": "It's been 94 days since 2026-07-01. Re-read the list, cut what's dead, set the next milestones.",
+          "url": ""
+        },
         {
           "t": 1791010959740,
           "level": "notable",
@@ -1403,55 +1456,6 @@
           "title": "Data collection complete — 78 days left",
           "detail": "First-author paper submitted, due 2026-12-15.",
           "url": ""
-        },
-        {
-          "t": 1790580700542,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 39 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1790518513057,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 49 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1790518513058,
-          "level": "notable",
-          "title": "Finish fellowship strong hasn't moved in 26 days",
-          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1790518513058,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
-        },
-        {
-          "t": 1790518513058,
-          "level": "notable",
-          "title": "Data collection complete — 79 days left",
-          "detail": "First-author paper submitted, due 2026-12-15.",
-          "url": ""
-        },
-        {
-          "t": 1790518513058,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 38 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1790473400318,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 49 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -1460,8 +1464,8 @@
       }
     },
     "reading": {
-      "lastRun": 1791010959742,
-      "lastOk": 1791010959742,
+      "lastRun": 1791058181218,
+      "lastOk": 1791058181218,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1622,9 +1626,34 @@
         {
           "t": 1791010959742,
           "v": 3
+        },
+        {
+          "t": 1791058181219,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1791058181218,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 63 days",
+          "url": ""
+        },
+        {
+          "t": 1791058181218,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1791058181218,
+          "level": "notable",
+          "title": "Still unread after 155 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1791010959742,
           "level": "notable",
@@ -2023,27 +2052,6 @@
           "title": "Still unread after 144 days — A book that has nothing to do with work",
           "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
           "url": ""
-        },
-        {
-          "t": 1790025174330,
-          "level": "notable",
-          "title": "Read next — Survival analysis, properly this time",
-          "detail": "about 45 min · research methods · already started",
-          "url": ""
-        },
-        {
-          "t": 1790025174330,
-          "level": "notable",
-          "title": "Read next — Current society guideline — read the update in full, not the summary",
-          "detail": "about 60 min · core · on the list 51 days",
-          "url": ""
-        },
-        {
-          "t": 1790025174330,
-          "level": "notable",
-          "title": "Still unread after 143 days — A book that has nothing to do with work",
-          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -2052,11 +2060,11 @@
       }
     },
     "training": {
-      "lastRun": 1791010959743,
-      "lastOk": 1791010959743,
+      "lastRun": 1791058181220,
+      "lastOk": 1791058181220,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0/4 this week · 0 min · last 4w: run 2, gym 1",
+      "lastLine": "0/4 this week · 0 min · last 4w: gym 1, run 1",
       "seen": [],
       "metrics": [
         {
@@ -2214,9 +2222,20 @@
         {
           "t": 1791010959743,
           "v": 0
+        },
+        {
+          "t": 1791058181220,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1791058181220,
+          "level": "notable",
+          "title": "24 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1791010959743,
           "level": "notable",
@@ -3259,6 +3278,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1791058181223,
+      "ran": 4,
+      "skipped": 6,
+      "failed": 0,
+      "notified": 0,
+      "held": 13
+    },
     {
       "t": 1791048833098,
       "ran": 3,

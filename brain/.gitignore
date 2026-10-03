@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
+
+# Your data and your secrets never belong in git.
+.env
+data/
+backups/
+
+/src/generated/prisma

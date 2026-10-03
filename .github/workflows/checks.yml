@@ -56,3 +56,37 @@ jobs:
       # nothing; this is only checking that the definitions hold together.
       - name: Agent definitions are valid
         run: node agents/runner.mjs --validate
+
+  # Brain (brain/) is a Next.js app with its own dependencies, so it gets its
+  # own job: lint, strict type-check, the test suite (which runs the real
+  # migrations against a throwaway SQLite file) and a production build.
+  brain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: brain
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: brain/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build

@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791058181214,
-      "lastOk": 1791058181214,
+      "lastRun": 1791069462590,
+      "lastOk": 1791069462590,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791052170000,
+          "level": "notable",
+          "title": "Getting the most out of Opus 5.5 in Claude and Claude Code",
+          "detail": "Article URL: https://claude.dev/blog/getting-the-most-out-of-opus-5-5/ Comments URL: https://news.ycombinator.com/item?id=49946567 Points: 127 # Comments: 85",
+          "url": "https://claude.dev/blog/getting-the-most-out-of-opus-5-5/"
+        },
+        {
+          "t": 1791047017000,
+          "level": "notable",
+          "title": "Agents don't need memory, they need documentation",
+          "detail": "Article URL: https://liao.gg/blog/agents-dont-need-memory Comments URL: https://news.ycombinator.com/item?id=49945933 Points: 15 # Comments: 11",
+          "url": "https://liao.gg/blog/agents-dont-need-memory"
+        },
         {
           "t": 1790968238000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "An agent used DNS to reach an external chatbot",
           "detail": "Article URL: https://alignment.openai.com/misalignment-reports/an-agent-used-dns-to-reach-an-external-chatbot/ Comments URL: https://news.ycombinator.com/item?id=49853137 Points: 86 # Comments: 91",
           "url": "https://alignment.openai.com/misalignment-reports/an-agent-used-dns-to-reach-an-external-chatbot/"
-        },
-        {
-          "t": 1790382603000,
-          "level": "notable",
-          "title": "Generate fonts where every LLM token is the same width",
-          "detail": "Article URL: https://ampdot.mesh.host/token-space-fonts.html Comments URL: https://news.ycombinator.com/item?id=49851883 Points: 58 # Comments: 12",
-          "url": "https://ampdot.mesh.host/token-space-fonts.html"
-        },
-        {
-          "t": 1790442640000,
-          "level": "notable",
-          "title": "Show HN: Reladraw – A diagram language where you decide where to place things",
-          "detail": "I love making diagrams to help understand, plan, etc. However, the options are (A) auto-placement languages like Mermaid or Graphviz (which don't let me decide how the diagram looks), or (B) software like Draw.io which are powerful but are very time consuming (and inefficient for agents to manipulat",
-          "url": "https://github.com/reladraw/reladraw"
         }
       ],
       "notifiedAt": {},
@@ -2495,11 +2495,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791048833098,
-      "lastOk": 1791048833098,
+      "lastRun": 1791069463072,
+      "lastOk": 1791069463072,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,242 (+76.8%) · excludes S&P 500 ETF",
+      "lastLine": "$4,237 (+76.6%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2845,9 +2845,27 @@
         {
           "t": 1791048833098,
           "v": 4242.1
+        },
+        {
+          "t": 1791069463073,
+          "v": 4237.25
         }
       ],
       "events": [
+        {
+          "t": 1791069463058,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791069463059,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791048833084,
           "level": "notable",
@@ -3253,31 +3271,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790289739805,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790289739805,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 84842
+          "BTC": 84745
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791069463073,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1791058181223,
       "ran": 4,

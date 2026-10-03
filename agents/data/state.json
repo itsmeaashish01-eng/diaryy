@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791010959282,
-      "lastOk": 1791010959282,
+      "lastRun": 1791031305255,
+      "lastOk": 1791031305255,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791016817000,
+          "level": "notable",
+          "title": "Show HN: Offrun – manage every coding agent from one workspace",
+          "detail": "Run Claude Code, Codex, AGY, and Grok Build side by side. See who is working, who needs you, and what every account has left. Comments URL: https://news.ycombinator.com/item?id=49942434 Points: 10 # Comments: 2",
+          "url": "https://offrun.dev/"
+        },
+        {
+          "t": 1790964076000,
+          "level": "notable",
+          "title": "From the creator of Redis; run LLM locally with ds4",
+          "detail": "Article URL: https://dwarfstar.sh/ Comments URL: https://news.ycombinator.com/item?id=49936575 Points: 273 # Comments: 69",
+          "url": "https://dwarfstar.sh/"
+        },
         {
           "t": 1790971215000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Show HN: Reladraw – A diagram language where you decide where to place things",
           "detail": "I love making diagrams to help understand, plan, etc. However, the options are (A) auto-placement languages like Mermaid or Graphviz (which don't let me decide how the diagram looks), or (B) software like Draw.io which are powerful but are very time consuming (and inefficient for agents to manipulat",
           "url": "https://github.com/reladraw/reladraw"
-        },
-        {
-          "t": 1790438194000,
-          "level": "notable",
-          "title": "Drawgent: Coding agent on a live Excalidraw canvas",
-          "detail": "Article URL: https://tangled.org/yanndegat.tngl.sh/drawgent Comments URL: https://news.ycombinator.com/item?id=49857729 Points: 90 # Comments: 31",
-          "url": "https://tangled.org/yanndegat.tngl.sh/drawgent"
-        },
-        {
-          "t": 1790415718000,
-          "level": "notable",
-          "title": "How to keep enjoying programming in a world of LLMs",
-          "detail": "Article URL: https://discourse.haskell.org/t/how-to-keep-enjoying-programming-in-a-world-of-llms/14705 Comments URL: https://news.ycombinator.com/item?id=49854875 Points: 132 # Comments: 190",
-          "url": "https://discourse.haskell.org/t/how-to-keep-enjoying-programming-in-a-world-of-llms/14705"
         }
       ],
       "notifiedAt": {},
@@ -2476,11 +2476,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791010960304,
-      "lastOk": 1791010960304,
+      "lastRun": 1791031305939,
+      "lastOk": 1791031305939,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,228 (+76.2%) · excludes S&P 500 ETF",
+      "lastLine": "$4,244 (+76.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2818,9 +2818,27 @@
         {
           "t": 1791010960304,
           "v": 4228.35
+        },
+        {
+          "t": 1791031305939,
+          "v": 4244.1
         }
       ],
       "events": [
+        {
+          "t": 1791031305925,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791031305925,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791010960290,
           "level": "notable",
@@ -3226,31 +3244,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790245692386,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790245692387,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 84567
+          "BTC": 84882
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791031305939,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1791010960305,
       "ran": 6,

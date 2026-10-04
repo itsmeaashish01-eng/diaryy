@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791108201737,
-      "lastOk": 1791108201737,
+      "lastRun": 1791127725074,
+      "lastOk": 1791127725074,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791081262000,
+          "level": "notable",
+          "title": "Religious scholars met with Anthropic",
+          "detail": "https://archive.is/y8FW0 Comments URL: https://news.ycombinator.com/item?id=49950052 Points: 131 # Comments: 292",
+          "url": "https://www.nytimes.com/2026/09/29/us/anthropic-claude-morals-ai.html"
+        },
+        {
+          "t": 1791047017000,
+          "level": "notable",
+          "title": "Agents don't need memory, they need documentation",
+          "detail": "Article URL: https://liao.gg/blog/agents-dont-need-memory Comments URL: https://news.ycombinator.com/item?id=49945933 Points: 271 # Comments: 154",
+          "url": "https://liao.gg/blog/agents-dont-need-memory"
+        },
         {
           "t": 1791100953000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "There are no \"rogue\" AI agents",
           "detail": "Article URL: https://eoinhiggins.substack.com/p/there-are-no-rogue-ai-agents Comments URL: https://news.ycombinator.com/item?id=49868083 Points: 177 # Comments: 114",
           "url": "https://eoinhiggins.substack.com/p/there-are-no-rogue-ai-agents"
-        },
-        {
-          "t": 1790524288000,
-          "level": "notable",
-          "title": "Show HN: TinyAIArena watch AI agents battle it out",
-          "detail": "Did you ever click on an “AI Arena” expecting glorious battle and instead get a boring benchmark? If so, this project is for you: proper life-or-death fights between four models on a picturesque 8×8 grid. May the most intelligent one win!Click on any of the matches to spectate them.Code: https://git",
-          "url": "https://tinyaiarena.com/"
-        },
-        {
-          "t": 1790442640000,
-          "level": "notable",
-          "title": "Show HN: Reladraw – A diagram language where you decide where to place things",
-          "detail": "I love making diagrams to help understand, plan, etc. However, the options are (A) auto-placement languages like Mermaid or Graphviz (which don't let me decide how the diagram looks), or (B) software like Draw.io which are powerful but are very time consuming (and inefficient for agents to manipulat",
-          "url": "https://github.com/reladraw/reladraw"
         }
       ],
       "notifiedAt": {},
@@ -2514,11 +2514,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791108212674,
-      "lastOk": 1791108212674,
+      "lastRun": 1791127725797,
+      "lastOk": 1791127725797,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,261 (+77.5%) · excludes S&P 500 ETF",
+      "lastLine": "$4,265 (+77.7%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2872,9 +2872,27 @@
         {
           "t": 1791108212675,
           "v": 4261.05
+        },
+        {
+          "t": 1791127725798,
+          "v": 4264.6
         }
       ],
       "events": [
+        {
+          "t": 1791127725784,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791127725784,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791108212661,
           "level": "notable",
@@ -3280,31 +3298,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790345254947,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790345254948,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 85221
+          "BTC": 85292
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791127725798,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1791108212675,
       "ran": 6,

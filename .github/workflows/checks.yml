@@ -40,14 +40,19 @@ jobs:
       - name: Guide self-test
         run: node guide/selftest.mjs
 
+      # Market Lens: parsers, sentiment, SEC arithmetic, the model, the
+      # quantum fusion and a full analysis on synthetic prices. Offline.
+      - name: Market Lens self-test
+        run: node market/selftest.mjs
+
       # A syntax error in a type would only show up at 37 past the hour,
       # in a job nobody is watching. Cheaper to find it here.
       - name: Everything parses
         run: |
-          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js; do
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js market/*.mjs market/lib/*.mjs market/app.js; do
             node --check "$f"
           done
-          for f in agents/data/*.json; do
+          for f in agents/data/*.json market/data/*.json; do
             node -e "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8'))" "$f"
           done
 

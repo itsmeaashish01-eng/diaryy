@@ -1,0 +1,32 @@
+{
+  "about": "The default set Market Lens analyses. Edit freely — any US-listed ticker works. ETFs get prices and news but no SEC report.",
+  "horizonDays": 63,
+  "budget": 10000,
+  "symbols": [
+    { "symbol": "AAPL",  "name": "Apple" },
+    { "symbol": "MSFT",  "name": "Microsoft" },
+    { "symbol": "NVDA",  "name": "NVIDIA" },
+    { "symbol": "GOOGL", "name": "Alphabet" },
+    { "symbol": "AMZN",  "name": "Amazon" },
+    { "symbol": "META",  "name": "Meta Platforms" },
+    { "symbol": "AVGO",  "name": "Broadcom" },
+    { "symbol": "TSLA",  "name": "Tesla" },
+    { "symbol": "AMD",   "name": "AMD" },
+    { "symbol": "NFLX",  "name": "Netflix" },
+    { "symbol": "CRM",   "name": "Salesforce" },
+    { "symbol": "JPM",   "name": "JPMorgan Chase" },
+    { "symbol": "V",     "name": "Visa" },
+    { "symbol": "BRK.B", "name": "Berkshire Hathaway" },
+    { "symbol": "LLY",   "name": "Eli Lilly" },
+    { "symbol": "UNH",   "name": "UnitedHealth" },
+    { "symbol": "JNJ",   "name": "Johnson & Johnson" },
+    { "symbol": "XOM",   "name": "Exxon Mobil" },
+    { "symbol": "CAT",   "name": "Caterpillar" },
+    { "symbol": "COST",  "name": "Costco" },
+    { "symbol": "WMT",   "name": "Walmart" },
+    { "symbol": "PG",    "name": "Procter & Gamble" },
+    { "symbol": "KO",    "name": "Coca-Cola" },
+    { "symbol": "HD",    "name": "Home Depot" },
+    { "symbol": "QQQ",   "name": "Nasdaq-100 ETF" }
+  ]
+}

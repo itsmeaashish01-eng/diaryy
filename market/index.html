@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Market Lens</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <span class="logo">◇ Market Lens</span>
+    <span class="tag">US stocks · mid-term outlook</span>
+    <button id="darkToggle" class="icon-btn" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
+  </header>
+
+  <main class="wrap">
+    <p class="disclaimer" role="note">
+      <strong>Not financial advice.</strong> These are statistical estimates from public data. Over a few months, stock
+      moves are close to a coin flip, and the honest numbers below say how much better than that the model did on
+      past data it hadn't seen. Never invest money you can't afford to lose.
+    </p>
+
+    <!-- ===== controls ===== -->
+    <section class="card controls">
+      <div class="field grow">
+        <label for="symbols">Stocks to compare <span class="hint">US tickers, separated by spaces or commas</span></label>
+        <textarea id="symbols" rows="2" spellcheck="false"></textarea>
+      </div>
+      <div class="ctl-row">
+        <div class="field">
+          <label for="horizon">Horizon</label>
+          <select id="horizon">
+            <option value="21">1 month</option>
+            <option value="63" selected>3 months</option>
+            <option value="126">6 months</option>
+            <option value="252">12 months</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="budget">Budget ($)</label>
+          <input id="budget" type="number" min="0" step="100" value="10000" />
+        </div>
+        <button id="runBtn" class="btn primary">Analyse now</button>
+      </div>
+      <details class="settings">
+        <summary>Settings</summary>
+        <div class="field">
+          <label for="email">Contact email for SEC EDGAR <span class="hint">The SEC asks every tool that reads company filings to say who it is. It's stored only on this computer, in market/.cache.</span></label>
+          <div class="ctl-row">
+            <input id="email" type="email" placeholder="you@example.com" />
+            <button id="saveEmail" class="btn">Save</button>
+            <span id="emailMsg" class="hint" role="status"></span>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section id="progress" class="card progress" hidden aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <div>
+        <strong id="progressHead">Working…</strong>
+        <pre id="progressLog"></pre>
+      </div>
+    </section>
+
+    <section id="empty" class="card empty" hidden>
+      <h2>No analysis yet</h2>
+      <p>Press <strong>Analyse now</strong>. The first run fetches ten years of prices, a month of news and the latest
+        filings for every stock, which takes a minute or two. Later runs reuse what was fetched.</p>
+    </section>
+
+    <div id="report" hidden>
+      <section class="tiles" id="tiles"></section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Where the evidence leans</h2>
+          <span class="hint" id="rankHint"></span>
+        </div>
+        <div class="table-wrap">
+          <table class="rank" id="rankTable">
+            <thead>
+              <tr>
+                <th>#</th><th>Stock</th><th class="hide-sm">Past year</th>
+                <th title="Quantum-fused probability the price is higher at the end of the horizon">P(up)</th>
+                <th class="hide-sm">Verdict</th>
+                <th class="num hide-sm" title="Monte Carlo: middle outcome, with the 10th–90th percentile range">Likely range</th>
+                <th class="num hide-md" title="Model's probability of beating the S&P 500 over the horizon">Beat S&amp;P</th>
+                <th class="num hide-md">News</th>
+                <th class="num hide-md" title="Where the latest 10-Q/10-K ranks against the others analysed">Report</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="hint">Select a row for the full reasoning: every source of evidence, the headlines, and the numbers from the latest report.</p>
+      </section>
+
+      <section class="card" id="allocCard"></section>
+
+      <section class="grid2">
+        <div class="card" id="modelCard"></div>
+        <div class="card" id="marketCard"></div>
+      </section>
+
+      <section class="card method">
+        <details>
+          <summary><h2>How the quantum probability is worked out</h2></summary>
+          <div class="method-body">
+            <p>Five independent kinds of evidence each give a probability that the stock is higher at the end of the horizon:</p>
+            <ol>
+              <li><strong>Price-pattern model</strong>: a logistic regression re-learned on every run from ten years of prices of all the stocks you listed, looking at momentum, trend, volatility, distance from the high and strength against the S&amp;P 500. It's tested walk-forward, so it's fitted on the past and scored on later data it never saw. Its spread is trusted only as far as that test earned.</li>
+              <li><strong>Monte Carlo futures</strong>: 3,000 possible futures stitched from real month-long stretches of the stock's last three years, with its drift pulled halfway toward the long-run market average.</li>
+              <li><strong>Company reports</strong>: revenue growth and whether it's speeding up, operating and free-cash-flow margins, debt and the price you pay per dollar of earnings. These come from the latest 10-Q and 10-K filings in SEC EDGAR, scored on their own and ranked against the other companies.</li>
+              <li><strong>Company news</strong>: the last 30 days of headlines, scored with a finance-specific word list. Newer headlines count for more.</li>
+              <li><strong>Market mood</strong>: the same, for news about the market and the economy as a whole.</li>
+            </ol>
+            <p>Each probability <em>p</em> becomes a qubit, <code>√p|up⟩ + √(1−p)|down⟩</code>. The qubits are superposed, weighted by trust, and the answer is read with the Born rule, <code>P(up) = |⟨up|Ψ⟩|² / ⟨Ψ|Ψ⟩</code>. When sources agree, their amplitudes interfere constructively. When they disagree, they cancel. <strong>Fidelity</strong> (⟨Ψ|Ψ⟩) measures that agreement. When the evidence is thin, the state is mixed with the fully uncertain one, which pulls the answer toward 50%. The <strong>range</strong> shows how far the answer moves if you leave out any one source.</p>
+            <p>This is quantum-<em>inspired</em> maths running on your own CPU. It is a careful way to combine evidence. It isn't a quantum computer, and it can't see the future.</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="card" id="errorsCard" hidden></section>
+      <p class="foot" id="foot"></p>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

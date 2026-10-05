@@ -65,10 +65,11 @@ Consequences:
 | I | **SUIT dentate atlas** (Diedrichsen et al. 2011) | Dentate nucleus | SUIT/MNI | Unknown (possibly non-commercial) | **Unverified** |
 | J | BodyParts3D (CC BY-SA 2.1 JP), Z-Anatomy (CC BY-SA 4.0) | Context layer only, if you approve | Native single-subject | As stated in your brief | Not rechecked |
 | K | SPL/NAC Brain Atlas (Open Anatomy) | Held for v2 | Native single-subject | Unknown | **Unverified** |
+| L | **Neuromorphometrics** (a) paid Labeled Scans; (b) MICCAI 2012 challenge set (OASIS T1 + manual labels); (c) SPM12 maximum-probability map built from (b) | QC cross-check only; nothing shipped | (a, b) native subject space, 1 mm; (c) "MNI" per SPM, exact template not stated | (a) academic subscription: research only, no sharing outside the group, no commercial use (reported); (b, c) **CC BY-NC** (checked in the SPM12 label file) | Checked (c); reported (a, b) |
 
 **ShareAlike:** anything built from E or F (and J) must ship as CC BY-SA 4.0. The app code can use a separate licence. The manifest records the licence for each asset.
 
-**Avoid:** Harvard-Oxford and XTRACT (FSL licence, non-commercial) and the Morel thalamic atlas (not open).
+**Avoid:** Harvard-Oxford and XTRACT (FSL licence, non-commercial), the Morel thalamic atlas (not open), and shipping any Neuromorphometrics-derived mesh. The paid scans can't be redistributed at all. The free sets are NC, and the label set adds nothing to the 20 structures: one "Brain Stem" label, a single pallidum, and no STN, SN or RN (checked in the SPM12 label file). Their one use is as an internal check: 35 manually labelled real brains for testing whether CIT168 and CerebrA boundaries fall within normal variation.
 
 ---
 
@@ -168,6 +169,7 @@ L/R test from §1.
 3. Should the anterior choroidal territory be split from PCA (§5.5)?
 4. Is it acceptable for v2 to show AICA and PICA as one combined territory?
 5. Should licences be confirmed before deliverable 2 starts? This matters most for CerebrA (ND?) and the CIT168 data. I can't reach OSF or G-Node from this environment, so either you or the environment's network settings need to provide access.
+6. Will Make a Brain ever be sold, carry ads, or be licensed to institutions? If so, every NC source (Neuromorphometrics, FSL atlases, possibly SUIT) is ruled out even for internal QC that feeds the product.
 
 ## 7. Uncertain statements in this document
 
@@ -179,6 +181,7 @@ L/R test from §1.
 - STN volume; all TA2 terms.
 - Whether HCP-1065 includes dentato-rubro-thalamic, spinothalamic and medial lemniscus tracts, and the Papez components.
 - Licences of Brainstem Navigator, the Harvard AAN atlas, SUIT and the SPL/NAC atlas.
+- Neuromorphometrics: MICCAI 2012 subject count (sources say 30 or 35 scans); which template the SPM12 map is in.
 
 ## References
 

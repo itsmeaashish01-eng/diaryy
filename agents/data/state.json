@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791307378396,
-      "lastOk": 1791307378396,
+      "lastRun": 1791323503283,
+      "lastOk": 1791323503283,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791309634000,
+          "level": "notable",
+          "title": "The smartest Claude Code feature is not for its users",
+          "detail": "Article URL: https://www.zohaib.cc/blog/smartest-claude-code-feature Comments URL: https://news.ycombinator.com/item?id=49981905 Points: 10 # Comments: 4",
+          "url": "https://www.zohaib.cc/blog/smartest-claude-code-feature"
+        },
         {
           "t": 1791271790000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "Sonnet 5.5",
           "detail": "Article URL: https://www.anthropic.com/claude-sonnet-5-5 Comments URL: https://news.ycombinator.com/item?id=49881850 Points: 468 # Comments: 316",
           "url": "https://www.anthropic.com/claude-sonnet-5-5"
-        },
-        {
-          "t": 1790616876000,
-          "level": "notable",
-          "title": "Launch HN: Vespper (YC F24) – SOTA Docx MCP",
-          "detail": "Hey HN! We're Dudu and Topaz from Vespper (https://vespper.com). Vespper is an MCP that lets AI agents efficiently edit Word documents, powered by our fine-tuned model. It's currently 3× faster, 2× cheaper and more accurate than the closest alternative. Check out an overview of how the product works",
-          "url": "https://www.vespper.com/blog/launching-vespper-docx-mcp"
         }
       ],
       "notifiedAt": {},
@@ -2571,11 +2571,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791307379588,
-      "lastOk": 1791307379588,
+      "lastRun": 1791323503826,
+      "lastOk": 1791323503826,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,275 (+78.1%) · excludes S&P 500 ETF",
+      "lastLine": "$4,279 (+78.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2957,9 +2957,27 @@
         {
           "t": 1791307379588,
           "v": 4274.85
+        },
+        {
+          "t": 1791323503826,
+          "v": 4279.25
         }
       ],
       "events": [
+        {
+          "t": 1791323503812,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791323503812,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791307379575,
           "level": "notable",
@@ -3365,31 +3383,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790497871844,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790497871844,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 85497
+          "BTC": 85585
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791323503826,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1791307379589,
       "ran": 3,

@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791337575035,
-      "lastOk": 1791337575035,
+      "lastRun": 1791364250373,
+      "lastOk": 1791364250373,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791343844000,
+          "level": "notable",
+          "title": "Show HN: NanoMuse – An open-source AI agent for your phone and computer",
+          "detail": "Article URL: https://github.com/nano-muse/nanoMuse Comments URL: https://news.ycombinator.com/item?id=49987765 Points: 19 # Comments: 3",
+          "url": "https://github.com/nano-muse/nanoMuse"
+        },
+        {
+          "t": 1791338531000,
+          "level": "notable",
+          "title": "Strands Decider 2B: a small, open-source, decision model",
+          "detail": "Article URL: https://strandsagents.com/blog/introducing-strands-decider/ Comments URL: https://news.ycombinator.com/item?id=49987076 Points: 166 # Comments: 41",
+          "url": "https://strandsagents.com/blog/introducing-strands-decider/"
+        },
+        {
+          "t": 1791309634000,
+          "level": "notable",
+          "title": "Claude Code’s suggested message feature: I think the real customer is the model",
+          "detail": "Article URL: https://www.zohaib.cc/blog/smartest-claude-code-feature Comments URL: https://news.ycombinator.com/item?id=49981905 Points: 195 # Comments: 108",
+          "url": "https://www.zohaib.cc/blog/smartest-claude-code-feature"
+        },
         {
           "t": 1791330633000,
           "level": "notable",
@@ -408,41 +429,90 @@
           "title": "Sonnet 5.5",
           "detail": "Article URL: https://www.anthropic.com/claude-sonnet-5-5 Comments URL: https://news.ycombinator.com/item?id=49881850 Points: 591 # Comments: 412",
           "url": "https://www.anthropic.com/claude-sonnet-5-5"
-        },
-        {
-          "t": 1790610396000,
-          "level": "notable",
-          "title": "Nvidia wants to put a watchdog chip next to every AI agent",
-          "detail": "Article URL: https://www.cnbc.com/2026/09/28/nvidia-releases.html Comments URL: https://news.ycombinator.com/item?id=49879883 Points: 106 # Comments: 148",
-          "url": "https://www.cnbc.com/2026/09/28/nvidia-releases.html"
-        },
-        {
-          "t": 1790609293000,
-          "level": "notable",
-          "title": "Cf: The Agentic CLI for the Cloudflare API",
-          "detail": "Article URL: https://blog.cloudflare.com/cloudflare-cf-cli-launch/ Comments URL: https://news.ycombinator.com/item?id=49879577 Points: 121 # Comments: 48",
-          "url": "https://blog.cloudflare.com/cloudflare-cf-cli-launch/"
-        },
-        {
-          "t": 1790608573000,
-          "level": "notable",
-          "title": "Show HN: HN.watch – Videos of all Hacker News posts",
-          "detail": "Hi HN, I’m Per, founder of Scrimba (YC S20). We’ve spent the last decade teaching people how to code with an HTML-based video format. We’ve now plugged an LLM into it, so that people can create explainer videos about anything. It’s called “Scrimba Explain”.To demo this technology for Hacker News, we",
-          "url": "https://hn.watch/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1791337575450,
-      "lastOk": 1791337575450,
+      "lastRun": 1791364250883,
+      "lastOk": 1791364250883,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.292",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791313170000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.292",
+          "detail": "## What's changed\n\n- Added `--marketplace <source>` to `claude plugin install`: adds the marketplace if needed, under the same policy checks as `claude plugin marketplace add`, then installs the plugin from it\n- Added an `effort` parameter to the Agent tool, so Claude runs a sub-agent at the effort level you ask for\n- Added `CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS` environment variable to set a",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.292"
+        },
+        {
+          "t": 1791258919000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.291",
+          "detail": "## What's changed\n\n- Fixed a regression in 2.1.290 where cloud sessions could drop answers to permission prompts\n- Fixed a regression in 2.1.288 where the last messages of a session could be lost when quitting\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.291"
+        },
+        {
+          "t": 1791243197000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.290",
+          "detail": "## What's changed\n\n- Added `serverToolUses` to the result of a mod's `turn.step` hook: the tool calls the API ran itself (the advisor), each with its id, name, input, start and end\n- Added `agentId` to the `tool.check` event of plugin hooks, so a hook can tell a subagent's permission check from the main session's\n- Added `ceiling` to the question and verdict a mod's `tool.check` hook reads, naming",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.290"
+        },
+        {
+          "t": 1791068837000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.289",
+          "detail": "## What's changed\n\n- Fixed a deny or ask rule on a nested part of a compound shell command not holding over a user-installed mod's approval on managed machines\n- Fixed the terminal freezing on short code blocks with many unclosed `<script>` tags or deeply nested `${` substitutions\n- Fixed `Read` deny rules not applying to files @-mentioned, changed, or selected in the IDE through a symlink\n- [VSCo",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.289"
+        },
+        {
+          "t": 1790972397000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.288",
+          "detail": "## What's changed\n\n- Added `$.ui.selection()` for mods: returns the text you last selected in fullscreen mode and, when the selection lies within one transcript row, that row\n- Added a built-in `gh api` to cloud sessions whose image has no GitHub CLI, and fixed the built-in sending control characters from file names, jq filters or GitHub errors to the terminal\n- Added recovery for a prompt cleared",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.288"
+        },
+        {
+          "t": 1790877622000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.287",
+          "detail": "## What's changed\n\n- Added Claude Mods: plugins may now modify deeper behavior\n- Added You should know, a built-in mod where a side agent watches your back and flags things you or Claude might miss. Turn it on with `/plugin enable cc-plugin-you-should-know@builtin` (for first-party sessions with telemetry on)\n- Added an `n:<text>` filter to the agents view that matches session names and tasks; a f",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.287"
+        },
+        {
+          "t": 1790795413000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.286",
+          "detail": "## What's changed\n\n- Added a count such as \"2 of 5\" to the permission prompt when several permission requests stack up\n- Added mouse support for the \"N more\" rows of lists in fullscreen mode: click one to jump to that end of the list, with hover and pressed states\n- Fixed several Claude Code processes and IDE extensions each opening a login browser when gcpAuthRefresh or awsAuthRefresh credentials",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.286"
+        },
+        {
+          "t": 1790710050000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.285",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_DISABLE_WEB_FETCH` environment variable to turn off the WebFetch tool\n- Added `claude --desktop` to open the Claude desktop app on the current directory, or on a session with `--continue` / `--resume <id>`\n- Added `claude plugin configure <plugin>` to show a plugin's options and which are unset, or save new values read from stdin with `--values-stdin`\n- Adde",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.285"
+        },
+        {
+          "t": 1790618523000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.284",
+          "detail": "## What's changed\n\n- Added Claude Sonnet 5.5 (`claude-sonnet-5-5`), now the default Sonnet model on the Anthropic API — 1M context, $2/$10 per Mtok with $0.20/Mtok cache reads\n- Added a \"Yes, but ask again next time\" answer to auto mode's prompt before a read outside the working directories, so you can allow that one read and still be asked about later ones\n- Added dollar amounts to the Claude app",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.284"
+        },
+        {
+          "t": 1790373012000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.283",
+          "detail": "## What's changed\n\n- Added `x-claude-code-prompt-id` to the gateway hint headers so LLM gateways can group the requests that serve one user prompt; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added `availableModelsMatch` managed setting: with `\"exact\"`, an `availableModels` entry allows only the model version it names, so new releases stay blocked until listed\n- Added `deniedModels` managed",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.283"
+        },
         {
           "t": 1791313170000,
           "level": "notable",
@@ -722,76 +792,6 @@
           "title": "anthropics/claude-code v2.1.281",
           "detail": "## What's changed\n\n- Added Claude apps gateway support for newer Claude Desktop keys in `desktop` policy blocks, including `blockReadsOutsideWorkingDirectories` and `disableBypassPermissionsMode`\n- Added `assume_role` on Claude apps gateway Bedrock upstreams: the gateway calls Bedrock as an IAM role it assumes through STS, in another AWS account if needed, optionally one session per developer\n- Ad",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.281"
-        },
-        {
-          "t": 1791068837000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.289",
-          "detail": "## What's changed\n\n- Fixed a deny or ask rule on a nested part of a compound shell command not holding over a user-installed mod's approval on managed machines\n- Fixed the terminal freezing on short code blocks with many unclosed `<script>` tags or deeply nested `${` substitutions\n- Fixed `Read` deny rules not applying to files @-mentioned, changed, or selected in the IDE through a symlink\n- [VSCo",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.289"
-        },
-        {
-          "t": 1790972397000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.288",
-          "detail": "## What's changed\n\n- Added `$.ui.selection()` for mods: returns the text you last selected in fullscreen mode and, when the selection lies within one transcript row, that row\n- Added a built-in `gh api` to cloud sessions whose image has no GitHub CLI, and fixed the built-in sending control characters from file names, jq filters or GitHub errors to the terminal\n- Added recovery for a prompt cleared",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.288"
-        },
-        {
-          "t": 1790877622000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.287",
-          "detail": "## What's changed\n\n- Added Claude Mods: plugins may now modify deeper behavior\n- Added You should know, a built-in mod where a side agent watches your back and flags things you or Claude might miss. Turn it on with `/plugin enable cc-plugin-you-should-know@builtin` (for first-party sessions with telemetry on)\n- Added an `n:<text>` filter to the agents view that matches session names and tasks; a f",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.287"
-        },
-        {
-          "t": 1790795413000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.286",
-          "detail": "## What's changed\n\n- Added a count such as \"2 of 5\" to the permission prompt when several permission requests stack up\n- Added mouse support for the \"N more\" rows of lists in fullscreen mode: click one to jump to that end of the list, with hover and pressed states\n- Fixed several Claude Code processes and IDE extensions each opening a login browser when gcpAuthRefresh or awsAuthRefresh credentials",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.286"
-        },
-        {
-          "t": 1790710050000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.285",
-          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_DISABLE_WEB_FETCH` environment variable to turn off the WebFetch tool\n- Added `claude --desktop` to open the Claude desktop app on the current directory, or on a session with `--continue` / `--resume <id>`\n- Added `claude plugin configure <plugin>` to show a plugin's options and which are unset, or save new values read from stdin with `--values-stdin`\n- Adde",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.285"
-        },
-        {
-          "t": 1790618523000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.284",
-          "detail": "## What's changed\n\n- Added Claude Sonnet 5.5 (`claude-sonnet-5-5`), now the default Sonnet model on the Anthropic API — 1M context, $2/$10 per Mtok with $0.20/Mtok cache reads\n- Added a \"Yes, but ask again next time\" answer to auto mode's prompt before a read outside the working directories, so you can allow that one read and still be asked about later ones\n- Added dollar amounts to the Claude app",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.284"
-        },
-        {
-          "t": 1790373012000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.283",
-          "detail": "## What's changed\n\n- Added `x-claude-code-prompt-id` to the gateway hint headers so LLM gateways can group the requests that serve one user prompt; opt in with `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`\n- Added `availableModelsMatch` managed setting: with `\"exact\"`, an `availableModels` entry allows only the model version it names, so new releases stay blocked until listed\n- Added `deniedModels` managed",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.283"
-        },
-        {
-          "t": 1790275085000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.282",
-          "detail": "## What's changed\n\n- Added a `maxProseWidth` setting that caps the width of Claude's prose in wide terminals while tables and code blocks keep the full width\n- Added a startup notice, and `/status` and `claude doctor` entries, listing telemetry variables in a project's settings files that were ignored or that turned telemetry off\n- Added the `allowClaudeInChromeWithManagedMcp` managed setting to l",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.282"
-        },
-        {
-          "t": 1790191155000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.281",
-          "detail": "## What's changed\n\n- Added Claude apps gateway support for newer Claude Desktop keys in `desktop` policy blocks, including `blockReadsOutsideWorkingDirectories` and `disableBypassPermissionsMode`\n- Added `assume_role` on Claude apps gateway Bedrock upstreams: the gateway calls Bedrock as an IAM role it assumes through STS, in another AWS account if needed, optionally one session per developer\n- Ad",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.281"
-        },
-        {
-          "t": 1790095094000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.280",
-          "detail": "## What's changed\n\n- Added Claude Opus 5.5 (`claude-opus-5-5`), now the default Opus model — 1M context, $4/$20 per Mtok with $0.20/Mtok cache reads\n- Added mouse support to more lists in fullscreen mode: the wheel scrolls the `/skills` list, and a skill's state options in `/plugin` can be clicked\n- Added `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` to change the 2,048-character cap on MCP tool descri",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.280"
         },
         {
           "t": 1791068837000,
@@ -2590,11 +2590,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791323503826,
-      "lastOk": 1791323503826,
+      "lastRun": 1791364251583,
+      "lastOk": 1791364251583,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,279 (+78.3%) · excludes S&P 500 ETF",
+      "lastLine": "$4,195 (+74.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -2980,9 +2980,27 @@
         {
           "t": 1791323503826,
           "v": 4279.25
+        },
+        {
+          "t": 1791364251583,
+          "v": 4194.6
         }
       ],
       "events": [
+        {
+          "t": 1791364251569,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791364251569,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791323503812,
           "level": "notable",
@@ -3388,31 +3406,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790518513697,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790518513697,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 85585
+          "BTC": 83892
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791364251583,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 15
+    },
     {
       "t": 1791337575457,
       "ran": 5,

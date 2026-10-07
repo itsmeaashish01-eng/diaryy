@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791391927914,
-      "lastOk": 1791391927914,
+      "lastRun": 1791411221771,
+      "lastOk": 1791411221771,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791398980000,
+          "level": "notable",
+          "title": "Meta and Microsoft take steps to reduce employee usage of Claude AI",
+          "detail": "Article URL: https://www.rswebsols.com/news/meta-and-microsoft-take-steps-to-reduce-employee-usage-of-claude-ai/ Comments URL: https://news.ycombinator.com/item?id=49997161 Points: 189 # Comments: 200",
+          "url": "https://www.rswebsols.com/news/meta-and-microsoft-take-steps-to-reduce-employee-usage-of-claude-ai/"
+        },
+        {
+          "t": 1791396092000,
+          "level": "notable",
+          "title": "Claude Haiku 5.5",
+          "detail": "Article URL: https://www.anthropic.com/claude-haiku-5-5 Comments URL: https://news.ycombinator.com/item?id=49996437 Points: 530 # Comments: 250",
+          "url": "https://www.anthropic.com/claude-haiku-5-5"
+        },
+        {
+          "t": 1791395318000,
+          "level": "notable",
+          "title": "Docker Agent",
+          "detail": "Article URL: https://github.com/docker/docker-agent Comments URL: https://news.ycombinator.com/item?id=49996259 Points: 132 # Comments: 55",
+          "url": "https://github.com/docker/docker-agent"
+        },
+        {
+          "t": 1791392351000,
+          "level": "notable",
+          "title": "Show HN: Agent.reviews – Where AI agents read and write reviews on tools",
+          "detail": "Hi HN!I’m Louis, Co-Founder of Armature (YC P26), where we help teams make their product discoverable and usable by coding agents. We already measured 50k+ agent sessions and realized that over and over agents would encounter the exact same limitations on different tasks using the same tool. So we w",
+          "url": "https://agent.reviews/"
+        },
         {
           "t": 1791389228000,
           "level": "notable",
@@ -401,34 +429,6 @@
           "title": "MicroLLM Lab – Try 7 tiny LLM's in the browser",
           "detail": "Article URL: https://stateofutopia.com/experiments/microllmlab/ Comments URL: https://news.ycombinator.com/item?id=49882781 Points: 233 # Comments: 82",
           "url": "https://stateofutopia.com/experiments/microllmlab/"
-        },
-        {
-          "t": 1790618291000,
-          "level": "notable",
-          "title": "Sonnet 5.5",
-          "detail": "Article URL: https://www.anthropic.com/claude-sonnet-5-5 Comments URL: https://news.ycombinator.com/item?id=49881850 Points: 772 # Comments: 517",
-          "url": "https://www.anthropic.com/claude-sonnet-5-5"
-        },
-        {
-          "t": 1790610396000,
-          "level": "notable",
-          "title": "Nvidia wants to put a watchdog chip next to every AI agent",
-          "detail": "Article URL: https://www.cnbc.com/2026/09/28/nvidia-releases.html Comments URL: https://news.ycombinator.com/item?id=49879883 Points: 166 # Comments: 208",
-          "url": "https://www.cnbc.com/2026/09/28/nvidia-releases.html"
-        },
-        {
-          "t": 1790643347000,
-          "level": "notable",
-          "title": "We found 24 Android vulnerabilities using our open source AI security agent",
-          "detail": "Article URL: https://github.blog/security/how-we-found-24-android-vulnerabilities-using-our-open-source-ai-security-agent/ Comments URL: https://news.ycombinator.com/item?id=49886609 Points: 6 # Comments: 1",
-          "url": "https://github.blog/security/how-we-found-24-android-vulnerabilities-using-our-open-source-ai-security-agent/"
-        },
-        {
-          "t": 1790630801000,
-          "level": "notable",
-          "title": "ESP32S3 cluster running 1.58-bit (BitNet) Language model",
-          "detail": "Article URL: https://github.com/Low-Zi-Hong/ESP32s3-LLM-Cluster Comments URL: https://news.ycombinator.com/item?id=49884625 Points: 30 # Comments: 2",
-          "url": "https://github.com/Low-Zi-Hong/ESP32s3-LLM-Cluster"
         }
       ],
       "notifiedAt": {},
@@ -2609,11 +2609,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791391929074,
-      "lastOk": 1791391929074,
+      "lastRun": 1791411222286,
+      "lastOk": 1791411222286,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,168 (+73.7%) · excludes S&P 500 ETF",
+      "lastLine": "$4,161 (+73.4%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3007,9 +3007,27 @@
         {
           "t": 1791391929075,
           "v": 4168.05
+        },
+        {
+          "t": 1791411222286,
+          "v": 4160.65
         }
       ],
       "events": [
+        {
+          "t": 1791411222272,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791411222272,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791391929065,
           "level": "notable",
@@ -3415,31 +3433,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790557606855,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790557606856,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 83361
+          "BTC": 83213
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791411222287,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 6
+    },
     {
       "t": 1791391929075,
       "ran": 6,

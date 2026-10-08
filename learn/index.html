@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Code Clinic</title>
+  <meta name="description" content="An interactive course in coding, agentic AI and software deployment, built around two projects: your own website and a healthcare research toolkit." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the lesson</a>
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button id="menuBtn" class="icon-btn menu-btn" type="button" aria-label="Show lessons" aria-expanded="false" aria-controls="sidebar">☰</button>
+      <a class="logo" href="#/" title="Code Clinic — home">⚕&#xFE0E; Code Clinic</a>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrap">
+        <input type="search" id="searchInput" placeholder="Find a lesson…" autocomplete="off" aria-label="Find a lesson" />
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <div id="searchResults" class="search-results" hidden></div>
+      </div>
+      <a class="icon-btn" href="../agents/index.html" title="Agents — what's been watching" aria-label="Open Agents">◉</a>
+      <a class="icon-btn" href="../index.html" title="Back to My Diary" aria-label="Back to My Diary">✦</a>
+      <button id="darkToggle" class="icon-btn" type="button" title="Toggle dark mode" aria-label="Toggle dark mode"><span id="darkIcon">☾</span></button>
+      <button id="exportBtn" class="icon-btn" type="button" title="Export your progress as a file" aria-label="Export progress">⤓</button>
+      <label class="icon-btn" title="Import progress from a file" aria-label="Import progress">⤒<input type="file" id="importFile" accept=".json,application/json" hidden /></label>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside id="sidebar" class="sidebar">
+      <nav id="sidebarNav" aria-label="Course"></nav>
+    </aside>
+    <main id="main" class="main"></main>
+  </div>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <!-- Plain scripts, in dependency order, the same shape as the rest of
+       this repository: no build step, opens from disk. -->
+  <script src="js/util.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/stats.js"></script>
+  <script src="js/gitsim.js"></script>
+  <script src="js/agentsim.js"></script>
+  <script src="js/sandbox.js"></script>
+  <script src="js/course.js"></script>
+  <script src="js/widgets.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/content/start.js"></script>
+  <script src="js/content/coding.js"></script>
+  <script src="js/content/agents.js"></script>
+  <script src="js/content/deploy.js"></script>
+  <script src="js/content/research.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791563457012,
-      "lastOk": 1791563457012,
+      "lastRun": 1791580283658,
+      "lastOk": 1791580283658,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791555691000,
+          "level": "notable",
+          "title": "Why Are Coding Agents So Dumb?",
+          "detail": "Article URL: https://mtlynch.io/why-are-coding-agents-so-dumb/ Comments URL: https://news.ycombinator.com/item?id=50020947 Points: 30 # Comments: 5",
+          "url": "https://mtlynch.io/why-are-coding-agents-so-dumb/"
+        },
+        {
+          "t": 1791543828000,
+          "level": "notable",
+          "title": "Show HN: Let your AI agents paint big arrows, boxes and text on your screen",
+          "detail": "Article URL: https://github.com/franzenzenhofer/big-arrow-on-the-screen Comments URL: https://news.ycombinator.com/item?id=50018817 Points: 345 # Comments: 145",
+          "url": "https://github.com/franzenzenhofer/big-arrow-on-the-screen"
+        },
         {
           "t": 1791543828000,
           "level": "notable",
@@ -401,20 +415,6 @@
           "title": "FTC is investigating OpenAI, Anthropic and other AI companies over product risks",
           "detail": "Article URL: https://www.cnbc.com/2026/09/30/ftc-ai-probe-openai-anthropic.html Comments URL: https://news.ycombinator.com/item?id=49921050 Points: 129 # Comments: 77",
           "url": "https://www.cnbc.com/2026/09/30/ftc-ai-probe-openai-anthropic.html"
-        },
-        {
-          "t": 1790789860000,
-          "level": "notable",
-          "title": "Launch HN: Magnitude (YC S25) – Self-optimizing inference engine for agents",
-          "detail": "Hey HN, Anders and Tom here. We're building Magnitude, an inference engine for agents that optimizes itself to run as fast as possible on your hardware. It works on Mac, Linux, and Windows on any hardware and is up to 2x faster than llama.cpp.We're both software engineers and previously built an ope",
-          "url": "https://github.com/magnitudedev/magnitude"
-        },
-        {
-          "t": 1790789860000,
-          "level": "notable",
-          "title": "Launch HN: Magnitude (YC S25) – Self-optimizing inference engine for agents",
-          "detail": "Hey HN, Anders and Tom here. We're building Magnitude, an inference engine for agents that optimizes itself to run as fast as possible on your hardware. It works on Mac, Linux, and Windows on any hardware and is up to 2x faster than llama.cpp.We're both software engineers and previously built an ope",
-          "url": "https://github.com/magnitudedev/magnitude"
         },
         {
           "t": 1790789860000,
@@ -2666,11 +2666,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791563457875,
-      "lastOk": 1791563457875,
+      "lastRun": 1791580284267,
+      "lastOk": 1791580284267,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,134 (+72.2%) · excludes S&P 500 ETF",
+      "lastLine": "$4,126 (+71.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3096,9 +3096,27 @@
         {
           "t": 1791563457875,
           "v": 4133.85
+        },
+        {
+          "t": 1791580284268,
+          "v": 4125.5
         }
       ],
       "events": [
+        {
+          "t": 1791580284256,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791580284257,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791563457862,
           "level": "notable",
@@ -3504,31 +3522,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790821253437,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790821253437,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 82677
+          "BTC": 82510
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791580284268,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1791563457875,
       "ran": 6,

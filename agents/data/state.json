@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791643224282,
-      "lastOk": 1791643224282,
+      "lastRun": 1791660518866,
+      "lastOk": 1791660518866,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791655854000,
+          "level": "notable",
+          "title": "Anthropic discloses 2 months old fake tip to police among new rogue AI incidents",
+          "detail": "Article URL: https://www.reuters.com/world/us/anthropic-ai-model-submits-false-homicide-tip-police-website-2026-10-09/ Comments URL: https://news.ycombinator.com/item?id=50035550 Points: 37 # Comments: 15",
+          "url": "https://www.reuters.com/world/us/anthropic-ai-model-submits-false-homicide-tip-police-website-2026-10-09/"
+        },
+        {
+          "t": 1791629529000,
+          "level": "notable",
+          "title": "Talorys – A self-hosted personal AI agent on Cloudflare's free tier",
+          "detail": "Article URL: https://github.com/rociiu/talorys Comments URL: https://news.ycombinator.com/item?id=50031614 Points: 187 # Comments: 96",
+          "url": "https://github.com/rociiu/talorys"
+        },
         {
           "t": 1791629529000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Identity Management for Agentic AI [pdf] (2025)",
           "detail": "Article URL: https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf Comments URL: https://news.ycombinator.com/item?id=49922736 Points: 64 # Comments: 20",
           "url": "https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf"
-        },
-        {
-          "t": 1790867470000,
-          "level": "notable",
-          "title": "OpenID Foundation: Identity Management for Agentic AI [pdf] (2025)",
-          "detail": "Article URL: https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf Comments URL: https://news.ycombinator.com/item?id=49922736 Points: 32 # Comments: 6",
-          "url": "https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf"
-        },
-        {
-          "t": 1790859655000,
-          "level": "notable",
-          "title": "FTC is investigating OpenAI, Anthropic and other AI companies over product risks",
-          "detail": "Article URL: https://www.cnbc.com/2026/09/30/ftc-ai-probe-openai-anthropic.html Comments URL: https://news.ycombinator.com/item?id=49921050 Points: 129 # Comments: 77",
-          "url": "https://www.cnbc.com/2026/09/30/ftc-ai-probe-openai-anthropic.html"
         }
       ],
       "notifiedAt": {},
@@ -2685,11 +2685,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791643225166,
-      "lastOk": 1791643225166,
+      "lastRun": 1791660519550,
+      "lastOk": 1791660519550,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,147 (+72.8%) · excludes S&P 500 ETF",
+      "lastLine": "$4,148 (+72.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3127,9 +3127,27 @@
         {
           "t": 1791643225166,
           "v": 4146.9
+        },
+        {
+          "t": 1791660519550,
+          "v": 4148.05
         }
       ],
       "events": [
+        {
+          "t": 1791660519537,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791660519537,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791643225152,
           "level": "notable",
@@ -3535,31 +3553,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790891899820,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790891899820,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 82938
+          "BTC": 82961
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791660519550,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1791643225166,
       "ran": 3,

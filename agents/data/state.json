@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791660518866,
-      "lastOk": 1791660518866,
+      "lastRun": 1791672801250,
+      "lastOk": 1791672801250,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791667182000,
+          "level": "notable",
+          "title": "Hackers abuse Google Ads, Bing redirects to push Claude ClickFix attacks",
+          "detail": "Article URL: https://www.bleepingcomputer.com/news/security/hackers-abuse-google-ads-bing-redirects-to-push-claude-clickfix-attacks/ Comments URL: https://news.ycombinator.com/item?id=50037299 Points: 17 # Comments: 7",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-abuse-google-ads-bing-redirects-to-push-claude-clickfix-attacks/"
+        },
+        {
+          "t": 1791629529000,
+          "level": "notable",
+          "title": "Talorys – A self-hosted personal AI agent on Cloudflare's free tier",
+          "detail": "Article URL: https://github.com/rociiu/talorys Comments URL: https://news.ycombinator.com/item?id=50031614 Points: 225 # Comments: 114",
+          "url": "https://github.com/rociiu/talorys"
+        },
+        {
+          "t": 1791559593000,
+          "level": "notable",
+          "title": "Five months treating bugs like patients and coding agents like a medical team",
+          "detail": "Article URL: https://www.cockroachlabs.com/blog/experiment-running-hospital-code/ Comments URL: https://news.ycombinator.com/item?id=50021899 Points: 16 # Comments: 3",
+          "url": "https://www.cockroachlabs.com/blog/experiment-running-hospital-code/"
+        },
         {
           "t": 1791655854000,
           "level": "notable",
@@ -408,35 +429,14 @@
           "title": "From the creator of Redis; run LLM locally with ds4",
           "detail": "Article URL: https://dwarfstar.sh/ Comments URL: https://news.ycombinator.com/item?id=49936575 Points: 53 # Comments: 5",
           "url": "https://dwarfstar.sh/"
-        },
-        {
-          "t": 1790892151000,
-          "level": "notable",
-          "title": "Aweb – Communication for AI Agents",
-          "detail": "Article URL: https://aweb.ai Comments URL: https://news.ycombinator.com/item?id=49927587 Points: 19 # Comments: 14",
-          "url": "https://aweb.ai"
-        },
-        {
-          "t": 1790886738000,
-          "level": "notable",
-          "title": "Show HN: Rhun, an open-source code editor written in assembly",
-          "detail": "I found that I'm not using even 1/3 of vim/vscode features anymore.That's wht I'm building rhun - a small code editor for Linux, Windows and Apple silicon Macs. It obviously has Vim mode, a terminal, Git diffs and a panel for Claude Code or Codex sessions.The editor and pixel renderer share an x86-6",
-          "url": "https://rhun.app/"
-        },
-        {
-          "t": 1790867470000,
-          "level": "notable",
-          "title": "Identity Management for Agentic AI [pdf] (2025)",
-          "detail": "Article URL: https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf Comments URL: https://news.ycombinator.com/item?id=49922736 Points: 64 # Comments: 20",
-          "url": "https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1791643224609,
-      "lastOk": 1791643224609,
+      "lastRun": 1791672801586,
+      "lastOk": 1791672801586,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.296",
@@ -654,6 +654,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.287"
         },
         {
+          "t": 1791574139000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.296",
+          "detail": "## What's changed\n\n- Added a `code` key to the Claude apps gateway's `managed.policies[]`: the same settings as `cli`, also applied in Claude Desktop's Code tab; beside `desktop`, it turns on Claude Desktop's gateway mode\n- Added `autoCompactWindow` to subagent frontmatter and `--agents` definitions, so a subagent can auto-compact earlier than the main conversation's window\n- Added `CLAUDE_CODE_WO",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.296"
+        },
+        {
           "t": 1791488918000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.295",
@@ -715,13 +722,6 @@
           "title": "anthropics/claude-code v2.1.287",
           "detail": "## What's changed\n\n- Added Claude Mods: plugins may now modify deeper behavior\n- Added You should know, a built-in mod where a side agent watches your back and flags things you or Claude might miss. Turn it on with `/plugin enable cc-plugin-you-should-know@builtin` (for first-party sessions with telemetry on)\n- Added an `n:<text>` filter to the agents view that matches session names and tasks; a f",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.287"
-        },
-        {
-          "t": 1790795413000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.286",
-          "detail": "## What's changed\n\n- Added a count such as \"2 of 5\" to the permission prompt when several permission requests stack up\n- Added mouse support for the \"N more\" rows of lists in fullscreen mode: click one to jump to that end of the list, with hover and pressed states\n- Fixed several Claude Code processes and IDE extensions each opening a login browser when gcpAuthRefresh or awsAuthRefresh credentials",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.286"
         },
         {
           "t": 1791488918000,
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1791618115778,
-      "lastOk": 1791618115778,
+      "lastRun": 1791672801587,
+      "lastOk": 1791672801587,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 2 drifting",
@@ -1074,9 +1074,62 @@
         {
           "t": 1791618115778,
           "v": 17
+        },
+        {
+          "t": 1791672801588,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1791672801587,
+          "level": "notable",
+          "title": "Log 50 supervised procedures — 82 days left",
+          "detail": "Finish fellowship strong, due 2026-12-31.",
+          "url": ""
+        },
+        {
+          "t": 1791672801587,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 36 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1791672801587,
+          "level": "notable",
+          "title": "Finish fellowship strong hasn't moved in 39 days",
+          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1791672801587,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1791672801587,
+          "level": "notable",
+          "title": "Data collection complete — 66 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1791672801587,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 51 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1791672801587,
+          "level": "notable",
+          "title": "Time for a goals review",
+          "detail": "It's been 101 days since 2026-07-01. Re-read the list, cut what's dead, set the next milestones.",
+          "url": ""
+        },
         {
           "t": 1791618115778,
           "level": "notable",
@@ -1447,55 +1500,6 @@
           "title": "✓ Protocol approved",
           "detail": "First-author paper submitted — finished 2026-08-20.",
           "url": ""
-        },
-        {
-          "t": 1791220884064,
-          "level": "notable",
-          "title": "Data collection complete — 71 days left",
-          "detail": "First-author paper submitted, due 2026-12-15.",
-          "url": ""
-        },
-        {
-          "t": 1791220884064,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 46 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1791220884064,
-          "level": "notable",
-          "title": "Time for a goals review",
-          "detail": "It's been 96 days since 2026-07-01. Re-read the list, cut what's dead, set the next milestones.",
-          "url": ""
-        },
-        {
-          "t": 1791152935485,
-          "level": "notable",
-          "title": "Log 50 supervised procedures — 88 days left",
-          "detail": "Finish fellowship strong, due 2026-12-31.",
-          "url": ""
-        },
-        {
-          "t": 1791152935485,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 42 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1791152935486,
-          "level": "notable",
-          "title": "Finish fellowship strong hasn't moved in 33 days",
-          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1791152935486,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -1504,8 +1508,8 @@
       }
     },
     "reading": {
-      "lastRun": 1791618115779,
-      "lastOk": 1791618115779,
+      "lastRun": 1791672801588,
+      "lastOk": 1791672801588,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1710,9 +1714,34 @@
         {
           "t": 1791618115780,
           "v": 3
+        },
+        {
+          "t": 1791672801589,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1791672801588,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 70 days",
+          "url": ""
+        },
+        {
+          "t": 1791672801588,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1791672801588,
+          "level": "notable",
+          "title": "Still unread after 162 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1791618115779,
           "level": "notable",
@@ -2111,27 +2140,6 @@
           "title": "Still unread after 150 days — A book that has nothing to do with work",
           "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
           "url": ""
-        },
-        {
-          "t": 1790580700543,
-          "level": "notable",
-          "title": "Read next — Survival analysis, properly this time",
-          "detail": "about 45 min · research methods · already started",
-          "url": ""
-        },
-        {
-          "t": 1790580700543,
-          "level": "notable",
-          "title": "Read next — Current society guideline — read the update in full, not the summary",
-          "detail": "about 60 min · core · on the list 58 days",
-          "url": ""
-        },
-        {
-          "t": 1790580700543,
-          "level": "notable",
-          "title": "Still unread after 150 days — A book that has nothing to do with work",
-          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -2140,8 +2148,8 @@
       }
     },
     "training": {
-      "lastRun": 1791618115781,
-      "lastOk": 1791618115781,
+      "lastRun": 1791672801589,
+      "lastOk": 1791672801589,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min",
@@ -2346,9 +2354,20 @@
         {
           "t": 1791618115781,
           "v": 0
+        },
+        {
+          "t": 1791672801590,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1791672801589,
+          "level": "notable",
+          "title": "31 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1791618115781,
           "level": "notable",
@@ -3564,6 +3583,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1791672801592,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 24
+    },
     {
       "t": 1791660519550,
       "ran": 2,

@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791750705511,
-      "lastOk": 1791750705511,
+      "lastRun": 1791762880527,
+      "lastOk": 1791762880527,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791750052000,
+          "level": "notable",
+          "title": "The gap in shared understanding of LLM capability is widening",
+          "detail": "Article URL: https://twitter.com/karpathy/status/2109361546505966046 Comments URL: https://news.ycombinator.com/item?id=50047422 Points: 179 # Comments: 263",
+          "url": "https://twitter.com/karpathy/status/2109361546505966046"
+        },
         {
           "t": 1791629529000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "Show HN: Offrun – manage every coding agent from one workspace",
           "detail": "Run Claude Code, Codex, AGY, and Grok Build side by side. See who is working, who needs you, and what every account has left. Comments URL: https://news.ycombinator.com/item?id=49942434 Points: 10 # Comments: 2",
           "url": "https://offrun.dev/"
-        },
-        {
-          "t": 1790964076000,
-          "level": "notable",
-          "title": "From the creator of Redis; run LLM locally with ds4",
-          "detail": "Article URL: https://dwarfstar.sh/ Comments URL: https://news.ycombinator.com/item?id=49936575 Points: 273 # Comments: 69",
-          "url": "https://dwarfstar.sh/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1791734139878,
-      "lastOk": 1791734139878,
+      "lastRun": 1791762880927,
+      "lastOk": 1791762880927,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.296",
@@ -3618,6 +3618,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1791762880934,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 11
+    },
     {
       "t": 1791750706246,
       "ran": 2,

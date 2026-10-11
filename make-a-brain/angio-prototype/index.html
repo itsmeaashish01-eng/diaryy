@@ -1,133 +1,158 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Angiography Simulator Prototype</title>
+<title>Neuro DSA Simulator</title>
+<meta name="description" content="Biplane cerebral angiography cine with real-time contrast timing, built from published atlas data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500&display=swap">
 <style>
+  /* Layout: an angio control room. Two monitors (frontal + lateral) above a
+     cine strip and time-density curve; acquisition controls in a side rack.
+     Deliberately single-theme (dark), like the lights-down suite it imitates. */
   :root {
-    --bg: #f4f4f2; --panel: #ffffff; --ink: #1d1f21; --muted: #5f6368;
-    --line: #d8d8d4; --accent: #2b5d8a; --warn: #8a4b00; --warn-bg: #fff4e5;
-    --film: #dcdcd8;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #141516; --panel: #1d1f21; --ink: #e8e8e6; --muted: #a0a4a8;
-      --line: #34373a; --accent: #7fb0dc; --warn: #f0b060; --warn-bg: #2e2416;
-    }
+    color-scheme: dark;
+    --room: #101315;
+    --rack: #181c1f;
+    --bezel: #050607;
+    --line: #2a3035;
+    --ink: #dfe4e6;
+    --muted: #8d979d;
+    --accent: #e0a64b;
+    --note-bg: #2a2216; --note-ink: #f0c98a;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink);
-    font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-  header { padding: 14px 16px 6px; }
-  h1 { font-size: 18px; margin: 0; font-weight: 600; }
-  header p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
-  main { display: grid; grid-template-columns: 300px 1fr; gap: 14px; padding: 10px 16px 24px; }
-  @media (max-width: 860px) { main { grid-template-columns: 1fr; } }
-  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
-  .panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em;
-    color: var(--muted); margin: 14px 0 6px; font-weight: 600; }
-  .panel h2:first-child { margin-top: 0; }
+  html, body { background: var(--room); color: var(--ink); }
+  body { margin: 0; font: 15px/1.45 var(--sans); padding-inline: 16px; padding-block: 14px 28px; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 12px; }
+  h1 { font: 600 19px/1.2 var(--sans); margin: 0; letter-spacing: .01em; }
+  header p { margin: 0; color: var(--muted); font-size: 13px; flex: 1 1 320px; min-width: 0; }
+  .xray { display: inline-flex; align-items: center; gap: 6px; font: 600 12px var(--mono);
+    letter-spacing: .08em; color: var(--muted); }
+  .xray i { width: 9px; height: 9px; border-radius: 50%; background: #3a3f43; display: inline-block; }
+  .xray.on { color: var(--accent); } .xray.on i { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+
+  main { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 14px; }
+  @media (max-width: 900px) { main { grid-template-columns: minmax(0, 1fr); } .rack { order: 2; } }
+
+  .rack { background: var(--rack); border: 1px solid var(--line); border-radius: 8px; padding: 12px; min-width: 0; }
+  .rack h2 { font: 600 11px var(--sans); text-transform: uppercase; letter-spacing: .09em; color: var(--muted); margin: 16px 0 7px; }
+  .rack h2:first-child { margin-top: 0; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-  button { font: inherit; padding: 8px 6px; border-radius: 6px; border: 1px solid var(--line);
-    background: transparent; color: var(--ink); cursor: pointer; min-height: 40px; }
-  button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
-  button:disabled { opacity: .45; cursor: not-allowed; }
+  button { font: 500 14px var(--sans); padding: 8px 6px; border-radius: 6px; border: 1px solid var(--line);
+    background: #1f2427; color: var(--ink); cursor: pointer; min-height: 42px; }
+  button:hover:not(:disabled) { border-color: #4a535a; }
+  button[aria-pressed="true"] { background: var(--accent); color: #1a1408; border-color: var(--accent); }
+  button:disabled { opacity: .4; cursor: not-allowed; }
   button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  label.chk { display: flex; gap: 8px; align-items: flex-start; margin: 6px 0; font-size: 14px; }
-  label.chk input { margin-top: 3px; }
-  .small { font-size: 12px; color: var(--muted); }
-  .views { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 600px) { .views { grid-template-columns: 1fr; } }
-  figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
-  figcaption { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
-  .film { position: relative; background: var(--film); border-radius: 4px; overflow: hidden; }
-  canvas { display: block; width: 100%; height: auto; image-rendering: auto; }
-  .mk { position: absolute; font: 600 13px/1 ui-monospace, Menlo, monospace; color: #222;
-    background: rgba(255,255,255,.75); padding: 2px 4px; border-radius: 3px; }
-  .mk.l { left: 6px; top: 50%; } .mk.r { right: 6px; top: 50%; }
-  .mk.t { top: 6px; left: 50%; } .mk.b { bottom: 6px; left: 50%; }
-  .tip { position: absolute; pointer-events: none; background: rgba(20,20,20,.88); color: #fff;
-    font-size: 12px; padding: 4px 6px; border-radius: 4px; display: none; white-space: nowrap; }
-  .cine { display: flex; gap: 10px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
-  .cine input[type=range] { flex: 1; min-width: 160px; }
-  .clock { font: 600 15px ui-monospace, Menlo, monospace; min-width: 70px; }
-  .phase { padding: 3px 8px; border-radius: 99px; border: 1px solid var(--line); font-size: 13px; }
-  .phasebar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin-top: 8px; }
-  .phasebar span { display: block; }
-  .status { margin-top: 12px; display: grid; gap: 6px; }
-  .note { background: var(--warn-bg); color: var(--warn); border-radius: 6px; padding: 8px 10px; font-size: 13px; }
-  .ok { background: transparent; color: var(--ink); border: 1px solid var(--line); }
-  footer { padding: 0 16px 24px; font-size: 12px; color: var(--muted); }
+  label.chk { display: flex; gap: 8px; align-items: flex-start; margin: 7px 0; font-size: 13.5px; }
+  label.chk input { margin-top: 3px; accent-color: var(--accent); }
+  .small { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+
+  .monitors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  @media (max-width: 640px) { .monitors { grid-template-columns: minmax(0, 1fr); } }
+  .monitor { background: var(--bezel); border: 1px solid #000; border-radius: 10px; padding: 10px;
+    box-shadow: inset 0 0 0 1px #1d2124; min-width: 0; }
+  .screen { position: relative; aspect-ratio: 1 / 1; max-width: 100%; background: #000; overflow: hidden; border-radius: 3px; }
+  .screen canvas { position: absolute; inset: 0; width: 100%; height: 100%; filter: blur(.5px); }
+  .ov { position: absolute; font: 400 11.5px/1.35 var(--mono); color: #e8e8e8; text-shadow: 0 0 2px #000, 0 0 2px #000;
+    pointer-events: none; white-space: pre; }
+  .ov.tl { left: 8px; top: 7px; } .ov.tr { right: 8px; top: 7px; text-align: right; }
+  .ov.bl { left: 8px; bottom: 7px; } .ov.br { right: 8px; bottom: 7px; text-align: right; }
+  .mk { position: absolute; font: 600 13px var(--mono); color: #f4f4f4; text-shadow: 0 0 3px #000; pointer-events: none; }
+  .mk.l { left: 8px; top: 50%; transform: translateY(-50%); } .mk.r { right: 8px; top: 50%; transform: translateY(-50%); }
+  .tip { position: absolute; pointer-events: none; background: rgba(8,10,11,.92); color: #fff; border: 1px solid #3a4146;
+    padding: 5px 8px; border-radius: 4px; display: none; white-space: nowrap; }
+  .tip b { font: 500 14px var(--serif); }
+
+  .cine { background: var(--rack); border: 1px solid var(--line); border-radius: 8px; padding: 12px; margin-top: 12px; min-width: 0; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .row input[type=range] { flex: 1 1 180px; min-width: 0; accent-color: var(--accent); }
+  #play { min-width: 96px; }
+  .clock { font: 600 16px var(--mono); font-variant-numeric: tabular-nums; min-width: 78px; }
+  .phase { padding: 3px 10px; border-radius: 99px; border: 1px solid; font-size: 13px; font-weight: 500; }
+  #tdc { display: block; width: 100%; height: 86px; margin-top: 10px; }
+  .status { margin-top: 10px; display: grid; gap: 6px; }
+  .note { background: var(--note-bg); color: var(--note-ink); border-radius: 6px; padding: 8px 10px; font-size: 13px; }
+  .note.plain { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .keys { font-size: 12px; color: var(--muted); margin: 10px 0 0; }
+  kbd { font: 11px var(--mono); border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; }
+  footer { margin-top: 16px; font-size: 12px; color: var(--muted); max-width: 980px; }
+  footer p { margin: 4px 0; }
+  @media (prefers-reduced-motion: reduce) { .xray.on i { box-shadow: none; } }
 </style>
-</head>
-<body>
+
 <header>
-  <h1>Angiography simulator — prototype</h1>
-  <p>Biplane DSA cine. Only the capillary (parenchymal) phase is built from real data so far. Arterial and venous phases stay blank until open vessel datasets are loaded.</p>
+  <h1>Neuro DSA Simulator</h1>
+  <span class="xray" id="xray"><i></i>X-RAY</span>
+  <p>Biplane cerebral angiogram in real time. The parenchymal (capillary) phase is built from published atlas data. Arterial and venous trees wait for open vessel datasets, so nothing is drawn there yet.</p>
 </header>
+
 <main>
-  <section class="panel" aria-label="Controls">
-    <h2>Injection</h2>
+  <section class="rack" aria-label="Acquisition controls">
+    <h2>Catheter position</h2>
     <div class="grid2" id="inj">
       <button data-inj="RICA">Right ICA</button>
       <button data-inj="LICA">Left ICA</button>
       <button data-inj="RVA">Right vertebral</button>
       <button data-inj="LVA">Left vertebral</button>
-      <button data-inj="RECA" disabled title="No open ECA branch dataset loaded">Right ECA</button>
-      <button data-inj="LECA" disabled title="No open ECA branch dataset loaded">Left ECA</button>
+      <button data-inj="RECA" disabled>Right ECA</button>
+      <button data-inj="LECA" disabled>Left ECA</button>
     </div>
-    <p class="small">ECA is off: its territory (scalp, dura, face) isn't in any brain atlas we have.</p>
+    <p class="small">ECA runs are off: scalp, dura and face aren't in any brain atlas we have.</p>
 
     <h2>Anatomical variants</h2>
-    <label class="chk"><input type="checkbox" id="fetal"> Fetal-type PCom on the injected side (PCA fills from the ICA, not the vertebral)</label>
-    <label class="chk"><input type="checkbox" id="acomm"> Cross-filling of the opposite ACA through the AComm (ICA injection)</label>
-    <label class="chk"><input type="checkbox" id="actp"> Include "anterior choroidal + thalamoperforators" (the atlas can't separate them)</label>
+    <label class="chk"><input type="checkbox" id="fetal"> Fetal PCom on the injected side (PCA fills from the ICA, not the vertebral)</label>
+    <label class="chk"><input type="checkbox" id="acomm"> Opposite ACA cross-fills through the AComm (ICA run)</label>
+    <label class="chk"><input type="checkbox" id="actp"> Add anterior choroidal + thalamoperforator territory (the atlas can't separate them)</label>
 
-    <h2>Display</h2>
-    <label class="chk"><input type="checkbox" id="latflip"> Lateral view: anterior on the right</label>
-    <label class="chk"><input type="checkbox" id="frames" checked> Step at 3 frames/s, like acquisition (off = smooth)</label>
+    <h2>Acquisition</h2>
+    <label class="chk"><input type="checkbox" id="frames" checked> Pulsed acquisition, 3 frames/s</label>
+    <label class="chk"><input type="checkbox" id="noise" checked> Simulated detector noise</label>
+    <label class="chk"><input type="checkbox" id="latflip"> Lateral: anterior on the right</label>
 
     <h2>Timing model</h2>
-    <p class="small">The capillary blush follows a gamma-variate curve: it starts at <b id="t0v"></b> s and peaks at <b id="tpv"></b> s. Phase windows are approximate teaching values, not measured, and need clinical sign-off.</p>
+    <p class="small">The blush follows a gamma-variate curve: it starts at <b id="t0v"></b> s, peaks at <b id="tpv"></b> s, then washes out. These are teaching values awaiting clinical sign-off, not patient measurements.</p>
   </section>
 
-  <section>
-    <div class="views">
-      <figure>
-        <figcaption><span>Frontal (AP)</span><span id="apLab"></span></figcaption>
-        <div class="film" id="apFilm">
+  <section style="min-width:0">
+    <div class="monitors">
+      <div class="monitor">
+        <div class="screen">
           <canvas id="ap"></canvas>
-          <span class="mk l">R</span><span class="mk r">L</span><span class="mk t">S</span><span class="mk b">I</span>
+          <div class="ov tl" id="apTL"></div><div class="ov tr" id="apTR"></div>
+          <div class="ov bl" id="apBL"></div><div class="ov br">SUB</div>
+          <span class="mk l">R</span><span class="mk r">L</span>
           <div class="tip"></div>
         </div>
-      </figure>
-      <figure>
-        <figcaption><span>Lateral</span><span id="latLab"></span></figcaption>
-        <div class="film" id="latFilm">
+      </div>
+      <div class="monitor">
+        <div class="screen">
           <canvas id="lat"></canvas>
-          <span class="mk l" id="latL">A</span><span class="mk r" id="latR">P</span><span class="mk t">S</span><span class="mk b">I</span>
+          <div class="ov tl" id="latTL"></div><div class="ov tr" id="latTR"></div>
+          <div class="ov bl" id="latBL"></div><div class="ov br">SUB</div>
+          <span class="mk l" id="latL">A</span><span class="mk r" id="latR">P</span>
           <div class="tip"></div>
         </div>
-      </figure>
+      </div>
     </div>
 
-    <div class="panel" style="margin-top:12px">
-      <div class="cine">
-        <button id="play" aria-label="Play">▶ Play</button>
-        <input type="range" id="scrub" min="0" max="10" step="0.01" value="0" aria-label="Time after injection, seconds">
+    <div class="cine">
+      <div class="row">
+        <button id="play">▶ Inject</button>
+        <input type="range" id="scrub" min="0" max="10" step="0.01" value="3.6" aria-label="Seconds after injection">
         <span class="clock" id="clock">0.00 s</span>
         <span class="phase" id="phase">Arterial</span>
       </div>
-      <div class="phasebar" id="phasebar" aria-hidden="true"></div>
+      <canvas id="tdc" aria-label="Time-density curve of the parenchymal blush with phase windows"></canvas>
       <div class="status" id="status"></div>
-      <p class="small" style="margin-bottom:0">Keys: space = play/pause, ← → = step one frame, 1–4 = injection. Hover or tap the image to name the territory.</p>
+      <p class="keys"><kbd>Space</kbd> inject / pause · <kbd>←</kbd> <kbd>→</kbd> one frame · <kbd>1</kbd>–<kbd>4</kbd> catheter position · hover or tap the image to name the territory</p>
     </div>
   </section>
 </main>
+
 <footer>
-  Capillary phase: Liu CF et al. Digital 3D brain MRI arterial territories atlas. <i>Sci Data</i> 2023;10:74, CC BY-SA 4.0.
-  The territories come from where 1,298 patients had infarcts. They are not perfusion maps. Blush intensity is the path length through each territory, treating grey and white matter as having the same blood volume.
+  <p>Parenchymal phase: Liu CF et al. Digital 3D brain MRI arterial territories atlas. <i>Sci Data</i> 2023;10:74 (CC BY-SA 4.0). Weighted by grey and white matter maps from the ICBM 2009a template (Fonov et al., <i>NeuroImage</i> 2011), using a grey-to-white blood volume ratio of 2:1.</p>
+  <p>The territories come from where 1,298 patients had infarcts; they are not perfusion maps. AICA and PICA are merged in the source. Detector noise and blur are display effects only.</p>
 </footer>
 
 <script src="territory-projections.js"></script>
@@ -135,28 +160,29 @@
 (() => {
   const D = window.TERRITORY_PROJECTIONS;
   const $ = id => document.getElementById(id);
-  const fetal = $("fetal"), acomm = $("acomm"), actp = $("actp"), latflip = $("latflip"), framesBox = $("frames");
-  const apLab = $("apLab"), latLab = $("latLab"), clock = $("clock"), scrub = $("scrub"), phaseEl = $("phase");
-  const statusEl = $("status"), phasebar = $("phasebar"), play = $("play");
-  const T_END = 10, FPS = 3;
+  const fetal = $("fetal"), acomm = $("acomm"), actp = $("actp"), latflip = $("latflip"),
+    framesBox = $("frames"), noiseBox = $("noise"), scrub = $("scrub"), clock = $("clock"),
+    phaseEl = $("phase"), statusEl = $("status"), play = $("play"), xray = $("xray"), tdc = $("tdc");
+
+  const T_END = 10, FPS = 3, NFRAMES = T_END * FPS;
   // Teaching values, flagged for review in docs/02-angiography-plan.md.
   const PHASES = [
-    { name: "Arterial",  from: 0,   to: 2.5, color: "#c0392b" },
-    { name: "Capillary", from: 2.5, to: 4.5, color: "#8e6bb8" },
-    { name: "Venous",    from: 4.5, to: T_END, color: "#2b5d8a" },
+    { name: "Arterial",  from: 0,   to: 2.5,   color: "#d4533f" },
+    { name: "Capillary", from: 2.5, to: 4.5,   color: "#a58ad0" },
+    { name: "Venous",    from: 4.5, to: T_END, color: "#5d9ad1" },
   ];
   const CAP = { t0: 1.5, tp: 3.5, alpha: 3 };
-  document.getElementById("t0v").textContent = CAP.t0;
-  document.getElementById("tpv").textContent = CAP.tp;
+  $("t0v").textContent = CAP.t0; $("tpv").textContent = CAP.tp;
 
   const dec = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
   const layers = {};
   for (const [k, v] of Object.entries(D.layers)) layers[k] = { name: v.name, ap: dec(v.ap), lat: dec(v.lat) };
+  const SCALE = D.scale || 1; // stored value / SCALE = tissue-weighted path length (mm)
 
   const range = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
-  // Intensities: odd = left, even = right.
-  const side = (labs, s) => labs.filter(l => (l % 2 === 1) === (s === "L"));
+  const side = (labs, s) => labs.filter(l => (l % 2 === 1) === (s === "L")); // odd = left
   const ANT = range(1, 16), PCA = range(17, 22), ACTP = [23, 24], VB = range(25, 30), ACA = [1, 2, 3, 4];
+  const INJ_NAME = { RICA: "R ICA", LICA: "L ICA", RVA: "R VERT", LVA: "L VERT" };
 
   function territories(inj, o) {
     const s = inj[0], other = s === "R" ? "L" : "R";
@@ -167,31 +193,27 @@
       if (o.actp) t = t.concat(side(ACTP, s));
       return t;
     }
-    if (inj.endsWith("VA")) {
-      // Both PCAs fill from the basilar unless the injected side's PCom is fetal.
-      let t = VB.slice().concat(side(PCA, other));
-      if (!o.fetal) t = t.concat(side(PCA, s));
-      return t;
-    }
-    return [];
+    // Vertebral: both PCAs fill from the basilar unless the injected side's PCom is fetal.
+    let t = VB.slice().concat(side(PCA, other));
+    if (!o.fetal) t = t.concat(side(PCA, s));
+    return t;
   }
 
-  const state = { inj: "RICA", t: 0, playing: false };
-  const opts = () => ({
-    fetal: fetal.checked, acomm: acomm.checked, actp: actp.checked,
-    latflip: latflip.checked, frames: framesBox.checked,
-  });
+  const state = { inj: "RICA", t: 3.6, playing: false };
+  const opts = () => ({ fetal: fetal.checked, acomm: acomm.checked, actp: actp.checked,
+    latflip: latflip.checked, frames: framesBox.checked, noise: noiseBox.checked });
 
   const views = {
-    ap: { cv: document.getElementById("ap"), shape: D.apShape, key: "ap" },
-    lat: { cv: document.getElementById("lat"), shape: D.latShape, key: "lat" },
+    ap:  { cv: $("ap"),  shape: D.apShape,  key: "ap",  tl: $("apTL"),  tr: $("apTR"),  bl: $("apBL"),  proj: "AP 0° / CRA 0°" },
+    lat: { cv: $("lat"), shape: D.latShape, key: "lat", tl: $("latTL"), tr: $("latTR"), bl: $("latBL"), proj: "LAT 90°" },
   };
-  // Faint roadmap: union of all territories, so the brain outline is real data too.
+  // Pad each image into a square, round field of view like an image intensifier.
   for (const v of Object.values(views)) {
-    const [h, w] = v.shape; v.cv.width = w; v.cv.height = h;
-    v.ctx = v.cv.getContext("2d"); v.img = v.ctx.createImageData(w, h);
-    v.road = new Float32Array(w * h);
-    for (const L of Object.values(layers)) { const a = L[v.key]; for (let i = 0; i < a.length; i++) v.road[i] += a[i]; }
+    const [h, w] = v.shape, n = Math.max(h, w);
+    v.n = n; v.ox = (n - w) >> 1; v.oy = (n - h) >> 1;
+    v.cv.width = n; v.cv.height = n;
+    v.ctx = v.cv.getContext("2d"); v.img = v.ctx.createImageData(n, n);
+    v.sum = new Float32Array(w * h);
   }
 
   function capCurve(t) {
@@ -200,107 +222,146 @@
     return Math.pow(x, CAP.alpha) * Math.exp(CAP.alpha * (1 - x));
   }
 
+  // Deterministic noise per frame, so a paused frame doesn't flicker.
+  function rng(seed) { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
+
+  let lastKey = "";
   function render() {
     const o = opts();
-    const t = o.frames ? Math.floor(state.t * FPS) / FPS : state.t;
+    const frame = Math.min(NFRAMES, Math.floor(state.t * FPS + 1e-6));
+    const t = o.frames ? frame / FPS : state.t;
     const c = capCurve(t);
     const labs = territories(state.inj, o);
+    const key = state.inj + "|" + labs.join(",");
     for (const v of Object.values(views)) {
-      const [h, w] = v.shape, px = v.img.data, n = w * h;
-      const sum = new Float32Array(n);
-      for (const l of labs) { const a = layers[l][v.key]; for (let i = 0; i < n; i++) sum[i] += a[i]; }
-      // Lateral data columns run posterior -> anterior; flip so anterior is on
-      // the viewer's left unless the user asks for anterior-right.
-      const flip = v.key === "lat" && !o.latflip;
-      for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
-        const src = y * w + (flip ? w - 1 - x : x);
-        // Subtracted DSA: contrast is dark on a light field (Beer-Lambert style).
-        const op = 1 - Math.exp(-0.018 * sum[src] * c);
-        const road = v.road[src] > 0 ? 0.04 : 0;
-        const g = 222 * (1 - 0.88 * op - road);
-        const p = (y * w + x) * 4;
+      const [h, w] = v.shape, n = v.n, px = v.img.data;
+      if (key !== lastKey) {
+        v.sum.fill(0);
+        for (const l of labs) { const a = layers[l][v.key]; for (let i = 0; i < a.length; i++) v.sum[i] += a[i] / SCALE; }
+      }
+      const rand = rng(frame * 7919 + (v.key === "lat" ? 31 : 0) + 1);
+      const flip = v.key === "lat" && !o.latflip; // data runs posterior -> anterior
+      const cx = n / 2, cy = n / 2, rr = (n / 2) * 0.98;
+      for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+        const p = (y * n + x) * 4;
+        const dx = x - cx, dy = y - cy;
+        if (dx * dx + dy * dy > rr * rr) { px[p] = px[p + 1] = px[p + 2] = 0; px[p + 3] = 255; continue; }
+        let g = 196; // subtracted background: flat light grey
+        const sx = x - v.ox, sy = y - v.oy;
+        if (sx >= 0 && sy >= 0 && sx < w && sy < h) {
+          const s = v.sum[sy * w + (flip ? w - 1 - sx : sx)];
+          g -= 175 * (1 - Math.exp(-0.035 * s * c)); // contrast darkens, Beer-Lambert style
+        }
+        if (o.noise) g += (rand() + rand() + rand() - 1.5) * 9;
+        g = g < 0 ? 0 : g > 255 ? 255 : g;
         px[p] = px[p + 1] = px[p + 2] = g; px[p + 3] = 255;
       }
       v.ctx.putImageData(v.img, 0, 0);
+      v.tl.textContent = `${INJ_NAME[state.inj]}  ${v.proj}\nDSA  3 f/s`;
+      v.tr.textContent = `FR ${String(frame).padStart(2, "0")}/${NFRAMES}\n${t.toFixed(2)} s`;
+      v.bl.textContent = v.key === "ap" ? "PLANE A" : "PLANE B";
     }
-    document.getElementById("latL").textContent = o.latflip ? "P" : "A";
-    document.getElementById("latR").textContent = o.latflip ? "A" : "P";
-    const nm = { RICA: "Right ICA", LICA: "Left ICA", RVA: "Right vertebral", LVA: "Left vertebral" }[state.inj];
-    apLab.textContent = latLab.textContent = nm + " injection";
+    lastKey = key;
+    $("latL").textContent = o.latflip ? "P" : "A";
+    $("latR").textContent = o.latflip ? "A" : "P";
     clock.textContent = state.t.toFixed(2) + " s";
     scrub.value = state.t;
     const ph = PHASES.find(p => state.t >= p.from && state.t < p.to) || PHASES[2];
-    phaseEl.textContent = ph.name + " phase"; phaseEl.style.borderColor = ph.color;
+    phaseEl.textContent = ph.name + " phase"; phaseEl.style.borderColor = ph.color; phaseEl.style.color = ph.color;
+    xray.classList.toggle("on", state.playing);
     renderStatus(ph);
+    drawTdc();
   }
 
+  let lastStatus = "";
   function renderStatus(ph) {
     const rows = [];
-    if (ph.name === "Arterial") rows.push('<div class="note"><b>Arterial phase: no vessel tree shown.</b> No openly licensed, labelled cerebral artery dataset is loaded yet, so nothing is drawn rather than inventing vessels. The capillary blush starts in the late arterial phase.</div>');
-    if (ph.name === "Venous") rows.push('<div class="note"><b>Venous phase: veins and sinuses not shown.</b> No openly licensed venous dataset is loaded yet. The fading blush is the capillary phase washing out.</div>');
-    if (ph.name === "Capillary") rows.push('<div class="note ok"><b>Capillary phase</b>, from the real territory atlas (Liu et al. 2023).</div>');
-    if (state.inj.endsWith("VA")) rows.push('<div class="note ok">AICA and PICA are one merged "inferior cerebellar" territory in the source atlas. Contralateral filling assumes reflux at the vertebrobasilar junction.</div>');
-    statusEl.innerHTML = rows.join("");
+    if (ph.name === "Arterial") rows.push('<div class="note"><b>Arterial phase: no vessel tree drawn.</b> No openly licensed, labelled artery dataset is loaded yet, so the arteries are left blank rather than invented. The blush begins in the late arterial phase.</div>');
+    if (ph.name === "Capillary") rows.push('<div class="note plain"><b>Capillary phase</b>, from the published territory atlas, weighted for grey and white matter.</div>');
+    if (ph.name === "Venous") rows.push('<div class="note"><b>Venous phase: veins and sinuses not drawn.</b> No openly licensed venous dataset is loaded yet. What you see is the blush washing out.</div>');
+    if (state.inj.endsWith("VA")) rows.push('<div class="note plain">AICA and PICA are one merged "inferior cerebellar" territory in the source. Opposite-side filling assumes reflux at the vertebrobasilar junction.</div>');
+    const html = rows.join("");
+    if (html !== lastStatus) { statusEl.innerHTML = html; lastStatus = html; }
+  }
+
+  function drawTdc() {
+    const dpr = window.devicePixelRatio || 1, W = tdc.clientWidth, H = tdc.clientHeight;
+    if (!W) return;
+    if (tdc.width !== Math.round(W * dpr)) { tdc.width = Math.round(W * dpr); tdc.height = Math.round(H * dpr); }
+    const g = tdc.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    const padL = 4, padB = 16, pw = W - padL * 2, ph = H - padB - 6;
+    const X = t => padL + t / T_END * pw, Y = v => 6 + ph * (1 - v);
+    for (const p of PHASES) { g.fillStyle = p.color + "26"; g.fillRect(X(p.from), 6, X(p.to) - X(p.from), ph); }
+    g.fillStyle = "#8d979d"; g.font = "11px 'IBM Plex Mono', monospace"; g.textBaseline = "top";
+    for (let s = 0; s <= T_END; s += 2) g.fillText(s + " s", Math.min(X(s), W - 26), H - 13);
+    g.strokeStyle = "#dfe4e6"; g.lineWidth = 1.5; g.beginPath();
+    for (let i = 0; i <= 200; i++) { const t = i / 200 * T_END, y = Y(capCurve(t)); i ? g.lineTo(X(t), y) : g.moveTo(X(t), y); }
+    g.stroke();
+    g.strokeStyle = "#e0a64b"; g.lineWidth = 2; g.beginPath(); g.moveTo(X(state.t), 6); g.lineTo(X(state.t), 6 + ph); g.stroke();
+    g.fillStyle = "#8d979d"; g.fillText("parenchymal blush (model)", padL + 4, 8);
   }
 
   // Hover / tap: name the territory with the longest path under the pointer.
   for (const v of Object.values(views)) {
-    const film = v.cv.parentElement, tip = film.querySelector(".tip");
+    const scr = v.cv.parentElement, tip = scr.querySelector(".tip");
     const show = e => {
       const r = v.cv.getBoundingClientRect(), [h, w] = v.shape;
-      let x = Math.floor((e.clientX - r.left) / r.width * w), y = Math.floor((e.clientY - r.top) / r.height * h);
+      let x = Math.floor((e.clientX - r.left) / r.width * v.n) - v.ox, y = Math.floor((e.clientY - r.top) / r.height * v.n) - v.oy;
       if (x < 0 || y < 0 || x >= w || y >= h) { tip.style.display = "none"; return; }
       if (v.key === "lat" && !opts().latflip) x = w - 1 - x;
       let best = null, bv = 0;
       for (const l of territories(state.inj, opts())) { const a = layers[l][v.key][y * w + x]; if (a > bv) { bv = a; best = l; } }
       if (!best) { tip.style.display = "none"; return; }
-      tip.textContent = layers[best].name + " · " + bv + " mm";
-      tip.style.left = (e.clientX - film.getBoundingClientRect().left + 12) + "px";
-      tip.style.top = (e.clientY - film.getBoundingClientRect().top + 12) + "px";
+      tip.innerHTML = `<b>${layers[best].name}</b>`;
+      const sr = scr.getBoundingClientRect();
+      tip.style.left = Math.max(4, Math.min(e.clientX - sr.left + 12, sr.width - tip.offsetWidth - 4 || sr.width - 200)) + "px";
+      tip.style.top = (e.clientY - sr.top + 12) + "px";
       tip.style.display = "block";
     };
-    film.addEventListener("pointermove", show);
-    film.addEventListener("pointerdown", show);
-    film.addEventListener("pointerleave", () => tip.style.display = "none");
+    scr.addEventListener("pointermove", show);
+    scr.addEventListener("pointerdown", show);
+    scr.addEventListener("pointerleave", () => tip.style.display = "none");
   }
 
-  // Phase bar
-  phasebar.innerHTML = PHASES.map(p => `<span style="width:${(p.to - p.from) / T_END * 100}%;background:${p.color}" title="${p.name}"></span>`).join("");
-
-  // Cine loop, timed against the wall clock so 1 s on screen = 1 s after injection.
+  // Cine loop against the wall clock: 1 s on screen = 1 s after injection.
   let last = null;
   function tick(ts) {
     if (!state.playing) { last = null; return; }
     if (last !== null) state.t += (ts - last) / 1000;
     last = ts;
-    if (state.t >= T_END) { state.t = T_END; setPlaying(false); }
+    if (state.t >= T_END) { state.t = T_END; setPlaying(false); return; }
     render();
-    if (state.playing) requestAnimationFrame(tick);
+    requestAnimationFrame(tick);
   }
   function setPlaying(p) {
     state.playing = p;
-    play.textContent = p ? "❚❚ Pause" : "▶ Play";
-    play.setAttribute("aria-label", p ? "Pause" : "Play");
-    if (p) { if (state.t >= T_END) state.t = 0; requestAnimationFrame(tick); }
-  }
-  function setInj(k) {
-    state.inj = k; state.t = 0;
-    document.querySelectorAll("#inj button").forEach(b => b.setAttribute("aria-pressed", b.dataset.inj === k));
+    play.textContent = p ? "❚❚ Pause" : "▶ Inject";
+    if (p) requestAnimationFrame(tick);
     render();
   }
-  play.onclick = () => setPlaying(!state.playing);
+  function setInj(k) {
+    state.inj = k;
+    document.querySelectorAll("#inj button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.inj === k)));
+    render();
+  }
+  // Inject restarts from 0 s unless resuming a paused run mid-way.
+  play.onclick = () => {
+    if (state.playing) return setPlaying(false);
+    if (state.t >= T_END - 0.01) state.t = 0;
+    setPlaying(true);
+  };
   scrub.oninput = () => { state.t = +scrub.value; render(); };
-  document.querySelectorAll("#inj button").forEach(b => b.onclick = () => setInj(b.dataset.inj));
-  [fetal, acomm, actp, latflip, framesBox].forEach(el => el.onchange = render);
+  document.querySelectorAll("#inj button").forEach(b => b.onclick = () => { state.t = 0; setInj(b.dataset.inj); });
+  [fetal, acomm, actp, latflip, framesBox, noiseBox].forEach(el => el.onchange = render);
+  window.addEventListener("resize", drawTdc);
   document.addEventListener("keydown", e => {
-    if (e.target.tagName === "INPUT" && e.target.type === "range") return;
-    if (e.code === "Space") { e.preventDefault(); setPlaying(!state.playing); }
-    else if (e.key === "ArrowRight") { state.t = Math.min(T_END, state.t + 1 / FPS); render(); }
-    else if (e.key === "ArrowLeft") { state.t = Math.max(0, state.t - 1 / FPS); render(); }
-    else if (["1", "2", "3", "4"].includes(e.key)) setInj(["RICA", "LICA", "RVA", "LVA"][+e.key - 1]);
+    if (e.target.tagName === "INPUT" && e.target.type === "range" && e.key.startsWith("Arrow")) return;
+    if (e.code === "Space") { e.preventDefault(); play.click(); }
+    else if (e.key === "ArrowRight") { state.t = Math.min(T_END, (Math.floor(state.t * FPS + 1e-6) + 1) / FPS); render(); }
+    else if (e.key === "ArrowLeft") { state.t = Math.max(0, (Math.ceil(state.t * FPS - 1e-6) - 1) / FPS); render(); }
+    else if (["1", "2", "3", "4"].includes(e.key)) { state.t = 0; setInj(["RICA", "LICA", "RVA", "LVA"][+e.key - 1]); }
   });
+  // Open on a mid-capillary frame so the first view shows the blush.
   setInj("RICA");
 })();
 </script>
-</body>
-</html>

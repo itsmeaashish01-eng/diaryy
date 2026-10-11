@@ -21,6 +21,9 @@ something else, such as the late venous or sinus phase.
 | **Capillary phase blush** per injection | Working, **real data** | Liu et al. 2023 territories atlas, CC BY-SA 4.0 |
 | Variants: fetal PCom, AComm cross-fill, anterior choroidal + thalamoperforators | Working (they change which territories fill) | Same |
 | Territory name on hover or tap | Working | Same |
+| Blush weighted by grey/white matter (GM + 0.5 x WM) | Working | ICBM 2009a tissue maps (copy bundled with nilearn) |
+| Alignment check: territory atlas vs template brain | **Dice 0.929** at the assumed MNI origin. The best integer shift (−2 mm in x) only reaches 0.931, so the atlas is within the 2 mm limit. The build fails below 0.9 | — |
+| Angio-monitor display: round field, frame counter, pulsed 3 f/s, simulated detector noise, time-density curve | Working (noise and blur are display effects only) | — |
 | Build-time orientation test (AP: patient right on the viewer's left; lateral: A/P) | Working. It caught a real A/P flip in the lateral view, which is now fixed | — |
 | **Arterial phase vessel tree with branch labels** | **Not built.** No dataset reachable (see §3) | — |
 | **Venous phase: veins and sinuses** | **Not built.** No dataset reachable | — |
@@ -80,6 +83,9 @@ needs either network access to those hosts, or you to download the files and
 add them to the repo.
 
 ## 4. Statements I'm unsure of: please check
+
+- The 2:1 grey-to-white matter blood volume ratio used to weight the blush is approximate, from memory.
+- The tissue maps are the symmetric 2009a template, while the territory atlas grid is the older standard MNI grid. Overlap is good (Dice 0.93), but this is not a voxel-exact registration.
 
 - Phase windows in the prototype: arterial 0–2.5 s, capillary 2.5–4.5 s, venous from 4.5 s. Capillary blush curve: starts at 1.5 s, peaks at 3.5 s. These are approximate teaching values from memory, not sourced. A standard reference such as Osborn, *Diagnostic Cerebral Angiography* (2nd ed., 1999) should replace them.
 - Vertebral injection fills both PCAs, and the contralateral inferior cerebellar territory fills by reflux. The second part varies between patients; it is the prototype's default.

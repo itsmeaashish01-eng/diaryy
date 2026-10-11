@@ -5,12 +5,24 @@ Source: Liu CF et al. Digital 3D brain MRI arterial territories atlas.
 Sci Data 2023;10:74. https://github.com/Chin-Fu-Liu/Arterial_Atlas
 Licence: CC BY-SA 4.0, so the output file is CC BY-SA 4.0 too.
 
-Each output pixel is the path length (mm, 1 mm voxels) of the ray through
-that territory, a stand-in for the amount of opacified tissue it crosses.
+Each output pixel is the blood-volume-weighted path length of the ray through
+that territory: the sum along the ray of (grey matter probability + 0.5 x
+white matter probability), taken from the ICBM 2009a template tissue maps
+(the copies bundled with nilearn). The 2:1 grey-to-white blood volume ratio is
+an approximation flagged for clinical review. Values are stored as uint8 and
+multiplied by `scale`.
 Names come from the intensity values (the atlas text table has typos; see
 docs/01-data-plan.md section 5), never from the abbreviation column.
 
-Usage: python3 -I angio_territory_projections.py ArterialAtlas.nii out.js
+The atlas header has no MNI origin, so the standard 181x217x181 grid is
+assumed: voxel (i, j, k) -> MNI (90 - i, j - 126, k - 72). The script reports
+the Dice overlap between all territories and the template brain mask as a
+check on that assumption (0.929 at the time of writing; the best integer shift,
+-2 mm in x, raised it only to 0.931).
+
+Usage: python3 -I angio_territory_projections.py ArterialAtlas.nii \
+           mni_icbm152_gm_tal_nlin_sym_09a_converted.nii.gz \
+           mni_icbm152_wm_tal_nlin_sym_09a_converted.nii.gz out.js
 """
 import base64
 import json
@@ -66,7 +78,31 @@ def check_orientation(layers, ni, nj):
         sys.exit("lateral orientation: frontal not anterior to occipital")
 
 
-def main(src, out):
+def tissue_weight(shape, gm_path, wm_path):
+    """Resample GM + 0.5 WM onto the atlas grid (both are integer-mm grids)."""
+    gm, wm = nib.load(gm_path), nib.load(wm_path)
+    if not np.allclose(gm.affine, wm.affine) or nib.aff2axcodes(gm.affine) != ("R", "A", "S"):
+        sys.exit("unexpected tissue map geometry")
+    g = gm.get_fdata() / gm.get_fdata().max()
+    w = wm.get_fdata() / wm.get_fdata().max()
+    inv = np.linalg.inv(gm.affine)
+    ni, nj, nk = shape
+    i, j, k = np.arange(ni), np.arange(nj), np.arange(nk)
+    ti = np.rint(inv[0, 0] * (90 - i) + inv[0, 3]).astype(int)
+    tj = np.rint(inv[1, 1] * (j - 126) + inv[1, 3]).astype(int)
+    tk = np.rint(inv[2, 2] * (k - 72) + inv[2, 3]).astype(int)
+    vi = (ti >= 0) & (ti < g.shape[0])
+    vj = (tj >= 0) & (tj < g.shape[1])
+    vk = (tk >= 0) & (tk < g.shape[2])
+    out = np.zeros(shape, np.float32)
+    sel = np.ix_(ti[vi], tj[vj], tk[vk])
+    out[np.ix_(vi, vj, vk)] = g[sel] + 0.5 * w[sel]
+    brain = np.zeros(shape, bool)
+    brain[np.ix_(vi, vj, vk)] = (g[sel] + w[sel]) > 0.5
+    return out, brain
+
+
+def main(src, gm_path, wm_path, out):
     img = nib.load(src)
     vol = np.asarray(img.dataobj)
     if vol.ndim == 4:
@@ -76,19 +112,30 @@ def main(src, out):
     if nib.aff2axcodes(img.affine) != ("L", "A", "S"):
         sys.exit(f"unexpected orientation {nib.aff2axcodes(img.affine)}")
     ni, nj, nk = vol.shape
-    layers = {}
+    weight, brain = tissue_weight(vol.shape, gm_path, wm_path)
+    terr = (vol >= 1) & (vol <= 32)
+    dice = 2 * (terr & brain).sum() / (terr.sum() + brain.sum())
+    print(f"alignment check: Dice(territories, template brain) = {dice:.3f}")
+    if dice < 0.9:
+        sys.exit("territories do not line up with the template; check the origin")
+    raw = {}
     for lab, name in LABELS.items():
         m = vol == lab
         if not m.any():
             sys.exit(f"label {lab} ({name}) is empty")
-        # AP: sum along anterior-posterior (j). Rows: superior at top.
+        wm_ = np.where(m, weight, 0)
+        raw[lab] = (name, wm_.sum(axis=1).T[::-1, :], wm_.sum(axis=0).T[::-1, :])
+    peak = max(max(a.max(), b.max()) for _, a, b in raw.values())
+    scale = float(np.floor(255 / peak))
+    layers = {}
+    for lab, (name, ap, lat) in raw.items():
+        # AP: summed along anterior-posterior (j). Rows: superior at top.
         # Columns: i ascending = patient right -> left, so patient right sits
         # on the viewer's left (frontal radiographic convention).
-        ap = m.sum(axis=1).T[::-1, :]
-        # Lateral: sum along left-right (i). Columns: j ascending =
-        # posterior -> anterior. The viewer flips it if wanted.
-        lat = m.sum(axis=0).T[::-1, :]
-        assert ap.max() < 256 and lat.max() < 256
+        # Lateral: summed along left-right (i). Columns: j ascending =
+        # posterior -> anterior; the viewer flips it to anterior-left.
+        ap = np.rint(ap * scale).astype(np.uint8)
+        lat = np.rint(lat * scale).astype(np.uint8)
         layers[lab] = {
             "name": name,
             "ap": base64.b64encode(ap.astype(np.uint8).tobytes()).decode(),
@@ -100,7 +147,10 @@ def main(src, out):
         "licence": "CC BY-SA 4.0",
         "apShape": [nk, ni],
         "latShape": [nk, nj],
-        "units": "mm path length per pixel",
+        "units": "blood-volume-weighted path length (mm) = value / scale",
+        "scale": scale,
+        "tissue": "ICBM 2009a sym GM/WM probability (nilearn copy), GM + 0.5 WM",
+        "alignmentDice": round(float(dice), 3),
         "layers": layers,
     }
     with open(out, "w") as f:
@@ -112,4 +162,4 @@ def main(src, out):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    main(*sys.argv[1:5])

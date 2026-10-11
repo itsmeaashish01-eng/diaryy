@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791684464399,
-      "lastOk": 1791684464399,
+      "lastRun": 1791710108060,
+      "lastOk": 1791710108060,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791684158000,
+          "level": "notable",
+          "title": "500B Tokens Later: Letting AI Agents Decompile a First-Person Shooter",
+          "detail": "Article URL: https://momo5502.com/posts/2026-10-09-game-decompilation/ Comments URL: https://news.ycombinator.com/item?id=50039092 Points: 89 # Comments: 67",
+          "url": "https://momo5502.com/posts/2026-10-09-game-decompilation/"
+        },
+        {
+          "t": 1791629529000,
+          "level": "notable",
+          "title": "Talorys – A self-hosted personal AI agent on Cloudflare's free tier",
+          "detail": "Article URL: https://github.com/rociiu/talorys Comments URL: https://news.ycombinator.com/item?id=50031614 Points: 289 # Comments: 133",
+          "url": "https://github.com/rociiu/talorys"
+        },
+        {
+          "t": 1791559593000,
+          "level": "notable",
+          "title": "Five months treating bugs like patients and coding agents like a medical team",
+          "detail": "Article URL: https://www.cockroachlabs.com/blog/experiment-running-hospital-code/ Comments URL: https://news.ycombinator.com/item?id=50021899 Points: 129 # Comments: 52",
+          "url": "https://www.cockroachlabs.com/blog/experiment-running-hospital-code/"
+        },
         {
           "t": 1791678153000,
           "level": "notable",
@@ -408,35 +429,14 @@
           "title": "Show HN: Made an open-source Lego AI generator",
           "detail": "Hi there :-) New on HN, first time posting.Past year, around December, I started experimenting with making ChatGPT and Claude generate source code in LDraw language.This LDraw is literally an \"assembly\" language, a low-level programming language that describes how to assemble LEGO pieces together in",
           "url": "https://github.com/anteloc/ldraw-nova"
-        },
-        {
-          "t": 1790964076000,
-          "level": "notable",
-          "title": "From the creator of Redis; run LLM locally with ds4",
-          "detail": "Article URL: https://dwarfstar.sh/ Comments URL: https://news.ycombinator.com/item?id=49936575 Points: 211 # Comments: 56",
-          "url": "https://dwarfstar.sh/"
-        },
-        {
-          "t": 1790971215000,
-          "level": "notable",
-          "title": "Show HN: Made an open-source Lego AI generator",
-          "detail": "Hi there :-) New on HN, first time posting.Past year, around December, I started experimenting with making ChatGPT and Claude generate source code in LDraw language.This LDraw is literally an \"assembly\" language, a low-level programming language that describes how to assemble LEGO pieces together in",
-          "url": "https://github.com/anteloc/ldraw-nova"
-        },
-        {
-          "t": 1790964076000,
-          "level": "notable",
-          "title": "From the creator of Redis; run LLM locally with ds4",
-          "detail": "Article URL: https://dwarfstar.sh/ Comments URL: https://news.ycombinator.com/item?id=49936575 Points: 128 # Comments: 35",
-          "url": "https://dwarfstar.sh/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1791672801586,
-      "lastOk": 1791672801586,
+      "lastRun": 1791710108493,
+      "lastOk": 1791710108493,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.296",
@@ -724,6 +724,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.287"
         },
         {
+          "t": 1791574139000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.296",
+          "detail": "## What's changed\n\n- Added a `code` key to the Claude apps gateway's `managed.policies[]`: the same settings as `cli`, also applied in Claude Desktop's Code tab; beside `desktop`, it turns on Claude Desktop's gateway mode\n- Added `autoCompactWindow` to subagent frontmatter and `--agents` definitions, so a subagent can auto-compact earlier than the main conversation's window\n- Added `CLAUDE_CODE_WO",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.296"
+        },
+        {
           "t": 1791488918000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.295",
@@ -785,13 +792,6 @@
           "title": "anthropics/claude-code v2.1.287",
           "detail": "## What's changed\n\n- Added Claude Mods: plugins may now modify deeper behavior\n- Added You should know, a built-in mod where a side agent watches your back and flags things you or Claude might miss. Turn it on with `/plugin enable cc-plugin-you-should-know@builtin` (for first-party sessions with telemetry on)\n- Added an `n:<text>` filter to the agents view that matches session names and tasks; a f",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.287"
-        },
-        {
-          "t": 1790795413000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.286",
-          "detail": "## What's changed\n\n- Added a count such as \"2 of 5\" to the permission prompt when several permission requests stack up\n- Added mouse support for the \"N more\" rows of lists in fullscreen mode: click one to jump to that end of the list, with hover and pressed states\n- Fixed several Claude Code processes and IDE extensions each opening a login browser when gcpAuthRefresh or awsAuthRefresh credentials",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.286"
         },
         {
           "t": 1791488918000,
@@ -2704,11 +2704,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791684465041,
-      "lastOk": 1791684465041,
+      "lastRun": 1791710109428,
+      "lastOk": 1791710109428,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,148 (+72.8%) · excludes S&P 500 ETF",
+      "lastLine": "$4,151 (+72.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3154,9 +3154,27 @@
         {
           "t": 1791684465041,
           "v": 4147.55
+        },
+        {
+          "t": 1791710109429,
+          "v": 4150.7
         }
       ],
       "events": [
+        {
+          "t": 1791710109416,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791710109416,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791684465027,
           "level": "notable",
@@ -3562,31 +3580,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790956625988,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790956625988,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 82951
+          "BTC": 83014
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791710109429,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 15
+    },
     {
       "t": 1791684465042,
       "ran": 2,

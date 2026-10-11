@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791672801250,
-      "lastOk": 1791672801250,
+      "lastRun": 1791684464399,
+      "lastOk": 1791684464399,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791678153000,
+          "level": "notable",
+          "title": "Veda: The First Agentic Hobby Operating System",
+          "detail": "Article URL: https://github.com/vahmoh25/Veda Comments URL: https://news.ycombinator.com/item?id=50038473 Points: 9 # Comments: 0",
+          "url": "https://github.com/vahmoh25/Veda"
+        },
+        {
+          "t": 1791629529000,
+          "level": "notable",
+          "title": "Talorys – A self-hosted personal AI agent on Cloudflare's free tier",
+          "detail": "Article URL: https://github.com/rociiu/talorys Comments URL: https://news.ycombinator.com/item?id=50031614 Points: 253 # Comments: 122",
+          "url": "https://github.com/rociiu/talorys"
+        },
+        {
+          "t": 1791559593000,
+          "level": "notable",
+          "title": "Five months treating bugs like patients and coding agents like a medical team",
+          "detail": "Article URL: https://www.cockroachlabs.com/blog/experiment-running-hospital-code/ Comments URL: https://news.ycombinator.com/item?id=50021899 Points: 59 # Comments: 27",
+          "url": "https://www.cockroachlabs.com/blog/experiment-running-hospital-code/"
+        },
         {
           "t": 1791667182000,
           "level": "notable",
@@ -407,27 +428,6 @@
           "level": "notable",
           "title": "From the creator of Redis; run LLM locally with ds4",
           "detail": "Article URL: https://dwarfstar.sh/ Comments URL: https://news.ycombinator.com/item?id=49936575 Points: 128 # Comments: 35",
-          "url": "https://dwarfstar.sh/"
-        },
-        {
-          "t": 1790973545000,
-          "level": "notable",
-          "title": "Three AI agents, two countries, and one uneven world wide web",
-          "detail": "Article URL: https://royapakzad.substack.com/p/multilingual-ai-agents Comments URL: https://news.ycombinator.com/item?id=49938326 Points: 6 # Comments: 0",
-          "url": "https://royapakzad.substack.com/p/multilingual-ai-agents"
-        },
-        {
-          "t": 1790971215000,
-          "level": "notable",
-          "title": "Show HN: Made an open-source Lego AI generator",
-          "detail": "Hi there :-) New on HN, first time posting.Past year, around December, I started experimenting with making ChatGPT and Claude generate source code in LDraw language.This LDraw is literally an \"assembly\" language, a low-level programming language that describes how to assemble LEGO pieces together in",
-          "url": "https://github.com/anteloc/ldraw-nova"
-        },
-        {
-          "t": 1790964076000,
-          "level": "notable",
-          "title": "From the creator of Redis; run LLM locally with ds4",
-          "detail": "Article URL: https://dwarfstar.sh/ Comments URL: https://news.ycombinator.com/item?id=49936575 Points: 53 # Comments: 5",
           "url": "https://dwarfstar.sh/"
         }
       ],
@@ -2704,8 +2704,8 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791660519550,
-      "lastOk": 1791660519550,
+      "lastRun": 1791684465041,
+      "lastOk": 1791684465041,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "$4,148 (+72.8%) · excludes S&P 500 ETF",
@@ -3150,9 +3150,27 @@
         {
           "t": 1791660519550,
           "v": 4148.05
+        },
+        {
+          "t": 1791684465041,
+          "v": 4147.55
         }
       ],
       "events": [
+        {
+          "t": 1791684465027,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791684465027,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791660519537,
           "level": "notable",
@@ -3558,31 +3576,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1790931308340,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1790931308340,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 82961
+          "BTC": 82951
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791684465042,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 5
+    },
     {
       "t": 1791672801592,
       "ran": 5,

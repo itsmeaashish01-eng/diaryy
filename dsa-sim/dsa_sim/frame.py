@@ -144,7 +144,7 @@ def petrous_ridge_distance(x, y):
 
 def _sphenoid_ridge_y(ax):
     """AP position of the lesser sphenoid wing (anterior / middle fossa boundary)."""
-    return 10.0 + np.clip(ax - 13.0, 0.0, None) * (15.0 / 37.0)
+    return 13.0 + np.clip(ax - 13.0, 0.0, None) * (12.0 / 37.0)
 
 
 def clivus_z(y):
@@ -155,8 +155,8 @@ def clivus_z(y):
 def cranial_floor_z(x, y):
     """Height of the endocranial skull-base surface (cavity exists above it).
 
-    anterior fossa ~ -18 (cribriform -24); middle fossa -47 laterally, sella region
-    -30 medially; petrous ridge -30 dropping steeply posteriorly; clivus; foramen
+    anterior fossa ~ -18 (cribriform -24); middle fossa -47 laterally, sella and
+    parasellar (cavernous sinus) region -37 medially; petrous ridge -30 dropping steeply posteriorly; clivus; foramen
     magnum is open (-200).  The calvarial ellipsoid closes the posterior fossa.
     """
     x = _a(x)
@@ -173,7 +173,8 @@ def cranial_floor_z(x, y):
     h_lat = np.where(d > 0, np.maximum(h_mid, -30.0 - 1.1 * d), np.maximum(h_pf, -30.0 - 3.0 * (-d)))
     # beyond the lateral end of the ridge (behind sigmoid) posterior fossa continues
     # medial strip: planum / sella / clivus / foramen magnum
-    h_med = np.where(y > 8.0, -22.0, np.where(y > -7.0, -30.0, clivus_z(y)))
+    # planum (y>13) / sella + parasellar cavernous sinus floor (-37) / clivus (y<-7)
+    h_med = np.where(y > 13.0, -22.0, np.where(y > -7.0, -37.0, np.minimum(clivus_z(y), -24.0)))
     fm = (y < -25.0) & (y > -60.0)
     h_med = np.where(fm, open_, np.where(y <= -60.0, h_pf, h_med))
     wl = smoothstep(11.0, 19.0, ax)
@@ -396,6 +397,10 @@ class GridSDF:
                 P = np.stack([np.full_like(Y, xv), Y, Z], -1)
                 grid[i] = fn(P)
             try:
+                import glob
+                for old in glob.glob(os.path.join(_cache_dir(), f"sdf_{name}_*_{spacing:g}.npy")):
+                    if old != path:
+                        os.remove(old)
                 np.save(path, grid)
             except OSError:
                 pass
@@ -856,9 +861,9 @@ def bone_density(p):
         cal = 0.45 + 0.55 * (np.exp(-np.clip(d_in, 0, None) / 1.3) + np.exp(-np.clip(-d_out, 0, None) / 1.3))
         dens = np.where(shell, np.minimum(cal, 1.0), dens)
     # petrous pyramids (dense) and clivus / sphenoid body
-    pet = np.minimum(sd_capsule(p, (14, -14, -36), (50, -36, -42), 9.0),
-                     sd_capsule(p, (-14, -14, -36), (-50, -36, -42), 9.0))
-    dens = np.where(pet < 0, 1.35, dens)
+    pet = np.minimum(sd_capsule(p, (14, -14, -36), (50, -36, -40), 7.0),
+                     sd_capsule(p, (-14, -14, -36), (-50, -36, -40), 7.0))
+    dens = np.where(pet < 0, np.maximum(dens, 0.75 + 0.35 * np.exp(-np.clip(-pet, 0, None) / 2.0)), dens)
     sph = sd_ellipsoid(p, (0, 4, -44), (14, 14, 9))
     sph_air = sd_ellipsoid(p, (0, 8, -46), (10, 10, 6))
     dens = np.where((sph < 0) & (sph_air > 0), np.maximum(dens, 0.8), dens)
@@ -930,9 +935,17 @@ BONE_BOUNDS = ((-84.0, 84.0), (-122.0, 100.0), (-268.0, 100.0))
 
 
 @lru_cache(maxsize=4)
-def bone_volume(spacing=2.0, bounds=BONE_BOUNDS):
-    """Voxelised bone density.  Returns (vol[z, y, x] float32, origin(x,y,z), spacing)."""
+def bone_volume(spacing=1.5, bounds=BONE_BOUNDS):
+    """Voxelised bone density.  Returns (vol[z, y, x] float32, origin(x,y,z), spacing).
+    Cached in memory and on disk (~/.cache/dsa_sim)."""
+    import os
     (x0, x1), (y0, y1), (z0, z1) = bounds
+    path = os.path.join(_cache_dir(), f"bone_{_geometry_hash()}_{spacing:g}.npy")
+    if os.path.exists(path):
+        try:
+            return np.load(path), np.array([x0, y0, z0]), float(spacing)
+        except Exception:
+            pass
     xs = np.arange(x0, x1 + 1e-6, spacing)
     ys = np.arange(y0, y1 + 1e-6, spacing)
     zs = np.arange(z0, z1 + 1e-6, spacing)
@@ -941,4 +954,10 @@ def bone_volume(spacing=2.0, bounds=BONE_BOUNDS):
     for i, zz in enumerate(zs):
         P = np.stack([X, Y, np.full_like(X, zz)], -1)
         vol[i] = bone_density(P)
+    from scipy.ndimage import gaussian_filter
+    vol = gaussian_filter(vol, 0.6).astype(np.float32)   # anti-alias voxel terraces
+    try:
+        np.save(path, vol)
+    except OSError:
+        pass
     return vol, np.array([x0, y0, z0]), float(spacing)

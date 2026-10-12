@@ -21,7 +21,7 @@ from __future__ import annotations
 import json
 import math
 from dataclasses import dataclass, field
-from typing import Callable, Iterable
+from typing import Callable
 
 import numpy as np
 
@@ -258,8 +258,9 @@ class VesselTree:
         if "flow_direction" not in kw:
             kw["flow_direction"] = 1 if (system == "artery" or pid is None) else -1
         la = kw.pop("label_anchor", None)
-        if la is not None and not isinstance(la, (int, np.integer)):
+        if la is not None:
             la = Vessel(id, name, pts, radii).index_at(la)
+            la = int(np.clip(la, 0, len(pts) - 1))
         v = Vessel(id=id, name=name, points=pts, radii=radii, system=system, group=group, parent=pid,
                    parent_index=parent_index, ctrl_index=cidx, label_anchor=la, **kw)
         if v.label_anchor is None:
@@ -456,7 +457,7 @@ def _smooth_path(P, passes=2):
 def grow_distal_branches(tree: VesselTree, vessel, n_branches=6, start_frac=0.5, start_mm=None, depth=2,
                          sub_branches=(1, 2), seed=0, surface="brain", surface_depth=-0.8,
                          min_radius=0.15, length_per_radius=70.0, max_length=90.0,
-                         branch_ratio=(0.55, 0.8), angle_deg=(35.0, 75.0), tortuosity=0.35,
+                         branch_ratio=(0.55, 0.8), angle_deg=(35.0, 75.0), tortuosity=0.25,
                          step=1.0, bias=None, bias_weight=0.3, region: Callable | None = None,
                          keep_side=True, include_tip=True, avoid=True, avoid_dist=2.0, taper=0.7,
                          group=None, territory=None, max_snap=12.0) -> list:

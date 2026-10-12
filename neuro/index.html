@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neuro Multiverse</title>
+  <meta name="description" content="High-yield neurology notes and practice questions, one universe per subspecialty." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <button id="homeBtn" class="logo" type="button">✺ Neuro<span class="logo-long"> Multiverse</span></button>
+    <nav class="topbar-right" aria-label="Main">
+      <button id="mixedBtn" class="pill" type="button">Mixed quiz</button>
+      <button id="searchBtn" class="icon-btn" type="button" title="Search notes" aria-label="Search notes">⌕</button>
+      <button id="themeBtn" class="icon-btn" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
+      <a class="icon-btn" href="../index.html" title="Back to the diary" aria-label="Back to the diary">✦</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== HOME: the map of universes ===== -->
+    <section id="view-home" class="view">
+      <div class="hero">
+        <h1>Eight universes of neurology</h1>
+        <p class="muted">Pick one for its notes and questions, or take a mixed quiz across all of them.</p>
+        <p id="overall" class="overall"></p>
+      </div>
+      <div id="universes" class="grid"></div>
+      <footer class="foot">
+        <p>A study aid, not clinical guidance. Check doses and thresholds against current local guidelines.</p>
+        <button id="resetBtn" class="link" type="button">Reset quiz progress</button>
+      </footer>
+    </section>
+
+    <!-- ===== ONE UNIVERSE ===== -->
+    <section id="view-universe" class="view" hidden>
+      <button class="back" type="button" data-back>← All universes</button>
+      <div class="u-head">
+        <span id="uGlyph" class="u-glyph"></span>
+        <div>
+          <h1 id="uName"></h1>
+          <p id="uTag" class="muted"></p>
+        </div>
+      </div>
+      <div class="u-actions">
+        <button id="uPractice" class="pill pill-strong" type="button">Practise this universe</button>
+        <span id="uProgress" class="muted"></span>
+      </div>
+      <div id="uNotes" class="notes"></div>
+    </section>
+
+    <!-- ===== SEARCH ===== -->
+    <section id="view-search" class="view" hidden>
+      <button class="back" type="button" data-back>← All universes</button>
+      <input id="searchInput" class="search" type="search" placeholder="Search notes…" autocomplete="off" aria-label="Search notes" />
+      <div id="results" class="notes"></div>
+    </section>
+
+    <!-- ===== QUIZ ===== -->
+    <section id="view-quiz" class="view" hidden>
+      <button class="back" type="button" data-back>← Leave quiz</button>
+      <p class="quiz-meta"><span id="quizLabel"></span> · <span id="quizCount"></span></p>
+      <div class="card">
+        <p id="quizFrom" class="note-from"></p>
+        <h2 id="quizQ" class="quiz-q"></h2>
+        <div id="quizOptions" class="options"></div>
+        <p id="quizWhy" class="why" hidden></p>
+        <button id="quizNext" class="pill pill-strong" type="button" hidden>Next question</button>
+      </div>
+    </section>
+
+    <!-- ===== QUIZ RESULT ===== -->
+    <section id="view-done" class="view" hidden>
+      <div class="card done">
+        <p class="muted">You scored</p>
+        <p id="doneScore" class="done-score"></p>
+        <p id="doneNote" class="muted"></p>
+        <div class="u-actions">
+          <button id="doneAgain" class="pill pill-strong" type="button">Go again</button>
+          <button id="doneHome" class="pill" type="button">All universes</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- data.js defines NM.data; app.js reads it, so the order matters -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

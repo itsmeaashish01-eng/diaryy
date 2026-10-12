@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791786378781,
-      "lastOk": 1791786378781,
+      "lastRun": 1791820810868,
+      "lastOk": 1791820810868,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791750052000,
+          "level": "notable",
+          "title": "The gap in shared understanding of LLM capability is widening",
+          "detail": "Article URL: https://twitter.com/karpathy/status/2109361546505966046 Comments URL: https://news.ycombinator.com/item?id=50047422 Points: 584 # Comments: 841",
+          "url": "https://twitter.com/karpathy/status/2109361546505966046"
+        },
         {
           "t": 1791750052000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "Show HN: Offrun – manage every coding agent from one workspace",
           "detail": "Run Claude Code, Codex, AGY, and Grok Build side by side. See who is working, who needs you, and what every account has left. Comments URL: https://news.ycombinator.com/item?id=49942434 Points: 59 # Comments: 26",
           "url": "https://offrun.dev/"
-        },
-        {
-          "t": 1790964076000,
-          "level": "notable",
-          "title": "From the creator of Redis; run LLM locally with ds4",
-          "detail": "Article URL: https://dwarfstar.sh/ Comments URL: https://news.ycombinator.com/item?id=49936575 Points: 307 # Comments: 89",
-          "url": "https://dwarfstar.sh/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1791786379216,
-      "lastOk": 1791786379216,
+      "lastRun": 1791820811332,
+      "lastOk": 1791820811332,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.296",
@@ -2742,11 +2742,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791786380121,
-      "lastOk": 1791786380121,
+      "lastRun": 1791820812008,
+      "lastOk": 1791820812008,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,185 (+74.4%) · excludes S&P 500 ETF",
+      "lastLine": "$4,133 (+72.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3208,9 +3208,27 @@
         {
           "t": 1791786380121,
           "v": 4185.15
+        },
+        {
+          "t": 1791820812008,
+          "v": 4132.65
         }
       ],
       "events": [
+        {
+          "t": 1791820811994,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791820811995,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791786380107,
           "level": "notable",
@@ -3616,31 +3634,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791048833084,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791048833085,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 83703
+          "BTC": 82653
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791820812008,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 13
+    },
     {
       "t": 1791786380121,
       "ran": 6,

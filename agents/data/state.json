@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791919769367,
-      "lastOk": 1791919769367,
+      "lastRun": 1791933850163,
+      "lastOk": 1791933850163,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791906596000,
+          "level": "notable",
+          "title": "Redesigning source control at Anthropic",
+          "detail": "Article URL: https://www.anthropic.com/engineering/redesigning-source-control Comments URL: https://news.ycombinator.com/item?id=50073633 Points: 463 # Comments: 457",
+          "url": "https://www.anthropic.com/engineering/redesigning-source-control"
+        },
+        {
+          "t": 1791900863000,
+          "level": "notable",
+          "title": "How to engineer an AI harness for game development",
+          "detail": "Article URL: https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code Comments URL: https://news.ycombinator.com/item?id=50072120 Points: 113 # Comments: 50",
+          "url": "https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code"
+        },
         {
           "t": 1791906596000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Religious scholars met with Anthropic",
           "detail": "https://archive.is/y8FW0 Comments URL: https://news.ycombinator.com/item?id=49950052 Points: 131 # Comments: 292",
           "url": "https://www.nytimes.com/2026/09/29/us/anthropic-claude-morals-ai.html"
-        },
-        {
-          "t": 1791047017000,
-          "level": "notable",
-          "title": "Agents don't need memory, they need documentation",
-          "detail": "Article URL: https://liao.gg/blog/agents-dont-need-memory Comments URL: https://news.ycombinator.com/item?id=49945933 Points: 271 # Comments: 154",
-          "url": "https://liao.gg/blog/agents-dont-need-memory"
-        },
-        {
-          "t": 1791100953000,
-          "level": "notable",
-          "title": "\"Torturing\" LLMs in a Robot Prison Has Triggered the Dumbest Debate in AI Yet",
-          "detail": "Article URL: https://www.404media.co/someone-torturing-llms-in-a-robot-prison-has-triggered-the-dumbest-debate-in-ai-yet/ Comments URL: https://news.ycombinator.com/item?id=49951684 Points: 15 # Comments: 12",
-          "url": "https://www.404media.co/someone-torturing-llms-in-a-robot-prison-has-triggered-the-dumbest-debate-in-ai-yet/"
         }
       ],
       "notifiedAt": {},
@@ -3699,6 +3699,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1791933850169,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 2
+    },
     {
       "t": 1791919780317,
       "ran": 3,

@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791846646901,
-      "lastOk": 1791846646901,
+      "lastRun": 1791863253987,
+      "lastOk": 1791863253987,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791856007000,
+          "level": "notable",
+          "title": "Strengthening our defenses against distillation attacks",
+          "detail": "Article URL: https://www.anthropic.com/research/distillation-defenses Comments URL: https://news.ycombinator.com/item?id=50065553 Points: 20 # Comments: 31",
+          "url": "https://www.anthropic.com/research/distillation-defenses"
+        },
+        {
+          "t": 1791842743000,
+          "level": "notable",
+          "title": "Janas: Run LLMs larger than RAM by streaming experts from SSD",
+          "detail": "Article URL: https://github.com/prabanta-dev/janas Comments URL: https://news.ycombinator.com/item?id=50063717 Points: 59 # Comments: 25",
+          "url": "https://github.com/prabanta-dev/janas"
+        },
+        {
+          "t": 1791823594000,
+          "level": "notable",
+          "title": "Launch HN: Agent37 (YC F26) – Low-cost agent sandboxes for running agents",
+          "detail": "Hey HN, I’m Vishnu from Agent37 (https://agent37.com). We build sandboxes for running AI agents at under 10% of the cost of most sandbox providers. Our customers spend an average of $0.37/month per sandbox.You can view a video walkthrough of the product here: https://youtu.be/DK5ISR2tbNoWe started a",
+          "url": "https://news.ycombinator.com/item?id=50059096"
+        },
         {
           "t": 1791825241000,
           "level": "notable",
@@ -408,27 +429,6 @@
           "title": "Getting the most out of Opus 5.5 in Claude and Claude Code",
           "detail": "Article URL: https://claude.dev/blog/getting-the-most-out-of-opus-5-5/ Comments URL: https://news.ycombinator.com/item?id=49946567 Points: 127 # Comments: 85",
           "url": "https://claude.dev/blog/getting-the-most-out-of-opus-5-5/"
-        },
-        {
-          "t": 1791047017000,
-          "level": "notable",
-          "title": "Agents don't need memory, they need documentation",
-          "detail": "Article URL: https://liao.gg/blog/agents-dont-need-memory Comments URL: https://news.ycombinator.com/item?id=49945933 Points: 15 # Comments: 11",
-          "url": "https://liao.gg/blog/agents-dont-need-memory"
-        },
-        {
-          "t": 1790968238000,
-          "level": "notable",
-          "title": "Show HN: Pi pod – Run your pi coding agent in sandboxes on your own server",
-          "detail": "pi pod runs sessions of the pi coding agent in isolated sandboxes (\"pods\") on a server you run, in composable environments.----Since moving my company towards AI-native work, I have been really frustrated by the state of \"agentic engineering\" environments. Products by the labs (claude code, codex) l",
-          "url": "https://pipod.dev/"
-        },
-        {
-          "t": 1790964076000,
-          "level": "notable",
-          "title": "From the creator of Redis; run LLM locally with ds4",
-          "detail": "Article URL: https://dwarfstar.sh/ Comments URL: https://news.ycombinator.com/item?id=49936575 Points: 331 # Comments: 95",
-          "url": "https://dwarfstar.sh/"
         }
       ],
       "notifiedAt": {},
@@ -2761,11 +2761,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791846648189,
-      "lastOk": 1791846648189,
+      "lastRun": 1791863254702,
+      "lastOk": 1791863254702,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,097 (+70.7%) · excludes S&P 500 ETF",
+      "lastLine": "$4,157 (+73.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3235,9 +3235,27 @@
         {
           "t": 1791846648189,
           "v": 4097.2
+        },
+        {
+          "t": 1791863254703,
+          "v": 4156.8
         }
       ],
       "events": [
+        {
+          "t": 1791863254693,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791863254693,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791846648178,
           "level": "notable",
@@ -3643,31 +3661,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791108212661,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791108212661,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81944
+          "BTC": 83136
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791863254703,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 5
+    },
     {
       "t": 1791846648189,
       "ran": 6,

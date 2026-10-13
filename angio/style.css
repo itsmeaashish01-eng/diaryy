@@ -18,8 +18,12 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0d1117; --panel: #161b22; --ink: #e6edf3; --muted: #93a1b0; --line: #2b3440;
-    --accent: #3aa0e0;
+    --accent: #3aa0e0; color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1117; --panel: #161b22; --ink: #e6edf3; --muted: #93a1b0; --line: #2b3440;
+  --accent: #3aa0e0; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
@@ -57,7 +61,7 @@ h3 { font-size: 15px; margin: 4px 0 8px; }
   display: grid; grid-template-columns: 270px minmax(0, 1fr) 300px; gap: 0;
 }
 .controls, .side {
-  background: var(--panel); overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 18px;
+  background: var(--panel); overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 18px;
 }
 .controls { border-right: 1px solid var(--line); }
 .side { border-left: 1px solid var(--line); }

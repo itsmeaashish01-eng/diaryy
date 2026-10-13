@@ -407,7 +407,8 @@
       if (st.look !== "dsa") p.set("look", st.look);
       if (st.labelMode !== "filled") p.set("labels", st.labelMode);
       if (st.selectedId) p.set("sel", st.selectedId);
-      history.replaceState(null, "", `#${p}`);
+      // Some hosts (sandboxed frames) refuse URL changes; the page works without.
+      try { history.replaceState(null, "", `#${p}`); } catch (e) { /* ignore */ }
     }, 250);
   }
   function readHash() {

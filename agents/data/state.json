@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791893181848,
-      "lastOk": 1791893181848,
+      "lastRun": 1791919769367,
+      "lastOk": 1791919769367,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791906596000,
+          "level": "notable",
+          "title": "Redesigning source control at Anthropic",
+          "detail": "Article URL: https://www.anthropic.com/engineering/redesigning-source-control Comments URL: https://news.ycombinator.com/item?id=50073633 Points: 192 # Comments: 153",
+          "url": "https://www.anthropic.com/engineering/redesigning-source-control"
+        },
+        {
+          "t": 1791906060000,
+          "level": "notable",
+          "title": "Launch HN: Consus (YC F24) – LLM gateway for companies handling sensitive data",
+          "detail": "Hey Hacker News! I'm Eric, the founder of Consus. We route all AI requests to ITAR restricted and controlled unclassified information (CUI) compliant infrastructure. Consus itself satisfies ITAR restrictions, and we recently completed our FedRAMP equivalency audit against the 410 FedRAMP High contro",
+          "url": "https://news.ycombinator.com/item?id=50073471"
+        },
+        {
+          "t": 1791900863000,
+          "level": "notable",
+          "title": "How to engineer an AI harness for game development",
+          "detail": "Article URL: https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code Comments URL: https://news.ycombinator.com/item?id=50072120 Points: 58 # Comments: 22",
+          "url": "https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code"
+        },
         {
           "t": 1791886098000,
           "level": "notable",
@@ -408,35 +429,14 @@
           "title": "\"Torturing\" LLMs in a Robot Prison Has Triggered the Dumbest Debate in AI Yet",
           "detail": "Article URL: https://www.404media.co/someone-torturing-llms-in-a-robot-prison-has-triggered-the-dumbest-debate-in-ai-yet/ Comments URL: https://news.ycombinator.com/item?id=49951684 Points: 15 # Comments: 12",
           "url": "https://www.404media.co/someone-torturing-llms-in-a-robot-prison-has-triggered-the-dumbest-debate-in-ai-yet/"
-        },
-        {
-          "t": 1791081262000,
-          "level": "notable",
-          "title": "Religious scholars met with Anthropic",
-          "detail": "https://archive.is/y8FW0 Comments URL: https://news.ycombinator.com/item?id=49950052 Points: 78 # Comments: 148",
-          "url": "https://www.nytimes.com/2026/09/29/us/anthropic-claude-morals-ai.html"
-        },
-        {
-          "t": 1791047017000,
-          "level": "notable",
-          "title": "Agents don't need memory, they need documentation",
-          "detail": "Article URL: https://liao.gg/blog/agents-dont-need-memory Comments URL: https://news.ycombinator.com/item?id=49945933 Points: 170 # Comments: 96",
-          "url": "https://liao.gg/blog/agents-dont-need-memory"
-        },
-        {
-          "t": 1791052170000,
-          "level": "notable",
-          "title": "Getting the most out of Opus 5.5 in Claude and Claude Code",
-          "detail": "Article URL: https://claude.dev/blog/getting-the-most-out-of-opus-5-5/ Comments URL: https://news.ycombinator.com/item?id=49946567 Points: 170 # Comments: 123",
-          "url": "https://claude.dev/blog/getting-the-most-out-of-opus-5-5/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1791893182296,
-      "lastOk": 1791893182296,
+      "lastRun": 1791919769718,
+      "lastOk": 1791919769718,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.296",
@@ -2780,11 +2780,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791893183003,
-      "lastOk": 1791893183003,
+      "lastRun": 1791919780316,
+      "lastOk": 1791919780316,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,161 (+73.4%) · excludes S&P 500 ETF",
+      "lastLine": "$4,159 (+73.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3262,9 +3262,27 @@
         {
           "t": 1791893183003,
           "v": 4160.75
+        },
+        {
+          "t": 1791919780316,
+          "v": 4159.2
         }
       ],
       "events": [
+        {
+          "t": 1791919780303,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791919780303,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791893182992,
           "level": "notable",
@@ -3670,31 +3688,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791152936260,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791152936260,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 83215
+          "BTC": 83184
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791919780317,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 15
+    },
     {
       "t": 1791893183003,
       "ran": 6,

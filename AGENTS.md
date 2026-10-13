@@ -17,6 +17,7 @@ and it runs.
 | `agents/` | Small watchers that GitHub Actions runs hourly. See `agents/README.md` |
 | `guide/` | RoamGuide, a travel planner that installs as a web app. See `guide/README.md` |
 | `guide/ios-app/` | The Capacitor wrapper for the App Store, and the only place with npm dependencies |
+| `angio/` | Neuroangiography Atlas: six-vessel simulated injections on a schematic model. See `angio/README.md` |
 
 Read the README of the app you're changing before you change it. They
 explain decisions that look like mistakes from the outside.
@@ -29,8 +30,9 @@ the same steps on Node 20. They are offline and take a few seconds:
 ```bash
 node agents/selftest.mjs
 node guide/selftest.mjs
+node angio/selftest.mjs
 node agents/runner.mjs --validate
-for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js; do node --check "$f"; done
+for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js angio/selftest.mjs angio/js/*.js; do node --check "$f"; done
 ```
 
 The diary and `tracker/` have no test suite. Check a change there by

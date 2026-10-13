@@ -40,11 +40,17 @@ jobs:
       - name: Guide self-test
         run: node guide/selftest.mjs
 
+      # The angiography atlas's vascular graph and injection model: each of
+      # the six injections must start where it says and fill only its own
+      # territory, and views must keep the patient's right on the right side.
+      - name: Angio atlas self-test
+        run: node angio/selftest.mjs
+
       # A syntax error in a type would only show up at 37 past the hour,
       # in a job nobody is watching. Cheaper to find it here.
       - name: Everything parses
         run: |
-          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js; do
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js angio/selftest.mjs angio/js/*.js; do
             node --check "$f"
           done
           for f in agents/data/*.json; do

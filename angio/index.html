@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neuroangiography Atlas</title>
+  <meta name="description" content="Six-vessel cerebral angiography teaching atlas: simulated contrast injections on a schematic vascular model, with anatomical labels.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <h1>Neuroangiography Atlas</h1>
+      <span class="muted">six-vessel teaching model</span>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Content type">
+      <button role="tab" id="tab-sim" aria-selected="true" aria-controls="pane-sim">Simulated injection</button>
+      <button role="tab" id="tab-dsa" aria-selected="false" aria-controls="pane-dsa">Recorded DSA</button>
+      <button role="tab" id="tab-3d" aria-selected="false" aria-controls="pane-3d">3D reconstruction</button>
+    </nav>
+  </header>
+
+  <!-- ===== Simulated injection ===== -->
+  <main id="pane-sim" class="pane sim" role="tabpanel" aria-labelledby="tab-sim">
+    <aside class="controls" aria-label="Injection controls">
+      <section>
+        <h2>Injection vessel</h2>
+        <div class="vessel-grid" id="vessel-grid" role="radiogroup" aria-label="Injection vessel">
+          <!-- filled by app.js -->
+        </div>
+        <button type="button" id="inject" class="btn btn-primary btn-inject">Inject</button>
+        <p class="muted small" id="inj-note"></p>
+      </section>
+
+      <section>
+        <h2>Playback</h2>
+        <div class="row">
+          <button type="button" id="restart" class="btn" title="Restart (Home)" aria-label="Restart">⏮</button>
+          <button type="button" id="play" class="btn" title="Play / pause (Space)" aria-label="Play">▶</button>
+          <label class="inline small">Speed
+            <select id="speed">
+              <option value="0.25">0.25×</option>
+              <option value="0.5" selected>0.5×</option>
+              <option value="1">1×</option>
+              <option value="2">2×</option>
+            </select>
+          </label>
+        </div>
+        <input type="range" id="scrub" min="0" max="1000" value="0" step="1" aria-label="Timeline">
+        <div class="phase-strip" id="phase-strip" aria-hidden="true"></div>
+        <div class="mono small" id="time">t = 0.00 s</div>
+        <p class="muted small">Timing is illustrative — a teaching model, not measured physiology.</p>
+      </section>
+
+      <section>
+        <h2>View</h2>
+        <div class="preset-grid" id="presets"></div>
+        <p class="muted small" id="preset-hint"></p>
+        <p class="muted small">Drag to rotate · wheel or pinch to zoom · shift-drag to pan</p>
+      </section>
+
+      <section>
+        <h2>Display</h2>
+        <label class="field-inline">Look
+          <select id="look">
+            <option value="dsa">Subtracted (DSA-style render)</option>
+            <option value="anat">Anatomical colours</option>
+          </select>
+        </label>
+        <label class="field-inline">Labels
+          <select id="labels">
+            <option value="filled">Filled vessels</option>
+            <option value="all">All</option>
+            <option value="off">Off</option>
+          </select>
+        </label>
+        <label class="inline"><input type="checkbox" id="ghost" checked> Show unfilled vessels faintly</label>
+        <label class="inline"><input type="checkbox" id="blush" checked> Capillary blush</label>
+      </section>
+
+      <details>
+        <summary>Teaching assumptions</summary>
+        <p class="muted small">Where unopacified blood joins the contrast, the model uses one stated factor. These are teaching choices, not measurements; real filling varies patient to patient.</p>
+        <label class="slider">ACom cross-filling of the opposite A2 <output id="o-acom"></output>
+          <input type="range" id="a-acom" min="0" max="1" step="0.05"></label>
+        <label class="slider">ICA blood reaching the PCA via PCom <output id="o-pcom"></output>
+          <input type="range" id="a-pcom" min="0" max="1" step="0.05"></label>
+        <label class="slider">Vertebral washback up the PCom <output id="o-pcomr"></output>
+          <input type="range" id="a-pcomr" min="0" max="1" step="0.05"></label>
+        <label class="slider">Basilar opacity on one vertebral (mixing) <output id="o-vb"></output>
+          <input type="range" id="a-vb" min="0.2" max="1" step="0.05"></label>
+        <label class="slider">Reflux down the opposite V4 to PICA <output id="o-reflux"></output>
+          <input type="range" id="a-reflux" min="0" max="1" step="0.05"></label>
+        <label class="inline"><input type="checkbox" id="a-fetal"> Fetal-type PCA, both sides (PCom large, P1 small)</label>
+        <button type="button" id="a-reset" class="btn btn-small">Reset assumptions</button>
+      </details>
+    </aside>
+
+    <section class="stage">
+      <div class="statusbar" id="statusbar" aria-live="polite"></div>
+      <div class="canvas-wrap">
+        <canvas id="view" tabindex="0" aria-label="Simulated angiogram. Use the branch list for a text alternative."></canvas>
+        <div class="watermark" aria-hidden="true">SIMULATED INJECTION · schematic teaching model · not DSA · not patient anatomy · timing illustrative</div>
+        <div class="tooltip" id="tooltip" hidden></div>
+      </div>
+    </section>
+
+    <aside class="side" aria-label="Branches">
+      <section class="card" id="details">
+        <h2>Selected branch</h2>
+        <p class="muted">Click a vessel or a label, or pick from the list.</p>
+      </section>
+      <section>
+        <h2>Branches</h2>
+        <input type="search" id="search" placeholder="Search branches, e.g. PICA, facial, M1" aria-label="Search branches">
+        <ul class="branch-list" id="branch-list"></ul>
+      </section>
+      <details>
+        <summary>Model coverage</summary>
+        <p class="small"><strong>Source:</strong> original schematic model written for this atlas from standard textbook anatomy. Not derived from any patient or dataset. Licence: same as this repository.</p>
+        <ul class="coverage small" id="coverage"></ul>
+        <h3 class="small">Not modelled</h3>
+        <ul class="small" id="missing"></ul>
+      </details>
+    </aside>
+  </main>
+
+  <!-- ===== Recorded DSA ===== -->
+  <main id="pane-dsa" class="pane doc" role="tabpanel" aria-labelledby="tab-dsa" hidden></main>
+
+  <!-- ===== 3D reconstruction ===== -->
+  <main id="pane-3d" class="pane doc" role="tabpanel" aria-labelledby="tab-3d" hidden>
+    <div class="banner banner-3d"><strong>3D reconstruction</strong> — none available in this build.</div>
+    <section class="card">
+      <h3>Why it is empty</h3>
+      <p>A 3D reconstruction here would mean vessels segmented from one real patient's angiographic volume (3D rotational angiography, CTA or MRA), shown as that patient's anatomy. No openly licensed volume that covers both carotid systems, the ECA branches and the vertebrobasilar system could be obtained for this build.</p>
+      <p>The nearest candidate checked, OpenNeuro <span class="mono">ds005096</span> (CC0), is time-of-flight MRA of intracranial aneurysms: it shows the circle of Willis but not the ECA or neck, and its segmentations cover the aneurysm and parent artery only. A reconstruction from it would need a full vessel segmentation of one subject, kept separate from every other subject and from the schematic model.</p>
+      <p>The 3D view in the <em>Simulated injection</em> tab is the schematic teaching model, not a reconstruction.</p>
+    </section>
+  </main>
+
+  <script src="js/anatomy.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/labels.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/dsa.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

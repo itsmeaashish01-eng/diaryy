@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791964696866,
-      "lastOk": 1791964696866,
+      "lastRun": 1791986333535,
+      "lastOk": 1791986333535,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791973706000,
+          "level": "notable",
+          "title": "TV4 postpones show after AI agent erases edited material",
+          "detail": "Article URL: https://swedenherald.com/article/tv4-postpones-the-challenge-until-2027-after-technical-failure-erases-edited-footage Comments URL: https://news.ycombinator.com/item?id=50085323 Points: 48 # Comments: 26",
+          "url": "https://swedenherald.com/article/tv4-postpones-the-challenge-until-2027-after-technical-failure-erases-edited-footage"
+        },
         {
           "t": 1791906596000,
           "level": "notable",
@@ -422,27 +429,27 @@
           "title": "Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates",
           "detail": "Article URL: https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors Comments URL: https://news.ycombinator.com/item?id=49970667 Points: 361 # Comments: 243",
           "url": "https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors"
-        },
-        {
-          "t": 1791234021000,
-          "level": "notable",
-          "title": "Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates",
-          "detail": "Article URL: https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors Comments URL: https://news.ycombinator.com/item?id=49970667 Points: 237 # Comments: 170",
-          "url": "https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1791943647936,
-      "lastOk": 1791943647936,
+      "lastRun": 1791986333918,
+      "lastOk": 1791986333918,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.296",
+      "lastLine": "latest is anthropics/claude-code v2.1.299",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791946182000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.299",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_DISABLE_FILE_MENTIONS` environment variable: Claude gets the paths of `@` file mentions to read with its file tools, not the files' contents\n- Added idle compaction in the terminal: a 200K+ token conversation left idle for about 54 minutes is compacted before its one-hour prompt cache expires, so your next message doesn't reprocess it all\n- Added `CLAUDE_COD",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.299"
+        },
         {
           "t": 1791574139000,
           "level": "notable",
@@ -505,13 +512,6 @@
           "title": "anthropics/claude-code v2.1.288",
           "detail": "## What's changed\n\n- Added `$.ui.selection()` for mods: returns the text you last selected in fullscreen mode and, when the selection lies within one transcript row, that row\n- Added a built-in `gh api` to cloud sessions whose image has no GitHub CLI, and fixed the built-in sending control characters from file names, jq filters or GitHub errors to the terminal\n- Added recovery for a prompt cleared",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.288"
-        },
-        {
-          "t": 1790877622000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.287",
-          "detail": "## What's changed\n\n- Added Claude Mods: plugins may now modify deeper behavior\n- Added You should know, a built-in mod where a side agent watches your back and flags things you or Claude might miss. Turn it on with `/plugin enable cc-plugin-you-should-know@builtin` (for first-party sessions with telemetry on)\n- Added an `n:<text>` filter to the agents view that matches session names and tasks; a f",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.287"
         },
         {
           "t": 1791574139000,
@@ -2799,11 +2799,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791964697643,
-      "lastOk": 1791964697643,
+      "lastRun": 1791986334460,
+      "lastOk": 1791986334460,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,174 (+73.9%) · excludes S&P 500 ETF",
+      "lastLine": "$4,133 (+72.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3293,9 +3293,27 @@
         {
           "t": 1791964697644,
           "v": 4173.85
+        },
+        {
+          "t": 1791986334460,
+          "v": 4133.35
         }
       ],
       "events": [
+        {
+          "t": 1791986334449,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791986334449,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791964697629,
           "level": "notable",
@@ -3701,31 +3719,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791242399293,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791242399293,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 83477
+          "BTC": 82667
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791986334460,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 13
+    },
     {
       "t": 1791964697644,
       "ran": 2,

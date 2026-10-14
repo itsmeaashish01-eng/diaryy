@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1791943647465,
-      "lastOk": 1791943647465,
+      "lastRun": 1791964696866,
+      "lastOk": 1791964696866,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1791906596000,
+          "level": "notable",
+          "title": "Redesigning source control at Anthropic",
+          "detail": "Article URL: https://www.anthropic.com/engineering/redesigning-source-control Comments URL: https://news.ycombinator.com/item?id=50073633 Points: 729 # Comments: 721",
+          "url": "https://www.anthropic.com/engineering/redesigning-source-control"
+        },
         {
           "t": 1791906596000,
           "level": "notable",
@@ -421,13 +428,6 @@
           "level": "notable",
           "title": "Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates",
           "detail": "Article URL: https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors Comments URL: https://news.ycombinator.com/item?id=49970667 Points: 237 # Comments: 170",
-          "url": "https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors"
-        },
-        {
-          "t": 1791234021000,
-          "level": "notable",
-          "title": "Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates",
-          "detail": "Article URL: https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors Comments URL: https://news.ycombinator.com/item?id=49970667 Points: 145 # Comments: 113",
           "url": "https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors"
         }
       ],
@@ -2799,11 +2799,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1791943648780,
-      "lastOk": 1791943648780,
+      "lastRun": 1791964697643,
+      "lastOk": 1791964697643,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,166 (+73.6%) · excludes S&P 500 ETF",
+      "lastLine": "$4,174 (+73.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3289,9 +3289,27 @@
         {
           "t": 1791943648780,
           "v": 4165.65
+        },
+        {
+          "t": 1791964697644,
+          "v": 4173.85
         }
       ],
       "events": [
+        {
+          "t": 1791964697629,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1791964697629,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1791943648767,
           "level": "notable",
@@ -3697,31 +3715,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791220884913,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791220884913,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 83313
+          "BTC": 83477
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1791964697644,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1791943648781,
       "ran": 6,

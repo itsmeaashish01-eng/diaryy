@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792017224596,
-      "lastOk": 1792017224596,
+      "lastRun": 1792025304738,
+      "lastOk": 1792025304738,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792022377000,
+          "level": "notable",
+          "title": "LFM2.5-24B-A2B: Built for fast on-device agents",
+          "detail": "Article URL: https://www.liquid.ai/blog/lfm2-5-24b-a2b Comments URL: https://news.ycombinator.com/item?id=50097369 Points: 29 # Comments: 1",
+          "url": "https://www.liquid.ai/blog/lfm2-5-24b-a2b"
+        },
+        {
+          "t": 1792009854000,
+          "level": "notable",
+          "title": "Anthropic's Scion is heavily inspired by Mononoke",
+          "detail": "Article URL: https://sunshowers.io/posts/anthropic-mononoke/ Comments URL: https://news.ycombinator.com/item?id=50094694 Points: 231 # Comments: 104",
+          "url": "https://sunshowers.io/posts/anthropic-mononoke/"
+        },
+        {
+          "t": 1791999923000,
+          "level": "notable",
+          "title": "Containment and monitoring failures are to blame for AI hacking reports: experts",
+          "detail": "Article URL: https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html Comments URL: https://news.ycombinator.com/item?id=50091788 Points: 821 # Comments: 442",
+          "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html"
+        },
         {
           "t": 1792009854000,
           "level": "notable",
@@ -408,27 +429,6 @@
           "title": "Show HN: Agent.reviews – Where AI agents read and write reviews on tools",
           "detail": "Hi HN!I’m Louis, Co-Founder of Armature (YC P26), where we help teams make their product discoverable and usable by coding agents. We already measured 50k+ agent sessions and realized that over and over agents would encounter the exact same limitations on different tasks using the same tool. So we w",
           "url": "https://agent.reviews/"
-        },
-        {
-          "t": 1791389228000,
-          "level": "notable",
-          "title": "Study: Claude, ChatGPT Offer Different Shopping Prices Based on Wealth",
-          "detail": "Article URL: https://www.bloomberg.com/news/newsletters/2026-10-07/study-claude-chatgpt-ai-bots-offer-different-shopping-prices-based-on-wealth Comments URL: https://news.ycombinator.com/item?id=49994746 Points: 25 # Comments: 2",
-          "url": "https://www.bloomberg.com/news/newsletters/2026-10-07/study-claude-chatgpt-ai-bots-offer-different-shopping-prices-based-on-wealth"
-        },
-        {
-          "t": 1791374676000,
-          "level": "notable",
-          "title": "Write Like It's 1866: LLMs Relearn Telegraphese",
-          "detail": "Article URL: https://fiveminutesforward.com/post/2026-10-04-telegraph-test/ Comments URL: https://news.ycombinator.com/item?id=49991580 Points: 61 # Comments: 39",
-          "url": "https://fiveminutesforward.com/post/2026-10-04-telegraph-test/"
-        },
-        {
-          "t": 1791343844000,
-          "level": "notable",
-          "title": "Show HN: NanoMuse – An open-source AI agent for your phone and computer",
-          "detail": "Article URL: https://github.com/nano-muse/nanoMuse Comments URL: https://news.ycombinator.com/item?id=49987765 Points: 19 # Comments: 3",
-          "url": "https://github.com/nano-muse/nanoMuse"
         }
       ],
       "notifiedAt": {},
@@ -2818,11 +2818,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792003820415,
-      "lastOk": 1792003820415,
+      "lastRun": 1792025305379,
+      "lastOk": 1792025305379,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,079 (+70.0%) · excludes S&P 500 ETF",
+      "lastLine": "$4,074 (+69.7%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3320,9 +3320,27 @@
         {
           "t": 1792003820415,
           "v": 4079.2
+        },
+        {
+          "t": 1792025305379,
+          "v": 4073.6
         }
       ],
       "events": [
+        {
+          "t": 1792025305366,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792025305366,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792003820401,
           "level": "notable",
@@ -3728,31 +3746,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791307379575,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791307379575,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81584
+          "BTC": 81472
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792025305379,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 5
+    },
     {
       "t": 1792017225009,
       "ran": 2,

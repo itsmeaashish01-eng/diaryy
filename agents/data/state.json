@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792045300090,
-      "lastOk": 1792045300090,
+      "lastRun": 1792065589341,
+      "lastOk": 1792065589341,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792048839000,
+          "level": "notable",
+          "title": "Aidlc: Adaptive workflow steering rules for AI coding agents",
+          "detail": "Article URL: https://github.com/awslabs/aidlc-workflows Comments URL: https://news.ycombinator.com/item?id=50100387 Points: 12 # Comments: 12",
+          "url": "https://github.com/awslabs/aidlc-workflows"
+        },
+        {
+          "t": 1792022377000,
+          "level": "notable",
+          "title": "LFM2.5-24B-A2B: Built for fast on-device agents",
+          "detail": "Article URL: https://www.liquid.ai/blog/lfm2-5-24b-a2b Comments URL: https://news.ycombinator.com/item?id=50097369 Points: 228 # Comments: 54",
+          "url": "https://www.liquid.ai/blog/lfm2-5-24b-a2b"
+        },
+        {
+          "t": 1791999923000,
+          "level": "notable",
+          "title": "Containment and monitoring failures are to blame for AI hacking reports: experts",
+          "detail": "Article URL: https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html Comments URL: https://news.ycombinator.com/item?id=50091788 Points: 912 # Comments: 550",
+          "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html"
+        },
         {
           "t": 1792022377000,
           "level": "notable",
@@ -408,27 +429,6 @@
           "title": "Claude Haiku 5.5",
           "detail": "Article URL: https://www.anthropic.com/claude-haiku-5-5 Comments URL: https://news.ycombinator.com/item?id=49996437 Points: 688 # Comments: 342",
           "url": "https://www.anthropic.com/claude-haiku-5-5"
-        },
-        {
-          "t": 1791395318000,
-          "level": "notable",
-          "title": "Docker Agent",
-          "detail": "Article URL: https://github.com/docker/docker-agent Comments URL: https://news.ycombinator.com/item?id=49996259 Points: 183 # Comments: 83",
-          "url": "https://github.com/docker/docker-agent"
-        },
-        {
-          "t": 1791392351000,
-          "level": "notable",
-          "title": "Show HN: Agent.reviews – Where AI agents read and write reviews on tools",
-          "detail": "Hi HN!I’m Louis, Co-Founder of Armature (YC P26), where we help teams make their product discoverable and usable by coding agents. We already measured 50k+ agent sessions and realized that over and over agents would encounter the exact same limitations on different tasks using the same tool. So we w",
-          "url": "https://agent.reviews/"
-        },
-        {
-          "t": 1791398980000,
-          "level": "notable",
-          "title": "Meta and Microsoft take steps to reduce employee usage of Claude AI",
-          "detail": "Article URL: https://www.rswebsols.com/news/meta-and-microsoft-take-steps-to-reduce-employee-usage-of-claude-ai/ Comments URL: https://news.ycombinator.com/item?id=49997161 Points: 189 # Comments: 200",
-          "url": "https://www.rswebsols.com/news/meta-and-microsoft-take-steps-to-reduce-employee-usage-of-claude-ai/"
         }
       ],
       "notifiedAt": {},
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1792003819547,
-      "lastOk": 1792003819547,
+      "lastRun": 1792065589344,
+      "lastOk": 1792065589344,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 2 drifting",
@@ -1102,9 +1102,62 @@
         {
           "t": 1792003819547,
           "v": 17
+        },
+        {
+          "t": 1792065589344,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1792065589343,
+          "level": "notable",
+          "title": "Log 50 supervised procedures — 77 days left",
+          "detail": "Finish fellowship strong, due 2026-12-31.",
+          "url": ""
+        },
+        {
+          "t": 1792065589343,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 31 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1792065589343,
+          "level": "notable",
+          "title": "Finish fellowship strong hasn't moved in 44 days",
+          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1792065589343,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1792065589343,
+          "level": "notable",
+          "title": "Data collection complete — 61 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1792065589343,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 56 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1792065589343,
+          "level": "notable",
+          "title": "Time for a goals review",
+          "detail": "It's been 106 days since 2026-07-01. Re-read the list, cut what's dead, set the next milestones.",
+          "url": ""
+        },
         {
           "t": 1792003819547,
           "level": "notable",
@@ -1475,65 +1528,16 @@
           "title": "✓ Protocol approved",
           "detail": "First-author paper submitted — finished 2026-08-20.",
           "url": ""
-        },
-        {
-          "t": 1791618115778,
-          "level": "notable",
-          "title": "Data collection complete — 66 days left",
-          "detail": "First-author paper submitted, due 2026-12-15.",
-          "url": ""
-        },
-        {
-          "t": 1791618115778,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 51 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1791618115778,
-          "level": "notable",
-          "title": "Time for a goals review",
-          "detail": "It's been 101 days since 2026-07-01. Re-read the list, cut what's dead, set the next milestones.",
-          "url": ""
-        },
-        {
-          "t": 1791563457397,
-          "level": "notable",
-          "title": "Log 50 supervised procedures — 83 days left",
-          "detail": "Finish fellowship strong, due 2026-12-31.",
-          "url": ""
-        },
-        {
-          "t": 1791563457397,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 37 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1791563457397,
-          "level": "notable",
-          "title": "Finish fellowship strong hasn't moved in 38 days",
-          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1791563457397,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
-        "checkedOn": "2026-10-14"
+        "checkedOn": "2026-10-15"
       }
     },
     "reading": {
-      "lastRun": 1792003819548,
-      "lastOk": 1792003819548,
+      "lastRun": 1792065589345,
+      "lastOk": 1792065589345,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1766,9 +1770,34 @@
         {
           "t": 1792003819549,
           "v": 3
+        },
+        {
+          "t": 1792065589345,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1792065589345,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 75 days",
+          "url": ""
+        },
+        {
+          "t": 1792065589345,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1792065589345,
+          "level": "notable",
+          "title": "Still unread after 167 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1792003819548,
           "level": "notable",
@@ -2167,27 +2196,6 @@
           "title": "Still unread after 155 days — A book that has nothing to do with work",
           "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
           "url": ""
-        },
-        {
-          "t": 1790956625308,
-          "level": "notable",
-          "title": "Read next — Current society guideline — read the update in full, not the summary",
-          "detail": "about 60 min · core · on the list 62 days",
-          "url": ""
-        },
-        {
-          "t": 1790956625308,
-          "level": "notable",
-          "title": "Read next — Survival analysis, properly this time",
-          "detail": "about 45 min · research methods · already started",
-          "url": ""
-        },
-        {
-          "t": 1790956625308,
-          "level": "notable",
-          "title": "Still unread after 154 days — A book that has nothing to do with work",
-          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -2196,8 +2204,8 @@
       }
     },
     "training": {
-      "lastRun": 1792003819550,
-      "lastOk": 1792003819550,
+      "lastRun": 1792065589346,
+      "lastOk": 1792065589346,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min",
@@ -2430,9 +2438,20 @@
         {
           "t": 1792003819550,
           "v": 0
+        },
+        {
+          "t": 1792065589346,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1792065589346,
+          "level": "notable",
+          "title": "36 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1792003819550,
           "level": "notable",
@@ -2818,11 +2837,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792045301260,
-      "lastOk": 1792045301260,
+      "lastRun": 1792065590087,
+      "lastOk": 1792065590087,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,042 (+68.4%) · excludes S&P 500 ETF",
+      "lastLine": "$4,048 (+68.7%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3328,9 +3347,27 @@
         {
           "t": 1792045301260,
           "v": 4041.8
+        },
+        {
+          "t": 1792065590087,
+          "v": 4047.65
         }
       ],
       "events": [
+        {
+          "t": 1792065590074,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792065590074,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792045301251,
           "level": "notable",
@@ -3736,31 +3773,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791364251569,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791364251569,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 80836
+          "BTC": 80953
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792065590087,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 16
+    },
     {
       "t": 1792045301260,
       "ran": 3,

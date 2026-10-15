@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792084700627,
-      "lastOk": 1792084700627,
+      "lastRun": 1792096221988,
+      "lastOk": 1792096221988,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792083919000,
+          "level": "notable",
+          "title": "More on Anthropic's Scion ripping off Mononoke",
+          "detail": "Redesigning source control at Anthropic - https://news.ycombinator.com/item?id=50073633 (996 comments)Anthropic's Scion is heavily inspired by Mononoke - https://news.ycombinator.com/item?id=50094694 (149 comments) Comments URL: https://news.ycombinator.com/item?id=50106738 Points: 192 # Comments: 5",
+          "url": "https://sunshowers.io/posts/anthropic-mononoke-2/"
+        },
         {
           "t": 1792048839000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "Meta and Microsoft take steps to reduce employee usage of Claude AI",
           "detail": "Article URL: https://www.rswebsols.com/news/meta-and-microsoft-take-steps-to-reduce-employee-usage-of-claude-ai/ Comments URL: https://news.ycombinator.com/item?id=49997161 Points: 277 # Comments: 276",
           "url": "https://www.rswebsols.com/news/meta-and-microsoft-take-steps-to-reduce-employee-usage-of-claude-ai/"
-        },
-        {
-          "t": 1791396092000,
-          "level": "notable",
-          "title": "Claude Haiku 5.5",
-          "detail": "Article URL: https://www.anthropic.com/claude-haiku-5-5 Comments URL: https://news.ycombinator.com/item?id=49996437 Points: 688 # Comments: 342",
-          "url": "https://www.anthropic.com/claude-haiku-5-5"
         }
       ],
       "notifiedAt": {},
@@ -3788,6 +3788,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1792096221993,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 1
+    },
     {
       "t": 1792084701925,
       "ran": 3,

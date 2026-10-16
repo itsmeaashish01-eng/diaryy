@@ -2,8 +2,8 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792114605495,
-      "lastOk": 1792114605495,
+      "lastRun": 1792131586602,
+      "lastOk": 1792131586602,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
@@ -2856,11 +2856,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792106056829,
-      "lastOk": 1792106056829,
+      "lastRun": 1792131587068,
+      "lastOk": 1792131587068,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,109 (+71.2%) · excludes S&P 500 ETF",
+      "lastLine": "$4,099 (+70.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3378,9 +3378,27 @@
         {
           "t": 1792106056829,
           "v": 4108.8
+        },
+        {
+          "t": 1792131587069,
+          "v": 4099.35
         }
       ],
       "events": [
+        {
+          "t": 1792131587054,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792131587054,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792106056818,
           "level": "notable",
@@ -3786,31 +3804,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791425670728,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791425670728,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 82176
+          "BTC": 81987
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792131587070,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 2
+    },
     {
       "t": 1792114605976,
       "ran": 5,

@@ -2,14 +2,49 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792180959937,
-      "lastOk": 1792180959937,
+      "lastRun": 1792191534268,
+      "lastOk": 1792191534268,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792177487000,
+          "level": "notable",
+          "title": "How the Claude Code team does code review",
+          "detail": "Article URL: https://claude.dev/blog/solving-code-review-at-anthropic/ Comments URL: https://news.ycombinator.com/item?id=50122951 Points: 175 # Comments: 168",
+          "url": "https://claude.dev/blog/solving-code-review-at-anthropic/"
+        },
+        {
+          "t": 1792176959000,
+          "level": "notable",
+          "title": "Claude reveals ECDSA curve origins",
+          "detail": "https://words.filippo.io/seeds-solved/ Comments URL: https://news.ycombinator.com/item?id=50122800 Points: 535 # Comments: 227",
+          "url": "https://www.anthropic.com/research/ecdsa-curve-origins"
+        },
+        {
+          "t": 1792174302000,
+          "level": "notable",
+          "title": "Anthropic assigned highest junk credit rating in June",
+          "detail": "https://finance.yahoo.com/technology/ai/articles/anthropic-s... Comments URL: https://news.ycombinator.com/item?id=50122112 Points: 177 # Comments: 50",
+          "url": "https://www.ft.com/content/5a310aee-f555-4266-874c-b1b4db20186d"
+        },
+        {
+          "t": 1792173618000,
+          "level": "notable",
+          "title": "Designing more efficient quantum circuits with Claude",
+          "detail": "Article URL: https://www.anthropic.com/research/designing-efficient-quantum-circuits Comments URL: https://news.ycombinator.com/item?id=50121939 Points: 77 # Comments: 15",
+          "url": "https://www.anthropic.com/research/designing-efficient-quantum-circuits"
+        },
+        {
+          "t": 1792160324000,
+          "level": "notable",
+          "title": "Show HN: Gemini 4 Argon plays StarCraft",
+          "detail": "I've refreshed StarSkirmish Bench, a benchmark where LLMs play StarCraft BW by writing code, with results from the flagship models of OpenAI, Anthropic, Google, and Muse Comments URL: https://news.ycombinator.com/item?id=50118688 Points: 176 # Comments: 82",
+          "url": "https://starskirmish.com/bench/v0-2/"
+        },
         {
           "t": 1792177487000,
           "level": "notable",
@@ -394,41 +429,6 @@
           "title": "Talorys – A self-hosted personal AI agent on Cloudflare's free tier",
           "detail": "Article URL: https://github.com/rociiu/talorys Comments URL: https://news.ycombinator.com/item?id=50031614 Points: 187 # Comments: 96",
           "url": "https://github.com/rociiu/talorys"
-        },
-        {
-          "t": 1791629529000,
-          "level": "notable",
-          "title": "Talorys – A self-hosted personal AI agent on Cloudflare's free tier",
-          "detail": "Article URL: https://github.com/rociiu/talorys Comments URL: https://news.ycombinator.com/item?id=50031614 Points: 92 # Comments: 41",
-          "url": "https://github.com/rociiu/talorys"
-        },
-        {
-          "t": 1791607033000,
-          "level": "notable",
-          "title": "Show HN: A simple to-do app for iPhone, Mac, and your agent",
-          "detail": "Article URL: https://ilia.page/writing/introducing-nagare Comments URL: https://news.ycombinator.com/item?id=50029607 Points: 11 # Comments: 7",
-          "url": "https://ilia.page/writing/introducing-nagare"
-        },
-        {
-          "t": 1791555691000,
-          "level": "notable",
-          "title": "Why Are Coding Agents So Dumb?",
-          "detail": "Article URL: https://mtlynch.io/why-are-coding-agents-so-dumb/ Comments URL: https://news.ycombinator.com/item?id=50020947 Points: 30 # Comments: 5",
-          "url": "https://mtlynch.io/why-are-coding-agents-so-dumb/"
-        },
-        {
-          "t": 1791543828000,
-          "level": "notable",
-          "title": "Show HN: Let your AI agents paint big arrows, boxes and text on your screen",
-          "detail": "Article URL: https://github.com/franzenzenhofer/big-arrow-on-the-screen Comments URL: https://news.ycombinator.com/item?id=50018817 Points: 345 # Comments: 145",
-          "url": "https://github.com/franzenzenhofer/big-arrow-on-the-screen"
-        },
-        {
-          "t": 1791543828000,
-          "level": "notable",
-          "title": "Let your AI agents paint big arrows, boxes and text on your screen",
-          "detail": "Article URL: https://github.com/franzenzenhofer/big-arrow-on-the-screen Comments URL: https://news.ycombinator.com/item?id=50018817 Points: 256 # Comments: 107",
-          "url": "https://github.com/franzenzenhofer/big-arrow-on-the-screen"
         }
       ],
       "notifiedAt": {},
@@ -2875,11 +2875,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792169624972,
-      "lastOk": 1792169624972,
+      "lastRun": 1792191534752,
+      "lastOk": 1792191534752,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,066 (+69.4%) · excludes S&P 500 ETF",
+      "lastLine": "$4,086 (+70.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3409,9 +3409,27 @@
         {
           "t": 1792169624972,
           "v": 4066.4
+        },
+        {
+          "t": 1792191534752,
+          "v": 4085.7
         }
       ],
       "events": [
+        {
+          "t": 1792191534738,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792191534738,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792169624963,
           "level": "notable",
@@ -3817,31 +3835,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791498187328,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791498187328,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81328
+          "BTC": 81714
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792191534752,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 7
+    },
     {
       "t": 1792180960417,
       "ran": 2,

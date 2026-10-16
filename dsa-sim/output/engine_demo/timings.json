@@ -1,0 +1,37 @@
+{
+ "demo_tree_build_s": 0.79,
+ "demo_tree": {
+  "vessels": 128,
+  "labeled": 16,
+  "points": 4430,
+  "segments": 4302,
+  "by_group": {
+   "artery:ACA": 20,
+   "artery:CoW": 1,
+   "artery:ECA": 1,
+   "artery:ICA": 3,
+   "artery:MCA": 85,
+   "artery:neck": 1,
+   "vein:venous": 17
+  }
+ },
+ "hemo_s": 0.382,
+ "phase_peaks_s(arterial,capillary,venous)": [
+  1.83,
+  3.29,
+  4.31
+ ],
+ "LAT_projector_build_s": 2.47,
+ "LAT_per_frame_s": 0.0935,
+ "AP_projector_build_s": 1.379,
+ "AP_per_frame_s": 0.0709,
+ "3dra_frame_s": 0.609,
+ "stress_tree_build_s": 15.6,
+ "stress_segments": 30062,
+ "stress_hemo_s": 1.11,
+ "stress_projector_build_s": 4.67,
+ "stress_nnz": 450842,
+ "stress_per_frame_s": 0.0731,
+ "stress_first_frame_incl_build_s": 4.74,
+ "stress_3dra_frame_s": 4.22
+}

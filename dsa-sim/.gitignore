@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+output/engine_demo/*.gif
+output/engine_demo/*montage*

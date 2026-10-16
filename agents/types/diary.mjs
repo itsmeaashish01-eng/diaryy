@@ -27,6 +27,7 @@ const words = (s) => String(s || "").trim().split(/\s+/).filter(Boolean).length;
 export default {
   id: "diary",
   label: "Diary",
+  adopts: "diary export",
   summary: "Writing streaks, silences, milestones and to-do backlog",
 
   validate(agent) {

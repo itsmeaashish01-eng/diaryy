@@ -727,10 +727,18 @@ body {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+@media (max-width: 640px) {
+  /* Five apps' worth of icons and a search box don't fit one narrow row,
+     so the bar becomes two: the icons, then a full-width search. */
+  .topbar { padding: 0.5rem 0.75rem; gap: 0.4rem 0.35rem; height: auto; min-height: 58px; flex-wrap: wrap; justify-content: flex-end; }
+  .topbar-left { margin-right: auto; }
+  .topbar-right { display: contents; }
+  .icon-btn { padding: 0.3rem 0.4rem; }
+  .search-wrap { order: 1; flex: 1 1 100%; }
+  .search-wrap input, .search-wrap input:focus { width: 100%; }
+}
+
 @media (max-width: 520px) {
-  .topbar { padding: 0 1rem; gap: 0.4rem; }
-  .search-wrap input { width: 120px; }
-  .search-wrap input:focus { width: 160px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .mood-selector { display: none; } /* hide on very small screens */
   .tag-row { display: none; }

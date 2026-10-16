@@ -40,11 +40,19 @@ jobs:
       - name: Guide self-test
         run: node guide/selftest.mjs
 
+      # Code Clinic, the course in learn/: every exercise's model answer must
+      # pass its own checks and every starter must fail them, every git
+      # challenge must be finishable, and the statistics must still match
+      # the scipy / statsmodels / lifelines values pinned in the test. The
+      # Python exercises run on the runner's own python3.
+      - name: Code Clinic self-test
+        run: node learn/selftest.mjs
+
       # A syntax error in a type would only show up at 37 past the hour,
       # in a job nobody is watching. Cheaper to find it here.
       - name: Everything parses
         run: |
-          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js; do
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js learn/selftest.mjs learn/js/*.js learn/js/content/*.js; do
             node --check "$f"
           done
           for f in agents/data/*.json; do

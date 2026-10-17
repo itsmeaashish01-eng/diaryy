@@ -2,14 +2,49 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792217087333,
-      "lastOk": 1792217087333,
+      "lastRun": 1792235229242,
+      "lastOk": 1792235229242,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792211813000,
+          "level": "notable",
+          "title": "Show HN: Llmspeed – feel how fast a local LLM runs before you buy the hardware",
+          "detail": "Article URL: https://llmspeed.dev/ Comments URL: https://news.ycombinator.com/item?id=50127979 Points: 88 # Comments: 37",
+          "url": "https://llmspeed.dev/"
+        },
+        {
+          "t": 1792177487000,
+          "level": "notable",
+          "title": "How the Claude Code team does code review",
+          "detail": "Article URL: https://claude.dev/blog/solving-code-review-at-anthropic/ Comments URL: https://news.ycombinator.com/item?id=50122951 Points: 353 # Comments: 332",
+          "url": "https://claude.dev/blog/solving-code-review-at-anthropic/"
+        },
+        {
+          "t": 1792176959000,
+          "level": "notable",
+          "title": "Claude reveals ECDSA curve origins",
+          "detail": "https://words.filippo.io/seeds-solved/ Comments URL: https://news.ycombinator.com/item?id=50122800 Points: 881 # Comments: 328",
+          "url": "https://www.anthropic.com/research/ecdsa-curve-origins"
+        },
+        {
+          "t": 1792173618000,
+          "level": "notable",
+          "title": "Designing more efficient quantum circuits with Claude",
+          "detail": "Article URL: https://www.anthropic.com/research/designing-efficient-quantum-circuits Comments URL: https://news.ycombinator.com/item?id=50121939 Points: 144 # Comments: 32",
+          "url": "https://www.anthropic.com/research/designing-efficient-quantum-circuits"
+        },
+        {
+          "t": 1792160324000,
+          "level": "notable",
+          "title": "Show HN: Gemini 4 Argon plays StarCraft",
+          "detail": "I've refreshed StarSkirmish Bench, a benchmark where LLMs play StarCraft BW by writing code, with results from the flagship models of OpenAI, Anthropic, Google, and Muse Comments URL: https://news.ycombinator.com/item?id=50118688 Points: 225 # Comments: 101",
+          "url": "https://starskirmish.com/bench/v0-2/"
+        },
         {
           "t": 1792177487000,
           "level": "notable",
@@ -394,41 +429,6 @@
           "title": "The gap in shared understanding of LLM capability is widening",
           "detail": "Article URL: https://twitter.com/karpathy/status/2109361546505966046 Comments URL: https://news.ycombinator.com/item?id=50047422 Points: 383 # Comments: 538",
           "url": "https://twitter.com/karpathy/status/2109361546505966046"
-        },
-        {
-          "t": 1791750052000,
-          "level": "notable",
-          "title": "The gap in shared understanding of LLM capability is widening",
-          "detail": "Article URL: https://twitter.com/karpathy/status/2109361546505966046 Comments URL: https://news.ycombinator.com/item?id=50047422 Points: 179 # Comments: 263",
-          "url": "https://twitter.com/karpathy/status/2109361546505966046"
-        },
-        {
-          "t": 1791629529000,
-          "level": "notable",
-          "title": "Talorys – A self-hosted personal AI agent on Cloudflare's free tier",
-          "detail": "Article URL: https://github.com/rociiu/talorys Comments URL: https://news.ycombinator.com/item?id=50031614 Points: 311 # Comments: 142",
-          "url": "https://github.com/rociiu/talorys"
-        },
-        {
-          "t": 1791684158000,
-          "level": "notable",
-          "title": "500B Tokens Later: Letting AI Agents Decompile a First-Person Shooter",
-          "detail": "Article URL: https://momo5502.com/posts/2026-10-09-game-decompilation/ Comments URL: https://news.ycombinator.com/item?id=50039092 Points: 89 # Comments: 67",
-          "url": "https://momo5502.com/posts/2026-10-09-game-decompilation/"
-        },
-        {
-          "t": 1791629529000,
-          "level": "notable",
-          "title": "Talorys – A self-hosted personal AI agent on Cloudflare's free tier",
-          "detail": "Article URL: https://github.com/rociiu/talorys Comments URL: https://news.ycombinator.com/item?id=50031614 Points: 289 # Comments: 133",
-          "url": "https://github.com/rociiu/talorys"
-        },
-        {
-          "t": 1791559593000,
-          "level": "notable",
-          "title": "Five months treating bugs like patients and coding agents like a medical team",
-          "detail": "Article URL: https://www.cockroachlabs.com/blog/experiment-running-hospital-code/ Comments URL: https://news.ycombinator.com/item?id=50021899 Points: 129 # Comments: 52",
-          "url": "https://www.cockroachlabs.com/blog/experiment-running-hospital-code/"
         }
       ],
       "notifiedAt": {},
@@ -2894,11 +2894,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792217098460,
-      "lastOk": 1792217098460,
+      "lastRun": 1792235230065,
+      "lastOk": 1792235230065,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,073 (+69.7%) · excludes S&P 500 ETF",
+      "lastLine": "$4,078 (+69.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3436,9 +3436,27 @@
         {
           "t": 1792217098460,
           "v": 4073.1
+        },
+        {
+          "t": 1792235230065,
+          "v": 4077.6
         }
       ],
       "events": [
+        {
+          "t": 1792235230051,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792235230051,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792217098449,
           "level": "notable",
@@ -3844,31 +3862,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791538412431,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791538412431,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81462
+          "BTC": 81552
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792235230065,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 7
+    },
     {
       "t": 1792217098460,
       "ran": 6,

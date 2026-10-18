@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792332440284,
-      "lastOk": 1792332440284,
+      "lastRun": 1792344620262,
+      "lastOk": 1792344620262,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792335490000,
+          "level": "notable",
+          "title": "Websites are closing their doors to AI agents",
+          "detail": "Article URL: https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web Comments URL: https://news.ycombinator.com/item?id=50141657 Points: 105 # Comments: 85",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web"
+        },
+        {
+          "t": 1792333827000,
+          "level": "notable",
+          "title": "Anthropic's proposed AI safety bill only kicks in if 50 deaths or $1B in damages",
+          "detail": "Article URL: https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropics-proposed-ai-safety-bill-only-kicks-in-if-50-deaths-or-usd1-billion-in-damages-are-on-the-line-proposal-would-effectively-make-the-commerce-department-the-only-agency-capable-of-stopping-an-ai-model Comments UR",
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropics-proposed-ai-safety-bill-only-kicks-in-if-50-deaths-or-usd1-billion-in-damages-are-on-the-line-proposal-would-effectively-make-the-commerce-department-the-only-agency-capable-of-stopping-an-ai-model"
+        },
+        {
+          "t": 1792298029000,
+          "level": "notable",
+          "title": "Show HN: Sphinx – A hook that quizzes you on your AI's code before shipping",
+          "detail": "FOSS, Basically it plugs into your existing coding agent workflow and every time you push to prod it'll throw up a questionnaire that checks if you understand how the code you're pushing works. Comments URL: https://news.ycombinator.com/item?id=50137950 Points: 210 # Comments: 71",
+          "url": "https://sphinx-six-theta.vercel.app/"
+        },
         {
           "t": 1792298029000,
           "level": "notable",
@@ -408,27 +429,6 @@
           "title": "TV4 postpones show after AI agent erases edited material",
           "detail": "Article URL: https://swedenherald.com/article/tv4-postpones-the-challenge-until-2027-after-technical-failure-erases-edited-footage Comments URL: https://news.ycombinator.com/item?id=50085323 Points: 48 # Comments: 26",
           "url": "https://swedenherald.com/article/tv4-postpones-the-challenge-until-2027-after-technical-failure-erases-edited-footage"
-        },
-        {
-          "t": 1791906596000,
-          "level": "notable",
-          "title": "Redesigning source control at Anthropic",
-          "detail": "Article URL: https://www.anthropic.com/engineering/redesigning-source-control Comments URL: https://news.ycombinator.com/item?id=50073633 Points: 729 # Comments: 721",
-          "url": "https://www.anthropic.com/engineering/redesigning-source-control"
-        },
-        {
-          "t": 1791906596000,
-          "level": "notable",
-          "title": "Redesigning source control at Anthropic",
-          "detail": "Article URL: https://www.anthropic.com/engineering/redesigning-source-control Comments URL: https://news.ycombinator.com/item?id=50073633 Points: 552 # Comments: 528",
-          "url": "https://www.anthropic.com/engineering/redesigning-source-control"
-        },
-        {
-          "t": 1791906596000,
-          "level": "notable",
-          "title": "Redesigning source control at Anthropic",
-          "detail": "Article URL: https://www.anthropic.com/engineering/redesigning-source-control Comments URL: https://news.ycombinator.com/item?id=50073633 Points: 463 # Comments: 457",
-          "url": "https://www.anthropic.com/engineering/redesigning-source-control"
         }
       ],
       "notifiedAt": {},
@@ -3931,6 +3931,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1792344620268,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1792332441149,
       "ran": 3,

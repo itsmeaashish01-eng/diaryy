@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792352148195,
-      "lastOk": 1792352148195,
+      "lastRun": 1792360178295,
+      "lastOk": 1792360178295,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792356494000,
+          "level": "notable",
+          "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+          "detail": "https://x.com/Jiaru_Zou/status/2110400256647340476https://github.com/togethercomputer/HybridAgenthttps://huggingface.co/collections/togethercomputer/hybridag...Evaluations: https://arxiv.org/html/2610.18861v1#S5 Comments URL: https://news.ycombinator.com/item?id=50145337 Points: 36 # Comments: 9",
+          "url": "https://arxiv.org/abs/2610.18861"
+        },
+        {
+          "t": 1792298029000,
+          "level": "notable",
+          "title": "Show HN: Sphinx – A hook that quizzes you on your AI's code before shipping",
+          "detail": "FOSS, Basically it plugs into your existing coding agent workflow and every time you push to prod it'll throw up a questionnaire that checks if you understand how the code you're pushing works. Comments URL: https://news.ycombinator.com/item?id=50137950 Points: 234 # Comments: 76",
+          "url": "https://sphinx-six-theta.vercel.app/"
+        },
         {
           "t": 1792347310000,
           "level": "notable",
@@ -415,28 +429,14 @@
           "title": "AI agents aren't 'going rogue.' Frontier labs are skipping security basics",
           "detail": "Article URL: https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html Comments URL: https://news.ycombinator.com/item?id=50091788 Points: 214 # Comments: 78",
           "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html"
-        },
-        {
-          "t": 1791996907000,
-          "level": "notable",
-          "title": "Linus Torvalds's first LLM-assisted patch series",
-          "detail": "Article URL: https://lwn.net/Articles/1100449/ Comments URL: https://news.ycombinator.com/item?id=50090842 Points: 79 # Comments: 36",
-          "url": "https://lwn.net/Articles/1100449/"
-        },
-        {
-          "t": 1791990041000,
-          "level": "notable",
-          "title": "Show HN: Graphicle, a Rust port of Graphify with memory for coding agents",
-          "detail": "Article URL: https://github.com/graphicle-ai/graphicle Comments URL: https://news.ycombinator.com/item?id=50088713 Points: 29 # Comments: 6",
-          "url": "https://github.com/graphicle-ai/graphicle"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1792332440629,
-      "lastOk": 1792332440629,
+      "lastRun": 1792360178696,
+      "lastOk": 1792360178696,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.302",
@@ -794,6 +794,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.291"
         },
         {
+          "t": 1792183986000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.302",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_AUTO_MODE_MODEL` to choose the model the client-side auto mode classifier uses; it does not change the model for server-side auto mode\n- Added an `Idle compaction` row to `/config` for turning idle compaction off or back on; the notices shown after an idle compaction now say how to turn it off\n- Added a notice to `/design-sync` and `/design-login` that stand",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.302"
+        },
+        {
           "t": 1792092126000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.301",
@@ -855,13 +862,6 @@
           "title": "anthropics/claude-code v2.1.291",
           "detail": "## What's changed\n\n- Fixed a regression in 2.1.290 where cloud sessions could drop answers to permission prompts\n- Fixed a regression in 2.1.288 where the last messages of a session could be lost when quitting\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.291"
-        },
-        {
-          "t": 1791243197000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.290",
-          "detail": "## What's changed\n\n- Added `serverToolUses` to the result of a mod's `turn.step` hook: the tool calls the API ran itself (the advisor), each with its id, name, input, start and end\n- Added `agentId` to the `tool.check` event of plugin hooks, so a hook can tell a subagent's permission check from the main session's\n- Added `ceiling` to the question and verdict a mod's `tool.check` hook reads, naming",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.290"
         }
       ],
       "notifiedAt": {},
@@ -3935,6 +3935,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1792360178701,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 12
+    },
     {
       "t": 1792352148691,
       "ran": 2,

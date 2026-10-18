@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792344620262,
-      "lastOk": 1792344620262,
+      "lastRun": 1792352148195,
+      "lastOk": 1792352148195,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792347310000,
+          "level": "notable",
+          "title": "Investing in the Public Benefit",
+          "detail": "Article URL: https://www.anthropic.com/news/public-benefit-fund Comments URL: https://news.ycombinator.com/item?id=50143755 Points: 11 # Comments: 7",
+          "url": "https://www.anthropic.com/news/public-benefit-fund"
+        },
         {
           "t": 1792335490000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "Show HN: Graphicle, a Rust port of Graphify with memory for coding agents",
           "detail": "Article URL: https://github.com/graphicle-ai/graphicle Comments URL: https://news.ycombinator.com/item?id=50088713 Points: 29 # Comments: 6",
           "url": "https://github.com/graphicle-ai/graphicle"
-        },
-        {
-          "t": 1791973706000,
-          "level": "notable",
-          "title": "TV4 postpones show after AI agent erases edited material",
-          "detail": "Article URL: https://swedenherald.com/article/tv4-postpones-the-challenge-until-2027-after-technical-failure-erases-edited-footage Comments URL: https://news.ycombinator.com/item?id=50085323 Points: 48 # Comments: 26",
-          "url": "https://swedenherald.com/article/tv4-postpones-the-challenge-until-2027-after-technical-failure-erases-edited-footage"
         }
       ],
       "notifiedAt": {},
@@ -2932,11 +2932,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792332441148,
-      "lastOk": 1792332441148,
+      "lastRun": 1792352148691,
+      "lastOk": 1792352148691,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,061 (+69.2%) · excludes S&P 500 ETF",
+      "lastLine": "$4,044 (+68.5%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3498,9 +3498,27 @@
         {
           "t": 1792332441148,
           "v": 4061.1
+        },
+        {
+          "t": 1792352148691,
+          "v": 4043.8
         }
       ],
       "events": [
+        {
+          "t": 1792352148677,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792352148677,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792332441134,
           "level": "notable",
@@ -3906,31 +3924,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791684465027,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791684465027,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81222
+          "BTC": 80876
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792352148691,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1792344620268,
       "ran": 1,

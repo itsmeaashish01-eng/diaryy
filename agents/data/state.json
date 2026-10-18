@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792317035597,
-      "lastOk": 1792317035597,
+      "lastRun": 1792332440284,
+      "lastOk": 1792332440284,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792298029000,
+          "level": "notable",
+          "title": "Show HN: Sphinx – A hook that quizzes you on your AI's code before shipping",
+          "detail": "FOSS, Basically it plugs into your existing coding agent workflow and every time you push to prod it'll throw up a questionnaire that checks if you understand how the code you're pushing works. Comments URL: https://news.ycombinator.com/item?id=50137950 Points: 180 # Comments: 55",
+          "url": "https://sphinx-six-theta.vercel.app/"
+        },
         {
           "t": 1792298029000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "Redesigning source control at Anthropic",
           "detail": "Article URL: https://www.anthropic.com/engineering/redesigning-source-control Comments URL: https://news.ycombinator.com/item?id=50073633 Points: 463 # Comments: 457",
           "url": "https://www.anthropic.com/engineering/redesigning-source-control"
-        },
-        {
-          "t": 1791900863000,
-          "level": "notable",
-          "title": "How to engineer an AI harness for game development",
-          "detail": "Article URL: https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code Comments URL: https://news.ycombinator.com/item?id=50072120 Points: 113 # Comments: 50",
-          "url": "https://kylekukshtel.com/ai-harness-engineering-game-development-claude-code"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1792299770706,
-      "lastOk": 1792299770706,
+      "lastRun": 1792332440629,
+      "lastOk": 1792332440629,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.302",
@@ -724,6 +724,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.291"
         },
         {
+          "t": 1792183986000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.302",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_AUTO_MODE_MODEL` to choose the model the client-side auto mode classifier uses; it does not change the model for server-side auto mode\n- Added an `Idle compaction` row to `/config` for turning idle compaction off or back on; the notices shown after an idle compaction now say how to turn it off\n- Added a notice to `/design-sync` and `/design-login` that stand",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.302"
+        },
+        {
           "t": 1792092126000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.301",
@@ -785,13 +792,6 @@
           "title": "anthropics/claude-code v2.1.291",
           "detail": "## What's changed\n\n- Fixed a regression in 2.1.290 where cloud sessions could drop answers to permission prompts\n- Fixed a regression in 2.1.288 where the last messages of a session could be lost when quitting\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.291"
-        },
-        {
-          "t": 1791243197000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.290",
-          "detail": "## What's changed\n\n- Added `serverToolUses` to the result of a mod's `turn.step` hook: the tool calls the API ran itself (the advisor), each with its id, name, input, start and end\n- Added `agentId` to the `tool.check` event of plugin hooks, so a hook can tell a subagent's permission check from the main session's\n- Added `ceiling` to the question and verdict a mod's `tool.check` hook reads, naming",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.290"
         },
         {
           "t": 1792092126000,
@@ -2932,11 +2932,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792317036159,
-      "lastOk": 1792317036159,
+      "lastRun": 1792332441148,
+      "lastOk": 1792332441148,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,107 (+71.1%) · excludes S&P 500 ETF",
+      "lastLine": "$4,061 (+69.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3494,9 +3494,27 @@
         {
           "t": 1792317036159,
           "v": 4106.55
+        },
+        {
+          "t": 1792332441148,
+          "v": 4061.1
         }
       ],
       "events": [
+        {
+          "t": 1792332441134,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792332441135,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792317036145,
           "level": "notable",
@@ -3902,31 +3920,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791660519537,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791660519537,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 82131
+          "BTC": 81222
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792332441149,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 13
+    },
     {
       "t": 1792317036159,
       "ran": 5,

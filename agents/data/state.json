@@ -2,14 +2,49 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792369562818,
-      "lastOk": 1792369562818,
+      "lastRun": 1792386749732,
+      "lastOk": 1792386749732,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792384327000,
+          "level": "notable",
+          "title": "Show HN: Strot – Compile an LLM's intent once, run decisions locally forever",
+          "detail": "Article URL: https://github.com/strot-ai/Project-STROT Comments URL: https://news.ycombinator.com/item?id=50148396 Points: 9 # Comments: 1",
+          "url": "https://github.com/strot-ai/Project-STROT"
+        },
+        {
+          "t": 1792375276000,
+          "level": "notable",
+          "title": "Superlite: A Faster Alternatie to Superpowers",
+          "detail": "Article URL: https://contextfirst.blog/superlite-hand-an-agent-a-spec/ Comments URL: https://news.ycombinator.com/item?id=50147492 Points: 31 # Comments: 15",
+          "url": "https://contextfirst.blog/superlite-hand-an-agent-a-spec/"
+        },
+        {
+          "t": 1792359370000,
+          "level": "notable",
+          "title": "Show HN: WhatsApp MCP running free on Cloudflare",
+          "detail": "I wanted my humble Claude on mobile to access my WhatsApp messages but the only options I could find either required WhatsApp Business or an actual server to run Baileys on.I wanted to run it for free on ClaudeFlare and with my personal WhatsApp account, so I built this.Important feature - it connec",
+          "url": "https://github.com/finereli/whatsapp-mcp"
+        },
+        {
+          "t": 1792357752000,
+          "level": "notable",
+          "title": "If you don't run your own LLM proxy, how do you know whats going on?",
+          "detail": "Article URL: https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on/ Comments URL: https://news.ycombinator.com/item?id=50145507 Points: 88 # Comments: 67",
+          "url": "https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on/"
+        },
+        {
+          "t": 1792356494000,
+          "level": "notable",
+          "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+          "detail": "https://x.com/Jiaru_Zou/status/2110400256647340476https://github.com/togethercomputer/HybridAgenthttps://huggingface.co/collections/togethercomputer/hybridag...Evaluations: https://arxiv.org/html/2610.18861v1#S5 Comments URL: https://news.ycombinator.com/item?id=50145337 Points: 296 # Comments: 158",
+          "url": "https://arxiv.org/abs/2610.18861"
+        },
         {
           "t": 1792359370000,
           "level": "notable",
@@ -394,55 +429,27 @@
           "title": "Containment and monitoring failures are to blame for AI hacking reports: experts",
           "detail": "Article URL: https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html Comments URL: https://news.ycombinator.com/item?id=50091788 Points: 867 # Comments: 501",
           "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html"
-        },
-        {
-          "t": 1792022377000,
-          "level": "notable",
-          "title": "LFM2.5-24B-A2B: Built for fast on-device agents",
-          "detail": "Article URL: https://www.liquid.ai/blog/lfm2-5-24b-a2b Comments URL: https://news.ycombinator.com/item?id=50097369 Points: 29 # Comments: 1",
-          "url": "https://www.liquid.ai/blog/lfm2-5-24b-a2b"
-        },
-        {
-          "t": 1792009854000,
-          "level": "notable",
-          "title": "Anthropic's Scion is heavily inspired by Mononoke",
-          "detail": "Article URL: https://sunshowers.io/posts/anthropic-mononoke/ Comments URL: https://news.ycombinator.com/item?id=50094694 Points: 231 # Comments: 104",
-          "url": "https://sunshowers.io/posts/anthropic-mononoke/"
-        },
-        {
-          "t": 1791999923000,
-          "level": "notable",
-          "title": "Containment and monitoring failures are to blame for AI hacking reports: experts",
-          "detail": "Article URL: https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html Comments URL: https://news.ycombinator.com/item?id=50091788 Points: 821 # Comments: 442",
-          "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html"
-        },
-        {
-          "t": 1792009854000,
-          "level": "notable",
-          "title": "Anthropic's Scion is heavily inspired by Mononoke",
-          "detail": "Article URL: https://sunshowers.io/posts/anthropic-mononoke/ Comments URL: https://news.ycombinator.com/item?id=50094694 Points: 164 # Comments: 60",
-          "url": "https://sunshowers.io/posts/anthropic-mononoke/"
-        },
-        {
-          "t": 1791999934000,
-          "level": "notable",
-          "title": "Neckbeard – A DevOps/platform/SRE plugin for your agent",
-          "detail": "Article URL: https://github.com/bealesh/neckbeard Comments URL: https://news.ycombinator.com/item?id=50091794 Points: 56 # Comments: 47",
-          "url": "https://github.com/bealesh/neckbeard"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1792360178696,
-      "lastOk": 1792360178696,
+      "lastRun": 1792386750213,
+      "lastOk": 1792386750213,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.302",
+      "lastLine": "latest is anthropics/claude-code v2.1.303",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792362414000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.303",
+          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.303"
+        },
         {
           "t": 1792183986000,
           "level": "notable",
@@ -505,13 +512,6 @@
           "title": "anthropics/claude-code v2.1.292",
           "detail": "## What's changed\n\n- Added `--marketplace <source>` to `claude plugin install`: adds the marketplace if needed, under the same policy checks as `claude plugin marketplace add`, then installs the plugin from it\n- Added an `effort` parameter to the Agent tool, so Claude runs a sub-agent at the effort level you ask for\n- Added `CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS` environment variable to set a",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.292"
-        },
-        {
-          "t": 1791258919000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.291",
-          "detail": "## What's changed\n\n- Fixed a regression in 2.1.290 where cloud sessions could drop answers to permission prompts\n- Fixed a regression in 2.1.288 where the last messages of a session could be lost when quitting\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.291"
         },
         {
           "t": 1792183986000,
@@ -2944,11 +2944,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792369563442,
-      "lastOk": 1792369563442,
+      "lastRun": 1792386750753,
+      "lastOk": 1792386750753,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,104 (+71.0%) · excludes S&P 500 ETF",
+      "lastLine": "$4,129 (+72.1%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3518,9 +3518,27 @@
         {
           "t": 1792369563442,
           "v": 4104.05
+        },
+        {
+          "t": 1792386750753,
+          "v": 4129.35
         }
       ],
       "events": [
+        {
+          "t": 1792386750739,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792386750739,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792369563434,
           "level": "notable",
@@ -3926,31 +3944,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791734140684,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791734140684,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 82081
+          "BTC": 82587
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792386750753,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 17
+    },
     {
       "t": 1792369563442,
       "ran": 5,

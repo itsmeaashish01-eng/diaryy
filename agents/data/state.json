@@ -2,14 +2,49 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792386749732,
-      "lastOk": 1792386749732,
+      "lastRun": 1792408230177,
+      "lastOk": 1792408230177,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792389331000,
+          "level": "notable",
+          "title": "Tmux and Claude Code: Sessions, Send-Keys, and the Ceiling",
+          "detail": "Article URL: https://crystl.dev/guides/tmux-for-ai-agents/ Comments URL: https://news.ycombinator.com/item?id=50148855 Points: 39 # Comments: 21",
+          "url": "https://crystl.dev/guides/tmux-for-ai-agents/"
+        },
+        {
+          "t": 1792375276000,
+          "level": "notable",
+          "title": "Superlite: A Faster Alternatie to Superpowers",
+          "detail": "Article URL: https://contextfirst.blog/superlite-hand-an-agent-a-spec/ Comments URL: https://news.ycombinator.com/item?id=50147492 Points: 99 # Comments: 40",
+          "url": "https://contextfirst.blog/superlite-hand-an-agent-a-spec/"
+        },
+        {
+          "t": 1792359370000,
+          "level": "notable",
+          "title": "Show HN: WhatsApp MCP running free on Cloudflare",
+          "detail": "I wanted my humble Claude on mobile to access my WhatsApp messages but the only options I could find either required WhatsApp Business or an actual server to run Baileys on.I wanted to run it for free on ClaudeFlare and with my personal WhatsApp account, so I built this.Important feature - it connec",
+          "url": "https://github.com/finereli/whatsapp-mcp"
+        },
+        {
+          "t": 1792357752000,
+          "level": "notable",
+          "title": "If you don't run your own LLM proxy, how do you know whats going on?",
+          "detail": "Article URL: https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on/ Comments URL: https://news.ycombinator.com/item?id=50145507 Points: 180 # Comments: 127",
+          "url": "https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on/"
+        },
+        {
+          "t": 1792356494000,
+          "level": "notable",
+          "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+          "detail": "https://x.com/Jiaru_Zou/status/2110400256647340476https://github.com/togethercomputer/HybridAgenthttps://huggingface.co/collections/togethercomputer/hybridag...Evaluations: https://arxiv.org/html/2610.18861v1#S5 Comments URL: https://news.ycombinator.com/item?id=50145337 Points: 407 # Comments: 199",
+          "url": "https://arxiv.org/abs/2610.18861"
+        },
         {
           "t": 1792384327000,
           "level": "notable",
@@ -394,41 +429,6 @@
           "title": "Aidlc: Adaptive workflow steering rules for AI coding agents",
           "detail": "Article URL: https://github.com/awslabs/aidlc-workflows Comments URL: https://news.ycombinator.com/item?id=50100387 Points: 12 # Comments: 12",
           "url": "https://github.com/awslabs/aidlc-workflows"
-        },
-        {
-          "t": 1792022377000,
-          "level": "notable",
-          "title": "LFM2.5-24B-A2B: Built for fast on-device agents",
-          "detail": "Article URL: https://www.liquid.ai/blog/lfm2-5-24b-a2b Comments URL: https://news.ycombinator.com/item?id=50097369 Points: 228 # Comments: 54",
-          "url": "https://www.liquid.ai/blog/lfm2-5-24b-a2b"
-        },
-        {
-          "t": 1791999923000,
-          "level": "notable",
-          "title": "Containment and monitoring failures are to blame for AI hacking reports: experts",
-          "detail": "Article URL: https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html Comments URL: https://news.ycombinator.com/item?id=50091788 Points: 912 # Comments: 550",
-          "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html"
-        },
-        {
-          "t": 1792022377000,
-          "level": "notable",
-          "title": "LFM2.5-24B-A2B: Built for fast on-device agents",
-          "detail": "Article URL: https://www.liquid.ai/blog/lfm2-5-24b-a2b Comments URL: https://news.ycombinator.com/item?id=50097369 Points: 154 # Comments: 37",
-          "url": "https://www.liquid.ai/blog/lfm2-5-24b-a2b"
-        },
-        {
-          "t": 1792009854000,
-          "level": "notable",
-          "title": "Anthropic's Scion is heavily inspired by Mononoke",
-          "detail": "Article URL: https://sunshowers.io/posts/anthropic-mononoke/ Comments URL: https://news.ycombinator.com/item?id=50094694 Points: 341 # Comments: 128",
-          "url": "https://sunshowers.io/posts/anthropic-mononoke/"
-        },
-        {
-          "t": 1791999923000,
-          "level": "notable",
-          "title": "Containment and monitoring failures are to blame for AI hacking reports: experts",
-          "detail": "Article URL: https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html Comments URL: https://news.ycombinator.com/item?id=50091788 Points: 867 # Comments: 501",
-          "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html"
         }
       ],
       "notifiedAt": {},
@@ -2944,11 +2944,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792386750753,
-      "lastOk": 1792386750753,
+      "lastRun": 1792408230696,
+      "lastOk": 1792408230696,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,129 (+72.1%) · excludes S&P 500 ETF",
+      "lastLine": "$4,108 (+71.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3522,9 +3522,27 @@
         {
           "t": 1792386750753,
           "v": 4129.35
+        },
+        {
+          "t": 1792408230697,
+          "v": 4108.25
         }
       ],
       "events": [
+        {
+          "t": 1792408230682,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792408230682,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792386750739,
           "level": "notable",
@@ -3930,31 +3948,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791750706231,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791750706231,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 82587
+          "BTC": 82165
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792408230697,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 7
+    },
     {
       "t": 1792386750753,
       "ran": 3,
@@ -5546,14 +5558,6 @@
       "failed": 0,
       "notified": 0,
       "held": 5
-    },
-    {
-      "t": 1789114622781,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 20
     }
   ]
 }

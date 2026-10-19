@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792360178295,
-      "lastOk": 1792360178295,
+      "lastRun": 1792369562818,
+      "lastOk": 1792369562818,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792359370000,
+          "level": "notable",
+          "title": "Show HN: WhatsApp MCP running free on Cloudflare",
+          "detail": "I wanted my humble Claude on mobile to access my WhatsApp messages but the only options I could find either required WhatsApp Business or an actual server to run Baileys on.I wanted to run it for free on ClaudeFlare and with my personal WhatsApp account, so I built this.Important feature - it connec",
+          "url": "https://github.com/finereli/whatsapp-mcp"
+        },
+        {
+          "t": 1792356494000,
+          "level": "notable",
+          "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+          "detail": "https://x.com/Jiaru_Zou/status/2110400256647340476https://github.com/togethercomputer/HybridAgenthttps://huggingface.co/collections/togethercomputer/hybridag...Evaluations: https://arxiv.org/html/2610.18861v1#S5 Comments URL: https://news.ycombinator.com/item?id=50145337 Points: 162 # Comments: 97",
+          "url": "https://arxiv.org/abs/2610.18861"
+        },
+        {
+          "t": 1792298029000,
+          "level": "notable",
+          "title": "Show HN: Sphinx – A hook that quizzes you on your AI's code before shipping",
+          "detail": "FOSS, Basically it plugs into your existing coding agent workflow and every time you push to prod it'll throw up a questionnaire that checks if you understand how the code you're pushing works. Comments URL: https://news.ycombinator.com/item?id=50137950 Points: 240 # Comments: 83",
+          "url": "https://sphinx-six-theta.vercel.app/"
+        },
         {
           "t": 1792356494000,
           "level": "notable",
@@ -408,27 +429,6 @@
           "title": "Neckbeard – A DevOps/platform/SRE plugin for your agent",
           "detail": "Article URL: https://github.com/bealesh/neckbeard Comments URL: https://news.ycombinator.com/item?id=50091794 Points: 56 # Comments: 47",
           "url": "https://github.com/bealesh/neckbeard"
-        },
-        {
-          "t": 1791999923000,
-          "level": "notable",
-          "title": "Containment and monitoring failures are to blame for AI hacking reports: experts",
-          "detail": "Article URL: https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html Comments URL: https://news.ycombinator.com/item?id=50091788 Points: 783 # Comments: 385",
-          "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html"
-        },
-        {
-          "t": 1791999934000,
-          "level": "notable",
-          "title": "Neckbeard – a DevOps/platform/SRE plugin for your agent",
-          "detail": "Article URL: https://github.com/bealesh/neckbeard Comments URL: https://news.ycombinator.com/item?id=50091794 Points: 9 # Comments: 0",
-          "url": "https://github.com/bealesh/neckbeard"
-        },
-        {
-          "t": 1791999923000,
-          "level": "notable",
-          "title": "AI agents aren't 'going rogue.' Frontier labs are skipping security basics",
-          "detail": "Article URL: https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html Comments URL: https://news.ycombinator.com/item?id=50091788 Points: 214 # Comments: 78",
-          "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html"
         }
       ],
       "notifiedAt": {},
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1792317035600,
-      "lastOk": 1792317035600,
+      "lastRun": 1792369562820,
+      "lastOk": 1792369562820,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 2 drifting",
@@ -1126,9 +1126,62 @@
         {
           "t": 1792317035600,
           "v": 17
+        },
+        {
+          "t": 1792369562820,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1792369562820,
+          "level": "notable",
+          "title": "Log 50 supervised procedures — 73 days left",
+          "detail": "Finish fellowship strong, due 2026-12-31.",
+          "url": ""
+        },
+        {
+          "t": 1792369562820,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 27 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1792369562820,
+          "level": "notable",
+          "title": "Finish fellowship strong hasn't moved in 48 days",
+          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1792369562820,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1792369562820,
+          "level": "notable",
+          "title": "Data collection complete — 57 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1792369562820,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 60 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1792369562820,
+          "level": "notable",
+          "title": "Time for a goals review",
+          "detail": "It's been 110 days since 2026-07-01. Re-read the list, cut what's dead, set the next milestones.",
+          "url": ""
+        },
         {
           "t": 1792317035599,
           "level": "notable",
@@ -1499,65 +1552,16 @@
           "title": "✓ Protocol approved",
           "detail": "First-author paper submitted — finished 2026-08-20.",
           "url": ""
-        },
-        {
-          "t": 1791943647938,
-          "level": "notable",
-          "title": "Data collection complete — 62 days left",
-          "detail": "First-author paper submitted, due 2026-12-15.",
-          "url": ""
-        },
-        {
-          "t": 1791943647938,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 55 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1791943647938,
-          "level": "notable",
-          "title": "Time for a goals review",
-          "detail": "It's been 105 days since 2026-07-01. Re-read the list, cut what's dead, set the next milestones.",
-          "url": ""
-        },
-        {
-          "t": 1791893182298,
-          "level": "notable",
-          "title": "Log 50 supervised procedures — 79 days left",
-          "detail": "Finish fellowship strong, due 2026-12-31.",
-          "url": ""
-        },
-        {
-          "t": 1791893182298,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 33 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1791893182298,
-          "level": "notable",
-          "title": "Finish fellowship strong hasn't moved in 42 days",
-          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1791893182298,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
-        "checkedOn": "2026-10-18"
+        "checkedOn": "2026-10-19"
       }
     },
     "reading": {
-      "lastRun": 1792317035601,
-      "lastOk": 1792317035601,
+      "lastRun": 1792369562821,
+      "lastOk": 1792369562821,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1814,9 +1818,34 @@
         {
           "t": 1792317035601,
           "v": 3
+        },
+        {
+          "t": 1792369562821,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1792369562821,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 79 days",
+          "url": ""
+        },
+        {
+          "t": 1792369562821,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1792369562821,
+          "level": "notable",
+          "title": "Still unread after 171 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1792317035601,
           "level": "notable",
@@ -2215,37 +2244,16 @@
           "title": "Still unread after 159 days — A book that has nothing to do with work",
           "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
           "url": ""
-        },
-        {
-          "t": 1791283425659,
-          "level": "notable",
-          "title": "Read next — Current society guideline — read the update in full, not the summary",
-          "detail": "about 60 min · core · on the list 66 days",
-          "url": ""
-        },
-        {
-          "t": 1791283425659,
-          "level": "notable",
-          "title": "Read next — Survival analysis, properly this time",
-          "detail": "about 45 min · research methods · already started",
-          "url": ""
-        },
-        {
-          "t": 1791283425659,
-          "level": "notable",
-          "title": "Still unread after 158 days — A book that has nothing to do with work",
-          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
-        "week": "2026-W42"
+        "week": "2026-W43"
       }
     },
     "training": {
-      "lastRun": 1792317035602,
-      "lastOk": 1792317035602,
+      "lastRun": 1792369562822,
+      "lastOk": 1792369562822,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min",
@@ -2502,9 +2510,20 @@
         {
           "t": 1792317035602,
           "v": 0
+        },
+        {
+          "t": 1792369562822,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1792369562822,
+          "level": "notable",
+          "title": "40 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1792317035602,
           "level": "notable",
@@ -2917,13 +2936,6 @@
           "title": "4 days since the last session",
           "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
           "url": ""
-        },
-        {
-          "t": 1789258384582,
-          "level": "notable",
-          "title": "4 days since the last session",
-          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -2932,11 +2944,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792352148691,
-      "lastOk": 1792352148691,
+      "lastRun": 1792369563442,
+      "lastOk": 1792369563442,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,044 (+68.5%) · excludes S&P 500 ETF",
+      "lastLine": "$4,104 (+71.0%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3502,9 +3514,27 @@
         {
           "t": 1792352148691,
           "v": 4043.8
+        },
+        {
+          "t": 1792369563442,
+          "v": 4104.05
         }
       ],
       "events": [
+        {
+          "t": 1792369563434,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792369563434,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792352148677,
           "level": "notable",
@@ -3910,31 +3940,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791710109416,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791710109416,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 80876
+          "BTC": 82081
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792369563442,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 16
+    },
     {
       "t": 1792360178701,
       "ran": 2,

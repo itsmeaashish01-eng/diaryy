@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792497685074,
-      "lastOk": 1792497685074,
+      "lastRun": 1792517309258,
+      "lastOk": 1792517309258,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792509054000,
+          "level": "notable",
+          "title": "Show HN: Penmentor – Claude marks up your handwritten math like a teacher",
+          "detail": "Article URL: https://github.com/AbdullahAlhariri/penmentor Comments URL: https://news.ycombinator.com/item?id=50167604 Points: 28 # Comments: 2",
+          "url": "https://github.com/AbdullahAlhariri/penmentor"
+        },
+        {
+          "t": 1792501582000,
+          "level": "notable",
+          "title": "Publish fake stats, get cited in LLMs",
+          "detail": "Article URL: https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web Comments URL: https://news.ycombinator.com/item?id=50165801 Points: 192 # Comments: 104",
+          "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web"
+        },
         {
           "t": 1792452138000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Anthropic assigned highest junk credit rating in June",
           "detail": "https://finance.yahoo.com/technology/ai/articles/anthropic-s... Comments URL: https://news.ycombinator.com/item?id=50122112 Points: 177 # Comments: 50",
           "url": "https://www.ft.com/content/5a310aee-f555-4266-874c-b1b4db20186d"
-        },
-        {
-          "t": 1792173618000,
-          "level": "notable",
-          "title": "Designing more efficient quantum circuits with Claude",
-          "detail": "Article URL: https://www.anthropic.com/research/designing-efficient-quantum-circuits Comments URL: https://news.ycombinator.com/item?id=50121939 Points: 77 # Comments: 15",
-          "url": "https://www.anthropic.com/research/designing-efficient-quantum-circuits"
-        },
-        {
-          "t": 1792160324000,
-          "level": "notable",
-          "title": "Show HN: Gemini 4 Argon plays StarCraft",
-          "detail": "I've refreshed StarSkirmish Bench, a benchmark where LLMs play StarCraft BW by writing code, with results from the flagship models of OpenAI, Anthropic, Google, and Muse Comments URL: https://news.ycombinator.com/item?id=50118688 Points: 176 # Comments: 82",
-          "url": "https://starskirmish.com/bench/v0-2/"
         }
       ],
       "notifiedAt": {},
@@ -2968,11 +2968,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792497686329,
-      "lastOk": 1792497686329,
+      "lastRun": 1792517309906,
+      "lastOk": 1792517309906,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,071 (+69.6%) · excludes S&P 500 ETF",
+      "lastLine": "$4,136 (+72.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3566,9 +3566,27 @@
         {
           "t": 1792497686329,
           "v": 4070.8
+        },
+        {
+          "t": 1792517309906,
+          "v": 4135.75
         }
       ],
       "events": [
+        {
+          "t": 1792517309895,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792517309895,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792497686315,
           "level": "notable",
@@ -3974,31 +3992,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791893182992,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791893182992,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81416
+          "BTC": 82715
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792517309907,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1792497686329,
       "ran": 3,
@@ -5590,14 +5602,6 @@
       "failed": 0,
       "notified": 0,
       "held": 21
-    },
-    {
-      "t": 1789194316257,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 7
     }
   ]
 }

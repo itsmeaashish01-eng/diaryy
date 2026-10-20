@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792449344874,
-      "lastOk": 1792449344874,
+      "lastRun": 1792458851434,
+      "lastOk": 1792458851434,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792425618000,
+          "level": "notable",
+          "title": "Launch HN: Laminar (YC S24) – RL-trained model that finds errors in agent traces",
+          "detail": "Hi HN, we’re Robert and Din from Laminar (https://laminar.sh). We’ve been building open-source observability for AI agents since 2024. Recently, we released flow-1, a model trained with RL to find errors in agent traces. On our benchmark (https://laminar.sh/blog/flow-1), it matches GPT-6-sol in dete",
+          "url": "https://news.ycombinator.com/item?id=50154029"
+        },
+        {
+          "t": 1792421524000,
+          "level": "notable",
+          "title": "Agentic Monitoring",
+          "detail": "Article URL: https://benjamincongdon.me/blog/2026/10/19/Agentic-Monitoring/ Comments URL: https://news.ycombinator.com/item?id=50153225 Points: 39 # Comments: 3",
+          "url": "https://benjamincongdon.me/blog/2026/10/19/Agentic-Monitoring/"
+        },
         {
           "t": 1792425618000,
           "level": "notable",
@@ -415,35 +429,91 @@
           "title": "Anthropic assigned highest junk credit rating in June",
           "detail": "Article URL: https://www.ft.com/content/5a310aee-f555-4266-874c-b1b4db20186d Comments URL: https://news.ycombinator.com/item?id=50122112 Points: 80 # Comments: 21",
           "url": "https://www.ft.com/content/5a310aee-f555-4266-874c-b1b4db20186d"
-        },
-        {
-          "t": 1792173618000,
-          "level": "notable",
-          "title": "Designing more efficient quantum circuits with Claude",
-          "detail": "Article URL: https://www.anthropic.com/research/designing-efficient-quantum-circuits Comments URL: https://news.ycombinator.com/item?id=50121939 Points: 37 # Comments: 6",
-          "url": "https://www.anthropic.com/research/designing-efficient-quantum-circuits"
-        },
-        {
-          "t": 1792160324000,
-          "level": "notable",
-          "title": "Show HN: Gemini 4 Argon plays StarCraft",
-          "detail": "I've refreshed StarSkirmish Bench, a benchmark where LLMs play StarCraft BW by writing code, with results from the flagship models of OpenAI, Anthropic, Google, and Muse Comments URL: https://news.ycombinator.com/item?id=50118688 Points: 146 # Comments: 68",
-          "url": "https://starskirmish.com/bench/v0-2/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1792431797989,
-      "lastOk": 1792431797989,
+      "lastRun": 1792458851937,
+      "lastOk": 1792458851937,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.303",
+      "lastLine": "latest is anthropics/claude-code v2.1.304",
       "seen": [],
       "metrics": [],
       "events": [
         {
+          "t": 1792445679000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.304",
+          "detail": "## What's changed\n\n- Added a transcript line when a plugin that runs first skips one of your mod's hooks, naming the event and the plugin\n- Added `decider: \"person\"` to a mod's `tool.check` answer: only the permission dialog or a host's callback can approve the ask, and it is refused with the mod's reason where nobody can be asked\n- Added `e.isReadOnly` to a mod's `tool.check` event, set when the ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.304"
+        },
+        {
+          "t": 1792362414000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.303",
+          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.303"
+        },
+        {
+          "t": 1792183986000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.302",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_AUTO_MODE_MODEL` to choose the model the client-side auto mode classifier uses; it does not change the model for server-side auto mode\n- Added an `Idle compaction` row to `/config` for turning idle compaction off or back on; the notices shown after an idle compaction now say how to turn it off\n- Added a notice to `/design-sync` and `/design-login` that stand",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.302"
+        },
+        {
+          "t": 1792092126000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.301",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS` so unattended retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) ends a request at a usage limit that resets too far away instead of waiting\n- Added OpenTelemetry tracing guidance to the `claude-api` skill, including setting up trace destinations with the `ant` CLI\n- Added the `%` motion to vim mode: jump to the matching bracke",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.301"
+        },
+        {
+          "t": 1792002265000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.300",
+          "detail": "## What's changed\n\n- Added `virtualText` to a mod's prompt decorations: text drawn in the prompt box that never enters the draft or the submitted prompt\n- Added `cache_creation_5m_tokens` and `cache_creation_1h_tokens` to the OpenTelemetry `api_request` event, splitting cache writes by lifetime\n- Added `$.ui.view({ agentId })` for mods: shows an agent's transcript in the main view when you ask, an",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.300"
+        },
+        {
+          "t": 1791946182000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.299",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_DISABLE_FILE_MENTIONS` environment variable: Claude gets the paths of `@` file mentions to read with its file tools, not the files' contents\n- Added idle compaction in the terminal: a 200K+ token conversation left idle for about 54 minutes is compacted before its one-hour prompt cache expires, so your next message doesn't reprocess it all\n- Added `CLAUDE_COD",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.299"
+        },
+        {
+          "t": 1791574139000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.296",
+          "detail": "## What's changed\n\n- Added a `code` key to the Claude apps gateway's `managed.policies[]`: the same settings as `cli`, also applied in Claude Desktop's Code tab; beside `desktop`, it turns on Claude Desktop's gateway mode\n- Added `autoCompactWindow` to subagent frontmatter and `--agents` definitions, so a subagent can auto-compact earlier than the main conversation's window\n- Added `CLAUDE_CODE_WO",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.296"
+        },
+        {
+          "t": 1791488918000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.295",
+          "detail": "## What's changed\n\n- Added `onFailure: \"block\"` for command and HTTP hooks: a hook that can't start, times out, or exits with an unexpected code blocks the action instead of letting it through\n- Added Program Status Protocol (OSC 7501) support: terminals that implement it can show whether Claude Code is working, waiting on you, or done\n- Added quoted text to the `/copy` picker, so a drafted messag",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.295"
+        },
+        {
+          "t": 1791435834000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.294",
+          "detail": "## What's changed\n\n- Fixed `prompt` and `agent` hooks written as instructions (such as \"Block commands that...\") allowing what they should block\n- Improved how `prompt` hooks on Stop and SubagentStop written as instructions (such as \"Carry on if the build is broken\") are judged, so Claude is less likely to stop early\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.294"
+        },
+        {
+          "t": 1791396620000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.293",
+          "detail": "## What's changed\n\n- Added Claude Haiku 5.5 (`claude-haiku-5-5`), now the default Haiku model on the Anthropic API — 1M context, $0.10/$0.50 per Mtok ($0.50/$2.50 for prompts over 100K)\n- Added `agentType` to the `subagentStatusLine` payload, so scripts can tell custom subagent types apart\n- Added `isDeferred` to `$.tool.register` for mods: `false` lists the tool's schema in the prompt from the st",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.293"
+        },
+        {
           "t": 1792362414000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.303",
@@ -582,76 +652,6 @@
           "title": "anthropics/claude-code v2.1.292",
           "detail": "## What's changed\n\n- Added `--marketplace <source>` to `claude plugin install`: adds the marketplace if needed, under the same policy checks as `claude plugin marketplace add`, then installs the plugin from it\n- Added an `effort` parameter to the Agent tool, so Claude runs a sub-agent at the effort level you ask for\n- Added `CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS` environment variable to set a",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.292"
-        },
-        {
-          "t": 1792183986000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.302",
-          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_AUTO_MODE_MODEL` to choose the model the client-side auto mode classifier uses; it does not change the model for server-side auto mode\n- Added an `Idle compaction` row to `/config` for turning idle compaction off or back on; the notices shown after an idle compaction now say how to turn it off\n- Added a notice to `/design-sync` and `/design-login` that stand",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.302"
-        },
-        {
-          "t": 1792092126000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.301",
-          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS` so unattended retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) ends a request at a usage limit that resets too far away instead of waiting\n- Added OpenTelemetry tracing guidance to the `claude-api` skill, including setting up trace destinations with the `ant` CLI\n- Added the `%` motion to vim mode: jump to the matching bracke",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.301"
-        },
-        {
-          "t": 1792002265000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.300",
-          "detail": "## What's changed\n\n- Added `virtualText` to a mod's prompt decorations: text drawn in the prompt box that never enters the draft or the submitted prompt\n- Added `cache_creation_5m_tokens` and `cache_creation_1h_tokens` to the OpenTelemetry `api_request` event, splitting cache writes by lifetime\n- Added `$.ui.view({ agentId })` for mods: shows an agent's transcript in the main view when you ask, an",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.300"
-        },
-        {
-          "t": 1791946182000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.299",
-          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_DISABLE_FILE_MENTIONS` environment variable: Claude gets the paths of `@` file mentions to read with its file tools, not the files' contents\n- Added idle compaction in the terminal: a 200K+ token conversation left idle for about 54 minutes is compacted before its one-hour prompt cache expires, so your next message doesn't reprocess it all\n- Added `CLAUDE_COD",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.299"
-        },
-        {
-          "t": 1791574139000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.296",
-          "detail": "## What's changed\n\n- Added a `code` key to the Claude apps gateway's `managed.policies[]`: the same settings as `cli`, also applied in Claude Desktop's Code tab; beside `desktop`, it turns on Claude Desktop's gateway mode\n- Added `autoCompactWindow` to subagent frontmatter and `--agents` definitions, so a subagent can auto-compact earlier than the main conversation's window\n- Added `CLAUDE_CODE_WO",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.296"
-        },
-        {
-          "t": 1791488918000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.295",
-          "detail": "## What's changed\n\n- Added `onFailure: \"block\"` for command and HTTP hooks: a hook that can't start, times out, or exits with an unexpected code blocks the action instead of letting it through\n- Added Program Status Protocol (OSC 7501) support: terminals that implement it can show whether Claude Code is working, waiting on you, or done\n- Added quoted text to the `/copy` picker, so a drafted messag",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.295"
-        },
-        {
-          "t": 1791435834000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.294",
-          "detail": "## What's changed\n\n- Fixed `prompt` and `agent` hooks written as instructions (such as \"Block commands that...\") allowing what they should block\n- Improved how `prompt` hooks on Stop and SubagentStop written as instructions (such as \"Carry on if the build is broken\") are judged, so Claude is less likely to stop early\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.294"
-        },
-        {
-          "t": 1791396620000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.293",
-          "detail": "## What's changed\n\n- Added Claude Haiku 5.5 (`claude-haiku-5-5`), now the default Haiku model on the Anthropic API — 1M context, $0.10/$0.50 per Mtok ($0.50/$2.50 for prompts over 100K)\n- Added `agentType` to the `subagentStatusLine` payload, so scripts can tell custom subagent types apart\n- Added `isDeferred` to `$.tool.register` for mods: `false` lists the tool's schema in the prompt from the st",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.293"
-        },
-        {
-          "t": 1791313170000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.292",
-          "detail": "## What's changed\n\n- Added `--marketplace <source>` to `claude plugin install`: adds the marketplace if needed, under the same policy checks as `claude plugin marketplace add`, then installs the plugin from it\n- Added an `effort` parameter to the Agent tool, so Claude runs a sub-agent at the effort level you ask for\n- Added `CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS` environment variable to set a",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.292"
-        },
-        {
-          "t": 1791258919000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.291",
-          "detail": "## What's changed\n\n- Fixed a regression in 2.1.290 where cloud sessions could drop answers to permission prompts\n- Fixed a regression in 2.1.288 where the last messages of a session could be lost when quitting\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.291"
         },
         {
           "t": 1792183986000,
@@ -3980,6 +3980,14 @@
   },
   "runs": [
     {
+      "t": 1792458851940,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 12
+    },
+    {
       "t": 1792449345531,
       "ran": 2,
       "skipped": 8,
@@ -5570,14 +5578,6 @@
       "failed": 0,
       "notified": 0,
       "held": 11
-    },
-    {
-      "t": 1789156761643,
-      "ran": 1,
-      "skipped": 9,
-      "failed": 0,
-      "notified": 0,
-      "held": 2
     }
   ]
 }

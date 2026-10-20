@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792517309258,
-      "lastOk": 1792517309258,
+      "lastRun": 1792529347486,
+      "lastOk": 1792529347486,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792518509000,
+          "level": "notable",
+          "title": "Claude designed protein binders against scorpion neurotoxins",
+          "detail": "Article URL: https://www.anthropic.com/research/claude-scorpion-toxin-binder-design Comments URL: https://news.ycombinator.com/item?id=50170021 Points: 38 # Comments: 18",
+          "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design"
+        },
+        {
+          "t": 1792501582000,
+          "level": "notable",
+          "title": "Publish fake stats, get cited in LLMs",
+          "detail": "Article URL: https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web Comments URL: https://news.ycombinator.com/item?id=50165801 Points: 284 # Comments: 163",
+          "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web"
+        },
         {
           "t": 1792509054000,
           "level": "notable",
@@ -415,35 +429,91 @@
           "title": "How the Claude Code team does code review",
           "detail": "Article URL: https://claude.dev/blog/solving-code-review-at-anthropic/ Comments URL: https://news.ycombinator.com/item?id=50122951 Points: 175 # Comments: 168",
           "url": "https://claude.dev/blog/solving-code-review-at-anthropic/"
-        },
-        {
-          "t": 1792176959000,
-          "level": "notable",
-          "title": "Claude reveals ECDSA curve origins",
-          "detail": "https://words.filippo.io/seeds-solved/ Comments URL: https://news.ycombinator.com/item?id=50122800 Points: 535 # Comments: 227",
-          "url": "https://www.anthropic.com/research/ecdsa-curve-origins"
-        },
-        {
-          "t": 1792174302000,
-          "level": "notable",
-          "title": "Anthropic assigned highest junk credit rating in June",
-          "detail": "https://finance.yahoo.com/technology/ai/articles/anthropic-s... Comments URL: https://news.ycombinator.com/item?id=50122112 Points: 177 # Comments: 50",
-          "url": "https://www.ft.com/content/5a310aee-f555-4266-874c-b1b4db20186d"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1792497685624,
-      "lastOk": 1792497685624,
+      "lastRun": 1792529347907,
+      "lastOk": 1792529347907,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.304",
+      "lastLine": "latest is anthropics/claude-code v2.1.305",
       "seen": [],
       "metrics": [],
       "events": [
         {
+          "t": 1792529210000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.305",
+          "detail": "## What's changed\n\n- Added `sandbox.allowNestedUserNamespaces` so sandboxed commands on Linux can create user namespaces (Chromium, rootless podman); this lets them get around the sandbox's file protections\n- Added `CLAUDE_CODE_RETRY_WATCHDOG_USAGE_LIMIT_RECHECK_MS` so unattended retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) notices a usage limit that was lifted before its reset\n- Fixed every request ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305"
+        },
+        {
+          "t": 1792445679000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.304",
+          "detail": "## What's changed\n\n- Added a transcript line when a plugin that runs first skips one of your mod's hooks, naming the event and the plugin\n- Added `decider: \"person\"` to a mod's `tool.check` answer: only the permission dialog or a host's callback can approve the ask, and it is refused with the mod's reason where nobody can be asked\n- Added `e.isReadOnly` to a mod's `tool.check` event, set when the ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.304"
+        },
+        {
+          "t": 1792362414000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.303",
+          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.303"
+        },
+        {
+          "t": 1792183986000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.302",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_AUTO_MODE_MODEL` to choose the model the client-side auto mode classifier uses; it does not change the model for server-side auto mode\n- Added an `Idle compaction` row to `/config` for turning idle compaction off or back on; the notices shown after an idle compaction now say how to turn it off\n- Added a notice to `/design-sync` and `/design-login` that stand",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.302"
+        },
+        {
+          "t": 1792092126000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.301",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS` so unattended retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) ends a request at a usage limit that resets too far away instead of waiting\n- Added OpenTelemetry tracing guidance to the `claude-api` skill, including setting up trace destinations with the `ant` CLI\n- Added the `%` motion to vim mode: jump to the matching bracke",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.301"
+        },
+        {
+          "t": 1792002265000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.300",
+          "detail": "## What's changed\n\n- Added `virtualText` to a mod's prompt decorations: text drawn in the prompt box that never enters the draft or the submitted prompt\n- Added `cache_creation_5m_tokens` and `cache_creation_1h_tokens` to the OpenTelemetry `api_request` event, splitting cache writes by lifetime\n- Added `$.ui.view({ agentId })` for mods: shows an agent's transcript in the main view when you ask, an",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.300"
+        },
+        {
+          "t": 1791946182000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.299",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_DISABLE_FILE_MENTIONS` environment variable: Claude gets the paths of `@` file mentions to read with its file tools, not the files' contents\n- Added idle compaction in the terminal: a 200K+ token conversation left idle for about 54 minutes is compacted before its one-hour prompt cache expires, so your next message doesn't reprocess it all\n- Added `CLAUDE_COD",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.299"
+        },
+        {
+          "t": 1791574139000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.296",
+          "detail": "## What's changed\n\n- Added a `code` key to the Claude apps gateway's `managed.policies[]`: the same settings as `cli`, also applied in Claude Desktop's Code tab; beside `desktop`, it turns on Claude Desktop's gateway mode\n- Added `autoCompactWindow` to subagent frontmatter and `--agents` definitions, so a subagent can auto-compact earlier than the main conversation's window\n- Added `CLAUDE_CODE_WO",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.296"
+        },
+        {
+          "t": 1791488918000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.295",
+          "detail": "## What's changed\n\n- Added `onFailure: \"block\"` for command and HTTP hooks: a hook that can't start, times out, or exits with an unexpected code blocks the action instead of letting it through\n- Added Program Status Protocol (OSC 7501) support: terminals that implement it can show whether Claude Code is working, waiting on you, or done\n- Added quoted text to the `/copy` picker, so a drafted messag",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.295"
+        },
+        {
+          "t": 1791435834000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.294",
+          "detail": "## What's changed\n\n- Fixed `prompt` and `agent` hooks written as instructions (such as \"Block commands that...\") allowing what they should block\n- Improved how `prompt` hooks on Stop and SubagentStop written as instructions (such as \"Carry on if the build is broken\") are judged, so Claude is less likely to stop early\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.294"
+        },
+        {
           "t": 1792445679000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.304",
@@ -722,76 +792,6 @@
           "title": "anthropics/claude-code v2.1.292",
           "detail": "## What's changed\n\n- Added `--marketplace <source>` to `claude plugin install`: adds the marketplace if needed, under the same policy checks as `claude plugin marketplace add`, then installs the plugin from it\n- Added an `effort` parameter to the Agent tool, so Claude runs a sub-agent at the effort level you ask for\n- Added `CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS` environment variable to set a",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.292"
-        },
-        {
-          "t": 1792183986000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.302",
-          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_AUTO_MODE_MODEL` to choose the model the client-side auto mode classifier uses; it does not change the model for server-side auto mode\n- Added an `Idle compaction` row to `/config` for turning idle compaction off or back on; the notices shown after an idle compaction now say how to turn it off\n- Added a notice to `/design-sync` and `/design-login` that stand",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.302"
-        },
-        {
-          "t": 1792092126000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.301",
-          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS` so unattended retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) ends a request at a usage limit that resets too far away instead of waiting\n- Added OpenTelemetry tracing guidance to the `claude-api` skill, including setting up trace destinations with the `ant` CLI\n- Added the `%` motion to vim mode: jump to the matching bracke",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.301"
-        },
-        {
-          "t": 1792002265000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.300",
-          "detail": "## What's changed\n\n- Added `virtualText` to a mod's prompt decorations: text drawn in the prompt box that never enters the draft or the submitted prompt\n- Added `cache_creation_5m_tokens` and `cache_creation_1h_tokens` to the OpenTelemetry `api_request` event, splitting cache writes by lifetime\n- Added `$.ui.view({ agentId })` for mods: shows an agent's transcript in the main view when you ask, an",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.300"
-        },
-        {
-          "t": 1791946182000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.299",
-          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_DISABLE_FILE_MENTIONS` environment variable: Claude gets the paths of `@` file mentions to read with its file tools, not the files' contents\n- Added idle compaction in the terminal: a 200K+ token conversation left idle for about 54 minutes is compacted before its one-hour prompt cache expires, so your next message doesn't reprocess it all\n- Added `CLAUDE_COD",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.299"
-        },
-        {
-          "t": 1791574139000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.296",
-          "detail": "## What's changed\n\n- Added a `code` key to the Claude apps gateway's `managed.policies[]`: the same settings as `cli`, also applied in Claude Desktop's Code tab; beside `desktop`, it turns on Claude Desktop's gateway mode\n- Added `autoCompactWindow` to subagent frontmatter and `--agents` definitions, so a subagent can auto-compact earlier than the main conversation's window\n- Added `CLAUDE_CODE_WO",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.296"
-        },
-        {
-          "t": 1791488918000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.295",
-          "detail": "## What's changed\n\n- Added `onFailure: \"block\"` for command and HTTP hooks: a hook that can't start, times out, or exits with an unexpected code blocks the action instead of letting it through\n- Added Program Status Protocol (OSC 7501) support: terminals that implement it can show whether Claude Code is working, waiting on you, or done\n- Added quoted text to the `/copy` picker, so a drafted messag",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.295"
-        },
-        {
-          "t": 1791435834000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.294",
-          "detail": "## What's changed\n\n- Fixed `prompt` and `agent` hooks written as instructions (such as \"Block commands that...\") allowing what they should block\n- Improved how `prompt` hooks on Stop and SubagentStop written as instructions (such as \"Carry on if the build is broken\") are judged, so Claude is less likely to stop early\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.294"
-        },
-        {
-          "t": 1791396620000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.293",
-          "detail": "## What's changed\n\n- Added Claude Haiku 5.5 (`claude-haiku-5-5`), now the default Haiku model on the Anthropic API — 1M context, $0.10/$0.50 per Mtok ($0.50/$2.50 for prompts over 100K)\n- Added `agentType` to the `subagentStatusLine` payload, so scripts can tell custom subagent types apart\n- Added `isDeferred` to `$.tool.register` for mods: `false` lists the tool's schema in the prompt from the st",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.293"
-        },
-        {
-          "t": 1791313170000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.292",
-          "detail": "## What's changed\n\n- Added `--marketplace <source>` to `claude plugin install`: adds the marketplace if needed, under the same policy checks as `claude plugin marketplace add`, then installs the plugin from it\n- Added an `effort` parameter to the Agent tool, so Claude runs a sub-agent at the effort level you ask for\n- Added `CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS` environment variable to set a",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.292"
-        },
-        {
-          "t": 1791258919000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.291",
-          "detail": "## What's changed\n\n- Fixed a regression in 2.1.290 where cloud sessions could drop answers to permission prompts\n- Fixed a regression in 2.1.288 where the last messages of a session could be lost when quitting\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.291"
         },
         {
           "t": 1792183986000,
@@ -868,8 +868,8 @@
       "memo": {}
     },
     "career": {
-      "lastRun": 1792477838812,
-      "lastOk": 1792477838812,
+      "lastRun": 1792529347909,
+      "lastOk": 1792529347909,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 2 drifting",
@@ -1138,9 +1138,62 @@
         {
           "t": 1792477838813,
           "v": 17
+        },
+        {
+          "t": 1792529347909,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1792529347908,
+          "level": "notable",
+          "title": "Log 50 supervised procedures — 72 days left",
+          "detail": "Finish fellowship strong, due 2026-12-31.",
+          "url": ""
+        },
+        {
+          "t": 1792529347908,
+          "level": "notable",
+          "title": "Present at the departmental meeting — 26 days left",
+          "detail": "Finish fellowship strong, due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1792529347908,
+          "level": "notable",
+          "title": "Finish fellowship strong hasn't moved in 49 days",
+          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1792529347908,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1792529347908,
+          "level": "notable",
+          "title": "Data collection complete — 56 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1792529347908,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 61 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1792529347908,
+          "level": "notable",
+          "title": "Time for a goals review",
+          "detail": "It's been 111 days since 2026-07-01. Re-read the list, cut what's dead, set the next milestones.",
+          "url": ""
+        },
         {
           "t": 1792477838812,
           "level": "notable",
@@ -1511,55 +1564,6 @@
           "title": "✓ Protocol approved",
           "detail": "First-author paper submitted — finished 2026-08-20.",
           "url": ""
-        },
-        {
-          "t": 1792114605970,
-          "level": "notable",
-          "title": "Data collection complete — 60 days left",
-          "detail": "First-author paper submitted, due 2026-12-15.",
-          "url": ""
-        },
-        {
-          "t": 1792114605971,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 57 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1792114605971,
-          "level": "notable",
-          "title": "Time for a goals review",
-          "detail": "It's been 107 days since 2026-07-01. Re-read the list, cut what's dead, set the next milestones.",
-          "url": ""
-        },
-        {
-          "t": 1792065589343,
-          "level": "notable",
-          "title": "Log 50 supervised procedures — 77 days left",
-          "detail": "Finish fellowship strong, due 2026-12-31.",
-          "url": ""
-        },
-        {
-          "t": 1792065589343,
-          "level": "notable",
-          "title": "Present at the departmental meeting — 31 days left",
-          "detail": "Finish fellowship strong, due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1792065589343,
-          "level": "notable",
-          "title": "Finish fellowship strong hasn't moved in 44 days",
-          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1792065589343,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -1568,8 +1572,8 @@
       }
     },
     "reading": {
-      "lastRun": 1792477838814,
-      "lastOk": 1792477838814,
+      "lastRun": 1792529347910,
+      "lastOk": 1792529347910,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -1838,9 +1842,34 @@
         {
           "t": 1792477838814,
           "v": 3
+        },
+        {
+          "t": 1792529347910,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1792529347910,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 80 days",
+          "url": ""
+        },
+        {
+          "t": 1792529347910,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1792529347910,
+          "level": "notable",
+          "title": "Still unread after 172 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1792477838814,
           "level": "notable",
@@ -2239,27 +2268,6 @@
           "title": "Still unread after 160 days — A book that has nothing to do with work",
           "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
           "url": ""
-        },
-        {
-          "t": 1791451493863,
-          "level": "notable",
-          "title": "Read next — Current society guideline — read the update in full, not the summary",
-          "detail": "about 60 min · core · on the list 68 days",
-          "url": ""
-        },
-        {
-          "t": 1791451493863,
-          "level": "notable",
-          "title": "Read next — Survival analysis, properly this time",
-          "detail": "about 45 min · research methods · already started",
-          "url": ""
-        },
-        {
-          "t": 1791451493863,
-          "level": "notable",
-          "title": "Still unread after 160 days — A book that has nothing to do with work",
-          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -2268,8 +2276,8 @@
       }
     },
     "training": {
-      "lastRun": 1792477838815,
-      "lastOk": 1792477838815,
+      "lastRun": 1792529347911,
+      "lastOk": 1792529347911,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min",
@@ -2538,9 +2546,20 @@
         {
           "t": 1792477838815,
           "v": 0
+        },
+        {
+          "t": 1792529347911,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1792529347911,
+          "level": "notable",
+          "title": "41 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1792477838815,
           "level": "notable",
@@ -2951,13 +2970,6 @@
           "t": 1789459194127,
           "level": "notable",
           "title": "6 days since the last session",
-          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
-          "url": ""
-        },
-        {
-          "t": 1789414427943,
-          "level": "notable",
-          "title": "5 days since the last session",
           "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
           "url": ""
         }
@@ -4003,6 +4015,14 @@
     }
   },
   "runs": [
+    {
+      "t": 1792529347915,
+      "ran": 5,
+      "skipped": 5,
+      "failed": 0,
+      "notified": 0,
+      "held": 23
+    },
     {
       "t": 1792517309907,
       "ran": 2,
@@ -5594,14 +5614,6 @@
       "failed": 0,
       "notified": 0,
       "held": 3
-    },
-    {
-      "t": 1789211536236,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 21
     }
   ]
 }

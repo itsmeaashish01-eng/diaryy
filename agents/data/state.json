@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792529347486,
-      "lastOk": 1792529347486,
+      "lastRun": 1792541100908,
+      "lastOk": 1792541100908,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792518509000,
+          "level": "notable",
+          "title": "Claude designed protein binders against scorpion neurotoxins",
+          "detail": "Article URL: https://www.anthropic.com/research/claude-scorpion-toxin-binder-design Comments URL: https://news.ycombinator.com/item?id=50170021 Points: 87 # Comments: 60",
+          "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design"
+        },
+        {
+          "t": 1792516231000,
+          "level": "notable",
+          "title": "Benchmarking Bot Detection Systems Against Modern AI Agents in 2026",
+          "detail": "Article URL: https://research.poh.org/bot-benchmarking-2026/ Comments URL: https://news.ycombinator.com/item?id=50169506 Points: 12 # Comments: 0",
+          "url": "https://research.poh.org/bot-benchmarking-2026/"
+        },
         {
           "t": 1792518509000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Designing more efficient quantum circuits with Claude",
           "detail": "Article URL: https://www.anthropic.com/research/designing-efficient-quantum-circuits Comments URL: https://news.ycombinator.com/item?id=50121939 Points: 97 # Comments: 18",
           "url": "https://www.anthropic.com/research/designing-efficient-quantum-circuits"
-        },
-        {
-          "t": 1792160324000,
-          "level": "notable",
-          "title": "Show HN: Gemini 4 Argon plays StarCraft",
-          "detail": "I've refreshed StarSkirmish Bench, a benchmark where LLMs play StarCraft BW by writing code, with results from the flagship models of OpenAI, Anthropic, Google, and Muse Comments URL: https://news.ycombinator.com/item?id=50118688 Points: 185 # Comments: 87",
-          "url": "https://starskirmish.com/bench/v0-2/"
-        },
-        {
-          "t": 1792177487000,
-          "level": "notable",
-          "title": "How the Claude Code team does code review",
-          "detail": "Article URL: https://claude.dev/blog/solving-code-review-at-anthropic/ Comments URL: https://news.ycombinator.com/item?id=50122951 Points: 175 # Comments: 168",
-          "url": "https://claude.dev/blog/solving-code-review-at-anthropic/"
         }
       ],
       "notifiedAt": {},
@@ -2980,11 +2980,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792517309906,
-      "lastOk": 1792517309906,
+      "lastRun": 1792541111091,
+      "lastOk": 1792541111091,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,136 (+72.3%) · excludes S&P 500 ETF",
+      "lastLine": "$4,144 (+72.7%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3582,9 +3582,27 @@
         {
           "t": 1792517309906,
           "v": 4135.75
+        },
+        {
+          "t": 1792541111091,
+          "v": 4144.35
         }
       ],
       "events": [
+        {
+          "t": 1792541111077,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792541111077,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792517309895,
           "level": "notable",
@@ -3990,31 +4008,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1791919780303,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1791919780303,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 82715
+          "BTC": 82887
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792541111091,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1792529347915,
       "ran": 5,
@@ -5606,14 +5618,6 @@
       "failed": 0,
       "notified": 0,
       "held": 17
-    },
-    {
-      "t": 1789222809323,
-      "ran": 1,
-      "skipped": 9,
-      "failed": 0,
-      "notified": 0,
-      "held": 3
     }
   ]
 }

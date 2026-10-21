@@ -2,14 +2,56 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792596772460,
-      "lastOk": 1792596772460,
+      "lastRun": 1792611139536,
+      "lastOk": 1792611139536,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "6 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792610041000,
+          "level": "notable",
+          "title": "Claude Duet",
+          "detail": "Article URL: https://claude.com/product/claude-duet Comments URL: https://news.ycombinator.com/item?id=50186037 Points: 17 # Comments: 2",
+          "url": "https://claude.com/product/claude-duet"
+        },
+        {
+          "t": 1792607394000,
+          "level": "notable",
+          "title": "Anthropic's Public Benefit Charter",
+          "detail": "Article URL: https://www.anthropic.com/public-benefit-charter Comments URL: https://news.ycombinator.com/item?id=50185438 Points: 21 # Comments: 6",
+          "url": "https://www.anthropic.com/public-benefit-charter"
+        },
+        {
+          "t": 1792598968000,
+          "level": "notable",
+          "title": "The bridge to agent-scale Git infrastructure",
+          "detail": "Article URL: https://github.blog/engineering/architecture-optimization/the-bridge-to-agent-scale-git-infrastructure/ Comments URL: https://news.ycombinator.com/item?id=50183344 Points: 35 # Comments: 5",
+          "url": "https://github.blog/engineering/architecture-optimization/the-bridge-to-agent-scale-git-infrastructure/"
+        },
+        {
+          "t": 1792591423000,
+          "level": "notable",
+          "title": "Patch the Planet: global response coordination as agents uncover vulnerabilities",
+          "detail": "https://patchtheplanet.org/ Comments URL: https://news.ycombinator.com/item?id=50181175 Points: 180 # Comments: 110",
+          "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/"
+        },
+        {
+          "t": 1792591226000,
+          "level": "notable",
+          "title": "Compromised LiteLLM 1.107.0 on PyPI Installs a Credential Stealer and Backdoor",
+          "detail": "Article URL: https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/ Comments URL: https://news.ycombinator.com/item?id=50181114 Points: 276 # Comments: 104",
+          "url": "https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/"
+        },
+        {
+          "t": 1792589820000,
+          "level": "notable",
+          "title": "Using thousands of AI agents to uncover new leads in biological data",
+          "detail": "Article URL: https://openai.com/index/scaling-ai-research-for-complex-biological-data/ Comments URL: https://news.ycombinator.com/item?id=50180752 Points: 98 # Comments: 46",
+          "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data/"
+        },
         {
           "t": 1792591423000,
           "level": "notable",
@@ -387,48 +429,6 @@
           "title": "Designing more efficient quantum circuits with Claude",
           "detail": "Article URL: https://www.anthropic.com/research/designing-efficient-quantum-circuits Comments URL: https://news.ycombinator.com/item?id=50121939 Points: 156 # Comments: 33",
           "url": "https://www.anthropic.com/research/designing-efficient-quantum-circuits"
-        },
-        {
-          "t": 1792211813000,
-          "level": "notable",
-          "title": "Show HN: Llmspeed – feel how fast a local LLM runs before you buy the hardware",
-          "detail": "Article URL: https://llmspeed.dev/ Comments URL: https://news.ycombinator.com/item?id=50127979 Points: 88 # Comments: 37",
-          "url": "https://llmspeed.dev/"
-        },
-        {
-          "t": 1792177487000,
-          "level": "notable",
-          "title": "How the Claude Code team does code review",
-          "detail": "Article URL: https://claude.dev/blog/solving-code-review-at-anthropic/ Comments URL: https://news.ycombinator.com/item?id=50122951 Points: 353 # Comments: 332",
-          "url": "https://claude.dev/blog/solving-code-review-at-anthropic/"
-        },
-        {
-          "t": 1792176959000,
-          "level": "notable",
-          "title": "Claude reveals ECDSA curve origins",
-          "detail": "https://words.filippo.io/seeds-solved/ Comments URL: https://news.ycombinator.com/item?id=50122800 Points: 881 # Comments: 328",
-          "url": "https://www.anthropic.com/research/ecdsa-curve-origins"
-        },
-        {
-          "t": 1792173618000,
-          "level": "notable",
-          "title": "Designing more efficient quantum circuits with Claude",
-          "detail": "Article URL: https://www.anthropic.com/research/designing-efficient-quantum-circuits Comments URL: https://news.ycombinator.com/item?id=50121939 Points: 144 # Comments: 32",
-          "url": "https://www.anthropic.com/research/designing-efficient-quantum-circuits"
-        },
-        {
-          "t": 1792160324000,
-          "level": "notable",
-          "title": "Show HN: Gemini 4 Argon plays StarCraft",
-          "detail": "I've refreshed StarSkirmish Bench, a benchmark where LLMs play StarCraft BW by writing code, with results from the flagship models of OpenAI, Anthropic, Google, and Muse Comments URL: https://news.ycombinator.com/item?id=50118688 Points: 225 # Comments: 101",
-          "url": "https://starskirmish.com/bench/v0-2/"
-        },
-        {
-          "t": 1792177487000,
-          "level": "notable",
-          "title": "How the Claude Code team does code review",
-          "detail": "Article URL: https://claude.dev/blog/solving-code-review-at-anthropic/ Comments URL: https://news.ycombinator.com/item?id=50122951 Points: 296 # Comments: 276",
-          "url": "https://claude.dev/blog/solving-code-review-at-anthropic/"
         }
       ],
       "notifiedAt": {},
@@ -4044,6 +4044,14 @@
   },
   "runs": [
     {
+      "t": 1792611139542,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 6
+    },
+    {
       "t": 1792596774028,
       "ran": 3,
       "skipped": 7,
@@ -5634,14 +5642,6 @@
       "failed": 0,
       "notified": 0,
       "held": 3
-    },
-    {
-      "t": 1789258384586,
-      "ran": 5,
-      "skipped": 5,
-      "failed": 0,
-      "notified": 0,
-      "held": 18
     }
   ]
 }

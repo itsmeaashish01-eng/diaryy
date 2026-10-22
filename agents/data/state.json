@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792622428863,
-      "lastOk": 1792622428863,
+      "lastRun": 1792633563649,
+      "lastOk": 1792633563649,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "6 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792610041000,
+          "level": "notable",
+          "title": "Claude Duet",
+          "detail": "Article URL: https://claude.com/product/claude-duet Comments URL: https://news.ycombinator.com/item?id=50186037 Points: 314 # Comments: 272",
+          "url": "https://claude.com/product/claude-duet"
+        },
+        {
+          "t": 1792591423000,
+          "level": "notable",
+          "title": "Patch the Planet: global response coordination as agents uncover vulnerabilities",
+          "detail": "https://patchtheplanet.org/ Comments URL: https://news.ycombinator.com/item?id=50181175 Points: 234 # Comments: 160",
+          "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/"
+        },
+        {
+          "t": 1792591226000,
+          "level": "notable",
+          "title": "Compromised LiteLLM 1.107.0 on PyPI Installs a Credential Stealer and Backdoor",
+          "detail": "Article URL: https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/ Comments URL: https://news.ycombinator.com/item?id=50181114 Points: 434 # Comments: 141",
+          "url": "https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/"
+        },
         {
           "t": 1792611618000,
           "level": "notable",
@@ -408,27 +429,6 @@
           "title": "Show HN: Llmspeed – feel how fast a local LLM runs before you buy the hardware",
           "detail": "Article URL: https://llmspeed.dev/ Comments URL: https://news.ycombinator.com/item?id=50127979 Points: 267 # Comments: 78",
           "url": "https://llmspeed.dev/"
-        },
-        {
-          "t": 1792211813000,
-          "level": "notable",
-          "title": "Show HN: Llmspeed – feel how fast a local LLM runs before you buy the hardware",
-          "detail": "Article URL: https://llmspeed.dev/ Comments URL: https://news.ycombinator.com/item?id=50127979 Points: 238 # Comments: 76",
-          "url": "https://llmspeed.dev/"
-        },
-        {
-          "t": 1792211813000,
-          "level": "notable",
-          "title": "Show HN: Llmspeed – feel how fast a local LLM runs before you buy the hardware",
-          "detail": "Article URL: https://llmspeed.dev/ Comments URL: https://news.ycombinator.com/item?id=50127979 Points: 229 # Comments: 75",
-          "url": "https://llmspeed.dev/"
-        },
-        {
-          "t": 1792195114000,
-          "level": "notable",
-          "title": "Show HN: Things to Do API",
-          "detail": "I built an api/mcp for local events: pop-ups, one-off events, concerts, etc. currently covering the SF bay area.I've been building a bunch of consumer apps lately around personalization and recommendation and have had a hard time finding this data in one spot. agents can find useful stuff through to",
-          "url": "https://thingstodoapi.com/"
         }
       ],
       "notifiedAt": {},
@@ -4060,6 +4060,14 @@
   },
   "runs": [
     {
+      "t": 1792633563655,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
+    {
       "t": 1792622429989,
       "ran": 6,
       "skipped": 4,
@@ -5650,14 +5658,6 @@
       "failed": 0,
       "notified": 0,
       "held": 10
-    },
-    {
-      "t": 1789295661458,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 14
     }
   ]
 }

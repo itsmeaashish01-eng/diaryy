@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792677777463,
-      "lastOk": 1792677777463,
+      "lastRun": 1792694711310,
+      "lastOk": 1792694711310,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792692158000,
+          "level": "notable",
+          "title": "Show HN: agent-usage-guard – a Claude Code mod to protect your usage window",
+          "detail": "Article URL: https://github.com/rbartoli/agent-usage-guard Comments URL: https://news.ycombinator.com/item?id=50198936 Points: 7 # Comments: 4",
+          "url": "https://github.com/rbartoli/agent-usage-guard"
+        },
         {
           "t": 1792610041000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "Show HN: Sphinx – A hook that quizzes you on your AI's code before shipping",
           "detail": "FOSS, Basically it plugs into your existing coding agent workflow and every time you push to prod it'll throw up a questionnaire that checks if you understand how the code you're pushing works. Comments URL: https://news.ycombinator.com/item?id=50137950 Points: 234 # Comments: 76",
           "url": "https://sphinx-six-theta.vercel.app/"
-        },
-        {
-          "t": 1792347310000,
-          "level": "notable",
-          "title": "Investing in the Public Benefit",
-          "detail": "Article URL: https://www.anthropic.com/news/public-benefit-fund Comments URL: https://news.ycombinator.com/item?id=50143755 Points: 11 # Comments: 7",
-          "url": "https://www.anthropic.com/news/public-benefit-fund"
         }
       ],
       "notifiedAt": {},
@@ -3016,11 +3016,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792677778700,
-      "lastOk": 1792677778700,
+      "lastRun": 1792694712040,
+      "lastOk": 1792694712040,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,086 (+70.2%) · excludes S&P 500 ETF",
+      "lastLine": "$4,059 (+69.1%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3646,9 +3646,27 @@
         {
           "t": 1792677778701,
           "v": 4085.5
+        },
+        {
+          "t": 1792694712041,
+          "v": 4059.1
         }
       ],
       "events": [
+        {
+          "t": 1792694712029,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792694712029,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792677778687,
           "level": "notable",
@@ -4054,31 +4072,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792065590074,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792065590074,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81710
+          "BTC": 81182
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792694712041,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1792677778701,
       "ran": 6,
@@ -5670,14 +5682,6 @@
       "failed": 0,
       "notified": 0,
       "held": 0
-    },
-    {
-      "t": 1789333545677,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 3
     }
   ]
 }

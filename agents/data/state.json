@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792708886426,
-      "lastOk": 1792708886426,
+      "lastRun": 1792720259864,
+      "lastOk": 1792720259864,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792709683000,
+          "level": "notable",
+          "title": "LLMs are making formal software verification feasible at a much larger scale",
+          "detail": "Article URL: https://www.anthropic.com/research/formal-verification Comments URL: https://news.ycombinator.com/item?id=50202217 Points: 104 # Comments: 52",
+          "url": "https://www.anthropic.com/research/formal-verification"
+        },
+        {
+          "t": 1792691046000,
+          "level": "notable",
+          "title": "OpenShell – A safe, private runtime for fleets of autonomous AI agents",
+          "detail": "Article URL: https://github.com/NVIDIA/OpenShell Comments URL: https://news.ycombinator.com/item?id=50198675 Points: 298 # Comments: 158",
+          "url": "https://github.com/NVIDIA/OpenShell"
+        },
         {
           "t": 1792691046000,
           "level": "notable",
@@ -414,20 +428,6 @@
           "level": "notable",
           "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
           "detail": "https://x.com/Jiaru_Zou/status/2110400256647340476https://github.com/togethercomputer/HybridAgenthttps://huggingface.co/collections/togethercomputer/hybridag...Evaluations: https://arxiv.org/html/2610.18861v1#S5 Comments URL: https://news.ycombinator.com/item?id=50145337 Points: 162 # Comments: 97",
-          "url": "https://arxiv.org/abs/2610.18861"
-        },
-        {
-          "t": 1792298029000,
-          "level": "notable",
-          "title": "Show HN: Sphinx – A hook that quizzes you on your AI's code before shipping",
-          "detail": "FOSS, Basically it plugs into your existing coding agent workflow and every time you push to prod it'll throw up a questionnaire that checks if you understand how the code you're pushing works. Comments URL: https://news.ycombinator.com/item?id=50137950 Points: 240 # Comments: 83",
-          "url": "https://sphinx-six-theta.vercel.app/"
-        },
-        {
-          "t": 1792356494000,
-          "level": "notable",
-          "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
-          "detail": "https://x.com/Jiaru_Zou/status/2110400256647340476https://github.com/togethercomputer/HybridAgenthttps://huggingface.co/collections/togethercomputer/hybridag...Evaluations: https://arxiv.org/html/2610.18861v1#S5 Comments URL: https://news.ycombinator.com/item?id=50145337 Points: 36 # Comments: 9",
           "url": "https://arxiv.org/abs/2610.18861"
         }
       ],
@@ -3016,11 +3016,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792694712040,
-      "lastOk": 1792694712040,
+      "lastRun": 1792720260589,
+      "lastOk": 1792720260589,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,059 (+69.1%) · excludes S&P 500 ETF",
+      "lastLine": "$4,076 (+69.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3650,9 +3650,27 @@
         {
           "t": 1792694712041,
           "v": 4059.1
+        },
+        {
+          "t": 1792720260589,
+          "v": 4075.75
         }
       ],
       "events": [
+        {
+          "t": 1792720260575,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792720260575,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792694712029,
           "level": "notable",
@@ -4058,31 +4076,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792084701911,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792084701911,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 81182
+          "BTC": 81515
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792720260589,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1792708886831,
       "ran": 2,
@@ -5674,14 +5686,6 @@
       "failed": 0,
       "notified": 0,
       "held": 9
-    },
-    {
-      "t": 1789349556997,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 13
     }
   ]
 }

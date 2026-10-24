@@ -2,11 +2,11 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792841426693,
-      "lastOk": 1792841426693,
+      "lastRun": 1792853337374,
+      "lastOk": 1792853337374,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
@@ -4148,6 +4148,14 @@
   },
   "runs": [
     {
+      "t": 1792853337380,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 0
+    },
+    {
       "t": 1792841427930,
       "ran": 6,
       "skipped": 4,
@@ -5738,14 +5746,6 @@
       "failed": 0,
       "notified": 0,
       "held": 7
-    },
-    {
-      "t": 1789496786198,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 15
     }
   ]
 }

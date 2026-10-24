@@ -2,17 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792803659455,
-      "lastOk": 1792794864412,
-      "errorCount": 1,
-      "lastError": {
-        "message": "fetch failed",
-        "t": 1792803659455
-      },
-      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
+      "lastRun": 1792822995294,
+      "lastOk": 1792822995294,
+      "errorCount": 0,
+      "lastError": null,
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792784798000,
+          "level": "notable",
+          "title": "Show HN: Corgi, a helpful {agent, terminal} multiplexer",
+          "detail": "Hey everyone,Inspired by Herdr, I've built an agent multiplexer that I've been using as my daily driver for a few weeks now.I think I improved on the concept in a few ways, focusing on the ergonomics I always wished I had:I show you what the agents are up to, along with a running feed of their activ",
+          "url": "https://corgi.computer/"
+        },
         {
           "t": 1792766690000,
           "level": "notable",
@@ -425,13 +429,6 @@
           "title": "Show HN: WhatsApp MCP running free on Cloudflare",
           "detail": "I wanted my humble Claude on mobile to access my WhatsApp messages but the only options I could find either required WhatsApp Business or an actual server to run Baileys on.I wanted to run it for free on ClaudeFlare and with my personal WhatsApp account, so I built this.Important feature - it connec",
           "url": "https://github.com/finereli/whatsapp-mcp"
-        },
-        {
-          "t": 1792357752000,
-          "level": "notable",
-          "title": "If you don't run your own LLM proxy, how do you know whats going on?",
-          "detail": "Article URL: https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on/ Comments URL: https://news.ycombinator.com/item?id=50145507 Points: 88 # Comments: 67",
-          "url": "https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on/"
         }
       ],
       "notifiedAt": {},
@@ -3043,11 +3040,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792803660341,
-      "lastOk": 1792803660341,
+      "lastRun": 1792822995963,
+      "lastOk": 1792822995963,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,030 (+67.9%) · excludes S&P 500 ETF",
+      "lastLine": "$4,034 (+68.1%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3697,9 +3694,27 @@
         {
           "t": 1792803660342,
           "v": 4029.95
+        },
+        {
+          "t": 1792822995963,
+          "v": 4033.8
         }
       ],
       "events": [
+        {
+          "t": 1792822995950,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792822995950,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792803660330,
           "level": "notable",
@@ -4105,31 +4120,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792191534738,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792191534738,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 80599
+          "BTC": 80676
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792822995963,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1792803660342,
       "ran": 2,
@@ -5721,14 +5730,6 @@
       "failed": 0,
       "notified": 0,
       "held": 3
-    },
-    {
-      "t": 1789459194909,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 21
     }
   ]
 }

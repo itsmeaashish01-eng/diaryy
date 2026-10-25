@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792938755755,
-      "lastOk": 1792938755755,
+      "lastRun": 1792950487758,
+      "lastOk": 1792950487758,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792942484000,
+          "level": "notable",
+          "title": "What Adobe v ArtCraft teaches us",
+          "detail": "Article URL: https://techbronerd.substack.com/p/openai-and-anthropic-wanted-to-replace Comments URL: https://news.ycombinator.com/item?id=50232682 Points: 52 # Comments: 27",
+          "url": "https://techbronerd.substack.com/p/openai-and-anthropic-wanted-to-replace"
+        },
         {
           "t": 1792878856000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
           "detail": "https://x.com/Jiaru_Zou/status/2110400256647340476https://github.com/togethercomputer/HybridAgenthttps://huggingface.co/collections/togethercomputer/hybridag...Evaluations: https://arxiv.org/html/2610.18861v1#S5 Comments URL: https://news.ycombinator.com/item?id=50145337 Points: 407 # Comments: 199",
           "url": "https://arxiv.org/abs/2610.18861"
-        },
-        {
-          "t": 1792384327000,
-          "level": "notable",
-          "title": "Show HN: Strot – Compile an LLM's intent once, run decisions locally forever",
-          "detail": "Article URL: https://github.com/strot-ai/Project-STROT Comments URL: https://news.ycombinator.com/item?id=50148396 Points: 9 # Comments: 1",
-          "url": "https://github.com/strot-ai/Project-STROT"
         }
       ],
       "notifiedAt": {},
@@ -4192,6 +4192,14 @@
   },
   "runs": [
     {
+      "t": 1792950487764,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 1
+    },
+    {
       "t": 1792938756968,
       "ran": 6,
       "skipped": 4,
@@ -5782,14 +5790,6 @@
       "failed": 0,
       "notified": 0,
       "held": 22
-    },
-    {
-      "t": 1789606275445,
-      "ran": 5,
-      "skipped": 5,
-      "failed": 0,
-      "notified": 0,
-      "held": 12
     }
   ]
 }

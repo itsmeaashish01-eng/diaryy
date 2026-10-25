@@ -2,11 +2,11 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792885048815,
-      "lastOk": 1792885048815,
+      "lastRun": 1792905085713,
+      "lastOk": 1792905085713,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
@@ -435,8 +435,8 @@
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1792865984428,
-      "lastOk": 1792865984428,
+      "lastRun": 1792905086106,
+      "lastOk": 1792905086106,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.310",
@@ -654,6 +654,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.301"
         },
         {
+          "t": 1792798740000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.310",
+          "detail": "## What's changed\n\n- Added the Monitor tool and plugin monitors on Bedrock, Vertex, and Foundry, and when telemetry or nonessential traffic is disabled; long foreground sleeps are now blocked there too\n- Fixed requests failing behind some gateways and compatible servers that reject the `effort-2025-11-24` beta value or mid-conversation system messages; Claude Code now retries without them\n- Fixed ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.310"
+        },
+        {
           "t": 1792707537000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.309",
@@ -715,13 +722,6 @@
           "title": "anthropics/claude-code v2.1.301",
           "detail": "## What's changed\n\n- Added `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS` so unattended retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) ends a request at a usage limit that resets too far away instead of waiting\n- Added OpenTelemetry tracing guidance to the `claude-api` skill, including setting up trace destinations with the `ant` CLI\n- Added the `%` motion to vim mode: jump to the matching bracke",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.301"
-        },
-        {
-          "t": 1792002265000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.300",
-          "detail": "## What's changed\n\n- Added `virtualText` to a mod's prompt decorations: text drawn in the prompt box that never enters the draft or the submitted prompt\n- Added `cache_creation_5m_tokens` and `cache_creation_1h_tokens` to the OpenTelemetry `api_request` event, splitting cache writes by lifetime\n- Added `$.ui.view({ agentId })` for mods: shows an agent's transcript in the main view when you ask, an",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.300"
         },
         {
           "t": 1792707537000,
@@ -3064,11 +3064,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792885049613,
-      "lastOk": 1792885049613,
+      "lastRun": 1792905086796,
+      "lastOk": 1792905086796,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,038 (+68.2%) · excludes S&P 500 ETF",
+      "lastLine": "$4,042 (+68.4%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3734,9 +3734,27 @@
         {
           "t": 1792885049613,
           "v": 4037.8
+        },
+        {
+          "t": 1792905086796,
+          "v": 4041.55
         }
       ],
       "events": [
+        {
+          "t": 1792905086782,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792905086782,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792885049602,
           "level": "notable",
@@ -4142,31 +4160,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792276580918,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792276580918,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 80756
+          "BTC": 80831
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792905086796,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 12
+    },
     {
       "t": 1792885049613,
       "ran": 5,
@@ -5758,14 +5770,6 @@
       "failed": 0,
       "notified": 0,
       "held": 4
-    },
-    {
-      "t": 1789562864916,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 22
     }
   ]
 }

@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792962628236,
-      "lastOk": 1792962628236,
+      "lastRun": 1792971015423,
+      "lastOk": 1792971015423,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792962691000,
+          "level": "notable",
+          "title": "OpenAI and Anthropic cut their LLM prices by up to 80% within a few months. Why?",
+          "detail": "Article URL: https://minimaxir.com/2026/10/cheap-llms/ Comments URL: https://news.ycombinator.com/item?id=50236102 Points: 53 # Comments: 69",
+          "url": "https://minimaxir.com/2026/10/cheap-llms/"
+        },
+        {
+          "t": 1792948538000,
+          "level": "notable",
+          "title": "A 10-year-old CNN outperforms frontier LLMs for skin cancer diagnosis",
+          "detail": "Article URL: https://lynchlab.net/llm-skin-cancer Comments URL: https://news.ycombinator.com/item?id=50233779 Points: 365 # Comments: 180",
+          "url": "https://lynchlab.net/llm-skin-cancer"
+        },
         {
           "t": 1792948538000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Superlite: A Faster Alternatie to Superpowers",
           "detail": "Article URL: https://contextfirst.blog/superlite-hand-an-agent-a-spec/ Comments URL: https://news.ycombinator.com/item?id=50147492 Points: 99 # Comments: 40",
           "url": "https://contextfirst.blog/superlite-hand-an-agent-a-spec/"
-        },
-        {
-          "t": 1792359370000,
-          "level": "notable",
-          "title": "Show HN: WhatsApp MCP running free on Cloudflare",
-          "detail": "I wanted my humble Claude on mobile to access my WhatsApp messages but the only options I could find either required WhatsApp Business or an actual server to run Baileys on.I wanted to run it for free on ClaudeFlare and with my personal WhatsApp account, so I built this.Important feature - it connec",
-          "url": "https://github.com/finereli/whatsapp-mcp"
-        },
-        {
-          "t": 1792357752000,
-          "level": "notable",
-          "title": "If you don't run your own LLM proxy, how do you know whats going on?",
-          "detail": "Article URL: https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on/ Comments URL: https://news.ycombinator.com/item?id=50145507 Points: 180 # Comments: 127",
-          "url": "https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on/"
         }
       ],
       "notifiedAt": {},
@@ -4196,6 +4196,14 @@
   },
   "runs": [
     {
+      "t": 1792971015430,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 2
+    },
+    {
       "t": 1792962639127,
       "ran": 3,
       "skipped": 7,
@@ -5786,14 +5794,6 @@
       "failed": 0,
       "notified": 0,
       "held": 14
-    },
-    {
-      "t": 1789626985354,
-      "ran": 1,
-      "skipped": 9,
-      "failed": 0,
-      "notified": 0,
-      "held": 3
     }
   ]
 }

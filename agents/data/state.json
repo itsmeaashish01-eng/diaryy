@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792950487758,
-      "lastOk": 1792950487758,
+      "lastRun": 1792962628236,
+      "lastOk": 1792962628236,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792948538000,
+          "level": "notable",
+          "title": "A 10-year-old CNN outperforms frontier LLMs for skin cancer diagnosis",
+          "detail": "Article URL: https://lynchlab.net/llm-skin-cancer Comments URL: https://news.ycombinator.com/item?id=50233779 Points: 287 # Comments: 143",
+          "url": "https://lynchlab.net/llm-skin-cancer"
+        },
         {
           "t": 1792942484000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "If you don't run your own LLM proxy, how do you know whats going on?",
           "detail": "Article URL: https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on/ Comments URL: https://news.ycombinator.com/item?id=50145507 Points: 180 # Comments: 127",
           "url": "https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on/"
-        },
-        {
-          "t": 1792356494000,
-          "level": "notable",
-          "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
-          "detail": "https://x.com/Jiaru_Zou/status/2110400256647340476https://github.com/togethercomputer/HybridAgenthttps://huggingface.co/collections/togethercomputer/hybridag...Evaluations: https://arxiv.org/html/2610.18861v1#S5 Comments URL: https://news.ycombinator.com/item?id=50145337 Points: 407 # Comments: 199",
-          "url": "https://arxiv.org/abs/2610.18861"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1792938756219,
-      "lastOk": 1792938756219,
+      "lastRun": 1792962628562,
+      "lastOk": 1792962628562,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.310",
@@ -794,6 +794,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.301"
         },
         {
+          "t": 1792798740000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.310",
+          "detail": "## What's changed\n\n- Added the Monitor tool and plugin monitors on Bedrock, Vertex, and Foundry, and when telemetry or nonessential traffic is disabled; long foreground sleeps are now blocked there too\n- Fixed requests failing behind some gateways and compatible servers that reject the `effort-2025-11-24` beta value or mid-conversation system messages; Claude Code now retries without them\n- Fixed ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.310"
+        },
+        {
           "t": 1792707537000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.309",
@@ -855,13 +862,6 @@
           "title": "anthropics/claude-code v2.1.301",
           "detail": "## What's changed\n\n- Added `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS` so unattended retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) ends a request at a usage limit that resets too far away instead of waiting\n- Added OpenTelemetry tracing guidance to the `claude-api` skill, including setting up trace destinations with the `ant` CLI\n- Added the `%` motion to vim mode: jump to the matching bracke",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.301"
-        },
-        {
-          "t": 1792002265000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.300",
-          "detail": "## What's changed\n\n- Added `virtualText` to a mod's prompt decorations: text drawn in the prompt box that never enters the draft or the submitted prompt\n- Added `cache_creation_5m_tokens` and `cache_creation_1h_tokens` to the OpenTelemetry `api_request` event, splitting cache writes by lifetime\n- Added `$.ui.view({ agentId })` for mods: shows an agent's transcript in the main view when you ask, an",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.300"
         }
       ],
       "notifiedAt": {},
@@ -3076,11 +3076,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792938756968,
-      "lastOk": 1792938756968,
+      "lastRun": 1792962639126,
+      "lastOk": 1792962639126,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,013 (+67.2%) · excludes S&P 500 ETF",
+      "lastLine": "$4,021 (+67.6%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3758,9 +3758,27 @@
         {
           "t": 1792938756968,
           "v": 4012.95
+        },
+        {
+          "t": 1792962639126,
+          "v": 4021.45
         }
       ],
       "events": [
+        {
+          "t": 1792962639113,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792962639113,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1792938756954,
           "level": "notable",
@@ -4166,31 +4184,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792332441134,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792332441135,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 80259
+          "BTC": 80429
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792962639127,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 13
+    },
     {
       "t": 1792950487764,
       "ran": 1,
@@ -5782,14 +5794,6 @@
       "failed": 0,
       "notified": 0,
       "held": 3
-    },
-    {
-      "t": 1789613315061,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 22
     }
   ]
 }

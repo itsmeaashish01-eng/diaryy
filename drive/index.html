@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lane Coach</title>
+  <meta name="description" content="Practice reading highway navigation cues — lane guidance, exit numbers, EXIT ONLY lanes, splits and frontage roads — on schematic North Texas highways." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M7 22 L10.5 2 M17 22 L13.5 2 M12 20v-3 M12 13v-3 M12 6V4" /></svg>
+      </span>
+      <div>
+        <div class="brand-name">Lane Coach</div>
+        <div class="brand-sub">North Texas highway navigation trainer</div>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Mode">
+      <button class="tab" role="tab" id="tab-quiz" data-view="quiz" aria-controls="view-quiz">Lane quiz</button>
+      <button class="tab" role="tab" id="tab-drive" data-view="drive" aria-controls="view-drive">Drive</button>
+      <button class="tab" role="tab" id="tab-guide" data-view="guide" aria-controls="view-guide">How to read it</button>
+    </nav>
+  </header>
+
+  <div class="disclaimer" role="note">
+    <strong>Educational simulation — not Tesla software.</strong>
+    Not affiliated with or endorsed by Tesla, Inc. The navigation display is an original, Tesla-<em>style</em> mock-up.
+    Roads are schematic: exit numbers, distances and lane counts are illustrative and won't match today's striping.
+    On the road, obey posted signs and your real navigation.
+  </div>
+
+  <main>
+
+    <!-- ===== QUIZ ===== -->
+    <section class="view" id="view-quiz" role="tabpanel" aria-labelledby="tab-quiz">
+      <div class="layout">
+        <div class="screen">
+          <div class="sign" id="quiz-sign" aria-label="Overhead sign ahead"></div>
+          <div class="display">
+            <canvas class="road" id="quiz-canvas" aria-label="Schematic top-down view of the highway ahead. Tap a lane to choose it."></canvas>
+            <div class="nav-card" id="quiz-nav"></div>
+            <div class="screen-tag">Schematic · not to scale</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-top">
+            <label class="field">
+              <span>Region</span>
+              <select id="quiz-region">
+                <option value="all">All of North Texas</option>
+                <option value="Denton">Denton County</option>
+                <option value="Fort Worth">Fort Worth</option>
+                <option value="Dallas">Dallas</option>
+                <option value="DFW">DFW Airport</option>
+              </select>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="quiz-cues" checked />
+              <span>Lane hints &amp; route line</span>
+            </label>
+          </div>
+
+          <div class="progress" id="quiz-progress" aria-label="Progress"></div>
+
+          <div class="card">
+            <div class="meta">
+              <span class="chip" id="quiz-region-chip"></span>
+              <span class="count" id="quiz-count"></span>
+            </div>
+            <h1 class="title" id="quiz-title"></h1>
+            <p class="place" id="quiz-place"></p>
+            <div class="skills" id="quiz-skills"></div>
+            <p class="prompt" id="quiz-prompt"></p>
+
+            <div class="choose">
+              <div class="choose-label">Choose your lane <span class="hint">— tap the road, or press 1–<span id="quiz-max">4</span></span></div>
+              <div class="lane-buttons" id="quiz-lanes"></div>
+            </div>
+          </div>
+
+          <div class="card feedback" id="quiz-feedback" hidden aria-live="polite">
+            <div class="verdict" id="quiz-verdict"></div>
+            <p class="why" id="quiz-why"></p>
+            <h2 class="sub">What's going on here</h2>
+            <p id="quiz-lesson"></p>
+            <p class="tip"><strong>Tip</strong> <span id="quiz-tip"></span></p>
+            <p class="note" id="quiz-note" hidden></p>
+            <div class="actions">
+              <button class="btn primary" id="quiz-next">Next scenario →</button>
+              <button class="btn" id="quiz-replay">↻ Replay</button>
+              <button class="btn" id="quiz-retry">Try again</button>
+              <button class="btn" id="quiz-drive">Drive this one</button>
+            </div>
+          </div>
+
+          <div class="score-row">
+            <span id="quiz-score"></span>
+            <button class="btn small" id="quiz-reset">Reset quiz</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DRIVE ===== -->
+    <section class="view" id="view-drive" role="tabpanel" aria-labelledby="tab-drive" hidden>
+      <div class="layout">
+        <div class="screen">
+          <div class="sign" id="drive-sign" aria-label="Overhead sign ahead"></div>
+          <div class="display">
+            <canvas class="road" id="drive-canvas" aria-label="Your car on a schematic highway, seen from above."></canvas>
+            <div class="nav-card" id="drive-nav"></div>
+            <div class="hud">
+              <span class="hud-speed" id="drive-speed">65 mph</span>
+              <span class="hud-status" id="drive-status"></span>
+            </div>
+            <div class="toast" id="drive-toast" role="status" aria-live="assertive"></div>
+            <div class="overlay" id="drive-intro">
+              <div class="overlay-card">
+                <h2 id="drive-intro-title"></h2>
+                <p id="drive-intro-text"></p>
+                <ul class="keys">
+                  <li><kbd>←</kbd><kbd>→</kbd> or the ◀ ▶ buttons — change lanes</li>
+                  <li><kbd>↓</kbd><kbd>↑</kbd> — ease off / speed up to find a gap</li>
+                  <li><kbd>Space</kbd> pause · <kbd>R</kbd> restart</li>
+                </ul>
+                <button class="btn primary" id="drive-go">Start driving</button>
+              </div>
+            </div>
+            <div class="overlay" id="drive-result" hidden>
+              <div class="overlay-card" aria-live="polite">
+                <div class="verdict" id="drive-verdict"></div>
+                <p id="drive-outcome"></p>
+                <p class="grade" id="drive-grade"></p>
+                <p class="stats" id="drive-stats"></p>
+                <p class="lesson" id="drive-lesson"></p>
+                <div class="actions">
+                  <button class="btn primary" id="drive-retry">↻ Drive it again</button>
+                  <button class="btn" id="drive-next">Next drill →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pad" aria-label="Driving controls">
+            <button class="pad-btn" id="drive-left" aria-label="Change lane left">◀</button>
+            <div class="pad-mid">
+              <button class="pad-btn small" id="drive-faster" aria-label="Speed up a little">▲</button>
+              <button class="pad-btn small" id="drive-slower" aria-label="Ease off a little">▼</button>
+            </div>
+            <button class="pad-btn" id="drive-right" aria-label="Change lane right">▶</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="card">
+            <label class="field wide">
+              <span>Drill</span>
+              <select id="drive-scenario"></select>
+            </label>
+            <div class="panel-top">
+              <label class="field">
+                <span>Traffic</span>
+                <select id="drive-traffic">
+                  <option value="off">None</option>
+                  <option value="light">Light</option>
+                  <option value="busy" selected>Busy (rush hour)</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Pace</span>
+                <select id="drive-pace">
+                  <option value="1.5">Relaxed — 1.5× time</option>
+                  <option value="2" selected>Normal — 2× time</option>
+                  <option value="2.5">Brisk — 2.5× time</option>
+                </select>
+              </label>
+            </div>
+            <div class="actions">
+              <button class="btn primary" id="drive-start">Start</button>
+              <button class="btn" id="drive-pause">Pause</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="meta"><span class="chip" id="drive-region-chip"></span></div>
+            <h1 class="title" id="drive-title"></h1>
+            <p class="place" id="drive-place"></p>
+            <p class="goal" id="drive-goal"></p>
+            <p class="small-print">Time runs faster than real life so a drill takes under a minute; distances on the navigation card are true to the drawing. Your car keeps its distance like adaptive cruise — you only steer between lanes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GUIDE ===== -->
+    <section class="view guide" id="view-guide" role="tabpanel" aria-labelledby="tab-guide" hidden>
+      <div class="guide-grid">
+        <article class="card">
+          <h2>The navigation card</h2>
+          <div class="legend-nav"><div class="nav-card" id="guide-nav"></div></div>
+          <dl class="legend">
+            <dt>Maneuver arrow</dt><dd>The next thing you'll do. The bright branch is your way; the dim one is the road you're leaving.</dd>
+            <dt>Distance</dt><dd>Counts down to where the maneuver starts — the gore, where the lanes separate. Miles above 0.2 mi, then feet.</dd>
+            <dt>Exit number</dt><dd>Match it to the green tab on the overhead sign. A/B exits are different ramps.</dd>
+            <dt>“Then…”</dt><dd>A second step that follows quickly, like a ramp that splits again. Favor that side early.</dd>
+            <dt>Lane strip</dt><dd>One arrow per lane, left to right. Highlighted lanes are on your route.</dd>
+            <dt>Blue route line</dt><dd>On the map, it runs from your car into the lane you'll need and along the road you'll take.</dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <h2>Signs and lines</h2>
+          <dl class="legend">
+            <dt><span class="mini-tab">EXIT 51A</span></dt><dd>The exit-number tab, on the side the exit leaves from.</dd>
+            <dt><span class="mini-tab is-left">LEFT</span></dt><dd>A left exit. Move left, early — the left lane is the fastest.</dd>
+            <dt><span class="mini-only">EXIT ONLY</span></dt><dd>The lanes above it can't go straight. Going straight? Get out from under it.</dd>
+            <dt>Shared arrow</dt><dd>An option lane: it can exit or continue. Good when you're not sure yet.</dd>
+            <dt><span class="line-ex dash"></span> Dashed</dt><dd>You may change lanes.</dd>
+            <dt><span class="line-ex wide"></span> Wide dotted</dt><dd>The lane is about to end or exit.</dd>
+            <dt><span class="line-ex solid"></span> Solid white</dt><dd>Don't cross — usually the last few hundred feet before a gore.</dd>
+            <dt><span class="line-ex yellow"></span> Yellow edge</dt><dd>The left edge of a one-way road. On a ramp, it's on your left.</dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <h2>North Texas specifics</h2>
+          <ul class="plain">
+            <li><strong>Frontage roads.</strong> Most exits drop you onto a one-way frontage (access) road before the cross street — so the exit comes early, and you finish at a traffic light.</li>
+            <li><strong>Texas U-turns.</strong> Under many bridges a U-turn lane takes you from one frontage road to the other without a light. It's how you recover from a missed exit.</li>
+            <li><strong>I-35E and I-35W.</strong> I-35 splits at Denton (and again at Hillsboro): E to Dallas, W to Fort Worth. Read the letter on the shield.</li>
+            <li><strong>TEXpress lanes.</strong> Toll lanes down the middle of highways like I-35W, I-35E and I-635. You enter and leave from the left.</li>
+            <li><strong>Stacks.</strong> The High Five (US 75 × I-635) and Fort Worth's Mixmaster (I-35W × I-30) have ramps that split again. Watch the “then” line.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>Five habits</h2>
+          <ol class="plain">
+            <li><strong>Half a mile.</strong> Be in a lane for your route half a mile before the maneuver.</li>
+            <li><strong>One lane at a time.</strong> Signal, check the mirror and over your shoulder, move, settle — then the next.</li>
+            <li><strong>Match the number.</strong> The exit on the sign should match the one on the navigation, and so should the distance.</li>
+            <li><strong>Make room by easing off.</strong> To merge behind a car, slow a little; don't race it.</li>
+            <li><strong>Missed it? Let it go.</strong> Never swerve across the gore or stop. The navigation will reroute.</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    Lane Coach is a study aid. It is not Tesla software, does not use Tesla's interface or data, and is not a substitute for driver training.
+  </footer>
+
+  <!-- Order matters: everything hangs off window.LC, and the modes need
+       the logic and the drawing loaded first. -->
+  <script src="js/logic.js"></script>
+  <script src="js/scenarios.js"></script>
+  <script src="js/draw.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/drive.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

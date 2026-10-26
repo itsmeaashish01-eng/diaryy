@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1792971015423,
-      "lastOk": 1792971015423,
+      "lastRun": 1792978528544,
+      "lastOk": 1792978528544,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1792962691000,
+          "level": "notable",
+          "title": "OpenAI and Anthropic cut their LLM prices by up to 80% within a few months. Why?",
+          "detail": "Article URL: https://minimaxir.com/2026/10/cheap-llms/ Comments URL: https://news.ycombinator.com/item?id=50236102 Points: 127 # Comments: 151",
+          "url": "https://minimaxir.com/2026/10/cheap-llms/"
+        },
+        {
+          "t": 1792948538000,
+          "level": "notable",
+          "title": "A 10-year-old CNN outperforms frontier LLMs for skin cancer diagnosis",
+          "detail": "Article URL: https://lynchlab.net/llm-skin-cancer Comments URL: https://news.ycombinator.com/item?id=50233779 Points: 422 # Comments: 202",
+          "url": "https://lynchlab.net/llm-skin-cancer"
+        },
         {
           "t": 1792962691000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "A hacker broke into John Deere and SharkNinja with an army of AI agents",
           "detail": "Article URL: https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins Comments URL: https://news.ycombinator.com/item?id=50152877 Points: 53 # Comments: 3",
           "url": "https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins"
-        },
-        {
-          "t": 1792389331000,
-          "level": "notable",
-          "title": "Tmux and Claude Code: Sessions, Send-Keys, and the Ceiling",
-          "detail": "Article URL: https://crystl.dev/guides/tmux-for-ai-agents/ Comments URL: https://news.ycombinator.com/item?id=50148855 Points: 39 # Comments: 21",
-          "url": "https://crystl.dev/guides/tmux-for-ai-agents/"
-        },
-        {
-          "t": 1792375276000,
-          "level": "notable",
-          "title": "Superlite: A Faster Alternatie to Superpowers",
-          "detail": "Article URL: https://contextfirst.blog/superlite-hand-an-agent-a-spec/ Comments URL: https://news.ycombinator.com/item?id=50147492 Points: 99 # Comments: 40",
-          "url": "https://contextfirst.blog/superlite-hand-an-agent-a-spec/"
         }
       ],
       "notifiedAt": {},
@@ -3076,11 +3076,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1792962639126,
-      "lastOk": 1792962639126,
+      "lastRun": 1792978529260,
+      "lastOk": 1792978529260,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,021 (+67.6%) · excludes S&P 500 ETF",
+      "lastLine": "$3,996 (+66.5%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3762,10 +3762,28 @@
         {
           "t": 1792962639126,
           "v": 4021.45
+        },
+        {
+          "t": 1792978529260,
+          "v": 3995.6
         }
       ],
       "events": [
         {
+          "t": 1792978529251,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1792978529252,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
+        {
           "t": 1792962639113,
           "level": "notable",
           "title": "Bitcoin is 90.0 points over target",
@@ -4166,20 +4184,6 @@
         },
         {
           "t": 1792369563434,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1792352148677,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792352148677,
           "level": "notable",
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
@@ -4189,12 +4193,20 @@
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 80429
+          "BTC": 79912
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1792978529261,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1792971015430,
       "ran": 1,
@@ -5786,14 +5798,6 @@
       "failed": 0,
       "notified": 0,
       "held": 15
-    },
-    {
-      "t": 1789646534978,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 14
     }
   ]
 }

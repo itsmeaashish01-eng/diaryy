@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793059364243,
-      "lastOk": 1793059364243,
+      "lastRun": 1793079023091,
+      "lastOk": 1793079023091,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793019890000,
+          "level": "notable",
+          "title": "Anthropic S-1",
+          "detail": "Article URL: https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm Comments URL: https://news.ycombinator.com/item?id=50242939 Points: 1542 # Comments: 1495",
+          "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm"
+        },
+        {
+          "t": 1793019588000,
+          "level": "notable",
+          "title": "Fixing Tool-Call Accuracy in vLLM",
+          "detail": "Article URL: https://www.ubicloud.com/blog/fixing-tool-call-accuracy-in-vllm Comments URL: https://news.ycombinator.com/item?id=50242870 Points: 159 # Comments: 66",
+          "url": "https://www.ubicloud.com/blog/fixing-tool-call-accuracy-in-vllm"
+        },
         {
           "t": 1793031149000,
           "level": "notable",
@@ -414,20 +428,6 @@
           "level": "notable",
           "title": "Publish fake stats, get cited in LLMs",
           "detail": "Article URL: https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web Comments URL: https://news.ycombinator.com/item?id=50165801 Points: 284 # Comments: 163",
-          "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web"
-        },
-        {
-          "t": 1792509054000,
-          "level": "notable",
-          "title": "Show HN: Penmentor – Claude marks up your handwritten math like a teacher",
-          "detail": "Article URL: https://github.com/AbdullahAlhariri/penmentor Comments URL: https://news.ycombinator.com/item?id=50167604 Points: 28 # Comments: 2",
-          "url": "https://github.com/AbdullahAlhariri/penmentor"
-        },
-        {
-          "t": 1792501582000,
-          "level": "notable",
-          "title": "Publish fake stats, get cited in LLMs",
-          "detail": "Article URL: https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web Comments URL: https://news.ycombinator.com/item?id=50165801 Points: 192 # Comments: 104",
           "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web"
         }
       ],
@@ -3100,11 +3100,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793045180881,
-      "lastOk": 1793045180881,
+      "lastRun": 1793079023799,
+      "lastOk": 1793079023799,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,992 (+66.3%) · excludes S&P 500 ETF",
+      "lastLine": "$3,985 (+66.1%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3802,9 +3802,27 @@
         {
           "t": 1793045180881,
           "v": 3991.7
+        },
+        {
+          "t": 1793079023799,
+          "v": 3985.25
         }
       ],
       "events": [
+        {
+          "t": 1793079023791,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793079023791,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793045180864,
           "level": "notable",
@@ -4210,31 +4228,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792431798565,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792431798565,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 79834
+          "BTC": 79705
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793079023799,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1793059364695,
       "ran": 2,
@@ -5826,14 +5838,6 @@
       "failed": 0,
       "notified": 0,
       "held": 4
-    },
-    {
-      "t": 1789713222573,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 22
     }
   ]
 }

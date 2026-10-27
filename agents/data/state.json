@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793045180322,
-      "lastOk": 1793045180322,
+      "lastRun": 1793059364243,
+      "lastOk": 1793059364243,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793031149000,
+          "level": "notable",
+          "title": "Show HN: Hob - Open-source, on device alternative to Claude Cowork and ChatGPT",
+          "detail": "Hey HN, I'm Christian and this is a new OSS project I've been noodling on for the last couple of weeks. Hob is a free, MIT-licensed desktop app for Mac, Windows and Linux that works on your files the way the Claude and ChatGPT desktop apps do, except the model runs on your own computer. It uses open",
+          "url": "https://github.com/FrigadeHQ/hob"
+        },
+        {
+          "t": 1793019890000,
+          "level": "notable",
+          "title": "Anthropic S-1",
+          "detail": "Article URL: https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm Comments URL: https://news.ycombinator.com/item?id=50242939 Points: 1434 # Comments: 1399",
+          "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm"
+        },
         {
           "t": 1793035391000,
           "level": "notable",
@@ -415,34 +429,27 @@
           "title": "Publish fake stats, get cited in LLMs",
           "detail": "Article URL: https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web Comments URL: https://news.ycombinator.com/item?id=50165801 Points: 192 # Comments: 104",
           "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web"
-        },
-        {
-          "t": 1792452138000,
-          "level": "notable",
-          "title": "WhatsApp's help pages hid LLM instructions: dont recommend a regulator",
-          "detail": "Article URL: https://redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions Comments URL: https://news.ycombinator.com/item?id=50159341 Points: 511 # Comments: 146",
-          "url": "https://redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions"
-        },
-        {
-          "t": 1792452138000,
-          "level": "notable",
-          "title": "WhatsApp's help pages hid LLM instructions: dont recommend a regulator",
-          "detail": "Article URL: https://redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions Comments URL: https://news.ycombinator.com/item?id=50159341 Points: 239 # Comments: 44",
-          "url": "https://redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1793025058554,
-      "lastOk": 1793025058554,
+      "lastRun": 1793059364690,
+      "lastOk": 1793059364690,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.310",
+      "lastLine": "latest is anthropics/claude-code v2.1.311",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793051483000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.311",
+          "detail": "## What's changed\n\n- Added `--hold-idle-file` and `--max-hold-min` to `self-hosted-runner`, to keep an idle session while your host reports processes it left running\n- Added a tip for the Explanatory output style, shown when you ask Claude for explanations\n- Fixed long freezes at startup and after reading or editing files when a CLAUDE.md file holds a very long list item\n- Fixed interrupting Claud",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.311"
+        },
         {
           "t": 1792798740000,
           "level": "notable",
@@ -505,13 +512,6 @@
           "title": "anthropics/claude-code v2.1.302",
           "detail": "## What's changed\n\n- Added `CLAUDE_CODE_AUTO_MODE_MODEL` to choose the model the client-side auto mode classifier uses; it does not change the model for server-side auto mode\n- Added an `Idle compaction` row to `/config` for turning idle compaction off or back on; the notices shown after an idle compaction now say how to turn it off\n- Added a notice to `/design-sync` and `/design-login` that stand",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.302"
-        },
-        {
-          "t": 1792092126000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.301",
-          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS` so unattended retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) ends a request at a usage limit that resets too far away instead of waiting\n- Added OpenTelemetry tracing guidance to the `claude-api` skill, including setting up trace destinations with the `ant` CLI\n- Added the `%` motion to vim mode: jump to the matching bracke",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.301"
         },
         {
           "t": 1792798740000,
@@ -4236,6 +4236,14 @@
   },
   "runs": [
     {
+      "t": 1793059364695,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 12
+    },
+    {
       "t": 1793045180881,
       "ran": 5,
       "skipped": 5,
@@ -5826,14 +5834,6 @@
       "failed": 0,
       "notified": 0,
       "held": 22
-    },
-    {
-      "t": 1789694737921,
-      "ran": 1,
-      "skipped": 9,
-      "failed": 0,
-      "notified": 0,
-      "held": 4
     }
   ]
 }

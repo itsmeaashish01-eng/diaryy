@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793098357159,
-      "lastOk": 1793098357159,
+      "lastRun": 1793119795228,
+      "lastOk": 1793119795228,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793114906000,
+          "level": "notable",
+          "title": "Anthropic trained Claude on illegally obtained Stanford professors' books",
+          "detail": "Article URL: https://stanforddaily.com/2026/10/27/professors-books-pirated-to-train-claude/ Comments URL: https://news.ycombinator.com/item?id=50260814 Points: 50 # Comments: 21",
+          "url": "https://stanforddaily.com/2026/10/27/professors-books-pirated-to-train-claude/"
+        },
+        {
+          "t": 1793113940000,
+          "level": "notable",
+          "title": "Show HN: Specification First Agentic Development Plugin and Prove",
+          "detail": "Implemented agent smith since start 2026 with over 1000 specifications which lead to about 500k lines of code. The procedure with that spec-first works well. How do you do it? Comments URL: https://news.ycombinator.com/item?id=50260571 Points: 6 # Comments: 0",
+          "url": "https://spec-first.dev/"
+        },
+        {
+          "t": 1793109375000,
+          "level": "notable",
+          "title": "Is my data used for model training?",
+          "detail": "Article URL: https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training Comments URL: https://news.ycombinator.com/item?id=50259406 Points: 147 # Comments: 69",
+          "url": "https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training"
+        },
+        {
+          "t": 1793107402000,
+          "level": "notable",
+          "title": "Here be monsters: What do you still need to know when agents do the work?",
+          "detail": "Article URL: https://blog.adrq.dev/here-be-monsters-what-do-you-still-need-to-know-when-agents-do-the-work Comments URL: https://news.ycombinator.com/item?id=50258868 Points: 82 # Comments: 20",
+          "url": "https://blog.adrq.dev/here-be-monsters-what-do-you-still-need-to-know-when-agents-do-the-work"
+        },
         {
           "t": 1793019890000,
           "level": "notable",
@@ -401,34 +429,6 @@
           "title": "Using Claude to reduce the attack surface of code",
           "detail": "Article URL: https://www.anthropic.com/research/attack-surface-reduction Comments URL: https://news.ycombinator.com/item?id=50175779 Points: 52 # Comments: 21",
           "url": "https://www.anthropic.com/research/attack-surface-reduction"
-        },
-        {
-          "t": 1792516231000,
-          "level": "notable",
-          "title": "Benchmarking Bot Detection Systems Against Modern AI Agents in 2026",
-          "detail": "Article URL: https://research.poh.org/bot-benchmarking-2026/ Comments URL: https://news.ycombinator.com/item?id=50169506 Points: 36 # Comments: 2",
-          "url": "https://research.poh.org/bot-benchmarking-2026/"
-        },
-        {
-          "t": 1792518509000,
-          "level": "notable",
-          "title": "Claude designed protein binders against scorpion neurotoxins",
-          "detail": "Article URL: https://www.anthropic.com/research/claude-scorpion-toxin-binder-design Comments URL: https://news.ycombinator.com/item?id=50170021 Points: 87 # Comments: 60",
-          "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design"
-        },
-        {
-          "t": 1792516231000,
-          "level": "notable",
-          "title": "Benchmarking Bot Detection Systems Against Modern AI Agents in 2026",
-          "detail": "Article URL: https://research.poh.org/bot-benchmarking-2026/ Comments URL: https://news.ycombinator.com/item?id=50169506 Points: 12 # Comments: 0",
-          "url": "https://research.poh.org/bot-benchmarking-2026/"
-        },
-        {
-          "t": 1792518509000,
-          "level": "notable",
-          "title": "Claude designed protein binders against scorpion neurotoxins",
-          "detail": "Article URL: https://www.anthropic.com/research/claude-scorpion-toxin-binder-design Comments URL: https://news.ycombinator.com/item?id=50170021 Points: 38 # Comments: 18",
-          "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design"
         }
       ],
       "notifiedAt": {},
@@ -3112,11 +3112,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793098357993,
-      "lastOk": 1793098357993,
+      "lastRun": 1793119795933,
+      "lastOk": 1793119795933,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,995 (+66.5%) · excludes S&P 500 ETF",
+      "lastLine": "$4,022 (+67.6%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3822,9 +3822,27 @@
         {
           "t": 1793098357993,
           "v": 3994.95
+        },
+        {
+          "t": 1793119795933,
+          "v": 4022.15
         }
       ],
       "events": [
+        {
+          "t": 1793119795915,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793119795915,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793098357980,
           "level": "notable",
@@ -4230,31 +4248,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792477839345,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792477839345,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 79899
+          "BTC": 80443
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793119795934,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 6
+    },
     {
       "t": 1793098357994,
       "ran": 6,
@@ -5846,14 +5858,6 @@
       "failed": 0,
       "notified": 0,
       "held": 10
-    },
-    {
-      "t": 1789749664309,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 15
     }
   ]
 }

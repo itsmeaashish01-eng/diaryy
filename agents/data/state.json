@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793197522513,
-      "lastOk": 1793197522513,
+      "lastRun": 1793216915022,
+      "lastOk": 1793216915022,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793202390000,
+          "level": "notable",
+          "title": "Dayjob: Tax – evaluating AI agents on 50 professional tax assignments",
+          "detail": "Article URL: https://surgehq.ai/blog/dayjob-tax Comments URL: https://news.ycombinator.com/item?id=50275626 Points: 119 # Comments: 68",
+          "url": "https://surgehq.ai/blog/dayjob-tax"
+        },
+        {
+          "t": 1793196140000,
+          "level": "notable",
+          "title": "The Agent SDK",
+          "detail": "Article URL: https://cursor.com/blog/agent-sdk Comments URL: https://news.ycombinator.com/item?id=50273731 Points: 66 # Comments: 69",
+          "url": "https://cursor.com/blog/agent-sdk"
+        },
         {
           "t": 1793196140000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Claude Duet",
           "detail": "Article URL: https://claude.com/resources/articles/claude-duet Comments URL: https://news.ycombinator.com/item?id=50186455 Points: 30 # Comments: 6",
           "url": "https://claude.com/resources/articles/claude-duet"
-        },
-        {
-          "t": 1792610041000,
-          "level": "notable",
-          "title": "Claude Duet",
-          "detail": "Article URL: https://claude.com/product/claude-duet Comments URL: https://news.ycombinator.com/item?id=50186037 Points: 239 # Comments: 205",
-          "url": "https://claude.com/product/claude-duet"
-        },
-        {
-          "t": 1792598968000,
-          "level": "notable",
-          "title": "The bridge to agent-scale Git infrastructure",
-          "detail": "Article URL: https://github.blog/engineering/architecture-optimization/the-bridge-to-agent-scale-git-infrastructure/ Comments URL: https://news.ycombinator.com/item?id=50183344 Points: 45 # Comments: 12",
-          "url": "https://github.blog/engineering/architecture-optimization/the-bridge-to-agent-scale-git-infrastructure/"
         }
       ],
       "notifiedAt": {},
@@ -3136,11 +3136,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793197523954,
-      "lastOk": 1793197523954,
+      "lastRun": 1793216915654,
+      "lastOk": 1793216915654,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,021 (+67.5%) · excludes S&P 500 ETF",
+      "lastLine": "$4,064 (+69.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3862,9 +3862,27 @@
         {
           "t": 1793197523954,
           "v": 4020.85
+        },
+        {
+          "t": 1793216915654,
+          "v": 4064.15
         }
       ],
       "events": [
+        {
+          "t": 1793216915641,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793216915641,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793197523942,
           "level": "notable",
@@ -4270,31 +4288,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792559622427,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792559622427,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 80417
+          "BTC": 81283
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793216915655,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1793197523954,
       "ran": 6,
@@ -5883,14 +5895,6 @@
       "t": 1789829058383,
       "ran": 2,
       "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 12
-    },
-    {
-      "t": 1789817181761,
-      "ran": 5,
-      "skipped": 5,
       "failed": 0,
       "notified": 0,
       "held": 12

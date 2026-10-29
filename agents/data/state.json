@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793254959417,
-      "lastOk": 1793254959417,
+      "lastRun": 1793281110681,
+      "lastOk": 1793281110681,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793244822000,
+          "level": "notable",
+          "title": "Claude Code regularly sends each background agent’s transcript to its model",
+          "detail": "Article URL: https://gist.github.com/flamerix-ai/c3905705cc4205e5de3011fa2e74efce Comments URL: https://news.ycombinator.com/item?id=50284255 Points: 469 # Comments: 186",
+          "url": "https://gist.github.com/flamerix-ai/c3905705cc4205e5de3011fa2e74efce"
+        },
         {
           "t": 1793244822000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "Show HN: Omnara – Open-source alternative to Claude Managed Agents",
           "detail": "Hey all, Kartik from Omnara (https://omnara.com) here. We're building an open-source API for running durable agents. You create an agent with an API call, and Omnara runs the agent loop, gives the agent sandboxes to run commands in, and handles secrets, permissions, and RBAC. Each agent's state is s",
           "url": "https://github.com/omnara-ai/omnara"
-        },
-        {
-          "t": 1792591423000,
-          "level": "notable",
-          "title": "Patch the Planet: global response coordination as agents uncover vulnerabilities",
-          "detail": "https://patchtheplanet.org/ Comments URL: https://news.ycombinator.com/item?id=50181175 Points: 251 # Comments: 169",
-          "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1793254959917,
-      "lastOk": 1793254959917,
+      "lastRun": 1793281111060,
+      "lastOk": 1793281111060,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.312",
@@ -794,6 +794,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.303"
         },
         {
+          "t": 1793132660000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.312",
+          "detail": "## What's changed\n\n- Added `oidc.user_id_claim` to the Claude apps gateway, to identify people by an id_token claim other than `sub`, such as Microsoft Entra ID's `oid`\n- Added click to send: in fullscreen, clicking the \"to send now\" hint under a queued message sends it right away, as its key does\n- Fixed managed settings and organization policy not being fetched for the rest of the session after ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312"
+        },
+        {
           "t": 1793051483000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.311",
@@ -855,13 +862,6 @@
           "title": "anthropics/claude-code v2.1.303",
           "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.303"
-        },
-        {
-          "t": 1792183986000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.302",
-          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_AUTO_MODE_MODEL` to choose the model the client-side auto mode classifier uses; it does not change the model for server-side auto mode\n- Added an `Idle compaction` row to `/config` for turning idle compaction off or back on; the notices shown after an idle compaction now say how to turn it off\n- Added a notice to `/design-sync` and `/design-login` that stand",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.302"
         }
       ],
       "notifiedAt": {},
@@ -3148,11 +3148,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793254960596,
-      "lastOk": 1793254960596,
+      "lastRun": 1793281111602,
+      "lastOk": 1793281111602,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,000 (+66.7%) · excludes S&P 500 ETF",
+      "lastLine": "$4,002 (+66.7%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3886,9 +3886,27 @@
         {
           "t": 1793254960596,
           "v": 3999.65
+        },
+        {
+          "t": 1793281111602,
+          "v": 4001.55
         }
       ],
       "events": [
+        {
+          "t": 1793281111588,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793281111588,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793254960586,
           "level": "notable",
@@ -4294,31 +4312,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792622429975,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792622429975,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 79993
+          "BTC": 80031
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793281111602,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 13
+    },
     {
       "t": 1793254960596,
       "ran": 6,
@@ -5907,14 +5919,6 @@
       "t": 1789860448964,
       "ran": 5,
       "skipped": 5,
-      "failed": 0,
-      "notified": 0,
-      "held": 11
-    },
-    {
-      "t": 1789851407839,
-      "ran": 2,
-      "skipped": 8,
       "failed": 0,
       "notified": 0,
       "held": 11

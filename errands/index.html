@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Errands — groceries &amp; Tesla charging</title>
+  <meta name="description" content="Compare grocery prices across the stores near home, and find the Tesla chargers around the same address." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <span class="logo">🛒 Errands</span>
+    <nav class="nav-tabs" aria-label="Main">
+      <button class="nav-tab is-on" data-view="groceries">Groceries</button>
+      <button class="nav-tab" data-view="charging">Tesla charging</button>
+      <button class="nav-tab" data-view="settings">Settings</button>
+    </nav>
+    <a class="icon-btn" href="../index.html" title="Back to My Diary" aria-label="Back to My Diary">✦</a>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="app-main" id="view"><!-- rendered by app.js --></main>
+
+  <footer class="page-foot">
+    <p>
+      Store and charger locations from <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>
+      contributors and the US DOE Alternative Fuels Data Center. Prices are the ones you record,
+      kept in this browser only.
+    </p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Load order matters: each file hangs itself off window.ER -->
+  <script src="js/util.js"></script>
+  <script src="js/places.js"></script>
+  <script src="js/basket.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

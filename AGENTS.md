@@ -6,7 +6,7 @@ Project rules live here, in one place, so both agents follow the same ones.
 
 ## What this is
 
-A personal diary and three companion apps, all static pages. No build
+A personal diary and four companion apps, all static pages. No build
 step, no server, and no `package.json` at the root: open an `index.html`
 and it runs.
 
@@ -16,6 +16,7 @@ and it runs.
 | `tracker/` | Price Watch: price tracking, alerts, a buy signal. See `tracker/README.md` |
 | `agents/` | Small watchers that GitHub Actions runs hourly. See `agents/README.md` |
 | `guide/` | RoamGuide, a travel planner that installs as a web app. See `guide/README.md` |
+| `errands/` | Errands: grocery prices across nearby stores, and Tesla chargers near home. See `errands/README.md` |
 | `guide/ios-app/` | The Capacitor wrapper for the App Store, and the only place with npm dependencies |
 
 Read the README of the app you're changing before you change it. They
@@ -29,8 +30,9 @@ the same steps on Node 20. They are offline and take a few seconds:
 ```bash
 node agents/selftest.mjs
 node guide/selftest.mjs
+node errands/selftest.mjs
 node agents/runner.mjs --validate
-for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js; do node --check "$f"; done
+for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js errands/selftest.mjs errands/js/*.js; do node --check "$f"; done
 ```
 
 The diary and `tracker/` have no test suite. Check a change there by
@@ -43,7 +45,7 @@ opening the page.
   calls the Claude API over raw HTTP for this reason. Don't add a
   `package.json` outside `guide/ios-app/`.
 - **Browser scripts hang off a global**: `window.PT` in `tracker/`,
-  `window.RG` in `guide/`. The `<script>` order in each `index.html` matters.
+  `window.RG` in `guide/`, `window.ER` in `errands/`. The `<script>` order in each `index.html` matters.
 - **Each file opens with a header comment** saying what it is, and comments
   explain why rather than what. Match the style of the file you're in.
 - **Render outside text as text.** Anything from a feed, a web page or the

@@ -105,6 +105,14 @@ const now = Date.parse("2026-10-29T12:00:00Z");
 }
 
 {
+  // Four stores ticked, two visited: the two can still be compared.
+  const prices = { A: { milk: P(3.49) }, B: { milk: P(3.19) } };
+  const r = basket.compare(items, ["A", "B", "C", "D"], prices, now);
+  check("unvisited stores don't block a comparison", r.verdict && r.verdict.basis === "common"
+    && r.verdict.best === "B" && r.verdict.storeCount === 2 && r.active.join() === "A,B");
+}
+
+{
   const r = basket.compare(items, ["A", "B"], {}, now);
   check("no prices, no verdict — and blanks aren't zero", r.verdict === null && r.perItem.milk.min === null);
 }

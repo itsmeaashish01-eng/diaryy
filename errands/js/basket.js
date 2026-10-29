@@ -12,7 +12,8 @@
    A missing price is "unknown", never zero. A store with half the list
    priced isn't cheaper than one with all of it, it's just less known —
    so whole-list totals only compare stores that have every item, and
-   failing that, only the items every store has a price for.
+   failing that, only the items shared by every store you've priced
+   anything at (a ticked store you haven't visited yet doesn't block it).
    ================================================ */
 (function (ER) {
   "use strict";
@@ -54,11 +55,12 @@
       perItem[item.id] = row;
     }
 
-    // Items with a price at every compared store: the only fair subset
-    // when no store has the whole list.
-    const common = storeIds.length
-      ? items.filter((it) => perItem[it.id].priced === storeIds.length) : [];
-    for (const sid of storeIds) {
+    // Items with a price at every store that has any prices: the only
+    // fair subset when no store has the whole list.
+    const active = storeIds.filter((sid) => perStore[sid].priced > 0);
+    const common = active.length
+      ? items.filter((it) => active.every((sid) => priceAt(prices, sid, it.id))) : [];
+    for (const sid of active) {
       perStore[sid].commonTotal = common.reduce(
         (sum, it) => sum + priceAt(prices, sid, it.id).price * qtyOf(it), 0);
     }
@@ -95,11 +97,12 @@
         split: !uncovered.length && splitStores.length > 1 && splitTotal < bestTotal - CENT
           ? { total: splitTotal, saves: bestTotal - splitTotal, stores: splitStores } : null,
       };
-    } else if (common.length && storeIds.length > 1) {
-      const ranked = storeIds.slice().sort((a, b) => perStore[a].commonTotal - perStore[b].commonTotal);
+    } else if (common.length && active.length > 1) {
+      const ranked = active.slice().sort((a, b) => perStore[a].commonTotal - perStore[b].commonTotal);
       verdict = {
         basis: "common",
         commonCount: common.length,
+        storeCount: active.length,
         best: ranked[0],
         bestTotal: perStore[ranked[0]].commonTotal,
         worst: ranked[ranked.length - 1],
@@ -109,7 +112,7 @@
     }
 
     return {
-      perItem, perStore, complete, common: common.map((i) => i.id),
+      perItem, perStore, complete, active, common: common.map((i) => i.id),
       split: { total: splitTotal, picks, stores: splitStores, uncovered },
       verdict,
     };

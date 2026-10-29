@@ -20,6 +20,7 @@
     editingHome: false,
     pasteStore: "",
     allStores: false,
+    confirmReset: false,
   };
 
   const view = document.getElementById("view");
@@ -227,7 +228,7 @@
     } else if (!r.verdict) {
       const priced = Object.values(r.perStore).reduce((n, x) => n + x.priced, 0);
       kids.push(h("p", {}, priced
-        ? "Not enough overlap yet: record the same item at two or more stores to see who's cheaper."
+        ? "Not enough overlap yet. Record the same item at two or more stores to see which is cheaper."
         : "Type in prices as you see them — on the shelf, a receipt, a weekly ad or the store's site (the 🔍 in each cell opens that store's search). The app works out the rest."));
     } else {
       const v = r.verdict;
@@ -240,7 +241,7 @@
       kids.push(h("p", { class: "small" }, v.basis === "all"
         ? `For your whole list of ${s.items.length} item${s.items.length === 1 ? "" : "s"}.`
           + (v.vsWorst > 0.005 ? ` ${fmtMoney(v.vsWorst)} less than ${name(v.worst)}.` : "")
-        : `Compared on the ${v.commonCount} item${v.commonCount === 1 ? "" : "s"} every store has a price for — fill in the gaps for a whole-list answer.`
+        : `Compared on the ${v.commonCount} item${v.commonCount === 1 ? "" : "s"} priced at all ${v.storeCount} stores you've checked. Fill in the rest for a whole-list answer.`
           + (v.vsWorst > 0.005 ? ` ${fmtMoney(v.vsWorst)} less than ${name(v.worst)} on those.` : "")));
       if (v.split) {
         kids.push(h("p", { class: "small split" },
@@ -302,7 +303,7 @@
         return h("td", { class: best ? "is-best" : "" },
           h("div", { class: "total" }, t.priced ? fmtMoney(t.total) : "—"),
           h("div", { class: "small muted" }, complete ? "all items" : `${t.priced} of ${s.items.length} priced`),
-          common ? h("div", { class: "small" }, `${fmtMoney(t.commonTotal)} on the ${r.common.length} shared`) : null,
+          common && r.active.includes(st.id) ? h("div", { class: "small" }, `${fmtMoney(t.commonTotal)} on the ${r.common.length} shared`) : null,
           best ? h("div", { class: "badge good small" }, common ? "✓ cheapest on shared" : "✓ cheapest") : null);
       }),
       h("td", {}));
@@ -597,9 +598,16 @@
         h("div", { class: "row" },
           h("button", { class: "btn", onclick: () => ER.util.downloadFile(`errands-${ER.util.today()}.json`, S.exportJSON()) }, "Download backup"),
           h("button", { class: "btn", onclick: () => file.click() }, "Restore backup"), file,
-          h("button", { class: "btn danger", onclick: () => {
-            if (confirm("Clear your list, prices and home address? This can't be undone.")) { S.reset(); render(); refreshStores(); refreshChargers(); }
-          } }, "Start over"))),
+          // Asked on the page, not with confirm(): some embedded viewers
+          // answer confirm() with "no" without ever showing it.
+          ui.confirmReset
+            ? h("span", { class: "row" },
+              h("button", { class: "btn danger", onclick: () => {
+                ui.confirmReset = false; S.reset(); render(); refreshStores(); refreshChargers();
+              } }, "Yes, clear everything"),
+              h("button", { class: "btn", onclick: () => { ui.confirmReset = false; render(); } }, "Keep my data"))
+            : h("button", { class: "btn danger", onclick: () => { ui.confirmReset = true; render(); } }, "Start over")),
+        ui.confirmReset ? h("p", { class: "small warn" }, "This clears your list, every price and your home address. It can't be undone.") : null),
       h("section", { class: "card" },
         h("h2", {}, "Where the data comes from"),
         h("ul", { class: "small plain-list" },

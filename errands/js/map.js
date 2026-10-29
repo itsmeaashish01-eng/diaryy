@@ -19,13 +19,29 @@
 
   let box = null, map = null, layer = null, framedFor = "";
 
+  /* A grey canvas with pins floating on it looks broken. After a handful
+     of tile failures the map gives way to a sentence saying why. */
+  // A small phone map asks for only a few tiles, so "two failed and none
+  // arrived" counts as broken as well as six failures outright.
+  const TILE_FAIL_LIMIT = 6;
+  let tilesFailed = 0, tilesLoaded = 0;
+  const tilesBroken = () => tilesFailed >= TILE_FAIL_LIMIT || (tilesFailed >= 2 && tilesLoaded === 0);
+  let host = null;
+  const NO_MAP = "The map needs the network (it loads Leaflet and OpenStreetMap tiles). The list below works without it.";
+
   const available = () => typeof window !== "undefined" && Boolean(window.L);
 
   function ensure() {
     if (map || !available()) return map;
     box = h("div", { class: "map-canvas" });
     map = window.L.map(box, { scrollWheelZoom: false }).setView([39.2873, -76.6191], 13);
-    window.L.tileLayer(TILES, { maxZoom: 19, attribution: ATTRIB, crossOrigin: true }).addTo(map);
+    const tiles = window.L.tileLayer(TILES, { maxZoom: 19, attribution: ATTRIB, crossOrigin: true });
+    tiles.on("tileload", () => { tilesLoaded++; });
+    tiles.on("tileerror", () => {
+      tilesFailed++;
+      if (tilesBroken() && host && host.contains(box)) host.replaceChildren(noMap());
+    });
+    tiles.addTo(map);
     layer = window.L.layerGroup().addTo(map);
     return map;
   }
@@ -36,13 +52,12 @@
 
   /* points: [{ lat, lon, label, sub, tone, n }] — tone picks the colour
      ("home", "pick", "other", "sc", "dest"); n is the list number. */
-  function show(host, home, points, frameKey) {
+  const noMap = () => h("p", { class: "map-empty muted small" }, NO_MAP);
+
+  function show(into, home, points, frameKey) {
+    host = into;
     if (!host) return;
-    if (!ensure()) {
-      host.replaceChildren(h("p", { class: "map-empty muted small" },
-        "The map needs the network (it loads Leaflet and OpenStreetMap tiles). The list below works without it."));
-      return;
-    }
+    if (!ensure() || tilesBroken()) { host.replaceChildren(noMap()); return; }
     if (box.parentNode !== host) host.replaceChildren(box);
     setTimeout(() => map.invalidateSize(), 0);
 

@@ -594,9 +594,18 @@
         h("p", { class: "small muted" }, "The key stays in this browser. It's sent only to developer.nrel.gov.")),
       h("section", { class: "card" },
         h("h2", {}, "Your data"),
-        h("p", { class: "small" }, "Your list and prices live in this browser only. Save a backup to move them to another device."),
+        h("p", { class: "small" }, "Your list and prices live in this browser only. Save a backup to move them to another device. Restore takes the saved file."),
         h("div", { class: "row" },
-          h("button", { class: "btn", onclick: () => ER.util.downloadFile(`errands-${ER.util.today()}.json`, S.exportJSON()) }, "Download backup"),
+          // Some embedded viewers refuse downloads, and they set this flag.
+          window.ER_NO_DOWNLOAD ? null
+            : h("button", { class: "btn", onclick: () => ER.util.downloadFile(`errands-${ER.util.today()}.json`, S.exportJSON()) }, "Download backup"),
+          h("button", { class: "btn", onclick: () => {
+            const text = S.exportJSON();
+            const done = () => toast("Backup copied. Paste it into a note or file to keep it.");
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(text).then(done, () => toast("Copying was refused here. Use Download backup instead."));
+            } else toast("Copying isn't available in this browser.");
+          } }, "Copy backup"),
           h("button", { class: "btn", onclick: () => file.click() }, "Restore backup"), file,
           // Asked on the page, not with confirm(): some embedded viewers
           // answer confirm() with "no" without ever showing it.

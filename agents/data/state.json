@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793303286255,
-      "lastOk": 1793303286255,
+      "lastRun": 1793319262709,
+      "lastOk": 1793319262709,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793310028000,
+          "level": "notable",
+          "title": "We ran AI agent swarms in Minecraft and Mindustry",
+          "detail": "Article URL: https://labs.ycombinator.com/projects/games/index.html Comments URL: https://news.ycombinator.com/item?id=50296486 Points: 101 # Comments: 35",
+          "url": "https://labs.ycombinator.com/projects/games/index.html"
+        },
+        {
+          "t": 1793301948000,
+          "level": "notable",
+          "title": "IgE disruptor for food allergy with Claude-enabled antibody design [pdf]",
+          "detail": "Article URL: https://divergencelabs.com/publications/ige-preprint.pdf Comments URL: https://news.ycombinator.com/item?id=50294486 Points: 33 # Comments: 21",
+          "url": "https://divergencelabs.com/publications/ige-preprint.pdf"
+        },
+        {
+          "t": 1793294665000,
+          "level": "notable",
+          "title": "Claude Duet is the first personal-assistant-type harness that feels useful",
+          "detail": "Article URL: https://fig.blue/posts/duet-is-the-future/ Comments URL: https://news.ycombinator.com/item?id=50292727 Points: 90 # Comments: 70",
+          "url": "https://fig.blue/posts/duet-is-the-future/"
+        },
+        {
+          "t": 1793289392000,
+          "level": "notable",
+          "title": "Launch HN: Simantic (YC F26) – Firmware Simulation for AI Agents",
+          "detail": "Hi HN, we're Ahnaf and Seungmin from Simantic (https://simantic.com). We are building the simulation layer that lets engineers and AI agents test and validate firmware without hardware.Before Simantic, we were ex-firmware engineers at companies like Neuralink and Tesla. We’ve worked on some of the c",
+          "url": "https://news.ycombinator.com/item?id=50291116"
+        },
         {
           "t": 1793301948000,
           "level": "notable",
@@ -401,34 +429,6 @@
           "title": "OpenShell – A safe, private runtime for fleets of autonomous AI agents",
           "detail": "Article URL: https://github.com/NVIDIA/OpenShell Comments URL: https://news.ycombinator.com/item?id=50198675 Points: 298 # Comments: 158",
           "url": "https://github.com/NVIDIA/OpenShell"
-        },
-        {
-          "t": 1792691046000,
-          "level": "notable",
-          "title": "OpenShell – A safe, private runtime for fleets of autonomous AI agents",
-          "detail": "Article URL: https://github.com/NVIDIA/OpenShell Comments URL: https://news.ycombinator.com/item?id=50198675 Points: 239 # Comments: 125",
-          "url": "https://github.com/NVIDIA/OpenShell"
-        },
-        {
-          "t": 1792692158000,
-          "level": "notable",
-          "title": "Show HN: agent-usage-guard – a Claude Code mod to protect your usage window",
-          "detail": "Article URL: https://github.com/rbartoli/agent-usage-guard Comments URL: https://news.ycombinator.com/item?id=50198936 Points: 7 # Comments: 4",
-          "url": "https://github.com/rbartoli/agent-usage-guard"
-        },
-        {
-          "t": 1792610041000,
-          "level": "notable",
-          "title": "Claude Duet",
-          "detail": "Article URL: https://claude.com/product/claude-duet Comments URL: https://news.ycombinator.com/item?id=50186037 Points: 466 # Comments: 432",
-          "url": "https://claude.com/product/claude-duet"
-        },
-        {
-          "t": 1792591226000,
-          "level": "notable",
-          "title": "Compromised LiteLLM 1.107.0 on PyPI Installs a Credential Stealer and Backdoor",
-          "detail": "Article URL: https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/ Comments URL: https://news.ycombinator.com/item?id=50181114 Points: 557 # Comments: 182",
-          "url": "https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/"
         }
       ],
       "notifiedAt": {},
@@ -3160,11 +3160,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793303287518,
-      "lastOk": 1793303287518,
+      "lastRun": 1793319263462,
+      "lastOk": 1793319263462,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,039 (+68.3%) · excludes S&P 500 ETF",
+      "lastLine": "$3,885 (+61.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3906,9 +3906,27 @@
         {
           "t": 1793303287518,
           "v": 4038.95
+        },
+        {
+          "t": 1793319263463,
+          "v": 3884.5
         }
       ],
       "events": [
+        {
+          "t": 1793319263451,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793319263451,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793303287509,
           "level": "notable",
@@ -4314,31 +4332,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792677778687,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792677778687,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 80779
+          "BTC": 77690
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793319263463,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 6
+    },
     {
       "t": 1793303287518,
       "ran": 6,
@@ -5930,14 +5942,6 @@
       "failed": 0,
       "notified": 0,
       "held": 12
-    },
-    {
-      "t": 1789867966849,
-      "ran": 1,
-      "skipped": 9,
-      "failed": 0,
-      "notified": 0,
-      "held": 1
     }
   ]
 }

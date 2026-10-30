@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793366830571,
-      "lastOk": 1793366830571,
+      "lastRun": 1793386063385,
+      "lastOk": 1793386063385,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793381245000,
+          "level": "notable",
+          "title": "Anthropic may not secure investment-grade rating after IPO, Blackstone says",
+          "detail": "Article URL: https://www.ft.com/content/59383c7f-8d82-493f-bf01-d2e862a1018f Comments URL: https://news.ycombinator.com/item?id=50307219 Points: 49 # Comments: 13",
+          "url": "https://www.ft.com/content/59383c7f-8d82-493f-bf01-d2e862a1018f"
+        },
+        {
+          "t": 1793344152000,
+          "level": "notable",
+          "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+          "detail": "https://cursor.com/blog/claude-code-extension-security-notic... Comments URL: https://news.ycombinator.com/item?id=50300683 Points: 497 # Comments: 384",
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/"
+        },
         {
           "t": 1793358353000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Argus – a free, open-source agentic security operations platform – MIT",
           "detail": "Article URL: https://thomasunise.com/argus Comments URL: https://news.ycombinator.com/item?id=50225748 Points: 19 # Comments: 5",
           "url": "https://thomasunise.com/argus"
-        },
-        {
-          "t": 1792784798000,
-          "level": "notable",
-          "title": "Show HN: Corgi, a helpful {agent, terminal} multiplexer",
-          "detail": "Hey everyone,Inspired by Herdr, I've built an agent multiplexer that I've been using as my daily driver for a few weeks now.I think I improved on the concept in a few ways, focusing on the ergonomics I always wished I had:I show you what the agents are up to, along with a running feed of their activ",
-          "url": "https://corgi.computer/"
-        },
-        {
-          "t": 1792784798000,
-          "level": "notable",
-          "title": "Show HN: Corgi, a helpful {agent, terminal} multiplexer",
-          "detail": "Hey everyone,Inspired by Herdr, I've built an agent multiplexer that I've been using as my daily driver for a few weeks now.I think I improved on the concept in a few ways, focusing on the ergonomics I always wished I had:I show you what the agents are up to, along with a running feed of their activ",
-          "url": "https://corgi.computer/"
         }
       ],
       "notifiedAt": {},
@@ -3172,11 +3172,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793366841727,
-      "lastOk": 1793366841727,
+      "lastRun": 1793386064095,
+      "lastOk": 1793386064095,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,863 (+61.0%) · excludes S&P 500 ETF",
+      "lastLine": "$3,833 (+59.7%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3930,9 +3930,27 @@
         {
           "t": 1793366841728,
           "v": 3863.35
+        },
+        {
+          "t": 1793386064095,
+          "v": 3832.85
         }
       ],
       "events": [
+        {
+          "t": 1793386064087,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793386064087,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793366841667,
           "level": "notable",
@@ -4338,31 +4356,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792742003371,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792742003371,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 77267
+          "BTC": 76657
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793386064096,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1793366841729,
       "ran": 6,
@@ -5954,14 +5966,6 @@
       "failed": 0,
       "notified": 0,
       "held": 3
-    },
-    {
-      "t": 1789921642364,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 12
     }
   ]
 }

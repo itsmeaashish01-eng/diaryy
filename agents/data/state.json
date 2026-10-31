@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793477716631,
-      "lastOk": 1793477716631,
+      "lastRun": 1793489944877,
+      "lastOk": 1793489944877,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793475559000,
+          "level": "notable",
+          "title": "Anthropic blocks users for anything touching training larger models",
+          "detail": "Article URL: https://twitter.com/jiahaoshao1/status/2116475922190922088 Comments URL: https://news.ycombinator.com/item?id=50319358 Points: 133 # Comments: 40",
+          "url": "https://twitter.com/jiahaoshao1/status/2116475922190922088"
+        },
         {
           "t": 1793456943000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "A 10-year-old CNN outperforms frontier LLMs for skin cancer diagnosis",
           "detail": "Article URL: https://lynchlab.net/llm-skin-cancer Comments URL: https://news.ycombinator.com/item?id=50233779 Points: 422 # Comments: 202",
           "url": "https://lynchlab.net/llm-skin-cancer"
-        },
-        {
-          "t": 1792962691000,
-          "level": "notable",
-          "title": "OpenAI and Anthropic cut their LLM prices by up to 80% within a few months. Why?",
-          "detail": "Article URL: https://minimaxir.com/2026/10/cheap-llms/ Comments URL: https://news.ycombinator.com/item?id=50236102 Points: 53 # Comments: 69",
-          "url": "https://minimaxir.com/2026/10/cheap-llms/"
         }
       ],
       "notifiedAt": {},
@@ -4408,6 +4408,14 @@
   },
   "runs": [
     {
+      "t": 1793489944882,
+      "ran": 1,
+      "skipped": 9,
+      "failed": 0,
+      "notified": 0,
+      "held": 1
+    },
+    {
       "t": 1793477717786,
       "ran": 3,
       "skipped": 7,
@@ -5998,14 +6006,6 @@
       "failed": 0,
       "notified": 0,
       "held": 11
-    },
-    {
-      "t": 1790010611923,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 14
     }
   ]
 }

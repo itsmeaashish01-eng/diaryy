@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793560078290,
-      "lastOk": 1793560078290,
+      "lastRun": 1793573985133,
+      "lastOk": 1793573985134,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793548708000,
+          "level": "notable",
+          "title": "Show HN: HackerBooks – HackerTube, but for books mentioned on HN",
+          "detail": "Saw Karpathy's HackerTube and wanted the same thing for books. So I had Claude build one (Opus 5.5).It's ~16.5k books that at least two different HN commenters brought up, from 2007 till now. Each book links back to the comments that mentioned it. Data is downloadable from the about page.To be clear",
+          "url": "https://hackerbooks.org"
+        },
         {
           "t": 1793548708000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "A 10-year-old CNN outperforms frontier LLMs for skin cancer diagnosis",
           "detail": "Article URL: https://lynchlab.net/llm-skin-cancer Comments URL: https://news.ycombinator.com/item?id=50233779 Points: 621 # Comments: 259",
           "url": "https://lynchlab.net/llm-skin-cancer"
-        },
-        {
-          "t": 1792988075000,
-          "level": "notable",
-          "title": "Show HN: Proc-CLI – An agent-friendly CLI tool for process and port management",
-          "detail": "Article URL: https://proc-cli.com/ Comments URL: https://news.ycombinator.com/item?id=50239041 Points: 6 # Comments: 0",
-          "url": "https://proc-cli.com/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1793543274324,
-      "lastOk": 1793543274324,
+      "lastRun": 1793573985473,
+      "lastOk": 1793573985473,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.316",
@@ -724,6 +724,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305"
         },
         {
+          "t": 1793408495000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.316",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_DISABLE_ULTRATHINK`, which turns the `ultrathink` keyword off\n- Added pooled group budgets to the Claude apps gateway: one monthly budget that a group's members share, on top of each member's own limit, set with `pooled_budget` on the spend limits admin API\n- Added `CLAUDE_CODE_DISABLE_LOOPED_CROSS_CERT_DROP` to keep system cross-certificates that certify ea",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316"
+        },
+        {
           "t": 1793322386000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.314",
@@ -785,13 +792,6 @@
           "title": "anthropics/claude-code v2.1.305",
           "detail": "## What's changed\n\n- Added `sandbox.allowNestedUserNamespaces` so sandboxed commands on Linux can create user namespaces (Chromium, rootless podman); this lets them get around the sandbox's file protections\n- Added `CLAUDE_CODE_RETRY_WATCHDOG_USAGE_LIMIT_RECHECK_MS` so unattended retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) notices a usage limit that was lifted before its reset\n- Fixed every request ",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305"
-        },
-        {
-          "t": 1792445679000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.304",
-          "detail": "## What's changed\n\n- Added a transcript line when a plugin that runs first skips one of your mod's hooks, naming the event and the plugin\n- Added `decider: \"person\"` to a mod's `tool.check` answer: only the permission dialog or a host's callback can approve the ask, and it is refused with the mod's reason where nobody can be asked\n- Added `e.isReadOnly` to a mod's `tool.check` event, set when the ",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.304"
         },
         {
           "t": 1793322386000,
@@ -4444,6 +4444,14 @@
   },
   "runs": [
     {
+      "t": 1793573985477,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 11
+    },
+    {
       "t": 1793560078785,
       "ran": 5,
       "skipped": 5,
@@ -6034,14 +6042,6 @@
       "failed": 0,
       "notified": 0,
       "held": 2
-    },
-    {
-      "t": 1790072187711,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 22
     }
   ]
 }

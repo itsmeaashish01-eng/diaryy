@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793515488582,
-      "lastOk": 1793515488582,
+      "lastRun": 1793543273842,
+      "lastOk": 1793543273842,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793540844000,
+          "level": "notable",
+          "title": "AI agent swarms in Minecraft fail to build civilization, drown in bureaucracy",
+          "detail": "Article URL: https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy Comments URL: https://news.ycombinator.com/item?id=50325662 Points: 6 # Comments: 1",
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy"
+        },
         {
           "t": 1793475559000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "A 10-year-old CNN outperforms frontier LLMs for skin cancer diagnosis",
           "detail": "Article URL: https://lynchlab.net/llm-skin-cancer Comments URL: https://news.ycombinator.com/item?id=50233779 Points: 511 # Comments: 228",
           "url": "https://lynchlab.net/llm-skin-cancer"
-        },
-        {
-          "t": 1792962691000,
-          "level": "notable",
-          "title": "OpenAI and Anthropic cut their LLM prices by up to 80% within a few months. Why?",
-          "detail": "Article URL: https://minimaxir.com/2026/10/cheap-llms/ Comments URL: https://news.ycombinator.com/item?id=50236102 Points: 127 # Comments: 151",
-          "url": "https://minimaxir.com/2026/10/cheap-llms/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1793515489001,
-      "lastOk": 1793515489001,
+      "lastRun": 1793543274324,
+      "lastOk": 1793543274324,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.316",
@@ -654,6 +654,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305"
         },
         {
+          "t": 1793408495000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.316",
+          "detail": "## What's changed\n\n- Added `CLAUDE_CODE_DISABLE_ULTRATHINK`, which turns the `ultrathink` keyword off\n- Added pooled group budgets to the Claude apps gateway: one monthly budget that a group's members share, on top of each member's own limit, set with `pooled_budget` on the spend limits admin API\n- Added `CLAUDE_CODE_DISABLE_LOOPED_CROSS_CERT_DROP` to keep system cross-certificates that certify ea",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316"
+        },
+        {
           "t": 1793322386000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.314",
@@ -715,13 +722,6 @@
           "title": "anthropics/claude-code v2.1.305",
           "detail": "## What's changed\n\n- Added `sandbox.allowNestedUserNamespaces` so sandboxed commands on Linux can create user namespaces (Chromium, rootless podman); this lets them get around the sandbox's file protections\n- Added `CLAUDE_CODE_RETRY_WATCHDOG_USAGE_LIMIT_RECHECK_MS` so unattended retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) notices a usage limit that was lifted before its reset\n- Fixed every request ",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305"
-        },
-        {
-          "t": 1792445679000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.304",
-          "detail": "## What's changed\n\n- Added a transcript line when a plugin that runs first skips one of your mod's hooks, naming the event and the plugin\n- Added `decider: \"person\"` to a mod's `tool.check` answer: only the permission dialog or a host's callback can approve the ask, and it is refused with the mod's reason where nobody can be asked\n- Added `e.isReadOnly` to a mod's `tool.check` event, set when the ",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.304"
         },
         {
           "t": 1793322386000,
@@ -3208,11 +3208,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793515489685,
-      "lastOk": 1793515489685,
+      "lastRun": 1793543274760,
+      "lastOk": 1793543274760,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,891 (+62.1%) · excludes S&P 500 ETF",
+      "lastLine": "$3,899 (+62.4%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -3990,9 +3990,27 @@
         {
           "t": 1793515489685,
           "v": 3891.35
+        },
+        {
+          "t": 1793543274761,
+          "v": 3898.7
         }
       ],
       "events": [
+        {
+          "t": 1793543274751,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793543274751,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793515489671,
           "level": "notable",
@@ -4398,31 +4416,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792865985063,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792865985063,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 77827
+          "BTC": 77974
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793543274761,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 13
+    },
     {
       "t": 1793515489685,
       "ran": 6,
@@ -6014,14 +6026,6 @@
       "failed": 0,
       "notified": 0,
       "held": 3
-    },
-    {
-      "t": 1790036114045,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 11
     }
   ]
 }

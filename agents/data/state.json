@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793619478237,
-      "lastOk": 1793619478237,
+      "lastRun": 1793656408575,
+      "lastOk": 1793656408575,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793644258000,
+          "level": "notable",
+          "title": "Agentic backdoors via pretraining poisoning",
+          "detail": "Article URL: https://arxiv.org/abs/2610.37741 Comments URL: https://news.ycombinator.com/item?id=50341334 Points: 64 # Comments: 14",
+          "url": "https://arxiv.org/abs/2610.37741"
+        },
+        {
+          "t": 1793639125000,
+          "level": "notable",
+          "title": "Launch HN: Momentic (YC W24) – Agents that catch bugs by using your app",
+          "detail": "Hey HN, we’re Wei-Wei and Jeff. We’re building Momentic, QA agents that autonomously plan, explore, and bug-bash controls and user flows in your web, iOS, Android, and (soon) desktop apps to catch bugs.Here’s a demo: https://youtu.be/BFsM-Se1Fh8We’re both software engineers that spent our careers on",
+          "url": "https://momentic.ai/"
+        },
+        {
+          "t": 1793637629000,
+          "level": "notable",
+          "title": "Anthropic's internal AI use, at retail prices, now exceeds its employee pay",
+          "detail": "Article URL: https://www.businessinsider.com/anthropic-claude-internal-ai-use-exceeds-employee-pay-tokens-2026-11 Comments URL: https://news.ycombinator.com/item?id=50339494 Points: 247 # Comments: 202",
+          "url": "https://www.businessinsider.com/anthropic-claude-internal-ai-use-exceeds-employee-pay-tokens-2026-11"
+        },
         {
           "t": 1793548708000,
           "level": "notable",
@@ -408,35 +429,14 @@
           "title": "The Git Forge for Agent-Human Collaboration",
           "detail": "Article URL: https://entire.com/blog/the-git-forge-for-agent-human-collaboration Comments URL: https://news.ycombinator.com/item?id=50247453 Points: 46 # Comments: 28",
           "url": "https://entire.com/blog/the-git-forge-for-agent-human-collaboration"
-        },
-        {
-          "t": 1793019890000,
-          "level": "notable",
-          "title": "Anthropic S-1",
-          "detail": "Article URL: https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm Comments URL: https://news.ycombinator.com/item?id=50242939 Points: 1255 # Comments: 1221",
-          "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm"
-        },
-        {
-          "t": 1793019588000,
-          "level": "notable",
-          "title": "Fixing Tool-Call Accuracy in vLLM",
-          "detail": "Article URL: https://www.ubicloud.com/blog/fixing-tool-call-accuracy-in-vllm Comments URL: https://news.ycombinator.com/item?id=50242870 Points: 132 # Comments: 64",
-          "url": "https://www.ubicloud.com/blog/fixing-tool-call-accuracy-in-vllm"
-        },
-        {
-          "t": 1793019890000,
-          "level": "notable",
-          "title": "Anthropic S-1",
-          "detail": "Article URL: https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm Comments URL: https://news.ycombinator.com/item?id=50242939 Points: 441 # Comments: 351",
-          "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1793619478667,
-      "lastOk": 1793619478667,
+      "lastRun": 1793656409018,
+      "lastOk": 1793656409018,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.316",
@@ -3232,11 +3232,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793619488837,
-      "lastOk": 1793619488837,
+      "lastRun": 1793656409760,
+      "lastOk": 1793656409760,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,891 (+62.1%) · excludes S&P 500 ETF",
+      "lastLine": "$3,836 (+59.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4030,9 +4030,27 @@
         {
           "t": 1793619488837,
           "v": 3890.6
+        },
+        {
+          "t": 1793656409760,
+          "v": 3835.5
         }
       ],
       "events": [
+        {
+          "t": 1793656409749,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793656409749,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793619488824,
           "level": "notable",
@@ -4438,31 +4456,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792938756954,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792938756954,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 77812
+          "BTC": 76710
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793656409761,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 15
+    },
     {
       "t": 1793619488838,
       "ran": 6,
@@ -6054,14 +6066,6 @@
       "failed": 0,
       "notified": 0,
       "held": 5
-    },
-    {
-      "t": 1790115807656,
-      "ran": 5,
-      "skipped": 5,
-      "failed": 0,
-      "notified": 0,
-      "held": 17
     }
   ]
 }

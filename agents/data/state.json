@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793573985133,
-      "lastOk": 1793573985134,
+      "lastRun": 1793587376596,
+      "lastOk": 1793587376596,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793548708000,
+          "level": "notable",
+          "title": "Show HN: HackerBooks – HackerTube, but for books mentioned on HN",
+          "detail": "Saw Karpathy's HackerTube and wanted the same thing for books. So I had Claude build one (Opus 5.5).It's ~16.5k books that at least two different HN commenters brought up, from 2007 till now. Each book links back to the comments that mentioned it. Data is downloadable from the about page.To be clear",
+          "url": "https://hackerbooks.org"
+        },
         {
           "t": 1793548708000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "Fixing Tool-Call Accuracy in vLLM",
           "detail": "Article URL: https://www.ubicloud.com/blog/fixing-tool-call-accuracy-in-vllm Comments URL: https://news.ycombinator.com/item?id=50242870 Points: 41 # Comments: 6",
           "url": "https://www.ubicloud.com/blog/fixing-tool-call-accuracy-in-vllm"
-        },
-        {
-          "t": 1792948538000,
-          "level": "notable",
-          "title": "A 10-year-old CNN outperforms frontier LLMs for skin cancer diagnosis",
-          "detail": "Article URL: https://lynchlab.net/llm-skin-cancer Comments URL: https://news.ycombinator.com/item?id=50233779 Points: 621 # Comments: 259",
-          "url": "https://lynchlab.net/llm-skin-cancer"
         }
       ],
       "notifiedAt": {},
@@ -3220,11 +3220,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793560078785,
-      "lastOk": 1793560078785,
+      "lastRun": 1793587377226,
+      "lastOk": 1793587377226,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,891 (+62.1%) · excludes S&P 500 ETF",
+      "lastLine": "$3,919 (+63.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4010,9 +4010,27 @@
         {
           "t": 1793560078785,
           "v": 3891.2
+        },
+        {
+          "t": 1793587377226,
+          "v": 3919.1
         }
       ],
       "events": [
+        {
+          "t": 1793587377218,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793587377218,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793560078771,
           "level": "notable",
@@ -4418,31 +4436,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792905086782,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792905086782,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 77824
+          "BTC": 78382
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793587377227,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1793573985477,
       "ran": 2,
@@ -6034,14 +6046,6 @@
       "failed": 0,
       "notified": 0,
       "held": 16
-    },
-    {
-      "t": 1790089712085,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 2
     }
   ]
 }

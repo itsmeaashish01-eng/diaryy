@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793677213310,
-      "lastOk": 1793677213310,
+      "lastRun": 1793708149529,
+      "lastOk": 1793708149529,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793704567000,
+          "level": "notable",
+          "title": "Anthropic IPO filing: $1.7B quarterly payroll, about $107K per employee monthly",
+          "detail": "Article URL: https://www.techspot.com/news/114428-anthropic-ipo-filing-reveals-17-billion-quarterly-personnel.html Comments URL: https://news.ycombinator.com/item?id=50350560 Points: 11 # Comments: 0",
+          "url": "https://www.techspot.com/news/114428-anthropic-ipo-filing-reveals-17-billion-quarterly-personnel.html"
+        },
+        {
+          "t": 1793639125000,
+          "level": "notable",
+          "title": "Launch HN: Momentic (YC W24) – Agents that catch bugs by using your app",
+          "detail": "Hey HN, we’re Wei-Wei and Jeff. We’re building Momentic, QA agents that autonomously plan, explore, and bug-bash controls and user flows in your web, iOS, Android, and (soon) desktop apps to catch bugs.Here’s a demo: https://youtu.be/BFsM-Se1Fh8We’re both software engineers that spent our careers on",
+          "url": "https://momentic.ai/"
+        },
         {
           "t": 1793658647000,
           "level": "notable",
@@ -415,34 +429,27 @@
           "title": "Anthropic S-1",
           "detail": "Article URL: https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm Comments URL: https://news.ycombinator.com/item?id=50242939 Points: 1542 # Comments: 1495",
           "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm"
-        },
-        {
-          "t": 1793019588000,
-          "level": "notable",
-          "title": "Fixing Tool-Call Accuracy in vLLM",
-          "detail": "Article URL: https://www.ubicloud.com/blog/fixing-tool-call-accuracy-in-vllm Comments URL: https://news.ycombinator.com/item?id=50242870 Points: 159 # Comments: 66",
-          "url": "https://www.ubicloud.com/blog/fixing-tool-call-accuracy-in-vllm"
-        },
-        {
-          "t": 1793031149000,
-          "level": "notable",
-          "title": "Show HN: Hob - Open-source, on device alternative to Claude Cowork and ChatGPT",
-          "detail": "Hey HN, I'm Christian and this is a new OSS project I've been noodling on for the last couple of weeks. Hob is a free, MIT-licensed desktop app for Mac, Windows and Linux that works on your files the way the Claude and ChatGPT desktop apps do, except the model runs on your own computer. It uses open",
-          "url": "https://github.com/FrigadeHQ/hob"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1793656409018,
-      "lastOk": 1793656409018,
+      "lastRun": 1793708150040,
+      "lastOk": 1793708150040,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.316",
+      "lastLine": "latest is anthropics/claude-code v2.1.317",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793669146000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.317",
+          "detail": "## What's changed\n\n- Added a warning to `/schedule` when a new cloud scheduled task gets connectors you did not ask for, with how to remove them\n- Added a check that asks before a web or shell tool call sends your account email address to the network\n- Added `onFailure: \"block\"` for Agent SDK hook callbacks, so a callback that fails blocks the action instead of letting it run\n- Added a notice in C",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.317"
+        },
         {
           "t": 1793408495000,
           "level": "notable",
@@ -505,13 +512,6 @@
           "title": "anthropics/claude-code v2.1.306",
           "detail": "## What's changed\n\n- Fixed `claude -p` inside cloud sessions reporting \"Not logged in\" when started without the session's environment variables\n- Fixed an API error being replaced by \"prompt is too long\", and an unneeded compaction, in sessions with many MCP tools\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.306"
-        },
-        {
-          "t": 1792529210000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.305",
-          "detail": "## What's changed\n\n- Added `sandbox.allowNestedUserNamespaces` so sandboxed commands on Linux can create user namespaces (Chromium, rootless podman); this lets them get around the sandbox's file protections\n- Added `CLAUDE_CODE_RETRY_WATCHDOG_USAGE_LIMIT_RECHECK_MS` so unattended retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) notices a usage limit that was lifted before its reset\n- Fixed every request ",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305"
         },
         {
           "t": 1793408495000,
@@ -3244,11 +3244,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793677214025,
-      "lastOk": 1793677214025,
+      "lastRun": 1793708150663,
+      "lastOk": 1793708150663,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,831 (+59.6%) · excludes S&P 500 ETF",
+      "lastLine": "$3,852 (+60.5%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4050,9 +4050,27 @@
         {
           "t": 1793677214025,
           "v": 3831.4
+        },
+        {
+          "t": 1793708150663,
+          "v": 3852.3
         }
       ],
       "events": [
+        {
+          "t": 1793708150654,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793708150655,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793677214014,
           "level": "notable",
@@ -4458,31 +4476,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1792978529251,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1792978529252,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 76628
+          "BTC": 77046
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793708150663,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1793677214025,
       "ran": 5,
@@ -6074,14 +6086,6 @@
       "failed": 0,
       "notified": 0,
       "held": 14
-    },
-    {
-      "t": 1790145343056,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 16
     }
   ]
 }

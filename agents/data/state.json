@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793877978138,
-      "lastOk": 1793877978138,
+      "lastRun": 1793904933062,
+      "lastOk": 1793904933062,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793899062000,
+          "level": "notable",
+          "title": "Launch HN: Rivet (YC W23) – Scale and Orchestrate Agents on S3",
+          "detail": "Hey HN, this is Nathan and Nicholas from Rivet (https://rivet.dev) – a fast, high-density, and scalable orchestrator for agentic workloads using the actor model. Rather than running a heavyweight sandbox per agent, each agent gets a lightweight actor backed by S3.Actors provide a long-lived process ",
+          "url": "https://github.com/rivet-dev/rivet"
+        },
+        {
+          "t": 1793895672000,
+          "level": "notable",
+          "title": "My psychophysics as a bilateral cochlear implant user",
+          "detail": "Article URL: https://claude.ai/artifact/L8qsMc3SorytGW3LA81nYf Comments URL: https://news.ycombinator.com/item?id=50381033 Points: 81 # Comments: 18",
+          "url": "https://claude.ai/artifact/L8qsMc3SorytGW3LA81nYf"
+        },
+        {
+          "t": 1793894081000,
+          "level": "notable",
+          "title": "Show HN: Stroq – a local audit of what your coding agent did and why",
+          "detail": "Article URL: https://github.com/AGGIB/Stroq Comments URL: https://news.ycombinator.com/item?id=50380704 Points: 25 # Comments: 6",
+          "url": "https://github.com/AGGIB/Stroq"
+        },
+        {
+          "t": 1793893917000,
+          "level": "notable",
+          "title": "Building a Multi-Agent System from Scratch: Architecture Patterns",
+          "detail": "Article URL: https://kadhar.dev/blog/multi-agent-systems-from-scratch Comments URL: https://news.ycombinator.com/item?id=50380658 Points: 32 # Comments: 11",
+          "url": "https://kadhar.dev/blog/multi-agent-systems-from-scratch"
+        },
         {
           "t": 1793818409000,
           "level": "notable",
@@ -401,42 +429,14 @@
           "title": "Survival LLM: AI assistant and emergency library that runs on your own computer",
           "detail": "Article URL: https://www.brangus.io/survival-llm Comments URL: https://news.ycombinator.com/item?id=50264853 Points: 426 # Comments: 164",
           "url": "https://www.brangus.io/survival-llm"
-        },
-        {
-          "t": 1793134242000,
-          "level": "notable",
-          "title": "Early progress on accelerating drug development with Claude",
-          "detail": "Article URL: https://www.anthropic.com/research/early-progress-drug-development Comments URL: https://news.ycombinator.com/item?id=50265609 Points: 203 # Comments: 181",
-          "url": "https://www.anthropic.com/research/early-progress-drug-development"
-        },
-        {
-          "t": 1793130906000,
-          "level": "notable",
-          "title": "Survival LLM: AI assistant and emergency library that runs on your own computer",
-          "detail": "Article URL: https://www.brangus.io/survival-llm Comments URL: https://news.ycombinator.com/item?id=50264853 Points: 295 # Comments: 125",
-          "url": "https://www.brangus.io/survival-llm"
-        },
-        {
-          "t": 1793139817000,
-          "level": "notable",
-          "title": "Expanding our partnership with GSA to bring Claude to all levels of government",
-          "detail": "Article URL: https://www.anthropic.com/news/expanding-partnership-gsa Comments URL: https://news.ycombinator.com/item?id=50266701 Points: 14 # Comments: 8",
-          "url": "https://www.anthropic.com/news/expanding-partnership-gsa"
-        },
-        {
-          "t": 1793134242000,
-          "level": "notable",
-          "title": "Early progress on accelerating drug development with Claude",
-          "detail": "Article URL: https://www.anthropic.com/research/early-progress-drug-development Comments URL: https://news.ycombinator.com/item?id=50265609 Points: 100 # Comments: 90",
-          "url": "https://www.anthropic.com/research/early-progress-drug-development"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1793877978640,
-      "lastOk": 1793877978640,
+      "lastRun": 1793904933426,
+      "lastOk": 1793904933426,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.318",
@@ -724,6 +724,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307"
         },
         {
+          "t": 1793750463000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.318",
+          "detail": "## What's changed\n\n- Added a record of your answer when Claude Code asks to turn on the mods it writes in a session\n- Added `assume_role` on `mantle` upstreams of the Claude apps gateway, for a role in another AWS account and for per-developer AWS cost attribution\n- Added an `effort` option to a mod's `$.model.fork`, so a quick side job can run at `low` whatever effort the session uses; the result",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
+        },
+        {
           "t": 1793669146000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.317",
@@ -785,13 +792,6 @@
           "title": "anthropics/claude-code v2.1.307",
           "detail": "## What's changed\n\n- Added `/claude-api api-version` to move Claude API code to API version `2026-10-21`\n- Added the `claude_code.safety_event` OpenTelemetry event for each tool call a permission rule, auto mode, a safety check, a hook or the sandbox stopped, prompted or sent back\n- Fixed requests failing with a model-not-found error when `CLAUDE_CODE_DISABLE_1M_CONTEXT` is set and the model is an",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307"
-        },
-        {
-          "t": 1792552591000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.306",
-          "detail": "## What's changed\n\n- Fixed `claude -p` inside cloud sessions reporting \"Not logged in\" when started without the session's environment variables\n- Fixed an API error being replaced by \"prompt is too long\", and an unneeded compaction, in sessions with many MCP tools\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.306"
         },
         {
           "t": 1793669146000,
@@ -3292,11 +3292,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793877979296,
-      "lastOk": 1793877979296,
+      "lastRun": 1793904934110,
+      "lastOk": 1793904934110,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$4,015 (+67.3%) · excludes S&P 500 ETF",
+      "lastLine": "$3,806 (+58.6%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4130,9 +4130,34 @@
         {
           "t": 1793877979296,
           "v": 4014.8
+        },
+        {
+          "t": 1793904934110,
+          "v": 3805.7
         }
       ],
       "events": [
+        {
+          "t": 1793904934109,
+          "level": "notable",
+          "title": "Bitcoin down 5.2%",
+          "detail": "$80,296 → $76,114 since the last check.",
+          "url": ""
+        },
+        {
+          "t": 1793904934109,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793904934109,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793877979286,
           "level": "notable",
@@ -4531,38 +4556,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793197523942,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793171917165,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1793171917165,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 80296
+          "BTC": 76114
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793904934110,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 17
+    },
     {
       "t": 1793877979296,
       "ran": 6,
@@ -6154,14 +6166,6 @@
       "failed": 0,
       "notified": 0,
       "held": 6
-    },
-    {
-      "t": 1790278098739,
-      "ran": 5,
-      "skipped": 5,
-      "failed": 0,
-      "notified": 0,
-      "held": 21
     }
   ]
 }

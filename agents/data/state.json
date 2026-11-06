@@ -2,17 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793925093047,
-      "lastOk": 1793904933062,
-      "errorCount": 1,
-      "lastError": {
-        "message": "fetch failed",
-        "t": 1793925093047
-      },
-      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
+      "lastRun": 1793949504023,
+      "lastOk": 1793949504023,
+      "errorCount": 0,
+      "lastError": null,
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793917035000,
+          "level": "notable",
+          "title": "Claude Code sends your email address to websites",
+          "detail": "Article URL: https://github.com/anthropics/claude-code/issues/107757 Comments URL: https://news.ycombinator.com/item?id=50385272 Points: 912 # Comments: 302",
+          "url": "https://github.com/anthropics/claude-code/issues/107757"
+        },
+        {
+          "t": 1793899062000,
+          "level": "notable",
+          "title": "Launch HN: Rivet (YC W23) – Scale and Orchestrate Agents on S3",
+          "detail": "Hey HN, this is Nathan and Nicholas from Rivet (https://rivet.dev) – a fast, high-density, and scalable orchestrator for agentic workloads using the actor model. Rather than running a heavyweight sandbox per agent, each agent gets a lightweight actor backed by S3.Actors provide a long-lived process ",
+          "url": "https://github.com/rivet-dev/rivet"
+        },
         {
           "t": 1793899062000,
           "level": "notable",
@@ -418,28 +429,14 @@
           "title": "The Agent SDK",
           "detail": "Article URL: https://cursor.com/blog/agent-sdk Comments URL: https://news.ycombinator.com/item?id=50273731 Points: 9 # Comments: 1",
           "url": "https://cursor.com/blog/agent-sdk"
-        },
-        {
-          "t": 1793134242000,
-          "level": "notable",
-          "title": "Early progress on accelerating drug development with Claude",
-          "detail": "Article URL: https://www.anthropic.com/research/early-progress-drug-development Comments URL: https://news.ycombinator.com/item?id=50265609 Points: 270 # Comments: 261",
-          "url": "https://www.anthropic.com/research/early-progress-drug-development"
-        },
-        {
-          "t": 1793130906000,
-          "level": "notable",
-          "title": "Survival LLM: AI assistant and emergency library that runs on your own computer",
-          "detail": "Article URL: https://www.brangus.io/survival-llm Comments URL: https://news.ycombinator.com/item?id=50264853 Points: 426 # Comments: 164",
-          "url": "https://www.brangus.io/survival-llm"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1793904933426,
-      "lastOk": 1793904933426,
+      "lastRun": 1793949504447,
+      "lastOk": 1793949504447,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.318",
@@ -797,6 +794,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307"
         },
         {
+          "t": 1793750463000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.318",
+          "detail": "## What's changed\n\n- Added a record of your answer when Claude Code asks to turn on the mods it writes in a session\n- Added `assume_role` on `mantle` upstreams of the Claude apps gateway, for a role in another AWS account and for per-developer AWS cost attribution\n- Added an `effort` option to a mod's `$.model.fork`, so a quick side job can run at `low` whatever effort the session uses; the result",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
+        },
+        {
           "t": 1793669146000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.317",
@@ -858,13 +862,6 @@
           "title": "anthropics/claude-code v2.1.307",
           "detail": "## What's changed\n\n- Added `/claude-api api-version` to move Claude API code to API version `2026-10-21`\n- Added the `claude_code.safety_event` OpenTelemetry event for each tool call a permission rule, auto mode, a safety check, a hook or the sandbox stopped, prompted or sent back\n- Fixed requests failing with a model-not-found error when `CLAUDE_CODE_DISABLE_1M_CONTEXT` is set and the model is an",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307"
-        },
-        {
-          "t": 1792552591000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.306",
-          "detail": "## What's changed\n\n- Fixed `claude -p` inside cloud sessions reporting \"Not logged in\" when started without the session's environment variables\n- Fixed an API error being replaced by \"prompt is too long\", and an unneeded compaction, in sessions with many MCP tools\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.306"
         }
       ],
       "notifiedAt": {},
@@ -3307,11 +3304,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793925093837,
-      "lastOk": 1793925093837,
+      "lastRun": 1793949505055,
+      "lastOk": 1793949505055,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,806 (+58.6%) · excludes S&P 500 ETF",
+      "lastLine": "$3,767 (+57.0%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4153,9 +4150,27 @@
         {
           "t": 1793925093837,
           "v": 3806.1
+        },
+        {
+          "t": 1793949505056,
+          "v": 3767.15
         }
       ],
       "events": [
+        {
+          "t": 1793949505044,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1793949505045,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793925093828,
           "level": "notable",
@@ -4561,31 +4576,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793233190401,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793216915641,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 76122
+          "BTC": 75343
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1793949505056,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1793925093838,
       "ran": 4,
@@ -6177,14 +6186,6 @@
       "failed": 0,
       "notified": 0,
       "held": 23
-    },
-    {
-      "t": 1790301032093,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 13
     }
   ]
 }

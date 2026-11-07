@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794063824496,
-      "lastOk": 1794063824496,
+      "lastRun": 1794080086278,
+      "lastOk": 1794080086278,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793994531000,
+          "level": "notable",
+          "title": "A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost",
+          "detail": "Article URL: https://hightouch.com/blog/llm-judges-identity-resolution Comments URL: https://news.ycombinator.com/item?id=50397429 Points: 565 # Comments: 139",
+          "url": "https://hightouch.com/blog/llm-judges-identity-resolution"
+        },
         {
           "t": 1794033544000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "LLM Voice",
           "detail": "Article URL: https://martinfowler.com/bliki/LLM-Voice.html Comments URL: https://news.ycombinator.com/item?id=50290177 Points: 517 # Comments: 276",
           "url": "https://martinfowler.com/bliki/LLM-Voice.html"
-        },
-        {
-          "t": 1793310028000,
-          "level": "notable",
-          "title": "We ran AI agent swarms in Minecraft and Mindustry",
-          "detail": "Article URL: https://labs.ycombinator.com/projects/games/index.html Comments URL: https://news.ycombinator.com/item?id=50296486 Points: 101 # Comments: 35",
-          "url": "https://labs.ycombinator.com/projects/games/index.html"
         }
       ],
       "notifiedAt": {},
@@ -3328,11 +3328,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794063825605,
-      "lastOk": 1794063825605,
+      "lastRun": 1794080086853,
+      "lastOk": 1794080086853,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,794 (+58.1%) · excludes S&P 500 ETF",
+      "lastLine": "$3,786 (+57.7%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4198,9 +4198,27 @@
         {
           "t": 1794063825605,
           "v": 3793.6
+        },
+        {
+          "t": 1794080086854,
+          "v": 3785.85
         }
       ],
       "events": [
+        {
+          "t": 1794080086840,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794080086840,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794063825592,
           "level": "notable",
@@ -4606,31 +4624,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793366841667,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793341256894,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 75872
+          "BTC": 75717
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794080086854,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1794063825605,
       "ran": 3,
@@ -6222,14 +6234,6 @@
       "failed": 0,
       "notified": 0,
       "held": 13
-    },
-    {
-      "t": 1790409505311,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 15
     }
   ]
 }

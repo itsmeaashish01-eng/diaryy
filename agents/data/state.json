@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1793998880821,
-      "lastOk": 1793998880821,
+      "lastRun": 1794013662444,
+      "lastOk": 1794013662444,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "6 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793994531000,
+          "level": "notable",
+          "title": "A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost",
+          "detail": "Article URL: https://hightouch.com/blog/llm-judges-identity-resolution Comments URL: https://news.ycombinator.com/item?id=50397429 Points: 305 # Comments: 66",
+          "url": "https://hightouch.com/blog/llm-judges-identity-resolution"
+        },
+        {
+          "t": 1793988213000,
+          "level": "notable",
+          "title": "Memorilla: Latent Semantic Memory for LLMs",
+          "detail": "Article URL: https://arxiv.org/abs/2610.21375 Comments URL: https://news.ycombinator.com/item?id=50395919 Points: 80 # Comments: 6",
+          "url": "https://arxiv.org/abs/2610.21375"
+        },
+        {
+          "t": 1793984076000,
+          "level": "notable",
+          "title": "Anthropic IPO buyers see valuation as low as $1.1T",
+          "detail": "https://epyhia.com/anthropic-ipo-valuation-talks-drop-to-1-3... Comments URL: https://news.ycombinator.com/item?id=50394906 Points: 211 # Comments: 469",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-06/anthropic-ipo-valuation-expectations-pressured-after-ai-rout"
+        },
         {
           "t": 1793996904000,
           "level": "notable",
@@ -408,41 +429,27 @@
           "title": "IgE disruptor for food allergy with Claude-enabled antibody design[pdf]",
           "detail": "Article URL: https://divergencelabs.com/publications/ige-preprint.pdf Comments URL: https://news.ycombinator.com/item?id=50294486 Points: 4 # Comments: 1",
           "url": "https://divergencelabs.com/publications/ige-preprint.pdf"
-        },
-        {
-          "t": 1793289392000,
-          "level": "notable",
-          "title": "Launch HN: Simantic (YC F26) – Firmware Simulation for AI Agents",
-          "detail": "Hi HN, we're Ahnaf and Seungmin from Simantic (https://simantic.com). We are building the simulation layer that lets engineers and AI agents test and validate firmware without hardware.Before Simantic, we were ex-firmware engineers at companies like Neuralink and Tesla. We’ve worked on some of the c",
-          "url": "https://news.ycombinator.com/item?id=50291116"
-        },
-        {
-          "t": 1793285875000,
-          "level": "notable",
-          "title": "LLM Voice",
-          "detail": "Article URL: https://martinfowler.com/bliki/LLM-Voice.html Comments URL: https://news.ycombinator.com/item?id=50290177 Points: 198 # Comments: 118",
-          "url": "https://martinfowler.com/bliki/LLM-Voice.html"
-        },
-        {
-          "t": 1793244822000,
-          "level": "notable",
-          "title": "Claude Code regularly sends each background agent’s transcript to its model",
-          "detail": "Article URL: https://gist.github.com/flamerix-ai/c3905705cc4205e5de3011fa2e74efce Comments URL: https://news.ycombinator.com/item?id=50284255 Points: 469 # Comments: 186",
-          "url": "https://gist.github.com/flamerix-ai/c3905705cc4205e5de3011fa2e74efce"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1793978386933,
-      "lastOk": 1793978386933,
+      "lastRun": 1794013662781,
+      "lastOk": 1794013662781,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.318",
+      "lastLine": "latest is anthropics/claude-code v2.1.319",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1793984641000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.319",
+          "detail": "## What's changed\n\n- Changed auto mode with telemetry or feature flags off, including behind LLM gateways: calls the server can't check are asked about or denied, with no fallback to the built-in classifier; set `CLAUDE_CODE_AUTO_MODE_SERVER=0` to keep using it (Bedrock, Vertex and Foundry are unchanged)\n- Changed auto mode behind an LLM gateway: `CLAUDE_CODE_AUTO_MODE_SERVER=1` turns on the serve",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
+        },
         {
           "t": 1793750463000,
           "level": "notable",
@@ -505,13 +512,6 @@
           "title": "anthropics/claude-code v2.1.308",
           "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.308"
-        },
-        {
-          "t": 1792621022000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.307",
-          "detail": "## What's changed\n\n- Added `/claude-api api-version` to move Claude API code to API version `2026-10-21`\n- Added the `claude_code.safety_event` OpenTelemetry event for each tool call a permission rule, auto mode, a safety check, a hook or the sandbox stopped, prompted or sent back\n- Fixed requests failing with a model-not-found error when `CLAUDE_CODE_DISABLE_1M_CONTEXT` is set and the model is an",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307"
         },
         {
           "t": 1793750463000,
@@ -3316,11 +3316,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1793998881365,
-      "lastOk": 1793998881365,
+      "lastRun": 1794013663512,
+      "lastOk": 1794013663512,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,790 (+57.9%) · excludes S&P 500 ETF",
+      "lastLine": "$3,794 (+58.1%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4174,9 +4174,27 @@
         {
           "t": 1793998881366,
           "v": 3789.95
+        },
+        {
+          "t": 1794013663512,
+          "v": 3793.65
         }
       ],
       "events": [
+        {
+          "t": 1794013663501,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794013663501,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1793998881352,
           "level": "notable",
@@ -4582,31 +4600,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793303287509,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793281111588,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 75799
+          "BTC": 75873
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794013663512,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 15
+    },
     {
       "t": 1793998881366,
       "ran": 2,
@@ -6198,14 +6210,6 @@
       "failed": 0,
       "notified": 0,
       "held": 12
-    },
-    {
-      "t": 1790362232699,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 15
     }
   ]
 }

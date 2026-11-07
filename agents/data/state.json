@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794037393809,
-      "lastOk": 1794037393809,
+      "lastRun": 1794063824496,
+      "lastOk": 1794063824496,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794033544000,
+          "level": "notable",
+          "title": "The Components of Agent Memory",
+          "detail": "Article URL: https://www.anthropic.com/research/components-of-agent-memory Comments URL: https://news.ycombinator.com/item?id=50402212 Points: 85 # Comments: 48",
+          "url": "https://www.anthropic.com/research/components-of-agent-memory"
+        },
+        {
+          "t": 1793994531000,
+          "level": "notable",
+          "title": "A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost",
+          "detail": "Article URL: https://hightouch.com/blog/llm-judges-identity-resolution Comments URL: https://news.ycombinator.com/item?id=50397429 Points: 527 # Comments: 125",
+          "url": "https://hightouch.com/blog/llm-judges-identity-resolution"
+        },
         {
           "t": 1794033544000,
           "level": "notable",
@@ -415,28 +429,14 @@
           "title": "We ran AI agent swarms in Minecraft and Mindustry",
           "detail": "Article URL: https://labs.ycombinator.com/projects/games/index.html Comments URL: https://news.ycombinator.com/item?id=50296486 Points: 101 # Comments: 35",
           "url": "https://labs.ycombinator.com/projects/games/index.html"
-        },
-        {
-          "t": 1793301948000,
-          "level": "notable",
-          "title": "IgE disruptor for food allergy with Claude-enabled antibody design [pdf]",
-          "detail": "Article URL: https://divergencelabs.com/publications/ige-preprint.pdf Comments URL: https://news.ycombinator.com/item?id=50294486 Points: 33 # Comments: 21",
-          "url": "https://divergencelabs.com/publications/ige-preprint.pdf"
-        },
-        {
-          "t": 1793294665000,
-          "level": "notable",
-          "title": "Claude Duet is the first personal-assistant-type harness that feels useful",
-          "detail": "Article URL: https://fig.blue/posts/duet-is-the-future/ Comments URL: https://news.ycombinator.com/item?id=50292727 Points: 90 # Comments: 70",
-          "url": "https://fig.blue/posts/duet-is-the-future/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1794037394219,
-      "lastOk": 1794037394219,
+      "lastRun": 1794063824878,
+      "lastOk": 1794063824878,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.319",
@@ -584,6 +584,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.308"
         },
         {
+          "t": 1793984641000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.319",
+          "detail": "## What's changed\n\n- Changed auto mode with telemetry or feature flags off, including behind LLM gateways: calls the server can't check are asked about or denied, with no fallback to the built-in classifier; set `CLAUDE_CODE_AUTO_MODE_SERVER=0` to keep using it (Bedrock, Vertex and Foundry are unchanged)\n- Changed auto mode behind an LLM gateway: `CLAUDE_CODE_AUTO_MODE_SERVER=1` turns on the serve",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
+        },
+        {
           "t": 1793750463000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.318",
@@ -645,13 +652,6 @@
           "title": "anthropics/claude-code v2.1.308",
           "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.308"
-        },
-        {
-          "t": 1792621022000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.307",
-          "detail": "## What's changed\n\n- Added `/claude-api api-version` to move Claude API code to API version `2026-10-21`\n- Added the `claude_code.safety_event` OpenTelemetry event for each tool call a permission rule, auto mode, a safety check, a hook or the sandbox stopped, prompted or sent back\n- Fixed requests failing with a model-not-found error when `CLAUDE_CODE_DISABLE_1M_CONTEXT` is set and the model is an",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307"
         },
         {
           "t": 1793750463000,
@@ -3328,11 +3328,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794037394775,
-      "lastOk": 1794037394775,
+      "lastRun": 1794063825605,
+      "lastOk": 1794063825605,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,798 (+58.3%) · excludes S&P 500 ETF",
+      "lastLine": "$3,794 (+58.1%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4194,9 +4194,27 @@
         {
           "t": 1794037394775,
           "v": 3798.1
+        },
+        {
+          "t": 1794063825605,
+          "v": 3793.6
         }
       ],
       "events": [
+        {
+          "t": 1794063825592,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794063825592,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794037394766,
           "level": "notable",
@@ -4602,31 +4620,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793341256894,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793319263451,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 75962
+          "BTC": 75872
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794063825605,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1794037394775,
       "ran": 6,
@@ -6213,14 +6225,6 @@
     },
     {
       "t": 1790409505311,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 15
-    },
-    {
-      "t": 1790387649352,
       "ran": 3,
       "skipped": 7,
       "failed": 0,

@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794157984164,
-      "lastOk": 1794157984164,
+      "lastRun": 1794172816408,
+      "lastOk": 1794172816408,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794161767000,
+          "level": "notable",
+          "title": "Goldman Sachs Is Pulling Claude Code from Its Bankers and Traders",
+          "detail": "Article URL: https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers Comments URL: https://news.ycombinator.com/item?id=50415628 Points: 374 # Comments: 228",
+          "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers"
+        },
+        {
+          "t": 1794127223000,
+          "level": "notable",
+          "title": "Agent memory needs its OpenTelemetry moment",
+          "detail": "Article URL: https://www.lorekit.io/blog/open-agent-memory-format Comments URL: https://news.ycombinator.com/item?id=50411467 Points: 156 # Comments: 101",
+          "url": "https://www.lorekit.io/blog/open-agent-memory-format"
+        },
         {
           "t": 1794127223000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
           "detail": "https://cursor.com/blog/claude-code-extension-security-notic... Comments URL: https://news.ycombinator.com/item?id=50300683 Points: 938 # Comments: 537",
           "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/"
-        },
-        {
-          "t": 1793344152000,
-          "level": "notable",
-          "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-          "detail": "https://cursor.com/blog/claude-code-extension-security-notic... Comments URL: https://news.ycombinator.com/item?id=50300683 Points: 890 # Comments: 528",
-          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/"
-        },
-        {
-          "t": 1793373791000,
-          "level": "notable",
-          "title": "Show HN: Sketch Stadium – watch your agent play Pictionary",
-          "detail": "tl;dr: Agents can play Pictionary. You can connect your own agent, or just watch a game in progress here: https://sketch.wakeshift.ai/games/q5ucruHi folks! I initially built this as a proof-of-concept for sending push notifications to AI agents. Watching the agents play Pictionary together has been ",
-          "url": "https://sketch.wakeshift.ai/games/q5ucru"
         }
       ],
       "notifiedAt": {},
@@ -3352,8 +3352,8 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794157985364,
-      "lastOk": 1794157985364,
+      "lastRun": 1794172817027,
+      "lastOk": 1794172817027,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "$3,783 (+57.6%) · excludes S&P 500 ETF",
@@ -4238,9 +4238,27 @@
         {
           "t": 1794157985364,
           "v": 3783.2
+        },
+        {
+          "t": 1794172817028,
+          "v": 3783.35
         }
       ],
       "events": [
+        {
+          "t": 1794172817013,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794172817014,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794157985354,
           "level": "notable",
@@ -4646,31 +4664,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793461850803,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793440504584,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 75664
+          "BTC": 75667
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794172817028,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1794157985364,
       "ran": 6,
@@ -6262,14 +6274,6 @@
       "failed": 0,
       "notified": 0,
       "held": 18
-    },
-    {
-      "t": 1790473400322,
-      "ran": 5,
-      "skipped": 5,
-      "failed": 0,
-      "notified": 0,
-      "held": 24
     }
   ]
 }

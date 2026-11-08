@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794105598840,
-      "lastOk": 1794105598840,
+      "lastRun": 1794134565228,
+      "lastOk": 1794134565228,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794127223000,
+          "level": "notable",
+          "title": "Agent memory needs its OpenTelemetry moment",
+          "detail": "Article URL: https://www.lorekit.io/blog/open-agent-memory-format Comments URL: https://news.ycombinator.com/item?id=50411467 Points: 28 # Comments: 17",
+          "url": "https://www.lorekit.io/blog/open-agent-memory-format"
+        },
+        {
+          "t": 1794107508000,
+          "level": "notable",
+          "title": "Goodbye Claude, Hello Pi",
+          "detail": "Article URL: https://caleb.software/posts/claude-to-pi.html Comments URL: https://news.ycombinator.com/item?id=50410107 Points: 323 # Comments: 193",
+          "url": "https://caleb.software/posts/claude-to-pi.html"
+        },
+        {
+          "t": 1794084332000,
+          "level": "notable",
+          "title": "Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files",
+          "detail": "Article URL: https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again Comments URL: https://news.ycombinator.com/item?id=50407882 Points: 400 # Comments: 273",
+          "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again"
+        },
         {
           "t": 1794084332000,
           "level": "notable",
@@ -408,35 +429,14 @@
           "title": "Backdoors in official Claude Code extensions",
           "detail": "Article URL: https://cyberplace.social/@GossiTheDog/117528831681803563 Comments URL: https://news.ycombinator.com/item?id=50302334 Points: 413 # Comments: 121",
           "url": "https://cyberplace.social/@GossiTheDog/117528831681803563"
-        },
-        {
-          "t": 1793355771000,
-          "level": "notable",
-          "title": "Anthropic hacked to deliver remote access trojan",
-          "detail": "Article URL: https://doublepulsar.com/anthropic-hacked-to-deliver-remote-access-trojan-to-claude-developer-laptops-worldwide-1148a92baae2 Comments URL: https://news.ycombinator.com/item?id=50301983 Points: 261 # Comments: 49",
-          "url": "https://doublepulsar.com/anthropic-hacked-to-deliver-remote-access-trojan-to-claude-developer-laptops-worldwide-1148a92baae2"
-        },
-        {
-          "t": 1793310028000,
-          "level": "notable",
-          "title": "We ran AI agent swarms in Minecraft and Mindustry",
-          "detail": "Article URL: https://labs.ycombinator.com/projects/games/index.html Comments URL: https://news.ycombinator.com/item?id=50296486 Points: 326 # Comments: 130",
-          "url": "https://labs.ycombinator.com/projects/games/index.html"
-        },
-        {
-          "t": 1793289392000,
-          "level": "notable",
-          "title": "Launch HN: Simantic (YC F26) – Firmware Simulation for AI Agents",
-          "detail": "Hi HN, we're Ahnaf and Seungmin from Simantic (https://simantic.com). We are building the simulation layer that lets engineers and AI agents test and validate firmware without hardware.Before Simantic, we were ex-firmware engineers at companies like Neuralink and Tesla. We’ve worked on some of the c",
-          "url": "https://news.ycombinator.com/item?id=50291116"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1794092247904,
-      "lastOk": 1794092247904,
+      "lastRun": 1794134565700,
+      "lastOk": 1794134565700,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.319",
@@ -724,6 +724,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.308"
         },
         {
+          "t": 1793984641000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.319",
+          "detail": "## What's changed\n\n- Changed auto mode with telemetry or feature flags off, including behind LLM gateways: calls the server can't check are asked about or denied, with no fallback to the built-in classifier; set `CLAUDE_CODE_AUTO_MODE_SERVER=0` to keep using it (Bedrock, Vertex and Foundry are unchanged)\n- Changed auto mode behind an LLM gateway: `CLAUDE_CODE_AUTO_MODE_SERVER=1` turns on the serve",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
+        },
+        {
           "t": 1793750463000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.318",
@@ -785,13 +792,6 @@
           "title": "anthropics/claude-code v2.1.308",
           "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.308"
-        },
-        {
-          "t": 1792621022000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.307",
-          "detail": "## What's changed\n\n- Added `/claude-api api-version` to move Claude API code to API version `2026-10-21`\n- Added the `claude_code.safety_event` OpenTelemetry event for each tool call a permission rule, auto mode, a safety check, a hook or the sandbox stopped, prompted or sent back\n- Fixed requests failing with a model-not-found error when `CLAUDE_CODE_DISABLE_1M_CONTEXT` is set and the model is an",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307"
         },
         {
           "t": 1793750463000,
@@ -3340,11 +3340,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794105599432,
-      "lastOk": 1794105599432,
+      "lastRun": 1794134566503,
+      "lastOk": 1794134566503,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,783 (+57.6%) · excludes S&P 500 ETF",
+      "lastLine": "$3,789 (+57.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4218,9 +4218,27 @@
         {
           "t": 1794105599433,
           "v": 3783.1
+        },
+        {
+          "t": 1794134566503,
+          "v": 3789.05
         }
       ],
       "events": [
+        {
+          "t": 1794134566489,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794134566489,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794105599418,
           "level": "notable",
@@ -4626,31 +4644,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793401761006,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793386064087,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 75662
+          "BTC": 75781
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794134566503,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 15
+    },
     {
       "t": 1794105599433,
       "ran": 2,
@@ -6242,14 +6254,6 @@
       "failed": 0,
       "notified": 0,
       "held": 5
-    },
-    {
-      "t": 1790453181754,
-      "ran": 1,
-      "skipped": 9,
-      "failed": 0,
-      "notified": 0,
-      "held": 6
     }
   ]
 }

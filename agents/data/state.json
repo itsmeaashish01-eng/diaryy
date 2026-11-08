@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794092247590,
-      "lastOk": 1794092247590,
+      "lastRun": 1794105598840,
+      "lastOk": 1794105598840,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794084332000,
+          "level": "notable",
+          "title": "Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files",
+          "detail": "Article URL: https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again Comments URL: https://news.ycombinator.com/item?id=50407882 Points: 191 # Comments: 131",
+          "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again"
+        },
         {
           "t": 1793994531000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "Launch HN: Simantic (YC F26) – Firmware Simulation for AI Agents",
           "detail": "Hi HN, we're Ahnaf and Seungmin from Simantic (https://simantic.com). We are building the simulation layer that lets engineers and AI agents test and validate firmware without hardware.Before Simantic, we were ex-firmware engineers at companies like Neuralink and Tesla. We’ve worked on some of the c",
           "url": "https://news.ycombinator.com/item?id=50291116"
-        },
-        {
-          "t": 1793285875000,
-          "level": "notable",
-          "title": "LLM Voice",
-          "detail": "Article URL: https://martinfowler.com/bliki/LLM-Voice.html Comments URL: https://news.ycombinator.com/item?id=50290177 Points: 517 # Comments: 276",
-          "url": "https://martinfowler.com/bliki/LLM-Voice.html"
         }
       ],
       "notifiedAt": {},
@@ -3340,11 +3340,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794080086853,
-      "lastOk": 1794080086853,
+      "lastRun": 1794105599432,
+      "lastOk": 1794105599432,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,786 (+57.7%) · excludes S&P 500 ETF",
+      "lastLine": "$3,783 (+57.6%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4214,9 +4214,27 @@
         {
           "t": 1794080086854,
           "v": 3785.85
+        },
+        {
+          "t": 1794105599433,
+          "v": 3783.1
         }
       ],
       "events": [
+        {
+          "t": 1794105599418,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794105599418,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794080086840,
           "level": "notable",
@@ -4622,31 +4640,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793386064087,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793366841667,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 75717
+          "BTC": 75662
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794105599433,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1794092247911,
       "ran": 5,
@@ -6238,14 +6250,6 @@
       "failed": 0,
       "notified": 0,
       "held": 6
-    },
-    {
-      "t": 1790443343784,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 16
     }
   ]
 }

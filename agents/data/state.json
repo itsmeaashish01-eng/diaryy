@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794172816408,
-      "lastOk": 1794172816408,
+      "lastRun": 1794186616171,
+      "lastOk": 1794186616171,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794161767000,
+          "level": "notable",
+          "title": "Goldman Sachs is pulling Claude Code from its bankers and traders",
+          "detail": "Article URL: https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers Comments URL: https://news.ycombinator.com/item?id=50415628 Points: 576 # Comments: 348",
+          "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers"
+        },
         {
           "t": 1794161767000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "Malware uses LLMs to rank victims by how much they're worth",
           "detail": "Article URL: https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/ Comments URL: https://news.ycombinator.com/item?id=50316531 Points: 204 # Comments: 108",
           "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/"
-        },
-        {
-          "t": 1793344152000,
-          "level": "notable",
-          "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-          "detail": "https://cursor.com/blog/claude-code-extension-security-notic... Comments URL: https://news.ycombinator.com/item?id=50300683 Points: 938 # Comments: 537",
-          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1794157984637,
-      "lastOk": 1794157984637,
+      "lastRun": 1794186616557,
+      "lastOk": 1794186616557,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.319",
@@ -4676,6 +4676,14 @@
   },
   "runs": [
     {
+      "t": 1794186616562,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 11
+    },
+    {
       "t": 1794172817028,
       "ran": 2,
       "skipped": 8,
@@ -6266,14 +6274,6 @@
       "failed": 1,
       "notified": 0,
       "held": 11
-    },
-    {
-      "t": 1790497871856,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 18
     }
   ]
 }

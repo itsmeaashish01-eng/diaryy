@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794213444316,
-      "lastOk": 1794213444316,
+      "lastRun": 1794254347767,
+      "lastOk": 1794254347767,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794250589000,
+          "level": "notable",
+          "title": "Claude Fable 5.2 and Mythos 5.2",
+          "detail": "Article URL: https://www.anthropic.com/claude-fable-and-mythos-5-2 Comments URL: https://news.ycombinator.com/item?id=50429906 Points: 328 # Comments: 130",
+          "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+        },
+        {
+          "t": 1794234699000,
+          "level": "notable",
+          "title": "Magenta solar panels may be agrivoltaics' cleverest trick yet",
+          "detail": "Article URL: https://www.anthropocenemagazine.org/2026/10/magenta-solar-panels-may-be-agrivoltaics-cleverest-trick-yet/ Comments URL: https://news.ycombinator.com/item?id=50426175 Points: 165 # Comments: 75",
+          "url": "https://www.anthropocenemagazine.org/2026/10/magenta-solar-panels-may-be-agrivoltaics-cleverest-trick-yet/"
+        },
         {
           "t": 1794199392000,
           "level": "notable",
@@ -415,34 +429,27 @@
           "title": "Show HN: HackerBooks – HackerTube, but for books mentioned on HN",
           "detail": "Saw Karpathy's HackerTube and wanted the same thing for books. So I had Claude build one (Opus 5.5).It's ~16.5k books that at least two different HN commenters brought up, from 2007 till now. Each book links back to the comments that mentioned it. Data is downloadable from the about page.To be clear",
           "url": "https://hackerbooks.org"
-        },
-        {
-          "t": 1793540844000,
-          "level": "notable",
-          "title": "AI agent swarms in Minecraft fail to build civilization, drown in bureaucracy",
-          "detail": "Article URL: https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy Comments URL: https://news.ycombinator.com/item?id=50325662 Points: 6 # Comments: 1",
-          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy"
-        },
-        {
-          "t": 1793475559000,
-          "level": "notable",
-          "title": "Anthropic blocks users for anything touching training larger models",
-          "detail": "Article URL: https://twitter.com/jiahaoshao1/status/2116475922190922088 Comments URL: https://news.ycombinator.com/item?id=50319358 Points: 298 # Comments: 167",
-          "url": "https://twitter.com/jiahaoshao1/status/2116475922190922088"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1794213444668,
-      "lastOk": 1794213444668,
+      "lastRun": 1794254348303,
+      "lastOk": 1794254348303,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.319",
+      "lastLine": "latest is anthropics/claude-code v2.1.321",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794252150000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.321",
+          "detail": "## What's changed\n\n- Added Claude Fable 5.2 (`claude-fable-5-2`), now the default Fable model — 1M context, $8/$40 per Mtok with $0.20/Mtok cache reads\n- Added `--settings <file>` to `claude remote-control`, which applies a settings file to every session it starts; if the file changes, no new session starts until you restart `claude remote-control`\n- Fixed MCP OAuth requests sending secrets such a",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321"
+        },
         {
           "t": 1793984641000,
           "level": "notable",
@@ -505,13 +512,6 @@
           "title": "anthropics/claude-code v2.1.309",
           "detail": "## What's changed\n\n- Fixed sandboxed Bash commands on macOS and Linux running the shell's startup files outside the sandbox before each command\n- Fixed macOS sandbox `denyWrite` glob patterns not applying at a path's real location when the pattern's folder is reached through a symlink\n- Fixed sandboxed commands and auto-accepted edits being able to modify the MCP config file passed with `--mcp-con",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.309"
-        },
-        {
-          "t": 1792643695000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.308",
-          "detail": "## What's changed\n\n- Bug fixes and reliability improvements\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.308"
         },
         {
           "t": 1793984641000,
@@ -3364,11 +3364,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794213445657,
-      "lastOk": 1794213445657,
+      "lastRun": 1794254349093,
+      "lastOk": 1794254349093,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,708 (+54.5%) · excludes S&P 500 ETF",
+      "lastLine": "$3,740 (+55.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4258,9 +4258,27 @@
         {
           "t": 1794213445658,
           "v": 3708.15
+        },
+        {
+          "t": 1794254349093,
+          "v": 3739.75
         }
       ],
       "events": [
+        {
+          "t": 1794254349080,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794254349080,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794213445647,
           "level": "notable",
@@ -4666,31 +4684,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793515489671,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793477717775,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 74163
+          "BTC": 74795
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794254349093,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1794213445658,
       "ran": 6,
@@ -6282,14 +6294,6 @@
       "failed": 0,
       "notified": 0,
       "held": 1
-    },
-    {
-      "t": 1790534263398,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 16
     }
   ]
 }

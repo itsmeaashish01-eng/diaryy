@@ -2710,9 +2710,13 @@
         {
           "t": 1794349246637,
           "p": 73811
+        },
+        {
+          "t": 1794365100764,
+          "p": 73581
         }
       ],
-      "lastCheck": 1794349246637,
+      "lastCheck": 1794365100764,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
@@ -4885,9 +4889,16 @@
           "meta": {
             "simulated": true
           }
+        },
+        {
+          "t": 1794365100784,
+          "p": 208.99,
+          "meta": {
+            "simulated": true
+          }
         }
       ],
-      "lastCheck": 1794349246650,
+      "lastCheck": 1794365100784,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,

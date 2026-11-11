@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794340681785,
-      "lastOk": 1794340681785,
+      "lastRun": 1794358255731,
+      "lastOk": 1794358255731,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794349076000,
+          "level": "notable",
+          "title": "After 7 months, Glasswing overwelms maintainers with underwhelming findings",
+          "detail": "Article URL: https://www.vulncheck.com/blog/anthropic-glasswing-november-update Comments URL: https://news.ycombinator.com/item?id=50447074 Points: 135 # Comments: 44",
+          "url": "https://www.vulncheck.com/blog/anthropic-glasswing-november-update"
+        },
+        {
+          "t": 1794333675000,
+          "level": "notable",
+          "title": "Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives",
+          "detail": "Browsers natively handle a lot of what used to take 50 lines of JS (or a dependency): `CSS.highlights` for text range highlighting without s everywhere, `` and showModal() give you backdrops and ideal focus management, `field-sizing` to auto-grow textareas as the user types.. (Something yesterday's ",
+          "url": "https://github.com/GoogleChrome/modern-web-guidance"
+        },
         {
           "t": 1794333675000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "The SEC Should Block Anthropic's IPO to Protect the Public",
           "detail": "Article URL: https://www.techpolicy.press/the-sec-should-block-anthropics-ipo-to-protect-the-public/ Comments URL: https://news.ycombinator.com/item?id=50344919 Points: 235 # Comments: 172",
           "url": "https://www.techpolicy.press/the-sec-should-block-anthropics-ipo-to-protect-the-public/"
-        },
-        {
-          "t": 1793639125000,
-          "level": "notable",
-          "title": "Launch HN: Momentic (YC W24) – Agents that catch bugs by using your app",
-          "detail": "Hey HN, we’re Wei-Wei and Jeff. We’re building Momentic, QA agents that autonomously plan, explore, and bug-bash controls and user flows in your web, iOS, Android, and (soon) desktop apps to catch bugs.Here’s a demo: https://youtu.be/BFsM-Se1Fh8We’re both software engineers that spent our careers on",
-          "url": "https://momentic.ai/"
-        },
-        {
-          "t": 1793644258000,
-          "level": "notable",
-          "title": "Agentic backdoors via pretraining poisoning",
-          "detail": "Article URL: https://arxiv.org/abs/2610.37741 Comments URL: https://news.ycombinator.com/item?id=50341334 Points: 64 # Comments: 14",
-          "url": "https://arxiv.org/abs/2610.37741"
         }
       ],
       "notifiedAt": {},
@@ -3388,11 +3388,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794340683187,
-      "lastOk": 1794340683187,
+      "lastRun": 1794358256526,
+      "lastOk": 1794358256526,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,670 (+52.9%) · excludes S&P 500 ETF",
+      "lastLine": "$3,676 (+53.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4298,9 +4298,27 @@
         {
           "t": 1794340683187,
           "v": 3670.1
+        },
+        {
+          "t": 1794358256526,
+          "v": 3676.2
         }
       ],
       "events": [
+        {
+          "t": 1794358256515,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794358256515,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794340683173,
           "level": "notable",
@@ -4706,31 +4724,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793619488824,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793587377218,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 73402
+          "BTC": 73524
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794358256527,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1794340683188,
       "ran": 6,
@@ -6322,14 +6334,6 @@
       "failed": 0,
       "notified": 0,
       "held": 24
-    },
-    {
-      "t": 1790610680582,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 12
     }
   ]
 }

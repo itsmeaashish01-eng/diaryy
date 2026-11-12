@@ -2,14 +2,49 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794437910173,
-      "lastOk": 1794437910173,
+      "lastRun": 1794456351092,
+      "lastOk": 1794456351092,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794439349000,
+          "level": "notable",
+          "title": "Modern Web Guidance 1.0: The web platform expertise your coding agent is missing",
+          "detail": "Article URL: https://developer.chrome.com/blog/modern-web-guidance-v1 Comments URL: https://news.ycombinator.com/item?id=50460398 Points: 24 # Comments: 5",
+          "url": "https://developer.chrome.com/blog/modern-web-guidance-v1"
+        },
+        {
+          "t": 1794432275000,
+          "level": "notable",
+          "title": "United Airlines bans AI agents from booking flights on behalf of travelers",
+          "detail": "Article URL: https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/ Comments URL: https://news.ycombinator.com/item?id=50458900 Points: 446 # Comments: 430",
+          "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/"
+        },
+        {
+          "t": 1794421298000,
+          "level": "notable",
+          "title": "AWS emulator",
+          "detail": "https://www.aboutamazon.com/news/aws/how-autonomous-ai-agent...https://www.allthingsdistributed.com/2026/11/aws-emulator-an... Comments URL: https://news.ycombinator.com/item?id=50456631 Points: 738 # Comments: 222",
+          "url": "https://github.com/aws/aws-emulator"
+        },
+        {
+          "t": 1794417116000,
+          "level": "notable",
+          "title": "Launch HN: Pomerado (YC F26) – Turn any website into an MCP for agents",
+          "detail": "Hi HN, we’re Alan and Akshay from Pomerado (https://pomerado.ai/). We connect your agents to any website by turning sites into deterministic, self-healing APIs in minutes, fully self-serve.Agents are no longer limited by their intelligence, but rather by their ability to interact with systems. Airli",
+          "url": "https://news.ycombinator.com/item?id=50455811"
+        },
+        {
+          "t": 1794406246000,
+          "level": "notable",
+          "title": "Atuin Threads: All your agent sessions on every machine",
+          "detail": "Article URL: https://blog.atuin.sh/threads-agent-sessions/ Comments URL: https://news.ycombinator.com/item?id=50453637 Points: 196 # Comments: 76",
+          "url": "https://blog.atuin.sh/threads-agent-sessions/"
+        },
         {
           "t": 1794432275000,
           "level": "notable",
@@ -394,41 +429,6 @@
           "title": "Building a Multi-Agent System from Scratch: Architecture Patterns",
           "detail": "Article URL: https://kadhar.dev/blog/multi-agent-systems-from-scratch Comments URL: https://news.ycombinator.com/item?id=50380658 Points: 32 # Comments: 11",
           "url": "https://kadhar.dev/blog/multi-agent-systems-from-scratch"
-        },
-        {
-          "t": 1793818409000,
-          "level": "notable",
-          "title": "Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding",
-          "detail": "Article URL: https://www.ricursive.com/ripple Comments URL: https://news.ycombinator.com/item?id=50369925 Points: 301 # Comments: 108",
-          "url": "https://www.ricursive.com/ripple"
-        },
-        {
-          "t": 1793813513000,
-          "level": "notable",
-          "title": "Launch HN: Kino AI (YC S23) – AI media manager and video editor",
-          "detail": "Hi HN! I'm Luke from Kino (https://kino.ai). Kino lets you make great videos with your agents and your teammates. Storage of footage and assets, a rich video editor, and review links for teammates are all bundled into one. Your colleagues and Codex / Claude Code can work on the same timeline with re",
-          "url": "https://news.ycombinator.com/item?id=50368804"
-        },
-        {
-          "t": 1793812666000,
-          "level": "notable",
-          "title": "Progress on provable inference for large language models",
-          "detail": "Article URL: https://www.anthropic.com/research/provable-inference Comments URL: https://news.ycombinator.com/item?id=50368626 Points: 226 # Comments: 113",
-          "url": "https://www.anthropic.com/research/provable-inference"
-        },
-        {
-          "t": 1793824290000,
-          "level": "notable",
-          "title": "Show HN: Gauge – Open-Source CLI to recursively improve your docs",
-          "detail": "Hi HN, I’m Evan from Gauge. We’re open-sourcing our CLI to recursively improve your docs for coding agents. The CLI includes a local execution backend, so you don't need an account to try it. Explainer video here: https://youtu.be/zhLUlIKB1MgThe CLI supports a hillclimbing loop:- set up tasks for co",
-          "url": "https://github.com/gauge-sh/gauge-cli"
-        },
-        {
-          "t": 1793818409000,
-          "level": "notable",
-          "title": "Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding",
-          "detail": "Article URL: https://www.ricursive.com/ripple Comments URL: https://news.ycombinator.com/item?id=50369925 Points: 231 # Comments: 79",
-          "url": "https://www.ricursive.com/ripple"
         }
       ],
       "notifiedAt": {},
@@ -3412,11 +3412,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794437911447,
-      "lastOk": 1794437911447,
+      "lastRun": 1794456351913,
+      "lastOk": 1794456351913,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,695 (+54.0%) · excludes S&P 500 ETF",
+      "lastLine": "$3,688 (+53.7%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4338,9 +4338,27 @@
         {
           "t": 1794437911447,
           "v": 3695.05
+        },
+        {
+          "t": 1794456351913,
+          "v": 3688.1
         }
       ],
       "events": [
+        {
+          "t": 1794456351904,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794456351904,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794437911434,
           "level": "notable",
@@ -4746,31 +4764,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793735122354,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793708150654,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 73901
+          "BTC": 73762
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794456351913,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 7
+    },
     {
       "t": 1794437911448,
       "ran": 6,
@@ -6362,14 +6374,6 @@
       "failed": 1,
       "notified": 0,
       "held": 2
-    },
-    {
-      "t": 1790697940571,
-      "ran": 5,
-      "skipped": 4,
-      "failed": 1,
-      "notified": 0,
-      "held": 22
     }
   ]
 }

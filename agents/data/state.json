@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794488989280,
-      "lastOk": 1794488989280,
+      "lastRun": 1794517338068,
+      "lastOk": 1794517338068,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794507348000,
+          "level": "notable",
+          "title": "Show HN: AgentRun – open-source, Self-improving Managed Agents",
+          "detail": "We (GREP.AI, YC F26) are open-sourcing AgentRun and turning it into a full managed agents platform. Read more about it in this post: https://agentrun.ai/blog/introducing-agentrun-run-smarter-ag....It includes what we originally built for our own agent harness:- Self-improving agents - Web-grounded w",
+          "url": "https://github.com/Parcha-ai/agentrun/blob/main/README.md"
+        },
+        {
+          "t": 1794496990000,
+          "level": "notable",
+          "title": "I'm making LLMs work on small and old devices",
+          "detail": "Article URL: https://github.com/hyperionaidev/smolmaxxing/ Comments URL: https://news.ycombinator.com/item?id=50468888 Points: 187 # Comments: 70",
+          "url": "https://github.com/hyperionaidev/smolmaxxing/"
+        },
         {
           "t": 1794484001000,
           "level": "notable",
@@ -415,28 +429,14 @@
           "title": "Claude Code sends your email address to websites",
           "detail": "Article URL: https://github.com/anthropics/claude-code/issues/107757 Comments URL: https://news.ycombinator.com/item?id=50385272 Points: 1380 # Comments: 435",
           "url": "https://github.com/anthropics/claude-code/issues/107757"
-        },
-        {
-          "t": 1793917035000,
-          "level": "notable",
-          "title": "Claude Code sends your email address to websites",
-          "detail": "Article URL: https://github.com/anthropics/claude-code/issues/107757 Comments URL: https://news.ycombinator.com/item?id=50385272 Points: 912 # Comments: 302",
-          "url": "https://github.com/anthropics/claude-code/issues/107757"
-        },
-        {
-          "t": 1793899062000,
-          "level": "notable",
-          "title": "Launch HN: Rivet (YC W23) – Scale and Orchestrate Agents on S3",
-          "detail": "Hey HN, this is Nathan and Nicholas from Rivet (https://rivet.dev) – a fast, high-density, and scalable orchestrator for agentic workloads using the actor model. Rather than running a heavyweight sandbox per agent, each agent gets a lightweight actor backed by S3.Actors provide a long-lived process ",
-          "url": "https://github.com/rivet-dev/rivet"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1794488989699,
-      "lastOk": 1794488989699,
+      "lastRun": 1794517338517,
+      "lastOk": 1794517338517,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.322",
@@ -3424,11 +3424,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794488990233,
-      "lastOk": 1794488990233,
+      "lastRun": 1794517339060,
+      "lastOk": 1794517339060,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,635 (+51.5%) · excludes S&P 500 ETF",
+      "lastLine": "$3,569 (+48.7%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4358,9 +4358,27 @@
         {
           "t": 1794488990233,
           "v": 3634.95
+        },
+        {
+          "t": 1794517339060,
+          "v": 3569.4
         }
       ],
       "events": [
+        {
+          "t": 1794517339046,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794517339046,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794488990219,
           "level": "notable",
@@ -4766,31 +4784,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793779014809,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793753436416,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 72699
+          "BTC": 71388
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794517339060,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1794488990233,
       "ran": 6,
@@ -6382,14 +6394,6 @@
       "failed": 0,
       "notified": 0,
       "held": 24
-    },
-    {
-      "t": 1790729035839,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 11
     }
   ]
 }

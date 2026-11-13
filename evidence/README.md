@@ -104,13 +104,20 @@ the page was right.
 | `js/util.js` | `el()`, `safeUrl()` and other small helpers |
 | `js/capture.js` | The bookmarklet, paste handling, `normalize()` |
 | `js/analyze.js` | The rules: references, summary, tree, appraisal, reading order, export |
+| `js/docx.js` | A note as a Word document, zip writer included |
 | `js/store.js` | localStorage, export and import |
 | `js/brain.js` | The optional Claude call |
 | `js/ui.js`, `js/app.js` | The three views, start-up, the receiving end of the bookmarklet |
-| `selftest.mjs` | Offline checks on the four modules that need no DOM |
+| `selftest.mjs` | Offline checks on the modules that need no DOM |
 
 Scripts hang off `window.EV` and the `<script>` order in `index.html`
 matters.
+
+**Download as Word** on a note saves it as a `.docx` — summary, tree,
+verdict, reading list with tick boxes, and your own notes — for Microsoft
+Word, Pages or Google Docs. `js/docx.js` writes the file itself: a `.docx`
+is a zip of a few XML files, and a hand-written uncompressed zip keeps this
+repo free of dependencies.
 
 **Copy unread for the reading agent** on a note's reading list copies the
 unread papers in the shape `agents/data/reading.json` keeps its items, so

@@ -160,6 +160,14 @@
       a.by === "claude" ? el("button", { class: "btn", text: "Back to rules", onclick: () => {
         store.update(n.id, { analysis: analyze.run(n.capture, a.question) }); redraw();
       } }) : null,
+      el("button", { class: "btn", text: "Download as Word", title: "Saves this note as a .docx you can open in Microsoft Word", onclick: () => {
+        const bytes = EV.docx.build(n, fmtDate(n.created));
+        const url = URL.createObjectURL(new Blob([bytes], { type: EV.docx.MIME }));
+        const link = el("a", { href: url, download: EV.docx.fileName(n) });
+        document.body.append(link); link.click(); link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        toast("Saved to Downloads — open it in Word");
+      } }),
       el("button", { class: "btn", text: "Copy as Markdown", onclick: async () =>
         toast((await copyText(analyze.toMarkdown(n))) ? "Note copied" : "Could not copy") }),
       el("button", { class: "btn btn-danger", text: "Delete", onclick: () => {

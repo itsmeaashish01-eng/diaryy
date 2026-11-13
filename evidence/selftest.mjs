@@ -26,11 +26,11 @@ import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
 
 const win = {};
-const ctx = createContext({ window: win, console, URL, JSON, Date, Math, Set, Map, AbortSignal });
-for (const name of ["util", "capture", "analyze", "brain"]) {
+const ctx = createContext({ window: win, console, URL, JSON, Date, Math, Set, Map, AbortSignal, TextEncoder, Uint8Array, Uint32Array, DataView });
+for (const name of ["util", "capture", "analyze", "docx", "brain"]) {
   runInContext(readFileSync(join(HERE, "js", `${name}.js`), "utf8"), ctx, { filename: `evidence/js/${name}.js` });
 }
-const { capture, analyze, brain } = win.EV;
+const { capture, analyze, brain, docx } = win.EV;
 
 let passed = 0;
 const failures = [];
@@ -176,6 +176,51 @@ check("markdown carries the tree, the verdict and my notes",
 const items = analyze.toReadingItems(note, "2026-01-01");
 eq("reading items skip what is already read and rank by design",
   items.map((i) => [i.priority, i.added]), [[5, "2026-01-01"], [4, "2026-01-01"], [3, "2026-01-01"]]);
+
+/* ---- the Word file ------------------------------------------------
+   Read back the way Word reads it: from the directory at the end of the
+   zip, checking each file's checksum. A .docx that is one byte wrong
+   does not open badly — it does not open. */
+
+function unzip(bytes) {
+  const v = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const end = bytes.length - 22;
+  const files = {};
+  let at = v.getUint32(end + 16, true);
+  for (let i = 0; i < v.getUint16(end + 10, true); i++) {
+    const size = v.getUint32(at + 24, true), nameLen = v.getUint16(at + 28, true), local = v.getUint32(at + 42, true);
+    const name = Buffer.from(bytes.subarray(at + 46, at + 46 + nameLen)).toString();
+    const start = local + 30 + v.getUint16(local + 26, true);
+    const data = bytes.subarray(start, start + size);
+    files[name] = { text: Buffer.from(data).toString("utf8"), ok: docx.crc32(data) === v.getUint32(at + 16, true) };
+    at += 46 + nameLen;
+  }
+  return { files, sig: v.getUint32(end, true) };
+}
+
+eq("crc32 matches the standard check value", docx.crc32(new TextEncoder().encode("123456789")), 0xcbf43926);
+
+const hostile = JSON.parse(JSON.stringify(note));
+hostile.analysis.refs.push({ n: 5, title: "</w:t><w:p> & \u0001 a hostile title", url: "javascript:alert(1)", host: "", year: null,
+  kind: "unknown", kindLabel: "Unclassified", level: 5 });
+hostile.analysis.reading.push({ n: 5, why: "x" });
+const z = unzip(docx.build(hostile, "1 Jan 2026"));
+const xml = z.files["word/document.xml"].text;
+
+eq("the zip ends where a zip should", z.sig, 0x06054b50);
+eq("it holds the five parts Word needs", Object.keys(z.files).sort(),
+  ["[Content_Types].xml", "_rels/.rels", "word/_rels/document.xml.rels", "word/document.xml", "word/styles.xml"]);
+check("every part's checksum is right", Object.values(z.files).every((f) => f.ok));
+check("the document carries the question, the tree and the verdict",
+  xml.includes("Which anticoagulant is preferred") && xml.includes("CAUTION") && xml.includes("Synthesised evidence"));
+check("a title made of XML arrives as text", xml.includes("&lt;/w:t&gt;&lt;w:p&gt; &amp;  a hostile title"));
+check("every tag that opens closes", (xml.match(/<w:p>/g) || []).length === (xml.match(/<\/w:p>/g) || []).length &&
+  (xml.match(/<w:t /g) || []).length === (xml.match(/<\/w:t>/g) || []).length);
+check("links are the four real papers and the source — never javascript:",
+  (z.files["word/_rels/document.xml.rels"].text.match(/TargetMode="External"/g) || []).length === 5 &&
+  !z.files["word/_rels/document.xml.rels"].text.includes("javascript"));
+check("a read paper is ticked", xml.includes("☑") && xml.includes("☐"));
+eq("the file is named for the question", docx.fileName(note), "which-anticoagulant-is-preferred-in-atrial-fibrillation-with.docx");
 
 /* ---- verdict ------------------------------------------------------ */
 

@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794535482470,
-      "lastOk": 1794535482470,
+      "lastRun": 1794563691601,
+      "lastOk": 1794563691601,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794539288000,
+          "level": "notable",
+          "title": "Brave Search API now accepts agentic payments via the x402 protocol",
+          "detail": "Article URL: https://brave.com/blog/search-api-agentic-payments/ Comments URL: https://news.ycombinator.com/item?id=50477649 Points: 97 # Comments: 62",
+          "url": "https://brave.com/blog/search-api-agentic-payments/"
+        },
+        {
+          "t": 1794507348000,
+          "level": "notable",
+          "title": "Show HN: AgentRun – open-source, Self-improving Managed Agents",
+          "detail": "We (GREP.AI, YC F26) are open-sourcing AgentRun and turning it into a full managed agents platform. Read more about it in this post: https://agentrun.ai/blog/introducing-agentrun-run-smarter-ag....It includes what we originally built for our own agent harness:- Self-improving agents - Web-grounded w",
+          "url": "https://github.com/Parcha-ai/agentrun/blob/main/README.md"
+        },
         {
           "t": 1794507348000,
           "level": "notable",
@@ -415,34 +429,27 @@
           "title": "Memorilla: Latent Semantic Memory for LLMs",
           "detail": "Article URL: https://arxiv.org/abs/2610.21375 Comments URL: https://news.ycombinator.com/item?id=50395919 Points: 40 # Comments: 1",
           "url": "https://arxiv.org/abs/2610.21375"
-        },
-        {
-          "t": 1793987981000,
-          "level": "notable",
-          "title": "Perplexity launches AI agents for work",
-          "detail": "Article URL: https://www.perplexity.ai/en-GB/hub/blog/teammates-are-agents-for-complex-ongoing-work Comments URL: https://news.ycombinator.com/item?id=50395866 Points: 54 # Comments: 39",
-          "url": "https://www.perplexity.ai/en-GB/hub/blog/teammates-are-agents-for-complex-ongoing-work"
-        },
-        {
-          "t": 1793984076000,
-          "level": "notable",
-          "title": "Anthropic IPO buyers see valuation as low as $1.1T",
-          "detail": "https://epyhia.com/anthropic-ipo-valuation-talks-drop-to-1-3... Comments URL: https://news.ycombinator.com/item?id=50394906 Points: 114 # Comments: 280",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-06/anthropic-ipo-valuation-expectations-pressured-after-ai-rout"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1794517338517,
-      "lastOk": 1794517338517,
+      "lastRun": 1794563692152,
+      "lastOk": 1794563692152,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.322",
+      "lastLine": "latest is anthropics/claude-code v2.1.323",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794521533000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.323",
+          "detail": "## What's changed\n\n- Added Code Mode, an experimental opt-in in which Claude writes JavaScript to call its tools; see https://code.claude.com/docs/en/code-mode to turn it on, or to turn it off for an organization\n- Added `engines[\"claude-code\"]` to `plugin.json`: plugins outside their stated Claude Code version range are not installed, updated or loaded, and install and update pick the newest vers",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323"
+        },
         {
           "t": 1794277783000,
           "level": "notable",
@@ -505,13 +512,6 @@
           "title": "anthropics/claude-code v2.1.311",
           "detail": "## What's changed\n\n- Added `--hold-idle-file` and `--max-hold-min` to `self-hosted-runner`, to keep an idle session while your host reports processes it left running\n- Added a tip for the Explanatory output style, shown when you ask Claude for explanations\n- Fixed long freezes at startup and after reading or editing files when a CLAUDE.md file holds a very long list item\n- Fixed interrupting Claud",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.311"
-        },
-        {
-          "t": 1792798740000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.310",
-          "detail": "## What's changed\n\n- Added the Monitor tool and plugin monitors on Bedrock, Vertex, and Foundry, and when telemetry or nonessential traffic is disabled; long foreground sleeps are now blocked there too\n- Fixed requests failing behind some gateways and compatible servers that reject the `effort-2025-11-24` beta value or mid-conversation system messages; Claude Code now retries without them\n- Fixed ",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.310"
         },
         {
           "t": 1794277783000,
@@ -3436,11 +3436,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794535483208,
-      "lastOk": 1794535483208,
+      "lastRun": 1794563692936,
+      "lastOk": 1794563692936,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,542 (+47.6%) · excludes S&P 500 ETF",
+      "lastLine": "$3,450 (+43.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4378,9 +4378,27 @@
         {
           "t": 1794535483208,
           "v": 3542.2
+        },
+        {
+          "t": 1794563692936,
+          "v": 3450.15
         }
       ],
       "events": [
+        {
+          "t": 1794563692926,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794563692926,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794535483200,
           "level": "notable",
@@ -4786,31 +4804,25 @@
           "title": "Bitcoin is 90.0 points over target",
           "detail": "100.0% of the USD side, target 10%.",
           "url": ""
-        },
-        {
-          "t": 1793830011590,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
-        },
-        {
-          "t": 1793809879012,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 70844
+          "BTC": 69003
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794563692937,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1794535483209,
       "ran": 5,
@@ -6402,14 +6414,6 @@
       "failed": 0,
       "notified": 0,
       "held": 15
-    },
-    {
-      "t": 1790777460009,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 13
     }
   ]
 }

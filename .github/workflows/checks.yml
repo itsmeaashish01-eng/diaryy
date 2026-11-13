@@ -40,11 +40,17 @@ jobs:
       - name: Guide self-test
         run: node guide/selftest.mjs
 
+      # Evidence Desk's rules: which study is a trial, what counts as a
+      # branch of the decision tree. A wrong grade reads as a right one,
+      # so it is pinned down here.
+      - name: Evidence self-test
+        run: node evidence/selftest.mjs
+
       # A syntax error in a type would only show up at 37 past the hour,
       # in a job nobody is watching. Cheaper to find it here.
       - name: Everything parses
         run: |
-          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js; do
+          for f in agents/runner.mjs agents/selftest.mjs agents/core/*.mjs agents/types/*.mjs agents/app.js script.js guide/selftest.mjs guide/js/*.js evidence/selftest.mjs evidence/js/*.js; do
             node --check "$f"
           done
           for f in agents/data/*.json; do

@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794698323850,
-      "lastOk": 1794698323850,
+      "lastRun": 1794711590218,
+      "lastOk": 1794711590218,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794665154000,
+          "level": "notable",
+          "title": "Show HN: A terminal-native idle factory game, written in Rust with ratatui",
+          "detail": "Hey HN readers!I'm snipedbywifi (https://gitlab.com/snipedbywifi), and i've been working on terminactory. Please try it out if you'd like to play a cozy factory game while waiting for long agent tasks to finish!The game is a factory game (overused niche, i know xD), but runs in your terminal. Reason",
+          "url": "https://gitlab.com/snipedbywifi/terminactory"
+        },
         {
           "t": 1794665292000,
           "level": "notable",
@@ -422,13 +429,6 @@
           "title": "A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost",
           "detail": "Article URL: https://hightouch.com/blog/llm-judges-identity-resolution Comments URL: https://news.ycombinator.com/item?id=50397429 Points: 565 # Comments: 139",
           "url": "https://hightouch.com/blog/llm-judges-identity-resolution"
-        },
-        {
-          "t": 1794033544000,
-          "level": "notable",
-          "title": "The Components of Agent Memory",
-          "detail": "Article URL: https://www.anthropic.com/research/components-of-agent-memory Comments URL: https://news.ycombinator.com/item?id=50402212 Points: 85 # Comments: 48",
-          "url": "https://www.anthropic.com/research/components-of-agent-memory"
         }
       ],
       "notifiedAt": {},
@@ -3472,11 +3472,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794684382374,
-      "lastOk": 1794684382374,
+      "lastRun": 1794711590695,
+      "lastOk": 1794711590695,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,269 (+36.2%) · excludes S&P 500 ETF",
+      "lastLine": "$3,240 (+35.0%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4438,9 +4438,27 @@
         {
           "t": 1794684382374,
           "v": 3268.55
+        },
+        {
+          "t": 1794711590696,
+          "v": 3240.05
         }
       ],
       "events": [
+        {
+          "t": 1794711590684,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794711590685,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794684382365,
           "level": "notable",
@@ -4846,31 +4864,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1793949505044,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1793949505045,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 65371
+          "BTC": 64801
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794711590696,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 3
+    },
     {
       "t": 1794698324346,
       "ran": 2,
@@ -6462,14 +6474,6 @@
       "failed": 0,
       "notified": 0,
       "held": 12
-    },
-    {
-      "t": 1790905651853,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 11
     }
   ]
 }

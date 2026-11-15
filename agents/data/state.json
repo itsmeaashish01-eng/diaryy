@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794741949041,
-      "lastOk": 1794741949041,
+      "lastRun": 1794765409275,
+      "lastOk": 1794765409275,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794759386000,
+          "level": "notable",
+          "title": "What Picasso taught me about building AI Agents",
+          "detail": "Article URL: https://claramap.com/blog/what-picasso-taught-me-about-building-ai-agents/ Comments URL: https://news.ycombinator.com/item?id=50508076 Points: 8 # Comments: 3",
+          "url": "https://claramap.com/blog/what-picasso-taught-me-about-building-ai-agents/"
+        },
+        {
+          "t": 1794744846000,
+          "level": "notable",
+          "title": "Understanding Positional Embeddings in Modern LLMs",
+          "detail": "Article URL: https://magazine.sebastianraschka.com/p/understanding-positional-embeddings Comments URL: https://news.ycombinator.com/item?id=50506376 Points: 123 # Comments: 3",
+          "url": "https://magazine.sebastianraschka.com/p/understanding-positional-embeddings"
+        },
         {
           "t": 1794665154000,
           "level": "notable",
@@ -415,28 +429,14 @@
           "title": "Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files",
           "detail": "Article URL: https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again Comments URL: https://news.ycombinator.com/item?id=50407882 Points: 400 # Comments: 273",
           "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again"
-        },
-        {
-          "t": 1794084332000,
-          "level": "notable",
-          "title": "Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files",
-          "detail": "Article URL: https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again Comments URL: https://news.ycombinator.com/item?id=50407882 Points: 191 # Comments: 131",
-          "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again"
-        },
-        {
-          "t": 1793994531000,
-          "level": "notable",
-          "title": "A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost",
-          "detail": "Article URL: https://hightouch.com/blog/llm-judges-identity-resolution Comments URL: https://news.ycombinator.com/item?id=50397429 Points: 565 # Comments: 139",
-          "url": "https://hightouch.com/blog/llm-judges-identity-resolution"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1794741949559,
-      "lastOk": 1794741949559,
+      "lastRun": 1794765409634,
+      "lastOk": 1794765409634,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.325",
@@ -724,6 +724,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312"
         },
         {
+          "t": 1794602401000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.325",
+          "detail": "## What's changed\n\n- Fixed a security issue in how zstd-compressed responses are decoded\n- Added a spinner tip in VS Code and similar integrated terminals about re-running a notebook cell, shown once Claude has read or edited a Jupyter notebook\n- Added a line under the error shown when your organization's policy blocks a request, saying how to continue: run `/rewind` and change the message, or run",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.325"
+        },
+        {
           "t": 1794521533000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.323",
@@ -785,13 +792,6 @@
           "title": "anthropics/claude-code v2.1.312",
           "detail": "## What's changed\n\n- Added `oidc.user_id_claim` to the Claude apps gateway, to identify people by an id_token claim other than `sub`, such as Microsoft Entra ID's `oid`\n- Added click to send: in fullscreen, clicking the \"to send now\" hint under a queued message sends it right away, as its key does\n- Fixed managed settings and organization policy not being fetched for the rest of the session after ",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312"
-        },
-        {
-          "t": 1793051483000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.311",
-          "detail": "## What's changed\n\n- Added `--hold-idle-file` and `--max-hold-min` to `self-hosted-runner`, to keep an idle session while your host reports processes it left running\n- Added a tip for the Explanatory output style, shown when you ask Claude for explanations\n- Fixed long freezes at startup and after reading or editing files when a CLAUDE.md file holds a very long list item\n- Fixed interrupting Claud",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.311"
         },
         {
           "t": 1794521533000,
@@ -3484,11 +3484,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794741950313,
-      "lastOk": 1794741950313,
+      "lastRun": 1794765420158,
+      "lastOk": 1794765420158,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,269 (+36.2%) · excludes S&P 500 ETF",
+      "lastLine": "$3,226 (+34.4%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4458,9 +4458,27 @@
         {
           "t": 1794741950313,
           "v": 3268.85
+        },
+        {
+          "t": 1794765420158,
+          "v": 3225.85
         }
       ],
       "events": [
+        {
+          "t": 1794765420149,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794765420149,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794741950305,
           "level": "notable",
@@ -4866,31 +4884,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1793998881352,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1793998881352,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 65377
+          "BTC": 64517
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794765420158,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1794741950313,
       "ran": 6,
@@ -6482,14 +6494,6 @@
       "failed": 0,
       "notified": 0,
       "held": 5
-    },
-    {
-      "t": 1790956626002,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 23
     }
   ]
 }

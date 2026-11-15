@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794765409275,
-      "lastOk": 1794765409275,
+      "lastRun": 1794784003031,
+      "lastOk": 1794784003031,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1794777039000,
+          "level": "notable",
+          "title": "Your Agent Will Pick the Hackable One",
+          "detail": "Article URL: https://geoffstearns.com/blog/your-agent-will-pick-the-hackable-one/ Comments URL: https://news.ycombinator.com/item?id=50510799 Points: 49 # Comments: 30",
+          "url": "https://geoffstearns.com/blog/your-agent-will-pick-the-hackable-one/"
+        },
+        {
+          "t": 1794744846000,
+          "level": "notable",
+          "title": "Understanding Positional Embeddings in Modern LLMs",
+          "detail": "Article URL: https://magazine.sebastianraschka.com/p/understanding-positional-embeddings Comments URL: https://news.ycombinator.com/item?id=50506376 Points: 184 # Comments: 23",
+          "url": "https://magazine.sebastianraschka.com/p/understanding-positional-embeddings"
+        },
         {
           "t": 1794759386000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Agent memory needs its OpenTelemetry moment",
           "detail": "Article URL: https://www.lorekit.io/blog/open-agent-memory-format Comments URL: https://news.ycombinator.com/item?id=50411467 Points: 28 # Comments: 17",
           "url": "https://www.lorekit.io/blog/open-agent-memory-format"
-        },
-        {
-          "t": 1794107508000,
-          "level": "notable",
-          "title": "Goodbye Claude, Hello Pi",
-          "detail": "Article URL: https://caleb.software/posts/claude-to-pi.html Comments URL: https://news.ycombinator.com/item?id=50410107 Points: 323 # Comments: 193",
-          "url": "https://caleb.software/posts/claude-to-pi.html"
-        },
-        {
-          "t": 1794084332000,
-          "level": "notable",
-          "title": "Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files",
-          "detail": "Article URL: https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again Comments URL: https://news.ycombinator.com/item?id=50407882 Points: 400 # Comments: 273",
-          "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again"
         }
       ],
       "notifiedAt": {},
@@ -3484,11 +3484,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794765420158,
-      "lastOk": 1794765420158,
+      "lastRun": 1794784003905,
+      "lastOk": 1794784003905,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,226 (+34.4%) · excludes S&P 500 ETF",
+      "lastLine": "$3,271 (+36.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4462,9 +4462,27 @@
         {
           "t": 1794765420158,
           "v": 3225.85
+        },
+        {
+          "t": 1794784003906,
+          "v": 3271.2
         }
       ],
       "events": [
+        {
+          "t": 1794784003897,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794784003897,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794765420149,
           "level": "notable",
@@ -4870,31 +4888,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794013663501,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794013663501,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 64517
+          "BTC": 65424
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794784003906,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1794765420158,
       "ran": 3,
@@ -6486,14 +6498,6 @@
       "failed": 0,
       "notified": 0,
       "held": 12
-    },
-    {
-      "t": 1790974562179,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 5
     }
   ]
 }

@@ -2,8 +2,8 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1794797978130,
-      "lastOk": 1794797978130,
+      "lastRun": 1794830302228,
+      "lastOk": 1794830302228,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0 of 20 items match /claude|anthropic|llm|agent/",
@@ -435,8 +435,8 @@
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1794797978443,
-      "lastOk": 1794797978443,
+      "lastRun": 1794830302693,
+      "lastOk": 1794830302693,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.325",
@@ -3496,11 +3496,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1794784003905,
-      "lastOk": 1794784003905,
+      "lastRun": 1794830303485,
+      "lastOk": 1794830303485,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,271 (+36.3%) · excludes S&P 500 ETF",
+      "lastLine": "$3,225 (+34.4%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4478,9 +4478,27 @@
         {
           "t": 1794784003906,
           "v": 3271.2
+        },
+        {
+          "t": 1794830303485,
+          "v": 3224.8
         }
       ],
       "events": [
+        {
+          "t": 1794830303475,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1794830303475,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1794784003897,
           "level": "notable",
@@ -4886,31 +4904,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794037394766,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794037394766,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 65424
+          "BTC": 64496
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1794830303485,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 12
+    },
     {
       "t": 1794797978449,
       "ran": 5,
@@ -6502,14 +6514,6 @@
       "failed": 0,
       "notified": 0,
       "held": 4
-    },
-    {
-      "t": 1791010960305,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 25
     }
   ]
 }

@@ -29,6 +29,21 @@
   "seeded": true,
   "alerts": [
     {
+      "id": "mwo2affe-xrkkaa",
+      "watchId": "seed-btc",
+      "watchLabel": "Bitcoin",
+      "kind": "crypto",
+      "ruleType": "dropPct",
+      "ruleLabel": "Falls % below its recent average",
+      "severity": "good",
+      "message": "Down 5.8% vs its recent average — now $61,540",
+      "price": 61540,
+      "currency": "USD",
+      "t": 1795123678874,
+      "read": false,
+      "kindLabel": "Crypto"
+    },
+    {
       "id": "mwmmoseb-du3tuc",
       "watchId": "seed-btc",
       "watchLabel": "Bitcoin",
@@ -3081,15 +3096,19 @@
         {
           "t": 1795093042451,
           "p": 63846
+        },
+        {
+          "t": 1795123678859,
+          "p": 61540
         }
       ],
-      "lastCheck": 1795093042451,
+      "lastCheck": 1795123678859,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,
       "lastAlertAt": {
         "risePct": 1790142975862,
-        "dropPct": 1795037008835
+        "dropPct": 1795123678874
       },
       "cooldownMin": 360,
       "notes": "Live source, no API key. Checked automatically every hour."
@@ -5460,9 +5479,16 @@
           "meta": {
             "simulated": true
           }
+        },
+        {
+          "t": 1795123678875,
+          "p": 276.64,
+          "meta": {
+            "simulated": true
+          }
         }
       ],
-      "lastCheck": 1795093042465,
+      "lastCheck": 1795123678875,
       "nextCheck": null,
       "errorCount": 0,
       "lastError": null,

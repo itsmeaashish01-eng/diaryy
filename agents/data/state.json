@@ -2,14 +2,49 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795040200618,
-      "lastOk": 1795040200618,
+      "lastRun": 1795060070617,
+      "lastOk": 1795060070617,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "5 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795051622000,
+          "level": "notable",
+          "title": "Previous-Token Prediction Based LLM Inversion for Prompt Reconstruction",
+          "detail": "Article URL: https://arxiv.org/abs/2607.29378 Comments URL: https://news.ycombinator.com/item?id=50554908 Points: 17 # Comments: 5",
+          "url": "https://arxiv.org/abs/2607.29378"
+        },
+        {
+          "t": 1795044609000,
+          "level": "notable",
+          "title": "Anthropic prices initial public offering",
+          "detail": "Article URL: https://www.anthropic.com/news/anthropic-prices-initial-public-offering Comments URL: https://news.ycombinator.com/item?id=50553843 Points: 120 # Comments: 91",
+          "url": "https://www.anthropic.com/news/anthropic-prices-initial-public-offering"
+        },
+        {
+          "t": 1795040953000,
+          "level": "notable",
+          "title": "LLM assisted reverse engineering",
+          "detail": "Article URL: https://www.slowchronicle.com/posts/llm-assisted-reverse-engineering Comments URL: https://news.ycombinator.com/item?id=50553225 Points: 94 # Comments: 28",
+          "url": "https://www.slowchronicle.com/posts/llm-assisted-reverse-engineering"
+        },
+        {
+          "t": 1795022788000,
+          "level": "notable",
+          "title": "Launch HN: Maritime (YC F26) – A managed cloud for production AI agents",
+          "detail": "Hi HN, we're Ary and Maria, co-founders of Maritime (https://maritime.sh). We're building an agent-native cloud that handles everything from custom environments to lifecycle management for AI agents.Demo: https://www.youtube.com/watch?v=lCWMdBQ96rYThere’s been an explosion of sandbox companies comin",
+          "url": "https://news.ycombinator.com/item?id=50549188"
+        },
+        {
+          "t": 1795016974000,
+          "level": "notable",
+          "title": "AI agents ask better questions than KPMG accountants in audit trial",
+          "detail": "Article URL: https://europeanbusinessmagazine.com/ai-agents-better-questions-kpmg/ Comments URL: https://news.ycombinator.com/item?id=50547777 Points: 387 # Comments: 170",
+          "url": "https://europeanbusinessmagazine.com/ai-agents-better-questions-kpmg/"
+        },
         {
           "t": 1795022788000,
           "level": "notable",
@@ -394,41 +429,6 @@
           "title": "Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives",
           "detail": "Browsers natively handle a lot of what used to take 50 lines of JS (or a dependency): `CSS.highlights` for text range highlighting without s everywhere, `` and showModal() give you backdrops and ideal focus management, `field-sizing` to auto-grow textareas as the user types.. (Something yesterday's ",
           "url": "https://github.com/GoogleChrome/modern-web-guidance"
-        },
-        {
-          "t": 1794333307000,
-          "level": "notable",
-          "title": "Claude Whiteboards, Claude Sheets, and Claude Data",
-          "detail": "Article URL: https://claude.com/resources/articles/sheets-whiteboards-data Comments URL: https://news.ycombinator.com/item?id=50443716 Points: 198 # Comments: 146",
-          "url": "https://claude.com/resources/articles/sheets-whiteboards-data"
-        },
-        {
-          "t": 1794349076000,
-          "level": "notable",
-          "title": "After 7 months, Glasswing overwelms maintainers with underwhelming findings",
-          "detail": "Article URL: https://www.vulncheck.com/blog/anthropic-glasswing-november-update Comments URL: https://news.ycombinator.com/item?id=50447074 Points: 135 # Comments: 44",
-          "url": "https://www.vulncheck.com/blog/anthropic-glasswing-november-update"
-        },
-        {
-          "t": 1794333675000,
-          "level": "notable",
-          "title": "Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives",
-          "detail": "Browsers natively handle a lot of what used to take 50 lines of JS (or a dependency): `CSS.highlights` for text range highlighting without s everywhere, `` and showModal() give you backdrops and ideal focus management, `field-sizing` to auto-grow textareas as the user types.. (Something yesterday's ",
-          "url": "https://github.com/GoogleChrome/modern-web-guidance"
-        },
-        {
-          "t": 1794333675000,
-          "level": "notable",
-          "title": "Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives",
-          "detail": "Browsers natively handle a lot of what used to take 50 lines of JS (or a dependency): `CSS.highlights` for text range highlighting without s everywhere, `` and showModal() give you backdrops and ideal focus management, `field-sizing` to auto-grow textareas as the user types.. (Something yesterday's ",
-          "url": "https://github.com/GoogleChrome/modern-web-guidance"
-        },
-        {
-          "t": 1794333307000,
-          "level": "notable",
-          "title": "Claude Whiteboards, Claude Sheets, and Claude Data",
-          "detail": "Article URL: https://claude.com/resources/articles/sheets-whiteboards-data Comments URL: https://news.ycombinator.com/item?id=50443716 Points: 25 # Comments: 11",
-          "url": "https://claude.com/resources/articles/sheets-whiteboards-data"
         }
       ],
       "notifiedAt": {},
@@ -3544,11 +3544,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795040211687,
-      "lastOk": 1795040211687,
+      "lastRun": 1795060071375,
+      "lastOk": 1795060071375,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,116 (+29.8%) · excludes S&P 500 ETF",
+      "lastLine": "$3,149 (+31.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4558,9 +4558,27 @@
         {
           "t": 1795040211687,
           "v": 3116.1
+        },
+        {
+          "t": 1795060071375,
+          "v": 3148.9
         }
       ],
       "events": [
+        {
+          "t": 1795060071366,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795060071366,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795040211678,
           "level": "notable",
@@ -4966,31 +4984,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794254349080,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794254349080,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 62322
+          "BTC": 62978
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795060071375,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 7
+    },
     {
       "t": 1795040211688,
       "ran": 6,
@@ -6582,14 +6594,6 @@
       "failed": 0,
       "notified": 0,
       "held": 13
-    },
-    {
-      "t": 1791139523191,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 10
     }
   ]
 }

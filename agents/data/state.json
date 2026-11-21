@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795210129883,
-      "lastOk": 1795210129883,
+      "lastRun": 1795229119586,
+      "lastOk": 1795229119586,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795213100000,
+          "level": "notable",
+          "title": "The Hungry Butler Effect: Concealed Commercial Incentives in LLMs",
+          "detail": "Article URL: https://www.researchgate.net/publication/418143113_The_Hungry_Butler_Effect_Concealed_Commercial_Incentives_and_the_Erosion_of_Epistemic_Rigour_in_Large_Language_Models Comments URL: https://news.ycombinator.com/item?id=50583117 Points: 19 # Comments: 8",
+          "url": "https://www.researchgate.net/publication/418143113_The_Hungry_Butler_Effect_Concealed_Commercial_Incentives_and_the_Erosion_of_Epistemic_Rigour_in_Large_Language_Models"
+        },
+        {
+          "t": 1795205996000,
+          "level": "notable",
+          "title": "Show HN: OpenComputer – an open source alternative to Devin",
+          "detail": "Hi HN!Utpal here, I'm one of the founders of OpenComputer.OpenComputer is an open source cloud coding agent for teams that can run in your own cloud account (AWS, GCP, Azure).We run the agent harness and the sandbox on the same durable VM (architecture in the docs [1]). First commit lands in 24s; th",
+          "url": "https://github.com/diggerhq/opencomputer"
+        },
         {
           "t": 1795205996000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "United Airlines bans AI agents from booking flights on behalf of travelers",
           "detail": "Article URL: https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/ Comments URL: https://news.ycombinator.com/item?id=50458900 Points: 183 # Comments: 188",
           "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/"
-        },
-        {
-          "t": 1794421298000,
-          "level": "notable",
-          "title": "AWS emulator",
-          "detail": "https://www.aboutamazon.com/news/aws/how-autonomous-ai-agent...https://www.allthingsdistributed.com/2026/11/aws-emulator-an... Comments URL: https://news.ycombinator.com/item?id=50456631 Points: 538 # Comments: 186",
-          "url": "https://github.com/aws/aws-emulator"
-        },
-        {
-          "t": 1794417116000,
-          "level": "notable",
-          "title": "Launch HN: Pomerado (YC F26) – Turn any website into an MCP for agents",
-          "detail": "Hi HN, we’re Alan and Akshay from Pomerado (https://pomerado.ai/). We connect your agents to any website by turning sites into deterministic, self-healing APIs in minutes, fully self-serve.Agents are no longer limited by their intelligence, but rather by their ability to interact with systems. Airli",
-          "url": "https://news.ycombinator.com/item?id=50455811"
         }
       ],
       "notifiedAt": {},
@@ -3580,11 +3580,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795210131203,
-      "lastOk": 1795210131203,
+      "lastRun": 1795229120106,
+      "lastOk": 1795229120106,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$2,929 (+22.1%) · excludes S&P 500 ETF",
+      "lastLine": "$2,927 (+22.0%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4618,9 +4618,27 @@
         {
           "t": 1795210131203,
           "v": 2929.25
+        },
+        {
+          "t": 1795229120106,
+          "v": 2927.2
         }
       ],
       "events": [
+        {
+          "t": 1795229120093,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795229120093,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795210131191,
           "level": "notable",
@@ -5026,31 +5044,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794414775312,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794414775312,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 58585
+          "BTC": 58544
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795229120107,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1795210131204,
       "ran": 6,
@@ -6642,14 +6654,6 @@
       "failed": 0,
       "notified": 0,
       "held": 25
-    },
-    {
-      "t": 1791256653875,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 11
     }
   ]
 }

@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795361789473,
-      "lastOk": 1795361789473,
+      "lastRun": 1795382040517,
+      "lastOk": 1795382040517,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795355818000,
+          "level": "notable",
+          "title": "Show HN: I built a game where you are an LLM's subagent",
+          "detail": "Article URL: https://github.com/gulivan/worker755 Comments URL: https://news.ycombinator.com/item?id=50599762 Points: 225 # Comments: 55",
+          "url": "https://github.com/gulivan/worker755"
+        },
+        {
+          "t": 1795337854000,
+          "level": "notable",
+          "title": "87% of the Anthropic power will come from gas and 11% from coal in 2028",
+          "detail": "Article URL: https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/ Comments URL: https://news.ycombinator.com/item?id=50597612 Points: 758 # Comments: 790",
+          "url": "https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/"
+        },
         {
           "t": 1795355818000,
           "level": "notable",
@@ -415,20 +429,6 @@
           "title": "Show HN: AgentRun – open-source, Self-improving Managed Agents",
           "detail": "We (GREP.AI, YC F26) are open-sourcing AgentRun and turning it into a full managed agents platform. Read more about it in this post: https://agentrun.ai/blog/introducing-agentrun-run-smarter-ag....It includes what we originally built for our own agent harness:- Self-improving agents - Web-grounded w",
           "url": "https://github.com/Parcha-ai/agentrun/blob/main/README.md"
-        },
-        {
-          "t": 1794496990000,
-          "level": "notable",
-          "title": "I'm making LLMs work on small and old devices",
-          "detail": "Article URL: https://github.com/hyperionaidev/smolmaxxing/ Comments URL: https://news.ycombinator.com/item?id=50468888 Points: 187 # Comments: 70",
-          "url": "https://github.com/hyperionaidev/smolmaxxing/"
-        },
-        {
-          "t": 1794484001000,
-          "level": "notable",
-          "title": "Anthropic IPO",
-          "detail": "Article URL: https://ipo.anthropic.com/us/ Comments URL: https://news.ycombinator.com/item?id=50465829 Points: 136 # Comments: 144",
-          "url": "https://ipo.anthropic.com/us/"
         }
       ],
       "notifiedAt": {},
@@ -3616,11 +3616,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795361790876,
-      "lastOk": 1795361790876,
+      "lastRun": 1795382041191,
+      "lastOk": 1795382041191,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,038 (+26.6%) · excludes S&P 500 ETF",
+      "lastLine": "$3,042 (+26.7%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4678,9 +4678,27 @@
         {
           "t": 1795361790876,
           "v": 3037.8
+        },
+        {
+          "t": 1795382041192,
+          "v": 3041.85
         }
       ],
       "events": [
+        {
+          "t": 1795382041182,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795382041183,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795361790864,
           "level": "notable",
@@ -5086,31 +5104,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794563692926,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794563692926,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 60756
+          "BTC": 60837
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795382041192,
+      "ran": 2,
+      "skipped": 8,
+      "failed": 0,
+      "notified": 0,
+      "held": 4
+    },
     {
       "t": 1795361790877,
       "ran": 6,
@@ -6702,14 +6714,6 @@
       "failed": 0,
       "notified": 0,
       "held": 6
-    },
-    {
-      "t": 1791391929075,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 25
     }
   ]
 }

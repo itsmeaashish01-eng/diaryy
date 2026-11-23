@@ -2,14 +2,42 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795432145072,
-      "lastOk": 1795432145072,
+      "lastRun": 1795474361254,
+      "lastOk": 1795474361254,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795472584000,
+          "level": "notable",
+          "title": "VP != VNP over Every Field [pdf]",
+          "detail": "Article URL: https://github.com/anthropics/formal-math/blob/11b6c7e3c927df2658f513b6b68ea7f8929c62c5/vp-vnp/paper.pdf Comments URL: https://news.ycombinator.com/item?id=50620252 Points: 18 # Comments: 2",
+          "url": "https://github.com/anthropics/formal-math/blob/11b6c7e3c927df2658f513b6b68ea7f8929c62c5/vp-vnp/paper.pdf"
+        },
+        {
+          "t": 1795471750000,
+          "level": "notable",
+          "title": "VP ≠ VNP over Every Field",
+          "detail": "Article URL: https://github.com/anthropics/formal-math/tree/main/vp-vnp Comments URL: https://news.ycombinator.com/item?id=50620102 Points: 47 # Comments: 17",
+          "url": "https://github.com/anthropics/formal-math/tree/main/vp-vnp"
+        },
+        {
+          "t": 1795454365000,
+          "level": "notable",
+          "title": "How should an LLM see a computer?",
+          "detail": "Article URL: https://www.greptile.com/blog/trex-computer-use Comments URL: https://news.ycombinator.com/item?id=50615520 Points: 35 # Comments: 20",
+          "url": "https://www.greptile.com/blog/trex-computer-use"
+        },
+        {
+          "t": 1795441358000,
+          "level": "notable",
+          "title": "NariQ: BF16-level Qwen3.8-27B in a 10 GB file",
+          "detail": "We built NariQ: 3-bit-or-lower quantizations of Qwen3.8-27B that retain near-BF16 quality across agentic tasks, math, multilingual reasoning, and image understanding.To our knowledge, this is the first 3-bit-or-lower quantization that retains BF16 lvl performance on long-horizon agentic tasks.Benchm",
+          "url": "https://huggingface.co/nari-labs/Qwen3.8-27B-NariQ-GGUF"
+        },
         {
           "t": 1795389130000,
           "level": "notable",
@@ -401,48 +429,27 @@
           "title": "Show HN: A terminal-native idle factory game, written in Rust with ratatui",
           "detail": "Hey HN readers!I'm snipedbywifi (https://gitlab.com/snipedbywifi), and i've been working on terminactory. Please try it out if you'd like to play a cozy factory game while waiting for long agent tasks to finish!The game is a factory game (overused niche, i know xD), but runs in your terminal. Reason",
           "url": "https://gitlab.com/snipedbywifi/terminactory"
-        },
-        {
-          "t": 1794603671000,
-          "level": "notable",
-          "title": "Autonomous (YC F25) is hiring MTS to build AI agents that manage your wealth",
-          "detail": "Article URL: https://atg.science/careers Comments URL: https://news.ycombinator.com/item?id=50489589 Points: 0 # Comments: 0",
-          "url": "https://atg.science/careers"
-        },
-        {
-          "t": 1794609555000,
-          "level": "notable",
-          "title": "Claude Meetings",
-          "detail": "Article URL: https://claude.com/resources/articles/claude-meetings Comments URL: https://news.ycombinator.com/item?id=50491097 Points: 55 # Comments: 47",
-          "url": "https://claude.com/resources/articles/claude-meetings"
-        },
-        {
-          "t": 1794603671000,
-          "level": "notable",
-          "title": "Autonomous (YC F25) is hiring MTS to build AI agents that manage your wealth",
-          "detail": "Article URL: https://atg.science/careers Comments URL: https://news.ycombinator.com/item?id=50489589 Points: 0 # Comments: 0",
-          "url": "https://atg.science/careers"
-        },
-        {
-          "t": 1794565093000,
-          "level": "notable",
-          "title": "Elevated errors on claude.ai, Claude Code, and platform.claude.com",
-          "detail": "Article URL: https://status.claude.com/incidents/nn11wk485zfn Comments URL: https://news.ycombinator.com/item?id=50481187 Points: 440 # Comments: 356",
-          "url": "https://status.claude.com/incidents/nn11wk485zfn"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1795432145581,
-      "lastOk": 1795432145581,
+      "lastRun": 1795474361675,
+      "lastOk": 1795474361675,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "latest is anthropics/claude-code v2.1.330",
+      "lastLine": "latest is anthropics/claude-code v2.1.331",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795469681000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.331",
+          "detail": "## What's changed\n\n- Added Code Mode support in terminal sessions on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry and Claude Platform on AWS\n- Added `oidc.groups_jsonpath` to the Claude apps gateway, to read groups from the matching entries of a list of objects with a small subset of JSONPath (RFC 9535)\n- Added an API connectivity section to `claude doctor` that reports whether",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.331"
+        },
         {
           "t": 1795213976000,
           "level": "notable",
@@ -505,13 +512,6 @@
           "title": "anthropics/claude-code v2.1.321",
           "detail": "## What's changed\n\n- Added Claude Fable 5.2 (`claude-fable-5-2`), now the default Fable model — 1M context, $8/$40 per Mtok with $0.20/Mtok cache reads\n- Added `--settings <file>` to `claude remote-control`, which applies a settings file to every session it starts; if the file changes, no new session starts until you restart `claude remote-control`\n- Fixed MCP OAuth requests sending secrets such a",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321"
-        },
-        {
-          "t": 1793984641000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.319",
-          "detail": "## What's changed\n\n- Changed auto mode with telemetry or feature flags off, including behind LLM gateways: calls the server can't check are asked about or denied, with no fallback to the built-in classifier; set `CLAUDE_CODE_AUTO_MODE_SERVER=0` to keep using it (Bedrock, Vertex and Foundry are unchanged)\n- Changed auto mode behind an LLM gateway: `CLAUDE_CODE_AUTO_MODE_SERVER=1` turns on the serve",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
         },
         {
           "t": 1795213976000,
@@ -3628,11 +3628,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795432156162,
-      "lastOk": 1795432156162,
+      "lastRun": 1795474362222,
+      "lastOk": 1795474362222,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,067 (+27.8%) · excludes S&P 500 ETF",
+      "lastLine": "$3,053 (+27.2%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4702,9 +4702,27 @@
         {
           "t": 1795432156162,
           "v": 3067.45
+        },
+        {
+          "t": 1795474362222,
+          "v": 3053.1
         }
       ],
       "events": [
+        {
+          "t": 1795474362209,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795474362209,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795432156153,
           "level": "notable",
@@ -5110,31 +5128,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794639401327,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794639401327,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 61349
+          "BTC": 61062
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795474362223,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 16
+    },
     {
       "t": 1795432156162,
       "ran": 6,
@@ -6726,14 +6738,6 @@
       "failed": 0,
       "notified": 0,
       "held": 14
-    },
-    {
-      "t": 1791451494590,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 26
     }
   ]
 }

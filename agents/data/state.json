@@ -2,14 +2,35 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795382040517,
-      "lastOk": 1795382040517,
+      "lastRun": 1795398961836,
+      "lastOk": 1795398961836,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "3 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795389130000,
+          "level": "notable",
+          "title": "Progress map for the Lean formalization of Alessandro Masullo's manuscript",
+          "detail": "Article URL: https://claude.ai/artifact/CtQyX8qfYAF822bgHJHHE3 Comments URL: https://news.ycombinator.com/item?id=50605045 Points: 150 # Comments: 120",
+          "url": "https://claude.ai/artifact/CtQyX8qfYAF822bgHJHHE3"
+        },
+        {
+          "t": 1795385928000,
+          "level": "notable",
+          "title": "Localcode, open source agentic coding on your Mac with one command",
+          "detail": "Article URL: https://github.com/mjwsolo/localcode Comments URL: https://news.ycombinator.com/item?id=50604540 Points: 21 # Comments: 5",
+          "url": "https://github.com/mjwsolo/localcode"
+        },
+        {
+          "t": 1795384425000,
+          "level": "notable",
+          "title": "Agent swarm trying to solve P vs. NP",
+          "detail": "Article URL: https://pequalnp.com/ Comments URL: https://news.ycombinator.com/item?id=50604314 Points: 111 # Comments: 104",
+          "url": "https://pequalnp.com/"
+        },
         {
           "t": 1795355818000,
           "level": "notable",
@@ -408,35 +429,14 @@
           "title": "Show HN: AgentRun – open-source, Self-improving Managed Agents",
           "detail": "We (GREP.AI, YC F26) are open-sourcing AgentRun and turning it into a full managed agents platform. Read more about it in this post: https://agentrun.ai/blog/introducing-agentrun-run-smarter-ag....It includes what we originally built for our own agent harness:- Self-improving agents - Web-grounded w",
           "url": "https://github.com/Parcha-ai/agentrun/blob/main/README.md"
-        },
-        {
-          "t": 1794507348000,
-          "level": "notable",
-          "title": "Show HN: AgentRun – open-source, Self-improving Managed Agents",
-          "detail": "We (GREP.AI, YC F26) are open-sourcing AgentRun and turning it into a full managed agents platform. Read more about it in this post: https://agentrun.ai/blog/introducing-agentrun-run-smarter-ag....It includes what we originally built for our own agent harness:- Self-improving agents - Web-grounded w",
-          "url": "https://github.com/Parcha-ai/agentrun/blob/main/README.md"
-        },
-        {
-          "t": 1794496990000,
-          "level": "notable",
-          "title": "I'm making LLMs work on small and old devices",
-          "detail": "Article URL: https://github.com/hyperionaidev/smolmaxxing/ Comments URL: https://news.ycombinator.com/item?id=50468888 Points: 279 # Comments: 95",
-          "url": "https://github.com/hyperionaidev/smolmaxxing/"
-        },
-        {
-          "t": 1794507348000,
-          "level": "notable",
-          "title": "Show HN: AgentRun – open-source, Self-improving Managed Agents",
-          "detail": "We (GREP.AI, YC F26) are open-sourcing AgentRun and turning it into a full managed agents platform. Read more about it in this post: https://agentrun.ai/blog/introducing-agentrun-run-smarter-ag....It includes what we originally built for our own agent harness:- Self-improving agents - Web-grounded w",
-          "url": "https://github.com/Parcha-ai/agentrun/blob/main/README.md"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1795361790161,
-      "lastOk": 1795361790161,
+      "lastRun": 1795398962223,
+      "lastOk": 1795398962223,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.330",
@@ -724,6 +724,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
         },
         {
+          "t": 1795213976000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.330",
+          "detail": "## What's changed\n\n- Added sign-in to organizations managed in Anthropic's Enterprise Admin Console: after `claude auth login`, Claude Code applies the organization's settings and uses its cloud provider or gateway\n- Added easel, a built-in mod that draws charts when asked and under MCP metrics results, on Pro, Max and, where available, Team and Enterprise on macOS and Linux; turn automatic charts",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
+        },
+        {
           "t": 1795126481000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.329",
@@ -785,13 +792,6 @@
           "title": "anthropics/claude-code v2.1.319",
           "detail": "## What's changed\n\n- Changed auto mode with telemetry or feature flags off, including behind LLM gateways: calls the server can't check are asked about or denied, with no fallback to the built-in classifier; set `CLAUDE_CODE_AUTO_MODE_SERVER=0` to keep using it (Bedrock, Vertex and Foundry are unchanged)\n- Changed auto mode behind an LLM gateway: `CLAUDE_CODE_AUTO_MODE_SERVER=1` turns on the serve",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
-        },
-        {
-          "t": 1793750463000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.318",
-          "detail": "## What's changed\n\n- Added a record of your answer when Claude Code asks to turn on the mods it writes in a session\n- Added `assume_role` on `mantle` upstreams of the Claude apps gateway, for a role in another AWS account and for per-developer AWS cost attribution\n- Added an `effort` option to a mod's `$.model.fork`, so a quick side job can run at `low` whatever effort the session uses; the result",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
         },
         {
           "t": 1795126481000,
@@ -3616,11 +3616,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795382041191,
-      "lastOk": 1795382041191,
+      "lastRun": 1795398962781,
+      "lastOk": 1795398962781,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,042 (+26.7%) · excludes S&P 500 ETF",
+      "lastLine": "$3,038 (+26.6%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4682,9 +4682,27 @@
         {
           "t": 1795382041192,
           "v": 3041.85
+        },
+        {
+          "t": 1795398962781,
+          "v": 3038.05
         }
       ],
       "events": [
+        {
+          "t": 1795398962769,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795398962769,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795382041182,
           "level": "notable",
@@ -5090,31 +5108,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794592786489,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794592786489,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 60837
+          "BTC": 60761
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795398962781,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 15
+    },
     {
       "t": 1795382041192,
       "ran": 2,
@@ -6706,14 +6718,6 @@
       "failed": 0,
       "notified": 0,
       "held": 16
-    },
-    {
-      "t": 1791411222287,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 6
     }
   ]
 }

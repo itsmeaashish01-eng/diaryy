@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795474361254,
-      "lastOk": 1795474361254,
+      "lastRun": 1795503815502,
+      "lastOk": 1795503815502,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "4 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795496681000,
+          "level": "notable",
+          "title": "Show HN: Genesis Map – Visualize your agent's changes. See where they can break",
+          "detail": "When agent ships code faster and faster, human review is no longer possible. Which brings 2 problems, at least for me:1. I need to understand what my agent changes as quickly and easily as possible, cuz I don't wanna lose track of the current status of my product, or be the main bottleneck in shippi",
+          "url": "https://github.com/GenesisAgentInfra/genesis"
+        },
+        {
+          "t": 1795472988000,
+          "level": "notable",
+          "title": "Latent Introspection: LLMs Can Detect Prior Concept Injections",
+          "detail": "Article URL: https://arxiv.org/abs/2602.20031 Comments URL: https://news.ycombinator.com/item?id=50620328 Points: 52 # Comments: 4",
+          "url": "https://arxiv.org/abs/2602.20031"
+        },
         {
           "t": 1795472584000,
           "level": "notable",
@@ -415,34 +429,90 @@
           "title": "Serving GLM-5.3 at 607.8 tok/s across two Nvidia DGX stations with vLLM",
           "detail": "Article URL: https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/ Comments URL: https://news.ycombinator.com/item?id=50497155 Points: 92 # Comments: 48",
           "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/"
-        },
-        {
-          "t": 1794665292000,
-          "level": "notable",
-          "title": "Show HN: Agweb – a browser for agents that stays out of your way",
-          "detail": "Article URL: https://github.com/paul-nameless/agweb Comments URL: https://news.ycombinator.com/item?id=50497147 Points: 57 # Comments: 18",
-          "url": "https://github.com/paul-nameless/agweb"
-        },
-        {
-          "t": 1794665154000,
-          "level": "notable",
-          "title": "Show HN: A terminal-native idle factory game, written in Rust with ratatui",
-          "detail": "Hey HN readers!I'm snipedbywifi (https://gitlab.com/snipedbywifi), and i've been working on terminactory. Please try it out if you'd like to play a cozy factory game while waiting for long agent tasks to finish!The game is a factory game (overused niche, i know xD), but runs in your terminal. Reason",
-          "url": "https://gitlab.com/snipedbywifi/terminactory"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1795474361675,
-      "lastOk": 1795474361675,
+      "lastRun": 1795503816112,
+      "lastOk": 1795503816112,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.331",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795469681000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.331",
+          "detail": "## What's changed\n\n- Added Code Mode support in terminal sessions on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry and Claude Platform on AWS\n- Added `oidc.groups_jsonpath` to the Claude apps gateway, to read groups from the matching entries of a list of objects with a small subset of JSONPath (RFC 9535)\n- Added an API connectivity section to `claude doctor` that reports whether",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.331"
+        },
+        {
+          "t": 1795213976000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.330",
+          "detail": "## What's changed\n\n- Added sign-in to organizations managed in Anthropic's Enterprise Admin Console: after `claude auth login`, Claude Code applies the organization's settings and uses its cloud provider or gateway\n- Added easel, a built-in mod that draws charts when asked and under MCP metrics results, on Pro, Max and, where available, Team and Enterprise on macOS and Linux; turn automatic charts",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
+        },
+        {
+          "t": 1795126481000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.329",
+          "detail": "## What's changed\n\n- Added a trust dialog warning that says where a folder's hooks are declared\n- Added a warning in the conversation, in Claude Desktop and other non-interactive hosts, when hooks in managed settings fail to load\n- Added this session's scheduled tasks, `/loop` wakeups, the goal and this conversation's forks to `/tasks`; x stops one after asking\n- Added a \"Server message\" row to a ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329"
+        },
+        {
+          "t": 1795050844000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.328",
+          "detail": "## What's changed\n\n- Added auto mode for Claude Opus 4.6 and Sonnet 4.6 on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry and Claude apps gateway; interactive sessions with no permission mode start in it\n- Added `\"onFailure\": \"block\"` for `mcp_tool` hooks, as for command and HTTP hooks: a hook whose call fails blocks the action\n- Added a warning when a message from a session that",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.328"
+        },
+        {
+          "t": 1794957465000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.327",
+          "detail": "## What's changed\n\n- Added a confirmation before `/install-github-app` changes a repository\n- Added `claude mcp add-json <name> -` to read the server's JSON from stdin, so tokens can stay off the command line; not available inside a Claude Code session\n- Added a line when a resumed session's earlier messages can't be loaded\n- Added a list in `/status` of broken agent, skill, command and output sty",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327"
+        },
+        {
+          "t": 1794867065000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.326",
+          "detail": "## What's changed\n\n- Added support for turning on Code Mode while agent teams are enabled; if you already turned it on, sessions with teams on now start in Code Mode\n- Added a startup warning when an `--allowedTools`, `--disallowedTools` or `--tools` value has an entry that doesn't look like a complete rule\n- Added a message explaining why MCP servers stop loading when an administrator adds `manag",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326"
+        },
+        {
+          "t": 1794602401000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.325",
+          "detail": "## What's changed\n\n- Fixed a security issue in how zstd-compressed responses are decoded\n- Added a spinner tip in VS Code and similar integrated terminals about re-running a notebook cell, shown once Claude has read or edited a Jupyter notebook\n- Added a line under the error shown when your organization's policy blocks a request, saying how to continue: run `/rewind` and change the message, or run",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.325"
+        },
+        {
+          "t": 1794521533000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.323",
+          "detail": "## What's changed\n\n- Added Code Mode, an experimental opt-in in which Claude writes JavaScript to call its tools; see https://code.claude.com/docs/en/code-mode to turn it on, or to turn it off for an organization\n- Added `engines[\"claude-code\"]` to `plugin.json`: plugins outside their stated Claude Code version range are not installed, updated or loaded, and install and update pick the newest vers",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323"
+        },
+        {
+          "t": 1794277783000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.322",
+          "detail": "## What's changed\n\n- Added fast mode on Vertex in the global, us and eu regions, falling back to standard speed if Vertex refuses it\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322"
+        },
+        {
+          "t": 1794252150000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.321",
+          "detail": "## What's changed\n\n- Added Claude Fable 5.2 (`claude-fable-5-2`), now the default Fable model — 1M context, $8/$40 per Mtok with $0.20/Mtok cache reads\n- Added `--settings <file>` to `claude remote-control`, which applies a settings file to every session it starts; if the file changes, no new session starts until you restart `claude remote-control`\n- Fixed MCP OAuth requests sending secrets such a",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321"
+        },
         {
           "t": 1795469681000,
           "level": "notable",
@@ -792,84 +862,14 @@
           "title": "anthropics/claude-code v2.1.319",
           "detail": "## What's changed\n\n- Changed auto mode with telemetry or feature flags off, including behind LLM gateways: calls the server can't check are asked about or denied, with no fallback to the built-in classifier; set `CLAUDE_CODE_AUTO_MODE_SERVER=0` to keep using it (Bedrock, Vertex and Foundry are unchanged)\n- Changed auto mode behind an LLM gateway: `CLAUDE_CODE_AUTO_MODE_SERVER=1` turns on the serve",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
-        },
-        {
-          "t": 1795213976000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.330",
-          "detail": "## What's changed\n\n- Added sign-in to organizations managed in Anthropic's Enterprise Admin Console: after `claude auth login`, Claude Code applies the organization's settings and uses its cloud provider or gateway\n- Added easel, a built-in mod that draws charts when asked and under MCP metrics results, on Pro, Max and, where available, Team and Enterprise on macOS and Linux; turn automatic charts",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
-        },
-        {
-          "t": 1795126481000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.329",
-          "detail": "## What's changed\n\n- Added a trust dialog warning that says where a folder's hooks are declared\n- Added a warning in the conversation, in Claude Desktop and other non-interactive hosts, when hooks in managed settings fail to load\n- Added this session's scheduled tasks, `/loop` wakeups, the goal and this conversation's forks to `/tasks`; x stops one after asking\n- Added a \"Server message\" row to a ",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329"
-        },
-        {
-          "t": 1795050844000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.328",
-          "detail": "## What's changed\n\n- Added auto mode for Claude Opus 4.6 and Sonnet 4.6 on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry and Claude apps gateway; interactive sessions with no permission mode start in it\n- Added `\"onFailure\": \"block\"` for `mcp_tool` hooks, as for command and HTTP hooks: a hook whose call fails blocks the action\n- Added a warning when a message from a session that",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.328"
-        },
-        {
-          "t": 1794957465000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.327",
-          "detail": "## What's changed\n\n- Added a confirmation before `/install-github-app` changes a repository\n- Added `claude mcp add-json <name> -` to read the server's JSON from stdin, so tokens can stay off the command line; not available inside a Claude Code session\n- Added a line when a resumed session's earlier messages can't be loaded\n- Added a list in `/status` of broken agent, skill, command and output sty",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327"
-        },
-        {
-          "t": 1794867065000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.326",
-          "detail": "## What's changed\n\n- Added support for turning on Code Mode while agent teams are enabled; if you already turned it on, sessions with teams on now start in Code Mode\n- Added a startup warning when an `--allowedTools`, `--disallowedTools` or `--tools` value has an entry that doesn't look like a complete rule\n- Added a message explaining why MCP servers stop loading when an administrator adds `manag",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326"
-        },
-        {
-          "t": 1794602401000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.325",
-          "detail": "## What's changed\n\n- Fixed a security issue in how zstd-compressed responses are decoded\n- Added a spinner tip in VS Code and similar integrated terminals about re-running a notebook cell, shown once Claude has read or edited a Jupyter notebook\n- Added a line under the error shown when your organization's policy blocks a request, saying how to continue: run `/rewind` and change the message, or run",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.325"
-        },
-        {
-          "t": 1794521533000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.323",
-          "detail": "## What's changed\n\n- Added Code Mode, an experimental opt-in in which Claude writes JavaScript to call its tools; see https://code.claude.com/docs/en/code-mode to turn it on, or to turn it off for an organization\n- Added `engines[\"claude-code\"]` to `plugin.json`: plugins outside their stated Claude Code version range are not installed, updated or loaded, and install and update pick the newest vers",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323"
-        },
-        {
-          "t": 1794277783000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.322",
-          "detail": "## What's changed\n\n- Added fast mode on Vertex in the global, us and eu regions, falling back to standard speed if Vertex refuses it\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322"
-        },
-        {
-          "t": 1794252150000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.321",
-          "detail": "## What's changed\n\n- Added Claude Fable 5.2 (`claude-fable-5-2`), now the default Fable model — 1M context, $8/$40 per Mtok with $0.20/Mtok cache reads\n- Added `--settings <file>` to `claude remote-control`, which applies a settings file to every session it starts; if the file changes, no new session starts until you restart `claude remote-control`\n- Fixed MCP OAuth requests sending secrets such a",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321"
-        },
-        {
-          "t": 1793984641000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.319",
-          "detail": "## What's changed\n\n- Changed auto mode with telemetry or feature flags off, including behind LLM gateways: calls the server can't check are asked about or denied, with no fallback to the built-in classifier; set `CLAUDE_CODE_AUTO_MODE_SERVER=0` to keep using it (Bedrock, Vertex and Foundry are unchanged)\n- Changed auto mode behind an LLM gateway: `CLAUDE_CODE_AUTO_MODE_SERVER=1` turns on the serve",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "career": {
-      "lastRun": 1795432145653,
-      "lastOk": 1795432145653,
+      "lastRun": 1795503816113,
+      "lastOk": 1795503816113,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 active goals · 1/6 milestones · 2 drifting",
@@ -1358,9 +1358,76 @@
         {
           "t": 1795432145654,
           "v": 17
+        },
+        {
+          "t": 1795503816113,
+          "v": 17
         }
       ],
       "events": [
+        {
+          "t": 1795503816113,
+          "level": "notable",
+          "title": "Log 50 supervised procedures — 37 days left",
+          "detail": "Finish fellowship strong, due 2026-12-31.",
+          "url": ""
+        },
+        {
+          "t": 1795503816113,
+          "level": "notable",
+          "title": "Present at the departmental meeting is past its date",
+          "detail": "Finish fellowship strong — was due 2026-11-15.",
+          "url": ""
+        },
+        {
+          "t": 1795503816113,
+          "level": "notable",
+          "title": "Mid-year review with supervisor — 68 days left",
+          "detail": "Finish fellowship strong, due 2027-01-31.",
+          "url": ""
+        },
+        {
+          "t": 1795503816113,
+          "level": "notable",
+          "title": "Finish fellowship strong hasn't moved in 84 days",
+          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1795503816113,
+          "level": "notable",
+          "title": "✓ Protocol approved",
+          "detail": "First-author paper submitted — finished 2026-08-20.",
+          "url": ""
+        },
+        {
+          "t": 1795503816113,
+          "level": "notable",
+          "title": "Data collection complete — 21 days left",
+          "detail": "First-author paper submitted, due 2026-12-15.",
+          "url": ""
+        },
+        {
+          "t": 1795503816113,
+          "level": "notable",
+          "title": "Draft to co-authors — 69 days left",
+          "detail": "First-author paper submitted, due 2027-02-01.",
+          "url": ""
+        },
+        {
+          "t": 1795503816113,
+          "level": "notable",
+          "title": "First-author paper submitted hasn't moved in 96 days",
+          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
+          "url": ""
+        },
+        {
+          "t": 1795503816113,
+          "level": "notable",
+          "title": "Time for a goals review",
+          "detail": "It's been 146 days since 2026-07-01. Re-read the list, cut what's dead, set the next milestones.",
+          "url": ""
+        },
         {
           "t": 1795432145653,
           "level": "notable",
@@ -1717,79 +1784,16 @@
           "title": "Data collection complete — 25 days left",
           "detail": "First-author paper submitted, due 2026-12-15.",
           "url": ""
-        },
-        {
-          "t": 1795146079336,
-          "level": "notable",
-          "title": "Draft to co-authors — 73 days left",
-          "detail": "First-author paper submitted, due 2027-02-01.",
-          "url": ""
-        },
-        {
-          "t": 1795146079336,
-          "level": "notable",
-          "title": "First-author paper submitted hasn't moved in 92 days",
-          "detail": "Last note was 2026-08-20. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1795146079336,
-          "level": "notable",
-          "title": "Time for a goals review",
-          "detail": "It's been 142 days since 2026-07-01. Re-read the list, cut what's dead, set the next milestones.",
-          "url": ""
-        },
-        {
-          "t": 1795096096516,
-          "level": "notable",
-          "title": "Log 50 supervised procedures — 42 days left",
-          "detail": "Finish fellowship strong, due 2026-12-31.",
-          "url": ""
-        },
-        {
-          "t": 1795096096516,
-          "level": "notable",
-          "title": "Present at the departmental meeting is past its date",
-          "detail": "Finish fellowship strong — was due 2026-11-15.",
-          "url": ""
-        },
-        {
-          "t": 1795096096516,
-          "level": "notable",
-          "title": "Mid-year review with supervisor — 73 days left",
-          "detail": "Finish fellowship strong, due 2027-01-31.",
-          "url": ""
-        },
-        {
-          "t": 1795096096517,
-          "level": "notable",
-          "title": "Finish fellowship strong hasn't moved in 79 days",
-          "detail": "Last note was 2026-09-01. Either it's still a goal and it needs an hour this week, or it isn't and it should come off the list.",
-          "url": ""
-        },
-        {
-          "t": 1795096096517,
-          "level": "notable",
-          "title": "✓ Protocol approved",
-          "detail": "First-author paper submitted — finished 2026-08-20.",
-          "url": ""
-        },
-        {
-          "t": 1795096096517,
-          "level": "notable",
-          "title": "Data collection complete — 26 days left",
-          "detail": "First-author paper submitted, due 2026-12-15.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
-        "checkedOn": "2026-11-23"
+        "checkedOn": "2026-11-24"
       }
     },
     "reading": {
-      "lastRun": 1795432145655,
-      "lastOk": 1795432145655,
+      "lastRun": 1795503816114,
+      "lastOk": 1795503816114,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "3 unread (~8 hours) · 0 finished · 0 in the last month",
@@ -2278,9 +2282,34 @@
         {
           "t": 1795432145655,
           "v": 3
+        },
+        {
+          "t": 1795503816114,
+          "v": 3
         }
       ],
       "events": [
+        {
+          "t": 1795503816113,
+          "level": "notable",
+          "title": "Read next — Current society guideline — read the update in full, not the summary",
+          "detail": "about 60 min · core · on the list 115 days",
+          "url": ""
+        },
+        {
+          "t": 1795503816113,
+          "level": "notable",
+          "title": "Read next — Survival analysis, properly this time",
+          "detail": "about 45 min · research methods · already started",
+          "url": ""
+        },
+        {
+          "t": 1795503816114,
+          "level": "notable",
+          "title": "Still unread after 207 days — A book that has nothing to do with work",
+          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
+          "url": ""
+        },
         {
           "t": 1795432145655,
           "level": "notable",
@@ -2679,27 +2708,6 @@
           "title": "Still unread after 194 days — A book that has nothing to do with work",
           "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
           "url": ""
-        },
-        {
-          "t": 1794385090603,
-          "level": "notable",
-          "title": "Read next — Current society guideline — read the update in full, not the summary",
-          "detail": "about 60 min · core · on the list 102 days",
-          "url": ""
-        },
-        {
-          "t": 1794385090603,
-          "level": "notable",
-          "title": "Read next — Survival analysis, properly this time",
-          "detail": "about 45 min · research methods · already started",
-          "url": ""
-        },
-        {
-          "t": 1794385090603,
-          "level": "notable",
-          "title": "Still unread after 194 days — A book that has nothing to do with work",
-          "detail": "It's allowed to come off the list. That's not the same as failing to read it.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -2708,8 +2716,8 @@
       }
     },
     "training": {
-      "lastRun": 1795432145656,
-      "lastOk": 1795432145656,
+      "lastRun": 1795503816114,
+      "lastOk": 1795503816114,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "0/4 this week · 0 min",
@@ -3198,9 +3206,20 @@
         {
           "t": 1795432145656,
           "v": 0
+        },
+        {
+          "t": 1795503816114,
+          "v": 0
         }
       ],
       "events": [
+        {
+          "t": 1795503816114,
+          "level": "notable",
+          "title": "76 days since the last session",
+          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
+          "url": ""
+        },
         {
           "t": 1795432145656,
           "level": "notable",
@@ -3613,13 +3632,6 @@
           "title": "39 days since the last session",
           "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
           "url": ""
-        },
-        {
-          "t": 1792266027576,
-          "level": "notable",
-          "title": "38 days since the last session",
-          "detail": "That was run on 2026-09-09. Rest is part of it — this is just the point you asked to be told.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
@@ -3628,11 +3640,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795474362222,
-      "lastOk": 1795474362222,
+      "lastRun": 1795503816795,
+      "lastOk": 1795503816795,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,053 (+27.2%) · excludes S&P 500 ETF",
+      "lastLine": "$3,018 (+25.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4706,9 +4718,27 @@
         {
           "t": 1795474362222,
           "v": 3053.1
+        },
+        {
+          "t": 1795503816795,
+          "v": 3018.2
         }
       ],
       "events": [
+        {
+          "t": 1795503816786,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795503816786,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795474362209,
           "level": "notable",
@@ -5114,31 +5144,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794666373803,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794666373803,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 61062
+          "BTC": 60364
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795503816796,
+      "ran": 6,
+      "skipped": 4,
+      "failed": 0,
+      "notified": 0,
+      "held": 27
+    },
     {
       "t": 1795474362223,
       "ran": 3,
@@ -6730,14 +6754,6 @@
       "failed": 0,
       "notified": 0,
       "held": 13
-    },
-    {
-      "t": 1791478318258,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 14
     }
   ]
 }

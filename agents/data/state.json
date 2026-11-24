@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795503815502,
-      "lastOk": 1795503815502,
+      "lastRun": 1795546990315,
+      "lastOk": 1795546990315,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795540245000,
+          "level": "notable",
+          "title": "Anthropic Staff Openly Talk About ‘Taking Over the World’, Claims Max Tegmark",
+          "detail": "Article URL: https://novaramedia.com/2026/11/24/anthropic-staff-openly-talk-about-taking-over-the-world-claims-top-mit-physicist/ Comments URL: https://news.ycombinator.com/item?id=50631210 Points: 145 # Comments: 71",
+          "url": "https://novaramedia.com/2026/11/24/anthropic-staff-openly-talk-about-taking-over-the-world-claims-top-mit-physicist/"
+        },
+        {
+          "t": 1795524015000,
+          "level": "notable",
+          "title": "LLM agents work for their parent companies, not for you",
+          "detail": "Article URL: https://michaelharley.net/posts/2026/11/01/llm-agents-work-for-their-parent-companies-not-for-you/ Comments URL: https://news.ycombinator.com/item?id=50627340 Points: 718 # Comments: 306",
+          "url": "https://michaelharley.net/posts/2026/11/01/llm-agents-work-for-their-parent-companies-not-for-you/"
+        },
         {
           "t": 1795496681000,
           "level": "notable",
@@ -415,28 +429,14 @@
           "title": "Show HN: A terminal-native idle factory game, written in Rust with ratatui",
           "detail": "Hey HN readers!I'm snipedbywifi (https://gitlab.com/snipedbywifi), and i've been working on terminactory. Please try it out if you'd like to play a cozy factory game while waiting for long agent tasks to finish!The game is a factory game (overused niche, i know xD), but runs in your terminal. Reason",
           "url": "https://gitlab.com/snipedbywifi/terminactory"
-        },
-        {
-          "t": 1794678673000,
-          "level": "notable",
-          "title": "Claude asked to renumber pages deletes professor's syllabus, year of notes",
-          "detail": "Article URL: https://www.tomshardware.com/tech-industry/artificial-intelligence/rogue-claude-ai-tasked-with-renumbering-pages-accidentally-deletes-law-professors-entire-syllabus-one-year-of-lecture-notes-youre-right-to-be-angry-i-deleted-your-files-through-my-own-carelessness-humbled-agent-admits Co",
-          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/rogue-claude-ai-tasked-with-renumbering-pages-accidentally-deletes-law-professors-entire-syllabus-one-year-of-lecture-notes-youre-right-to-be-angry-i-deleted-your-files-through-my-own-carelessness-humbled-agent-admits"
-        },
-        {
-          "t": 1794665365000,
-          "level": "notable",
-          "title": "Serving GLM-5.3 at 607.8 tok/s across two Nvidia DGX stations with vLLM",
-          "detail": "Article URL: https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/ Comments URL: https://news.ycombinator.com/item?id=50497155 Points: 92 # Comments: 48",
-          "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1795503816112,
-      "lastOk": 1795503816112,
+      "lastRun": 1795546990763,
+      "lastOk": 1795546990763,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.331",
@@ -584,6 +584,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321"
         },
         {
+          "t": 1795469681000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.331",
+          "detail": "## What's changed\n\n- Added Code Mode support in terminal sessions on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry and Claude Platform on AWS\n- Added `oidc.groups_jsonpath` to the Claude apps gateway, to read groups from the matching entries of a list of objects with a small subset of JSONPath (RFC 9535)\n- Added an API connectivity section to `claude doctor` that reports whether",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.331"
+        },
+        {
           "t": 1795213976000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.330",
@@ -645,13 +652,6 @@
           "title": "anthropics/claude-code v2.1.321",
           "detail": "## What's changed\n\n- Added Claude Fable 5.2 (`claude-fable-5-2`), now the default Fable model — 1M context, $8/$40 per Mtok with $0.20/Mtok cache reads\n- Added `--settings <file>` to `claude remote-control`, which applies a settings file to every session it starts; if the file changes, no new session starts until you restart `claude remote-control`\n- Fixed MCP OAuth requests sending secrets such a",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321"
-        },
-        {
-          "t": 1793984641000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.319",
-          "detail": "## What's changed\n\n- Changed auto mode with telemetry or feature flags off, including behind LLM gateways: calls the server can't check are asked about or denied, with no fallback to the built-in classifier; set `CLAUDE_CODE_AUTO_MODE_SERVER=0` to keep using it (Bedrock, Vertex and Foundry are unchanged)\n- Changed auto mode behind an LLM gateway: `CLAUDE_CODE_AUTO_MODE_SERVER=1` turns on the serve",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
         },
         {
           "t": 1795213976000,
@@ -3640,11 +3640,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795503816795,
-      "lastOk": 1795503816795,
+      "lastRun": 1795546991318,
+      "lastOk": 1795546991318,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,018 (+25.8%) · excludes S&P 500 ETF",
+      "lastLine": "$2,991 (+24.6%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4722,9 +4722,27 @@
         {
           "t": 1795503816795,
           "v": 3018.2
+        },
+        {
+          "t": 1795546991318,
+          "v": 2990.9
         }
       ],
       "events": [
+        {
+          "t": 1795546991304,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795546991305,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795503816786,
           "level": "notable",
@@ -5130,31 +5148,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794684382365,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794684382365,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 60364
+          "BTC": 59818
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795546991318,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1795503816796,
       "ran": 6,
@@ -6743,14 +6755,6 @@
       "t": 1791513058623,
       "ran": 3,
       "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 13
-    },
-    {
-      "t": 1791498187342,
-      "ran": 5,
-      "skipped": 5,
       "failed": 0,
       "notified": 0,
       "held": 13

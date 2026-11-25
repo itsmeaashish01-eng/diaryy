@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795576091566,
-      "lastOk": 1795576091566,
+      "lastRun": 1795613078050,
+      "lastOk": 1795613078050,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795575696000,
+          "level": "notable",
+          "title": "Top open problems in mathematics ranked by LLM-assessed importance",
+          "detail": "Article URL: https://www.proofatlas.ai/open-problems/ Comments URL: https://news.ycombinator.com/item?id=50637871 Points: 70 # Comments: 34",
+          "url": "https://www.proofatlas.ai/open-problems/"
+        },
+        {
+          "t": 1795538744000,
+          "level": "notable",
+          "title": "Ask HN: Anthropic is accusing my company of distilling. How can I prove I'm not?",
+          "detail": "Basically the title.Anthropic is accusing me and my company of using their API for distillation. We are not. We do not train our own models.Our only usage which I think could get us flagged is automated regression benchmarks whenever we change some AI settings. But this is not against their policy?N",
+          "url": "https://news.ycombinator.com/item?id=50630809"
+        },
         {
           "t": 1795524015000,
           "level": "notable",
@@ -415,34 +429,90 @@
           "title": "Understanding Positional Embeddings in Modern LLMs",
           "detail": "Article URL: https://magazine.sebastianraschka.com/p/understanding-positional-embeddings Comments URL: https://news.ycombinator.com/item?id=50506376 Points: 123 # Comments: 3",
           "url": "https://magazine.sebastianraschka.com/p/understanding-positional-embeddings"
-        },
-        {
-          "t": 1794665154000,
-          "level": "notable",
-          "title": "Show HN: A terminal-native idle factory game, written in Rust with ratatui",
-          "detail": "Hey HN readers!I'm snipedbywifi (https://gitlab.com/snipedbywifi), and i've been working on terminactory. Please try it out if you'd like to play a cozy factory game while waiting for long agent tasks to finish!The game is a factory game (overused niche, i know xD), but runs in your terminal. Reason",
-          "url": "https://gitlab.com/snipedbywifi/terminactory"
-        },
-        {
-          "t": 1794665292000,
-          "level": "notable",
-          "title": "Show HN: Agweb – a browser for agents that stays out of your way",
-          "detail": "Article URL: https://github.com/paul-nameless/agweb Comments URL: https://news.ycombinator.com/item?id=50497147 Points: 81 # Comments: 21",
-          "url": "https://github.com/paul-nameless/agweb"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1795576092028,
-      "lastOk": 1795576092028,
+      "lastRun": 1795613078502,
+      "lastOk": 1795613078502,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.332",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795570334000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.332",
+          "detail": "## What's changed\n\n- Added skills from MCP servers (beta). They show as `server:skill` in the `/` menu; other skills keep their names\n- Added a `PreSkillShellCommand` hook event that can refuse a skill or command's inline shell commands as it loads; on 2.1.331 and older, a settings file naming it opens a dialog at start\n- Added \"Always deliver\" to the prompt for held messages from other sessions\n-",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332"
+        },
+        {
+          "t": 1795469681000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.331",
+          "detail": "## What's changed\n\n- Added Code Mode support in terminal sessions on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry and Claude Platform on AWS\n- Added `oidc.groups_jsonpath` to the Claude apps gateway, to read groups from the matching entries of a list of objects with a small subset of JSONPath (RFC 9535)\n- Added an API connectivity section to `claude doctor` that reports whether",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.331"
+        },
+        {
+          "t": 1795213976000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.330",
+          "detail": "## What's changed\n\n- Added sign-in to organizations managed in Anthropic's Enterprise Admin Console: after `claude auth login`, Claude Code applies the organization's settings and uses its cloud provider or gateway\n- Added easel, a built-in mod that draws charts when asked and under MCP metrics results, on Pro, Max and, where available, Team and Enterprise on macOS and Linux; turn automatic charts",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
+        },
+        {
+          "t": 1795126481000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.329",
+          "detail": "## What's changed\n\n- Added a trust dialog warning that says where a folder's hooks are declared\n- Added a warning in the conversation, in Claude Desktop and other non-interactive hosts, when hooks in managed settings fail to load\n- Added this session's scheduled tasks, `/loop` wakeups, the goal and this conversation's forks to `/tasks`; x stops one after asking\n- Added a \"Server message\" row to a ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329"
+        },
+        {
+          "t": 1795050844000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.328",
+          "detail": "## What's changed\n\n- Added auto mode for Claude Opus 4.6 and Sonnet 4.6 on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry and Claude apps gateway; interactive sessions with no permission mode start in it\n- Added `\"onFailure\": \"block\"` for `mcp_tool` hooks, as for command and HTTP hooks: a hook whose call fails blocks the action\n- Added a warning when a message from a session that",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.328"
+        },
+        {
+          "t": 1794957465000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.327",
+          "detail": "## What's changed\n\n- Added a confirmation before `/install-github-app` changes a repository\n- Added `claude mcp add-json <name> -` to read the server's JSON from stdin, so tokens can stay off the command line; not available inside a Claude Code session\n- Added a line when a resumed session's earlier messages can't be loaded\n- Added a list in `/status` of broken agent, skill, command and output sty",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327"
+        },
+        {
+          "t": 1794867065000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.326",
+          "detail": "## What's changed\n\n- Added support for turning on Code Mode while agent teams are enabled; if you already turned it on, sessions with teams on now start in Code Mode\n- Added a startup warning when an `--allowedTools`, `--disallowedTools` or `--tools` value has an entry that doesn't look like a complete rule\n- Added a message explaining why MCP servers stop loading when an administrator adds `manag",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326"
+        },
+        {
+          "t": 1794602401000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.325",
+          "detail": "## What's changed\n\n- Fixed a security issue in how zstd-compressed responses are decoded\n- Added a spinner tip in VS Code and similar integrated terminals about re-running a notebook cell, shown once Claude has read or edited a Jupyter notebook\n- Added a line under the error shown when your organization's policy blocks a request, saying how to continue: run `/rewind` and change the message, or run",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.325"
+        },
+        {
+          "t": 1794521533000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.323",
+          "detail": "## What's changed\n\n- Added Code Mode, an experimental opt-in in which Claude writes JavaScript to call its tools; see https://code.claude.com/docs/en/code-mode to turn it on, or to turn it off for an organization\n- Added `engines[\"claude-code\"]` to `plugin.json`: plugins outside their stated Claude Code version range are not installed, updated or loaded, and install and update pick the newest vers",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323"
+        },
+        {
+          "t": 1794277783000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.322",
+          "detail": "## What's changed\n\n- Added fast mode on Vertex in the global, us and eu regions, falling back to standard speed if Vertex refuses it\n",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322"
+        },
         {
           "t": 1795570334000,
           "level": "notable",
@@ -722,76 +792,6 @@
           "title": "anthropics/claude-code v2.1.321",
           "detail": "## What's changed\n\n- Added Claude Fable 5.2 (`claude-fable-5-2`), now the default Fable model — 1M context, $8/$40 per Mtok with $0.20/Mtok cache reads\n- Added `--settings <file>` to `claude remote-control`, which applies a settings file to every session it starts; if the file changes, no new session starts until you restart `claude remote-control`\n- Fixed MCP OAuth requests sending secrets such a",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321"
-        },
-        {
-          "t": 1795213976000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.330",
-          "detail": "## What's changed\n\n- Added sign-in to organizations managed in Anthropic's Enterprise Admin Console: after `claude auth login`, Claude Code applies the organization's settings and uses its cloud provider or gateway\n- Added easel, a built-in mod that draws charts when asked and under MCP metrics results, on Pro, Max and, where available, Team and Enterprise on macOS and Linux; turn automatic charts",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
-        },
-        {
-          "t": 1795126481000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.329",
-          "detail": "## What's changed\n\n- Added a trust dialog warning that says where a folder's hooks are declared\n- Added a warning in the conversation, in Claude Desktop and other non-interactive hosts, when hooks in managed settings fail to load\n- Added this session's scheduled tasks, `/loop` wakeups, the goal and this conversation's forks to `/tasks`; x stops one after asking\n- Added a \"Server message\" row to a ",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329"
-        },
-        {
-          "t": 1795050844000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.328",
-          "detail": "## What's changed\n\n- Added auto mode for Claude Opus 4.6 and Sonnet 4.6 on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry and Claude apps gateway; interactive sessions with no permission mode start in it\n- Added `\"onFailure\": \"block\"` for `mcp_tool` hooks, as for command and HTTP hooks: a hook whose call fails blocks the action\n- Added a warning when a message from a session that",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.328"
-        },
-        {
-          "t": 1794957465000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.327",
-          "detail": "## What's changed\n\n- Added a confirmation before `/install-github-app` changes a repository\n- Added `claude mcp add-json <name> -` to read the server's JSON from stdin, so tokens can stay off the command line; not available inside a Claude Code session\n- Added a line when a resumed session's earlier messages can't be loaded\n- Added a list in `/status` of broken agent, skill, command and output sty",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327"
-        },
-        {
-          "t": 1794867065000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.326",
-          "detail": "## What's changed\n\n- Added support for turning on Code Mode while agent teams are enabled; if you already turned it on, sessions with teams on now start in Code Mode\n- Added a startup warning when an `--allowedTools`, `--disallowedTools` or `--tools` value has an entry that doesn't look like a complete rule\n- Added a message explaining why MCP servers stop loading when an administrator adds `manag",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326"
-        },
-        {
-          "t": 1794602401000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.325",
-          "detail": "## What's changed\n\n- Fixed a security issue in how zstd-compressed responses are decoded\n- Added a spinner tip in VS Code and similar integrated terminals about re-running a notebook cell, shown once Claude has read or edited a Jupyter notebook\n- Added a line under the error shown when your organization's policy blocks a request, saying how to continue: run `/rewind` and change the message, or run",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.325"
-        },
-        {
-          "t": 1794521533000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.323",
-          "detail": "## What's changed\n\n- Added Code Mode, an experimental opt-in in which Claude writes JavaScript to call its tools; see https://code.claude.com/docs/en/code-mode to turn it on, or to turn it off for an organization\n- Added `engines[\"claude-code\"]` to `plugin.json`: plugins outside their stated Claude Code version range are not installed, updated or loaded, and install and update pick the newest vers",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323"
-        },
-        {
-          "t": 1794277783000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.322",
-          "detail": "## What's changed\n\n- Added fast mode on Vertex in the global, us and eu regions, falling back to standard speed if Vertex refuses it\n",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322"
-        },
-        {
-          "t": 1794252150000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.321",
-          "detail": "## What's changed\n\n- Added Claude Fable 5.2 (`claude-fable-5-2`), now the default Fable model — 1M context, $8/$40 per Mtok with $0.20/Mtok cache reads\n- Added `--settings <file>` to `claude remote-control`, which applies a settings file to every session it starts; if the file changes, no new session starts until you restart `claude remote-control`\n- Fixed MCP OAuth requests sending secrets such a",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321"
-        },
-        {
-          "t": 1793984641000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.319",
-          "detail": "## What's changed\n\n- Changed auto mode with telemetry or feature flags off, including behind LLM gateways: calls the server can't check are asked about or denied, with no fallback to the built-in classifier; set `CLAUDE_CODE_AUTO_MODE_SERVER=0` to keep using it (Bedrock, Vertex and Foundry are unchanged)\n- Changed auto mode behind an LLM gateway: `CLAUDE_CODE_AUTO_MODE_SERVER=1` turns on the serve",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
         },
         {
           "t": 1795213976000,
@@ -3652,11 +3652,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795576092717,
-      "lastOk": 1795576092717,
+      "lastRun": 1795613079056,
+      "lastOk": 1795613079056,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$2,958 (+23.3%) · excludes S&P 500 ETF",
+      "lastLine": "$2,936 (+22.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4742,9 +4742,27 @@
         {
           "t": 1795576092718,
           "v": 2958.35
+        },
+        {
+          "t": 1795613079056,
+          "v": 2936.15
         }
       ],
       "events": [
+        {
+          "t": 1795613079042,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795613079042,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795576092709,
           "level": "notable",
@@ -5150,31 +5168,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "fetch failed\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794741950305,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794741950305,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 59167
+          "BTC": 58723
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795613079056,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1795576092718,
       "ran": 6,
@@ -6766,14 +6778,6 @@
       "failed": 0,
       "notified": 0,
       "held": 24
-    },
-    {
-      "t": 1791538412445,
-      "ran": 3,
-      "skipped": 7,
-      "failed": 0,
-      "notified": 0,
-      "held": 13
     }
   ]
 }

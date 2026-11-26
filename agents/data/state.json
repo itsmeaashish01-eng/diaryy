@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795646507292,
-      "lastOk": 1795646507292,
+      "lastRun": 1795670586401,
+      "lastOk": 1795670586401,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795644934000,
+          "level": "notable",
+          "title": "Bare Metal Qwen",
+          "detail": "Article URL: https://github.com/alesha-pro/llm.asm/tree/main/02-baremetal-os Comments URL: https://news.ycombinator.com/item?id=50648365 Points: 95 # Comments: 21",
+          "url": "https://github.com/alesha-pro/llm.asm/tree/main/02-baremetal-os"
+        },
+        {
+          "t": 1795643290000,
+          "level": "notable",
+          "title": "Much shorter version of GRH Lean verification from Anthropic",
+          "detail": "Article URL: https://github.com/lsernau/grh-lean Comments URL: https://news.ycombinator.com/item?id=50648050 Points: 364 # Comments: 182",
+          "url": "https://github.com/lsernau/grh-lean"
+        },
         {
           "t": 1795643290000,
           "level": "notable",
@@ -415,28 +429,14 @@
           "title": "Windows 11 Is Collecting Data on Which Coding Agents and Developer Tools You Use",
           "detail": "Article URL: https://xusheng.dev/posts/windows-coding-agent-telemetry/ Comments URL: https://news.ycombinator.com/item?id=50524736 Points: 365 # Comments: 227",
           "url": "https://xusheng.dev/posts/windows-coding-agent-telemetry/"
-        },
-        {
-          "t": 1794777039000,
-          "level": "notable",
-          "title": "Your Agent Will Pick the Hackable One",
-          "detail": "Article URL: https://geoffstearns.com/blog/your-agent-will-pick-the-hackable-one/ Comments URL: https://news.ycombinator.com/item?id=50510799 Points: 49 # Comments: 30",
-          "url": "https://geoffstearns.com/blog/your-agent-will-pick-the-hackable-one/"
-        },
-        {
-          "t": 1794744846000,
-          "level": "notable",
-          "title": "Understanding Positional Embeddings in Modern LLMs",
-          "detail": "Article URL: https://magazine.sebastianraschka.com/p/understanding-positional-embeddings Comments URL: https://news.ycombinator.com/item?id=50506376 Points: 184 # Comments: 23",
-          "url": "https://magazine.sebastianraschka.com/p/understanding-positional-embeddings"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1795646507785,
-      "lastOk": 1795646507785,
+      "lastRun": 1795670587137,
+      "lastOk": 1795670587137,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.332",
@@ -654,6 +654,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322"
         },
         {
+          "t": 1795570334000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.332",
+          "detail": "## What's changed\n\n- Added skills from MCP servers (beta). They show as `server:skill` in the `/` menu; other skills keep their names\n- Added a `PreSkillShellCommand` hook event that can refuse a skill or command's inline shell commands as it loads; on 2.1.331 and older, a settings file naming it opens a dialog at start\n- Added \"Always deliver\" to the prompt for held messages from other sessions\n-",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332"
+        },
+        {
           "t": 1795469681000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.331",
@@ -715,13 +722,6 @@
           "title": "anthropics/claude-code v2.1.322",
           "detail": "## What's changed\n\n- Added fast mode on Vertex in the global, us and eu regions, falling back to standard speed if Vertex refuses it\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322"
-        },
-        {
-          "t": 1794252150000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.321",
-          "detail": "## What's changed\n\n- Added Claude Fable 5.2 (`claude-fable-5-2`), now the default Fable model — 1M context, $8/$40 per Mtok with $0.20/Mtok cache reads\n- Added `--settings <file>` to `claude remote-control`, which applies a settings file to every session it starts; if the file changes, no new session starts until you restart `claude remote-control`\n- Fixed MCP OAuth requests sending secrets such a",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321"
         },
         {
           "t": 1795469681000,
@@ -3664,11 +3664,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795646508526,
-      "lastOk": 1795646508526,
+      "lastRun": 1795670587801,
+      "lastOk": 1795670587801,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,007 (+25.3%) · excludes S&P 500 ETF",
+      "lastLine": "$3,046 (+26.9%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4762,9 +4762,27 @@
         {
           "t": 1795646508526,
           "v": 3007.35
+        },
+        {
+          "t": 1795670587801,
+          "v": 3046.35
         }
       ],
       "events": [
+        {
+          "t": 1795670587793,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795670587793,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795646508513,
           "level": "notable",
@@ -5170,31 +5188,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794784003897,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794784003897,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 60147
+          "BTC": 60927
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795670587801,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1795646508526,
       "ran": 6,
@@ -6786,14 +6798,6 @@
       "failed": 1,
       "notified": 0,
       "held": 10
-    },
-    {
-      "t": 1791580284268,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 4
     }
   ]
 }

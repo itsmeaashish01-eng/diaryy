@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795773886128,
-      "lastOk": 1795773886128,
+      "lastRun": 1795808198080,
+      "lastOk": 1795808198080,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795768088000,
+          "level": "notable",
+          "title": "Claude sabotaging ML research tasks?",
+          "detail": "Article URL: https://twitter.com/RealAstropulse/status/2126119408997466389 Comments URL: https://news.ycombinator.com/item?id=50664325 Points: 412 # Comments: 210",
+          "url": "https://twitter.com/RealAstropulse/status/2126119408997466389"
+        },
+        {
+          "t": 1795755378000,
+          "level": "notable",
+          "title": "\"What's Claude's fursona?\" and other questions",
+          "detail": "Article URL: https://herecomesthemoon.net/2026/11/whats-claudes-fursona/ Comments URL: https://news.ycombinator.com/item?id=50662933 Points: 144 # Comments: 107",
+          "url": "https://herecomesthemoon.net/2026/11/whats-claudes-fursona/"
+        },
         {
           "t": 1795768088000,
           "level": "notable",
@@ -415,28 +429,14 @@
           "title": "Launch HN: StarSling (YC P25) – Self-improving CI for agent-volume repos",
           "detail": "We’re Yonas and Daniel and we’re building StarSling (https://starsling.dev), fast GitHub Actions runners with AI agents that ship PRs to continuously improve your tests and workflows.Every CI job gets its own ephemeral sandbox on the fastest Zen 5 machines and NVMe Disk with unlimited concurrency so",
           "url": "https://starsling.dev"
-        },
-        {
-          "t": 1794939965000,
-          "level": "notable",
-          "title": "Advancing computer-use agents for healthcare teams",
-          "detail": "Article URL: https://openai.com/index/advancing-computer-use-for-healthcare-teams/ Comments URL: https://news.ycombinator.com/item?id=50535898 Points: 32 # Comments: 23",
-          "url": "https://openai.com/index/advancing-computer-use-for-healthcare-teams/"
-        },
-        {
-          "t": 1794939378000,
-          "level": "notable",
-          "title": "Not Everything Needs an LLM",
-          "detail": "Article URL: https://newsletter.posthog.com/p/decision-models Comments URL: https://news.ycombinator.com/item?id=50535740 Points: 54 # Comments: 15",
-          "url": "https://newsletter.posthog.com/p/decision-models"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1795773886561,
-      "lastOk": 1795773886561,
+      "lastRun": 1795808198548,
+      "lastOk": 1795808198548,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.332",
@@ -3688,11 +3688,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795773887092,
-      "lastOk": 1795773887092,
+      "lastRun": 1795808199212,
+      "lastOk": 1795808199212,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,079 (+28.3%) · excludes S&P 500 ETF",
+      "lastLine": "$2,996 (+24.8%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4802,9 +4802,27 @@
         {
           "t": 1795773887092,
           "v": 3079.3
+        },
+        {
+          "t": 1795808199212,
+          "v": 2996.35
         }
       ],
       "events": [
+        {
+          "t": 1795808199203,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795808199203,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795773887081,
           "level": "notable",
@@ -5210,31 +5228,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794926990082,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794926990082,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 61586
+          "BTC": 59927
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795808199212,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1795773887092,
       "ran": 6,
@@ -6826,14 +6838,6 @@
       "failed": 0,
       "notified": 0,
       "held": 24
-    },
-    {
-      "t": 1791660519550,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 4
     }
   ]
 }

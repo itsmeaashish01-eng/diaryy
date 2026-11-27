@@ -2,14 +2,21 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795707671756,
-      "lastOk": 1795707671756,
+      "lastRun": 1795740337429,
+      "lastOk": 1795740337429,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
+      "lastLine": "1 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795686263000,
+          "level": "notable",
+          "title": "Google Will Make AI Agents Use Its MCP Servers. The Gmail One Can't Send Email",
+          "detail": "Article URL: https://techstackups.com/articles/google-workspace-ai-agents-mcp/ Comments URL: https://news.ycombinator.com/item?id=50653477 Points: 217 # Comments: 193",
+          "url": "https://techstackups.com/articles/google-workspace-ai-agents-mcp/"
+        },
         {
           "t": 1795644934000,
           "level": "notable",
@@ -422,21 +429,14 @@
           "title": "Show HN: TrnRT – An open-source LLM inference engine for AWS Trainium",
           "detail": "Hi HN, Sanchit here from RunAnywhere (YC W26). We just open-sourced TrnRT: Trainium RunTime, our inference engine for AWS Trainium. We started 3 weeks back, and currently we’re able to serve and run GLM 5.3 flash (FP8) on AWS trn2.48xlarge, and will bring more models support soon. It’s open to contr",
           "url": "https://github.com/RunanywhereAI/trnrt"
-        },
-        {
-          "t": 1794910840000,
-          "level": "notable",
-          "title": "How the Claude Code team thinks about verification",
-          "detail": "Article URL: https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/ Comments URL: https://news.ycombinator.com/item?id=50529612 Points: 89 # Comments: 104",
-          "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1795707672260,
-      "lastOk": 1795707672260,
+      "lastRun": 1795740338002,
+      "lastOk": 1795740338002,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.332",
@@ -794,6 +794,13 @@
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322"
         },
         {
+          "t": 1795570334000,
+          "level": "notable",
+          "title": "anthropics/claude-code v2.1.332",
+          "detail": "## What's changed\n\n- Added skills from MCP servers (beta). They show as `server:skill` in the `/` menu; other skills keep their names\n- Added a `PreSkillShellCommand` hook event that can refuse a skill or command's inline shell commands as it loads; on 2.1.331 and older, a settings file naming it opens a dialog at start\n- Added \"Always deliver\" to the prompt for held messages from other sessions\n-",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332"
+        },
+        {
           "t": 1795469681000,
           "level": "notable",
           "title": "anthropics/claude-code v2.1.331",
@@ -855,13 +862,6 @@
           "title": "anthropics/claude-code v2.1.322",
           "detail": "## What's changed\n\n- Added fast mode on Vertex in the global, us and eu regions, falling back to standard speed if Vertex refuses it\n",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322"
-        },
-        {
-          "t": 1794252150000,
-          "level": "notable",
-          "title": "anthropics/claude-code v2.1.321",
-          "detail": "## What's changed\n\n- Added Claude Fable 5.2 (`claude-fable-5-2`), now the default Fable model — 1M context, $8/$40 per Mtok with $0.20/Mtok cache reads\n- Added `--settings <file>` to `claude remote-control`, which applies a settings file to every session it starts; if the file changes, no new session starts until you restart `claude remote-control`\n- Fixed MCP OAuth requests sending secrets such a",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321"
         }
       ],
       "notifiedAt": {},
@@ -3676,11 +3676,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795707682797,
-      "lastOk": 1795707682797,
+      "lastRun": 1795740338719,
+      "lastOk": 1795740338719,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,018 (+25.8%) · excludes S&P 500 ETF",
+      "lastLine": "$3,030 (+26.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4782,9 +4782,27 @@
         {
           "t": 1795707682797,
           "v": 3018.15
+        },
+        {
+          "t": 1795740338720,
+          "v": 3030.15
         }
       ],
       "events": [
+        {
+          "t": 1795740338705,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795740338705,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795707682788,
           "level": "notable",
@@ -5190,31 +5208,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794868082591,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794868082591,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 60363
+          "BTC": 60603
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795740338720,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 13
+    },
     {
       "t": 1795707682798,
       "ran": 6,
@@ -6806,14 +6818,6 @@
       "failed": 0,
       "notified": 0,
       "held": 13
-    },
-    {
-      "t": 1791618125924,
-      "ran": 6,
-      "skipped": 4,
-      "failed": 0,
-      "notified": 0,
-      "held": 24
     }
   ]
 }

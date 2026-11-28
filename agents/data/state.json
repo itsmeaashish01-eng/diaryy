@@ -2,14 +2,28 @@
   "version": 1,
   "agents": {
     "hn-ai": {
-      "lastRun": 1795831715032,
-      "lastOk": 1795831715032,
+      "lastRun": 1795862870675,
+      "lastOk": 1795862870675,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "2 of 20 items match /claude|anthropic|llm|agent/",
       "seen": [],
       "metrics": [],
       "events": [
+        {
+          "t": 1795855029000,
+          "level": "notable",
+          "title": "Show HN: Fleetlayer – Framework for running many AI agents on multiple machines",
+          "detail": "Hi HN! I ran into many problems when I started running lots of Claude Code sessions in parallel. I quickly ran out of usage, so I signed up for more Claude subs (which Anthropic terms allow.)Running so many different accounts meant that I couldn't use claude.ai artifacts anymore, because the browser",
+          "url": "https://fleetlayer.ai/"
+        },
+        {
+          "t": 1795813654000,
+          "level": "notable",
+          "title": "SessionGraph: Visualize all your coding agent sessions in one interactive graph",
+          "detail": "Article URL: https://sessiongraph.ai/ Comments URL: https://news.ycombinator.com/item?id=50671651 Points: 60 # Comments: 26",
+          "url": "https://sessiongraph.ai/"
+        },
         {
           "t": 1795813654000,
           "level": "notable",
@@ -415,28 +429,14 @@
           "title": "Harvard researchers find AI coding agents shifted the bottleneck to code review",
           "detail": "Article URL: https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/ Comments URL: https://news.ycombinator.com/item?id=50538303 Points: 248 # Comments: 335",
           "url": "https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/"
-        },
-        {
-          "t": 1794942103000,
-          "level": "notable",
-          "title": "Launch HN: StarSling (YC P25) – Self-improving CI for agent-volume repos",
-          "detail": "We’re Yonas and Daniel and we’re building StarSling (https://starsling.dev), fast GitHub Actions runners with AI agents that ship PRs to continuously improve your tests and workflows.Every CI job gets its own ephemeral sandbox on the fastest Zen 5 machines and NVMe Disk with unlimited concurrency so",
-          "url": "https://news.ycombinator.com/item?id=50536468"
-        },
-        {
-          "t": 1794950172000,
-          "level": "notable",
-          "title": "Harvard researchers find AI coding agents shifted the bottleneck to code review",
-          "detail": "Article URL: https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/ Comments URL: https://news.ycombinator.com/item?id=50538303 Points: 93 # Comments: 153",
-          "url": "https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/"
         }
       ],
       "notifiedAt": {},
       "memo": {}
     },
     "claude-code-releases": {
-      "lastRun": 1795831715428,
-      "lastOk": 1795831715428,
+      "lastRun": 1795862871044,
+      "lastOk": 1795862871044,
       "errorCount": 0,
       "lastError": null,
       "lastLine": "latest is anthropics/claude-code v2.1.332",
@@ -3700,11 +3700,11 @@
       }
     },
     "portfolio": {
-      "lastRun": 1795831716216,
-      "lastOk": 1795831716216,
+      "lastRun": 1795862871590,
+      "lastOk": 1795862871590,
       "errorCount": 0,
       "lastError": null,
-      "lastLine": "$3,006 (+25.2%) · excludes S&P 500 ETF",
+      "lastLine": "$2,959 (+23.3%) · excludes S&P 500 ETF",
       "seen": [],
       "metrics": [
         {
@@ -4822,9 +4822,27 @@
         {
           "t": 1795831716216,
           "v": 3005.6
+        },
+        {
+          "t": 1795862871591,
+          "v": 2958.9
         }
       ],
       "events": [
+        {
+          "t": 1795862871577,
+          "level": "notable",
+          "title": "Bitcoin is 90.0 points over target",
+          "detail": "100.0% of the USD side, target 10%.",
+          "url": ""
+        },
+        {
+          "t": 1795862871577,
+          "level": "notable",
+          "title": "Couldn't price S&P 500 ETF",
+          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
+          "url": ""
+        },
         {
           "t": 1795831716206,
           "level": "notable",
@@ -5230,31 +5248,25 @@
           "title": "Couldn't price S&P 500 ETF",
           "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
           "url": ""
-        },
-        {
-          "t": 1794976834166,
-          "level": "notable",
-          "title": "Bitcoin is 90.0 points over target",
-          "detail": "100.0% of the USD side, target 10%.",
-          "url": ""
-        },
-        {
-          "t": 1794976834166,
-          "level": "notable",
-          "title": "Couldn't price S&P 500 ETF",
-          "detail": "HTTP 404 Not Found\nThe total below leaves it out, so it is lower than your real position.",
-          "url": ""
         }
       ],
       "notifiedAt": {},
       "memo": {
         "prices": {
-          "BTC": 60112
+          "BTC": 59178
         }
       }
     }
   },
   "runs": [
+    {
+      "t": 1795862871591,
+      "ran": 3,
+      "skipped": 7,
+      "failed": 0,
+      "notified": 0,
+      "held": 14
+    },
     {
       "t": 1795831716216,
       "ran": 6,
@@ -6846,14 +6858,6 @@
       "failed": 0,
       "notified": 0,
       "held": 15
-    },
-    {
-      "t": 1791684465042,
-      "ran": 2,
-      "skipped": 8,
-      "failed": 0,
-      "notified": 0,
-      "held": 5
     }
   ]
 }
